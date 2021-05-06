@@ -1,0 +1,17 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 12V6C2 5 2 2 6 2H12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2 19V25C2 26 2 29 6 29H12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M29 12V6C29 5 29 2 25 2H19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M29 19V25C29 26 29 29 25 29H19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="7" y="8" width="6" height="6" rx="1" stroke="white" stroke-width="2"/>
+<rect x="7" y="18" width="6" height="6" rx="1" stroke="white" stroke-width="2"/>
+<rect x="17" y="8" width="6" height="6" rx="1" stroke="white" stroke-width="2"/>
+<rect x="16" y="17" width="2" height="2" rx="0.5" fill="white"/>
+<rect x="22" y="17" width="2" height="2" rx="0.5" fill="white"/>
+<rect x="19" y="10" width="2" height="2" rx="0.5" fill="white"/>
+<rect x="9" y="10" width="2" height="2" rx="0.5" fill="white"/>
+<rect x="9" y="20" width="2" height="2" rx="0.5" fill="white"/>
+<rect x="22" y="23" width="2" height="2" rx="0.5" fill="white"/>
+<rect x="16" y="23" width="2" height="2" rx="0.5" fill="white"/>
+<rect x="19" y="20" width="2" height="2" rx="0.5" fill="white"/>
+</svg>

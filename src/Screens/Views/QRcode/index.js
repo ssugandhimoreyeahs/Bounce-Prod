@@ -40,7 +40,7 @@ export default function QRcode({navigation}) {
       <View style={styles.subContainer}>
         {userQR && (
           <View style={styles.QRcontainer}>
-            <QRCodes value={'1'} size={200} qrValue={userQR} />
+            <QRCodes size={200} qrValue={userQR} />
           </View>
         )}
       </View>

@@ -6,6 +6,8 @@ class Server {
 
 class Endpoints extends Server {
   getQR = '/user/getqr';
+  postUser = '/user';
+  getCategory = 'Vendor/Category';
 }
 
 export default Object.freeze(new Endpoints());

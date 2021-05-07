@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput ,ToastAndroid} from 'react-native'
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, ToastAndroid } from 'react-native'
 import { CustomTextinput, FloatingInput, CustomButton, Root, GooglePlacesInput } from '@components'
 import { Avatar } from 'react-native-elements'
 import {
@@ -18,6 +18,7 @@ import { getHp, getWp } from '@utils'
 import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 import { UserContext } from "../../../context/profiledataProvider";
+import { ApiClient } from '../../../app/services';
 
 export default function HostProfile(props) {
     const {
@@ -116,11 +117,7 @@ export default function HostProfile(props) {
 
         console.log("TOKEN", token);
 
-        const SERVER_RESPONSE = await axios.post('http://3.12.168.164:3000/user', formData, {
-            headers: {
-                'Authorization': 'bearer ' + `${token}`
-            }
-        }).then(async (i) => {
+        const SERVER_RESPONSE = await ApiClient.authInstance.post(ApiClient.endPoints.postUser, formData).then(async (i) => {
             await fetchProfile()
 
             console.log(i)

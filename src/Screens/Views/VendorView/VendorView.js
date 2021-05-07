@@ -239,7 +239,7 @@ export default function DjProfile(props) {
                                 share={<BlackShare height={25} width={25} />}
                                 back
                                 onPress={() => props.navigation.goBack()}
-                                HeaderBackColor={{ backgroundColor: '#fff' }}
+                                headerBackColor={{ backgroundColor: '#fff' }}
                             />
                             </View>
                         <View style={styles.subContainer} pointerEvents="none">

@@ -3,117 +3,29 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 
 import { Header, SearchBar, Footer, CustomButton, Toggle, Calender, ModalPopup, Root, PastGuestList, CustomSearchbar } from '@components'
 import { Girl } from '@assets';
 import {
-    Info,
-    AddBlueWhite,
-    ContactWhite,
-    List,
-    BlackMenubar,
-    BlackContact,
-    Dollar,
-    CohostWhite
+
 } from '@svg'
 import { KeyboardAvoidingView } from 'react-native';
 import { FONTSIZE, getHp, getWp } from '@utils'
 
 
 
-const DATA = [
-    {
-        icon: Girl,
-        messageName: "Jessica Lambert",
-    },
-    {
-        icon: Girl,
-        messageName: "Jessica Lambert",
-    },
-    {
-        icon: Girl,
-        messageName: "Jessica Lambert",
-    },
-    {
-        icon: Girl,
-        messageName: "Jessica Lambert",
-    },
-    {
-        icon: Girl,
-        messageName: "Jessica Lambert",
-    },
-    {
-        icon: Girl,
-        messageName: "Jessica Lambert",
-    },
-    {
-        icon: Girl,
-        messageName: "Jessica Lambert",
-    },
-    {
-        icon: Girl,
-        messageName: "Jessica Lambert",
-    },
-    {
-        icon: Girl,
-        messageName: "Jessica Lambert",
-    },
-];
 
 export default function InviteFriends(props) {
-    const {
-        age = false
-    } = props
+    console.log("invirttefd", props.route.params)
+
     return (
         <Root>
             <View style={styles.container}>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={{ overflow: 'visible', flex: 1 }}>
                     <Header
                         back
-                        headerTitle={"Invite Friends"}
+                        headerTitle={props?.route?.params?.heading}
+                        onPress={() => props.navigation.goBack()}
+                        headerBackColor={{ backgroundColor: '#fff' }}
                     />
-
-                    <PastGuestList
-                        onPressGuessList={() => props.navigation.navigate('GuestContactList', {
-                            heading: "Beverly Hills Bachelor Party"
-                        })}
-                        PAST_LIST_ARRAY={DATA}
-                        heading={"Beverly Hills Bachelor Party"}
-                    />
-                    <PastGuestList
-                        onPressGuessList={() => props.navigation.navigate('GuestContactList', {
-                            heading: "Beverly Hills Bachelor Party"
-                        })}
-                        PAST_LIST_ARRAY={DATA}
-                        heading={"Beverly Hills Bachelor Party"}
-                    />
-                    <PastGuestList
-                        onPressGuessList={() => props.navigation.navigate('GuestContactList', {
-                            heading: "Beverly Hills Bachelor Party"
-                        })}
-                        PAST_LIST_ARRAY={DATA}
-                        heading={"Beverly Hills Bachelor Party"}
-                    />
-
-                    <View style={{ marginHorizontal: getWp(10), paddingVertical: getHp(20) }}>
-                        <SearchBar
-                            placeholder={"Search Friends"}
-                            cohost
-                            rightIcon
-                            requestIcon
-                            heading={"Friends"}
-                            dataList={DATA}
-                            mutual
-                            noUnderline
-                            filterSmallButtons={["All", "Selected", "Unselected"]}
-                        />
-                    </View>
 
                 </ScrollView>
-
-            </View>
-            <View style={{ paddingHorizontal: 10 }}>
-                <CustomButton
-                    complete
-                    bar
-                    ButtonTitle={"Continue"}
-                />
             </View>
         </Root>
     )

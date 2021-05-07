@@ -99,13 +99,14 @@ import CohostWhite from './CohostWhite.svg'
 import BlackPen from './BlackPen.svg'
 import GreenTick from './GreenTick.svg'
 import WhiteTick from './WhiteTick.svg'
-
 import WhiteShare from '../white_svg/Share.svg';
 import WhiteMore from '../white_svg/More_Icons.svg';
-
 import EditPen from './EditPen.svg';
 
+import YellowStar from './YellowStar.svg';
+
 export {
+    YellowStar,
     EditPen,
     WhiteTick,
     GreenTick,

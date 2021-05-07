@@ -23,7 +23,7 @@ function Header(props) {
         onPress,
         back = false,
         share = false,
-        HeaderBackColor = null,
+        headerBackColor = null,
         rightTitle = false,
         rightTitleStyle = null,
         rightTitleContainer = null,
@@ -63,7 +63,7 @@ function Header(props) {
 
     return (
         <View>
-            <View style={[styles.container, HeaderBackColor ? HeaderBackColor : null]}>
+            <View style={[styles.container, headerBackColor ? headerBackColor : null]}>
 
                 {
                     back ?

@@ -102,7 +102,7 @@ export default function Signup(props) {
                 < View style={styles.container}>
                     <ScrollView>
                         <Header
-                            HeaderBackColor={{ backgroundColor: 'rgba(238, 238, 238, 0.5)' }}
+                            headerBackColor={{ backgroundColor: 'rgba(238, 238, 238, 0.5)' }}
                             back
                             headerTitle={"Choose Vendors"}
                             onPress={() => props.navigation.goBack()}

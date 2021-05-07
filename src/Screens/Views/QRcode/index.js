@@ -12,7 +12,7 @@ export default function QRcode({ navigation }) {
                 back
                 onPress={() => navigation.goBack()}
                 theme={'#fff'}
-                HeaderBackColor={{ backgroundColor: "#000" }}
+                headerBackColor={{ backgroundColor: "#000" }}
             />
 
             <View style={styles.subContainer}>

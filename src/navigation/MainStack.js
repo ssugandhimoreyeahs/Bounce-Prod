@@ -619,7 +619,7 @@ export default function MainStack(props) {
   return (
     <AuthStack.Navigator
       headerMode="screen"
-      initialRouteName="Filter"
+      initialRouteName="SplashScreen"
       screenOptions={{ headerShown: false }}>
 
       <AuthStack.Screen name="GuestContactList" component={GuestContactList} />

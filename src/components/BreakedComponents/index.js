@@ -62,11 +62,11 @@ export const VendorCard = ({ item }) => {
                         {city}
                     </Text>
                 </View>
-                </View>
-                <TouchableOpacity style={[styles.fourItems, { backgroundColor: 'rgba(31, 174, 247, 0.7)', borderRadius: 50, padding: 10 }]}>
-                    <WhiteTick height={21} width={21} />
-                </TouchableOpacity>
-          
+            </View>
+            <TouchableOpacity style={[styles.fourItems, { backgroundColor: 'rgba(31, 174, 247, 0.7)', borderRadius: 50, padding: 10 }]}>
+                <WhiteTick height={21} width={21} />
+            </TouchableOpacity>
+
         </View>
 
 
@@ -152,7 +152,7 @@ export const InputBox = ({ placeholder, onChangeText, styleProp }) => {
     )
 }
 
-export const PastGuestList = ({ PAST_LIST_ARRAY, heading, pen = false }) => {
+export const PastGuestList = ({ PAST_LIST_ARRAY, heading, pen = false, onPressGuessList = () => { } }) => {
 
     const RenderItem = ({ item }) => {
         return (
@@ -173,26 +173,34 @@ export const PastGuestList = ({ PAST_LIST_ARRAY, heading, pen = false }) => {
             </View>
         )
     }
+
+    const bridge = (item) => {
+        console.log("fdfdfsd", item)
+        return (
+            <TouchableOpacity onPress={onPressGuessList}>
+                <RenderItem item={item} />
+            </TouchableOpacity>
+
+        )
+    }
+
     return (
-        <View style={{ justifyContent: 'space-around', paddingHorizontal: 15, paddingTop: 10 }}>
+        <TouchableOpacity onPress={onPressGuessList} style={styles.pastGuestContainer}>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Text style={[styles.TitleStyle, { color: '#000', fontWeight: 'bold', paddingVertical: 5 }]}>{heading}</Text>
                 {
                     !pen && <BlackPen height={28} width={25} />
-
                 }
             </View>
             <View style={{ paddingVertical: 5 }}>
                 <FlatList
                     data={PAST_LIST_ARRAY}
-                    renderItem={(item, index) => <RenderItem item={item} />
-                    }
-
+                    renderItem={(item) => <RenderItem item={item} />}
                     horizontal
                 />
             </View>
-            <View style={{ height: 1, backgroundColor: '#CCCCCC', marginTop: 20, marginBottom: 5 }} />
-        </View>
+
+        </TouchableOpacity>
     )
 }
 
@@ -284,6 +292,13 @@ export const RenderSmallButton = ({ item }) => {
 }
 
 const styles = StyleSheet.create({
+    pastGuestContainer: {
+        justifyContent: 'space-around',
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        backgroundColor: '#fff',
+        marginVertical: 2
+    },
     hourStyle: {
         color: '#000',
         fontSize: FONTSIZE.Text18,

@@ -10,7 +10,7 @@ export default function UserProfileVendorView() {
                 <Header
                     back
                     headerTitle={"Vendor Request"}
-                    HeaderBackColor={{ backgroundColor: '#000000' }}
+                    headerBackColor={{ backgroundColor: '#000000' }}
                 />
                 <VendorRequest />
                 <VendorRequest />

@@ -82,7 +82,8 @@ import SplashScreen from "../Screens/BounceVendors/Onboarding/Splash";
 import UploadInventory from "../Screens/host/UploadInventory";
 import UserQrCode from "../Screens/Views/QRcode"
 import VendorSearch from '../Screens/BounceVendors/PlanParty/VendorSearch'
-import Filter from '../Screens/BounceVendors/Filter'
+import Filter from '../Screens/Views/Filter'
+import GuestContactList from '../Screens/Views/GuestContactList'
 
 
 const BottomTab = createMaterialBottomTabNavigator();
@@ -618,9 +619,10 @@ export default function MainStack(props) {
   return (
     <AuthStack.Navigator
       headerMode="screen"
-      initialRouteName="SplashScreen"
+      initialRouteName="Filter"
       screenOptions={{ headerShown: false }}>
 
+      <AuthStack.Screen name="GuestContactList" component={GuestContactList} />
       <AuthStack.Screen name="Filter" component={Filter} />
       <AuthStack.Screen name="VendorSearch" component={VendorSearch} />
       <AuthStack.Screen name="ChooseVendorsScreen" component={ChooseVendorsScreen} />
@@ -866,17 +868,17 @@ function BottomVendorStack(props) {
 
       <BottomTab.Screen
         options={{
-          
+
           unmountOnBlur: true,
           tabBarColor: "red",
-                  tabBarIcon: ({ tintColor, focused }) => {
+          tabBarIcon: ({ tintColor, focused }) => {
             return !focused ? (
               <GreyPerson height={30} width={30} />
             ) : (
                 <BlackPerson height={30} width={30} />
               );
           },
-          
+
         }}
         name="DjProfileScreen"
         component={DjProfileScreen}

@@ -78,7 +78,7 @@ export default function UploadMedia(props) {
                         headerTitle={"Upload Media"}
                         back
                         onPress={() => props.navigation.goBack()}
-                        HeaderBackColor={{ backgroundColor: '#fff' }}
+                        headerBackColor={{ backgroundColor: '#fff' }}
                     />
                     <FlatList
                         data={getMedia}

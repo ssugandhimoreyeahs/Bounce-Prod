@@ -1,15 +1,15 @@
 import { DarkTheme as DarkPaperTheme } from 'react-native-paper';
 import { DarkTheme as DarkNavTheme } from '@react-navigation/native';
 import DarkThemeColors from './colors';
-import ThemeTypes from '../themeTypes';
+import ThemeFactory from '../index';
 
 
 
 class DarkTheme extends DarkThemeColors { 
     typeId = 2;
-    type = ThemeTypes.DARK;
+    type = ThemeFactory.DARK;
     constructor() {
-        super();
+        super(); 
         this.initTheme();
     }
     initTheme = () => {

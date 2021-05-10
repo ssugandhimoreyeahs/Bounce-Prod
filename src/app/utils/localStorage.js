@@ -45,6 +45,7 @@ class LocalStorage {
       const setTheme = await AsyncStorage.setItem(LOCAL_STORAGE_TOKEN.THEME,themeValue); 
       return Promise.resolve(true);
     }catch(error) {
+      console.log("setTheme_Error - ", error);
       return Promise.reject(error);
     }
   }

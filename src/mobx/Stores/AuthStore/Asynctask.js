@@ -105,6 +105,7 @@ class Asynctask {
             showLoader && this.rootStore.appStore.toogleLoader(false);
             return Promise.resolve(userDetailsObj);
         } catch (error) {
+            console.log("LAND_ON_ASYNC_AUTOLOGIN");
             showLoader && this.rootStore.appStore.toogleLoader(false);
             runInAction(() => {
                 this.authStore.isAutoLoginDone = true;

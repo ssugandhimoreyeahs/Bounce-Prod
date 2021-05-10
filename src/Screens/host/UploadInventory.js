@@ -352,7 +352,7 @@ export default function UploadInventory(props) {
                             headerTitle={"Upload Media"}
                             back
                             onPress={() => props.navigation.goBack()}
-                            HeaderBackColor={{ backgroundColor: "#fff" }}
+                            headerBackColor={{ backgroundColor: "#fff" }}
                         />
 
                         <LinearGradient

@@ -70,18 +70,26 @@ export default function InviteFriends(props) {
                     />
 
                     <PastGuestList
+                        onPressGuessList={() => props.navigation.navigate('GuestContactList', {
+                            heading: "Beverly Hills Bachelor Party"
+                        })}
                         PAST_LIST_ARRAY={DATA}
                         heading={"Beverly Hills Bachelor Party"}
                     />
                     <PastGuestList
-                            PAST_LIST_ARRAY={DATA}
-                            heading={"Beverly Hills Bachelor Party"}
-                        />
-                        <PastGuestList
-                            PAST_LIST_ARRAY={DATA}
-                            heading={"Beverly Hills Bachelor Party"}
-                        />
-
+                        onPressGuessList={() => props.navigation.navigate('GuestContactList', {
+                            heading: "Beverly Hills Bachelor Party"
+                        })}
+                        PAST_LIST_ARRAY={DATA}
+                        heading={"Beverly Hills Bachelor Party"}
+                    />
+                    <PastGuestList
+                        onPressGuessList={() => props.navigation.navigate('GuestContactList', {
+                            heading: "Beverly Hills Bachelor Party"
+                        })}
+                        PAST_LIST_ARRAY={DATA}
+                        heading={"Beverly Hills Bachelor Party"}
+                    />
 
                     <View style={{ marginHorizontal: getWp(10), paddingVertical: getHp(20) }}>
                         <SearchBar

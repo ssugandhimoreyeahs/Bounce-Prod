@@ -85,7 +85,7 @@ export default function VendorProfile(props) {
                                 share={<BlackShare height={25} width={25} />}
                                 back
                                 onPress={() => props.navigation.goBack()}
-                                HeaderBackColor={{ backgroundColor: '#fff' }}
+                                headerBackColor={{ backgroundColor: '#fff' }}
                             />
                             <View style={styles.subContainer}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 5 }}>

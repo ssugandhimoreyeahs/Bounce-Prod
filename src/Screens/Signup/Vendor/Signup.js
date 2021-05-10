@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, FlatList, TouchableOpacity, Alert } from 'react-native'
 import { Header, Root } from '@components'
 import { getData } from '../../../FetchServices'
 import { FONTSIZE, getHp, getWp } from '@utils'
@@ -16,7 +16,7 @@ import {
 } from '@svg'
 import Spinner from 'react-native-loading-spinner-overlay';
 import { SvgUri } from 'react-native-svg';
-
+import { ApiClient } from '../../../app/services';
 
 const DATA = [
     { icon: <DjMusic height={getHp(52)} width={getHp(52)} /> },
@@ -35,10 +35,14 @@ export default function Signup(props) {
     const [vendorList, setVendorList] = useState(null)
 
     const fetchData = async () => {
-
-        let res = await getData('Vendor/Category')
-        setVendorList(res)
-        setLoader(false)
+        try {
+            let categoryResponse = await ApiClient.instance.get(ApiClient.endPoints.getCategory);
+            setVendorList(categoryResponse.data)
+            setLoader(false);
+        } catch (error) {
+            setLoader(false);
+            return Alert.alert("Message", "Something went wrong!");
+        }
     }
 
     useEffect(() => {
@@ -82,7 +86,7 @@ export default function Signup(props) {
                 < View style={styles.container}>
                     <ScrollView>
                         <Header
-                            HeaderBackColor={{ backgroundColor: 'rgba(238, 238, 238, 0.5)' }}
+                            headerBackColor={{ backgroundColor: 'rgba(238, 238, 238, 0.5)' }}
                             back
                             headerTitle={"Select Business"}
                             onPress={() => props.navigation.goBack()}

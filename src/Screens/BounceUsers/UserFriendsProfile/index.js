@@ -160,7 +160,7 @@ export default function UserFriendsProfile(props) {
                 setShowDrawer(i => !i);
                 return;
                 props.navigation.openDrawer()}}
-              HeaderBackColor={{ backgroundColor: "rgba(238, 238, 238, 0.5)" }}
+              headerBackColor={{ backgroundColor: "rgba(238, 238, 238, 0.5)" }}
             />
             <View style={styles.subContainer}>
               <View

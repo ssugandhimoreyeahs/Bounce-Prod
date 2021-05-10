@@ -11,7 +11,7 @@ export default function VendorConfirm() {
                 <Header
 
                     headerTitle={"Confirm"}
-                    HeaderBackColor={{ backgroundColor: '#000000' }}
+                    headerBackColor={{ backgroundColor: '#000000' }}
                 />
                 <View style={{ marginHorizontal: 10, flex: 1 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 10 }}>

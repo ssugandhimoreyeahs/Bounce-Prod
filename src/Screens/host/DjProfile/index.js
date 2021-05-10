@@ -47,6 +47,7 @@ import { UserContext } from "../../../context/profiledataProvider";
 import DocumentPicker from 'react-native-document-picker';
 import MobxStore from '../../../mobx';
 import { observer } from "mobx-react";
+import UploadInventoryScreen from "../UploadInventory";
 
 const DATA = [
   {
@@ -153,7 +154,7 @@ function DjProfile(props) {
         propsImages.push(selectedImage);
         len++;
       });
-      props.navigation.navigate('UploadInventory', {
+      props.navigation.navigate(UploadInventoryScreen.routeName, {
         editMode: false,
         propsImages
       })
@@ -631,5 +632,5 @@ function DjProfile(props) {
 {
   /* <Footer buttonStack={DATA} /> */
 }
-
+DjProfile.routeName = "/DjProfile";
 export default observer(DjProfile);

@@ -1,3 +1,4 @@
+import {getData} from '../FetchServices';
 export const VENDOR_CURRENT_LOGIN_DATA = "VENDOR_CURRENT_LOGIN_DATA";
 export const USER_CURRENT_LOGIN_DATA = "USER_CURRENT_LOGIN_DATA";
 export const LANGUAGE_ARRAY = "LANGUAGE_ARRAY";
@@ -107,3 +108,36 @@ export const fetchCurrentLoginData = (fullDataSet) => {
     dispatch(vendorProfile(fullDataSet));
   };
 };
+
+export const fetchMiscData = () => async (dispatch) => {
+  try {
+    let LANGUAGE_SERVER = await getData('language');
+    dispatch(fetchCurrentLoginData(['ORIGINAL_LANG', LANGUAGE_SERVER]));
+    let tempLanguage = [];
+    await LANGUAGE_SERVER.map(item => {
+      tempLanguage.push({label: item.name, value: item.id, code: item.code});
+    });
+    dispatch(fetchCurrentLoginData(['LANGUAGE_ARRAY', tempLanguage]));
+
+    let GENRE_SERVER = await getData('genres');
+    dispatch(fetchCurrentLoginData(['ORIGINAL_GENRE', GENRE_SERVER]));
+    let tempGenre = [];
+    await GENRE_SERVER.map(item => {
+      tempGenre.push({label: item.name, value: item.id});
+    });
+    dispatch(fetchCurrentLoginData(['GENRE_ARRAY', tempGenre]));
+
+    let GUARD_CERTIFICATION_SERVER = await getData('genres/guardcertification');
+    dispatch(
+      fetchCurrentLoginData(['ORIGINAL_CERTI', GUARD_CERTIFICATION_SERVER]),
+    );
+    let tempCERTIFICATION = [];
+    await GUARD_CERTIFICATION_SERVER.map(item => {
+      tempCERTIFICATION.push({label: item.name, value: item.id});
+    });
+    dispatch(fetchCurrentLoginData(['CERTIFICATION_ARRAY', tempCERTIFICATION]));
+  }catch(error) {
+    console.log("ERROR_WHILE_MISC_DATA - ", error);
+
+  }
+}

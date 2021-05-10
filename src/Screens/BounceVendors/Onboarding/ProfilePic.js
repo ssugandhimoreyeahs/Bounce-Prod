@@ -67,12 +67,7 @@ export default function ProfilePic(props) {
                     const result = await JSON.stringify(response.data)
                     console.log("NEW_USER_REGISTRATION ", result);  
                     authStore.onUserRegistration(response.data);
-                    setLoader(false);
-                    await props.navigation.navigate('UserFriendsProfile', {
-                        params: {
-                            body
-                        }
-                    });
+                    setLoader(false); 
                 }
             } 
        else {
@@ -171,7 +166,7 @@ export default function ProfilePic(props) {
                         <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
 
                             <TouchableOpacity
-                                onPress={() => ToastAndroid.show("This is under Development!", 200)}>
+                                onPress={() => ToastAndroid.show("This is under Development!", 1000)}>
                                 <Text style={styles.skip}>
                                     {"Skip the rest for now"}
                                 </Text>
@@ -189,6 +184,9 @@ export default function ProfilePic(props) {
         </Root>
     )
 }
+
+ProfilePic.routeName = "/ProfilePic";
+
 const styles = StyleSheet.create({
     uploadText: {
         fontSize: FONTSIZE.Text16,

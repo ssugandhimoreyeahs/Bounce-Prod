@@ -2,28 +2,19 @@
  
 import React, { Component, useEffect, useRef, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, SafeAreaView } from 'react-native';
-import {
-  NavigationContainer,
-
-  DarkTheme as NavigationDarkTheme,
-  DefaultTheme as NavigationDefaultTheme
-} from '@react-navigation/native';
+ 
 import {
   Provider as PaperProvider,
 } from 'react-native-paper'
-import MainStack from './src/navigation/MainStack';
+// import MainStack from './src/navigation/MainStack';
 import { Provider } from "react-redux";
 import Store from "./src/reducer/store";
-import { LogBox } from 'react-native';
-import { AuthContext } from './src/context'
-import { UserInfoProvider } from './src/context/profiledataProvider';
-import { Button } from 'react-native';
+import { LogBox } from 'react-native'; 
 import MobxStore from './src/mobx';
 import { observer } from 'mobx-react';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Icon from 'react-native-vector-icons/Entypo';
-
-import ModalDropdown from 'react-native-modal-dropdown-v2'; 
+import Navigation from './src/navigation'; 
 
 Icon.loadFont();
 function App() {
@@ -38,12 +29,11 @@ function App() {
         visible={MobxStore.appStore.loader}
       //visible={true}
       />
-      <PaperProvider theme={uiStore.theme}>
-        <NavigationContainer theme={uiStore.theme}>
+      <PaperProvider theme={uiStore.theme}> 
           <SafeAreaView style={{flex:1}}>
-          <MainStack />
-          </SafeAreaView>
-        </NavigationContainer>
+          {/* <MainStack /> */}
+          <Navigation theme={uiStore.theme}/> 
+          </SafeAreaView> 
       </PaperProvider>
     </Provider>
   );

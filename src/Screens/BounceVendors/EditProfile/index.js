@@ -12,6 +12,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { UserContext } from '../../../context/profiledataProvider';
 import MobxStore from '../../../mobx';
 import { observer } from 'mobx-react'; 
+import UploadInventory from '../../host/UploadInventory';
 // import { na } from '@react-navigation/native';
 
 
@@ -401,7 +402,7 @@ function DJSignup(props) {
                                 : null
                             }
                             {user?.vendorCategoryName == 'Event Rentals' &&
-                                <TouchableOpacity style={styles.colButtonStyle} onPress={() => props.navigation.navigate('UploadInventory', {
+                                <TouchableOpacity style={styles.colButtonStyle} onPress={() => props.navigation.navigate(UploadInventory.routeName, {
                                     image: user?.vendor?.inventory
                                 })} >
                                     <Text style={[styles.titleStyle]}>
@@ -468,5 +469,6 @@ const styles = StyleSheet.create({
     },
 
 })
+DJSignup.routeName = "/DJSignup";
 
 export default observer(DJSignup);

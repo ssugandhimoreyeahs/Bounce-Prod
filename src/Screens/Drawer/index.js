@@ -24,7 +24,7 @@ import MobxStore from '../../mobx';
 import { observer } from "mobx-react";
 import Themes from '../../app/themes';
 import { shareFunction } from '@components'
-
+import EditVendorProfile from '../BounceVendors/EditProfile';
 
 function CustomDrawer({ navigation }) {
   const {
@@ -48,7 +48,7 @@ function CustomDrawer({ navigation }) {
         }}
       />,
       name: "Edit Profile",
-      onPress: () => navigation.navigate("VendorEditProfile"),
+      onPress: () => navigation.navigate(EditVendorProfile.routeName),
     },
     {
       icon: <RenderSVG
@@ -92,8 +92,7 @@ function CustomDrawer({ navigation }) {
     },
     {
       name: "Log Out",
-      onPress: async () => {
-        await navigation.replace("LoginScreen");
+      onPress: async () => { 
         await LocalStorage.clearToken()
         authStore.logout();
       },

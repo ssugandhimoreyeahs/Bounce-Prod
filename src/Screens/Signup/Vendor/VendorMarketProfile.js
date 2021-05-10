@@ -19,7 +19,7 @@ let temp = []
 let genretemp = []
 let guardtemp = []
 
-export default function EditProfile(props) {
+export default function VendorMarketProfile(props) {
     const {
         authStore
     } = MobxStore;
@@ -112,13 +112,7 @@ export default function EditProfile(props) {
                         await LocalStorage.storeToken(JSON.stringify(body));
                         await LocalStorage.onSignUp(response.data.accessToken, JSON.stringify(response.data.user));
                         authStore.onVendorRegistration({ token: response.data.accessToken, user: response.data.user });
-                        setLoader(false)
-                        await props.navigation.replace("btmstack", {
-                            screen: "DjProfileScreen",
-                            params: {
-                                body
-                            }
-                        })
+                        setLoader(false);
 
                     } else {
                         setLoader(false)
@@ -358,6 +352,8 @@ export default function EditProfile(props) {
     </Root>
     )
 }
+VendorMarketProfile.routeName = "/VendorMarketProfile";
+
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FBFBFB',

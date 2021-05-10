@@ -9,9 +9,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchVendorData } from "../../../reducer/mainexpensecategory";
 import { getHp, getWp, } from '@utils'
 import { postData } from '../../../FetchServices'
+import VendorMarketProfile from './VendorMarketProfile';
 
 
-export default function DJSignup(props) {
+export default function VendorSignup(props) {
     const { login, vendorType
     } = useSelector((state) => state.mainExpenseByCategory);
     const [username, setUsername] = useState('')
@@ -79,7 +80,7 @@ export default function DJSignup(props) {
             if (res.statusCode !== 404) {
                 dispatch(fetchVendorData(["FIRST_PAGE", body]))
                 setLoader(false)
-                props.navigation.navigate("EditProfile")
+                props.navigation.navigate(VendorMarketProfile.routeName);
             } else if (res.statusCode == 404) {
                 setLoader(false)
                 alert(res.message)
@@ -182,6 +183,8 @@ export default function DJSignup(props) {
     </Root>
     )
 }
+VendorSignup.routeName = "/VendorSignup";
+
 const styles = StyleSheet.create({
     crossButton: {
         elevation: 10,

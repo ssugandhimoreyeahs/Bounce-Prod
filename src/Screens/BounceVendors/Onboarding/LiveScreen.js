@@ -15,8 +15,9 @@ import {
 import QRCode from 'react-native-qrcode-svg';
 import { fetchVendorData } from "../../../reducer/mainexpensecategory";
 import { FONTSIZE } from '@utils'
+import ProfilePic from './ProfilePic';
 
-export default function LoginScreen(props) {
+export default function LiveScreen(props) {
     const {
         navigation
     } = props
@@ -26,7 +27,7 @@ export default function LoginScreen(props) {
 
     const handleSubmit = async () => {
         if (live.length > 0) {
-            navigation.navigate("ProfilePic", {
+            navigation.navigate(ProfilePic.routeName, {
                 birthday: birthday,
                 username: username,
                 password: password,
@@ -74,6 +75,9 @@ export default function LoginScreen(props) {
         </Root>
     )
 }
+
+LiveScreen.routeName = "/LiveScreen";
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

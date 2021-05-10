@@ -56,13 +56,15 @@ export default function Notifications() {
                    
 
                 </ScrollView>
-                <Footer
+                {/* <Footer
                     notification
-                />
+                /> */}
             </View>
         </Root>
     )
 }
+
+Notifications.routeName = "/BENotification";
 const styles = StyleSheet.create({
     headingStyle: {
         color: '#000',

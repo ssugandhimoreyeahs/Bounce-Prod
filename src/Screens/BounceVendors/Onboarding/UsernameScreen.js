@@ -9,9 +9,9 @@ import { FONTSIZE, validateEmail, validatePass } from '@utils'
 import { postData } from '../../../FetchServices'
 import { useSelector, useDispatch } from "react-redux";
 import { fetchVendorData } from "../../../reducer/mainexpensecategory";
+import BirthDayScreen from './BirthDayScreen';
 
-
-export default function LoginScreen(props) {
+export default function UserNameScreen(props) {
     const {
         navigation
     } = props
@@ -45,7 +45,7 @@ export default function LoginScreen(props) {
                 if (res.statusCode !== 404) {
                     dispatch(fetchVendorData(["FIRST_PAGE", body]))
                     setLoader(false)
-                    props.navigation.navigate("Birthday", {
+                    props.navigation.navigate(BirthDayScreen.routeName, {
                         username: username,
                         password: password,
                         name
@@ -130,6 +130,8 @@ export default function LoginScreen(props) {
         </Root>
     )
 }
+UserNameScreen.routeName = "/UserNameScreen";
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

@@ -1,61 +1,62 @@
-import { observable,action, runInAction, makeAutoObservable } from 'mobx';
+import {
+  observable,
+  action,
+  runInAction,
+  makeAutoObservable,
+  computed,
+} from 'mobx';
 import Asynctask from './Asynctask';
-import { LocalStorage } from "../../../app/utils/localStorage";
-class AuthStore{ 
-    userProfile = {};
-    isAuthenticated = false;
-    isAutoLoginDone = false;
-    async;
-    constructor(rootStore) {  
-        makeAutoObservable(this, {
-            count: observable,
-            userProfile: observable,
-            isAuthenticated: observable,
-            autoLogin: observable
-        });
-        this.rootStore = rootStore;
-        this.async = new Asynctask(this, rootStore);
-        
-    } 
-    onVendorRegistration = (userProfile) => {
-        runInAction(()=>{
-            this.isAuthenticated = true;
-            this.userProfile = Object.assign({}, userProfile);
-        });
-    }
-    logout = () => {
-        runInAction(()=>{
-            this.isAuthenticated = false;
-            this.userProfile = {};
-        });
-    }
-    onAutoLogin = (userProfile) => {
-        runInAction(() => {
-            this.userProfile = userProfile;
-            this.isAuthenticated = true;
-            this.isAutoLoginDone = true;
-        });
-    }
-    onReloadVendor = (user) => {
-        runInAction(()=>{
-            let nextUserProfile = Object.assign({}, this.userProfile);
-            console.log('NEXT_USER_PROFILE_TEST - ', JSON.stringify(nextUserProfile));
-            nextUserProfile.user = user;
-            this.userProfile = nextUserProfile;
-        })
-    }
-    onUserRegistration = (body) => {
-        let userDetailsObj = {
-            success: true,
-            token: body.accessToken,
-            user: body.user
-        };
-        runInAction(()=>{
-            this.userProfile = userDetailsObj;
-            this.isAuthenticated = true;
-        });
-        LocalStorage.onSignUp(body.accessToken, JSON.stringify(body.user));
-    }
+import {LocalStorage} from '../../../app/utils/localStorage';
+class AuthStore {
+  @observable userProfile = {};
+  @observable isAuthenticated = false;
+  @observable isAutoLoginDone = false;
+  async;
+  rootStore;
+  constructor(rootStore) {
+    makeAutoObservable(this);
+    this.rootStore = rootStore;
+    this.async = new Asynctask(this, rootStore);
+  }
+  onVendorRegistration = userProfile => { 
+      this.isAuthenticated = true;
+      this.userProfile = Object.assign({}, userProfile); 
+  };
+  logout = () => { 
+      this.isAuthenticated = false;
+      this.userProfile = {}; 
+  };
+  onAutoLogin = userProfile => { 
+      this.userProfile = userProfile;
+      this.isAuthenticated = true;
+      this.isAutoLoginDone = true; 
+  };
+  onReloadVendor = user => { 
+      let nextUserProfile = Object.assign({}, this.userProfile);
+      nextUserProfile.user = user;
+      this.userProfile = nextUserProfile; 
+  };
+  onUserRegistration = body => {
+    let userDetailsObj = {
+      success: true,
+      token: body.accessToken,
+      user: body.user,
+    };
+    this.userProfile = userDetailsObj;
+    this.isAuthenticated = true;
+    LocalStorage.onSignUp(body.accessToken, JSON.stringify(body.user));
+  };
+
+  @computed
+  get token() {
+    return this.userProfile.token;
+  }
+
+  @computed
+  get isVendor() {
+    let vendorType = this.userProfile?.user?.vendorType;
+    return vendorType == 2 ? false : true;
+  }
 }
 
 export default AuthStore;

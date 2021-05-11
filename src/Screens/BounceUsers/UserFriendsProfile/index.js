@@ -30,6 +30,7 @@ import { fetchGet, postData } from "../../../FetchServices";
 import { UserContext } from "../../../context/profiledataProvider";
 import MobxStore from '../../../mobx'; 
 import Drawer from '../../Drawer/UserCustomDrawer';
+import QRcode from "../../Views/QRcode";
 
 const DATA = [
   {
@@ -138,11 +139,7 @@ export default function UserFriendsProfile(props) {
 
   return ( 
     <View style={styles.container}>
-      <Drawer 
-        navigation={props.navigation}
-        showDrawer={showDrawer} 
-        setShowDrawer = {() => setShowDrawer(i => !i)}
-      />
+       
       <ScrollView keyboardShouldPersistTaps={"always"}>
         <Spinner visible={loader} color={"#1FAEF7"} />
         {!loader && (
@@ -155,10 +152,10 @@ export default function UserFriendsProfile(props) {
               DropdownAccounts={DATA}
               scanner={<Scanner height={25} width={25} />}
               share={<BlackMenubar height={25} width={25} />}
-              onPressScanner={() => props.navigation.navigate('UserQrCode')}
-              onPress={() => {
-                setShowDrawer(i => !i);
-                return;
+              onPressScanner={() => props.navigation.navigate(QRcode.routeName)}
+              onPress={() => { 
+                // console.log("TEST - ", authStore.isVendor);
+                // return false;
                 props.navigation.openDrawer()}}
               headerBackColor={{ backgroundColor: "rgba(238, 238, 238, 0.5)" }}
             />
@@ -288,3 +285,5 @@ export default function UserFriendsProfile(props) {
     </View> 
   );
 }
+UserFriendsProfile.routeName = "/UserFriendsProfile";
+

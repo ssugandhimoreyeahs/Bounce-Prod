@@ -7,7 +7,7 @@ const AuthInstance = () => {
   authInstance.interceptors.request.use(
     config => {
       config.baseURL = `${authInstance.defaults.baseURL}`;
-      config.headers.Authorization = `Bearer ${MobxStore.authStore?.userProfile?.token}`;
+      config.headers.Authorization = `Bearer ${MobxStore.authStore?.token}`;
       let requestData = {
         url: `${config.baseURL}${config.url}`,
         headers: JSON.stringify(config.headers),

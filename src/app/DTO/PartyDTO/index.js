@@ -1,17 +1,9 @@
-
-function Required(param) {
-  console.log("Required decorator_factory executed");
-  return function(target, propertyName, description) {
-    console.log("TARGET - ", target);
-    console.log("PropertyName - ", propertyName);
-    console.log(description);
-    console.log("Required Decorator executed");
-  }
-}
+import {Decorators as D, DecoratorValidation} from '../../Validations';
 
 class PartyDTO {
- 
+  @D.Required({message: 'Required Title'})
   title = '';
+
   galleryFiles = [];
   date = '';
   location = {
@@ -19,15 +11,27 @@ class PartyDTO {
     long: '',
     addressStr: '',
   };
+
+  @D.Required({message: 'Required Description'})
   description = '';
 
-  constructor(model) {
-    if (model) {
-      Object.assign(this, model);
-    }
-  }
-  update = obj => {
-    return Object.assign({}, this, obj);
+  error = {};
+
+
+
+
+  toString = () => {
+    let json = {PartyDTO: this};
+    return JSON.stringify(json);
+  };
+  validate = () => {
+    const errors = DecoratorValidation.validate(this);
+    console.log('ERRORS_PARTY_DTO - ', errors);
+    this.error = {...errors};
+    return this.notify();
+  };
+  notify = () => {
+    return {...this};
   };
 }
 

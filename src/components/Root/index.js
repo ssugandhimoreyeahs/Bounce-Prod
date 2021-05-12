@@ -1,3 +1,4 @@
+import { observer } from "mobx-react";
 import React, { Fragment } from "react";
 import {
   View,
@@ -58,4 +59,4 @@ const style = StyleSheet.create({
     backgroundColor: "#F8F8F8",
   },
 });
-export default RootComponent;
+export default observer(RootComponent);

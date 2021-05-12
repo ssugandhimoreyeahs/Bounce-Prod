@@ -7,6 +7,8 @@ import UserQrScreen from '../../Screens/Views/QRcode';
 
 import CreateInvitation from '../../Screens/BounceVendors/PlanParty/CreateInvitation';
 
+import UploadMedia from '../../Screens/BounceVendors/PlanParty/UploadMedia';
+
 const UserRootStack = createStackNavigator();
 
 class UserNavigation {
@@ -28,6 +30,10 @@ class UserNavigation {
         <UserRootStack.Screen 
           name={CreateInvitation.routeName}
           component={CreateInvitation}
+        />
+        <UserRootStack.Screen 
+          name={UploadMedia.routeName}
+          component={UploadMedia}
         />
       </UserRootStack.Navigator>
     );

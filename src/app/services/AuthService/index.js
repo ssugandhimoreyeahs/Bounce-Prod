@@ -1,14 +1,11 @@
-import {LocalStorage} from '../../../app/utils/localStorage';
-import {postData, BaseURL} from '../../../FetchServices';
-import {runInAction} from 'mobx';
-import axios from 'axios';
-import {ApiClient} from '../../../app/services';
-class Asynctask {
-  authStore;
-  rootStore;
-  constructor(authStore, rootStore) {
-    this.authStore = authStore;
-    this.rootStore = rootStore;
+
+import {LocalStorage} from '../../../app/utils/localStorage';   
+import {ApiClient} from '../ApiClient';
+import MobxStore from '../../../mobx';
+class AuthService {
+ 
+  constructor() {
+     
   }
   fetchProfile = async () => {
     try {
@@ -29,7 +26,7 @@ class Asynctask {
   };
   login = async (username, password, showLoader = true) => {
     try {
-      showLoader && this.rootStore.appStore.toogleLoader(true);
+      showLoader && MobxStore.appStore.toogleLoader(true);
       let body = {
         username: username,
         password: password,
@@ -39,7 +36,7 @@ class Asynctask {
         body,
       ); 
       const userLoginResponse = userLoginReq.data;
-      showLoader && this.rootStore.appStore.toogleLoader(false);
+      showLoader && MobxStore.appStore.toogleLoader(false);
       if (userLoginResponse.success == true) { 
         await LocalStorage.storeToken(JSON.stringify(body));
         await LocalStorage.onSignUp(
@@ -144,4 +141,4 @@ class Asynctask {
     }
   };
 }
-export default Asynctask;
+export default new AuthService();

@@ -5,6 +5,8 @@ import UserHomeDrawerNavigator from './drawerNavigation';
 
 import UserQrScreen from '../../Screens/Views/QRcode'; 
 
+import CreateInvitation from '../../Screens/BounceVendors/PlanParty/CreateInvitation';
+
 const UserRootStack = createStackNavigator();
 
 class UserNavigation {
@@ -14,7 +16,7 @@ class UserNavigation {
     return (
       <UserRootStack.Navigator
         headerMode={'none'}
-        initialRouteName={UserHomeDrawerNavigator.routeName}>
+        initialRouteName={CreateInvitation.routeName}>
         <UserRootStack.Screen
           name={UserHomeDrawerNavigator.routeName}
           component={UserHomeDrawerNavigator.drawerHome}
@@ -22,6 +24,10 @@ class UserNavigation {
         <UserRootStack.Screen 
           name={UserQrScreen.routeName}
           component={UserQrScreen}
+        />
+        <UserRootStack.Screen 
+          name={CreateInvitation.routeName}
+          component={CreateInvitation}
         />
       </UserRootStack.Navigator>
     );

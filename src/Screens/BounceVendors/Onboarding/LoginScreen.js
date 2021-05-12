@@ -24,7 +24,7 @@ import {axiosPost, getData} from '../../../FetchServices';
 import {fetchCurrentLoginData} from '../../../reducer/CurrentData';
 import {LocalStorage} from '../../../app/utils/localStorage';
 import {UserContext} from '../../../context/profiledataProvider';
-import MobxStore from '@appMobx';
+import MobxStore from '../../../mobx';
 import VendorCategory from '../../Signup/Vendor/VendorCategory';
 import NameScreen from './NameScreen';
 

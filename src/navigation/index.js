@@ -9,20 +9,22 @@ import MobxStore from '../mobx';
 import {observer} from 'mobx-react';
 import AuthStackNavigator from './AuthNavigation';
 import VendorNavigation from './VendorNavigation';
+import UserNavigation from './UserNavigation';
+
+@observer
 class Navigation extends Component {
   componentDidMount = () => {
     MobxStore.authStore.async.autoLogin(true);
-    //this.props.fetchMiscData();
+    this.props.fetchMiscData();
   };
   createAppNavigation = () => {
-    const {authStore} = MobxStore;
-    console.log("MOBX_TEST_USER_2- ", JSON.stringify(authStore.userProfile));
+    const {authStore} = MobxStore; 
     if (!authStore.isAutoLoginDone) {
       return SplashScreen;
     }
     if (authStore.isAutoLoginDone && authStore.isAuthenticated) {
       if (authStore.userProfile.user.vendorType == 2) {
-
+        return UserNavigation.stack;
       }else {
         return VendorNavigation.stack;
       }
@@ -46,4 +48,4 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-export default connect(null, mapDispatchToProps)(observer(Navigation));
+export default connect(null, mapDispatchToProps)(Navigation);

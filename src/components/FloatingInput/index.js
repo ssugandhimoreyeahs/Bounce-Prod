@@ -8,7 +8,7 @@ const FloatingInput = (props) => {
     const {
         floatingLabel,
         value,
-        onChange,
+        onChange = () => {  },
         Password = false,
         multiline = false,
         onFocus = false,
@@ -19,9 +19,32 @@ const FloatingInput = (props) => {
         placeholder = false,
         custom = false,
         onSubmitEditing = () => { },
-        keyboardType = ''
+        keyboardType = '',
+        formikData = undefined
     } = props
+    let formikPROP, name, error;
+    const isFormikContainer = formikData ? true : false;
+    if (isFormikContainer) {
+        formikPROP = formikData.formikPROP;
+        name = formikData.name;
+        error = !!formikPROP.errors[name] && !!formikPROP.touched[name];
+    }
+     
+    const getValue = () => {
+        if (isFormikContainer) { 
+            const value = formikPROP.values[name];
+            return value ? value : '';
+        }
+        return value;
+    }
 
+    const handleOnChange = (text) => {
+        if (formikData) {
+            formikPROP.handleChange(name)(text);
+        }
+        onChange(text);
+
+    }
     return (
         <View>
             {custom ?
@@ -75,6 +98,7 @@ const FloatingInput = (props) => {
                 :
                 <View style={{ flex: 1, backgroundColor: '#F6F6F6', marginVertical: 10}}>
                     <FloatingLabelInput
+                        onBlur={formikPROP?.handleBlur(name)}
                         returnKeyType="done"
                         // placeholder={placeholder}
                         // placeholderTextColor={'#666666'}
@@ -113,8 +137,8 @@ const FloatingInput = (props) => {
                             marginTop: 10,
 
                         }}
-                        value={value}
-                        onChangeText={onChange}
+                        value={getValue()}
+                        onChangeText={handleOnChange}
                         containerStyles={{
                      
                             fontFamily: 'AvenirNext',
@@ -128,6 +152,7 @@ const FloatingInput = (props) => {
                             Keyboard.dismiss();
                         }}
                     />
+                    {error && <Text>{formikPROP?.errors[name]}</Text>}
                 </View>
             }
         </View>

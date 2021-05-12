@@ -117,3 +117,5 @@ const styles = StyleSheet.create({
     },
 
 })
+
+CreateInvitation4.routeName = "/CreateInvitation4";

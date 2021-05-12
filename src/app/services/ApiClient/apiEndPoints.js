@@ -6,7 +6,11 @@ class Server {
 
 class Endpoints extends Server {
   getQR = '/user/getqr';
-  postUser = '/user';
+  postUser = '/user'; 
+  getCategory = '/Vendor/Category';
+  postUserLogin = '/user/userlogin';
+  getVendor = '/vendor/getvendor';
+  getUser = '/user'; 
   getCategory = 'Vendor/Category';
   validateVendor = 'auth/validatevendor';
   vendorRegister = 'auth/vendor/register';
@@ -16,7 +20,7 @@ class Endpoints extends Server {
   getGenre = 'genres';
   getCertification = 'genres/guardcertification';
   vendorCategory = 'Vendor/Category';
-  vendorList = 'Vendor';
+  vendorList = 'Vendor'; 
 }
 
 export default Object.freeze(new Endpoints());

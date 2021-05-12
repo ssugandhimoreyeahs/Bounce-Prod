@@ -274,7 +274,9 @@ function DjProfile(props) {
               }
               DropdownAccounts={DATA}
               share={<BlackMenubar height={25} width={25} />}
-              onPress={() => props.navigation.openDrawer()}
+              onPress={() => { 
+                props.navigation.openDrawer()
+              }}
               headerBackColor={{ backgroundColor: "rgba(238, 238, 238, 0.5)" }}
             />
 

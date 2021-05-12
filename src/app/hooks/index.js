@@ -2,7 +2,7 @@ import useLoader from './useLoader'
 import useFirebaseUpload from './useBlob'
 import UsePickDocument from './usePickDocument'
 import {pickDocument} from './usePickDocument'
-
+import useTheme from './useTheme';
 
 
 export {
@@ -10,4 +10,5 @@ export {
     UsePickDocument,
     useLoader,
     useFirebaseUpload,
+    useTheme
 }

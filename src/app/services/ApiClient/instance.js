@@ -18,10 +18,10 @@ const Instance = () => {
 
   instance.interceptors.response.use(
     response => {
-      let responseTree = {
-        url: `${response?.responseURL}`,
-        data: JSON.stringify(response?.data),
-      };
+      // let responseTree = {
+      //   url: `${response?.responseURL}`,
+      //   data: JSON.stringify(response?.data),
+      // };
       return Promise.resolve(response);
       //   //console.log(`RESPONSE <<< ${JSON.stringify(responseTree)}`);
       //   //if (response?.status === 200 && response?.data?.success === true) {

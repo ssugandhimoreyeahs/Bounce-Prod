@@ -1,8 +1,8 @@
 import { action, makeAutoObservable, observable } from 'mobx';
-import {InvitationModel} from '../../../app/models';
+import {PartyDTO} from '../../../app/DTO';
 
 class InvitationPartyModel {
-    @observable partyFields = new InvitationModel();
+    @observable partyFields = new PartyDTO();
     constructor() {
         makeAutoObservable(this);
     }

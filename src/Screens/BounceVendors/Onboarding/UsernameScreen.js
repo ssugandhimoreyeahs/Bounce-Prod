@@ -10,6 +10,7 @@ import { postData } from '../../../FetchServices'
 import { useSelector, useDispatch } from "react-redux";
 import { fetchVendorData } from "../../../reducer/mainexpensecategory";
 import BirthDayScreen from './BirthDayScreen';
+import { ApiClient } from '../../../app/services';
 
 export default function UserNameScreen(props) {
     const {
@@ -23,25 +24,25 @@ export default function UserNameScreen(props) {
 
 
     const handleSubmit = async () => {
-        try{
+        try {
             let body = {
                 vendorType: "2",
                 username: username,
                 password: password
             }
-    
+
             let validateP = await validatePass(password)
             if (!validateP) {
                 console.log("values res of pass", validateP);
                 ToastAndroid.show("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !", ToastAndroid.SHORT);
-    
+
             } else if (username.length > 0 &&
                 password.length > 0
-    
+
             ) {
                 setLoader(true)
-                const res = await postData('auth/validatevendor', body)
-    
+                const res = await ApiClient.instance.post(ApiClient.endPoints.validateVendor, body)
+
                 if (res.statusCode !== 404) {
                     dispatch(fetchVendorData(["FIRST_PAGE", body]))
                     setLoader(false)
@@ -57,9 +58,9 @@ export default function UserNameScreen(props) {
             } else {
                 setLoader(false)
                 ToastAndroid.show("Please fill all the field's with valid data !", ToastAndroid.SHORT);
-    
+
             }
-        }catch(error) {
+        } catch (error) {
             console.log(error);
         }
     }

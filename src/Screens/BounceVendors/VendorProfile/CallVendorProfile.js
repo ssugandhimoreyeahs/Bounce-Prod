@@ -10,6 +10,7 @@ import axios from 'axios';
 import { FlatList } from 'react-native';
 import VendorProfile from './index'
 import { fetchGet, getData, postData } from '../../../FetchServices'
+import { ApiClient } from '../../../app/services'
 
 const { width } = Dimensions.get("window");
 const height = width * 100 / 60;
@@ -46,11 +47,8 @@ export default function CallVendorProfile(props) {
     // var LENGTH = 0
     const fetchProfile = async () => {
         setLoader(true)
-        let SERVER_RESPONSE = await getData('Vendor')
-        // console.log("NORMAL RES", SERVER_RESPONSE);
-        // console.log("SERVER_RESPONSE", JSON.stringify(SERVER_RESPONSE));
-        // LENGTH = SERVER_RESPONSE.LENGTH
-        // console.log("THIS IS LEGNTH", LENGTH);
+        let SERVER_RESPONSE = await ApiClient.instance.get(ApiClient.endPoints.vendorList);
+
         if (!(SERVER_RESPONSE.statusCode == 401)) {
             dispatch(fetchVendorData(["ALL_VENDORS_PROFILES", SERVER_RESPONSE]))
             setLoader(false)
@@ -61,7 +59,7 @@ export default function CallVendorProfile(props) {
         // console.log(' fullArray.length :', fullArray)
         // console.log("THIS IS LEGNTH", LENGTH);
         return <VendorProfile
-        ref={FooterRef}
+            ref={FooterRef}
             item={item}
             imageArray={getMedia == null ? [] : getMedia}
             onSnapToItem={(index) => setState(index)}

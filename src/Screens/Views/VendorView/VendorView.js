@@ -84,7 +84,7 @@ export default function DjProfile(props) {
         setLoader(true)
         // let token = "Bearer " + AccessToken
         console.log("body", body);
-        let SERVER_RESPONSE = await postData('user/userlogin', body)
+        let SERVER_RESPONSE = await ApiClient.instance.post(ApiClient.endPoints.postLogin, body)
         console.log("NORMAL RES", SERVER_RESPONSE);
         console.log("SERVER_RESPONSE", JSON.stringify(SERVER_RESPONSE));
         if (!(SERVER_RESPONSE.statusCode == 401)) {
@@ -202,7 +202,7 @@ export default function DjProfile(props) {
     let FinalGenres = []
     let FinalLanguage = []
     let FinalGuard = []
-    
+
     const dataParser = (data) => {
         let temp = JSON.parse(data)
         temp.map((item) => {
@@ -232,16 +232,16 @@ export default function DjProfile(props) {
                 <Spinner visible={loader} color={'#1FAEF7'} />
                 {!loader &&
                     <>
-                    <View pointerEvents="none">
-                         <Header
-                         
+                        <View pointerEvents="none">
+                            <Header
+
                                 // headerTitle={"DJ Nathan"}
                                 share={<BlackShare height={25} width={25} />}
                                 back
                                 onPress={() => props.navigation.goBack()}
                                 headerBackColor={{ backgroundColor: '#fff' }}
                             />
-                            </View>
+                        </View>
                         <View style={styles.subContainer} pointerEvents="none">
                             <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 5 }}>
                                 {profileImage != null ?
@@ -479,13 +479,13 @@ export default function DjProfile(props) {
             </ScrollView>
             {/* <Footer buttonStack={DATA} /> */}
             <View pointerEvents="none">
-                    <Footer
-                        threeItems
-                        page={{ current: 1, total: 1 }}
-                        onPressNext={()=>console.log()}
-                        onPressPrevious={()=>console.log()}
-                    />
-                </View>
+                <Footer
+                    threeItems
+                    page={{ current: 1, total: 1 }}
+                    onPressNext={() => console.log()}
+                    onPressPrevious={() => console.log()}
+                />
+            </View>
         </View>
     )
 }

@@ -11,24 +11,23 @@ export default function IconTitle(props) {
         iconBelowText = false,
         styleProp = null
     } = props
-    // console.log("ICON TITLE TEXT", text)
     return (
-
-        // text != null ||  this was before //may be conflict
         text !== null ?
             (
                 text !== '' ?
 
-                    text?.length > 0 || text !== []  ?
+                    text?.length > 0 || text !== [] ?
                         <View>
                             <View style={styles.belowTextContainer}>
                                 <View style={{ alignItems: 'center', width: '29%' }}>
                                     {icon}
-                                    <Text style={[styles.belowHeading, textStyle, { opacity: 1 }]}>{iconBelowText} </Text>
+                                    <Text style={[styles.belowHeading, textStyle, { fontSize: FONTSIZE.Text14, opacity: 1, fontFamily: 'ANB',marginTop: 4}]}>{iconBelowText}
+                                    </Text>
                                 </View>
 
                                 <View style={{ width: '65%', marginTop: 15 }}>
-                                    <Text style={[styles.belowHeading,  { fontWeight: 'normal', color: '#000000' }]}>{text}</Text>
+                                    <Text style={[styles.belowHeading, { fontWeight: 'normal', color: '#000000' }]}>{text}
+                                    </Text>
                                 </View>
 
                             </View>
@@ -36,25 +35,18 @@ export default function IconTitle(props) {
                         </View>
                         : null
                     : null
-
             )
-
-
             : null
-
     )
 }
-
-
 
 const styles = StyleSheet.create({
     partition: {
         marginTop: 10,
-        width: '90%',
+        width: '95%',
         height: getHp(1),
         backgroundColor: '#DDD',
         alignSelf: 'center',
-
     },
     belowHeading: {
         fontSize: FONTSIZE.Text16,

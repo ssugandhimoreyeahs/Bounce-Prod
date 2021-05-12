@@ -52,7 +52,7 @@ export default function Signup(props) {
     const onChangeSearch = query => setSearchQuery(query);
     const fetchData = async () => {
 
-        let res = await getData('Vendor/Category')
+        let res = await ApiClient.instance.get(ApiClient.endPoints.vendorCategory);
         setVendorList(res)
         setLoader(false)
     }

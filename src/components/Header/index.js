@@ -98,7 +98,7 @@ function Header(props) {
                         </TouchableOpacity>
                         : null
                 }
-                <Text style={[styles.headerTitleStyle, headerTitle == 'Upload Media' ? { fontFamily: 'Comfortaa-bold', fontWeight: 'normal' } : null]}>
+                <Text style={[styles.headerTitleStyle, headerTitle == 'Upload Media' ? { fontFamily: 'AvenirNext', fontWeight: 'normal' } : null]}>
                     {headerTitle}
                 </Text>
                 <View >
@@ -211,6 +211,7 @@ const styles = StyleSheet.create({
 
     },
     headerTitleStyle: {
+        fontFamily: '100',
         color: "#000",
         fontSize: FONTSIZE.Text22,
         letterSpacing: 0.1,

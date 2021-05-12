@@ -19,15 +19,6 @@ import { SvgUri } from 'react-native-svg';
 import { ApiClient } from '../../../app/services';
 import VendorSignup from './VendorSignup';
 
-const DATA = [
-    { icon: <DjMusic height={getHp(52)} width={getHp(52)} /> },
-    { icon: <Food height={getHp(52)} width={getHp(52)} /> },
-    { icon: <Bartender height={getHp(52)} width={getHp(52)} /> },
-    { icon: <Videographer height={getHp(52)} width={getHp(52)} /> },
-    { icon: <Security height={getHp(52)} width={getHp(52)} /> },
-    { icon: <Cleaning height={getHp(52)} width={getHp(52)} /> },
-    { icon: <PartyRentals height={getHp(52)} width={getHp(52)} /> },
-];
 
 export default function VendorCategory(props) {
      

@@ -6,6 +6,14 @@ const { height, width } = Dimensions.get("screen")
 
 const styles = (theme) => {
    return StyleSheet.create({
+      partition: {
+         marginVertical: 10,
+         width: '100%',
+         height: getHp(1),
+         backgroundColor: '#DDD',
+         alignSelf: 'center',
+ 
+     },
       mediaText: {
          color: '#1FAEF7',
          fontSize: FONTSIZE.Text20,
@@ -45,7 +53,7 @@ const styles = (theme) => {
       },
       fullName: {
          color: theme.colors.primaryText1,
-         fontSize: FONTSIZE.Text20,
+         fontSize: FONTSIZE.Text16,
          fontWeight: '600'
       },
       addMediaButton: {
@@ -62,8 +70,8 @@ const styles = (theme) => {
       websiteView: {
          flexDirection: 'row',
          alignItems: 'center',
-         marginTop: 10,
-         paddingVertical: 10
+         paddingTop: 10,
+         paddingBottom: 5
       },
       container: {
          flex: 1,

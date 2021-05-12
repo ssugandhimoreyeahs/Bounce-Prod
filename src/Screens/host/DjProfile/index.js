@@ -40,10 +40,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchVendorData } from "../../../reducer/mainexpensecategory";
 import Spinner from "react-native-loading-spinner-overlay";
 import { pickDocument } from "@hooks";
-import { postData } from "../../../FetchServices";
 import axios from "axios";
-import { useFocusEffect } from "@react-navigation/native";
-import { UserContext } from "../../../context/profiledataProvider";
+import { ApiClient } from '../../../app/services';
 import DocumentPicker from 'react-native-document-picker';
 import MobxStore from '../../../mobx';
 import { observer } from "mobx-react";
@@ -97,7 +95,7 @@ function DjProfile(props) {
     profileImage,
     menu,
     gallery,
-  } = userProfile?.user; 
+  } = userProfile?.user;
 
   const {
     equipment,
@@ -109,7 +107,7 @@ function DjProfile(props) {
     guardCertification,
     hourlyRate,
     inventory
-  } = vendor; 
+  } = vendor;
 
 
   const handleCarousel = () => {
@@ -176,8 +174,8 @@ function DjProfile(props) {
       })
     })
   }
-   
-  const handleImagesArray = async (images) => { 
+
+  const handleImagesArray = async (images) => {
     let milliseconds = new Date().getTime();
     let formData = new FormData();
     images.forEach((item) => {
@@ -188,9 +186,7 @@ function DjProfile(props) {
       });
     });
     // console.log("INSIDE before api call");
-    const RES_IMAGE = await axios.post(
-      "http://3.12.168.164:3000/vendor/addmedia",
-      formData,
+    const RES_IMAGE = await ApiClient.authInstance.post(ApiClient.endPoints.vendorAddMedia, formData,
       {
         headers: {
           Authorization: "Bearer " + `${token}`,
@@ -263,7 +259,7 @@ function DjProfile(props) {
     }
   };
 
- 
+
 
   return (
     <View style={styles.container}>
@@ -397,13 +393,16 @@ function DjProfile(props) {
                   </View>
                 ) : null}
 
+                <View style={[styles.partition, { marginTop: 30,marginBottom:0 }]} />
+
                 {about != null ? (
                   <CustomText
                     TextData={about}
-                    styleProp={{ color: "#000", fontSize: FONTSIZE.Text18, marginVertical: getHp(30) }}
+                    styleProp={{ color: "#000", fontSize: FONTSIZE.Text18, marginVertical: getHp(20) }}
                   />
                 ) : null}
 
+                <View style={[styles.partition, { marginBottom: 20 }]} />
 
               </View>
               {/* View Inventory Add Media Extra button START */}
@@ -411,7 +410,7 @@ function DjProfile(props) {
               {!(inventory.length == 0 || inventory == null) && vendorCategoryName == 'Event Rentals' ?
                 <>
                   <View style={styles.prView}>
-                    <Text style={[styles.mediaText, { fontSize: FONTSIZE.Text24, color: '#000' }]}>{"Media"}</Text>
+                    <Text style={[styles.mediaText, { fontSize: FONTSIZE.Text20, color: '#000' }]}>{"Media"}</Text>
                     {/* <TouchableOpacity onPress={onlyPartyRentalImage} >
                       <View style={styles.onlyFlex}>
                         <AddBlueWhite height={20} width={20} />
@@ -446,7 +445,7 @@ function DjProfile(props) {
                 (vendorCategoryName != 'Event Rentals') ?
                 <>
                   <View style={styles.prView}>
-                    <Text style={[styles.mediaText, { fontSize: FONTSIZE.Text24, color: '#000' }]}>{"Media"}</Text>
+                    <Text style={[styles.mediaText, { fontSize: FONTSIZE.Text20, color: '#000' }]}>{"Media"}</Text>
                     {/* <TouchableOpacity onPress={handleImage} >
                       <View style={styles.onlyFlex}>
                         <AddBlueWhite height={20} width={20} />

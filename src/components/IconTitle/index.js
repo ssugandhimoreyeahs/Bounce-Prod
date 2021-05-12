@@ -21,11 +21,13 @@ export default function IconTitle(props) {
                             <View style={styles.belowTextContainer}>
                                 <View style={{ alignItems: 'center', width: '29%' }}>
                                     {icon}
-                                    <Text style={[styles.belowHeading, textStyle, { fontSize: FONTSIZE.Text14, opacity: 1, fontFamily: '500', }]}>{iconBelowText} </Text>
+                                    <Text style={[styles.belowHeading, textStyle, { fontSize: FONTSIZE.Text14, opacity: 1, fontFamily: 'ANB',marginTop: 4}]}>{iconBelowText}
+                                    </Text>
                                 </View>
 
                                 <View style={{ width: '65%', marginTop: 15 }}>
-                                    <Text style={[styles.belowHeading, { fontWeight: 'normal', color: '#000000' }]}>{text}</Text>
+                                    <Text style={[styles.belowHeading, { fontWeight: 'normal', color: '#000000' }]}>{text}
+                                    </Text>
                                 </View>
 
                             </View>
@@ -33,16 +35,10 @@ export default function IconTitle(props) {
                         </View>
                         : null
                     : null
-
             )
-
-
             : null
-
     )
 }
-
-
 
 const styles = StyleSheet.create({
     partition: {
@@ -51,7 +47,6 @@ const styles = StyleSheet.create({
         height: getHp(1),
         backgroundColor: '#DDD',
         alignSelf: 'center',
-
     },
     belowHeading: {
         fontSize: FONTSIZE.Text16,

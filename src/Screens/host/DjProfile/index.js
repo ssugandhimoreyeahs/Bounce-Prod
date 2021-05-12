@@ -393,7 +393,7 @@ function DjProfile(props) {
                   </View>
                 ) : null}
 
-                <View style={[styles.partition, { marginTop: 30,marginBottom:0 }]} />
+                <View style={[styles.partition, { marginTop: 30, marginBottom: 0 }]} />
 
                 {about != null ? (
                   <CustomText
@@ -531,8 +531,10 @@ function DjProfile(props) {
                 text={
                   vendorCategoryName == "Security" ? (
                     <>
-                      {guardCertification.map((item) => {
-                        return `${item.label}, `;
+                      {guardCertification.map((item, i) => {
+                        let comma = guardCertification.length - 1 > i ? ', ' : '';
+                        return item.label + comma;
+
                       })}
                     </>
                   ) : vendorCategoryName == "DJ" ? (
@@ -607,13 +609,14 @@ function DjProfile(props) {
                     text={
                       language != null ? (
                         <>
-                          {language.map((item) => {
-                            return `${item.label}, `;
+                          {language.map((item, i) => {
+                            let comma = language.length - 1 > i ? ', ' : '';
+                            return item.label + comma;
                           })}
                         </>
                       ) : null
                     }
-                    icon={<Multilingual height={60} width={60} />}
+                    icon={<Multilingual height={42} width={42} />}
                     iconBelowText={"Multilingual"}
                   />
                 )}

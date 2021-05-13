@@ -3,7 +3,7 @@ import {Decorators as D, DecoratorValidation} from '../../Validations';
 class PartyDTO {
   @D.Required({message: 'Required Title'})
   title = '';
-
+ 
   galleryFiles = [];
   date = '';
   location = {

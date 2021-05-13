@@ -18,6 +18,7 @@ class FormDATA {
         }
     }
     objectToFormData = (obj) => {
+        console.log("FORM_DATA_CONVERSION_OBJ = ", JSON.stringify(obj));
         this.form = new FormData();
 
         Object.keys(obj).forEach((key) => {

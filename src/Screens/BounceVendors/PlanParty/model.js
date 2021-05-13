@@ -1,36 +1,58 @@
-import {action, makeAutoObservable, observable} from 'mobx';
+import {action, makeAutoObservable, observable, runInAction} from 'mobx';
 import {CreatePartyDTO} from '../../../app/DTO';
-import {CreatePartyEntity} from '../../../app/Entities';
+import {Validation} from '../../../app/Validations';
 
 class InvitationPartyModel {
   @observable partyFields = new CreatePartyDTO();
+  @observable partyFieldsErrors = {};
   constructor() {
     makeAutoObservable(this);
   }
 
   @action
-  setPartyFields = obj => {
-    this.partyFields = this.partyFields.updateFields(obj);
+  setPartyFields = fields => {
+    for (key in fields) {
+      if (this.partyFieldsErrors[key]) {
+        delete this.partyFieldsErrors[key];
+      }
+    }
+    this.partyFields = {
+      ...this.partyFields,
+      ...fields,
+    };
   };
   @action
   addGallery = images => {
-    this.partyFields = this.partyFields.addGallery(images);
+    let nextParty = {...this.partyFields};
+    nextParty.galleryFiles.push(...images);
+    this.partyFields = nextParty;
   };
   @action
   removeGallery = image => {
-    this.partyFields = this.partyFields.removeGallery(image);
+    let nextParty = {...this.partyFields};
+    let findIndex = nextParty.galleryFiles.findIndex(i => i == image);
+    if (findIndex > -1) {
+      nextParty.galleryFiles.splice(findIndex, 1);
+    }
+    this.partyFields = nextParty;
   };
+
   @action
-  setIsPrivate = (value) => {
-    this.partyFields = this.partyFields.setIsPrivate(value);
-  }
-  @action
-  validate = () => {
-    this.partyFields = this.partyFields.validate();
+  isPartyValid = async () => {
+    let schema = {success: false, partyFields: this.partyFields};
+    const isValid = await Validation.validateClassDecorator(
+      new CreatePartyDTO(this.partyFields),
+    );
+    if (!isValid.success) {
+      runInAction(() => {
+        this.partyFieldsErrors = isValid.errors;
+      });
+      return schema;
+    }
+    schema.success = true;
+    return schema;
   };
-  getPartyEntity = () => {
-    return new CreatePartyEntity(this.partyFields);
-  };
+
   static instance;
   static getInstance() {
     if (!this.instance) {

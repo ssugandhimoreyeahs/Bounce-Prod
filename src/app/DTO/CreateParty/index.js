@@ -1,46 +1,30 @@
-import {Decorators as D, DecoratorValidation} from '../../Validations';
-import {CreatePartyEntity} from '../../Entities';
+import {MinLength} from 'class-validator';
+class CreatePartyDTO {
+  @MinLength(1, {message: 'Required title'})
+  title = '';
 
-class CreatePartyDTO extends CreatePartyEntity {
-  error = {};
+  @MinLength(1, {message: 'Required Description'})
+  description = '';
+  date = '';
+  location = '';
+  fee = 0;
+  needBouncer = false;
+  needDJ = false;
+  ageLimit = false;
+  isPrivate = false;
+  profileImageFile = '';
+  fromAge = 0;
+  toAge = 0;
+  galleryFiles = [];
+  address = '';
 
-  updateFields = (fields) => { 
-    for (key in fields) {
-      this[key] = fields[key];
-      if (this.error[key]) {
-        delete this.error[key];
-      }
+  constructor(props) {
+    if (props && Object.keys(props)?.length > 0) {
+      Object.keys(props).map(key => {
+        this[key] = props[key];
+      });
     }
-    return this.notify();
-  }
-  addGallery = (images) => { 
-    this.galleryFiles.push(...images);
-    return this.notify();
-  }
-  removeGallery = image => { 
-    let findIndex = this.galleryFiles.findIndex(i => i.path == image.path);
-    if (findIndex > -1) {
-      nextParty.galleryFiles.splice(findIndex, 1);
-    }
-    return this.notify();
-  };
-  setIsPrivate = (value) => {
-    this.isPrivate = value;
-    return this.notify();
-  }
-  toString = () => {
-    let json = {PartyDTO: this};
-    return JSON.stringify(json);
-  };
-  validate = () => {
-    const errors = DecoratorValidation.validate(this);
-    console.log('ERRORS_PARTY_DTO - ', errors);
-    this.error = {...errors};
-    return this.notify();
-  };
-  notify = () => {
-    return {...this};
-  };
+  } 
 }
 
 export default CreatePartyDTO;

@@ -35,7 +35,7 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {Strings} from '../../../app/constants';
 import UploadMedia from './UploadMedia';
-import {ValidationDecorators} from '../../../app/Validations';
+import {FormDATA, ApiClient} from '../../../app/services';
 const INTEREST = [
   {
     categoryHeading: 'Add Tags',
@@ -62,6 +62,26 @@ function CreateInvitation(props) {
   const [footer, openFooter] = useState(false);
   const [getPrivate, setPrivate] = useState(false);
 
+  const handleOnPress = async () => {
+    try {
+      const res = await partyModel.isPartyValid();
+    console.log('RES_TESt - ', res);
+    if (!res.success) {
+      return;
+    }
+    const formData = FormDATA.objectToFormData(res.partyFields);
+    console.log('FORMDATA_RES - ', JSON.stringify(formData));
+    const createPartyRes = await ApiClient.authInstance.post(
+      ApiClient.endPoints.party,
+      formData,
+      ApiClient.formDataHeaders(),
+    );
+    console.log("CREATE_PARTY_RES - ", createPartyRes);
+    }catch(error) {
+      console.log("ERROR - ", error);
+
+    }
+  };
   const handleImage = async () => {
     ImagePicker.openPicker({
       multiple: true,
@@ -69,7 +89,7 @@ function CreateInvitation(props) {
       height: 300,
       cropping: true,
     }).then(images => {
-      partyModel.addGallery(images);
+      partyModel.addGallery(images.map(i => i.path));
       props.navigation.navigate(UploadMedia.routeName);
     });
   };
@@ -110,7 +130,7 @@ function CreateInvitation(props) {
               onChange={title => {
                 partyModel.setPartyFields({title: title});
               }}
-              errorMessage={partyModel.partyFields?.error?.title}
+              errorMessage={partyModel.partyFieldsErrors?.title}
               styleProp={{borderRadius: 19}}
             />
 
@@ -184,7 +204,7 @@ function CreateInvitation(props) {
               onChange={title => {
                 partyModel.setPartyFields({title: title});
               }}
-              errorMessage={partyModel.partyFields?.error?.title}
+              errorMessage={partyModel.partyFieldsErrors?.title}
             />
             <FloatingInput
               floatingLabel={'Address'}
@@ -194,7 +214,7 @@ function CreateInvitation(props) {
               onChange={address => {
                 partyModel.setPartyFields({address: address});
               }}
-              errorMessage={partyModel.partyFields?.error?.address}
+              errorMessage={partyModel.partyFieldsErrors?.address}
             />
             <CustomTextinput
               text={'Description...'}
@@ -203,7 +223,7 @@ function CreateInvitation(props) {
               onChange={description => {
                 partyModel.setPartyFields({description: description});
               }}
-              errorMessage={partyModel.partyFields?.error?.description}
+              errorMessage={partyModel.partyFieldsErrors?.description}
             />
             {/* {INTEREST.map((item) => {
                             return (
@@ -280,7 +300,7 @@ function CreateInvitation(props) {
                 onChange={fromAge => {
                   partyModel.setPartyFields({fromAge: fromAge});
                 }}
-                errorMessage={partyModel.partyFields?.error?.fromAge}
+                errorMessage={partyModel.partyFieldsErrors?.fromAge}
                 style={[
                   styles.textInput,
                   {
@@ -310,7 +330,7 @@ function CreateInvitation(props) {
                 onChange={toAge => {
                   partyModel.setPartyFields({toAge: toAge});
                 }}
-                errorMessage={partyModel.partyFields?.error?.toAge}
+                errorMessage={partyModel.partyFieldsErrors?.toAge}
                 placeholderTextColor={'#000'}
                 placeholder={'0'}
                 style={[
@@ -427,9 +447,7 @@ function CreateInvitation(props) {
             rowDoubleButton
             ButtonTitle={'Save As Draft'}
             ButtonTitle2={'Complete'}
-            onPress={() => {
-              console.log('TEST_DATA - ', partyModel.getPartyEntity());
-            }}
+            onPress={handleOnPress}
           />
 
           {/* <View style={styles.bottomContainer}>

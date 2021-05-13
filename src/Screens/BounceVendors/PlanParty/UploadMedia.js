@@ -64,7 +64,7 @@ function UploadMedia(props) {
               ) : null}
               <View>
                 <Avatar
-                  source={{uri: item.path}}
+                  source={{uri: item}}
                   avatarStyle={{borderRadius: 13}}
                   size={125}
                 />

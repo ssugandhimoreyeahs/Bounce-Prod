@@ -14,6 +14,15 @@ class ApiClientProvider {
     this.instance = Instance();
     this.authInstance = AuthInstance();
   };
+
+  formDataHeaders = (customHeaders = {}) => {
+    return {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        ...customHeaders,
+      },
+    };
+  };
 }
 
 let ApiClient = new ApiClientProvider();

@@ -54,7 +54,7 @@ const AuthInstance = () => {
       ${JSON.stringify(responseTreeError)}
       
       `); 
-      return Promise.resolve(error);
+      return Promise.reject(error);
     },
   );
   return authInstance;

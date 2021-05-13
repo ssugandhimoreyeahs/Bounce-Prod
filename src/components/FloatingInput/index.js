@@ -20,31 +20,8 @@ const FloatingInput = (props) => {
         custom = false,
         onSubmitEditing = () => { },
         keyboardType = '',
-        formikData = undefined
-    } = props
-    let formikPROP, name, error;
-    const isFormikContainer = formikData ? true : false;
-    if (isFormikContainer) {
-        formikPROP = formikData.formikPROP;
-        name = formikData.name;
-        error = !!formikPROP.errors[name] && !!formikPROP.touched[name];
-    }
-     
-    const getValue = () => {
-        if (isFormikContainer) { 
-            const value = formikPROP.values[name];
-            return value ? value : '';
-        }
-        return value;
-    }
-
-    const handleOnChange = (text) => {
-        if (formikData) {
-            formikPROP.handleChange(name)(text);
-        }
-        onChange(text);
-
-    }
+        errorMessage = '', 
+    } = props 
     return (
         <View>
             {custom ?
@@ -96,9 +73,8 @@ const FloatingInput = (props) => {
                     />
                 </View>
                 :
-                <View style={{ flex: 1, backgroundColor: '#F6F6F6', marginVertical: 10}}>
-                    <FloatingLabelInput
-                        onBlur={formikPROP?.handleBlur(name)}
+                <View style={{ flex: 1,marginVertical: 10}}>
+                    <FloatingLabelInput 
                         returnKeyType="done"
                         // placeholder={placeholder}
                         // placeholderTextColor={'#666666'}
@@ -137,8 +113,8 @@ const FloatingInput = (props) => {
                             marginTop: 10,
 
                         }}
-                        value={getValue()}
-                        onChangeText={handleOnChange}
+                        value={value}
+                        onChangeText={onChange}
                         containerStyles={{
                      
                             fontFamily: 'AvenirNext',
@@ -152,7 +128,9 @@ const FloatingInput = (props) => {
                             Keyboard.dismiss();
                         }}
                     />
-                    {error && <Text>{formikPROP?.errors[name]}</Text>}
+                    {errorMessage.length > 0 && <View style={styles.errorContainer}>
+                        <Text style={styles.errorText}>{errorMessage}</Text>
+                        </View>}
                 </View>
             }
         </View>
@@ -194,6 +172,15 @@ const styles = StyleSheet.create({
         // fontWeight: 'bold',
         color: '#000'
     },
+    errorContainer: {
+        marginTop: 10,
+        marginLeft: 20,
+        backgroundColor: "white"
+    },
+
+    errorText: {
+        color: "red"
+    }
 })
 
 // import React, { useState } from 'react';

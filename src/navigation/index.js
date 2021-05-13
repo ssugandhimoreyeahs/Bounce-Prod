@@ -48,4 +48,4 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-export default connect(null, mapDispatchToProps)(Navigation);
+export default connect(null, mapDispatchToProps)(observer(Navigation));

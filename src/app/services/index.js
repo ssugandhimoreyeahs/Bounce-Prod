@@ -1,6 +1,7 @@
 import ApiClient from './ApiClient';
-
+import FormDATA from './FormDATA';
 
 export  {
-    ApiClient
+    ApiClient,
+    FormDATA
 }

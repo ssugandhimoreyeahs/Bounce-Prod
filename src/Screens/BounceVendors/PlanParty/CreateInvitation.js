@@ -35,7 +35,7 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {Strings} from '../../../app/constants';
 import UploadMedia from './UploadMedia';
-import { ValidationDecorators } from '../../../app/Validations';
+import {ValidationDecorators} from '../../../app/Validations';
 const INTEREST = [
   {
     categoryHeading: 'Add Tags',
@@ -91,7 +91,6 @@ function CreateInvitation(props) {
     );
   };
 
-  
   return (
     <Root>
       <View style={styles.container}>
@@ -105,15 +104,14 @@ function CreateInvitation(props) {
               backgroundColor: '#fff',
               paddingBottom: 20,
             }}>
-            <FloatingInput 
+            <FloatingInput
               floatingLabel={'Event title'}
               value={partyModel.partyFields.title}
-              onChange={title => { 
+              onChange={title => {
                 partyModel.setPartyFields({title: title});
               }}
-              styleProp={{borderRadius: 19}}
               errorMessage={partyModel.partyFields?.error?.title}
-               
+              styleProp={{borderRadius: 19}}
             />
 
             {picture == null ? (
@@ -182,16 +180,30 @@ function CreateInvitation(props) {
               floatingLabel={'Date / Time'}
               value={date}
               onChange={value => setDate(value)}
+              value={partyModel.partyFields.title}
+              onChange={title => {
+                partyModel.setPartyFields({title: title});
+              }}
+              errorMessage={partyModel.partyFields?.error?.title}
             />
             <FloatingInput
               floatingLabel={'Address'}
               value={address}
               onChange={value => setAddress(value)}
+              value={partyModel.partyFields.address}
+              onChange={address => {
+                partyModel.setPartyFields({address: address});
+              }}
+              errorMessage={partyModel.partyFields?.error?.address}
             />
             <CustomTextinput
               text={'Description...'}
               multiline
-              onChange={value => setDescription(value)}
+              value={partyModel.partyFields.description}
+              onChange={description => {
+                partyModel.setPartyFields({description: description});
+              }}
+              errorMessage={partyModel.partyFields?.error?.description}
             />
             {/* {INTEREST.map((item) => {
                             return (
@@ -232,7 +244,7 @@ function CreateInvitation(props) {
             {/* <Icon name="chevron-down" size={15} color="#000" /> */}
             {/* </View> */}
 
- 
+            {/*  
 //             <View style={{marginVertical: 10}}>
 //               <SwitchButton
 //                 onPrivatePress={() => setPrivate()}
@@ -241,70 +253,79 @@ function CreateInvitation(props) {
 //             </View>
 //             <DollarField />
 //             <AgeField />
-//           </View>
- 
-                    <View style={{marginVertical: 10}}>
-                      <SwitchButton
-                        onPrivatePress={() => setPrivate()}
-                        onPublicPress={() => setPrivate()}
-                      />
-                    </View>
-                    <View
-                      style={[
-                        styles.eventContainer,
-                        {justifyContent: 'space-between'},
-                      ]}>
-                      <Text
-                        style={[
-                          styles.headerTitle,
-                          {fontSize: FONTSIZE.Text20, marginRight: 5},
-                        ]}>
-                        {'Minimum Age'}
-                      </Text>
-                      <TextInput
-                        placeholderTextColor={'#000'}
-                        placeholder={'0'}
-                        style={[
-                          styles.textInput,
-                          {
-                          
-                            width: '35%',
-                            textAlign: 'center',
-                            fontSize: FONTSIZE.Text18,
-                          },
-                        ]}
-                      />
-                    </View>
+//           </View> */}
 
-                    <View
-                      style={[
-                        styles.eventContainer,
-                        {justifyContent: 'space-between'},
-                      ]}>
-                      <Text
-                        style={[
-                          styles.headerTitle,
-                          {fontSize: FONTSIZE.Text20, marginRight: 5},
-                        ]}>
-                        {'Maximum Age'}
-                      </Text>
-                      <TextInput
-                        placeholderTextColor={'#000'}
-                        placeholder={'0'}
-                        style={[
-                          styles.textInput,
-                          {
-                            width: '35%',
-                            textAlign: 'center',
-                            fontSize: FONTSIZE.Text18,
-                          },
-                        ]}
-                      />
-                    </View>
-                    {/* <DollarField />
+            <View style={{marginVertical: 10}}>
+              <SwitchButton
+                onPrivatePress={() => partyModel.setIsPrivate(true)}
+                onPublicPress={() => partyModel.setIsPrivate(true)}
+              />
+            </View>
+            <View
+              style={[
+                styles.eventContainer,
+                {justifyContent: 'space-between'},
+              ]}>
+              <Text
+                style={[
+                  styles.headerTitle,
+                  {fontSize: FONTSIZE.Text20, marginRight: 5},
+                ]}>
+                {'Minimum Age'}
+              </Text>
+              <TextInput
+                placeholderTextColor={'#000'}
+                placeholder={'0'}
+                value={partyModel.partyFields.fromAge}
+                onChange={fromAge => {
+                  partyModel.setPartyFields({fromAge: fromAge});
+                }}
+                errorMessage={partyModel.partyFields?.error?.fromAge}
+                style={[
+                  styles.textInput,
+                  {
+                    width: '35%',
+                    textAlign: 'center',
+                    fontSize: FONTSIZE.Text18,
+                    color: 'black',
+                  },
+                ]}
+              />
+            </View>
+
+            <View
+              style={[
+                styles.eventContainer,
+                {justifyContent: 'space-between'},
+              ]}>
+              <Text
+                style={[
+                  styles.headerTitle,
+                  {fontSize: FONTSIZE.Text20, marginRight: 5},
+                ]}>
+                {'Maximum Age'}
+              </Text>
+              <TextInput
+                value={partyModel.partyFields.toAge}
+                onChange={toAge => {
+                  partyModel.setPartyFields({toAge: toAge});
+                }}
+                errorMessage={partyModel.partyFields?.error?.toAge}
+                placeholderTextColor={'#000'}
+                placeholder={'0'}
+                style={[
+                  styles.textInput,
+                  {
+                    width: '35%',
+                    textAlign: 'center',
+                    fontSize: FONTSIZE.Text18,
+                  },
+                ]}
+              />
+            </View>
+            {/* <DollarField />
                     <AgeField /> */}
-                  </View>
- 
+          </View>
 
           {/* Tickets Section */}
           <View
@@ -407,7 +428,7 @@ function CreateInvitation(props) {
             ButtonTitle={'Save As Draft'}
             ButtonTitle2={'Complete'}
             onPress={() => {
-                partyModel.validate();
+              console.log('TEST_DATA - ', partyModel.getPartyEntity());
             }}
           />
 
@@ -464,7 +485,7 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: FONTSIZE.Text14,
     // fontWeight: 'bold',
-    fontFamily:'500',
+    fontFamily: '500',
   },
 
   cameraStyle: {

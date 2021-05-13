@@ -35,6 +35,7 @@ export default class ScanScreen extends Component {
     return (
       <View style={{backgroundColor: '#fff', elevation: 10, borderRadius: 42}}>
         <QRCode
+        
           value={qrValue}
           // logo={{uri: `${qrUserPic}`}}
           logoBorderRadius={100}

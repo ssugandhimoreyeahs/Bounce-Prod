@@ -232,15 +232,79 @@ function CreateInvitation(props) {
             {/* <Icon name="chevron-down" size={15} color="#000" /> */}
             {/* </View> */}
 
-            <View style={{marginVertical: 10}}>
-              <SwitchButton
-                onPrivatePress={() => setPrivate()}
-                onPublicPress={() => setPrivate()}
-              />
-            </View>
-            <DollarField />
-            <AgeField />
-          </View>
+ 
+//             <View style={{marginVertical: 10}}>
+//               <SwitchButton
+//                 onPrivatePress={() => setPrivate()}
+//                 onPublicPress={() => setPrivate()}
+//               />
+//             </View>
+//             <DollarField />
+//             <AgeField />
+//           </View>
+ 
+                    <View style={{marginVertical: 10}}>
+                      <SwitchButton
+                        onPrivatePress={() => setPrivate()}
+                        onPublicPress={() => setPrivate()}
+                      />
+                    </View>
+                    <View
+                      style={[
+                        styles.eventContainer,
+                        {justifyContent: 'space-between'},
+                      ]}>
+                      <Text
+                        style={[
+                          styles.headerTitle,
+                          {fontSize: FONTSIZE.Text20, marginRight: 5},
+                        ]}>
+                        {'Minimum Age'}
+                      </Text>
+                      <TextInput
+                        placeholderTextColor={'#000'}
+                        placeholder={'0'}
+                        style={[
+                          styles.textInput,
+                          {
+                          
+                            width: '35%',
+                            textAlign: 'center',
+                            fontSize: FONTSIZE.Text18,
+                          },
+                        ]}
+                      />
+                    </View>
+
+                    <View
+                      style={[
+                        styles.eventContainer,
+                        {justifyContent: 'space-between'},
+                      ]}>
+                      <Text
+                        style={[
+                          styles.headerTitle,
+                          {fontSize: FONTSIZE.Text20, marginRight: 5},
+                        ]}>
+                        {'Maximum Age'}
+                      </Text>
+                      <TextInput
+                        placeholderTextColor={'#000'}
+                        placeholder={'0'}
+                        style={[
+                          styles.textInput,
+                          {
+                            width: '35%',
+                            textAlign: 'center',
+                            fontSize: FONTSIZE.Text18,
+                          },
+                        ]}
+                      />
+                    </View>
+                    {/* <DollarField />
+                    <AgeField /> */}
+                  </View>
+ 
 
           {/* Tickets Section */}
           <View
@@ -399,8 +463,8 @@ const styles = StyleSheet.create({
     // alignContent: 'center',
     color: '#000',
     fontSize: FONTSIZE.Text14,
-    fontWeight: 'bold',
-    fontFamily: 'AvenirNext',
+    // fontWeight: 'bold',
+    fontFamily:'500',
   },
 
   cameraStyle: {

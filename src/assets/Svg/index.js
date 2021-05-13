@@ -104,8 +104,18 @@ import WhiteMore from '../white_svg/More_Icons.svg';
 import EditPen from './EditPen.svg';
 
 import YellowStar from './YellowStar.svg';
+import GreyHome from './GreyHome.svg';
+import GreyEvent from './GreyEvent.svg';
+import BlackEvent from './BlackEvent.svg';
+import BlackHome from './BlackHome.svg';
+
+
 
 export {
+    BlackEvent,
+    BlackHome,
+    GreyEvent,
+    GreyHome,
     YellowStar,
     EditPen,
     WhiteTick,

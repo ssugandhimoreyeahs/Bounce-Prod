@@ -1,35 +1,42 @@
 import {action, makeAutoObservable, observable} from 'mobx';
-import {CreatePartyDTO} from '../../../app/DTO';
-import {CreatePartyEntity} from '../../../app/Entities';
+import {PartyDTO} from '../../../app/DTO';
 
 class InvitationPartyModel {
-  @observable partyFields = new CreatePartyDTO();
+  @observable partyFields = new PartyDTO();
   constructor() {
     makeAutoObservable(this);
   }
 
   @action
   setPartyFields = obj => {
-    this.partyFields = this.partyFields.updateFields(obj);
+    let nextParty = {...this.partyFields};
+    for (o in obj) {
+        nextParty[o] = obj[o];
+      if (nextParty.error[o]) {
+        delete nextParty.error[o];
+      }
+    }
+    this.partyFields = nextParty;
   };
   @action
   addGallery = images => {
-    this.partyFields = this.partyFields.addGallery(images);
+    let nextParty = {...this.partyFields};
+    nextParty.galleryFiles.push(...images);
+    this.partyFields = nextParty;
   };
   @action
   removeGallery = image => {
-    this.partyFields = this.partyFields.removeGallery(image);
+    let nextParty = {...this.partyFields};
+    let findIndex = nextParty.galleryFiles.findIndex(i => i.path == image.path);
+    if (findIndex > -1) {
+      nextParty.galleryFiles.splice(findIndex, 1);
+    }
+    this.partyFields = nextParty;
   };
-  @action
-  setIsPrivate = (value) => {
-    this.partyFields = this.partyFields.setIsPrivate(value);
-  }
+
   @action
   validate = () => {
     this.partyFields = this.partyFields.validate();
-  };
-  getPartyEntity = () => {
-    return new CreatePartyEntity(this.partyFields);
   };
   static instance;
   static getInstance() {

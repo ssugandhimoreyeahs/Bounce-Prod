@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, { Fragment, useState } from 'react';
 import {
   View,
   Text,
@@ -14,28 +14,30 @@ import {
   CustomButton,
   CustomTextinput,
   FloatingInput,
-  InputBox,
+  DatePicker,
 } from '@components';
-import {UploadCamera} from '@assets';
-import {UploadBlue, BlackClose, BlueCamera} from '@svg';
-import {Keyboard} from 'react-native';
+import { UploadCamera } from '@assets';
+import { UploadBlue, BlackClose, BlueCamera } from '@svg';
+import { Keyboard } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
-import {connect} from 'react-redux';
-import {FONTSIZE, getHp, getWp} from '@utils';
+import { connect } from 'react-redux';
+import { FONTSIZE, getHp, getWp } from '@utils';
 import {
   AgeField,
   SwitchButton,
   DollarField,
 } from '../../../components/BreakedComponents';
-import {Avatar} from 'react-native-elements';
+import { Avatar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import InvitationPartyModel from './model';
-import {observer} from 'mobx-react';
-import {Formik} from 'formik';
+import { observer } from 'mobx-react';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import {Strings} from '../../../app/constants';
+import { Strings } from '../../../app/constants';
 import UploadMedia from './UploadMedia';
-import {ValidationDecorators} from '../../../app/Validations';
+import { ValidationDecorators } from '../../../app/Validations';
+import DatePick from '../../../components/DatePick'
+
 const INTEREST = [
   {
     categoryHeading: 'Add Tags',
@@ -61,6 +63,8 @@ function CreateInvitation(props) {
   const [picture, setPicture] = useState(null);
   const [footer, openFooter] = useState(false);
   const [getPrivate, setPrivate] = useState(false);
+  const [birthday, setBirthday] = useState('')
+
 
   const handleImage = async () => {
     ImagePicker.openPicker({
@@ -82,7 +86,7 @@ function CreateInvitation(props) {
       </TouchableOpacity>
     );
   };
-  const SmallButton = ({item}) => {
+  const SmallButton = ({ item }) => {
     console.log('ase', item);
     return (
       <TouchableOpacity style={styles.smallButtonStyle}>
@@ -91,10 +95,11 @@ function CreateInvitation(props) {
     );
   };
 
+
   return (
     <Root>
       <View style={styles.container}>
-        <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
+        <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
           <Header back rightTitle={'Save as Draft'} />
           {/* First Section */}
           <View
@@ -108,10 +113,11 @@ function CreateInvitation(props) {
               floatingLabel={'Event title'}
               value={partyModel.partyFields.title}
               onChange={title => {
-                partyModel.setPartyFields({title: title});
+                partyModel.setPartyFields({ title: title });
               }}
+              styleProp={{ borderRadius: 19 }}
               errorMessage={partyModel.partyFields?.error?.title}
-              styleProp={{borderRadius: 19}}
+
             />
 
             {picture == null ? (
@@ -141,69 +147,65 @@ function CreateInvitation(props) {
                 </Text>
               </TouchableOpacity>
             ) : (
-              <>
-                <View
-                  style={{
-                    marginVertical: getHp(23),
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <TouchableOpacity
-                    onPress={() => openFooter(true)}
-                    style={{marginVertical: 30}}>
-                    <Avatar
-                      source={{
-                        uri: picture.path,
-                      }}
-                      size="xlarge"
-                      rounded
-                    />
-                    <View>
-                      <UploadBlue
-                        height={50}
-                        width={50}
-                        style={{
-                          position: 'absolute',
-                          bottom: -25,
-                          left: 55,
-                          resizeMode: 'contain',
+                <>
+                  <View
+                    style={{
+                      marginVertical: getHp(23),
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <TouchableOpacity
+                      onPress={() => openFooter(true)}
+                      style={{ marginVertical: 30 }}>
+                      <Avatar
+                        source={{
+                          uri: picture.path,
                         }}
+                        size="xlarge"
+                        rounded
                       />
-                    </View>
-                    {footer ? <ImageFooter /> : null}
-                  </TouchableOpacity>
-                </View>
-              </>
-            )}
+                      <View>
+                        <UploadBlue
+                          height={50}
+                          width={50}
+                          style={{
+                            position: 'absolute',
+                            bottom: -25,
+                            left: 55,
+                            resizeMode: 'contain',
+                          }}
+                        />
+                      </View>
+                      {footer ? <ImageFooter /> : null}
+                    </TouchableOpacity>
+                  </View>
+                </>
+              )}
 
-            <FloatingInput
+            {/* <FloatingInput
               floatingLabel={'Date / Time'}
               value={date}
               onChange={value => setDate(value)}
-              value={partyModel.partyFields.title}
-              onChange={title => {
-                partyModel.setPartyFields({title: title});
-              }}
-              errorMessage={partyModel.partyFields?.error?.title}
+            /> */}
+            <DatePick
+              setBirthday={setBirthday}
+              birthday={birthday}
+              tillToday
             />
+            {/* <DatePicker
+              setBirthday={setBirthday}
+              birthday={birthday}
+              tillToday
+            /> */}
             <FloatingInput
               floatingLabel={'Address'}
               value={address}
               onChange={value => setAddress(value)}
-              value={partyModel.partyFields.address}
-              onChange={address => {
-                partyModel.setPartyFields({address: address});
-              }}
-              errorMessage={partyModel.partyFields?.error?.address}
             />
             <CustomTextinput
               text={'Description...'}
               multiline
-              value={partyModel.partyFields.description}
-              onChange={description => {
-                partyModel.setPartyFields({description: description});
-              }}
-              errorMessage={partyModel.partyFields?.error?.description}
+              onChange={value => setDescription(value)}
             />
             {/* {INTEREST.map((item) => {
                             return (
@@ -237,95 +239,86 @@ function CreateInvitation(props) {
             <Text
               style={[
                 styles.headerTitle,
-                {fontSize: FONTSIZE.Text20, marginRight: 5},
+                { fontSize: FONTSIZE.Text20, marginRight: 5 },
               ]}>
               {'Event Settings'}
             </Text>
             {/* <Icon name="chevron-down" size={15} color="#000" /> */}
             {/* </View> */}
 
-            {/*  
-//             <View style={{marginVertical: 10}}>
-//               <SwitchButton
-//                 onPrivatePress={() => setPrivate()}
-//                 onPublicPress={() => setPrivate()}
-//               />
-//             </View>
-//             <DollarField />
-//             <AgeField />
-//           </View> */}
 
-            <View style={{marginVertical: 10}}>
+            <View style={{ marginVertical: 10 }}>
               <SwitchButton
-                onPrivatePress={() => partyModel.setIsPrivate(true)}
-                onPublicPress={() => partyModel.setIsPrivate(true)}
-              />
-            </View>
-            <View
-              style={[
-                styles.eventContainer,
-                {justifyContent: 'space-between'},
-              ]}>
-              <Text
-                style={[
-                  styles.headerTitle,
-                  {fontSize: FONTSIZE.Text20, marginRight: 5},
-                ]}>
-                {'Minimum Age'}
-              </Text>
-              <TextInput
-                placeholderTextColor={'#000'}
-                placeholder={'0'}
-                value={partyModel.partyFields.fromAge}
-                onChange={fromAge => {
-                  partyModel.setPartyFields({fromAge: fromAge});
-                }}
-                errorMessage={partyModel.partyFields?.error?.fromAge}
-                style={[
-                  styles.textInput,
-                  {
-                    width: '35%',
-                    textAlign: 'center',
-                    fontSize: FONTSIZE.Text18,
-                    color: 'black',
-                  },
-                ]}
-              />
-            </View>
-
-            <View
-              style={[
-                styles.eventContainer,
-                {justifyContent: 'space-between'},
-              ]}>
-              <Text
-                style={[
-                  styles.headerTitle,
-                  {fontSize: FONTSIZE.Text20, marginRight: 5},
-                ]}>
-                {'Maximum Age'}
-              </Text>
-              <TextInput
-                value={partyModel.partyFields.toAge}
-                onChange={toAge => {
-                  partyModel.setPartyFields({toAge: toAge});
-                }}
-                errorMessage={partyModel.partyFields?.error?.toAge}
-                placeholderTextColor={'#000'}
-                placeholder={'0'}
-                style={[
-                  styles.textInput,
-                  {
-                    width: '35%',
-                    textAlign: 'center',
-                    fontSize: FONTSIZE.Text18,
-                  },
-                ]}
+                onPrivatePress={() => setPrivate()}
+                onPublicPress={() => setPrivate()}
               />
             </View>
             {/* <DollarField />
+            <AgeField /> */}
+          </View>
+
+          <View style={{ marginVertical: 10 }}>
+            <SwitchButton
+              onPrivatePress={() => setPrivate()}
+              onPublicPress={() => setPrivate()}
+            />
+          </View>
+          <View
+            style={[
+              styles.eventContainer,
+              { justifyContent: 'space-between' },
+            ]}>
+            <Text
+              style={[
+                styles.headerTitle,
+                { fontSize: FONTSIZE.Text20, marginRight: 5 },
+              ]}>
+              {'Minimum Age'}
+            </Text>
+            <TextInput
+              placeholderTextColor={'#000'}
+              placeholder={'0'}
+              style={[
+                styles.textInput,
+                {
+
+                  width: '35%',
+                  textAlign: 'center',
+                  fontSize: FONTSIZE.Text18,
+                },
+              ]}
+            />
+          </View>
+
+          <View
+            style={[
+              styles.eventContainer,
+              { justifyContent: 'space-between' },
+            ]}>
+            <Text
+              style={[
+                styles.headerTitle,
+                { fontSize: FONTSIZE.Text20, marginRight: 5 },
+              ]}>
+              {'Maximum Age'}
+            </Text>
+            <TextInput
+              placeholderTextColor={'#000'}
+              placeholder={'0'}
+              style={[
+                styles.textInput,
+                {
+                  width: '35%',
+                  textAlign: 'center',
+                  fontSize: FONTSIZE.Text18,
+                },
+              ]}
+            />
+
+            {/* <DollarField />
                     <AgeField /> */}
           </View>
+
 
           {/* Tickets Section */}
           <View
@@ -354,12 +347,12 @@ function CreateInvitation(props) {
             <View
               style={[
                 styles.eventContainer,
-                {justifyContent: 'space-between'},
+                { justifyContent: 'space-between' },
               ]}>
               <Text
                 style={[
                   styles.headerTitle,
-                  {fontSize: FONTSIZE.Text20, marginRight: 5},
+                  { fontSize: FONTSIZE.Text20, marginRight: 5 },
                 ]}>
                 {'Price'}
               </Text>
@@ -379,12 +372,12 @@ function CreateInvitation(props) {
             <View
               style={[
                 styles.eventContainer,
-                {justifyContent: 'space-between'},
+                { justifyContent: 'space-between' },
               ]}>
               <Text
                 style={[
                   styles.headerTitle,
-                  {fontSize: FONTSIZE.Text20, marginRight: 5},
+                  { fontSize: FONTSIZE.Text20, marginRight: 5 },
                 ]}>
                 {'Quantity Available'}
               </Text>
@@ -428,7 +421,7 @@ function CreateInvitation(props) {
             ButtonTitle={'Save As Draft'}
             ButtonTitle2={'Complete'}
             onPress={() => {
-              console.log('TEST_DATA - ', partyModel.getPartyEntity());
+              partyModel.validate();
             }}
           />
 

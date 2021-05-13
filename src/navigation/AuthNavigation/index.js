@@ -1,5 +1,5 @@
-import React, {Fragment} from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import React, { Fragment } from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import LoginScreen from '../../Screens/BounceVendors/Onboarding/LoginScreen';
 
@@ -26,11 +26,13 @@ class AuthStackNavigator {
       <AuthStack.Navigator
         headerMode="screen"
         initialRouteName={LoginScreen.routeName}
-        screenOptions={{headerShown: false}}>
+        screenOptions={{ headerShown: false }}>
+
         <AuthStack.Screen
           name={LoginScreen.routeName}
           component={LoginScreen}
         />
+    
 
         {/* Vendor Signup Screens */}
         <AuthStack.Screen
@@ -48,7 +50,10 @@ class AuthStackNavigator {
         {/* Vendor Signup Screens */}
 
         {/* User Signup Screens */}
-        <AuthStack.Screen name={NameScreen.routeName} component={NameScreen} />
+        <AuthStack.Screen
+          name={NameScreen.routeName}
+          component={NameScreen}
+        />
         <AuthStack.Screen
           name={UserNameScreen.routeName}
           component={UserNameScreen}
@@ -57,8 +62,14 @@ class AuthStackNavigator {
           name={BirthDayScreen.routeName}
           component={BirthDayScreen}
         />
-        <AuthStack.Screen name={LiveScreen.routeName} component={LiveScreen} />
-        <AuthStack.Screen name={ProfilePic.routeName} component={ProfilePic} />
+        <AuthStack.Screen
+          name={LiveScreen.routeName}
+          component={LiveScreen}
+        />
+        <AuthStack.Screen
+          name={ProfilePic.routeName}
+          component={ProfilePic}
+        />
         {/* User Signup Screens */}
       </AuthStack.Navigator>
     );

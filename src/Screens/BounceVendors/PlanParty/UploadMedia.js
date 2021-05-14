@@ -23,10 +23,10 @@ import {FONTSIZE, getHp, getWp} from '@utils';
 import {Avatar} from 'react-native-elements';
 import Modal from 'react-native-modal';
 import {Observer, observer} from 'mobx-react';
-import InvitationPartyModel from './model';
+import PlanPartyModel from './PlanPartyModel';
 
 function UploadMedia(props) {
-  let partyModel = InvitationPartyModel.getInstance();
+  let partyModel = PlanPartyModel.getInstance();
   const handleImage = () => {
     ImagePicker.openPicker({
       width: 300,

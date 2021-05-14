@@ -29,7 +29,7 @@ import {
 } from '../../../components/BreakedComponents';
 import {Avatar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import InvitationPartyModel from './model';
+import PlanPartyModel from './PlanPartyModel';
 import {observer} from 'mobx-react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
@@ -52,8 +52,8 @@ const INTEREST = [
   },
 ];
 function CreateInvitation(props) {
-  //const [partyModel] = useState(() => InvitationPartyModel.getInstance());
-  const partyModel = InvitationPartyModel.getInstance();
+  //const [partyModel] = useState(() => PlanPartyModel.getInstance());
+  const partyModel = PlanPartyModel.getInstance();
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
   const [address, setAddress] = useState('');
@@ -297,7 +297,7 @@ function CreateInvitation(props) {
                 placeholderTextColor={'#000'}
                 placeholder={'0'}
                 value={partyModel.partyFields.fromAge}
-                onChange={fromAge => {
+                onChangeText={fromAge => {
                   partyModel.setPartyFields({fromAge: fromAge});
                 }}
                 errorMessage={partyModel.partyFieldsErrors?.fromAge}
@@ -327,7 +327,7 @@ function CreateInvitation(props) {
               </Text>
               <TextInput
                 value={partyModel.partyFields.toAge}
-                onChange={toAge => {
+                onChangeText={toAge => {
                   partyModel.setPartyFields({toAge: toAge});
                 }}
                 errorMessage={partyModel.partyFieldsErrors?.toAge}

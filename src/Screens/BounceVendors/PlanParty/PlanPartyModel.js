@@ -1,8 +1,8 @@
-import {action, makeAutoObservable, observable, runInAction} from 'mobx';
+import {action, makeAutoObservable, observable, runInAction, toJS} from 'mobx';
 import {CreatePartyDTO} from '../../../app/DTO';
 import {Validation} from '../../../app/Validations';
 
-class InvitationPartyModel {
+class PlanPartyModel {
   @observable partyFields = new CreatePartyDTO();
   @observable partyFieldsErrors = {};
   constructor() {
@@ -16,10 +16,7 @@ class InvitationPartyModel {
         delete this.partyFieldsErrors[key];
       }
     }
-    this.partyFields = {
-      ...this.partyFields,
-      ...fields,
-    };
+    this.partyFields = Object.assign({}, this.partyFields, fields);
   };
   @action
   addGallery = images => {
@@ -37,13 +34,13 @@ class InvitationPartyModel {
     this.partyFields = nextParty;
   };
 
-  @action
   isPartyValid = async () => {
-    let schema = {success: false, partyFields: this.partyFields};
-    const isValid = await Validation.validateClassDecorator(
-      new CreatePartyDTO(this.partyFields),
-    );
+    let partyToJS = toJS(this.partyFields);
+    let validateParty = new CreatePartyDTO(partyToJS);
+    let schema = {success: false, partyFields: partyToJS};
+    const isValid = await Validation.validateClassDecorator(validateParty);
     if (!isValid.success) {
+      console.log("ERROR_PARTY - ", JSON.stringify(isValid));
       runInAction(() => {
         this.partyFieldsErrors = isValid.errors;
       });
@@ -56,9 +53,9 @@ class InvitationPartyModel {
   static instance;
   static getInstance() {
     if (!this.instance) {
-      this.instance = new InvitationPartyModel();
+      this.instance = new PlanPartyModel();
     }
     return this.instance;
   }
 }
-export default InvitationPartyModel;
+export default PlanPartyModel;

@@ -27,6 +27,15 @@ import PlanPartyModel from './PlanPartyModel';
 
 function UploadMedia(props) {
   let partyModel = PlanPartyModel.getInstance();
+  const [state, setState] = useState({});
+  useEffect(() => {
+    const listener = partyModel.party?.subscribe(() => {
+      setState(() => ({}));
+    });
+    return () => {
+      listener.unSubscribe();
+    };
+  }, []);
   const handleImage = () => {
     ImagePicker.openPicker({
       width: 300,
@@ -77,7 +86,7 @@ function UploadMedia(props) {
                     width: 30,
                   }}
                   onPress={() => {
-                    partyModel.removeGallery(item);
+                    partyModel.party.removeGallery(item);
                   }}>
                   <BlackCircleCross height={30} width={30} />
                 </TouchableOpacity>
@@ -106,7 +115,7 @@ function UploadMedia(props) {
           />
 
           <FlatList
-            data={partyModel.partyFields.galleryFiles}
+            data={partyModel.party.galleryFiles}
             renderItem={renderItem}
           />
           <View
@@ -121,7 +130,7 @@ function UploadMedia(props) {
               ButtonTitle={'Add Images'}
               ButtonTitle2={'Continue'}
               onPress={() => {
-                handleImage()
+                handleImage();
               }}
             />
           </View>

@@ -1,53 +1,49 @@
-import {MinLength, IsInt, Matches, IsNotEmpty, IsEmpty} from 'class-validator';
-import {Decorators as D} from '../../Validations';
+import {Party as CreatePartyEntity} from '../../Entities';
+import {ReactModel} from '../../core';
+import {Validation} from '../../Validations';
+@ReactModel()
+class CreatePartyDTO extends CreatePartyEntity {
+  partyError = {};
 
-class CreatePartyDTO {
-  @IsNotEmpty({message: 'Required title'})
-  title = '';
-
-  @IsNotEmpty({message: 'Required Description'})
-  description = '';
-  date = '';
-  location = '';
-
-  @IsInt({message: 'Invalid Fee'})
-  fee = 0;
-
-  @D.IsLesserThen('toAge', {message: 'From Age cannot be greater than to age'})
-  @IsInt({message: 'Invalid From Age'})
-  fromAge = '';
-
-  @IsInt({message: 'Invalid To Age'})
-  @IsEmpty()
-  toAge = '';
-
-  galleryFiles = [];
-  address = '';
-  needBouncer = false;
-  needDJ = false;
-  ageLimit = false;
-  isPrivate = false;
-  profileImageFile = '';
-
-  constructor(fields) {
-    console.log('CREATE_DTO_CON - ', fields);
-    try {
-      if (fields && Object.keys(fields)?.length > 0) {
-        for (let key in fields) {
-          this[key] = fields[key];
-        }
-        this.fromAge = parseInt(fields['fromAge']) || '';
-        this.toAge = parseInt(fields['toAge']) || '';
-        this.fee = parseInt(fields['fee']) || '';
-        if (!isNaN(this.fromAge) && !isNaN(this.toAge)) {
-          this.ageLimit = true;
-        }
-        console.log('ASSIGN_CREATE_DTO - ' + JSON.stringify(this));
+  set = fields => {
+    for (key in fields) {
+      if (this.partyError[key]) {
+        delete this.partyError[key];
       }
-    } catch (error) {
-      console.log('CreatePartyDTO - error - ', error);
+      this[key] = fields[key];
     }
-  }
+    this.notifyListeners();
+  };
+
+  addGallery = images => {
+    this.galleryFiles.push(...images);
+    this.notifyListeners();
+  };
+
+  removeGallery = image => {
+    let findIndex = this.galleryFiles.findIndex(i => i == image);
+    if (findIndex > -1) {
+      this.galleryFiles.splice(findIndex, 1);
+    }
+    this.notifyListeners();
+  };
+  setIsPrivate = value => {
+    this.isPrivate = value;
+    this.notifyListeners();
+  };
+  isPartyValid = async () => {
+    let validateParty = new CreatePartyEntity(this);
+    let schema = {success: false, partyFields: validateParty};
+    const isValid = await Validation.validateClassDecorator(validateParty);
+    if (!isValid.success) {
+      console.log('ERROR_PARTY - ', JSON.stringify(isValid));
+      this.partyError = isValid.errors;
+    } else {
+      schema.success = true;
+    }
+    this.notifyListeners();
+    return schema;
+  };
 }
 
 export default CreatePartyDTO;

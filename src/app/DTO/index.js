@@ -1,5 +1,5 @@
-import PartyDTO from './PartyDTO';
+import CreatePartyDTO from './CreateParty';
 
 export {
-    PartyDTO
+    CreatePartyDTO
 }

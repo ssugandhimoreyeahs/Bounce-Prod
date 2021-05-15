@@ -11,16 +11,17 @@ class Endpoints extends Server {
   postUserLogin = '/user/userlogin';
   getVendor = '/vendor/getvendor';
   getUser = '/user'; 
-  getCategory = 'Vendor/Category';
-  validateVendor = 'auth/validatevendor';
-  vendorRegister = 'auth/vendor/register';
-  vendorAddMedia = 'vendor/addmedia';
-  postLogin = 'user/userlogin';
-  getLanguage = 'language';
-  getGenre = 'genres';
-  getCertification = 'genres/guardcertification';
-  vendorCategory = 'Vendor/Category';
-  vendorList = 'Vendor'; 
+  getCategory = '/Vendor/Category';
+  validateVendor = '/auth/validatevendor';
+  vendorRegister = '/auth/vendor/register';
+  vendorAddMedia = '/vendor/addmedia';
+  postLogin = '/user/userlogin';
+  getLanguage = '/language';
+  getGenre = '/genres';
+  getCertification = '/genres/guardcertification';
+  vendorCategory = '/Vendor/Category';
+  vendorList = '/Vendor'; 
+  party = '/party';
 }
 
 export default Object.freeze(new Endpoints());

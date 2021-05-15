@@ -10,7 +10,7 @@ const AuthInstance = () => {
       config.headers.Authorization = `Bearer ${MobxStore.authStore?.token}`;
       let requestData = {
         url: `${config.baseURL}${config.url}`,
-        headers: JSON.stringify(config.headers),
+        // body: JSON.stringify(config.headers),
       };
       console.log(`
 
@@ -45,7 +45,7 @@ const AuthInstance = () => {
       let responseTreeError = {
         url: `${request?.responseURL}`,
         data: JSON.stringify(response?.data),
-        error: JSON.stringify(error),
+        // error: JSON.stringify(error),
       };
       console.log(`
 
@@ -54,7 +54,7 @@ const AuthInstance = () => {
       ${JSON.stringify(responseTreeError)}
       
       `); 
-      return Promise.resolve(error);
+      return Promise.reject(error);
     },
   );
   return authInstance;

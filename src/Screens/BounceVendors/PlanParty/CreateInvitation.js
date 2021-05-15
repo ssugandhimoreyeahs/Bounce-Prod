@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -29,7 +29,7 @@ import {
 } from '../../../components/BreakedComponents';
 import {Avatar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import InvitationPartyModel from './model';
+import PlanPartyModel from './PlanPartyModel';
 import {observer} from 'mobx-react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
@@ -52,8 +52,8 @@ const INTEREST = [
   },
 ];
 function CreateInvitation(props) {
-  //const [partyModel] = useState(() => InvitationPartyModel.getInstance());
-  const partyModel = InvitationPartyModel.getInstance();
+  //const [partyModel] = useState(() => PlanPartyModel.getInstance());
+  const partyModel = PlanPartyModel.getInstance();
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
   const [address, setAddress] = useState('');
@@ -61,25 +61,31 @@ function CreateInvitation(props) {
   const [picture, setPicture] = useState(null);
   const [footer, openFooter] = useState(false);
   const [getPrivate, setPrivate] = useState(false);
-
+  const [state, setState] = useState({});
+  useEffect(() => {
+    const listener = partyModel.party?.subscribe(() => {
+      setState(() => ({}));
+    });
+    return () => {
+      listener.unSubscribe();
+    };
+  }, []);
   const handleOnPress = async () => {
     try {
-      const res = await partyModel.isPartyValid();
-    console.log('RES_TESt - ', res);
-    if (!res.success) {
-      return;
-    }
-    const formData = FormDATA.objectToFormData(res.partyFields);
-    console.log('FORMDATA_RES - ', JSON.stringify(formData));
-    const createPartyRes = await ApiClient.authInstance.post(
-      ApiClient.endPoints.party,
-      formData,
-      ApiClient.formDataHeaders(),
-    );
-    console.log("CREATE_PARTY_RES - ", createPartyRes);
-    }catch(error) {
-      console.log("ERROR - ", error);
-
+      const res = await partyModel.party.isPartyValid(); 
+      if (!res.success) {
+        return;
+      }
+      const formData = FormDATA.objectToFormData(res.partyFields);
+      console.log('FORMDATA_RES - ', JSON.stringify(formData));
+      // const createPartyRes = await ApiClient.authInstance.post(
+      //   ApiClient.endPoints.party,
+      //   formData,
+      //   ApiClient.formDataHeaders(),
+      // );
+      // console.log("CREATE_PARTY_RES - ", createPartyRes);
+    } catch (error) {
+      console.log('ERROR - ', error);
     }
   };
   const handleImage = async () => {
@@ -89,7 +95,7 @@ function CreateInvitation(props) {
       height: 300,
       cropping: true,
     }).then(images => {
-      partyModel.addGallery(images.map(i => i.path));
+      partyModel.party.addGallery(images.map(i => i.path));
       props.navigation.navigate(UploadMedia.routeName);
     });
   };
@@ -126,11 +132,11 @@ function CreateInvitation(props) {
             }}>
             <FloatingInput
               floatingLabel={'Event title'}
-              value={partyModel.partyFields.title}
+              value={partyModel.party.title}
               onChange={title => {
-                partyModel.setPartyFields({title: title});
+                partyModel.party.set({title: title});
               }}
-              errorMessage={partyModel.partyFieldsErrors?.title}
+              errorMessage={partyModel.party?.partyError?.title}
               styleProp={{borderRadius: 19}}
             />
 
@@ -200,30 +206,30 @@ function CreateInvitation(props) {
               floatingLabel={'Date / Time'}
               value={date}
               onChange={value => setDate(value)}
-              value={partyModel.partyFields.title}
-              onChange={title => {
-                partyModel.setPartyFields({title: title});
-              }}
-              errorMessage={partyModel.partyFieldsErrors?.title}
+              // value={partyModel.partyFields.title}
+              // onChange={title => {
+              //   partyModel.party.set({title: title});
+              // }}
+              // errorMessage={partyModel.party?.partyError?.title}
             />
             <FloatingInput
               floatingLabel={'Address'}
               value={address}
               onChange={value => setAddress(value)}
-              value={partyModel.partyFields.address}
+              value={partyModel.party.address}
               onChange={address => {
-                partyModel.setPartyFields({address: address});
+                partyModel.party.set({address: address});
               }}
-              errorMessage={partyModel.partyFieldsErrors?.address}
+              errorMessage={partyModel.party?.partyError?.address}
             />
             <CustomTextinput
               text={'Description...'}
               multiline
-              value={partyModel.partyFields.description}
+              value={partyModel.party.description}
               onChange={description => {
-                partyModel.setPartyFields({description: description});
+                partyModel.party.set({description: description});
               }}
-              errorMessage={partyModel.partyFieldsErrors?.description}
+              errorMessage={partyModel.party?.partyError?.description}
             />
             {/* {INTEREST.map((item) => {
                             return (
@@ -277,8 +283,8 @@ function CreateInvitation(props) {
 
             <View style={{marginVertical: 10}}>
               <SwitchButton
-                onPrivatePress={() => partyModel.setIsPrivate(true)}
-                onPublicPress={() => partyModel.setIsPrivate(true)}
+                onPrivatePress={() => partyModel.party.setIsPrivate(true)}
+                onPublicPress={() => partyModel.party.setIsPrivate(true)}
               />
             </View>
             <View
@@ -294,13 +300,13 @@ function CreateInvitation(props) {
                 {'Minimum Age'}
               </Text>
               <TextInput
-                placeholderTextColor={'#000'}
+                keyboardType={'numeric'} 
                 placeholder={'0'}
-                value={partyModel.partyFields.fromAge}
-                onChange={fromAge => {
-                  partyModel.setPartyFields({fromAge: fromAge});
+                value={partyModel.party.fromAge}
+                onChangeText={fromAge => {
+                  partyModel.party.set({fromAge: fromAge});
                 }}
-                errorMessage={partyModel.partyFieldsErrors?.fromAge}
+                errorMessage={partyModel.party?.partyError?.fromAge}
                 style={[
                   styles.textInput,
                   {
@@ -326,12 +332,12 @@ function CreateInvitation(props) {
                 {'Maximum Age'}
               </Text>
               <TextInput
-                value={partyModel.partyFields.toAge}
-                onChange={toAge => {
-                  partyModel.setPartyFields({toAge: toAge});
+                keyboardType={'numeric'}
+                value={partyModel.party.toAge}
+                onChangeText={toAge => {
+                  partyModel.party.set({toAge: toAge});
                 }}
-                errorMessage={partyModel.partyFieldsErrors?.toAge}
-                placeholderTextColor={'#000'}
+                errorMessage={partyModel.party?.partyError?.toAge}
                 placeholder={'0'}
                 style={[
                   styles.textInput,
@@ -339,6 +345,7 @@ function CreateInvitation(props) {
                     width: '35%',
                     textAlign: 'center',
                     fontSize: FONTSIZE.Text18,
+                    color: 'black',
                   },
                 ]}
               />

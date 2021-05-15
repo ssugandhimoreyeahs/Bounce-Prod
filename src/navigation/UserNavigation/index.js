@@ -18,7 +18,7 @@ class UserNavigation {
     return (
       <UserRootStack.Navigator
         headerMode={'none'}
-        initialRouteName={UserHomeDrawerNavigator.routeName}>
+        initialRouteName={CreateInvitation.routeName}>
         <UserRootStack.Screen
           name={UserHomeDrawerNavigator.routeName}
           component={UserHomeDrawerNavigator.drawerHome}

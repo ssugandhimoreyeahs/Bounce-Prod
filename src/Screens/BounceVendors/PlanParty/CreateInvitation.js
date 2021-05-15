@@ -36,6 +36,7 @@ import * as Yup from 'yup';
 import {Strings} from '../../../app/constants';
 import UploadMedia from './UploadMedia';
 import {FormDATA, ApiClient} from '../../../app/services';
+import DatePick from '../../../components/DatePick';
 const INTEREST = [
   {
     categoryHeading: 'Add Tags',
@@ -62,6 +63,7 @@ function CreateInvitation(props) {
   const [footer, openFooter] = useState(false);
   const [getPrivate, setPrivate] = useState(false);
   const [state, setState] = useState({});
+  const [birthday, setBirthday] = useState(null);
   useEffect(() => {
     const listener = partyModel.party?.subscribe(() => {
       setState(() => ({}));
@@ -72,7 +74,7 @@ function CreateInvitation(props) {
   }, []);
   const handleOnPress = async () => {
     try {
-      const res = await partyModel.party.isPartyValid(); 
+      const res = await partyModel.party.isPartyValid();
       if (!res.success) {
         return;
       }
@@ -202,16 +204,7 @@ function CreateInvitation(props) {
               </>
             )}
 
-            <FloatingInput
-              floatingLabel={'Date / Time'}
-              value={date}
-              onChange={value => setDate(value)}
-              // value={partyModel.partyFields.title}
-              // onChange={title => {
-              //   partyModel.party.set({title: title});
-              // }}
-              // errorMessage={partyModel.party?.partyError?.title}
-            />
+            <DatePick setBirthday={setBirthday} birthday={birthday} tillToday />
             <FloatingInput
               floatingLabel={'Address'}
               value={address}
@@ -300,7 +293,7 @@ function CreateInvitation(props) {
                 {'Minimum Age'}
               </Text>
               <TextInput
-                keyboardType={'numeric'} 
+                keyboardType={'numeric'}
                 placeholder={'0'}
                 value={partyModel.party.fromAge}
                 onChangeText={fromAge => {

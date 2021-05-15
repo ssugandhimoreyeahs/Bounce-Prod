@@ -35,8 +35,9 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {Strings} from '../../../app/constants';
 import UploadMedia from './UploadMedia';
-import {FormDATA, ApiClient} from '../../../app/services';
+import {CreateFormData, ApiClient} from '../../../app/services';
 import DatePick from '../../../components/DatePick';
+import moment from 'moment';
 const INTEREST = [
   {
     categoryHeading: 'Add Tags',
@@ -78,7 +79,7 @@ function CreateInvitation(props) {
       if (!res.success) {
         return;
       }
-      const formData = FormDATA.objectToFormData(res.partyFields);
+      const formData = CreateFormData.objectToFormData(res.partyFields);
       console.log('FORMDATA_RES - ', JSON.stringify(formData));
       // const createPartyRes = await ApiClient.authInstance.post(
       //   ApiClient.endPoints.party,
@@ -204,14 +205,20 @@ function CreateInvitation(props) {
               </>
             )}
 
-            <DatePick setBirthday={setBirthday} birthday={birthday} tillToday />
+            <DatePick
+              placeholder={'Date / Time'}
+              handleChange={date => partyModel.party.set({date})}
+              value={partyModel.party.date}
+              pickerMode={'datetime'}
+              minimumDate={moment().add(1, 'day').toDate()}
+              maximumDate={moment().add(7, 'day').toDate()}
+              errorMessage={partyModel.party?.partyError?.date}
+            />
             <FloatingInput
               floatingLabel={'Address'}
-              value={address}
-              onChange={value => setAddress(value)}
-              value={partyModel.party.address}
+              value={partyModel.party.location.addressStr}
               onChange={address => {
-                partyModel.party.set({address: address});
+                partyModel.party.setAddress(address);
               }}
               errorMessage={partyModel.party?.partyError?.address}
             />

@@ -14,7 +14,10 @@ class CreatePartyDTO extends CreatePartyEntity {
     }
     this.notifyListeners();
   };
-
+  setAddress = (addressStr) => {
+    this.location.addressStr = addressStr;
+    this.notifyListeners();
+  }
   addGallery = images => {
     this.galleryFiles.push(...images);
     this.notifyListeners();

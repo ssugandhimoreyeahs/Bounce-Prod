@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
 
    },
    flex: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between'
+      // flexDirection: 'row',
+      alignItems: 'flex-start',
+      // justifyContent: 'space-between'
    },
    partition: {
       width: '90%',

@@ -78,6 +78,9 @@
 		<string>AvenirNext-HeavyItalic.ttf</string>
 		<string>AvenirNext-Italic.ttf</string>
 		<string>AvenirNext-MediumItalic.ttf</string>
+		<string>Roboto_medium.ttf</string>
+		<string>Roboto.ttf</string>
+		<string>rubicon-icon-font.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

@@ -76,10 +76,11 @@ function Header(props) {
                     leftDropdown ?
                         <TouchableOpacity onPress={() => setShow(!showDropdown)} >
                             <View style={styles.headerDropdown}>
-                                <Text style={[styles.leftTitleStyle, rightTitleStyle, { marginRight: getWp(10) }]}>
+                                <Icon name="angle-right" size={getHp(30)} color="#000" style={{marginHorizontal:5}} />
+                                <Text style={[styles.leftTitleStyle, rightTitleStyle, { marginLeft: getWp(5) }]}>
                                     {`${leftDropdown}`}
                                 </Text>
-                                <Icon name="angle-down" size={getHp(30)} color="#000" />
+
                             </View>
                         </TouchableOpacity>
                         : null
@@ -177,9 +178,9 @@ function Header(props) {
                         </>
                     )
                 }
-                <TouchableOpacity style={{ elevation: 5, backgroundColor: '#fff', borderRadius: 18, paddingVertical: 10, alignItems: 'center', marginVertical: 8 }}>
-                    <Text style={[styles.rightTitleStyle]}>
-                        {"Add Account"}
+                <TouchableOpacity style={{ elevation: 5, backgroundColor: '#F2F5F6', borderRadius: 18, paddingVertical: 10, alignItems: 'center', marginVertical: 8 }}>
+                    <Text style={{color:'#000000',fontSize:FONTSIZE.Text16,fontFamily:'ANB'}}>
+                        {"New Account"}
                     </Text>
                 </TouchableOpacity>
             </View>}
@@ -194,7 +195,7 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 24,
         borderWidth: 1,
         borderColor: '#CCCCCC',
-        backgroundColor: '#F4F4F4',
+        backgroundColor: '#FFFFFF',
         padding: 10
     },
     partition: {

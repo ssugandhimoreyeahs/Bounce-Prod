@@ -13,9 +13,11 @@ export default function Tab1(props) {
   const renderItems = ({item, index}) => {
     return (
       <TouchableOpacity
-        onPress={() => props.navigation.navigate(CreateInvitation.routeName, {
-            party: item
-        })}
+        onPress={() =>
+          props.navigation.navigate(CreateInvitation.routeName, {
+            party: item,
+          })
+        }
         key={index}
         style={{backgroundColor: '#FBFBFB', padding: 10}}>
         {/* This can be used as component */}
@@ -27,7 +29,7 @@ export default function Tab1(props) {
             flexDirection: 'row',
           }}>
           <Avatar
-            source={Girl}
+            source={{uri: item?.gallery[0]?.filePath}}
             size={125}
             avatarStyle={{borderTopLeftRadius: 10, borderBottomLeftRadius: 10}}
           />

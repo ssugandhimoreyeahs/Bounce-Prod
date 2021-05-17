@@ -75,6 +75,7 @@ export default function AccountSetting(props) {
     </Root>
     )
 }
+AccountSetting.routeName = "/AccountSetting";
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',

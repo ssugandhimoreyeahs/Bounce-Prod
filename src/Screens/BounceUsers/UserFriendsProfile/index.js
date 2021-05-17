@@ -10,7 +10,7 @@ import {
 import {
   Header,
   ImageCarousel,
-  IconTitle,
+  Tabview,
   ReviewCard,
   Footer,
   CustomText,
@@ -33,18 +33,6 @@ import Drawer from '../../Drawer/UserCustomDrawer';
 import QRcode from "../../Views/QRcode";
 
 
-const DATA = [
-  {
-    id: "0",
-    icon: Favourite,
-    messageName: "Favourite",
-  },
-  {
-    id: "1",
-    icon: Message,
-    messageName: "Message",
-  },
-];
 
 const ACCOUNTS = [
   {
@@ -58,6 +46,20 @@ const ACCOUNTS = [
     messageName: "Message",
   },
 ];
+
+const DATA = [{
+  eventTitle: "Rich Little - Live in Las Vegas",
+  name: 'Laugh Factory',
+  icon: Girl,
+  time: "Dec 31, 8:00 PM",
+},
+{
+  eventTitle: "Rich Little - Live in Las Vegas",
+  name: 'Laugh Factory',
+  icon: Girl,
+  time: "Dec 31, 8:00 PM",
+}
+]
 
 export default function UserFriendsProfile(props) {
   // const { loader, userinfo, fetchProfile } = useContext(UserContext);
@@ -151,7 +153,7 @@ export default function UserFriendsProfile(props) {
                 username !== null ? `@${username !== null ? username : ""}` : ""
               }
               DropdownAccounts={DATA}
-              // scanner={<Scanner height={25} width={25} />}
+              scanner={<Scanner height={25} width={25} />}
               share={<BlackMenubar height={25} width={25} />}
               onPressScanner={() => props.navigation.navigate(QRcode.routeName)}
               onPress={() => {
@@ -199,7 +201,7 @@ export default function UserFriendsProfile(props) {
               <View style={[styles.flex, { width: "70%", marginVertical: 10 }]}>
                 <TouchableOpacity
                   style={styles.socialButton}
-                  onPress={() => navigation.navigate("HostProfile")}
+                  onPress={() => props.navigation.navigate("HostProfile")}
                 >
                   <Text style={styles.editButton}>{"Edit Profile"}</Text>
                 </TouchableOpacity>
@@ -248,6 +250,11 @@ export default function UserFriendsProfile(props) {
                 textAlignVertical="top"
                 style={styles.Textarea}
                 placeholderTextColor='#999999'
+              />
+
+              <Tabview
+                DATA={DATA}
+                {...props}
               />
 
               <View style={{ marginVertical: 10 }}>

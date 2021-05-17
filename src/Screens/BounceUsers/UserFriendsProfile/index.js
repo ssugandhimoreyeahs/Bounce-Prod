@@ -4,13 +4,13 @@ import {
   Text,
   Image,
   ScrollView,
-  Linking,
+  TextInput,
   TouchableOpacity,
 } from "react-native";
 import {
   Header,
   ImageCarousel,
-  IconTitle,
+  Tabview,
   ReviewCard,
   Footer,
   CustomText,
@@ -28,21 +28,11 @@ import Spinner from "react-native-loading-spinner-overlay";
 import { pickDocument } from "@hooks";
 import { fetchGet, postData } from "../../../FetchServices";
 import { UserContext } from "../../../context/profiledataProvider";
-import MobxStore from '../../../mobx'; 
+import MobxStore from '../../../mobx';
 import Drawer from '../../Drawer/UserCustomDrawer';
+import QRcode from "../../Views/QRcode";
 
-const DATA = [
-  {
-    id: "0",
-    icon: Favourite,
-    messageName: "Favourite",
-  },
-  {
-    id: "1",
-    icon: Message,
-    messageName: "Message",
-  },
-];
+
 
 const ACCOUNTS = [
   {
@@ -56,6 +46,20 @@ const ACCOUNTS = [
     messageName: "Message",
   },
 ];
+
+const DATA = [{
+  eventTitle: "Rich Little - Live in Las Vegas",
+  name: 'Laugh Factory',
+  icon: Girl,
+  time: "Dec 31, 8:00 PM",
+},
+{
+  eventTitle: "Rich Little - Live in Las Vegas",
+  name: 'Laugh Factory',
+  icon: Girl,
+  time: "Dec 31, 8:00 PM",
+}
+]
 
 export default function UserFriendsProfile(props) {
   // const { loader, userinfo, fetchProfile } = useContext(UserContext);
@@ -136,13 +140,9 @@ export default function UserFriendsProfile(props) {
     }
   };
 
-  return ( 
+  return (
     <View style={styles.container}>
-      <Drawer 
-        navigation={props.navigation}
-        showDrawer={showDrawer} 
-        setShowDrawer = {() => setShowDrawer(i => !i)}
-      />
+
       <ScrollView keyboardShouldPersistTaps={"always"}>
         <Spinner visible={loader} color={"#1FAEF7"} />
         {!loader && (
@@ -155,12 +155,13 @@ export default function UserFriendsProfile(props) {
               DropdownAccounts={DATA}
               scanner={<Scanner height={25} width={25} />}
               share={<BlackMenubar height={25} width={25} />}
-              onPressScanner={() => props.navigation.navigate('UserQrCode')}
+              onPressScanner={() => props.navigation.navigate(QRcode.routeName)}
               onPress={() => {
-                setShowDrawer(i => !i);
-                return;
-                props.navigation.openDrawer()}}
-              headerBackColor={{ backgroundColor: "rgba(238, 238, 238, 0.5)" }}
+                // console.log("TEST - ", authStore.isVendor);
+                // return false;
+                props.navigation.openDrawer()
+              }}
+              headerBackColor={{ backgroundColor: "#FFFFFF" }}
             />
             <View style={styles.subContainer}>
               <View
@@ -200,12 +201,12 @@ export default function UserFriendsProfile(props) {
               <View style={[styles.flex, { width: "70%", marginVertical: 10 }]}>
                 <TouchableOpacity
                   style={styles.socialButton}
-                  onPress={() => navigation.navigate("HostProfile")}
+                  onPress={() => props.navigation.navigate("HostProfile")}
                 >
                   <Text style={styles.editButton}>{"Edit Profile"}</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   onPress={() =>
                     Linking.openURL(
                       `https://www.instagram.com/${instagramUsername}`
@@ -239,8 +240,22 @@ export default function UserFriendsProfile(props) {
                   }
                 >
                   <Tiktok height={30} width={30} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
+
+              <TextInput
+                multiline
+                numberOfLines={5}
+                placeholder="I like to party..."
+                textAlignVertical="top"
+                style={styles.Textarea}
+                placeholderTextColor='#999999'
+              />
+
+              <Tabview
+                DATA={DATA}
+                {...props}
+              />
 
               <View style={{ marginVertical: 10 }}>
                 <Text style={styles.aboutText}>{about}</Text>
@@ -285,6 +300,8 @@ export default function UserFriendsProfile(props) {
         )}
       </ScrollView>
       <Footer buttonStack={DATA} />
-    </View> 
+    </View>
   );
 }
+UserFriendsProfile.routeName = "/UserFriendsProfile";
+

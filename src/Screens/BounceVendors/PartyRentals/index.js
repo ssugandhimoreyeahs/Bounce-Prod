@@ -97,6 +97,9 @@ export default function PartyRental() {
         </Root>
     )
 }
+
+PartyRental.routeName = "/PartyRental";
+
 const styles = StyleSheet.create({
     textStyle1: {
         fontSize: FONTSIZE.Text18,

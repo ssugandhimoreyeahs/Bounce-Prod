@@ -4,9 +4,6 @@ import { Button } from 'react-native-elements';
 import { Message, Delete, ThreeDots, Girl } from '@assets';
 import { FONTSIZE } from '@utils'
 import DropDownPicker from 'react-native-dropdown-picker';
-import { getData } from '../../FetchServices';
-import { connect, useSelector, useDispatch } from "react-redux";
-import { fetchVendorData } from "../../reducer/mainexpensecategory";
 
 function CustomDropdown(props) {
     const {

@@ -8,10 +8,11 @@ import { FONTSIZE, validateEmail, validatePass } from '@utils'
 import { useSelector, useDispatch } from "react-redux";
 import { fetchVendorData } from "../../../reducer/mainexpensecategory";
 import { getHp, getWp, } from '@utils'
-import { postData } from '../../../FetchServices'
+import { ApiClient } from '../../../app/services';
+import VendorMarketProfile from './VendorMarketProfile';
 
 
-export default function DJSignup(props) {
+export default function VendorSignup(props) {
     const { login, vendorType
     } = useSelector((state) => state.mainExpenseByCategory);
     const [username, setUsername] = useState('')
@@ -65,30 +66,30 @@ export default function DJSignup(props) {
             console.log("values res of pass", validateP);
             ToastAndroid.show("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !", ToastAndroid.SHORT);
 
-        } else 
-        if (username.length > 0 
-            &&
-            password.length > 0 &&
-            email.length > 0 &&
-            phone.length > 0 &&
-            picture != null
-        ) {
-            setLoader(true)
-            const res = await postData('auth/validatevendor', body)
+        } else
+            if (username.length > 0
+                &&
+                password.length > 0 &&
+                email.length > 0 &&
+                phone.length > 0 &&
+                picture != null
+            ) {
+                setLoader(true)
+                const res = await ApiClient.instance.post(ApiClient.endPoints.validateVendor, body)
 
-            if (res.statusCode !== 404) {
-                dispatch(fetchVendorData(["FIRST_PAGE", body]))
+                if (res.statusCode !== 404) {
+                    dispatch(fetchVendorData(["FIRST_PAGE", body]))
+                    setLoader(false)
+                    props.navigation.navigate(VendorMarketProfile.routeName);
+                } else if (res.statusCode == 404) {
+                    setLoader(false)
+                    alert(res.message)
+                }
+            } else {
                 setLoader(false)
-                props.navigation.navigate("EditProfile")
-            } else if (res.statusCode == 404) {
-                setLoader(false)
-                alert(res.message)
+                ToastAndroid.show("Please fill all the field's with valid data !", ToastAndroid.SHORT);
+
             }
-        } else {
-            setLoader(false)
-            ToastAndroid.show("Please fill all the field's with valid data !", ToastAndroid.SHORT);
-
-        }
     }
 
     const handleSpace = (value) => {
@@ -104,13 +105,13 @@ export default function DJSignup(props) {
         <ScrollView
             keyboardShouldPersistTaps='always'
             contentContainerStyle={{ flexGrow: 1 }}
-            style={{  backgroundColor: '#FBFBFB', flex: 1 }}>
+            style={{ backgroundColor: '#FBFBFB', flex: 1 }}>
             <Header
                 back
                 headerTitle={`Create ${vendorType} Profile`}
                 onPress={() => props.navigation.goBack()}
             />
-            <View style={{ paddingBottom: getHp(80), paddingHorizontal: getWp(10),  backgroundColor: '#FBFBFB' }}>
+            <View style={{ paddingBottom: getHp(80), paddingHorizontal: getWp(10), backgroundColor: '#FBFBFB' }}>
 
                 {picture == null ?
                     <View style={{ padding: 0, marginVertical: getHp(60), justifyContent: 'center', alignItems: 'center' }}>
@@ -182,6 +183,8 @@ export default function DJSignup(props) {
     </Root>
     )
 }
+VendorSignup.routeName = "/VendorSignup";
+
 const styles = StyleSheet.create({
     crossButton: {
         elevation: 10,

@@ -22,3 +22,7 @@ export const sortArrayAlphabatically = (arr, key) => {
         }
       });
 };
+
+export const getFirstKeyValueFromObject = (obj) => {
+  
+}

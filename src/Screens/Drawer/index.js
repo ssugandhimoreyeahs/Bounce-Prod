@@ -24,9 +24,11 @@ import MobxStore from '../../mobx';
 import { observer } from "mobx-react";
 import Themes from '../../app/themes';
 import { shareFunction } from '@components'
-
+import EditVendorProfile from '../BounceVendors/EditProfile';
+import { useTheme } from '@hooks';
 
 function CustomDrawer({ navigation }) {
+  const theme = useTheme();
   const {
     authStore,
     uiStore
@@ -35,8 +37,7 @@ function CustomDrawer({ navigation }) {
   const { vendorProfileData } = useSelector(
     (state) => state.mainExpenseByCategory
   );
-  console.log("vendorProfileData", vendorProfileData);
-  console.log('THEME_TEST_HERE_F_3 - ', uiStore.theme.serialize());
+  console.log('THEME_SERIALIZE - ', theme.serialize());
   const SERVICES = [
     {
       icon: <RenderSVG
@@ -48,7 +49,7 @@ function CustomDrawer({ navigation }) {
         }}
       />,
       name: "Edit Profile",
-      onPress: () => navigation.navigate("VendorEditProfile"),
+      onPress: () => navigation.navigate(EditVendorProfile.routeName),
     },
     {
       icon: <RenderSVG
@@ -92,8 +93,7 @@ function CustomDrawer({ navigation }) {
     },
     {
       name: "Log Out",
-      onPress: async () => {
-        await navigation.replace("LoginScreen");
+      onPress: async () => { 
         await LocalStorage.clearToken()
         authStore.logout();
       },
@@ -120,7 +120,7 @@ function CustomDrawer({ navigation }) {
                 marginLeft: 15,
                 fontSize: FONTSIZE.Text21,
                 fontWeight: "normal",
-                color: uiStore.theme.colors.primaryText1
+                color: theme.colors.primaryText1
               },
             ]}
           >

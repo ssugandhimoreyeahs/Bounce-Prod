@@ -10,8 +10,6 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "react": "17.0.1",
-    "react-native": "0.64.0",
     "@react-native-async-storage/async-storage": "^1.15.2",
     "@react-native-community/blur": "^3.6.0",
     "@react-native-community/checkbox": "^0.5.7",
@@ -24,13 +22,23 @@
     "@react-navigation/stack": "^5.14.2",
     "axios": "^0.21.1",
     "babel-plugin-inline-import": "^3.0.0",
+    "class-validator": "^0.13.1",
     "cors": "^2.8.5",
-    "css-to-react-native": "^3.0.0", 
+    "css-to-react-native": "^3.0.0",
+    "dateformat": "^4.5.1",
+    "fast-text-encoding": "^1.0.3",
+    "formik": "^2.2.6",
+    "is_js": "^0.9.0",
+    "joi": "^17.4.0",
     "lodash": "^4.17.20",
     "mobx": "^6.2.0",
     "mobx-react": "^7.1.0",
-    "moment": "^2.29.1", 
-    "react-dom": "16.13.1", 
+    "moment": "^2.29.1",
+    "native-base": "^2.15.2",
+    "npm": "^7.12.1",
+    "react": "17.0.1",
+    "react-dom": "16.13.1",
+    "react-native": "0.64.0",
     "react-native-calendar-picker": "^7.0.9",
     "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera.git",
     "react-native-check-box": "^2.1.7",
@@ -72,10 +80,12 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "rn-fetch-blob": "^0.12.0",
-    "toggle-switch-react-native": "^3.2.0"
+    "toggle-switch-react-native": "^3.2.0",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@babel/plugin-proposal-decorators": "^7.10.1",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jest": "^26.0.20",
@@ -85,9 +95,8 @@
     "eslint": "^7.14.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.64.0",
-    "react-test-renderer": "17.0.1",
-    "typescript": "^3.8.3", 
-    "@babel/plugin-proposal-decorators": "^7.10.1" 
+    "react-test-renderer": "17.0.1", 
+    "typescript": "^3.8.3"
   },
   "resolutions": {
     "@types/react": "^17"

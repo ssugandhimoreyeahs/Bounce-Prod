@@ -14,12 +14,10 @@ import { LocalStorage } from '../../../app/utils/localStorage';
 import { UserContext } from '../../../context/profiledataProvider';
 import Spinner from "react-native-loading-spinner-overlay";
 import MobxStore from '../../../mobx';
+import { ApiClient } from '../../../app/services';
 
-let temp = []
-let genretemp = []
-let guardtemp = []
 
-export default function EditProfile(props) {
+export default function VendorMarketProfile(props) {
     const {
         authStore
     } = MobxStore;
@@ -103,7 +101,7 @@ export default function EditProfile(props) {
                     formData.append('profileImageFile', imgObj)
                     formData.append('hourlyRate', price)
 
-                    const response = await axios.post('http://3.12.168.164:3000/auth/vendor/register', formData)
+                    const response = await ApiClient.instance.post(ApiClient.endPoints.vendorRegister, formData)
 
                     console.log("RESPONSE IN FETCH SERVICES -- >", response)
                     if (response.status == 201 || response.status == 200) {
@@ -112,13 +110,7 @@ export default function EditProfile(props) {
                         await LocalStorage.storeToken(JSON.stringify(body));
                         await LocalStorage.onSignUp(response.data.accessToken, JSON.stringify(response.data.user));
                         authStore.onVendorRegistration({ token: response.data.accessToken, user: response.data.user });
-                        setLoader(false)
-                        await props.navigation.replace("btmstack", {
-                            screen: "DjProfileScreen",
-                            params: {
-                                body
-                            }
-                        })
+                        setLoader(false);
 
                     } else {
                         setLoader(false)
@@ -146,7 +138,7 @@ export default function EditProfile(props) {
     const fetchData = async () => {
         setLoader(true)
 
-        let LANGUAGE_SERVER = await getData('language')
+        let LANGUAGE_SERVER = await ApiClient.instance.get(ApiClient.endPoints.getLanguage);
         setOriginalLangArray(LANGUAGE_SERVER)
         let tempLanguage = []
         await LANGUAGE_SERVER.map((item) => {
@@ -155,7 +147,7 @@ export default function EditProfile(props) {
         dispatch(fetchCurrentLoginData(["LANGUAGE_ARRAY", tempLanguage]))
 
 
-        let GENRE_SERVER = await getData('genres')
+        let GENRE_SERVER = await ApiClient.instance.get(ApiClient.endPoints.getGenre);
         setOriginalGenreArray(GENRE_SERVER)
         let tempGenre = []
         await GENRE_SERVER.map((item) => {
@@ -163,7 +155,7 @@ export default function EditProfile(props) {
         })
         dispatch(fetchCurrentLoginData(["GENRE_ARRAY", tempGenre]))
 
-        let GUARD_CERTIFICATION_SERVER = await getData('genres/guardcertification')
+        let GUARD_CERTIFICATION_SERVER = await ApiClient.instance.get(ApiClient.endPoints.getCertification);
         setOriginalGuardArray(GUARD_CERTIFICATION_SERVER)
         let tempCERTIFICATION = []
         await GUARD_CERTIFICATION_SERVER.map((item) => {
@@ -358,6 +350,8 @@ export default function EditProfile(props) {
     </Root>
     )
 }
+VendorMarketProfile.routeName = "/VendorMarketProfile";
+
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FBFBFB',

@@ -8,7 +8,7 @@ const FloatingInput = (props) => {
     const {
         floatingLabel,
         value,
-        onChange,
+        onChange = () => {  },
         Password = false,
         multiline = false,
         onFocus = false,
@@ -19,9 +19,9 @@ const FloatingInput = (props) => {
         placeholder = false,
         custom = false,
         onSubmitEditing = () => { },
-        keyboardType = ''
-    } = props
-
+        keyboardType = '',
+        errorMessage = '', 
+    } = props 
     return (
         <View>
             {custom ?
@@ -73,8 +73,8 @@ const FloatingInput = (props) => {
                     />
                 </View>
                 :
-                <View style={{ flex: 1, backgroundColor: '#F6F6F6', marginVertical: 10}}>
-                    <FloatingLabelInput
+                <View style={{ flex: 1,marginVertical: 10}}>
+                    <FloatingLabelInput 
                         returnKeyType="done"
                         // placeholder={placeholder}
                         // placeholderTextColor={'#666666'}
@@ -128,6 +128,9 @@ const FloatingInput = (props) => {
                             Keyboard.dismiss();
                         }}
                     />
+                    {errorMessage.length > 0 && <View style={styles.errorContainer}>
+                        <Text style={styles.errorText}>{errorMessage}</Text>
+                        </View>}
                 </View>
             }
         </View>
@@ -169,6 +172,15 @@ const styles = StyleSheet.create({
         // fontWeight: 'bold',
         color: '#000'
     },
+    errorContainer: {
+        marginTop: 10,
+        marginLeft: 20,
+        backgroundColor: "white"
+    },
+
+    errorText: {
+        color: "red"
+    }
 })
 
 // import React, { useState } from 'react';

@@ -15,8 +15,9 @@ import { connect, useSelector, useDispatch } from "react-redux";
 import { fetchVendorData, } from "../../../reducer/mainexpensecategory";
 import { FONTSIZE } from '@utils'
 import { ScrollView } from 'react-native';
+import UserNameScreen from './UsernameScreen';
 
-export default function LoginScreen(props) {
+export default function NameScreen(props) {
     const {
         navigation
     } = props
@@ -26,11 +27,11 @@ export default function LoginScreen(props) {
     const handleSubmit = async () => {
 
         if (name.length > 0) {
-            navigation.navigate("Username", {
+            navigation.navigate(UserNameScreen.routeName, {
                 name: name
             })
         } else {
-            ToastAndroid.show("Please enter your name!")
+            ToastAndroid.show("Please enter your name!", 1000);
 
         }
     }
@@ -60,6 +61,8 @@ export default function LoginScreen(props) {
         </Root>
     )
 }
+NameScreen.routeName = "/NameScreen";
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

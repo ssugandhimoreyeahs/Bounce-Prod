@@ -50,12 +50,14 @@ import {
     InputBox,
     ChooseVendorCard,
     VendorCard,
+    Tabview,
 } from './BreakedComponents'
 import DropDown from './CustomDropdown/DropDown'
 
 
 
 export {
+    Tabview,
     VendorCard,
     shareFunction,
     ChooseVendorCard,

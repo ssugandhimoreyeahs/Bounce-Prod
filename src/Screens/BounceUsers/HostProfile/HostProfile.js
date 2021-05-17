@@ -289,11 +289,10 @@ export default function HostProfile(props) {
 
             </ScrollView>
         }
-
-
     </Root>
     )
 }
+HostProfile.routeName = "/HostProfile";
 const styles = StyleSheet.create({
     Tiktok: {
         marginLeft: 10,

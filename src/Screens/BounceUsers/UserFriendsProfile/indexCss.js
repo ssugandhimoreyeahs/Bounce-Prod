@@ -15,17 +15,17 @@ const styles = StyleSheet.create({
       paddingVertical: 10
    },
    socialButton: {
-      elevation: 5,
-      borderRadius: 13,
+      elevation: 3,
+      borderRadius: 7,
       padding: 5,
       paddingHorizontal: 10,
       backgroundColor: '#fff',
 
    },
    flex: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between'
+      // flexDirection: 'row',
+      alignItems: 'flex-start',
+      // justifyContent: 'space-between'
    },
    partition: {
       width: '90%',
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
    container: {
       // justifyContent:'center',
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#FBFBFB',
    },
    subContainer: {
       // flexDirection: 'column',
@@ -125,11 +125,22 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       fontFamily: 'AvenirNext'
    },
+
    aboutText: {
       color: '#000',
       fontSize: FONTSIZE.Text16,
       fontFamily: 'AvenirNext'
    },
+   Textarea: {
+      borderWidth: 1,
+      borderColor: "#DDDDDD",
+      backgroundColor: '#FFFFFF',
+      marginVertical: 10,
+      fontSize: FONTSIZE.Text16,
+      borderRadius: 15,
+      paddingLeft: 20,
+   }
+   ,
 
    iconWithBelowTextStyle: {
       height: 0,

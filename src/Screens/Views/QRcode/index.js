@@ -1,12 +1,12 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {View, StyleSheet, Alert} from 'react-native';
-import {QRCodes, Header, CustomButton} from '@components';
-import {UserContext} from '../../../context/profiledataProvider';
-import {FONTSIZE, getHp, getWp} from '@utils';
-import {ApiClient} from '../../../app/services';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, StyleSheet, Alert } from 'react-native';
+import { QRCodes, Header, CustomButton } from '@components';
+import { UserContext } from '../../../context/profiledataProvider';
+import { FONTSIZE, getHp, getWp } from '@utils';
+import { ApiClient } from '../../../app/services';
 
-export default function QRcode({navigation}) {
-  const {loader, userinfo, fetchProfile} = useContext(UserContext);
+export default function QRcode({ navigation }) {
+  const { loader, userinfo, fetchProfile } = useContext(UserContext);
   const [userQR, setUserQR] = useState(null);
   useEffect(() => {
     (async () => {
@@ -34,7 +34,7 @@ export default function QRcode({navigation}) {
         back
         onPress={() => navigation.goBack()}
         theme={'#fff'}
-        headerBackColor={{backgroundColor: '#000'}}
+        headerBackColor={{ backgroundColor: '#000' }}
       />
 
       <View style={styles.subContainer}>
@@ -48,6 +48,8 @@ export default function QRcode({navigation}) {
     </View>
   );
 }
+QRcode.routeName = '/QRcode'
+
 const styles = StyleSheet.create({
   barStyle: {
     height: getHp(5),

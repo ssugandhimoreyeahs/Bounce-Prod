@@ -15,8 +15,9 @@ import {
 import { connect, useSelector, useDispatch } from "react-redux";
 import { fetchVendorData, } from "../../../reducer/mainexpensecategory";
 import { FONTSIZE } from '@utils'
+import LiveScreen from './LiveScreen';
 
-export default function LoginScreen(props) {
+export default function BirthDayScreen(props) {
     const {
         navigation
     } = props
@@ -30,14 +31,14 @@ export default function LoginScreen(props) {
 
     const handleSubmit = async () => {
         if (birthday != '') {
-            navigation.navigate("Live", {
+            navigation.navigate(LiveScreen.routeName, {
                 birthday: birthday,
                 username: username,
                 password: password,
                 name
             })
         } else {
-            ToastAndroid.show("Please select birthday!")
+            ToastAndroid.show("Please select birthday!", 1000)
         }
     }
     return (
@@ -70,6 +71,9 @@ export default function LoginScreen(props) {
         </Root>
     )
 }
+
+BirthDayScreen.routeName="/BirthDayScreen";
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

@@ -17,19 +17,11 @@ import {
 import Spinner from 'react-native-loading-spinner-overlay';
 import { SvgUri } from 'react-native-svg';
 import { ApiClient } from '../../../app/services';
+import VendorSignup from './VendorSignup';
 
-const DATA = [
-    { icon: <DjMusic height={getHp(52)} width={getHp(52)} /> },
-    { icon: <Food height={getHp(52)} width={getHp(52)} /> },
-    { icon: <Bartender height={getHp(52)} width={getHp(52)} /> },
-    { icon: <Videographer height={getHp(52)} width={getHp(52)} /> },
-    { icon: <Security height={getHp(52)} width={getHp(52)} /> },
-    { icon: <Cleaning height={getHp(52)} width={getHp(52)} /> },
-    { icon: <PartyRentals height={getHp(52)} width={getHp(52)} /> },
-];
 
-export default function Signup(props) {
-
+export default function VendorCategory(props) {
+     
     const dispatch = useDispatch()
     const [loader, setLoader] = useState(true)
     const [vendorList, setVendorList] = useState(null)
@@ -54,9 +46,7 @@ export default function Signup(props) {
         return (<TouchableOpacity key={index}
             onPress={() => {
                 dispatch(fetchVendorData(["VENDOR_TYPE", item.vendorCategory]))
-                props.navigation.navigate("DjSignup", {
-                    ROUTE: 'SIGNUP'
-                })
+                props.navigation.navigate(VendorSignup.routeName);
             }} >
 
             <View style={styles.iconStyle}>
@@ -101,7 +91,7 @@ export default function Signup(props) {
         </Root >
     )
 }
-
+VendorCategory.routeName = "/VendorCategory";
 const styles = StyleSheet.create({
     categoryStyle: {
         color: '#000',

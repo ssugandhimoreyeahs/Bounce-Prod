@@ -62,9 +62,9 @@ class ValidationDecorators extends ValidatorsFactory {
             const [relatedPropertyName] = args.constraints;
             const relatedValue = args.object[relatedPropertyName]; 
             if (typeof property == 'object') {
-              return Validation.validateForm({
-                [ValidationTypes.REQUIRED]: true,
+              return Validation.validateForm({ 
                 value: value[property.key],
+                ...property
               });
             } else {
               return true;

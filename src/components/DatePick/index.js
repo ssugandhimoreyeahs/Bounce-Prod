@@ -62,6 +62,7 @@ export default DatePicker = (props) => {
         <View>
             <TouchableOpacity onPress={showDatePicker}>
                 <TextInput
+                    placeholderTextColor={'black'}
                     placeholder={placeholder}
                     style={[styles.textInput, errorMessage.length > 0 && { borderColor: 'red' }]}  
                     value={getValue()}
@@ -94,8 +95,7 @@ const styles = StyleSheet.create({
         borderRadius: 9.5,
         borderWidth: 1,
         paddingLeft: 15,
-        fontSize: FONTSIZE.Text17,
-        fontWeight: 'bold',
+        fontSize: FONTSIZE.Text17, 
         marginTop: 10,
         color: '#000'
     },

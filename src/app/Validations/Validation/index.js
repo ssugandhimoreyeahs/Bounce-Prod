@@ -9,9 +9,13 @@ class Validation {
 
   static validateForm = validatableInput => {
     let isValid = true;
-    if (validatableInput[ValidationTypes.REQUIRED]) {
-      isValid = isValid && this.required(validatableInput.value);
-    }
+    Object.keys(validatableInput).map(vKey => {
+      switch (vKey) {
+        case ValidationTypes.REQUIRED:
+          isValid = isValid && this.required(validatableInput.value);
+          break;
+      }
+    });
     return isValid;
   };
   static validateClassDecorator = async instance => {

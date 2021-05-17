@@ -36,11 +36,12 @@ class CreatePartyDTO extends CreatePartyEntity {
   };
   isPartyValid = async () => {
     let validateParty = new CreatePartyEntity(this);
-    let schema = {success: false, partyFields: validateParty};
+    let schema = {success: false, partyFields: validateParty, error: {}};
     const isValid = await Validation.validateClassDecorator(validateParty);
     if (!isValid.success) {
       console.log('ERROR_PARTY - ', JSON.stringify(isValid));
-      this.partyError = isValid.errors;
+      //this.partyError = isValid.errors;
+      schema.error = isValid.errors;
     } else {
       schema.success = true;
     }

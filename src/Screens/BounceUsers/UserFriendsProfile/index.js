@@ -201,7 +201,7 @@ export default function UserFriendsProfile(props) {
               <View style={[styles.flex, { width: "70%", marginVertical: 10 }]}>
                 <TouchableOpacity
                   style={styles.socialButton}
-                  onPress={() => navigation.navigate("HostProfile")}
+                  onPress={() => props.navigation.navigate("HostProfile")}
                 >
                   <Text style={styles.editButton}>{"Edit Profile"}</Text>
                 </TouchableOpacity>
@@ -254,6 +254,7 @@ export default function UserFriendsProfile(props) {
 
               <Tabview
                 DATA={DATA}
+                {...props}
               />
 
               <View style={{ marginVertical: 10 }}>

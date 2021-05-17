@@ -25,7 +25,7 @@ import Tab3 from '../../Screens/BounceUsers/UserFriendsProfile/Tab3.js';
 import { FONTSIZE, getHp, getWp } from '@utils'
 
 
-export const Tabview = ({ DATA }) => {
+export const Tabview = (props) => {
 
     return (
         <View style={{ marginVertical: 10 }}>
@@ -35,7 +35,7 @@ export const Tabview = ({ DATA }) => {
                     textStyle={{ color: '#000', fontFamily: '500' }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
                     activeTextStyle={{ color: '#000', fontFamily: '500' }} heading={"Hosting"}>
-                    <Tab1 DATA={DATA} />
+                    <Tab1 DATA={props.DATA} {...props} />
                 </Tab >
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}

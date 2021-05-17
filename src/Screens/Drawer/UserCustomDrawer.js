@@ -17,7 +17,7 @@ export default function UserCustomDrawer(props) {
       icon: <Settings height={30} width={30} />,
       name: 'Account Settings',
       onPress: () => {
-        //navigation.navigate("AccountSetting")
+        props.navigation.navigate("AccountSetting")
       },
     },
     {

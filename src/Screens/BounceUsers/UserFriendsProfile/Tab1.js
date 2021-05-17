@@ -1,17 +1,21 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { FONTSIZE } from '@utils'
 import { Avatar } from 'react-native-elements'
 import { Girl } from '../../../assets'
 import { RenderSmallButton } from '@components'
-import { FlatList } from 'react-native-gesture-handler'
+import { FlatList, } from 'react-native-gesture-handler'
+import CreateInvitation from '../../BounceVendors/PlanParty/CreateInvitation'
 
 export default function Tab1(props) {
     const { DATA } = props
     console.log("VALUE OF PROPS-->", props)
-    const renderItems = ({ items }) => {
+    const renderItems = ({ items, index }) => {
+
         return (
-            <View style={{ backgroundColor: '#FBFBFB', padding: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.navigate(CreateInvitation.routeName)}
+                key={index}
+                style={{ backgroundColor: '#FBFBFB', padding: 10 }}>
                 {/* This can be used as component */}
                 <View style={{ backgroundColor: '#fff', borderRadius: 10, flex: 1, flexDirection: 'row' }}>
                     <Avatar source={Girl} size={125} avatarStyle={{ borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
@@ -30,19 +34,10 @@ export default function Tab1(props) {
                         <Text style={[styles.textStyle, { color: '#000', marginVertical: 3, fontSize: FONTSIZE.Text13, fontFamily: '500' }]}>
                             {"Dec. 31, 7:00 PM"}
                         </Text>
-
-                        {/* <FlatList
-                            data={DATA}
-                            showsHorizontalScrollIndicator={false}
-                            renderItem={renderItems}
-                            keyExtractor={(index) => index}
-                            horizontal
-                        /> */}
-
                     </View>
                 </View>
                 {/* This can be used as component */}
-            </View>
+            </TouchableOpacity>
         );
     }
     return (<FlatList

@@ -1,6 +1,7 @@
 import ValidatorsFactory from './validatorsFactory';
 import ValidationTypes from '../ValidationTypes';
 import {registerDecorator} from 'class-validator';
+import Validation from '../Validation';
 import {RegexCollection} from '../../constants';
 class ValidationDecorators extends ValidatorsFactory {
   Required = validationObj => (target, propName) => {
@@ -21,7 +22,7 @@ class ValidationDecorators extends ValidatorsFactory {
         validator: {
           validate(value, args) {
             const [relatedPropertyName] = args.constraints;
-            const relatedValue = args.object[relatedPropertyName]; 
+            const relatedValue = args.object[relatedPropertyName];
             if (relatedValue == 0 && value == 0) {
               return true;
             }
@@ -41,6 +42,32 @@ class ValidationDecorators extends ValidatorsFactory {
               } else {
                 return true;
               }
+            }
+          },
+        },
+      });
+    };
+  };
+
+  ValidateObjecKey = (property, validationOptions) => {
+    return function (object, propertyName) {
+      registerDecorator({
+        name: 'validateObjecKey',
+        target: object.constructor,
+        propertyName: propertyName,
+        constraints: [property],
+        options: validationOptions,
+        validator: {
+          validate(value, args) {
+            const [relatedPropertyName] = args.constraints;
+            const relatedValue = args.object[relatedPropertyName]; 
+            if (typeof property == 'object') {
+              return Validation.validateForm({ 
+                value: value[property.key],
+                ...property
+              });
+            } else {
+              return true;
             }
           },
         },

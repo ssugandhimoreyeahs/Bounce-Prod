@@ -35,7 +35,7 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {Strings} from '../../../app/constants';
 import UploadMedia from './UploadMedia';
-import {CreateFormData, PlanPartyService} from '../../../app/services';
+import {CreateFormData, PartyService} from '../../../app/services';
 import DatePick from '../../../components/DatePick';
 import moment from 'moment';
 import {Root as NRoot} from 'native-base';
@@ -57,38 +57,36 @@ const INTEREST = [
   },
 ];
 function CreateInvitation(props) {
-  //const [partyModel] = useState(() => PlanPartyModel.getInstance());
+  const {party = undefined} = props.route.params;
+  console.log('PARTY_RECIE - ', JSON.stringify(party));
   const partyModel = PlanPartyModel.getInstance();
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
-  const [address, setAddress] = useState('');
-  const [description, setDescription] = useState('');
   const [picture, setPicture] = useState(null);
   const [footer, openFooter] = useState(false);
-  const [getPrivate, setPrivate] = useState(false);
   const [state, setState] = useState({});
-  const [birthday, setBirthday] = useState(null);
   useEffect(() => {
     const listener = partyModel.party?.subscribe(() => {
       setState(() => ({}));
     });
+    partyModel.party.reset(party); 
     return () => {
+      partyModel.party.reset();
+      console.log('UMOUNTED');
       listener.unSubscribe();
     };
   }, []);
-  const handleOnPress = async () => {
+  const handleOnPress = async (isDraftMode) => {
     try {
       const res = await partyModel.party.isPartyValid();
       if (!res.success) {
         let key = Object.keys(res.error)[0];
-        let msg = res.error[key];
+        let msg = res.error[key] || 'Something went wrong!';
         Toast(msg);
         return;
       }
       const formData = CreateFormData.objectToFormData(res.partyFields);
       console.log('FORMDATA_RES - ', JSON.stringify(formData));
-      const savePartyResponse = await PlanPartyService.createParty(formData);
-      console.log("CREATE_PARTY_RES - ", createPartyRes);
+      const savePartyResponse = await PartyService.createParty(formData);
+      console.log('CREATE_PARTY_RES - ', savePartyResponse);
     } catch (error) {
       console.log('ERROR - ', error);
     }
@@ -127,7 +125,7 @@ function CreateInvitation(props) {
       <NRoot>
         <View style={styles.container}>
           <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
-            <Header back rightTitle={'Save as Draft'} />
+            <Header back rightTitle={'Save as Draft'} onPress={()=> handleOnPress(true)}/>
             {/* First Section */}
             <View
               style={{
@@ -211,7 +209,7 @@ function CreateInvitation(props) {
               <DatePick
                 placeholder={'Date / Time'}
                 handleChange={date => partyModel.party.set({date})}
-                value={partyModel.party.date}
+                value={partyModel.party.date || new Date()}
                 pickerMode={'datetime'}
                 minimumDate={moment().add(1, 'day').toDate()}
                 maximumDate={moment().add(7, 'day').toDate()}
@@ -219,7 +217,7 @@ function CreateInvitation(props) {
               />
               <FloatingInput
                 floatingLabel={'Address'}
-                value={partyModel.party.location.addressStr?.toString()}
+                value={partyModel.party.location?.addressStr?.toString()}
                 onChange={address => {
                   partyModel.party.setAddress(address);
                 }}
@@ -470,7 +468,7 @@ function CreateInvitation(props) {
               rowDoubleButton
               ButtonTitle={'Save As Draft'}
               ButtonTitle2={'Complete'}
-              onPress={handleOnPress}
+              onPress={() => handleOnPress(false)}
             />
 
             {/* <View style={styles.bottomContainer}>

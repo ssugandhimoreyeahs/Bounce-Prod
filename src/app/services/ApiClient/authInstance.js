@@ -10,6 +10,7 @@ const AuthInstance = () => {
       config.headers.Authorization = `Bearer ${MobxStore.authStore?.token}`;
       let requestData = {
         url: `${config.baseURL}${config.url}`,
+        token: `Bearer ${MobxStore.authStore?.token}`,
         // body: JSON.stringify(config.headers),
       };
       console.log(`
@@ -41,7 +42,7 @@ const AuthInstance = () => {
       return Promise.resolve(response);
     },
     error => {
-      const {config, request, response, isAxiosError} = error; 
+      const {config, request, response, isAxiosError} = error;
       let responseTreeError = {
         url: `${request?.responseURL}`,
         data: JSON.stringify(response?.data),
@@ -53,7 +54,7 @@ const AuthInstance = () => {
       RESPONSE_ERROR_AT - > ${new Date()}
       ${JSON.stringify(responseTreeError)}
       
-      `); 
+      `);
       return Promise.reject(error);
     },
   );

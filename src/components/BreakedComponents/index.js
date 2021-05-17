@@ -23,9 +23,10 @@ import Tab1 from '../../Screens/BounceUsers/UserFriendsProfile/Tab1.js';
 import Tab2 from '../../Screens/BounceUsers/UserFriendsProfile/Tab2.js';
 import Tab3 from '../../Screens/BounceUsers/UserFriendsProfile/Tab3.js';
 import { FONTSIZE, getHp, getWp } from '@utils'
+import MboxStore from '../../mobx';
+import { observer } from 'mobx-react';
 
-
-export const Tabview = (props) => {
+export const Tabview = observer((props) => {
 
     return (
         <View style={{ marginVertical: 10 }}>
@@ -35,7 +36,7 @@ export const Tabview = (props) => {
                     textStyle={{ color: '#000', fontFamily: '500' }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
                     activeTextStyle={{ color: '#000', fontFamily: '500' }} heading={"Hosting"}>
-                    <Tab1 DATA={props.DATA} {...props} />
+                    <Tab1 hosting={MboxStore.partyStore.party} {...props}/>
                 </Tab >
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
@@ -55,7 +56,7 @@ export const Tabview = (props) => {
             </Tabs>
         </View>
     );
-}
+});
 
 
 

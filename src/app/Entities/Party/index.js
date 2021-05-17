@@ -7,6 +7,8 @@ import {
   Min,
 } from 'class-validator';
 import {Decorators as D, ValidationTypes} from '../../Validations';
+import {toCurrentTimeZone} from '../../utils';
+import moment from 'moment';
 class Party {
   @IsNotEmpty({message: 'Required title'})
   title;
@@ -43,28 +45,39 @@ class Party {
   needDJ = false;
   ageLimit = false;
   isPrivate = false;
-
+  isDraft = false;
   profileImageFile;
 
-  constructor(fields) {
+  static toCreate = fields => {
     try {
       if (fields && typeof fields == 'object') {
-        Object.keys(this).map(key => {
-          this[key] = fields[key];
+        let newParty = new Party();
+        Object.keys(newParty).map(key => {
+          newParty[key] = fields[key];
         });
-        this.fromAge = parseInt(fields['fromAge']) || 0;
-        this.toAge = parseInt(fields['toAge']) || 0;
-        this.fee = parseInt(fields['fee']) || 0;
-        this.quantityAvailable = parseInt(fields['quantityAvailable']) || 0;
-        if (this.fromAge > 0 && this.toAge > 0) {
-          this.ageLimit = true;
+        newParty.fromAge = parseInt(fields['fromAge']) || 0;
+        newParty.toAge = parseInt(fields['toAge']) || 0;
+        newParty.fee = parseInt(fields['fee']) || 0;
+        newParty.quantityAvailable = parseInt(fields['quantityAvailable']) || 0;
+        if (newParty.fromAge > 0 && newParty.toAge > 0) {
+          newParty.ageLimit = true;
         }
-        console.log('PARTY_ENTITY_CREATE - ' + JSON.stringify(this));
+        //newParty.profileImageFile = fields?.galleryFiles[0] || [];
+        newParty.date = toCurrentTimeZone(fields.date).toString();
+        return newParty;
       }
+      return new Party();
     } catch (error) {
       console.log('PARTY_ENTITY_ERROR - ', error);
     }
-  }
+  };
+  static toEdit = fields => {
+    let newParty = this.toCreate(fields);
+    newParty.date = moment(fields.date).toDate();
+    newParty.galleryFiles = fields?.gallery?.map(i => i.filePath);
+    console.log('TO_EDIT_TEST - ', newParty);
+    return newParty;
+  };
 }
 
 export default Party;

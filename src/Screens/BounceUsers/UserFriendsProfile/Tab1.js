@@ -16,6 +16,7 @@ export default function Tab1(props) {
         onPress={() =>
           props.navigation.navigate(CreateInvitation.routeName, {
             party: item,
+            isEditParty: true
           })
         }
         key={index}

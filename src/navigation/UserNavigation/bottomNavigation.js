@@ -1,6 +1,7 @@
 import React from 'react';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { Avatar } from 'react-native-elements'
+import {Button} from 'react-native';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import {Avatar} from 'react-native-elements';
 import {
   GreyBell,
   GreyParty,
@@ -13,13 +14,11 @@ import {
   BlackEvent,
   BlackHome,
 } from '@svg';
-import {
-  Placeholderr,
-  Placeholder
-} from '@assets'
+import {Placeholderr, Placeholder} from '@assets';
 
-import Temp from '../../Screens/BounceUsers/Temp'
+import Temp from '../../Screens/BounceUsers/Temp';
 import UserHomeScreen from '../../Screens/BounceUsers/UserFriendsProfile';
+import CreateInvitation from '../../Screens/BounceVendors/PlanParty/CreateInvitation';
 const UserHomeBottomTab = createMaterialBottomTabNavigator();
 
 class UserHomeBottomNavigation {
@@ -29,19 +28,19 @@ class UserHomeBottomNavigation {
       <UserHomeBottomTab.Navigator
         initialRouteName={UserHomeScreen.routeName}
         labeled={false}
-        barStyle={{ backgroundColor: '#FBFBFB', elevation: 5 }}
+        barStyle={{backgroundColor: '#FBFBFB', elevation: 5}}
         unmountOnBlur={true}
         keyboardHidesNavigationBar
-        screenOptions={{ unmountOnBlur: true }}>
+        screenOptions={{unmountOnBlur: true}}>
         <UserHomeBottomTab.Screen
           options={{
             unmountOnBlur: true,
-            tabBarIcon: ({ tintColor, focused }) => {
+            tabBarIcon: ({tintColor, focused}) => {
               return focused ? (
                 <BlackHome height={30} width={30} />
               ) : (
-                  <GreyHome height={30} width={30} />
-                );
+                <GreyHome height={30} width={30} />
+              );
             },
           }}
           name={UserHomeScreen.routeName}
@@ -51,17 +50,24 @@ class UserHomeBottomNavigation {
         <UserHomeBottomTab.Screen
           options={{
             title: null,
-            tabBarIcon: ({ tintColor, focused }) => {
+            tabBarIcon: ({tintColor, focused}) => {
               return focused ? (
                 <BlackEvent height={30} width={30} />
               ) : (
-                  <GreyEvent height={30} width={30} />
-                );
+                <GreyEvent height={30} width={30} />
+              );
             },
           }}
-          name={"2"}
-          component={() => {
-            return null;
+          name={'2'}
+          component={props => {
+            return (
+              <Button
+                title={'Create Invitation'}
+                onPress={() => {
+                  props.navigation.navigate(CreateInvitation.routeName);
+                }}
+              />
+            );
           }}
         />
 
@@ -69,15 +75,15 @@ class UserHomeBottomNavigation {
           options={{
             unmountOnBlur: true,
             // tabBarColor: 'red',
-            tabBarIcon: ({ tintColor, focused }) => {
+            tabBarIcon: ({tintColor, focused}) => {
               return focused ? (
                 <BlackBell height={30} width={30} />
               ) : (
-                  <GreyBell height={30} width={30} />
-                );
+                <GreyBell height={30} width={30} />
+              );
             },
           }}
-          name={"Home"}
+          name={'Home'}
           component={() => {
             return null;
           }}
@@ -89,21 +95,28 @@ class UserHomeBottomNavigation {
           options={{
             unmountOnBlur: true,
             // tabBarColor: 'red',
-            tabBarIcon: ({ tintColor, focused }) => {
+            tabBarIcon: ({tintColor, focused}) => {
               return focused ? (
-                <Avatar rounded source={Placeholder} style={{ resizeMode: 'contain', height: 26, width: 26 }} />
+                <Avatar
+                  rounded
+                  source={Placeholder}
+                  style={{resizeMode: 'contain', height: 26, width: 26}}
+                />
               ) : (
-                  <Avatar rounded source={Placeholderr} style={{ resizeMode: 'contain', height: 26, width: 26 }} />
-                );
+                <Avatar
+                  rounded
+                  source={Placeholderr}
+                  style={{resizeMode: 'contain', height: 26, width: 26}}
+                />
+              );
             },
           }}
-          name={"Temp"}
+          name={'Temp'}
           component={() => {
             return null;
           }}
           unmountOnBlur={true}
         />
-
       </UserHomeBottomTab.Navigator>
     );
   };

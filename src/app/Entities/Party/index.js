@@ -36,11 +36,12 @@ class Party {
   @D.PartyAge('fromAge', {message: 'Invalid Maximum Age'})
   toAge;
 
-  @Min(1, {message: 'Required Quantity'})
-  quantityAvailable;
+   
 
   @ArrayNotEmpty({message: 'Required Event Media'})
   galleryFiles = [];
+
+  ticket = [];
   needBouncer = false;
   needDJ = false;
   ageLimit = false;

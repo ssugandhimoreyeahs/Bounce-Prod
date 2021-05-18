@@ -40,6 +40,7 @@ import { CustomSearchbar } from './CustomSearchbar'
 import Checkbox from './Checkbox'
 import DatePicker from './DatePicker'
 import ModalDropDownComponent from './ModalDropDown';
+import TicketComponent from './TicketComponent';
 
 import {
     AgeField,
@@ -57,6 +58,7 @@ import DropDown from './CustomDropdown/DropDown'
 
 
 export {
+    TicketComponent,
     Tabview,
     VendorCard,
     shareFunction,

@@ -15,6 +15,7 @@ import {
   CustomTextinput,
   FloatingInput,
   InputBox,
+  TicketComponent,
 } from '@components';
 import {UploadCamera} from '@assets';
 import {UploadBlue, BlackClose, BlueCamera} from '@svg';
@@ -57,8 +58,12 @@ const INTEREST = [
   },
 ];
 function CreateInvitation(props) {
-  const {party = undefined} = props.route.params;
-  console.log('PARTY_RECIE - ', JSON.stringify(party));
+  let party = {};
+  let isEditParty = false;
+  if (props.route?.params) {
+    party = props.route?.params.party;
+    isEditParty = props.route?.params.party;
+  }
   const partyModel = PlanPartyModel.getInstance();
   const [picture, setPicture] = useState(null);
   const [footer, openFooter] = useState(false);
@@ -67,14 +72,16 @@ function CreateInvitation(props) {
     const listener = partyModel.party?.subscribe(() => {
       setState(() => ({}));
     });
-    partyModel.party.reset(party); 
+    if (isEditParty) {
+      partyModel.setEditParty(party);
+    }
     return () => {
-      partyModel.party.reset();
+      partyModel.reset();
       console.log('UMOUNTED');
       listener.unSubscribe();
     };
   }, []);
-  const handleOnPress = async (isDraftMode) => {
+  const handleOnPress = async isDraftMode => {
     try {
       const res = await partyModel.party.isPartyValid();
       if (!res.success) {
@@ -125,7 +132,11 @@ function CreateInvitation(props) {
       <NRoot>
         <View style={styles.container}>
           <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
-            <Header back rightTitle={'Save as Draft'} onPress={()=> handleOnPress(true)}/>
+            <Header
+              back
+              rightTitle={'Save as Draft'}
+              onPress={() => handleOnPress(true)}
+            />
             {/* First Section */}
             <View
               style={{
@@ -209,7 +220,7 @@ function CreateInvitation(props) {
               <DatePick
                 placeholder={'Date / Time'}
                 handleChange={date => partyModel.party.set({date})}
-                value={partyModel.party.date || new Date()}
+                value={partyModel.party.date}
                 pickerMode={'datetime'}
                 minimumDate={moment().add(1, 'day').toDate()}
                 maximumDate={moment().add(7, 'day').toDate()}
@@ -357,112 +368,41 @@ function CreateInvitation(props) {
             </View>
 
             {/* Tickets Section */}
-            <View
+
+            <TouchableOpacity
+              onPress={() => {
+                partyModel.party.addTicketType();
+              }}
               style={{
-                paddingHorizontal: 10,
-                marginTop: 3,
-                backgroundColor: '#fff',
-                justifyContent: 'center',
-                paddingVertical: 20,
+                backgroundColor: '#F2F5F6',
+                borderRadius: 9,
               }}>
               <Text
                 style={[
                   styles.headerTitle,
                   {
-                    fontSize: FONTSIZE.Text20,
-                    marginRight: 5,
-                    marginBottom: 10,
+                    fontSize: FONTSIZE.Text18,
+                    color: '#1FAEF7',
+                    paddingVertical: 10,
+                    textAlign: 'center',
                   },
                 ]}>
-                {'Tickets'}
+                {'Add Ticket Type'}
               </Text>
-
-              <TextInput placeholder="Ticket Title" style={styles.textInput} />
-              <TextInput placeholder="Description" style={styles.textInput} />
-
-              <View
-                style={[
-                  styles.eventContainer,
-                  {justifyContent: 'space-between'},
-                ]}>
-                <Text
-                  style={[
-                    styles.headerTitle,
-                    {fontSize: FONTSIZE.Text20, marginRight: 5},
-                  ]}>
-                  {'Price'}
-                </Text>
-                <TextInput
-                  keyboardType={'numeric'}
-                  placeholderTextColor={'grey'}
-                  placeholder={'$0'}
-                  onChangeText={fee => {
-                    partyModel.party.set({fee});
+            </TouchableOpacity>
+            {partyModel.party.ticket?.map((t, index) => {
+              return (
+                <TicketComponent
+                  data={t}
+                  onChangeText={data => {
+                    partyModel.party.onTicketChangeText(data, index);
                   }}
-                  value={partyModel.party.fee?.toString()}
-                  style={[
-                    styles.textInput,
-                    {
-                      width: '35%',
-                      textAlign: 'center',
-                      fontSize: FONTSIZE.Text18,
-                      color: 'black',
-                    },
-                  ]}
-                />
-              </View>
-              <View
-                style={[
-                  styles.eventContainer,
-                  {justifyContent: 'space-between'},
-                ]}>
-                <Text
-                  style={[
-                    styles.headerTitle,
-                    {fontSize: FONTSIZE.Text20, marginRight: 5},
-                  ]}>
-                  {'Quantity Available'}
-                </Text>
-                <TextInput
-                  keyboardType={'numeric'}
-                  placeholderTextColor={'grey'}
-                  placeholder={'0'}
-                  value={partyModel.party.quantityAvailable?.toString()}
-                  onChangeText={quantityAvailable => {
-                    partyModel.party.set({quantityAvailable});
+                  onTicketDelete={() => {
+                    partyModel.party.onTicketDelete(index);
                   }}
-                  style={[
-                    styles.textInput,
-                    {
-                      width: '35%',
-                      textAlign: 'center',
-                      fontSize: FONTSIZE.Text18,
-                      color: 'black',
-                    },
-                  ]}
                 />
-              </View>
-
-              <TouchableOpacity
-                style={{
-                  marginTop: 10,
-                  backgroundColor: '#F2F5F6',
-                  borderRadius: 9,
-                }}>
-                <Text
-                  style={[
-                    styles.headerTitle,
-                    {
-                      fontSize: FONTSIZE.Text18,
-                      color: '#1FAEF7',
-                      paddingVertical: 10,
-                      textAlign: 'center',
-                    },
-                  ]}>
-                  {'Add Ticket Type'}
-                </Text>
-              </TouchableOpacity>
-            </View>
+              );
+            })}
             <CustomButton
               bar
               rowDoubleButton

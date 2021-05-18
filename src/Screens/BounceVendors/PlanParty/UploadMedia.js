@@ -26,6 +26,10 @@ import {Observer, observer} from 'mobx-react';
 import PlanPartyModel from './PlanPartyModel';
 
 function UploadMedia(props) {
+  let goBack = false; 
+  if (props.route?.params) {
+    goBack = props.route?.params.goBack; 
+  }
   let partyModel = PlanPartyModel.getInstance();
   const [state, setState] = useState({});
   useEffect(() => {
@@ -44,9 +48,11 @@ function UploadMedia(props) {
       multiple: true,
     })
       .then(images => {
-        partyModel.addGallery(images);
+        partyModel.party.addGallery(images.map(i => i.path));
       })
-      .catch(e => alert(e));
+      .catch(e => {
+        console.log('ERROR_SEL_IMG - ',e);
+      });
   };
 
   const renderItem = ({item, index}) => {
@@ -129,8 +135,11 @@ function UploadMedia(props) {
               colDoubleButton
               ButtonTitle={'Add Images'}
               ButtonTitle2={'Continue'}
+              onPress1={handleImage}
               onPress={() => {
-                handleImage();
+                if(goBack) {
+                  return props.navigation.goBack();
+                }
               }}
             />
           </View>

@@ -2,7 +2,7 @@
 class RegexCollection {
 
     static DateFormat = 'mm/dd/yyyy';
-    static DateTimeFormat = 'mm/dd/yyyy HH:MM';
+    static DateTimeFormat = 'mm/dd/yyyy HH:MM:ss';
     static TimeFormat = 'HH:mm';
     //Validation Regex
     static requiredString = /^(\S+)$/;

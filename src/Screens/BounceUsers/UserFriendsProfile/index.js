@@ -31,6 +31,7 @@ import { UserContext } from "../../../context/profiledataProvider";
 import MobxStore from '../../../mobx';
 import Drawer from '../../Drawer/UserCustomDrawer';
 import QRcode from "../../Views/QRcode";
+import { PartyService } from '../../../app/services';
 
 
 
@@ -89,6 +90,10 @@ export default function UserFriendsProfile(props) {
     profileImage = {},
   } = userinfo?.user;
   console.log("userinfo", userinfo)
+
+  useEffect(()=>{
+    PartyService.getParty();
+  }, []);
   const handleCarousel = (value) => {
     return (
       <ImageCarousel

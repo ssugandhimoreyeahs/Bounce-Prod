@@ -3,6 +3,7 @@ import Instance from './instance';
 import ApiEndPoints from './apiEndPoints';
 
 class ApiClientProvider {
+  LOADING = 'LOADING';
   endPoints = ApiEndPoints;
   instance = Instance();
   authInstance = AuthInstance();
@@ -15,10 +16,21 @@ class ApiClientProvider {
     this.authInstance = AuthInstance();
   };
 
-  formDataHeaders = (customHeaders = {}) => {
+  formDataHeaders = (loading = true, customHeaders = {}) => {
     return {
       headers: {
         'Content-Type': 'multipart/form-data',
+        [this.LOADING]: loading,
+        ...customHeaders,
+      },
+    };
+  };
+
+  applicationJSONHeader = (loading = true, customHeaders = {}) => {
+    return {
+      headers: {
+        'Content-Type': 'application/json',
+        [this.LOADING]: loading,
         ...customHeaders,
       },
     };

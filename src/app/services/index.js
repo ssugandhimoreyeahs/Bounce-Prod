@@ -1,5 +1,5 @@
 import ApiClient from './ApiClient';
 import CreateFormData from './FormData';
-import PlanPartyService from './PlainParty';
+import PartyService from './Party';
 
-export {ApiClient, CreateFormData, PlanPartyService};
+export {ApiClient, CreateFormData, PartyService};

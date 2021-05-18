@@ -1,5 +1,5 @@
 import React, { useState, Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native'
 import { Header, SearchBar, Footer, CustomText, Toggle, Calender, ModalPopup, Root } from '@components'
 import { Girl } from '@assets';
 import {
@@ -23,19 +23,24 @@ import Tab1 from '../../Screens/BounceUsers/UserFriendsProfile/Tab1.js';
 import Tab2 from '../../Screens/BounceUsers/UserFriendsProfile/Tab2.js';
 import Tab3 from '../../Screens/BounceUsers/UserFriendsProfile/Tab3.js';
 import { FONTSIZE, getHp, getWp } from '@utils'
+import MboxStore from '../../mobx';
+import { observer } from 'mobx-react'; 
 
-
-export const Tabview = (props) => {
+export const Tabview = observer((props) => {
 
     return (
-        <View style={{ marginVertical: 10 }}>
+        <View style={{ marginVertical: 5 }}>
             <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
                     textStyle={{ color: '#000', fontFamily: '500' }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
                     activeTextStyle={{ color: '#000', fontFamily: '500' }} heading={"Hosting"}>
-                    <Tab1 DATA={props.DATA} {...props} />
+                    <ScrollView nestedScrollEnabled={true} style={{
+                        height:300
+                    }}>
+                    <Tab1 hosting={MboxStore.partyStore.party} {...props}/>
+                    </ScrollView>
                 </Tab >
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
@@ -55,7 +60,7 @@ export const Tabview = (props) => {
             </Tabs>
         </View>
     );
-}
+});
 
 
 

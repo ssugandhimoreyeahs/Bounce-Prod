@@ -15,6 +15,8 @@ import {
   CustomTextinput,
   FloatingInput,
   InputBox,
+  TagsCollapsible,
+  TicketComponent,
 } from '@components';
 import {UploadCamera} from '@assets';
 import {UploadBlue, BlackClose, BlueCamera} from '@svg';
@@ -35,65 +37,68 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {Strings} from '../../../app/constants';
 import UploadMedia from './UploadMedia';
-import {CreateFormData, PlanPartyService} from '../../../app/services';
+import {CreateFormData, PartyService} from '../../../app/services';
 import DatePick from '../../../components/DatePick';
 import moment from 'moment';
 import {Root as NRoot} from 'native-base';
 import {Toast} from '../../../app/constants';
+import Collapsible from 'react-native-collapsible';
 
-const INTEREST = [
+const TAGS = [
   {
-    categoryHeading: 'Add Tags',
-    categoryList: [
-      'Concerts',
-      'Broadway',
-      'Comedy',
-      'Gaming',
-      'Concerts',
-      'Broadway',
-      'Comedy',
-      'Gaming',
-    ],
+    name: 'Entertainment',
+    visible: false,
+    item: ['Comedy', 'Gaming', 'Gaming'],
   },
 ];
 function CreateInvitation(props) {
-  //const [partyModel] = useState(() => PlanPartyModel.getInstance());
+  let party = {};
+  let isEditParty = false;
+  if (props.route?.params) {
+    party = props.route?.params?.party;
+    isEditParty = props.route?.params?.isEditParty;
+  }
   const partyModel = PlanPartyModel.getInstance();
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
-  const [address, setAddress] = useState('');
-  const [description, setDescription] = useState('');
   const [picture, setPicture] = useState(null);
   const [footer, openFooter] = useState(false);
-  const [getPrivate, setPrivate] = useState(false);
   const [state, setState] = useState({});
-  const [birthday, setBirthday] = useState(null);
   useEffect(() => {
     const listener = partyModel.party?.subscribe(() => {
       setState(() => ({}));
     });
+    if (isEditParty) {
+      partyModel.setEditParty(party);
+    }
     return () => {
+      partyModel.reset();
+      console.log('UMOUNTED');
       listener.unSubscribe();
     };
   }, []);
-  const handleOnPress = async () => {
+  const handleOnPress = async isDraftMode => {
     try {
-      const res = await partyModel.party.isPartyValid();
+      const res = await partyModel.party.isPartyValid(isDraftMode);
       if (!res.success) {
         let key = Object.keys(res.error)[0];
-        let msg = res.error[key];
+        let msg = res.error[key] || 'Something went wrong!';
         Toast(msg);
         return;
       }
       const formData = CreateFormData.objectToFormData(res.partyFields);
-      console.log('FORMDATA_RES - ', JSON.stringify(formData));
-      const savePartyResponse = await PlanPartyService.createParty(formData);
-      console.log("CREATE_PARTY_RES - ", createPartyRes);
+      const savePartyResponse = await PartyService.createParty(formData);
+      Toast(
+        isDraftMode ? 'Party saved to Draft' : 'Party Created Successfully',
+      );
+      partyModel.reset();
+      console.log('CREATE_PARTY_RES - ', savePartyResponse);
     } catch (error) {
       console.log('ERROR - ', error);
     }
   };
   const handleImage = async () => {
+    return props.navigation.navigate(UploadMedia.routeName, {
+      goBack: true,
+    });
     ImagePicker.openPicker({
       multiple: true,
       width: 300,
@@ -101,7 +106,6 @@ function CreateInvitation(props) {
       cropping: true,
     }).then(images => {
       partyModel.party.addGallery(images.map(i => i.path));
-      props.navigation.navigate(UploadMedia.routeName);
     });
   };
   const ImageFooter = () => {
@@ -127,7 +131,11 @@ function CreateInvitation(props) {
       <NRoot>
         <View style={styles.container}>
           <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
-            <Header back rightTitle={'Save as Draft'} />
+            <Header
+              back
+              rightTitle={'Save as Draft'}
+              onPress={() => handleOnPress(true)}
+            />
             {/* First Section */}
             <View
               style={{
@@ -219,7 +227,7 @@ function CreateInvitation(props) {
               />
               <FloatingInput
                 floatingLabel={'Address'}
-                value={partyModel.party.location.addressStr?.toString()}
+                value={partyModel.party.location?.addressStr?.toString()}
                 onChange={address => {
                   partyModel.party.setAddress(address);
                 }}
@@ -291,6 +299,7 @@ function CreateInvitation(props) {
                   onPublicPress={() => partyModel.party.set({isPrivate: false})}
                 />
               </View>
+
               <View
                 style={[
                   styles.eventContainer,
@@ -359,118 +368,51 @@ function CreateInvitation(props) {
             </View>
 
             {/* Tickets Section */}
-            <View
+            {/* <View>
+            {TAGS.map(t => {
+                return <TagsCollapsible {...t} />;
+              })} 
+            </View> */}
+            <TouchableOpacity
+              onPress={() => {
+                partyModel.party.addTicketType();
+              }}
               style={{
-                paddingHorizontal: 10,
-                marginTop: 3,
-                backgroundColor: '#fff',
-                justifyContent: 'center',
-                paddingVertical: 20,
+                backgroundColor: '#F2F5F6',
+                borderRadius: 9,
               }}>
               <Text
                 style={[
                   styles.headerTitle,
                   {
-                    fontSize: FONTSIZE.Text20,
-                    marginRight: 5,
-                    marginBottom: 10,
+                    fontSize: FONTSIZE.Text18,
+                    color: '#1FAEF7',
+                    paddingVertical: 10,
+                    textAlign: 'center',
                   },
                 ]}>
-                {'Tickets'}
+                {'Add Ticket Type'}
               </Text>
-
-              <TextInput placeholder="Ticket Title" style={styles.textInput} />
-              <TextInput placeholder="Description" style={styles.textInput} />
-
-              <View
-                style={[
-                  styles.eventContainer,
-                  {justifyContent: 'space-between'},
-                ]}>
-                <Text
-                  style={[
-                    styles.headerTitle,
-                    {fontSize: FONTSIZE.Text20, marginRight: 5},
-                  ]}>
-                  {'Price'}
-                </Text>
-                <TextInput
-                  keyboardType={'numeric'}
-                  placeholderTextColor={'grey'}
-                  placeholder={'$0'}
-                  onChangeText={fee => {
-                    partyModel.party.set({fee});
+            </TouchableOpacity>
+            {partyModel.party.ticket?.map((t, index) => {
+              return (
+                <TicketComponent
+                  data={t}
+                  onChangeText={data => {
+                    partyModel.party.onTicketChangeText(data, index);
                   }}
-                  value={partyModel.party.fee?.toString()}
-                  style={[
-                    styles.textInput,
-                    {
-                      width: '35%',
-                      textAlign: 'center',
-                      fontSize: FONTSIZE.Text18,
-                      color: 'black',
-                    },
-                  ]}
-                />
-              </View>
-              <View
-                style={[
-                  styles.eventContainer,
-                  {justifyContent: 'space-between'},
-                ]}>
-                <Text
-                  style={[
-                    styles.headerTitle,
-                    {fontSize: FONTSIZE.Text20, marginRight: 5},
-                  ]}>
-                  {'Quantity Available'}
-                </Text>
-                <TextInput
-                  keyboardType={'numeric'}
-                  placeholderTextColor={'grey'}
-                  placeholder={'0'}
-                  value={partyModel.party.quantityAvailable?.toString()}
-                  onChangeText={quantityAvailable => {
-                    partyModel.party.set({quantityAvailable});
+                  onTicketDelete={() => {
+                    partyModel.party.onTicketDelete(index);
                   }}
-                  style={[
-                    styles.textInput,
-                    {
-                      width: '35%',
-                      textAlign: 'center',
-                      fontSize: FONTSIZE.Text18,
-                      color: 'black',
-                    },
-                  ]}
                 />
-              </View>
-
-              <TouchableOpacity
-                style={{
-                  marginTop: 10,
-                  backgroundColor: '#F2F5F6',
-                  borderRadius: 9,
-                }}>
-                <Text
-                  style={[
-                    styles.headerTitle,
-                    {
-                      fontSize: FONTSIZE.Text18,
-                      color: '#1FAEF7',
-                      paddingVertical: 10,
-                      textAlign: 'center',
-                    },
-                  ]}>
-                  {'Add Ticket Type'}
-                </Text>
-              </TouchableOpacity>
-            </View>
+              );
+            })}
             <CustomButton
               bar
               rowDoubleButton
               ButtonTitle={'Save As Draft'}
               ButtonTitle2={'Complete'}
-              onPress={handleOnPress}
+              onPress={() => handleOnPress(false)}
             />
 
             {/* <View style={styles.bottomContainer}>
@@ -536,7 +478,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   container: {
-    backgroundColor: '#F2F5F6',
+    backgroundColor: 'white',
     flex: 1,
   },
   bottomContainer: {

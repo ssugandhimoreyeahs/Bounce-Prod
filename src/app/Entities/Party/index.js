@@ -28,19 +28,15 @@ class Party {
     addressStr: '',
   };
 
-  @Min(1, {message: 'Required Price'})
-  fee;
-
   @D.PartyAge('toAge', {message: 'Invalid Minimum Age'})
   fromAge;
   @D.PartyAge('fromAge', {message: 'Invalid Maximum Age'})
   toAge;
 
-   
-
   @ArrayNotEmpty({message: 'Required Event Media'})
   galleryFiles = [];
 
+  @ArrayNotEmpty({message: 'Add atleast 1 Ticket Type'})
   ticket = [];
   needBouncer = false;
   needDJ = false;
@@ -63,8 +59,9 @@ class Party {
         if (newParty.fromAge > 0 && newParty.toAge > 0) {
           newParty.ageLimit = true;
         }
-        //newParty.profileImageFile = fields?.galleryFiles[0] || [];
-        newParty.date = toCurrentTimeZone(fields.date).toString();
+        if (fields?.galleryFiles && fields?.galleryFiles[0]) {
+          newParty.profileImageFile = fields?.galleryFiles[0] || [];
+        }
         return newParty;
       }
       return new Party();
@@ -73,11 +70,18 @@ class Party {
     }
   };
   static toEdit = fields => {
-    let newParty = this.toCreate(fields);
-    newParty.date = moment(fields.date).toDate();
-    newParty.galleryFiles = fields?.gallery?.map(i => i.filePath);
-    console.log('TO_EDIT_TEST - ', newParty);
-    return newParty;
+    try {
+      console.log('FIELD_REC - ', JSON.stringify(fields));
+      let newParty = this.toCreate(fields);
+      if (fields.date) {
+        newParty.date = moment(new Date(fields.date)).toDate();
+      }
+      newParty.galleryFiles = fields?.gallery?.map(i => i.filePath);
+      console.log('TO_EDIT_TEST - ', newParty);
+      return newParty;
+    } catch (error) {
+      console.log('ERROR - ', error);
+    }
   };
 }
 

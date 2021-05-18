@@ -15,6 +15,7 @@ import {
   CustomTextinput,
   FloatingInput,
   InputBox,
+  TagsCollapsible,
   TicketComponent,
 } from '@components';
 import {UploadCamera} from '@assets';
@@ -41,28 +42,21 @@ import DatePick from '../../../components/DatePick';
 import moment from 'moment';
 import {Root as NRoot} from 'native-base';
 import {Toast} from '../../../app/constants';
+import Collapsible from 'react-native-collapsible';
 
-const INTEREST = [
+const TAGS = [
   {
-    categoryHeading: 'Add Tags',
-    categoryList: [
-      'Concerts',
-      'Broadway',
-      'Comedy',
-      'Gaming',
-      'Concerts',
-      'Broadway',
-      'Comedy',
-      'Gaming',
-    ],
+    name: 'Entertainment',
+    visible: false,
+    item: ['Comedy', 'Gaming', 'Gaming'],
   },
 ];
 function CreateInvitation(props) {
   let party = {};
   let isEditParty = false;
   if (props.route?.params) {
-    party = props.route?.params.party;
-    isEditParty = props.route?.params.party;
+    party = props.route?.params?.party;
+    isEditParty = props.route?.params?.isEditParty;
   }
   const partyModel = PlanPartyModel.getInstance();
   const [picture, setPicture] = useState(null);
@@ -83,7 +77,7 @@ function CreateInvitation(props) {
   }, []);
   const handleOnPress = async isDraftMode => {
     try {
-      const res = await partyModel.party.isPartyValid();
+      const res = await partyModel.party.isPartyValid(isDraftMode);
       if (!res.success) {
         let key = Object.keys(res.error)[0];
         let msg = res.error[key] || 'Something went wrong!';
@@ -91,14 +85,20 @@ function CreateInvitation(props) {
         return;
       }
       const formData = CreateFormData.objectToFormData(res.partyFields);
-      console.log('FORMDATA_RES - ', JSON.stringify(formData));
       const savePartyResponse = await PartyService.createParty(formData);
+      Toast(
+        isDraftMode ? 'Party saved to Draft' : 'Party Created Successfully',
+      );
+      partyModel.reset();
       console.log('CREATE_PARTY_RES - ', savePartyResponse);
     } catch (error) {
       console.log('ERROR - ', error);
     }
   };
   const handleImage = async () => {
+    return props.navigation.navigate(UploadMedia.routeName, {
+      goBack: true,
+    });
     ImagePicker.openPicker({
       multiple: true,
       width: 300,
@@ -106,7 +106,6 @@ function CreateInvitation(props) {
       cropping: true,
     }).then(images => {
       partyModel.party.addGallery(images.map(i => i.path));
-      props.navigation.navigate(UploadMedia.routeName);
     });
   };
   const ImageFooter = () => {
@@ -300,6 +299,7 @@ function CreateInvitation(props) {
                   onPublicPress={() => partyModel.party.set({isPrivate: false})}
                 />
               </View>
+
               <View
                 style={[
                   styles.eventContainer,
@@ -368,7 +368,11 @@ function CreateInvitation(props) {
             </View>
 
             {/* Tickets Section */}
-
+            {/* <View>
+            {TAGS.map(t => {
+                return <TagsCollapsible {...t} />;
+              })} 
+            </View> */}
             <TouchableOpacity
               onPress={() => {
                 partyModel.party.addTicketType();
@@ -474,7 +478,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   container: {
-    backgroundColor: '#F2F5F6',
+    backgroundColor: 'white',
     flex: 1,
   },
   bottomContainer: {

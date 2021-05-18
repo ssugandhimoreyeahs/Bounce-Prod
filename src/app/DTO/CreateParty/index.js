@@ -38,8 +38,9 @@ class CreatePartyDTO extends CreatePartyEntity {
     this.isPrivate = value;
     this.notifyListeners();
   };
-  isPartyValid = async () => {
+  isPartyValid = async (isDraftMode = false) => {
     let validateParty = CreatePartyEntity.toCreate(this);
+    validateParty.isDraft = isDraftMode;
     let schema = {success: false, partyFields: validateParty, error: {}};
     const isValid = await Validation.validateClassDecorator(validateParty);
     if (!isValid.success) {
@@ -70,10 +71,10 @@ class CreatePartyDTO extends CreatePartyEntity {
     this.notifyListeners();
   };
 
-  onTicketDelete = (index) => {
-    this.ticket = [...this.ticket.filter((_,i) => i != index)];
+  onTicketDelete = index => {
+    this.ticket = [...this.ticket.filter((_, i) => i != index)];
     this.notifyListeners();
-  }
+  };
 }
 
 export default CreatePartyDTO;

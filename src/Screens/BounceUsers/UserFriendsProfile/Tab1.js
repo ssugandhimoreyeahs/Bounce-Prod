@@ -16,7 +16,7 @@ export default function Tab1(props) {
         onPress={() =>
           props.navigation.navigate(CreateInvitation.routeName, {
             party: item,
-            isEditParty: true
+            isEditParty: true,
           })
         }
         key={index}
@@ -80,7 +80,7 @@ export default function Tab1(props) {
                 },
               ]}>
               {/* {'Dec. 31, 7:00 PM'} */}
-              {moment(item?.date).format('MMM. DD, HH:MM A')}
+              {moment(new Date(item?.date)).format('MMM. DD, HH:MM A')}
             </Text>
           </View>
         </View>

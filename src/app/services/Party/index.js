@@ -4,14 +4,18 @@ import MobxStore from '../../../mobx';
 class PartyService {
   createParty = async partyFormData => {
     try {
+      MobxStore.appStore.toogleLoader(true);
       const createPartyRes = await ApiClient.authInstance.post(
         ApiClient.endPoints.party,
         partyFormData,
         ApiClient.formDataHeaders(),
       );
+      this.getParty();
       return Promise.resolve(createPartyRes);
     } catch (error) {
       return Promise.reject(error);
+    } finally {
+      MobxStore.appStore.toogleLoader(false);
     }
   };
 
@@ -20,8 +24,7 @@ class PartyService {
       const parties = await ApiClient.authInstance.get(
         ApiClient.endPoints.party,
         ApiClient.applicationJSONHeader(false),
-      );
-      console.log('JSON_STR - ', JSON.stringify(parties.data));
+      ); 
       MobxStore.partyStore.setParty(parties.data);
       return Promise.resolve(parties.data);
     } catch (error) {

@@ -54,10 +54,12 @@ import {
     Tabview,
 } from './BreakedComponents'
 import DropDown from './CustomDropdown/DropDown'
+import TagsCollapsible from './TagsCollapsible';
 
 
 
 export {
+    TagsCollapsible,
     TicketComponent,
     Tabview,
     VendorCard,

@@ -45,7 +45,7 @@ export default function BirthDayScreen(props) {
         <Root>
             <KeyboardAwareScrollView style={{ flexGrow: 1 }} contentContainerStyle={{ flex: 1 }}>
                 <View style={styles.container}>
-                    <Text style={styles.HeadingStyle}>{"When’s your birthday?"}</Text>
+                    <Text style={styles.HeadingStyle}>{"When’s your birthday? 🎂"}</Text>
 
                     <View style={{ marginVertical: 40 }}>
 
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     HeadingStyle: {
         marginTop: 40,
         fontFamily: 'Avenir Next',
-        letterSpacing: 1.6,
+        letterSpacing: 0.2,
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text26,
         fontWeight: 'bold',

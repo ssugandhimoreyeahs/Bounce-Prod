@@ -39,7 +39,7 @@ export default function NameScreen(props) {
         <Root>
             <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
                 <View style={styles.container}>
-                    <Text style={styles.HeadingStyle}>{"What’s your name?"}</Text>
+                    <Text style={styles.HeadingStyle}>{"What’s your name? 👋"}</Text>
                     <View style={{ marginVertical: 40 }}>
                         <TextInput
                             placeholder={"Name"}
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     HeadingStyle: {
         marginTop: 40,
         fontFamily: 'Avenir Next',
-        letterSpacing: 1.6,
+        letterSpacing: 0.2,
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text26,
         fontWeight: 'bold',

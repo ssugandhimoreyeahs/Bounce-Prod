@@ -24,11 +24,18 @@ import Tab2 from '../../Screens/BounceUsers/UserFriendsProfile/Tab2.js';
 import Tab3 from '../../Screens/BounceUsers/UserFriendsProfile/Tab3.js';
 import { FONTSIZE, getHp, getWp } from '@utils'
 
+export const PrivacyBlock = () => {
+    return (<View>
+        <Text style={styles.headerTitle}>{"Privacy Settings"}</Text>
+        <Text style={styles.headerTitle}>{"Choose what you want to share with friends. Only public events can be displayed on your profile."}</Text>
+    </View>
+    )
+}
 
 export const Tabview = (props) => {
 
     return (
-        <View style={{ marginVertical: 10 }}>
+        <View style={{ marginVertical: 10, borderBottomWidth: 1, borderColor: '#EEEEEE' }}>
             <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}

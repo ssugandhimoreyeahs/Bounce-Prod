@@ -22,8 +22,8 @@ import MobxStore from '../../../mobx';
 
 export default function ProfilePic(props) {
     const {
-        authStore 
-    } = MobxStore; 
+        authStore
+    } = MobxStore;
     const { navigation } = props
     const [picture, setPicture] = useState(null)
     const [footer, openFooter] = useState(false)
@@ -36,9 +36,9 @@ export default function ProfilePic(props) {
 
     const handleSubmit = async () => {
         try {
-        setLoader(true)
-        if (picture != null) {
-            
+            setLoader(true)
+            if (picture != null) {
+
                 let body = {
                     "username": username,
                     "password": password,
@@ -60,21 +60,21 @@ export default function ProfilePic(props) {
                 formData.append('city', live);
                 formData.append('birthday', birthday);
                 formData.append('profileImageFile', imgObj);
-                formData.append('vendorType',2);
+                formData.append('vendorType', 2);
 
-                const response = await axios.post('http://3.12.168.164:3000/auth/host/register', formData); 
+                const response = await axios.post('http://3.12.168.164:3000/auth/host/register', formData);
                 if (response.status == 201 || response.status == 200) {
                     const result = await JSON.stringify(response.data)
-                    console.log("NEW_USER_REGISTRATION ", result);  
+                    console.log("NEW_USER_REGISTRATION ", result);
                     authStore.onUserRegistration(response.data);
-                    setLoader(false); 
+                    setLoader(false);
                 }
-            } 
-       else {
-            setLoader(false)
-            ToastAndroid.show("Please select a picture!", 1000);
+            }
+            else {
+                setLoader(false)
+                ToastAndroid.show("Please select a picture!", 1000);
+            }
         }
-    }
         catch (e) {
             setLoader(false)
             console.log('ERROR - ', e);
@@ -129,7 +129,7 @@ export default function ProfilePic(props) {
                 <KeyboardAwareScrollView style={{ flexGrow: 1 }} contentContainerStyle={{ flex: 1 }}>
                     <View style={styles.container}>
                         <Text style={styles.HeadingStyle}>
-                            {"Add a profile pic!"}
+                            {"Add a 🔥🔥🔥 profile pic!"}
                         </Text>
 
                         <View style={{ marginVertical: 40 }}>
@@ -164,13 +164,6 @@ export default function ProfilePic(props) {
                         </View>
 
                         <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
-
-                            <TouchableOpacity
-                                onPress={() => ToastAndroid.show("This is under Development!", 1000)}>
-                                <Text style={styles.skip}>
-                                    {"Skip the rest for now"}
-                                </Text>
-                            </TouchableOpacity>
 
                             <CustomButton
                                 linear
@@ -211,7 +204,7 @@ const styles = StyleSheet.create({
     HeadingStyle: {
         marginTop: 40,
         fontFamily: 'Avenir Next',
-        letterSpacing: 1.6,
+        letterSpacing: 0.2,
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text26,
         fontWeight: 'bold',

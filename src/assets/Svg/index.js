@@ -109,9 +109,32 @@ import GreyEvent from './GreyEvent.svg';
 import BlackEvent from './BlackEvent.svg';
 import BlackHome from './BlackHome.svg';
 
+import WhitePerson from './WhitePerson.svg'
+import GreyCross from './GreyCross.svg'
+import InstaNew from './InstaNew.svg'
 
+import Add_Outline from './Add_Outline.svg'
+import Bell_Outline from './Bell_Outline.svg'
+import Home_Outline from './Home_Outline.svg'
+import Search_Outline from './Search_Outline.svg'
+
+import Add_Fill from './Add_Fill.svg'
+import Bell_Fill from './Bell_Fill.svg'
+import Home_Fill from './Home_Fill.svg'
+import Search_Fill from './Search_Fill.svg'
 
 export {
+    Add_Fill,
+    Bell_Fill,
+    Home_Fill,
+    Search_Fill,
+    Add_Outline,
+    Bell_Outline,
+    Home_Outline,
+    Search_Outline,
+    InstaNew,
+    GreyCross,
+    WhitePerson,
     BlackEvent,
     BlackHome,
     GreyEvent,

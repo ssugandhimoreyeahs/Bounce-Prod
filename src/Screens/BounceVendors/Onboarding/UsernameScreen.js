@@ -98,7 +98,7 @@ export default function UserNameScreen(props) {
         <Root>
             <KeyboardAwareScrollView style={{ flexGrow: 1 }} contentContainerStyle={{ flex: 1 }}>
                 <View style={styles.container}>
-                    <Text style={styles.HeadingStyle}>{"Create your username."}</Text>
+                    <Text style={styles.HeadingStyle}>{"Pick a username! 😜"}</Text>
 
                     <View style={{ marginTop: 40 }}>
                         <TextInput
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     HeadingStyle: {
         marginTop: 40,
         fontFamily: 'Avenir Next',
-        letterSpacing: 1.6,
+        letterSpacing: 0.2,
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text26,
         fontWeight: 'bold',

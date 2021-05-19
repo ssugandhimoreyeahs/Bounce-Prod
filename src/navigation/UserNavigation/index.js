@@ -10,6 +10,7 @@ import CreateInvitation from '../../Screens/BounceVendors/PlanParty/CreateInvita
 import UploadMedia from '../../Screens/BounceVendors/PlanParty/UploadMedia';
 import AccountSetting from '../../Screens/Drawer/AccountSetting';
 import HostProfile from '../../Screens/BounceUsers/HostProfile/HostProfile';
+import AboutUs from '../../Screens/Views/About/AboutUs';
 
 const UserRootStack = createStackNavigator();
 
@@ -44,6 +45,10 @@ class UserNavigation {
         <UserRootStack.Screen 
           name={UploadMedia.routeName}
           component={UploadMedia}
+        />
+        <UserRootStack.Screen 
+          name={AboutUs.routeName}
+          component={AboutUs}
         />
       </UserRootStack.Navigator>
     );

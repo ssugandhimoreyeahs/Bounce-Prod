@@ -2,16 +2,16 @@ import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Avatar } from 'react-native-elements'
 import {
-  GreyBell,
-  GreyParty,
-  GreyPerson,
-  BlackBell,
-  BlackPerson,
-  BlackParty,
-  GreyHome,
-  GreyEvent,
-  BlackEvent,
-  BlackHome,
+  Add_Outline,
+  Bell_Outline,
+  Home_Outline,
+  Search_Outline,
+
+  Add_Fill,
+  Bell_Fill,
+  Home_Fill,
+  Search_Fill,
+
 } from '@svg';
 import {
   Placeholderr,
@@ -20,6 +20,8 @@ import {
 
 import Temp from '../../Screens/BounceUsers/Temp'
 import UserHomeScreen from '../../Screens/BounceUsers/UserFriendsProfile';
+import DesignCanva from '../../Screens/Views/Canva/DesignCanva'
+
 const UserHomeBottomTab = createMaterialBottomTabNavigator();
 
 class UserHomeBottomNavigation {
@@ -38,9 +40,9 @@ class UserHomeBottomNavigation {
             unmountOnBlur: true,
             tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
-                <BlackHome height={30} width={30} />
+                <Home_Outline height={30} width={30} />
               ) : (
-                  <GreyHome height={30} width={30} />
+                  <Home_Outline height={30} width={30} />
                 );
             },
           }}
@@ -53,16 +55,14 @@ class UserHomeBottomNavigation {
             title: null,
             tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
-                <BlackEvent height={30} width={30} />
+                <Search_Outline height={30} width={30} />
               ) : (
-                  <GreyEvent height={30} width={30} />
+                  <Search_Outline height={30} width={30} />
                 );
             },
           }}
-          name={"2"}
-          component={() => {
-            return null;
-          }}
+          name={DesignCanva.routeName}
+          component={DesignCanva}
         />
 
         <UserHomeBottomTab.Screen
@@ -71,9 +71,28 @@ class UserHomeBottomNavigation {
             // tabBarColor: 'red',
             tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
-                <BlackBell height={30} width={30} />
+                <Add_Outline height={30} width={30} />
               ) : (
-                  <GreyBell height={30} width={30} />
+                  <Add_Outline height={30} width={30} />
+                );
+            },
+          }}
+          name={"Qr"}
+          component={() => {
+            return null;
+          }}
+          unmountOnBlur={true}
+        />
+
+        <UserHomeBottomTab.Screen
+          options={{
+            unmountOnBlur: true,
+            // tabBarColor: 'red',
+            tabBarIcon: ({ tintColor, focused }) => {
+              return focused ? (
+                <Bell_Outline height={30} width={30} />
+              ) : (
+                  <Bell_Outline height={30} width={30} />
                 );
             },
           }}

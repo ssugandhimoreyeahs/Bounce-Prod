@@ -5,28 +5,63 @@ import { FONTSIZE } from '@utils'
 const { height, width } = Dimensions.get("screen")
 
 const styles = StyleSheet.create({
-   allFrnds: {
+   Tiktok: {
+      marginLeft: 10,
+      fontFamily: 'ANB',
+      color: '#000',
+      width: '100%'
+   },
+   flex: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      // justifyContent: 'space-between'
+   },
+   editButtonStyle: {
+      elevation: 2,
+      borderRadius: 7,
+      paddingHorizontal: 15,
+      paddingVertical: 5,
+      backgroundColor: '#fff',
+   },
+   socialButton: {
+      width: '90%',
+      height: 50,
+      elevation: 2,
+      borderRadius: 13,
+      paddingHorizontal: 10,
+      backgroundColor: '#fff',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginVertical: 5,
+   },
+   linearGradient: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 56,
+      elevation: 2,
+      backgroundColor: '#fff',
       marginVertical: 10,
-      elevation: 5,
+      borderRadius: 20,
+   },
+   allFrnds: {
+      marginTop: 10,
       borderRadius: 9,
       alignItems: 'center',
       padding: 5,
-      backgroundColor: '#EEEEEE',
+      borderWidth: 1,
+      borderColor: '#E4EEF1',
+      backgroundColor: '#F2F5F6',
       paddingVertical: 10
    },
-   socialButton: {
-      elevation: 3,
-      borderRadius: 7,
-      padding: 5,
-      paddingHorizontal: 10,
-      backgroundColor: '#fff',
+   // socialButton: {
+   //    elevation: 3,
+   //    borderRadius: 7,
+   //    padding: 5,
+   //    paddingHorizontal: 10,
+   //    backgroundColor: '#fff',
 
-   },
-   flex: {
-      // flexDirection: 'row',
-      alignItems: 'flex-start',
-      // justifyContent: 'space-between'
-   },
+   // },
    partition: {
       width: '90%',
       height: 0.1,
@@ -75,7 +110,6 @@ const styles = StyleSheet.create({
    textStyle: {
       color: '#000',
       fontSize: 18,
-      opacity: 0.8,
       fontFamily: 'AvenirNext',
    },
    belowTextStyle: {
@@ -87,7 +121,7 @@ const styles = StyleSheet.create({
    headerTitle: {
       color: '#000',
       fontSize: 18,
-      opacity: 0.5,
+      // opacity: 0.5,
       marginBottom: 5,
       fontFamily: 'AvenirNext',
    },
@@ -121,9 +155,9 @@ const styles = StyleSheet.create({
    },
    InstaText: {
       color: '#000',
-      fontSize: FONTSIZE.Text20,
-      fontWeight: 'bold',
-      fontFamily: 'AvenirNext'
+      fontSize: FONTSIZE.Text14,
+      marginLeft: 10 ,
+      fontFamily: 'ANB'
    },
 
    aboutText: {

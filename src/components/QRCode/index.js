@@ -30,17 +30,17 @@ export default class ScanScreen extends Component {
   };
 
   render() {
-    const {qrValue} = this.props;
+    const {qrValue,qrUserPic} = this.props;
 
     return (
-      <View style={{backgroundColor: '#fff', elevation: 10, borderRadius: 42}}>
+      <View style={{backgroundColor: '#fff',borderRadius: 42}}>
         <QRCode
         
           value={qrValue}
-          // logo={{uri: `${qrUserPic}`}}
+          logo={qrUserPic}
           logoBorderRadius={100}
           logoSize={50}
-          color="#1FAEF7"
+          color="#04A9FF"
           logoBackgroundColor="transparent"
           size={getHp(270)}
 

@@ -51,12 +51,14 @@ import {
     ChooseVendorCard,
     VendorCard,
     Tabview,
+    PrivacyBlock,
 } from './BreakedComponents'
 import DropDown from './CustomDropdown/DropDown'
 
 
 
 export {
+    PrivacyBlock,
     Tabview,
     VendorCard,
     shareFunction,

@@ -76,7 +76,7 @@ function LoginScreen(props) {
     <Root>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
-        <KeyboardAwareScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
+        <KeyboardAwareScrollView style={{ flex: 1, backgroundColor: '#FBFBFB' }}>
           <View style={styles.container}>
             <View style={{ alignItems: 'center', marginBottom: getHp(20) }}>
               <BounceSplash style={{ marginTop: 50, marginBottom: 20 }} />

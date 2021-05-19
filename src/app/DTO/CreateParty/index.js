@@ -64,7 +64,7 @@ class CreatePartyDTO extends CreatePartyEntity {
   addTicketType = () => {
     this.ticket.push(new TicketEntity());
     this.notifyListeners();
-  };
+  }; 
 
   onTicketChangeText = (data, index) => {
     this.ticket[index] = {...this.ticket[index], ...data};

@@ -12,3 +12,14 @@ export const getFromToDate = (from, to) => {
      
     return `From ${fromDate} To ${toDate}`;
 }
+
+export const toCurrentTimeZone = (date) => {
+    let dt = moment(date);
+    let timeOffset = new Date().getTimezoneOffset();
+    if (timeOffset < 0) {
+        dt.add(Math.abs(timeOffset),'minutes');
+    }else {
+        dt.subtract(Math.abs(timeOffset),'minutes');
+    }
+    return dt.toDate();
+}

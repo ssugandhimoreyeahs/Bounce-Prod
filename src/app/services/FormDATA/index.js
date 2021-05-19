@@ -1,7 +1,7 @@
 import { RegexCollection } from '../../constants';
 import is from 'is_js';
 
-class FormDATA {
+class CreateFormData {
     form;
     appendToFormData = (key, value) => {
          if(value == undefined) {
@@ -11,10 +11,10 @@ class FormDATA {
             this.form.append(key, this.createFormDataImage(value));
         }else if (is.date(value)) {
             this.form.append(key, value == null ? null : value.toISOString());
-        }else if(is.not.object(value)) {
-            this.form.append(key, value == null ? null : value.toString());
-        }else {
+        }else if(is.object(value)) {
             this.form.append(key, value == null ? null : JSON.stringify(value));
+        }else {
+            this.form.append(key, value == null ? null : value);
         }
     }
     objectToFormData = (obj) => {
@@ -54,10 +54,10 @@ class FormDATA {
     static instance;
     static getInstance() {
         if(!this.instance) {
-            this.instance = new FormDATA();
+            this.instance = new CreateFormData();
         }
         return this.instance;
     }
 }
 
-export default FormDATA.getInstance();
+export default CreateFormData.getInstance();

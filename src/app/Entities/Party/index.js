@@ -1,51 +1,96 @@
-import {MinLength, IsInt, Matches, IsNotEmpty, IsEmpty} from 'class-validator';
-import {Decorators as D} from '../../Validations';
+import {
+  MinLength,
+  IsInt,
+  Matches,
+  IsNotEmpty,
+  ArrayNotEmpty,
+  Min,
+} from 'class-validator';
+import {Decorators as D, ValidationTypes} from '../../Validations';
+import {toCurrentTimeZone} from '../../utils';
+import moment from 'moment';
 class Party {
   @IsNotEmpty({message: 'Required title'})
-  title = '';
+  title;
   @IsNotEmpty({message: 'Required Description'})
-  description = '';
+  description;
+
   @IsNotEmpty({message: 'Required Date'})
-  date = '';
-  location = '';
-  @IsInt({message: 'Invalid Fee'})
-  fee = 0;
-  @D.PartyAge('toAge', {message: "Invalid Minimum Age"}) 
+  date;
+
+  @D.ValidateObjecKey(
+    {key: 'addressStr', [ValidationTypes.REQUIRED]: true},
+    {message: 'Required Address'},
+  )
+  location = {
+    lat: '1',
+    lon: '1',
+    addressStr: '',
+  };
+
+  @D.PartyAge('toAge', {message: 'Invalid Minimum Age'})
   fromAge;
-  @D.PartyAge('fromAge', {message: "Invalid Maximum Age"})  
+  @D.PartyAge('fromAge', {message: 'Invalid Maximum Age'})
   toAge;
 
+  @ArrayNotEmpty({message: 'Required Event Media'})
   galleryFiles = [];
-  address = '';
+
+  @ArrayNotEmpty({message: 'Add atleast 1 Ticket Type'})
+  ticket = [];
   needBouncer = false;
   needDJ = false;
   ageLimit = false;
   isPrivate = false;
-  profileImageFile = '';
+  isDraft = false;
+  profileImageFile;
 
-  constructor(fields) {
-    console.log('PARTY_ENTITY - ', fields);
+  static toCreate = fields => {
     try {
       if (fields && typeof fields == 'object') {
-        for (let key in fields) {
-          Object.keys(this).map(thisK => {
-            if (key == thisK) {
-              this[key] = fields[key];
-            }
-          });
+        let newParty = new Party();
+        Object.keys(newParty).map(key => {
+          newParty[key] = fields[key];
+        });
+        newParty.fromAge = parseInt(fields['fromAge']) || 0;
+        newParty.toAge = parseInt(fields['toAge']) || 0;
+        newParty.fee = parseInt(fields['fee']) || 0;
+        newParty.quantityAvailable = parseInt(fields['quantityAvailable']) || 0;
+        if (newParty.fromAge > 0 && newParty.toAge > 0) {
+          newParty.ageLimit = true;
         }
-        this.fromAge = parseInt(fields['fromAge']) || 0;
-        this.toAge = parseInt(fields['toAge']) || 0;
-        this.fee = parseInt(fields['fee']) || '';
-        if (!isNaN(this.fromAge) && !isNaN(this.toAge)) {
-          this.ageLimit = true;
+        if (fields?.galleryFiles && fields?.galleryFiles[0]) {
+          newParty.profileImageFile = fields?.galleryFiles[0] || [];
         }
-        console.log('PARTY_ENTITY - ' + JSON.stringify(this));
+        return newParty;
       }
+      return new Party();
     } catch (error) {
       console.log('PARTY_ENTITY_ERROR - ', error);
     }
-  }
+  };
+  static toEdit = fields => {
+    try {
+      console.log('FIELD_REC - ', JSON.stringify(fields));
+      let newParty = this.toCreate(fields);
+      if (fields.date) {
+        newParty.date = moment(new Date(fields.date)).toDate();
+      }
+      newParty.galleryFiles = fields?.gallery?.map(i => i.filePath);
+      console.log('TO_EDIT_TEST - ', newParty);
+      return newParty;
+    } catch (error) {
+      console.log('ERROR - ', error);
+    }
+  };
 }
 
 export default Party;
+
+// for (let key in fields) {
+//   Object.keys(this).map(thisK => {
+//     if (key == thisK) {
+//       this[key] = fields[key];
+//     }
+//   });
+// }

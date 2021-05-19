@@ -17,6 +17,7 @@ export default function CustomButton(props) {
         rowDoubleButton = false,
         colDoubleButton = false,
         theme = false,
+        onPress1 = () => { }
     } = props
     return (
         <View style={{ backgroundColor: '#FEFEFE' }}>
@@ -82,7 +83,7 @@ export default function CustomButton(props) {
                 <>
                     <View style={{ alignItems: 'center', marginVertical: getHp(0), borderTopWidth: 0.5, borderColor: '#CCCCCC', paddingTop: 10 }}>
 
-                        <TouchableOpacity style={styles.colButtonStyle} onPress={onPress}>
+                        <TouchableOpacity style={styles.colButtonStyle} onPress={onPress1}>
                             <Text style={[styles.titleStyle, { color: '#1FAEF7', fontSize: FONTSIZE.Text20, fontWeight: 'bold', letterSpacing: 0.2 }]}>
                                 {ButtonTitle}
                             </Text>

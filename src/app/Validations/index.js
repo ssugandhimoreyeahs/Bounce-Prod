@@ -1,4 +1,6 @@
 import Decorators from './Decorators';
 import DecoratorValidation from './DecoratorValidation';
 import Validation from './Validation';
-export {Decorators, DecoratorValidation, Validation};
+import ValidationTypes from './ValidationTypes';
+
+export {Decorators, DecoratorValidation, Validation, ValidationTypes};

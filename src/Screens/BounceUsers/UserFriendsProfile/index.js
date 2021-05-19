@@ -43,6 +43,8 @@ import {
   Snapchat
 } from "@svg";
 import { BlackPerson } from "../../../assets/Svg";
+import { PartyService } from '../../../app/services';
+
 
 
 const ACCOUNTS = [
@@ -112,6 +114,10 @@ export default function UserFriendsProfile(props) {
     profileImage = {},
   } = userinfo?.user;
   console.log("userinfo", userinfo)
+
+  useEffect(()=>{
+    PartyService.getParty();
+  }, []);
   const handleCarousel = (value) => {
     return (
       <ImageCarousel

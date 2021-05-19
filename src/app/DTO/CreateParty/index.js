@@ -1,6 +1,10 @@
-import {Party as CreatePartyEntity} from '../../Entities';
+import {
+  Party as CreatePartyEntity,
+  Ticket as TicketEntity,
+} from '../../Entities';
 import {ReactModel} from '../../core';
 import {Validation} from '../../Validations';
+
 @ReactModel()
 class CreatePartyDTO extends CreatePartyEntity {
   partyError = {};
@@ -14,7 +18,10 @@ class CreatePartyDTO extends CreatePartyEntity {
     }
     this.notifyListeners();
   };
-
+  setAddress = addressStr => {
+    this.location.addressStr = addressStr;
+    this.notifyListeners();
+  };
   addGallery = images => {
     this.galleryFiles.push(...images);
     this.notifyListeners();
@@ -31,18 +38,42 @@ class CreatePartyDTO extends CreatePartyEntity {
     this.isPrivate = value;
     this.notifyListeners();
   };
-  isPartyValid = async () => {
-    let validateParty = new CreatePartyEntity(this);
-    let schema = {success: false, partyFields: validateParty};
+  isPartyValid = async (isDraftMode = false) => {
+    let validateParty = CreatePartyEntity.toCreate(this);
+    validateParty.isDraft = isDraftMode;
+    let schema = {success: false, partyFields: validateParty, error: {}};
     const isValid = await Validation.validateClassDecorator(validateParty);
     if (!isValid.success) {
       console.log('ERROR_PARTY - ', JSON.stringify(isValid));
-      this.partyError = isValid.errors;
+      schema.error = isValid.errors;
     } else {
       schema.success = true;
     }
-    this.notifyListeners();
     return schema;
+  };
+
+  reset = (preParty = {}) => {
+    if (Object.keys(preParty).length == 0) {
+      Object.assign(this, new CreatePartyEntity());
+    } else {
+      Object.assign(this, CreatePartyEntity.toEdit(preParty));
+    }
+    this.notifyListeners();
+  };
+
+  addTicketType = () => {
+    this.ticket.push(new TicketEntity());
+    this.notifyListeners();
+  }; 
+
+  onTicketChangeText = (data, index) => {
+    this.ticket[index] = {...this.ticket[index], ...data};
+    this.notifyListeners();
+  };
+
+  onTicketDelete = index => {
+    this.ticket = [...this.ticket.filter((_, i) => i != index)];
+    this.notifyListeners();
   };
 }
 

@@ -86,6 +86,7 @@ function CreateInvitation(props) {
         return;
       }
       const formData = CreateFormData.objectToFormData(res.partyFields);
+      console.log('FORM_BODY_CREATEd - ', formData);
       const savePartyResponse = await PartyService.createParty(formData);
       Toast(
         isDraftMode ? 'Party saved to Draft' : 'Party Created Successfully',

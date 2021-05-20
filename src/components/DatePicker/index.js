@@ -14,10 +14,8 @@ export default DatePicker = ({ birthday, setBirthday, tillToday }) => {
         setDatePickerVisibility(false);
     };
 
-    const handleConfirm = (date) => {
-        var currentDate = moment(date).format("DD/MM/YYYY");
-        console.log("currentDate", currentDate);
-        setBirthday(currentDate)
+    const handleConfirm = (date) => { 
+        setBirthday(date)
         hideDatePicker();
     };
 

@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, TextInput, ToastAndroid } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
     Root,
-    CustomButton
+    CustomButton,
+    ProgressCircle
 } from '@components'
 import { FONTSIZE, validateEmail, validatePass } from '@utils'
 import { postData } from '../../../FetchServices'
@@ -119,6 +120,7 @@ export default function UserNameScreen(props) {
                     </View>
 
                     <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
+                    <ProgressCircle currentProgress={2} containerStyle={{marginBottom: 20}}/>
                         <CustomButton
                             userContinue
                             onPress={handleSubmit}

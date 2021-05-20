@@ -10,10 +10,10 @@ function ReactModel() {
       onSubscribe = listener => {
         return {
           ...this,
-          unSubscribe: () => this.unSubscribe(listener),
+          unsubscribe: () => this.unsubscribe(listener),
         };
       };
-      unSubscribe = listener => {
+      unsubscribe = listener => {
         this.Observers.delete(listener);
       };
       notifyListeners = () => { 

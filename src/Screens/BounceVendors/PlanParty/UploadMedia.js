@@ -37,7 +37,7 @@ function UploadMedia(props) {
       setState(() => ({}));
     });
     return () => {
-      listener.unSubscribe();
+      listener.unsubscribe();
     };
   }, []);
   const handleImage = () => {

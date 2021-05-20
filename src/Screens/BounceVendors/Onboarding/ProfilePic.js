@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity, ToastAndroid } from 'react-na
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
     Root,
-    CustomButton
+    CustomButton,
+    ProgressCircle
 } from '@components'
 import {
     UploadBlue,
@@ -162,6 +163,13 @@ export default function ProfilePic(props) {
                         </View>
 
                         <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
+                        <ProgressCircle currentProgress={5} containerStyle={{marginBottom: 20}}/>
+                            <TouchableOpacity
+                                onPress={() => ToastAndroid.show("This is under Development!", 1000)}>
+                                <Text style={styles.skip}>
+                                    {"Skip the rest for now"}
+                                </Text>
+                            </TouchableOpacity>
 
                             <CustomButton
                                 userContinue

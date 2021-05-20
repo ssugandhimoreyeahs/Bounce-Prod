@@ -23,7 +23,7 @@ class Navigation extends Component {
       return SplashScreen;
     }
     if (authStore.isAutoLoginDone && authStore.isAuthenticated) {
-      if (authStore.userProfile.user.vendorType == 2) {
+      if (authStore?.userProfile?.user?.vendorType == 2) {
         return UserNavigation.stack;
       }else {
         return VendorNavigation.stack;

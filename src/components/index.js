@@ -55,6 +55,7 @@ import {
 } from './BreakedComponents'
 import DropDown from './CustomDropdown/DropDown'
 import TagsCollapsible from './TagsCollapsible';
+import ProgressCircle from './ProgressCircle';
 
 
 
@@ -111,5 +112,6 @@ export {
     Header,
     Footer,
     ImageCarousel,
-    ModalDropDownComponent
+    ModalDropDownComponent,
+    ProgressCircle
 }

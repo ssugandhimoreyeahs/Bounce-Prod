@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, TextInput, Alert, ToastAndroid } from 'react-na
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
     Root,
-    CustomButton
+    CustomButton,
+    ProgressCircle
 } from '@components'
 import RadialGradient from 'react-native-radial-gradient';
 import {
@@ -16,7 +17,7 @@ import { fetchVendorData, } from "../../../reducer/mainexpensecategory";
 import { FONTSIZE } from '@utils'
 import { ScrollView } from 'react-native';
 import UserNameScreen from './UsernameScreen';
-
+ 
 export default function NameScreen(props) {
     const {
         navigation
@@ -50,6 +51,7 @@ export default function NameScreen(props) {
                         />
                     </View>
                     <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
+                        <ProgressCircle containerStyle={{marginBottom: 20}}/>
                         <CustomButton
                             linear
                             bar

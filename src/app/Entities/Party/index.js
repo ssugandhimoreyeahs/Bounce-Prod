@@ -54,7 +54,7 @@ class Party {
         });
         newParty.fromAge = parseInt(fields['fromAge']) || 0;
         newParty.toAge = parseInt(fields['toAge']) || 0;
-        newParty.fee = parseInt(fields['fee']) || 0;
+        //newParty.fee = parseInt(fields['fee']) || 0;
         newParty.quantityAvailable = parseInt(fields['quantityAvailable']) || 0;
         if (newParty.fromAge > 0 && newParty.toAge > 0) {
           newParty.ageLimit = true;

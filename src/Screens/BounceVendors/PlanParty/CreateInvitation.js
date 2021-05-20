@@ -72,7 +72,7 @@ function CreateInvitation(props) {
     return () => {
       partyModel.reset();
       console.log('UMOUNTED');
-      listener.unSubscribe();
+      listener.unsubscribe();
     };
   }, []);
   const handleOnPress = async isDraftMode => {

@@ -5,6 +5,7 @@ import {
     Root,
     CustomButton,
     DatePicker,
+    ProgressCircle
 } from '@components'
 import RadialGradient from 'react-native-radial-gradient';
 import {
@@ -16,6 +17,7 @@ import { connect, useSelector, useDispatch } from "react-redux";
 import { fetchVendorData, } from "../../../reducer/mainexpensecategory";
 import { FONTSIZE } from '@utils'
 import LiveScreen from './LiveScreen';
+import moment from 'moment';
 
 export default function BirthDayScreen(props) {
     const {
@@ -51,13 +53,13 @@ export default function BirthDayScreen(props) {
 
                         <DatePicker
                             setBirthday={setBirthday}
-                            birthday={birthday}
+                            birthday={birthday == '' ? '' : moment(birthday).format('MMM DD, YYYY')}
                             tillToday
-                        />
-                        {console.log("birthday", birthday)}
+                        /> 
                     </View>
 
                     <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
+                    <ProgressCircle currentProgress={3} containerStyle={{marginBottom: 20}}/>
                         <CustomButton
                             linear
                             bar

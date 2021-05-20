@@ -27,6 +27,10 @@ class UserNavigation {
           name={UserHomeDrawerNavigator.routeName}
           component={UserHomeDrawerNavigator.drawerHome}
         />
+          {/* <UserRootStack.Screen 
+          name={AccountSetting.routeName}
+          component={AccountSetting}
+        /> */}
         <UserRootStack.Screen 
           name={UserQrScreen.routeName}
           component={UserQrScreen}

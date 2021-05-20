@@ -114,9 +114,10 @@ export const fetchCurrentLoginData = (fullDataSet) => {
 export const fetchMiscData = () => async (dispatch) => {
   try {
     let LANGUAGE_SERVER = await ApiClient.instance.get(ApiClient.endPoints.getLanguage);
+    console.log("current data CHECKING->", LANGUAGE_SERVER)
     dispatch(fetchCurrentLoginData(['ORIGINAL_LANG', LANGUAGE_SERVER]));
     let tempLanguage = [];
-    await LANGUAGE_SERVER.map(item => {
+    await LANGUAGE_SERVER.data.map(item => {
       tempLanguage.push({ label: item.name, value: item.id, code: item.code });
     });
     dispatch(fetchCurrentLoginData(['LANGUAGE_ARRAY', tempLanguage]));
@@ -124,7 +125,7 @@ export const fetchMiscData = () => async (dispatch) => {
     let GENRE_SERVER = await ApiClient.instance.get(ApiClient.endPoints.getGenre);
     dispatch(fetchCurrentLoginData(['ORIGINAL_GENRE', GENRE_SERVER]));
     let tempGenre = [];
-    await GENRE_SERVER.map(item => {
+    await GENRE_SERVER.data.map(item => {
       tempGenre.push({ label: item.name, value: item.id });
     });
     dispatch(fetchCurrentLoginData(['GENRE_ARRAY', tempGenre]));
@@ -133,7 +134,7 @@ export const fetchMiscData = () => async (dispatch) => {
     dispatch(fetchCurrentLoginData(['ORIGINAL_CERTI', GUARD_CERTIFICATION_SERVER]),
     );
     let tempCERTIFICATION = [];
-    await GUARD_CERTIFICATION_SERVER.map(item => {
+    await GUARD_CERTIFICATION_SERVER.data.map(item => {
       tempCERTIFICATION.push({ label: item.name, value: item.id });
     });
     dispatch(fetchCurrentLoginData(['CERTIFICATION_ARRAY', tempCERTIFICATION]));

@@ -139,7 +139,7 @@ function CreateInvitation(props) {
               onPress={() => {
                 Alert.alert(
                   "Alert !",
-                  "All changes will be lost ! Are you sure ?",
+                  "Are you sure you want to go back ? All your changes will be lost!",
                   [
                     {
                       text: 'OK',

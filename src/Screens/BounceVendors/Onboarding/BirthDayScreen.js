@@ -15,7 +15,7 @@ import {
 import { connect, useSelector, useDispatch } from "react-redux";
 import { fetchVendorData, } from "../../../reducer/mainexpensecategory";
 import { FONTSIZE } from '@utils'
-import LiveScreen from './LiveScreen';
+import ProfilePic from './ProfilePic';
 
 export default function BirthDayScreen(props) {
     const {
@@ -31,7 +31,7 @@ export default function BirthDayScreen(props) {
 
     const handleSubmit = async () => {
         if (birthday != '') {
-            navigation.navigate(LiveScreen.routeName, {
+            navigation.navigate(ProfilePic.routeName, {
                 birthday: birthday,
                 username: username,
                 password: password,
@@ -47,20 +47,17 @@ export default function BirthDayScreen(props) {
                 <View style={styles.container}>
                     <Text style={styles.HeadingStyle}>{"When’s your birthday? 🎂"}</Text>
 
-                    <View style={{ marginVertical: 40 }}>
-
+                    <View style={{ marginTop: 100 }}>
                         <DatePicker
                             setBirthday={setBirthday}
                             birthday={birthday}
                             tillToday
                         />
-                        {console.log("birthday", birthday)}
                     </View>
 
                     <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
                         <CustomButton
-                            linear
-                            bar
+                            userContinue
                             onPress={handleSubmit}
                         />
                     </View>
@@ -72,59 +69,34 @@ export default function BirthDayScreen(props) {
     )
 }
 
-BirthDayScreen.routeName="/BirthDayScreen";
+BirthDayScreen.routeName = "/BirthDayScreen";
 
 const styles = StyleSheet.create({
+    infoText: {
+        fontSize: FONTSIZE.Text16,
+        color: '#999999',
+        fontFamily: '500',
+        letterSpacing: 0.1,
+        marginTop: 10
+    },
     container: {
         flex: 1,
         padding: 15,
         flexDirection: 'column',
-        // justifyContent:'space-between',
-        // backgroundColor:'red'
-        // justifyContent: 'center',
-        // alignItems: 'center',
     },
     HeadingStyle: {
         marginTop: 40,
-        fontFamily: 'Avenir Next',
+        fontFamily: '500',
         letterSpacing: 0.2,
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text26,
-        fontWeight: 'bold',
-        // alignSelf:'center'
-    },
-    signStyle: {
-        fontFamily: 'Avenir Next',
-        letterSpacing: 1,
-        color: '#000',
-        fontSize: FONTSIZE.Text22,
-        fontWeight: 'bold'
     },
     textInput: {
-        borderBottomColor: '#1FAEF7',
+        borderBottomColor: '#EEEEEE',
         borderBottomWidth: 2,
         fontSize: FONTSIZE.Text22,
-        fontWeight: 'bold',
-        marginTop: 10
+        fontFamily: '500',
+        marginTop: 10,
+        color: '#000000'
     },
-    TitleStyle: {
-        fontSize: 14,
-        paddingVertical: 0
-    },
-    Card: {
-        backgroundColor: '#fff',
-        borderRadius: 20,
-        elevation: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '30%',
-        height: 100
-    },
-    CardContainer: {
-        marginVertical: 30,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        // backgroundColor: 'red'
-    }
-
 })

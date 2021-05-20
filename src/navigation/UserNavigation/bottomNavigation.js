@@ -1,7 +1,7 @@
 import React from 'react';
-import {Button} from 'react-native';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-import {Avatar} from 'react-native-elements';
+import { Button } from 'react-native';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { Avatar } from 'react-native-elements';
 import {
   Add_Outline,
   Bell_Outline,
@@ -14,30 +14,38 @@ import {
   Search_Fill,
 
 } from '@svg';
-import {Placeholderr, Placeholder} from '@assets';
+import { Placeholderr, Placeholder } from '@assets';
 
 import Temp from '../../Screens/BounceUsers/Temp';
 import UserHomeScreen from '../../Screens/BounceUsers/UserFriendsProfile';
 import DesignCanva from '../../Screens/Views/Canva/DesignCanva'
 
 import CreateInvitation from '../../Screens/BounceVendors/PlanParty/CreateInvitation';
+import MobxStore from '../../mobx';
+
 const UserHomeBottomTab = createMaterialBottomTabNavigator();
 
 class UserHomeBottomNavigation {
   static routeName = '/UserHomeBottomNavigation';
   static homeBottomNav = props => {
+    const {
+      authStore
+    } = MobxStore;
+    const userinfo = authStore.userProfile;
+    const { profileImage = {} } = userinfo?.user;
+    
     return (
       <UserHomeBottomTab.Navigator
         initialRouteName={UserHomeScreen.routeName}
         labeled={false}
-        barStyle={{backgroundColor: '#FBFBFB', elevation: 5}}
+        barStyle={{ backgroundColor: '#FBFBFB', elevation: 5 }}
         unmountOnBlur={true}
         keyboardHidesNavigationBar
-        screenOptions={{unmountOnBlur: true}}>
+        screenOptions={{ unmountOnBlur: true }}>
         <UserHomeBottomTab.Screen
           options={{
             unmountOnBlur: true,
-            tabBarIcon: ({tintColor, focused}) => {
+            tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
                 <Home_Outline height={30} width={30} />
               ) : (
@@ -52,7 +60,7 @@ class UserHomeBottomNavigation {
         <UserHomeBottomTab.Screen
           options={{
             title: null,
-            tabBarIcon: ({tintColor, focused}) => {
+            tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
                 <Search_Outline height={30} width={30} />
               ) : (
@@ -87,7 +95,7 @@ class UserHomeBottomNavigation {
           options={{
             unmountOnBlur: true,
             // tabBarColor: 'red',
-            tabBarIcon: ({tintColor, focused}) => {
+            tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
                 <Bell_Outline height={30} width={30} />
               ) : (
@@ -107,20 +115,22 @@ class UserHomeBottomNavigation {
           options={{
             unmountOnBlur: true,
             // tabBarColor: 'red',
-            tabBarIcon: ({tintColor, focused}) => {
+            tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
                 <Avatar
                   rounded
-                  source={Placeholder}
-                  style={{resizeMode: 'contain', height: 26, width: 26}}
+                  source={{ uri: `${profileImage?.filePath}` }}
+                  // source={Placeholder}
+                  style={{ resizeMode: 'contain', height: 26, width: 26 }}
                 />
               ) : (
-                <Avatar
-                  rounded
-                  source={Placeholderr}
-                  style={{resizeMode: 'contain', height: 26, width: 26}}
-                />
-              );
+                  <Avatar
+                    rounded
+                    // source={Placeholderr}
+                    source={{ uri: `${profileImage?.filePath}` }}
+                    style={{ resizeMode: 'contain', height: 26, width: 26 }}
+                  />
+                );
             },
           }}
           name={'Temp'}

@@ -26,6 +26,7 @@ function Header(props) {
         share = false,
         headerBackColor = null,
         rightTitle = false,
+        onPressRightTitle = () => { },
         rightTitleStyle = null,
         rightTitleContainer = null,
         leftTitleContainer = null,
@@ -127,7 +128,7 @@ function Header(props) {
                 </View>
                 {
                     rightTitle ?
-                        <TouchableOpacity onPress={onPress}>
+                        <TouchableOpacity onPress={onPressRightTitle}>
                             <View style={rightTitleContainer}>
                                 <Text style={[styles.rightTitleStyle, rightTitleStyle]}>
                                     {rightTitle}

@@ -13,7 +13,6 @@ import VendorMarketProfile from '../../Screens/Signup/Vendor/VendorMarketProfile
 import NameScreen from '../../Screens/BounceVendors/Onboarding/NameScreen';
 import UserNameScreen from '../../Screens/BounceVendors/Onboarding/UsernameScreen';
 import BirthDayScreen from '../../Screens/BounceVendors/Onboarding/BirthDayScreen';
-import LiveScreen from '../../Screens/BounceVendors/Onboarding/LiveScreen';
 import ProfilePic from '../../Screens/BounceVendors/Onboarding/ProfilePic';
 //User Signup screens
 
@@ -32,7 +31,7 @@ class AuthStackNavigator {
           name={LoginScreen.routeName}
           component={LoginScreen}
         />
-    
+
 
         {/* Vendor Signup Screens */}
         <AuthStack.Screen
@@ -61,10 +60,6 @@ class AuthStackNavigator {
         <AuthStack.Screen
           name={BirthDayScreen.routeName}
           component={BirthDayScreen}
-        />
-        <AuthStack.Screen
-          name={LiveScreen.routeName}
-          component={LiveScreen}
         />
         <AuthStack.Screen
           name={ProfilePic.routeName}

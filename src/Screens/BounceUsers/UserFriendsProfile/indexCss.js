@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
    socialButton: {
       width: '90%',
       height: 50,
-      elevation: 2,
+      elevation: 1,
       borderRadius: 13,
       paddingHorizontal: 10,
       backgroundColor: '#fff',
@@ -122,8 +122,8 @@ const styles = StyleSheet.create({
       color: '#000',
       fontSize: 18,
       // opacity: 0.5,
-      marginBottom: 5,
-      fontFamily: 'AvenirNext',
+      // marginBottom: 5,
+      fontFamily: '500',
    },
    BasePackageTitle: {
       color: '#000',

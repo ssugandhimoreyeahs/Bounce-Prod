@@ -44,8 +44,8 @@ import {
 } from "@svg";
 import { BlackPerson } from "../../../assets/Svg";
 import { PartyService } from '../../../app/services';
-
-
+import CreateInvitation from '../../../Screens/BounceVendors/PlanParty/CreateInvitation'
+import { observer } from 'mobx-react';
 
 const ACCOUNTS = [
   {
@@ -76,7 +76,7 @@ const DATA = [{
 
 const STATIC_DATA = ["Create an event page", "Invite friends", "Hire vendors", "Promote your event"]
 
-export default function UserFriendsProfile(props) {
+function UserFriendsProfile(props) {
   // const { loader, userinfo, fetchProfile } = useContext(UserContext);
   const {
     authStore
@@ -279,8 +279,7 @@ export default function UserFriendsProfile(props) {
                 placeholderTextColor='#999999'
               />
 
-              <Tabview
-                DATA={true ? STATIC_DATA : DATA}
+              <Tabview 
                 {...props}
               />
               <LinearGradient
@@ -290,9 +289,11 @@ export default function UserFriendsProfile(props) {
                 style={[
                   styles.linearGradient
                 ]}>
-                <TouchableOpacity style={{ flexDirection: "row" }}>
+                <TouchableOpacity style={{ flexDirection: "row" }} 
+                onPress={()=>props.navigation.navigate(CreateInvitation.routeName)}>
                   <WhitePerson height={27} width={19} />
-                  <Text style={[styles.textStyle, { marginLeft: 20, fontFamily: '500', color: '#FFFFFF' }]}>{'Add Friends'}</Text>
+                  <Text style={[styles.textStyle, { marginLeft: 20, fontFamily: '500', color: '#FFFFFF' }]}>
+                    {'Create Invitation'}</Text>
                 </TouchableOpacity>
               </LinearGradient>
 
@@ -312,7 +313,7 @@ export default function UserFriendsProfile(props) {
                       style={[styles.headerTitle, { marginLeft: 10, fontWeight: 'bold' }]}
                     />
                   </View>
-                  <Text style={[styles.headerTitle, { color: '#1FAEF7', fontWeight: 'bold' }]}>{"Connect"}</Text>
+                  <Text style={[styles.headerTitle, { color: '#1FAEF7',  }]}>{"Connect"}</Text>
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
@@ -324,7 +325,7 @@ export default function UserFriendsProfile(props) {
                     <Spotify height={30} width={30} />
                     <Text style={[styles.headerTitle, { fontWeight: 'bold', marginLeft: 10 }]}>{"Spotify"}</Text>
                   </View>
-                  <Text style={[styles.headerTitle, { color: '#1FAEF7', fontWeight: 'bold' }]}>{"Connect"}</Text>
+                  <Text style={[styles.headerTitle, { color: '#1FAEF7', }]}>{"Connect"}</Text>
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
@@ -437,3 +438,5 @@ export default function UserFriendsProfile(props) {
 }
 UserFriendsProfile.routeName = "/UserFriendsProfile";
 
+
+export default observer(UserFriendsProfile)

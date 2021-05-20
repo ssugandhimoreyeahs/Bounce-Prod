@@ -78,9 +78,8 @@ function LoginScreen(props) {
       {!loader && (
         <KeyboardAwareScrollView style={{ flex: 1, backgroundColor: '#FBFBFB' }}>
           <View style={styles.container}>
-            <View style={{ alignItems: 'center', marginBottom: getHp(20) }}>
-              <BounceSplash style={{ marginTop: 50, marginBottom: 20 }} />
-              {/* <Bounce height={getHp(32)} width={getWp(135)} /> */}
+            <View style={{ alignItems: 'center', marginVertical: 50, }}>
+              <BounceSplash preserveAspectRatio='none' height={170} width={238} />
             </View>
 
             <Text style={styles.signStyle}>{'Sign In'}</Text>
@@ -207,6 +206,8 @@ const styles = StyleSheet.create({
     // backgroundColor: 'transparent',
   },
   linearGradient: {
+    justifyContent: 'center',
+    height: 50,
     elevation: 2,
     backgroundColor: '#fff',
     marginVertical: 10,

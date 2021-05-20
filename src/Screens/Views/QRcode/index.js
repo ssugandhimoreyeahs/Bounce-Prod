@@ -6,10 +6,18 @@ import { FONTSIZE, getHp, getWp } from '@utils';
 import { ApiClient } from '../../../app/services';
 import { Girl } from '../../../assets';
 import { UploadBlue } from '@svg'
+import mobxStore from '../../../mobx'
+
 
 export default function QRcode({ navigation }) {
-  const { loader, userinfo, fetchProfile } = useContext(UserContext);
+  const { authStore } = mobxStore
+  const userinfo = authStore.userProfile;
+  // const { loader, userinfo, fetchProfile } = useContext(UserContext);
   const [userQR, setUserQR] = useState(null);
+  const { profileImage = {},
+  } = userinfo?.user;
+  console.log("userinfo", userinfo)
+
   useEffect(() => {
     (async () => {
       try {
@@ -51,11 +59,11 @@ export default function QRcode({ navigation }) {
 
         {userQR && (
           <View style={styles.QRcontainer}>
-            <QRCodes size={200} qrValue={userQR} qrUserPic={Girl} />
+            <QRCodes size={200} qrValue={userQR} qrUserPic={profileImage?.filePath} />
           </View>
         )}
 
-        <View style={{ marginBottom:10, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ marginBottom: 10, justifyContent: 'center', alignItems: 'center' }}>
           <TouchableOpacity style={{
             alignItems: 'center'
           }}>

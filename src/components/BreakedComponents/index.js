@@ -34,7 +34,8 @@ export const PrivacyBlock = () => {
     )
 }
 
-export const Tabview = (props) => {
+
+export const Tabview = observer((props) => {
 
     return (
         <View style={{ marginVertical: 10, borderBottomWidth: 1, borderColor: '#EEEEEE' }}>
@@ -68,7 +69,7 @@ export const Tabview = (props) => {
             </Tabs>
         </View>
     );
-};
+});
 
 
 

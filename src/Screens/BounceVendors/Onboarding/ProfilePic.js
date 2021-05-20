@@ -43,7 +43,6 @@ export default function ProfilePic(props) {
                     "username": username,
                     "password": password,
                     "fullName": name,
-                    "city": live,
                     "birthday": birthday,
                 }
                 let milliseconds = new Date().getTime();
@@ -57,7 +56,6 @@ export default function ProfilePic(props) {
                 formData.append('fullName', name);
                 formData.append('username', username);
                 formData.append('password', password);
-                formData.append('city', live);
                 formData.append('birthday', birthday);
                 formData.append('profileImageFile', imgObj);
                 formData.append('vendorType', 2);
@@ -166,8 +164,7 @@ export default function ProfilePic(props) {
                         <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
 
                             <CustomButton
-                                linear
-                                bar
+                                userContinue
                                 onPress={handleSubmit}
                             />
                         </View>

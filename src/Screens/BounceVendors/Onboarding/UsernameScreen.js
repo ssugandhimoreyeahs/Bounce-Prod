@@ -28,6 +28,7 @@ export default function UserNameScreen(props) {
         try {
             let body = {
                 vendorType: "2",
+                name,
                 username: username,
                 password: password
             }
@@ -62,7 +63,8 @@ export default function UserNameScreen(props) {
 
             }
         } catch (error) {
-            console.log(error);
+            console.log("Catch error",error);
+            ToastAndroid.show("Username already exist!", ToastAndroid.SHORT);
         }
     }
 

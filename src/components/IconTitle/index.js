@@ -19,14 +19,14 @@ export default function IconTitle(props) {
                     text?.length > 0 || text !== [] ?
                         <View>
                             <View style={styles.belowTextContainer}>
-                                <View style={{ alignItems: 'center', width: '29%' }}>
+                                <View style={{ alignItems: 'center', width: '29%',backgroundColor:'#FBFBFB' }}>
                                     {icon}
                                     <Text style={[styles.belowHeading, textStyle, { fontSize: FONTSIZE.Text14, opacity: 1, fontFamily: 'ANB',marginTop: 4}]}>{iconBelowText}
                                     </Text>
                                 </View>
 
-                                <View style={{ width: '65%', marginTop: 15 }}>
-                                    <Text style={[styles.belowHeading, { fontWeight: 'normal', color: '#000000' }]}>{text}
+                                <View style={{ width: '65%', marginTop: 15,backgroundColor:'#FBFBFB' }}>
+                                    <Text style={[styles.belowHeading, { fontWeight: 'normal',fontFamily: '200', color: '#000000' }]}>{text}
                                     </Text>
                                 </View>
 
@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: 20,
-        paddingVertical: 20
+        paddingVertical: 20,
+        backgroundColor:'#FBFBFB'
     },
 
 })

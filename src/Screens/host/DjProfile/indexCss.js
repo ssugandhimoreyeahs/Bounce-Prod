@@ -9,8 +9,8 @@ const styles = (theme) => {
       partition: {
          marginVertical: 10,
          width: '100%',
-         height: getHp(1),
-         backgroundColor: '#DDD',
+         height:0.8,
+         backgroundColor: '#EBEBEB',
          alignSelf: 'center',
  
      },
@@ -80,6 +80,7 @@ const styles = (theme) => {
       subContainer: {
          paddingHorizontal: 0,
          paddingVertical: 5,
+         backgroundColor:'#FBFBFB'
       },
       textStyle: {
          color: '#000',

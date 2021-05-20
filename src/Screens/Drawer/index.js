@@ -83,10 +83,10 @@ function CustomDrawer({ navigation }) {
         uiStore.toggleTheme();
       }
     },
-    {
-      name: "Subscription",
-      // onPress: () => navigation.navigate("SubscriptionScreen")
-    },
+    // {
+    //   name: "Subscription",
+    //   // onPress: () => navigation.navigate("SubscriptionScreen")
+    // },
     {
       name: "About",
       // onPress: () => navigation.navigate("LoginScreen")

@@ -141,7 +141,7 @@ export default function ImageCarousel(props) {
                 null
                 :
                 <Pagination
-                    containerStyle={{ marginTop: -20 }}
+                    containerStyle={{ marginTop: -20,backgroundColor:'#FBFBFB' }}
                     dotsLength={imageArray.length}
                     activeDotIndex={state}
 
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
         padding: 10,
         position: 'absolute',
         zIndex: 100,
-        bottom: 20,
+        bottom: 40,
         right: 20
     },
     friendsImage: {

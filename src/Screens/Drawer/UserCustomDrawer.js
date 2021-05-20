@@ -49,10 +49,10 @@ export default function UserCustomDrawer(props) {
       name: 'Dark / Light Mode',
       // onPress: () => toggleTheme()
     },
-    {
-      name: 'Subscription',
-      // onPress: () => navigation.navigate("SubscriptionScreen")
-    },
+    // {
+    //   name: 'Subscription',
+    //   // onPress: () => navigation.navigate("SubscriptionScreen")
+    // },
     {
       name: 'About',
       onPress: () => props.navigation.navigate(AboutUs.routeName)

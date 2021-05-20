@@ -190,7 +190,7 @@ function DjProfile(props) {
       },
     );
     // console.log("RES_IMAGE", RES_IMAGE);
-    await authStoreAsync.fetchVendor();
+    await authStoreAsync.reloadVendor();
     let strrr = await RES_IMAGE.data;
     await strrr.map(item => {
       imgTemp.push(item.data.filePath);
@@ -242,7 +242,7 @@ function DjProfile(props) {
                   'SERVER_PDF',
                   SERVER_PDF.data.userData.menu.filePath,
                 );
-                await authStoreAsync.fetchVendor();
+                await authStoreAsync.reloadVendor();
                 setPdf(SERVER_PDF.data.userData.menu.filePath);
               });
           });

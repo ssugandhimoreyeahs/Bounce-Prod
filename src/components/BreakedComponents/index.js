@@ -48,7 +48,7 @@ export const Tabview = observer((props) => {
                     <ScrollView nestedScrollEnabled={true} style={{
                         height:300
                     }}>
-                    <Tab1 hosting={MboxStore.partyStore.party} {...props}/>
+                    <Tab1 partyStore={MboxStore.partyStore} {...props}/>
                     </ScrollView>
                 </Tab >
 

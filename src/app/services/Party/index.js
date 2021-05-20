@@ -21,6 +21,7 @@ class PartyService {
 
   getParty = async () => {
     try {
+      MobxStore.partyStore.onLoadParty();
       const parties = await ApiClient.authInstance.get(
         ApiClient.endPoints.party,
         ApiClient.applicationJSONHeader(false),
@@ -28,6 +29,7 @@ class PartyService {
       MobxStore.partyStore.setParty(parties.data);
       return Promise.resolve(parties.data);
     } catch (error) {
+      MobxStore.partyStore.onLoadParty(false);
       return Promise.reject(error);
     }
   };

@@ -163,7 +163,7 @@ export default function ProfilePic(props) {
                         </View>
 
                         <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
-                        <ProgressCircle currentProgress={5} containerStyle={{marginBottom: 20}}/>
+                        <ProgressCircle currentProgress={4} containerStyle={{marginBottom: 20}}/>
                             <TouchableOpacity
                                 onPress={() => ToastAndroid.show("This is under Development!", 1000)}>
                                 <Text style={styles.skip}>

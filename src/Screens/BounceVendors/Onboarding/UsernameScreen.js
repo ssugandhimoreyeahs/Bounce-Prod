@@ -99,14 +99,15 @@ export default function UserNameScreen(props) {
         <Root>
             <KeyboardAwareScrollView style={{ flexGrow: 1 }} contentContainerStyle={{ flex: 1 }}>
                 <View style={styles.container}>
-                    <Text style={styles.HeadingStyle}>{"Create your username."}</Text>
+                    <Text style={styles.HeadingStyle}>{"Pick a username! 😜"}</Text>
 
-                    <View style={{ marginTop: 40 }}>
+                    <View style={{ marginTop:100 }}>
                         <TextInput
                             placeholder="@Username"
                             style={styles.textInput}
                             onChangeText={(value) => setUsername(value)}
                         />
+                        <Text style={styles.infoText}>{"You won’t be able to change it!"}</Text>
                     </View>
 
                     <View style={{ marginVertical: 10 }}>
@@ -121,8 +122,7 @@ export default function UserNameScreen(props) {
                     <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
                     <ProgressCircle currentProgress={2} containerStyle={{marginBottom: 20}}/>
                         <CustomButton
-                            linear
-                            bar
+                            userContinue
                             onPress={handleSubmit}
                         />
                     </View>
@@ -136,57 +136,31 @@ export default function UserNameScreen(props) {
 UserNameScreen.routeName = "/UserNameScreen";
 
 const styles = StyleSheet.create({
+    infoText: {
+        fontSize: FONTSIZE.Text16,
+        color: '#999999',
+        fontFamily: '500',
+        letterSpacing: 0.1,
+        marginTop: 10
+    },
     container: {
         flex: 1,
         padding: 15,
         flexDirection: 'column',
-        // justifyContent:'space-between',
-        // backgroundColor:'red'
-        // justifyContent: 'center',
-        // alignItems: 'center',
     },
     HeadingStyle: {
         marginTop: 40,
-        fontFamily: 'Avenir Next',
-        letterSpacing: 1.6,
+        fontFamily: '500',
+        letterSpacing: 0.2,
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text26,
-        fontWeight: 'bold',
-        // alignSelf:'center'
-    },
-    signStyle: {
-        fontFamily: 'Avenir Next',
-        letterSpacing: 1,
-        color: '#000',
-        fontSize: FONTSIZE.Text22,
-        fontWeight: 'bold'
     },
     textInput: {
-        borderBottomColor: '#1FAEF7',
+        borderBottomColor: '#EEEEEE',
         borderBottomWidth: 2,
         fontSize: FONTSIZE.Text22,
-        fontWeight: 'bold',
+        fontFamily: '500',
         marginTop: 10,
-        color: '#000'
+        color: '#000000'
     },
-    TitleStyle: {
-        fontSize: 14,
-        paddingVertical: 0
-    },
-    Card: {
-        backgroundColor: '#fff',
-        borderRadius: 20,
-        elevation: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '30%',
-        height: 100
-    },
-    CardContainer: {
-        marginVertical: 30,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        // backgroundColor: 'red'
-    }
-
 })

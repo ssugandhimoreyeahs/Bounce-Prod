@@ -16,7 +16,6 @@ import {
   CustomText,
 } from "@components";
 import { Message, Favourite, Girl, DJ, DJ1, DJ2 } from "@assets";
-import { Insta, Twitter, Tiktok, Snapchat } from "@svg";
 import { styles } from "./indexCss";
 import { BlackMenubar, Scanner } from "@svg";
 import { Avatar } from "react-native-elements";
@@ -31,9 +30,22 @@ import { UserContext } from "../../../context/profiledataProvider";
 import MobxStore from '../../../mobx';
 import Drawer from '../../Drawer/UserCustomDrawer';
 import QRcode from "../../Views/QRcode";
+import LinearGradient from 'react-native-linear-gradient';
+import {
+  WhitePerson
+  , UploadBlue,
+  InstaNew,
+  GreyCross,
+  Spotify,
+  Insta,
+  Twitter,
+  Tiktok,
+  Snapchat
+} from "@svg";
+import { BlackPerson } from "../../../assets/Svg";
 import { PartyService } from '../../../app/services';
-
-
+import CreateInvitation from '../../../Screens/BounceVendors/PlanParty/CreateInvitation'
+import { observer } from 'mobx-react';
 
 const ACCOUNTS = [
   {
@@ -62,7 +74,9 @@ const DATA = [{
 }
 ]
 
-export default function UserFriendsProfile(props) {
+const STATIC_DATA = ["Create an event page", "Invite friends", "Hire vendors", "Promote your event"]
+
+function UserFriendsProfile(props) {
   // const { loader, userinfo, fetchProfile } = useContext(UserContext);
   const {
     authStore
@@ -76,6 +90,16 @@ export default function UserFriendsProfile(props) {
   const imageArray = [DJ, DJ1, DJ2];
   const [state, setState] = useState(0);
   console.log("PROPS", props);
+
+  //Social media states
+  const [snapchat, setSnapchat] = useState(null)
+  const [instagram, setInstagram] = useState(null)
+  const [picture, setPicture] = useState(null)
+  const [footer, openFooter] = useState(false)
+  const [twitter, setTwitter] = useState('')
+  const [tiktok, setTiktok] = useState('')
+  //Social media states end
+
   // const { body = {} } = props.route.params;
   // const { user = {} } = useSelector(
   //   (state) => state.mainExpenseByCategory.userProfileData
@@ -153,11 +177,9 @@ export default function UserFriendsProfile(props) {
         {!loader && (
           <>
             <Header
-              ACCOUNTS={ACCOUNTS}
               leftDropdown={
                 username !== null ? `@${username !== null ? username : ""}` : ""
               }
-              DropdownAccounts={DATA}
               scanner={<Scanner height={25} width={25} />}
               share={<BlackMenubar height={25} width={25} />}
               onPressScanner={() => props.navigation.navigate(QRcode.routeName)}
@@ -203,15 +225,15 @@ export default function UserFriendsProfile(props) {
                 </View>
               </View>
 
-              <View style={[styles.flex, { width: "70%", marginVertical: 10 }]}>
+              <View style={[styles.flex, { width: "70%", marginVertical: 10, justifyContent: 'space-evenly' }]}>
                 <TouchableOpacity
-                  style={styles.socialButton}
+                  style={[styles.editButtonStyle]}
                   onPress={() => props.navigation.navigate("HostProfile")}
                 >
                   <Text style={styles.editButton}>{"Edit Profile"}</Text>
                 </TouchableOpacity>
 
-                {/* <TouchableOpacity
+                <TouchableOpacity
                   onPress={() =>
                     Linking.openURL(
                       `https://www.instagram.com/${instagramUsername}`
@@ -245,7 +267,7 @@ export default function UserFriendsProfile(props) {
                   }
                 >
                   <Tiktok height={30} width={30} />
-                </TouchableOpacity> */}
+                </TouchableOpacity>
               </View>
 
               <TextInput
@@ -257,44 +279,150 @@ export default function UserFriendsProfile(props) {
                 placeholderTextColor='#999999'
               />
 
-              <Tabview
-                DATA={DATA}
+              <Tabview 
                 {...props}
               />
+              <LinearGradient
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                colors={['#69CCFF', '#8CDDFF']}
+                style={[
+                  styles.linearGradient
+                ]}>
+                <TouchableOpacity style={{ flexDirection: "row" }} 
+                onPress={()=>props.navigation.navigate(CreateInvitation.routeName)}>
+                  <WhitePerson height={27} width={19} />
+                  <Text style={[styles.textStyle, { marginLeft: 20, fontFamily: '500', color: '#FFFFFF' }]}>
+                    {'Create Invitation'}</Text>
+                </TouchableOpacity>
+              </LinearGradient>
 
-              <View style={{ marginVertical: 10 }}>
-                <Text style={styles.aboutText}>{about}</Text>
+              <View style={{ backgroundColor: '#EEEEEE', height: 1, marginVertical: 10 }} />
+
+              {/* Social Media Section Start */}
+              {/* 1st */}
+              <View style={styles.flex}>
+                <TouchableOpacity style={styles.socialButton}>
+                  <View style={styles.flex}>
+                    <Insta height={30} width={30} />
+                    <TextInput
+                      placeholder={`Instagram`}
+                      placeholderTextColor={'#000'}
+                      // value={instagram == null ? user.instagramUsername : instagram}
+                      onChangeText={(value) => setInstagram(value)}
+                      style={[styles.headerTitle, { marginLeft: 10, fontWeight: 'bold' }]}
+                    />
+                  </View>
+                  <Text style={[styles.headerTitle, { color: '#1FAEF7',  }]}>{"Connect"}</Text>
+                </TouchableOpacity>
+                <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
 
-              <Text
-                style={[
-                  styles.InstaText,
-                  {
-                    marginTop: 10,
-                    marginBottom: 5,
-                  },
-                ]}
-              >
-                {"Instagram"}
-              </Text>
-              {handleCarousel("Instagram")}
+              {/* 2nd */}
+              <View style={styles.flex}>
+                <TouchableOpacity style={styles.socialButton}>
+                  <View style={styles.flex}>
+                    <Spotify height={30} width={30} />
+                    <Text style={[styles.headerTitle, { fontWeight: 'bold', marginLeft: 10 }]}>{"Spotify"}</Text>
+                  </View>
+                  <Text style={[styles.headerTitle, { color: '#1FAEF7', }]}>{"Connect"}</Text>
+                </TouchableOpacity>
+                <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
+              </View>
 
-              <Text style={styles.InstaText}>{"Friends"}</Text>
-              <Text
-                style={[
-                  styles.InstaText,
-                  { color: "#696969", fontSize: FONTSIZE.Text16 },
-                ]}
-              >
-                {"240 (8 mutual)"}
-              </Text>
-              {handleCarousel("Friends")}
 
-              <TouchableOpacity style={styles.allFrnds}>
-                <Text style={[styles.aboutText, { fontWeight: "bold" }]}>
-                  {"All Friends"}
+              {/* 3rd */}
+              <View style={[styles.flex, { marginTop: 15 }]}>
+                <TouchableOpacity style={[styles.socialButton, {
+                  borderWidth: 1,
+                  borderColor: '#DDDDDD',
+                  elevation: 0
+                }]}>
+                  <View style={styles.flex}>
+                    <Twitter height={30} width={30} />
+                    <TextInput
+                      placeholder={`@twitter`}
+                      placeholderTextColor={'#999999'}
+                      onChangeText={(value) => setTwitter(value)}
+                      style={[styles.headerTitle, styles.Tiktok]}
+                      value={twitter}
+                    />
+                  </View>
+                </TouchableOpacity>
+                <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
+              </View>
+              {/* 4th */}
+              <View style={styles.flex}>
+                <TouchableOpacity style={[styles.socialButton, {
+                  borderWidth: 1,
+                  borderColor: '#DDDDDD',
+                  elevation: 0
+                }]}>
+                  <View style={styles.flex}>
+                    <Tiktok height={30} width={30} />
+                    <TextInput
+                      placeholder={`@tiktok`}
+                      placeholderTextColor={'#999999'}
+                      onChangeText={(value) => setTiktok(value)}
+                      style={[styles.headerTitle, styles.Tiktok]}
+                      value={tiktok}
+                    />
+                  </View>
+                </TouchableOpacity>
+                <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
+              </View>
+              {/* 5th */}
+              <View style={styles.flex}>
+                <TouchableOpacity style={[styles.socialButton, {
+                  borderWidth: 1,
+                  borderColor: '#DDDDDD',
+                  elevation: 0
+                }]}>
+                  <View style={styles.flex}>
+                    <Snapchat height={30} width={30} />
+                    <TextInput
+                      placeholder={`@snapchat`}
+                      placeholderTextColor={'#999999'}
+
+                      onChangeText={(value) => setSnapchat(value)}
+                      style={[styles.headerTitle, styles.Tiktok]}
+                    // value={snapchat == null ? user.snapchatUsername : snapchat}
+                    />
+                  </View>
+                </TouchableOpacity>
+                <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
+              </View>
+              {/* Social Media Section */}
+
+              <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} />
+              {/* First Gallery Block of Friends */}
+              <View style={{ marginVertical: 5, paddingVertical: 10 }}>
+                <View style={[styles.flex]}>
+                  <BlackPerson height={20} width={14} />
+                  <Text style={[styles.InstaText]}> {"240 friends"}</Text>
+                </View>
+                {handleCarousel("Friends")}
+                <TouchableOpacity style={styles.allFrnds}>
+                  <Text style={[styles.aboutText, { fontWeight: "bold" }]}>
+                    {"All Friends"}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              {/*END*** First Gallery Block of Friends */}
+              <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} />
+
+              {/*Start*** Second Gallery Block of Friends */}
+              <View style={[styles.flex, {
+                marginVertical: 10,
+              }]}>
+                <InstaNew height={20} width={14} />
+                <Text style={styles.InstaText} >
+                  {"Instagram"}
                 </Text>
-              </TouchableOpacity>
+              </View>
+              {handleCarousel("Instagram")}
+              {/*END*** Second Gallery Block of Friends */}
+
 
               <View>
                 <Text style={styles.InstaText}>{"Favorite Music"}</Text>
@@ -310,3 +438,5 @@ export default function UserFriendsProfile(props) {
 }
 UserFriendsProfile.routeName = "/UserFriendsProfile";
 
+
+export default observer(UserFriendsProfile)

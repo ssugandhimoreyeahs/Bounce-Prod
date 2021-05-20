@@ -17,6 +17,7 @@ const { height, width } = Dimensions.get('screen')
 
 function Header(props) {
     const {
+        headerStyleProp,
         ACCOUNTS = {},
         dropdown = false,
         headerTitle,
@@ -25,6 +26,7 @@ function Header(props) {
         share = false,
         headerBackColor = null,
         rightTitle = false,
+        onPressRightTitle = () => { },
         rightTitleStyle = null,
         rightTitleContainer = null,
         leftTitleContainer = null,
@@ -76,7 +78,7 @@ function Header(props) {
                     leftDropdown ?
                         <TouchableOpacity onPress={() => setShow(!showDropdown)} >
                             <View style={styles.headerDropdown}>
-                                <Icon name="angle-right" size={getHp(30)} color="#000" style={{marginHorizontal:5}} />
+                                <Icon name="angle-right" size={getHp(30)} color="#000" style={{ marginHorizontal: 5 }} />
                                 <Text style={[styles.leftTitleStyle, rightTitleStyle, { marginLeft: getWp(5) }]}>
                                     {`${leftDropdown}`}
                                 </Text>
@@ -99,7 +101,7 @@ function Header(props) {
                         </TouchableOpacity>
                         : null
                 }
-                <Text style={[styles.headerTitleStyle, headerTitle == 'Upload Media' ? { fontFamily: 'AvenirNext', fontWeight: 'normal' } : null]}>
+                <Text style={[styles.headerTitleStyle, headerStyleProp, headerTitle == 'Upload Media' ? { fontFamily: '500', fontFamily: '500' } : null]}>
                     {headerTitle}
                 </Text>
                 <View >
@@ -126,7 +128,7 @@ function Header(props) {
                 </View>
                 {
                     rightTitle ?
-                        <TouchableOpacity onPress={onPress}>
+                        <TouchableOpacity onPress={onPressRightTitle}>
                             <View style={rightTitleContainer}>
                                 <Text style={[styles.rightTitleStyle, rightTitleStyle]}>
                                     {rightTitle}
@@ -179,7 +181,7 @@ function Header(props) {
                     )
                 }
                 <TouchableOpacity style={{ elevation: 5, backgroundColor: '#F2F5F6', borderRadius: 18, paddingVertical: 10, alignItems: 'center', marginVertical: 8 }}>
-                    <Text style={{color:'#000000',fontSize:FONTSIZE.Text16,fontFamily:'ANB'}}>
+                    <Text style={{ color: '#000000', fontSize: FONTSIZE.Text16, fontFamily: 'ANB' }}>
                         {"New Account"}
                     </Text>
                 </TouchableOpacity>

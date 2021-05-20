@@ -19,6 +19,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 import { UserContext } from "../../../context/profiledataProvider";
 import { ApiClient } from '../../../app/services';
+import { PrivacyBlock } from '../../../components';
 
 export default function HostProfile(props) {
     const {
@@ -210,7 +211,7 @@ export default function HostProfile(props) {
                         value={bio == null ? user.about : bio}
                         onChange={(value) => setBio(value)}
                     />
-                    <Text style={[styles.headerTitle, { fontSize: FONTSIZE.Text22, marginTop: getHp(20), marginBottom: getHp(10), color: '#000', fontWeight: 'bold' }]}>{"Social Links"}</Text>
+                    <Text style={[styles.headerTitle, { fontSize: FONTSIZE.Text22, marginTop: getHp(20), marginBottom: getHp(10), color: '#000', fontWeight: 'bold' }]}>{"App Sync"}</Text>
 
                     <TouchableOpacity style={styles.socialButton}>
                         <View style={styles.flex}>
@@ -275,6 +276,9 @@ export default function HostProfile(props) {
                             />
                         </View>
                     </TouchableOpacity>
+
+                    {/* <PrivacyBlock /> */}
+                    {/* This is incomplete bcoz of Host Profile.js was not rendering */}
 
                 </View>
 

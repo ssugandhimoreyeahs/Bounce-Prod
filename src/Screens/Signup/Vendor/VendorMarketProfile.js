@@ -18,6 +18,7 @@ import { ApiClient } from '../../../app/services';
 
 
 export default function VendorMarketProfile(props) {
+    console.log("REACHED AT VENDOR MARKETPLACE SCREEN 3 -->")
     const {
         authStore
     } = MobxStore;
@@ -137,28 +138,30 @@ export default function VendorMarketProfile(props) {
 
     const fetchData = async () => {
         setLoader(true)
-
+        console.log("1");
         let LANGUAGE_SERVER = await ApiClient.instance.get(ApiClient.endPoints.getLanguage);
+        console.log("LANGUAGE CHECKING->", LANGUAGE_SERVER)
         setOriginalLangArray(LANGUAGE_SERVER)
         let tempLanguage = []
-        await LANGUAGE_SERVER.map((item) => {
+        await LANGUAGE_SERVER.data.map((item) => {
             tempLanguage.push({ label: item.name, value: item.id, code: item.code })
         })
+        console.log("LANGUAGE CHECKING 222->", tempLanguage)
         dispatch(fetchCurrentLoginData(["LANGUAGE_ARRAY", tempLanguage]))
-
+        console.log("2");
 
         let GENRE_SERVER = await ApiClient.instance.get(ApiClient.endPoints.getGenre);
         setOriginalGenreArray(GENRE_SERVER)
         let tempGenre = []
-        await GENRE_SERVER.map((item) => {
+        await GENRE_SERVER.data.map((item) => {
             tempGenre.push({ label: item.name, value: item.id })
         })
         dispatch(fetchCurrentLoginData(["GENRE_ARRAY", tempGenre]))
-
+        console.log("3");
         let GUARD_CERTIFICATION_SERVER = await ApiClient.instance.get(ApiClient.endPoints.getCertification);
         setOriginalGuardArray(GUARD_CERTIFICATION_SERVER)
         let tempCERTIFICATION = []
-        await GUARD_CERTIFICATION_SERVER.map((item) => {
+        await GUARD_CERTIFICATION_SERVER.data.map((item) => {
             tempCERTIFICATION.push({ label: item.name, value: item.id })
         })
         dispatch(fetchCurrentLoginData(["CERTIFICATION_ARRAY", tempCERTIFICATION]))

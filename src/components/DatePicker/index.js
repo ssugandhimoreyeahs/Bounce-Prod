@@ -21,13 +21,11 @@ export default DatePicker = ({ birthday, setBirthday, tillToday }) => {
 
     return (
         <View>
-            {/* <Button title="Show Date Picker" onPress={showDatePicker} /> */}
             <TouchableOpacity onPress={showDatePicker}>
                 <TextInput
-                    placeholder="Birthday"
+                    placeholder={"Birthday"}
                     style={styles.textInput}
                     onChangeText={(value) => setBirthday(value)}
-                    // onFocus={() => showDatePicker()}
                     editable={false}
                     value={`${birthday}`}
                 />
@@ -46,11 +44,10 @@ export default DatePicker = ({ birthday, setBirthday, tillToday }) => {
 };
 const styles = StyleSheet.create({
     textInput: {
-        borderBottomColor: '#1FAEF7',
+        borderBottomColor: '#EEEEEE',
         borderBottomWidth: 2,
         fontSize: FONTSIZE.Text22,
-        fontWeight: 'bold',
-        marginTop: 10,
+        fontFamily: '500',
         color: '#000'
     },
 })

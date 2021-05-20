@@ -26,10 +26,19 @@ import { FONTSIZE, getHp, getWp } from '@utils'
 import MboxStore from '../../mobx';
 import { observer } from 'mobx-react'; 
 
+export const PrivacyBlock = () => {
+    return (<View>
+        <Text style={styles.headerTitle}>{"Privacy Settings"}</Text>
+        <Text style={styles.headerTitle}>{"Choose what you want to share with friends. Only public events can be displayed on your profile."}</Text>
+    </View>
+    )
+}
+
+
 export const Tabview = observer((props) => {
 
     return (
-        <View style={{ marginVertical: 5 }}>
+        <View style={{ marginVertical: 10, borderBottomWidth: 1, borderColor: '#EEEEEE' }}>
             <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}

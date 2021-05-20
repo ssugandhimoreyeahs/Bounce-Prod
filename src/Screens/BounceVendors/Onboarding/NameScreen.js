@@ -40,21 +40,21 @@ export default function NameScreen(props) {
         <Root>
             <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
                 <View style={styles.container}>
-                    <Text style={styles.HeadingStyle}>{"What’s your name?"}</Text>
-                    <View style={{ marginVertical: 40 }}>
+                    <Text style={styles.HeadingStyle}>
+                        {"What’s your name? 👋"}
+                    </Text>
+                    <View style={{ marginTop:100 }}>
                         <TextInput
                             placeholder={"Name"}
                             style={styles.textInput}
                             onChangeText={(value) => setName(value)}
                             value={name}
-                        // placeholderTextColor={"#000"}
                         />
                     </View>
                     <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
                         <ProgressCircle containerStyle={{marginBottom: 20}}/>
                         <CustomButton
-                            linear
-                            bar
+                            userContinue
                             onPress={handleSubmit}
                         />
                     </View>
@@ -66,6 +66,13 @@ export default function NameScreen(props) {
 NameScreen.routeName = "/NameScreen";
 
 const styles = StyleSheet.create({
+    infoText: {
+        fontSize: FONTSIZE.Text16,
+        color: '#999999',
+        fontFamily: '500',
+        letterSpacing: 0.1,
+        marginTop: 10
+    },
     container: {
         flex: 1,
         padding: 15,
@@ -73,44 +80,18 @@ const styles = StyleSheet.create({
     },
     HeadingStyle: {
         marginTop: 40,
-        fontFamily: 'Avenir Next',
-        letterSpacing: 1.6,
+        fontFamily: '500',
+        letterSpacing: 0.2,
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text26,
-        fontWeight: 'bold',
-    },
-    signStyle: {
-        fontFamily: 'Avenir Next',
-        letterSpacing: 1,
-        color: '#000',
-        fontSize: FONTSIZE.Text22,
-        fontWeight: 'bold'
     },
     textInput: {
-        borderBottomColor: '#1FAEF7',
+        borderBottomColor: '#EEEEEE',
         borderBottomWidth: 2,
         fontSize: FONTSIZE.Text22,
-        fontWeight: 'bold',
+        fontFamily: '500',
         marginTop: 10,
-        color: '#000'
+        color: '#000000'
     },
-    TitleStyle: {
-        fontSize: 14,
-        paddingVertical: 0
-    },
-    Card: {
-        backgroundColor: '#fff',
-        borderRadius: 20,
-        elevation: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '30%',
-        height: 100
-    },
-    CardContainer: {
-        marginVertical: 30,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    }
 
 })

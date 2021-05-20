@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import {
   AppRegistry,
@@ -10,9 +10,9 @@ import {
   Linking,
   View,
 } from 'react-native';
-import {getHp} from '@utils';
+import { getHp } from '@utils';
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import {RNCamera} from 'react-native-camera';
+import { RNCamera } from 'react-native-camera';
 import QRCode from 'react-native-qrcode-svg';
 
 export default class ScanScreen extends Component {
@@ -30,21 +30,21 @@ export default class ScanScreen extends Component {
   };
 
   render() {
-    const {qrValue} = this.props;
-
+    const { qrValue, qrUserPic } = this.props;
+console.log("asdasdasa",qrUserPic)
     return (
-      <View style={{backgroundColor: '#fff', elevation: 10, borderRadius: 42}}>
+      <View style={{ backgroundColor: '#fff', borderRadius: 42 }}>
         <QRCode
-        
+
           value={qrValue}
-          // logo={{uri: `${qrUserPic}`}}
+          logo={{ uri: qrUserPic }}
           logoBorderRadius={100}
           logoSize={50}
-          color="#1FAEF7"
+          color="#04A9FF"
           logoBackgroundColor="transparent"
           size={getHp(270)}
 
-          // logoMargin={100}
+        // logoMargin={100}
         ></QRCode>
       </View>
     );

@@ -78,20 +78,20 @@ function CreateInvitation(props) {
   }, []);
   const handleOnPress = async isDraftMode => {
     try {
-      const res = await partyModel.party.isPartyValid(isDraftMode);
-      if (!res.success) {
-        let key = Object.keys(res.error)[0];
-        let msg = res.error[key] || 'Something went wrong!';
-        Toast(msg);
-        return;
-      }
-      const formData = CreateFormData.objectToFormData(res.partyFields);
-      console.log('FORM_BODY_CREATEd - ', formData);
-      const savePartyResponse = await PartyService.createParty(formData);
+      console.log('DFMD - ', isDraftMode);
+      const res = await partyModel.party.isPartyValid(isDraftMode, partyModel.isEditMode);
+      // if (!res.success) {
+      //   let key = Object.keys(res.error)[0];
+      //   let msg = res.error[key] || 'Something went wrong!';
+      //   Toast(msg);
+      //   return;
+      // } 
+      
+      const savePartyResponse = await PartyService.createOrUpdateParty(res.partyFields, partyModel.editParty?.id);
       Toast(
         isDraftMode ? 'Party saved to Draft' : 'Party Created Successfully',
       );
-      partyModel.reset();
+      //partyModel.reset();
       console.log('CREATE_PARTY_RES - ', savePartyResponse);
     } catch (error) {
       console.log('ERROR - ', error);
@@ -433,7 +433,9 @@ function CreateInvitation(props) {
               rowDoubleButton
               ButtonTitle={'Save As Draft'}
               ButtonTitle2={'Complete'}
-              onPress={() => handleOnPress(false)}
+              onsave
+              onContinuePress={() => handleOnPress(false)}
+              onSaveDraftPress={() => handleOnPress(true)}
             />
 
             {/* <View style={styles.bottomContainer}>

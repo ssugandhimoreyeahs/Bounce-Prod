@@ -29,7 +29,9 @@ export default DatePicker = props => {
     setDatePickerVisibility(false);
   };
 
-  const handleConfirm = date => {
+  const handleConfirm = date => { 
+    console.log('ON_DATE_SELECT - ', date);
+    console.log("CUR_DATE - ' ", new Date());
     handleChange(date);
     hideDatePicker();
   };
@@ -46,8 +48,8 @@ export default DatePicker = props => {
         case 'time':
           format = RegexCollection.TimeFormat;
           break;
-      }
-      return dateFormat(value, format);
+      } 
+      return moment(value).format(format);
     } else {
       return '';
     }
@@ -96,9 +98,9 @@ export default DatePicker = props => {
 };
 const styles = StyleSheet.create({
   textInput: {
-    elevation:2,
-    height:58,
-    backgroundColor:'#fff',
+    elevation: 2,
+    height: 58,
+    backgroundColor: '#fff',
     // borderColor: '#DDDDDD',
     borderRadius: 9.5,
     // borderWidth: 1,

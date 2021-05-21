@@ -15,13 +15,17 @@ import { observer } from 'mobx-react';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Icon from 'react-native-vector-icons/Entypo';
 import Navigation from './src/navigation'; 
+import {RNErrorHandlerService} from './src/app/services';
 
 Icon.loadFont();
 function App() {
   LogBox.ignoreAllLogs(true);
 
+  useEffect(()=>{
+    RNErrorHandlerService.getInstance().init(); 
+  }, []);   
   const {
-    uiStore
+    uiStore  
   } = MobxStore;
   return (
     <Provider store={Store}>

@@ -18,8 +18,8 @@ class PlanPartyModel {
 
   @action 
   reset = () => {
-    // this.isEditMode = false;
-    // this.editParty = {};
+    this.isEditMode = false;
+    this.editParty = {};
     this.party.reset();
   }
   static instance;

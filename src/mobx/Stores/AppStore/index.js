@@ -8,7 +8,7 @@ class AppStore {
   }
   @action
   toogleLoader = (flag = undefined) => {
-    if (flag) {
+    if (flag != undefined) {
       this.loader = flag;
       return;
     }

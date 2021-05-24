@@ -168,7 +168,7 @@ export const VendorCard = ({ item }) => {
         />
 
         <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
-            {/* Rating and Hourly Rate */}
+            {/ Rating and Hourly Rate /}
             <View
                 style={{
                     flexDirection: "row",
@@ -194,7 +194,7 @@ export const VendorCard = ({ item }) => {
                     </Text>
                 </View>
             </View>
-            {/* Heart Share */}
+            {/ Heart Share /}
             <View style={{
                 flexDirection: "row",
                 alignItems: "center",

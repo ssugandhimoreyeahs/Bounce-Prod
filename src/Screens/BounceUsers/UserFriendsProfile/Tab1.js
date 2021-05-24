@@ -14,6 +14,8 @@ import {FlatList} from 'react-native-gesture-handler';
 import CreateInvitation from '../../BounceVendors/PlanParty/CreateInvitation';
 import moment from 'moment';
 import {observer} from 'mobx-react';
+import { toCurrentTimeZone } from '../../../app/utils';
+import { RegexCollection } from '../../../app/constants';
 
 const STATIC_DATA = [
   'Create an event page',
@@ -96,7 +98,7 @@ function Tab1(props) {
                 },
               ]}>
               {/* {'Dec. 31, 7:00 PM'} */}
-              {moment(new Date(item?.date)).format('MMM. DD, HH:MM A')}
+              {moment.utc(item?.date).format(RegexCollection.PartyTimeFormat)}
             </Text>
           </View>
         </View>

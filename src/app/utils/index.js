@@ -7,7 +7,7 @@ import {
   removeDuplicateFromArr,
   sortArrayAlphabatically,
 } from './array';
-import {getFromToDate, toCurrentTimeZone} from './dateTime';
+import {getFromToDate, toCurrentTimeZone, filterArrOnDate, timezoneToUTC} from './dateTime';
 import {smallHitSlop, bigHitSlop} from './hitSlop';
 import {validateEmail, validatePass} from './validation';
 
@@ -29,5 +29,7 @@ export {
   getLargeNum,
   removeDuplicateFromArr,
   sortArrayAlphabatically,
-  toCurrentTimeZone
+  toCurrentTimeZone,
+  filterArrOnDate,
+  timezoneToUTC
 };

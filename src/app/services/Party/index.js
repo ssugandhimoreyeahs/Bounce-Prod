@@ -1,13 +1,25 @@
 import ApiClient from '../ApiClient';
 import MobxStore from '../../../mobx';
+import CreateFormData from '../FormData';
 
 class PartyService {
-  createParty = async partyFormData => {
-    try {
+  createOrUpdateParty = async (partyFields, partyID = undefined) => {
+    try { 
+      const formData = CreateFormData.objectToFormData(partyFields);
+      let endPoint = ApiClient.endPoints.party;
+      if (partyID) {
+        endPoint = endPoint.concat('/' + partyID);
+      }
+      console.log(
+        'JSON_PARTY_FORM_DATA_edit_check_22 - ',
+        JSON.stringify(formData),
+      );
+      console.log('ENDPOINT_ETST - ', endPoint);
+        return;
       MobxStore.appStore.toogleLoader(true);
       const createPartyRes = await ApiClient.authInstance.post(
-        ApiClient.endPoints.party,
-        partyFormData,
+        endPoint,
+        formData,
         ApiClient.formDataHeaders(),
       );
       this.getParty();
@@ -25,7 +37,7 @@ class PartyService {
       const parties = await ApiClient.authInstance.get(
         ApiClient.endPoints.party,
         ApiClient.applicationJSONHeader(false),
-      ); 
+      );
       MobxStore.partyStore.setParty(parties.data);
       return Promise.resolve(parties.data);
     } catch (error) {

@@ -4,7 +4,7 @@ import {
 } from '../../Entities';
 import {ReactModel} from '../../core';
 import {Validation} from '../../Validations';
-
+ 
 @ReactModel()
 class CreatePartyDTO extends CreatePartyEntity {
   partyError = {};
@@ -27,21 +27,36 @@ class CreatePartyDTO extends CreatePartyEntity {
     this.notifyListeners();
   };
 
-  removeGallery = image => {
-    let findIndex = this.galleryFiles.findIndex(i => i == image);
-    if (findIndex > -1) {
-      this.galleryFiles.splice(findIndex, 1);
+  removeGallery = (action = false, image) => {
+    if (action == false) {
+      let findIndex = this.galleryFiles.findIndex(i => i.path == image);
+      if (findIndex > -1) {
+        this.galleryFiles.splice(findIndex, 1);
+      }
+    } else {
+      let findIndex = this.gallery.findIndex(i => i.filePath == image);
+      if (findIndex > -1) {
+        this.gallery.splice(findIndex, 1);
+      }
     }
+
     this.notifyListeners();
   };
   setIsPrivate = value => {
     this.isPrivate = value;
     this.notifyListeners();
   };
-  isPartyValid = async (isDraftMode = false) => {
-    let validateParty = CreatePartyEntity.toCreate(this);
+  isPartyValid = async (isDraftMode = false, isEditMode = false) => {
+    let validateParty;
+    if (isEditMode) {
+      validateParty = CreatePartyEntity.forEditValidate(this);
+    }else {
+      validateParty = CreatePartyEntity.forValidate(this);
+    }
     validateParty.isDraft = isDraftMode;
+    console.log('PARTY_LOG_EDIT_5 - ', JSON.stringify(validateParty));
     let schema = {success: false, partyFields: validateParty, error: {}};
+
     const isValid = await Validation.validateClassDecorator(validateParty);
     if (!isValid.success) {
       console.log('ERROR_PARTY - ', JSON.stringify(isValid));
@@ -64,7 +79,7 @@ class CreatePartyDTO extends CreatePartyEntity {
   addTicketType = () => {
     this.ticket.push(new TicketEntity());
     this.notifyListeners();
-  }; 
+  };
 
   onTicketChangeText = (data, index) => {
     this.ticket[index] = {...this.ticket[index], ...data};

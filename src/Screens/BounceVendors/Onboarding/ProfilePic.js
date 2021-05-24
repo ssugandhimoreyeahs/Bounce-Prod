@@ -20,7 +20,11 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { LocalStorage } from '../../../app/utils/localStorage';
 import { UserContext } from '../../../context/profiledataProvider';
 import MobxStore from '../../../mobx';
+ 
+import moment from 'moment';
+ 
 import { ApiClient } from '../../../app/services';
+ 
 
 export default function ProfilePic(props) {
     const {
@@ -34,12 +38,15 @@ export default function ProfilePic(props) {
 
     const { name, username, password, birthday } = props.route.params
     console.log("ProfilePic PROPS -->", props.route.params)
-    console.log(name, username, password, birthday);
-
+ 
+    console.log(name, username, password, birthday, live);
+     
     const handleSubmit = async () => {
         try {
             setLoader(true)
-            if (picture != null) {
+            if (picture != null) { 
+                let birthday = moment(birthday).format('YYYY-MM-DD') +' 00:00:00';
+ 
                 let milliseconds = new Date().getTime();
                 console.log("PICTURE", picture);
                 let imgObj = {

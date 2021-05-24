@@ -78,31 +78,37 @@ function CreateInvitation(props) {
       listener.unsubscribe();
     };
   }, []);
-  const handleOnPress = async isDraftMode => {
+   const handleOnPress = async isDraftMode => {
     try {
-      const res = await partyModel.party.isPartyValid(isDraftMode);
-      console.log("SEARCHING FOR IMAGE", res)
-      console.log("222SEARCHING FOR IMAGE", res)
+      console.log('DFMD - ', isDraftMode);
+      const res = await partyModel.party.isPartyValid(
+        isDraftMode,
+        partyModel.isEditMode,
+      );
       if (!res.success) {
         let key = Object.keys(res.error)[0];
         let msg = res.error[key] || 'Something went wrong!';
         Toast(msg);
         return;
       }
-      const formData = CreateFormData.objectToFormData(res.partyFields);
-      console.log('FORM_BODY_CREATEd - ', formData);
-      const savePartyResponse = await PartyService.createParty(formData);
-      Toast(
-        isDraftMode ? 'Party saved to Draft' : 'Party Created Successfully',
-      );
-      partyModel.reset();
-      setTimeout(() => {
-        props.navigation.goBack()
-      }, 300);
 
+      const savePartyResponse = await PartyService.createOrUpdateParty(
+        res.partyFields,
+        partyModel.editParty?.id,
+      );
+
+      Toast(
+        partyModel.isEditMode
+          ? 'Party Updated Successfully'
+          : isDraftMode
+          ? 'Party saved to Draft'
+          : 'Party Created Successfully',
+      );
+      //partyModel.reset();
       console.log('CREATE_PARTY_RES - ', savePartyResponse);
     } catch (error) {
       console.log('ERROR - ', error);
+      Toast('Something went wrong!');
     }
   };
   const handleImage = async () => {
@@ -184,7 +190,7 @@ function CreateInvitation(props) {
 
               }}
             />
-            {/* First Section */}
+            {/ First Section /}
             <View
               style={{
                 paddingHorizontal: 10,
@@ -278,7 +284,7 @@ function CreateInvitation(props) {
                         })} */}
             </View>
 
-            {/* Second Section */}
+            {/ Second Section /}
             <View
               style={{
                 paddingHorizontal: 10,
@@ -287,7 +293,7 @@ function CreateInvitation(props) {
                 justifyContent: 'center',
                 paddingVertical: 20,
               }}>
-              {/* <View style={styles.eventContainer}> */}
+              {/ <View style={styles.eventContainer}> /}
               <Text
                 style={[
                   styles.headerTitle,
@@ -295,8 +301,8 @@ function CreateInvitation(props) {
                 ]}>
                 {'Event Settings'}
               </Text>
-              {/* <Icon name="chevron-down" size={15} color="#000" /> */}
-              {/* </View> */}
+              {/ <Icon name="chevron-down" size={15} color="#000" /> /}
+              {/ </View> /}
 
               {/*  
 //             <View style={{marginVertical: 10}}>
@@ -384,7 +390,7 @@ function CreateInvitation(props) {
                     <AgeField /> */}
             </View>
 
-            {/* Tickets Section */}
+            {/ Tickets Section /}
             {/* <View>
             {TAGS.map(t => {
                 return <TagsCollapsible {...t} />;
@@ -447,9 +453,9 @@ function CreateInvitation(props) {
                         </View> */}
           </ScrollView>
         </View>
-        {/* <View style={{ paddingBottom: 15 }}> */}
+        {/ <View style={{ paddingBottom: 15 }}> /}
 
-        {/* </View> */}
+        {/ </View> /}
       </NRoot>
     </Root>
   );

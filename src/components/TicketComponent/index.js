@@ -62,10 +62,10 @@ const TicketComponent = props => {
           keyboardType={'numeric'}
           placeholderTextColor={'grey'}
           placeholder={'$0'}
-          onChangeText={fee => {
-            onChangeText({fee});
+          onChangeText={price => {
+            onChangeText({price});
           }}
-          value={data?.fee?.toString()}
+          value={data?.price?.toString()}
           style={[
             styles.textInput,
             {

@@ -109,7 +109,6 @@ class Party {
         price: t.price,
         quantity: t.quantity,
       }));
-      newParty;
       delete newParty.id;
       delete newParty.profileImageFile;
       return newParty;

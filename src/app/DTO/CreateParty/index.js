@@ -4,7 +4,7 @@ import {
 } from '../../Entities';
 import {ReactModel} from '../../core';
 import {Validation} from '../../Validations';
- 
+
 @ReactModel()
 class CreatePartyDTO extends CreatePartyEntity {
   partyError = {};
@@ -47,22 +47,21 @@ class CreatePartyDTO extends CreatePartyEntity {
     this.notifyListeners();
   };
   isPartyValid = async (isDraftMode = false, isEditMode = false) => {
-    let validateParty;
-    if (isEditMode) {
-      validateParty = CreatePartyEntity.forEditValidate(this);
-    }else {
-      validateParty = CreatePartyEntity.forValidate(this);
-    }
+    let validateParty = CreatePartyEntity.toJSON(this, isEditMode);
     validateParty.isDraft = isDraftMode;
-    console.log('PARTY_LOG_EDIT_5 - ', JSON.stringify(validateParty));
     let schema = {success: false, partyFields: validateParty, error: {}};
-
+    if (validateParty.galleryFiles.length == 0) {
+      validateParty.galleryFiles.push(undefined);
+    }
     const isValid = await Validation.validateClassDecorator(validateParty);
     if (!isValid.success) {
       console.log('ERROR_PARTY - ', JSON.stringify(isValid));
       schema.error = isValid.errors;
     } else {
       schema.success = true;
+      if (validateParty.galleryFiles[0] == undefined) {
+        delete validateParty.galleryFiles;
+      }
     }
     return schema;
   };
@@ -71,23 +70,23 @@ class CreatePartyDTO extends CreatePartyEntity {
     if (Object.keys(preParty).length == 0) {
       Object.assign(this, new CreatePartyEntity());
     } else {
-      Object.assign(this, CreatePartyEntity.toEdit(preParty));
+      Object.assign(this, CreatePartyEntity.fromJSON(preParty));
     }
     this.notifyListeners();
   };
 
   addTicketType = () => {
-    this.ticket.push(new TicketEntity());
+    this.tickets.push(new TicketEntity());
     this.notifyListeners();
   };
 
   onTicketChangeText = (data, index) => {
-    this.ticket[index] = {...this.ticket[index], ...data};
+    this.tickets[index] = {...this.tickets[index], ...data};
     this.notifyListeners();
   };
 
   onTicketDelete = index => {
-    this.ticket = [...this.ticket.filter((_, i) => i != index)];
+    this.tickets = [...this.tickets.filter((_, i) => i != index)];
     this.notifyListeners();
   };
 }

@@ -13,6 +13,7 @@ import HostProfile from '../../Screens/BounceUsers/HostProfile/HostProfile';
 import AboutUs from '../../Screens/Views/About/AboutUs';
 import CreateInvitationTemplate from '../../Screens/BounceVendors/PlanParty/CreateInvitationTemplate';
 
+
 const UserRootStack = createStackNavigator();
 
 class UserNavigation {
@@ -27,10 +28,7 @@ class UserNavigation {
           name={UserHomeDrawerNavigator.routeName}
           component={UserHomeDrawerNavigator.drawerHome}
         />
-          {/* <UserRootStack.Screen 
-          name={AccountSetting.routeName}
-          component={AccountSetting}
-        /> */}
+         
         <UserRootStack.Screen 
           name={UserQrScreen.routeName}
           component={UserQrScreen}

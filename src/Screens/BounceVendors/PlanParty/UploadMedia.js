@@ -25,6 +25,7 @@ import {Avatar} from 'react-native-elements';
 import Modal from 'react-native-modal';
 import {Observer, observer} from 'mobx-react';
 import PlanPartyModel from './PlanPartyModel';
+import { Toast } from '../../../app/constants';
 
 function UploadMedia(props) {
   let goBack = false;
@@ -52,13 +53,16 @@ function UploadMedia(props) {
         partyModel.party.addGallery(images);
       })
       .catch(e => {
-        console.log('ERROR_SEL_IMG - ', e);
+        Toast('Invalid Files');
       });
   };
   const deleteImage = (action, path) => {
     partyModel.party.removeGallery(action,path);
   }
   const renderItem = ({item, index}) => {
+    if (item == undefined) {
+      return false;
+    }
     return (
       <View>
         <View
@@ -138,7 +142,7 @@ function UploadMedia(props) {
           />
 
           <FlatList
-            data={[...partyModel.party.galleryFiles, ...partyModel.party.gallery]}
+            data={[...partyModel.party.galleryFiles.filter(i => i!=undefined), ...partyModel.party.gallery]}
             renderItem={renderItem}
           />
           <View

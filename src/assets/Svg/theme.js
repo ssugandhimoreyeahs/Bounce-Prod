@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   WhiteShare,
-  BlackShare,
+  BlackOutlineShare,
   WhiteMore,
   More,
   PenWhite,
@@ -13,7 +13,7 @@ import ThemeFactory from '../../app/themes';
 const SVGS = {
   [ThemeFactory.LIGHT]: {
     Drawer_Edit: EditPen,
-    Drawer_Share: BlackShare,
+    Drawer_Share: BlackOutlineShare,
     Drawer_More: More,
   },
   [ThemeFactory.DARK]: {

@@ -14,6 +14,7 @@ class Endpoints extends Server {
   getCategory = '/Vendor/Category';
   validateVendor = '/auth/validatevendor';
   vendorRegister = '/auth/vendor/register';
+  userRegister = 'auth/host/register';
   vendorAddMedia = '/vendor/addmedia';
   postLogin = '/user/userlogin';
   getLanguage = '/language';

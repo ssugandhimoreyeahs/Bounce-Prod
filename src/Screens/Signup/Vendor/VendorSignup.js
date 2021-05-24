@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ToastAndroid } from 'react-native'
+import { View, Text, StyleSheet, Alert, ScrollView, TouchableOpacity, ToastAndroid } from 'react-native'
 import { Header, FloatingInput, CustomButton, Root } from '@components'
 import { Avatar } from 'react-native-elements'
 import { UploadBlue, BlackClose } from '@svg';
@@ -30,7 +30,6 @@ export default function VendorSignup(props) {
         ImagePicker.openPicker({
             width: 300,
             height: 300,
-            cropping: true
         }).then(image => {
             setPicture(image)
         });
@@ -47,50 +46,60 @@ export default function VendorSignup(props) {
 
 
     const handleData = async () => {
-        let body = {
-            vendorType: "1",
-            picture: picture,
-            username: username,
-            email: email,
-            phone: phone,
-            password: password
-        }
-
-        let validateE = await validateEmail(email)
-        let validateP = await validatePass(password)
-
-        if (!validateE) {
-            console.log("values res of email", validateE);
-            ToastAndroid.show("Please enter valid email !", ToastAndroid.SHORT);
-
-        } else if (!validateP) {
-            console.log("values res of pass", validateP);
-            ToastAndroid.show("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !", ToastAndroid.SHORT);
-
-        } else
-            if (username.length > 0
-                &&
-                password.length > 0 &&
-                email.length > 0 &&
-                phone.length > 0 &&
-                picture != null
-            ) {
-                setLoader(true)
-                const res = await ApiClient.instance.post(ApiClient.endPoints.validateVendor, body)
-
-                if (res.statusCode !== 404) {
-                    dispatch(fetchVendorData(["FIRST_PAGE", body]))
-                    setLoader(false)
-                    props.navigation.navigate(VendorMarketProfile.routeName);
-                } else if (res.statusCode == 404) {
-                    setLoader(false)
-                    alert(res.message)
-                }
-            } else {
-                setLoader(false)
-                ToastAndroid.show("Please fill all the field's with valid data !", ToastAndroid.SHORT);
-
+        try {
+            let body = {
+                vendorType: "1",
+                picture: picture,
+                username: username,
+                email: email,
+                phone: phone,
+                password: password
             }
+
+            let validateE = await validateEmail(email)
+            let validateP = await validatePass(password)
+
+            if (!validateE) {
+                console.log("values res of email", validateE);
+                ToastAndroid.show("Please enter valid email !", ToastAndroid.SHORT);
+
+            } else if (!validateP) {
+                console.log("values res of pass", validateP);
+                ToastAndroid.show("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !", ToastAndroid.SHORT);
+
+            } else
+                if (username.length > 0 &&
+                    password.length > 0 &&
+                    email.length > 0 &&
+                    phone.length > 0 &&
+                    picture != null
+                ) {
+                    console.log("1 st blockk");
+                    setLoader(true)
+                    const res = await ApiClient.instance.post(ApiClient.endPoints.validateVendor, body)
+                    console.log("This is response", res)
+                    if (res.statusCode !== 404) {
+                        console.log("1.1 blockk");
+                        dispatch(fetchVendorData(["FIRST_PAGE", body]))
+                        setLoader(false)
+                        props.navigation.navigate(VendorMarketProfile.routeName);
+                    } else if (res.statusCode == 404) {
+                        console.log("1.2 blockk");
+                        setLoader(false)
+                        ToastAndroid.show(res.message, ToastAndroid.SHORT);
+                        // Alert.alert(res.message)
+
+                    }
+                } else {
+                    console.log("2 blockk");
+                    setLoader(false)
+                    ToastAndroid.show("Please fill all the field's with valid data !", ToastAndroid.SHORT);
+
+                }
+        } catch (err) {
+            // console.log("Error", err.message)
+            ToastAndroid.show("Vendor Username or Number already exist!", ToastAndroid.SHORT);
+        }
     }
 
     const handleSpace = (value) => {

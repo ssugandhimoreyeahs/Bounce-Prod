@@ -16,11 +16,11 @@ import {
   CustomTextinput,
   FloatingInput,
   InputBox,
-  TagsCollapsible,
+  ImageCarousel,
   TicketComponent,
 } from '@components';
 import {UploadCamera} from '@assets';
-import {UploadBlue, BlackClose, BlueCamera} from '@svg';
+import {UploadBlue, BlackClose, BlueCamera, Add_Outline, AddBlue} from '@svg';
 import {Keyboard} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import {connect} from 'react-redux';
@@ -63,6 +63,8 @@ function CreateInvitation(props) {
   const [picture, setPicture] = useState(null);
   const [footer, openFooter] = useState(false);
   const [state, setState] = useState({});
+  const [getImageState, setImageState] = useState(0);
+
   useEffect(() => {
     const listener = partyModel.party?.subscribe(() => {
       setState(() => ({}));
@@ -122,24 +124,53 @@ function CreateInvitation(props) {
       partyModel.party.addGallery(images.map(i => i.path));
     });
   };
-  const ImageFooter = () => {
-    return (
-      <TouchableOpacity
-        onPress={() => setPicture(null)}
-        style={styles.crossButton}>
-        <BlackClose height={15} width={15} />
-      </TouchableOpacity>
-    );
-  };
-  const SmallButton = ({item}) => {
-    console.log('ase', item);
-    return (
-      <TouchableOpacity style={styles.smallButtonStyle}>
-        <Text style={[styles.headerTitle]}>{item}</Text>
-      </TouchableOpacity>
-    );
-  };
+  // const ImageFooter = () => {
+  //   return (
+  //     <TouchableOpacity
+  //       onPress={() => setPicture(null)}
+  //       style={styles.crossButton}>
+  //       <BlackClose height={15} width={15} />
+  //     </TouchableOpacity>
+  //   );
+  // };
+  // const SmallButton = ({ item }) => {
+  //   console.log('ase', item);
+  //   return (
+  //     <TouchableOpacity style={styles.smallButtonStyle}>
+  //       <Text style={[styles.headerTitle]}>{item}</Text>
+  //     </TouchableOpacity>
+  //   );
+  // };
 
+  // console.log("partyModel.party",partyModel?.party?.galleryFiles);
+  const handleCarousel = () => {
+    let img = [];
+    if (partyModel?.party?.galleryFiles?.length > 0) {
+      partyModel.party.galleryFiles.map(i => i?.path && img.push(i.path));
+    }
+    if (partyModel?.party?.gallery?.length > 0) {
+      partyModel.party.gallery.map(i => img.push(i.filePath));
+    }
+    console.log('IMG_TEST ', img);
+    return (
+      <View>
+        <ImageCarousel
+          onPre
+          value={'CreateInvitation'}
+          // onPress={handleImage}
+          pagination
+          imageArray={img.length == 0 ? [] : img}
+          onSnapToItem={index => setImageState(index)}
+          state={getImageState}
+        />
+        <TouchableOpacity onPress={()=>{
+          handleImage();
+        }} style={{position: 'absolute', bottom: 10, right: 20}}>
+          <AddBlue height={33} width={33} />
+        </TouchableOpacity>
+      </View>
+    );
+  };
   return (
     <Root>
       <NRoot>
@@ -150,24 +181,31 @@ function CreateInvitation(props) {
               // rightTitle={'Save as Draft'}
               onPressRightTitle={() => handleOnPress(true)}
               onPress={() => {
-                Alert.alert(
-                  'Alert !',
-                  'Are you sure you want to go back ? All your changes will be lost!',
-                  [
-                    {
-                      text: 'OK',
-                      onPress: () => props.navigation.goBack(),
-                    },
-                    {
-                      text: 'Cancel',
-                    },
-                  ],
-                  {cancelable: true},
-                );
+                if (
+                  partyModel?.party?.title === undefined ||
+                  partyModel?.party?.title === ''
+                ) {
+                  props.navigation.goBack();
+                } else {
+                  Alert.alert(
+                    'Alert !',
+                    'Are you sure you want to go back ?. All your changes will be lost!',
+                    [
+                      {
+                        text: 'OK',
+                        onPress: () => props.navigation.goBack(),
+                      },
+                      {
+                        text: 'Cancel',
+                      },
+                    ],
+                    {cancelable: true},
+                  );
+                }
+
                 // Alert.alert("All changes will be lost! Are you sure ? ")
               }}
             />
-            {/* First Section */}
             <View
               style={{
                 paddingHorizontal: 10,
@@ -185,66 +223,39 @@ function CreateInvitation(props) {
                 styleProp={{borderRadius: 19}}
               />
 
-              {picture == null ? (
-                <TouchableOpacity
-                  onPress={handleImage}
-                  style={{
-                    marginVertical: getHp(40),
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <View
+              {!partyModel.isEditMode ? (
+                partyModel?.party?.galleryFiles?.length == 0 ? (
+                  <TouchableOpacity
+                    onPress={handleImage}
                     style={{
-                      borderRadius: 100,
-                      elevation: 10,
-                      backgroundColor: '#fff',
-                    }}>
-                    <UploadBlue height={getHp(100)} width={getHp(100)} />
-                  </View>
-                  <Text
-                    style={{
-                      fontSize: FONTSIZE.Text14,
-                      color: '#000',
-                      marginTop: 10,
-                      fontFamily: 'AvenirNext',
-                    }}>
-                    {'Upload Media'}
-                  </Text>
-                </TouchableOpacity>
-              ) : (
-                <>
-                  <View
-                    style={{
-                      marginVertical: getHp(23),
+                      marginVertical: getHp(40),
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}>
-                    <TouchableOpacity
-                      onPress={() => openFooter(true)}
-                      style={{marginVertical: 30}}>
-                      <Avatar
-                        source={{
-                          uri: picture.path,
-                        }}
-                        size="xlarge"
-                        rounded
-                      />
-                      <View>
-                        <UploadBlue
-                          height={50}
-                          width={50}
-                          style={{
-                            position: 'absolute',
-                            bottom: -25,
-                            left: 55,
-                            resizeMode: 'contain',
-                          }}
-                        />
-                      </View>
-                      {footer ? <ImageFooter /> : null}
-                    </TouchableOpacity>
-                  </View>
-                </>
+                    <View
+                      style={{
+                        borderRadius: 100,
+                        elevation: 10,
+                        backgroundColor: '#fff',
+                      }}>
+                      <UploadBlue height={getHp(100)} width={getHp(100)} />
+                    </View>
+                    <Text
+                      style={{
+                        fontSize: FONTSIZE.Text14,
+                        color: '#000',
+                        marginTop: 10,
+                        fontFamily: 'AvenirNext',
+                      }}>
+                      {'Upload Media'}
+                    </Text>
+                  </TouchableOpacity>
+                ) : (
+                  // null
+                  handleCarousel()
+                )
+              ) : (
+                handleCarousel()
               )}
 
               <DatePick
@@ -292,7 +303,6 @@ function CreateInvitation(props) {
                         })} */}
             </View>
 
-            {/* Second Section */}
             <View
               style={{
                 paddingHorizontal: 10,
@@ -301,7 +311,6 @@ function CreateInvitation(props) {
                 justifyContent: 'center',
                 paddingVertical: 20,
               }}>
-              {/* <View style={styles.eventContainer}> */}
               <Text
                 style={[
                   styles.headerTitle,
@@ -309,8 +318,6 @@ function CreateInvitation(props) {
                 ]}>
                 {'Event Settings'}
               </Text>
-              {/* <Icon name="chevron-down" size={15} color="#000" /> */}
-              {/* </View> */}
 
               {/*  
 //             <View style={{marginVertical: 10}}>
@@ -326,8 +333,8 @@ function CreateInvitation(props) {
               <View style={{marginVertical: 10}}>
                 <SwitchButton
                   value={partyModel.party.isPrivate}
-                  onPrivatePress={() => partyModel.party.set({isPrivate: true})}
-                  onPublicPress={() => partyModel.party.set({isPrivate: false})}
+                  onPrivatePress={() => partyModel.party.setIsPrivate(true)}
+                  onPublicPress={() => partyModel.party.setIsPrivate(false)}
                 />
               </View>
 
@@ -398,7 +405,6 @@ function CreateInvitation(props) {
                     <AgeField /> */}
             </View>
 
-            {/* Tickets Section */}
             {/* <View>
             {TAGS.map(t => {
                 return <TagsCollapsible {...t} />;
@@ -425,7 +431,7 @@ function CreateInvitation(props) {
                 {'Add Ticket Type'}
               </Text>
             </TouchableOpacity>
-            {partyModel.party.ticket?.map((t, index) => {
+            {partyModel.party.tickets?.map((t, index) => {
               return (
                 <TicketComponent
                   data={t}
@@ -443,9 +449,8 @@ function CreateInvitation(props) {
               rowDoubleButton
               ButtonTitle={'Save As Draft'}
               ButtonTitle2={'Complete'}
-              onsave
-              onContinuePress={() => handleOnPress(false)}
               onSaveDraftPress={() => handleOnPress(true)}
+              onContinuePress={() => handleOnPress(false)}
             />
 
             {/* <View style={styles.bottomContainer}>
@@ -462,9 +467,9 @@ function CreateInvitation(props) {
                         </View> */}
           </ScrollView>
         </View>
-        {/* <View style={{ paddingBottom: 15 }}> */}
+        {/* {/ <View style={{ paddingBottom: 15 }}> /}
 
-        {/* </View> */}
+        {/ </View> /} */}
       </NRoot>
     </Root>
   );

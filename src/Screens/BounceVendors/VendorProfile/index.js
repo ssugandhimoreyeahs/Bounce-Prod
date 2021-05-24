@@ -20,7 +20,7 @@ import {
     Services,
     Cuisines,
     Equipments,
-    BlackShare
+    BlackOutlineShare
 } from '@svg'
 import Ratings from '../../../components/RatingStar/Ratings'
 import { Avatar } from 'react-native-elements'
@@ -82,7 +82,7 @@ export default function VendorProfile(props) {
                         <>
                             <Header
                                 // headerTitle={"DJ Nathan"}
-                                share={<BlackShare height={25} width={25} />}
+                                share={<BlackOutlineShare height={25} width={25} />}
                                 back
                                 onPress={() => props.navigation.goBack()}
                                 headerBackColor={{ backgroundColor: '#fff' }}

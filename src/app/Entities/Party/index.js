@@ -102,13 +102,18 @@ class Party {
       newParty.date = moment(fields.date).format('YYYY-MM-DD HH:mm:ss');
       newParty.gallery = fields?.gallery?.map(i => ({id: i.id})) || [];
       newParty.profileImage = fields?.profileImage?.id || 0;
-      newParty.tickets = fields.ticket.map(t => ({
-        id: t.id,
-        title: t.title,
-        description: t.description,
-        price: t.price,
-        quantity: t.quantity,
-      }));
+      newParty.tickets = fields.ticket.map(t => {
+        let obj = {
+          title: t.title,
+          description: t.description,
+          price: t.price,
+          quantity: t.quantity,
+        };
+        if (t.id) {
+          obj.id = t.id;
+        }
+        return obj;
+      });
       delete newParty.id;
       delete newParty.profileImageFile;
       return newParty;

@@ -39,7 +39,7 @@ class Party {
 
   gallery = [];
   @ArrayNotEmpty({message: 'Add atleast 1 Ticket Type'})
-  ticket = [];
+  tickets = [];
   needBouncer = false;
   needDJ = false;
   ageLimit = false;
@@ -53,9 +53,9 @@ class Party {
       let newParty = this.toJSON(fields);
       if (fields.date) {
         newParty.date = timezoneToUTC(fields.date);
-      }
+      } 
       newParty.gallery = fields?.gallery || [];
-      newParty.ticket = fields?.tickets;
+      newParty.tickets = fields?.tickets;
       newParty.isPrivate = fields?.isPrivate;
       newParty.profileImage = fields?.profileImage;
       return newParty;
@@ -86,11 +86,12 @@ class Party {
       newParty.date = fields.date
         ? moment(fields.date).format('YYYY-MM-DD HH:mm:ss')
         : null; //2020-12-25 12:15:00
-
-      if (isEdit) { 
+      newParty.isPrivate = fields.isPrivate;
+      delete newParty.gallery;
+      if (isEdit) {
         newParty.gallery = fields?.gallery?.map(i => ({id: i.id})) || [];
         newParty.profileImage = fields?.profileImage?.id || 0;
-        newParty.ticket = fields.ticket.map(t => {
+        newParty.tickets = fields.tickets.map(t => {
           let obj = {
             title: t.title,
             description: t.description,

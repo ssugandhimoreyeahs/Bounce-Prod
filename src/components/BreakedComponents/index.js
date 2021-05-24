@@ -296,9 +296,12 @@ export const PastGuestList = ({ PAST_LIST_ARRAY, heading, pen = false, onPressGu
     )
 }
 
-export const SwitchButton = (props) => {
-    // console.log("props breaked", props);
-    const [getPrivate, setPrivate] = useState(true)
+export const SwitchButton = (props) => { 
+    const {
+        value,
+        onPrivatePress,
+        onPublicPress
+    } = props;
     const {
     } = props
     const onValues = {
@@ -315,12 +318,12 @@ export const SwitchButton = (props) => {
             <View style={styles.doubleSubcontainer}>
                 <TouchableOpacity
                     style={[styles.private,
-                    getPrivate ? onValues : offValues]} onPress={() => setPrivate(!getPrivate)}>
-                    <Text style={[styles.TitleStyle, getPrivate ? { color: '#1FAEF7', fontWeight: 'bold' } : { color: '#000', fontWeight: 'normal' }]}>{"Private"}</Text>
+                        value ? onValues : offValues]} onPress={() => onPrivatePress()}>
+                    <Text style={[styles.TitleStyle, value ? { color: '#1FAEF7', fontWeight: 'bold' } : { color: '#000', fontWeight: 'normal' }]}>{"Private"}</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={[styles.private, getPrivate ? offValues : onValues]} onPress={() => setPrivate(!getPrivate)}>
-                    <Text style={[styles.TitleStyle, !getPrivate ? { color: '#1FAEF7', fontWeight: 'bold' } : { color: '#000', fontWeight: 'normal' }]}>{"Public"}</Text>
+                <TouchableOpacity style={[styles.private, value ? offValues : onValues]} onPress={() => onPublicPress()}>
+                    <Text style={[styles.TitleStyle, !value ? { color: '#1FAEF7', fontWeight: 'bold' } : { color: '#000', fontWeight: 'normal' }]}>{"Public"}</Text>
                 </TouchableOpacity>
             </View>
 

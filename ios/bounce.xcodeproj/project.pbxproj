@@ -11,10 +11,16 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1CAA81AF265B991700C8AE3A /* boost_context.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C67D42D2657C6F000923E58 /* boost_context.xcframework */; };
+		1CAA81B4265B993E00C8AE3A /* boost_filesystem.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CAA81B3265B993E00C8AE3A /* boost_filesystem.xcframework */; };
+		1CAA81B6265B993E00C8AE3A /* boost_program_options.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CAA81B5265B993E00C8AE3A /* boost_program_options.xcframework */; };
+		1CAA81B8265B993E00C8AE3A /* boost_regex.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CAA81B7265B993E00C8AE3A /* boost_regex.xcframework */; };
+		1CAA81BA265B993E00C8AE3A /* boost_system.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CAA81B9265B993E00C8AE3A /* boost_system.xcframework */; };
+		1CAA81BC265B993E00C8AE3A /* boost_thread.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CAA81BB265B993E00C8AE3A /* boost_thread.xcframework */; };
 		1CE908782645336000C00DB3 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 1CE908772645336000C00DB3 /* fonts */; };
+		32AD3E3167E1B1E2879BF138 /* libPods-bounce.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1559CBD4D2691A608FB0D510 /* libPods-bounce.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		CD41EAF6B65022CD98D9BE43 /* libPods-bounce.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B11DCC2FC9AE44AED5E4D3 /* libPods-bounce.a */; };
-		E1A9FABB5936617A61993EEE /* libPods-bounce-bounceTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A80853598029D5B457EB180 /* libPods-bounce-bounceTests.a */; };
+		8CD7CA91E810B283FB5938BE /* libPods-bounce-bounceTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BB00B674CB80BE180C0D546 /* libPods-bounce-bounceTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +45,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* bounceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bounceTests.m; sourceTree = "<group>"; };
 		0A97B96C16654A9698D41F7B /* AvenirNext-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AvenirNext-MediumItalic.ttf"; path = "../src/assets/fonts/AvenirNext-MediumItalic.ttf"; sourceTree = "<group>"; };
+		0EEAE25861897208FBD2A80C /* Pods-bounce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bounce.debug.xcconfig"; path = "Target Support Files/Pods-bounce/Pods-bounce.debug.xcconfig"; sourceTree = "<group>"; };
 		0F7415C620004019A25492E3 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* bounce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bounce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = bounce/AppDelegate.h; sourceTree = "<group>"; };
@@ -47,18 +54,25 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = bounce/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = bounce/main.m; sourceTree = "<group>"; };
 		1444225DC5EC48BFAC625379 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		1559CBD4D2691A608FB0D510 /* libPods-bounce.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bounce.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		196D9C700DC74E43A489AADE /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		1C455D3F26454A5D008DFED2 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		1C67D42D2657C6F000923E58 /* boost_context.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = boost_context.xcframework; path = "Pods/Flipper-Boost-iOSX/frameworks/boost_context.xcframework"; sourceTree = "<group>"; };
 		1CA53A83265B6D3900E202D2 /* libRNExitApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNExitApp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CA53A85265B6D8600E202D2 /* RNExitApp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNExitApp.xcodeproj; path = "../node_modules/react-native-exit-app/ios/RNExitApp.xcodeproj"; sourceTree = "<group>"; };
+		1CAA81B3265B993E00C8AE3A /* boost_filesystem.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = boost_filesystem.xcframework; path = "Pods/Flipper-Boost-iOSX/frameworks/boost_filesystem.xcframework"; sourceTree = "<group>"; };
+		1CAA81B5265B993E00C8AE3A /* boost_program_options.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = boost_program_options.xcframework; path = "Pods/Flipper-Boost-iOSX/frameworks/boost_program_options.xcframework"; sourceTree = "<group>"; };
+		1CAA81B7265B993E00C8AE3A /* boost_regex.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = boost_regex.xcframework; path = "Pods/Flipper-Boost-iOSX/frameworks/boost_regex.xcframework"; sourceTree = "<group>"; };
+		1CAA81B9265B993E00C8AE3A /* boost_system.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = boost_system.xcframework; path = "Pods/Flipper-Boost-iOSX/frameworks/boost_system.xcframework"; sourceTree = "<group>"; };
+		1CAA81BB265B993E00C8AE3A /* boost_thread.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = boost_thread.xcframework; path = "Pods/Flipper-Boost-iOSX/frameworks/boost_thread.xcframework"; sourceTree = "<group>"; };
 		1CDF7D7CDB564B1FBA374040 /* AvenirNext.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AvenirNext.ttf; path = ../src/assets/fonts/AvenirNext.ttf; sourceTree = "<group>"; };
 		1CE908772645336000C00DB3 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
+		2BB00B674CB80BE180C0D546 /* libPods-bounce-bounceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bounce-bounceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D0D0E3EDB1D4E718569CB3F /* ANB.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = ANB.otf; path = ../src/assets/fonts/ANB.otf; sourceTree = "<group>"; };
 		2E1B0B9C06324356B94F8A22 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		2E30543533FF4DB19DD9D808 /* AvenirNext-DemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AvenirNext-DemiBoldItalic.ttf"; path = "../src/assets/fonts/AvenirNext-DemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		31F31A6B78814E34A476D1F7 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
-		33DD9FAA2436106F333852F4 /* Pods-bounce-bounceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bounce-bounceTests.debug.xcconfig"; path = "Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests.debug.xcconfig"; sourceTree = "<group>"; };
+		33D1B58A49EBDB596DF3F33B /* Pods-bounce-bounceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bounce-bounceTests.release.xcconfig"; path = "Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests.release.xcconfig"; sourceTree = "<group>"; };
 		3B5B9C6BF3F64064BB0ED9CB /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		3D970DE99AEC49FAA4F79D8D /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		430624C476424A0B9685E4CD /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
@@ -70,7 +84,6 @@
 		5B88857C0BE94FFFB99B2B8A /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		5D6BEC1A4752468DAF80D5C4 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		6C62296EC639434EAE2F060D /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		71DDCBEA161AA44E9F4F0409 /* Pods-bounce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bounce.debug.xcconfig"; path = "Target Support Files/Pods-bounce/Pods-bounce.debug.xcconfig"; sourceTree = "<group>"; };
 		78130C4BCFA5418BB8C01CF3 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		7CD813FEABB548BA8DEF8885 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		7F102348E00A4C7EAF662A23 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
@@ -79,9 +92,7 @@
 		8773BF9CF9054FAEA6B8E03A /* AvenirNext-DemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AvenirNext-DemiBold.ttf"; path = "../src/assets/fonts/AvenirNext-DemiBold.ttf"; sourceTree = "<group>"; };
 		88B1928572F94709848B8065 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../src/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		8BB82D1B5164426182C4A88F /* AvenirNext-Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AvenirNext-Heavy.ttf"; path = "../src/assets/fonts/AvenirNext-Heavy.ttf"; sourceTree = "<group>"; };
-		8D89491BF1BDC8B5A3FAE2FE /* Pods-bounce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bounce.release.xcconfig"; path = "Target Support Files/Pods-bounce/Pods-bounce.release.xcconfig"; sourceTree = "<group>"; };
-		8D9070DCC2A21C10FE9C6375 /* Pods-bounce-bounceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bounce-bounceTests.release.xcconfig"; path = "Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests.release.xcconfig"; sourceTree = "<group>"; };
-		9A80853598029D5B457EB180 /* libPods-bounce-bounceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bounce-bounceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D17CEEAF1F978060B6436E4 /* Pods-bounce-bounceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bounce-bounceTests.debug.xcconfig"; path = "Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9D7E6CE49FB9489A84820947 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		9D8D5CA46DE244F78E9149F8 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/native-base/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		9F765120195948728D822BA9 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
@@ -94,6 +105,7 @@
 		BB4A27C0129848A8A7F948AF /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		BCFDE2D678394AF4A116650B /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		BD12234F192440E4BF0340C2 /* AvenirNext-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AvenirNext-BoldItalic.ttf"; path = "../src/assets/fonts/AvenirNext-BoldItalic.ttf"; sourceTree = "<group>"; };
+		CB5EA41FC35A9D5219869E30 /* Pods-bounce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bounce.release.xcconfig"; path = "Target Support Files/Pods-bounce/Pods-bounce.release.xcconfig"; sourceTree = "<group>"; };
 		D09EB94D17094F23B2CF9B80 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../src/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		D2E12A6BBDD94D8CB4341894 /* AvenirNext-HeavyItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AvenirNext-HeavyItalic.ttf"; path = "../src/assets/fonts/AvenirNext-HeavyItalic.ttf"; sourceTree = "<group>"; };
 		D6BD4A3DF7F9472BA8179045 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -102,7 +114,6 @@
 		E150D2969B4E44A686C3EF48 /* AvenirNextLTPro-It.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AvenirNextLTPro-It.otf"; path = "../src/assets/fonts/AvenirNextLTPro-It.otf"; sourceTree = "<group>"; };
 		E39DDEC6FE7640C0A55581EF /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/native-base/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		E45C576A4F2B4CF98B031357 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		E5B11DCC2FC9AE44AED5E4D3 /* libPods-bounce.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bounce.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5D49F46BFC7434AA3C504BA /* 200.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = 200.ttf; path = ../src/assets/fonts/200.ttf; sourceTree = "<group>"; };
 		E682082C95F44002BC31D37A /* 500.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = 500.ttf; path = ../src/assets/fonts/500.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -117,7 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1A9FABB5936617A61993EEE /* libPods-bounce-bounceTests.a in Frameworks */,
+				8CD7CA91E810B283FB5938BE /* libPods-bounce-bounceTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +136,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD41EAF6B65022CD98D9BE43 /* libPods-bounce.a in Frameworks */,
+				1CAA81AF265B991700C8AE3A /* boost_context.xcframework in Frameworks */,
+				1CAA81B4265B993E00C8AE3A /* boost_filesystem.xcframework in Frameworks */,
+				32AD3E3167E1B1E2879BF138 /* libPods-bounce.a in Frameworks */,
+				1CAA81B6265B993E00C8AE3A /* boost_program_options.xcframework in Frameworks */,
+				1CAA81B8265B993E00C8AE3A /* boost_regex.xcframework in Frameworks */,
+				1CAA81BA265B993E00C8AE3A /* boost_system.xcframework in Frameworks */,
+				1CAA81BC265B993E00C8AE3A /* boost_thread.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,12 +191,17 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1CAA81B3265B993E00C8AE3A /* boost_filesystem.xcframework */,
+				1CAA81B5265B993E00C8AE3A /* boost_program_options.xcframework */,
+				1CAA81B7265B993E00C8AE3A /* boost_regex.xcframework */,
+				1CAA81B9265B993E00C8AE3A /* boost_system.xcframework */,
+				1CAA81BB265B993E00C8AE3A /* boost_thread.xcframework */,
 				1CA53A85265B6D8600E202D2 /* RNExitApp.xcodeproj */,
 				1CA53A83265B6D3900E202D2 /* libRNExitApp.a */,
 				1C67D42D2657C6F000923E58 /* boost_context.xcframework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				E5B11DCC2FC9AE44AED5E4D3 /* libPods-bounce.a */,
-				9A80853598029D5B457EB180 /* libPods-bounce-bounceTests.a */,
+				1559CBD4D2691A608FB0D510 /* libPods-bounce.a */,
+				2BB00B674CB80BE180C0D546 /* libPods-bounce-bounceTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -280,10 +302,10 @@
 		E8EF85542CC883BD9EFDE803 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				71DDCBEA161AA44E9F4F0409 /* Pods-bounce.debug.xcconfig */,
-				8D89491BF1BDC8B5A3FAE2FE /* Pods-bounce.release.xcconfig */,
-				33DD9FAA2436106F333852F4 /* Pods-bounce-bounceTests.debug.xcconfig */,
-				8D9070DCC2A21C10FE9C6375 /* Pods-bounce-bounceTests.release.xcconfig */,
+				0EEAE25861897208FBD2A80C /* Pods-bounce.debug.xcconfig */,
+				CB5EA41FC35A9D5219869E30 /* Pods-bounce.release.xcconfig */,
+				9D17CEEAF1F978060B6436E4 /* Pods-bounce-bounceTests.debug.xcconfig */,
+				33D1B58A49EBDB596DF3F33B /* Pods-bounce-bounceTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -295,12 +317,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "bounceTests" */;
 			buildPhases = (
-				955B49DE1F769037F72A1402 /* [CP] Check Pods Manifest.lock */,
+				C00A3E0DA4EEEF1FD60CEEBD /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				1282023E65453821893D4E1C /* [CP] Embed Pods Frameworks */,
-				05F50450F3182F886E6AF798 /* [CP] Copy Pods Resources */,
+				30383E6923C52945122E75DC /* [CP] Embed Pods Frameworks */,
+				8BFE46C31EA5AD5ECA92BD03 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -316,14 +338,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "bounce" */;
 			buildPhases = (
-				874BCC438B0FB437854CDAE1 /* [CP] Check Pods Manifest.lock */,
+				51BF41552DCA8E21F3DDC8AD /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				4211FDFAED01ECCB85A9E2D3 /* [CP] Embed Pods Frameworks */,
-				108B5CB7831EF232F778FF46 /* [CP] Copy Pods Resources */,
+				166995135F21D59FD65C4B3A /* [CP] Embed Pods Frameworks */,
+				42D4FDF4CA194EB3ACEE1D84 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -421,58 +443,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		05F50450F3182F886E6AF798 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		108B5CB7831EF232F778FF46 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-bounce/Pods-bounce-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-bounce/Pods-bounce-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bounce/Pods-bounce-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1282023E65453821893D4E1C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4211FDFAED01ECCB85A9E2D3 /* [CP] Embed Pods Frameworks */ = {
+		166995135F21D59FD65C4B3A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -489,7 +460,41 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bounce/Pods-bounce-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		874BCC438B0FB437854CDAE1 /* [CP] Check Pods Manifest.lock */ = {
+		30383E6923C52945122E75DC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		42D4FDF4CA194EB3ACEE1D84 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bounce/Pods-bounce-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bounce/Pods-bounce-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bounce/Pods-bounce-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		51BF41552DCA8E21F3DDC8AD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -511,7 +516,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		955B49DE1F769037F72A1402 /* [CP] Check Pods Manifest.lock */ = {
+		8BFE46C31EA5AD5ECA92BD03 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bounce-bounceTests/Pods-bounce-bounceTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C00A3E0DA4EEEF1FD60CEEBD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -585,7 +607,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33DD9FAA2436106F333852F4 /* Pods-bounce-bounceTests.debug.xcconfig */;
+			baseConfigurationReference = 9D17CEEAF1F978060B6436E4 /* Pods-bounce-bounceTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -613,7 +635,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8D9070DCC2A21C10FE9C6375 /* Pods-bounce-bounceTests.release.xcconfig */;
+			baseConfigurationReference = 33D1B58A49EBDB596DF3F33B /* Pods-bounce-bounceTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -638,7 +660,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 71DDCBEA161AA44E9F4F0409 /* Pods-bounce.debug.xcconfig */;
+			baseConfigurationReference = 0EEAE25861897208FBD2A80C /* Pods-bounce.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -666,7 +688,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8D89491BF1BDC8B5A3FAE2FE /* Pods-bounce.release.xcconfig */;
+			baseConfigurationReference = CB5EA41FC35A9D5219869E30 /* Pods-bounce.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

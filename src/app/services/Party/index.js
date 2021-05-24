@@ -13,9 +13,8 @@ class PartyService {
       console.log(
         'JSON_PARTY_FORM_DATA_edit_check_22 - ',
         JSON.stringify(formData),
-      );
-      console.log('ENDPOINT_ETST - ', endPoint);
-        return;
+      ); 
+      //return false;
       MobxStore.appStore.toogleLoader(true);
       const createPartyRes = await ApiClient.authInstance.post(
         endPoint,

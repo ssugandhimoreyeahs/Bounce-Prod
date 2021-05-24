@@ -20,7 +20,7 @@ import {
   TicketComponent,
 } from '@components';
 import {UploadCamera} from '@assets';
-import {UploadBlue, BlackClose, BlueCamera} from '@svg';
+import {UploadBlue, BlackClose, BlueCamera, Add_Outline, AddBlue} from '@svg';
 import {Keyboard} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import {connect} from 'react-redux';
@@ -144,19 +144,31 @@ function CreateInvitation(props) {
 
   // console.log("partyModel.party",partyModel?.party?.galleryFiles);
   const handleCarousel = () => {
+    let img = [];
+    if (partyModel?.party?.galleryFiles?.length > 0) {
+      partyModel.party.galleryFiles.map(i => i?.path && img.push(i.path));
+    }
+    if (partyModel?.party?.gallery?.length > 0) {
+      partyModel.party.gallery.map(i => img.push(i.filePath));
+    }
+    console.log('IMG_TEST ', img);
     return (
-      <ImageCarousel
-        value={'CreateInvitation'}
-        // onPress={handleImage}
-        pagination
-        imageArray={
-          partyModel?.party?.galleryFiles?.length == 0
-            ? []
-            : partyModel?.party?.galleryFiles
-        }
-        onSnapToItem={index => setImageState(index)}
-        state={getImageState}
-      />
+      <View>
+        <ImageCarousel
+          onPre
+          value={'CreateInvitation'}
+          // onPress={handleImage}
+          pagination
+          imageArray={img.length == 0 ? [] : img}
+          onSnapToItem={index => setImageState(index)}
+          state={getImageState}
+        />
+        <TouchableOpacity onPress={()=>{
+          handleImage();
+        }} style={{position: 'absolute', bottom: 10, right: 20}}>
+          <AddBlue height={33} width={33} />
+        </TouchableOpacity>
+      </View>
     );
   };
   return (
@@ -193,7 +205,7 @@ function CreateInvitation(props) {
 
                 // Alert.alert("All changes will be lost! Are you sure ? ")
               }}
-            /> 
+            />
             <View
               style={{
                 paddingHorizontal: 10,
@@ -211,34 +223,38 @@ function CreateInvitation(props) {
                 styleProp={{borderRadius: 19}}
               />
 
-              {partyModel?.party?.galleryFiles?.length == 0 ? (
-                <TouchableOpacity
-                  onPress={handleImage}
-                  style={{
-                    marginVertical: getHp(40),
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <View
+              {!partyModel.isEditMode ? (
+                partyModel?.party?.galleryFiles?.length == 0 ? (
+                  <TouchableOpacity
+                    onPress={handleImage}
                     style={{
-                      borderRadius: 100,
-                      elevation: 10,
-                      backgroundColor: '#fff',
+                      marginVertical: getHp(40),
+                      justifyContent: 'center',
+                      alignItems: 'center',
                     }}>
-                    <UploadBlue height={getHp(100)} width={getHp(100)} />
-                  </View>
-                  <Text
-                    style={{
-                      fontSize: FONTSIZE.Text14,
-                      color: '#000',
-                      marginTop: 10,
-                      fontFamily: 'AvenirNext',
-                    }}>
-                    {'Upload Media'}
-                  </Text>
-                </TouchableOpacity>
+                    <View
+                      style={{
+                        borderRadius: 100,
+                        elevation: 10,
+                        backgroundColor: '#fff',
+                      }}>
+                      <UploadBlue height={getHp(100)} width={getHp(100)} />
+                    </View>
+                    <Text
+                      style={{
+                        fontSize: FONTSIZE.Text14,
+                        color: '#000',
+                        marginTop: 10,
+                        fontFamily: 'AvenirNext',
+                      }}>
+                      {'Upload Media'}
+                    </Text>
+                  </TouchableOpacity>
+                ) : (
+                  // null
+                  handleCarousel()
+                )
               ) : (
-                // null
                 handleCarousel()
               )}
 
@@ -317,8 +333,8 @@ function CreateInvitation(props) {
               <View style={{marginVertical: 10}}>
                 <SwitchButton
                   value={partyModel.party.isPrivate}
-                  onPrivatePress={() => partyModel.party.set({isPrivate: true})}
-                  onPublicPress={() => partyModel.party.set({isPrivate: false})}
+                  onPrivatePress={() => partyModel.party.setIsPrivate(true)}
+                  onPublicPress={() => partyModel.party.setIsPrivate(false)}
                 />
               </View>
 
@@ -415,7 +431,7 @@ function CreateInvitation(props) {
                 {'Add Ticket Type'}
               </Text>
             </TouchableOpacity>
-            {partyModel.party.ticket?.map((t, index) => {
+            {partyModel.party.tickets?.map((t, index) => {
               return (
                 <TicketComponent
                   data={t}

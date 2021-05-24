@@ -4,7 +4,7 @@ import {
 } from '../../Entities';
 import {ReactModel} from '../../core';
 import {Validation} from '../../Validations';
- 
+
 @ReactModel()
 class CreatePartyDTO extends CreatePartyEntity {
   partyError = {};
@@ -47,16 +47,9 @@ class CreatePartyDTO extends CreatePartyEntity {
     this.notifyListeners();
   };
   isPartyValid = async (isDraftMode = false, isEditMode = false) => {
-    let validateParty;
-    if (isEditMode) {
-      validateParty = CreatePartyEntity.forEditValidate(this);
-    }else {
-      validateParty = CreatePartyEntity.forValidate(this);
-    }
-    validateParty.isDraft = isDraftMode;
-    console.log('PARTY_LOG_EDIT_5 - ', JSON.stringify(validateParty));
+    let validateParty = CreatePartyEntity.toJSON(this, isEditMode);
+    validateParty.isDraft = isDraftMode; 
     let schema = {success: false, partyFields: validateParty, error: {}};
-
     const isValid = await Validation.validateClassDecorator(validateParty);
     if (!isValid.success) {
       console.log('ERROR_PARTY - ', JSON.stringify(isValid));
@@ -71,7 +64,7 @@ class CreatePartyDTO extends CreatePartyEntity {
     if (Object.keys(preParty).length == 0) {
       Object.assign(this, new CreatePartyEntity());
     } else {
-      Object.assign(this, CreatePartyEntity.toEdit(preParty));
+      Object.assign(this, CreatePartyEntity.fromJSON(preParty));
     }
     this.notifyListeners();
   };

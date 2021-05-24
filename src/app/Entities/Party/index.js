@@ -34,7 +34,7 @@ class Party {
   @D.PartyAge('fromAge', {message: 'Invalid Maximum Age'})
   toAge;
 
-  @ArrayNotEmpty({message: Strings.requiredFieldError('Event Media')})
+  //@ArrayNotEmpty({message: Strings.requiredFieldError('Event Media')})
   galleryFiles = [];
 
   gallery = [];

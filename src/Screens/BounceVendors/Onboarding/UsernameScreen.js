@@ -12,7 +12,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchVendorData } from "../../../reducer/mainexpensecategory";
 import BirthDayScreen from './BirthDayScreen';
 import { ApiClient } from '../../../app/services';
-
+import { Toast } from '../../../app/constants';
+ 
 export default function UserNameScreen(props) {
     const {
         navigation
@@ -62,6 +63,7 @@ export default function UserNameScreen(props) {
 
             }
         } catch (error) {
+            Toast('User already exist');
             console.log(error);
         }
     }
@@ -95,7 +97,7 @@ export default function UserNameScreen(props) {
     // }
 
 
-    return (
+    return ( 
         <Root>
             <KeyboardAwareScrollView style={{ flexGrow: 1 }} contentContainerStyle={{ flex: 1 }}>
                 <View style={styles.container}>

@@ -4,7 +4,7 @@ import {
 } from '../../Entities';
 import {ReactModel} from '../../core';
 import {Validation} from '../../Validations';
-
+ 
 @ReactModel()
 class CreatePartyDTO extends CreatePartyEntity {
   partyError = {};

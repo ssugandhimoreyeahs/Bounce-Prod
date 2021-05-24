@@ -95,6 +95,7 @@ function CreateInvitation(props) {
       console.log('CREATE_PARTY_RES - ', savePartyResponse);
     } catch (error) {
       console.log('ERROR - ', error);
+      Toast('Something went wrong!');
     }
   };
   const handleImage = async () => {

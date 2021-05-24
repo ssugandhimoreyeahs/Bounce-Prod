@@ -10,7 +10,6 @@ import {Decorators as D, ValidationTypes} from '../../Validations';
 import {timezoneToUTC} from '../../utils';
 import moment from 'moment';
 class Party {
-  id;
   @IsNotEmpty({message: 'Required title'})
   title;
   @IsNotEmpty({message: 'Required Description'})
@@ -102,8 +101,16 @@ class Party {
       newParty.date = moment(fields.date).format('YYYY-MM-DD HH:mm:ss');
       newParty.gallery = fields?.gallery?.map(i => ({id: i.id})) || [];
       newParty.profileImage = fields?.profileImage?.id || 0;
-      newParty.ticket = fields.ticket;
+      newParty.tickets = fields.ticket.map(t => ({
+        id: t.id,
+        title: t.title,
+        description: t.description,
+        price: t.price,
+        quantity: t.quantity,
+      }));
+      newParty;
       delete newParty.id;
+      delete newParty.profileImageFile;
       return newParty;
     } catch (error) {
       console.log('ERROR - ', error);

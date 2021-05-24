@@ -4,18 +4,18 @@ import CreateFormData from '../FormData';
 
 class PartyService {
   createOrUpdateParty = async (partyFields, partyID = undefined) => {
-    try {
+    try { 
       const formData = CreateFormData.objectToFormData(partyFields);
       let endPoint = ApiClient.endPoints.party;
       if (partyID) {
         endPoint = endPoint.concat('/' + partyID);
       }
       console.log(
-        'JSON_PARTY_FORM_DATA_edit_check_3 - ',
+        'JSON_PARTY_FORM_DATA_edit_check_22 - ',
         JSON.stringify(formData),
       );
       console.log('ENDPOINT_ETST - ', endPoint);
-      //return false;
+  
       MobxStore.appStore.toogleLoader(true);
       const createPartyRes = await ApiClient.authInstance.post(
         endPoint,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert,ToastAndroid } from 'react-native'
 import { Header, Root, GooglePlacesInput, CustomDropdown, CustomButton, FloatingInput, ModalDropDownComponent } from '@components'
 import { Avatar } from 'react-native-elements'
 import { UploadBlue, BlackCircleCross } from '@svg';
@@ -188,7 +188,7 @@ function DJSignup(props) {
         })
         setLoader(false);
         if (venderRegisterResponse.status == 201 || venderRegisterResponse.status == 200) {
-            //ToastAndroid.show("Profile Updated Successfully!")
+            ToastAndroid.show("Profile Updated Successfully!",1000)
             authStore.async.reloadVendor();
         }
 

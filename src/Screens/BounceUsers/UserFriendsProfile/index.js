@@ -306,7 +306,7 @@ function UserFriendsProfile(props) {
                   <View style={styles.flex}>
                     <Insta height={30} width={30} />
                     <TextInput
-                      placeholder={`Instagram`}
+                      placeholder={`Instagram `}
                       placeholderTextColor={'#000'}
                       // value={instagram == null ? user.instagramUsername : instagram}
                       onChangeText={(value) => setInstagram(value)}

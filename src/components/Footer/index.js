@@ -19,7 +19,7 @@ import {
     LeftBlueArrow,
     RightBlueArrow,
     BlackOutlineHeart,
-    BlackShare,
+    BlackOutlineShare,
 } from '@svg'
 import { shareFunction } from '@components'
 import { FONTSIZE, getHp, getWp, smallHitSlop } from '@utils';
@@ -208,7 +208,7 @@ export default function Footer(props) {
                             onPress={() => setShared(shared + 1)}
                             style={[styles.footerList,]} >
                             {
-                                <BlackShare height={21} width={21} />
+                                <BlackOutlineShare height={21} width={21} />
                             }
                             <Text style={styles.reviewsTitleStyle}>{`Share`}</Text>
                         </TouchableOpacity>

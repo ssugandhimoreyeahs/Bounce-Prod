@@ -16,7 +16,7 @@ import { FlatList } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import Ratings from "../../components/RatingStar/Ratings";
-import { BlackShare } from '../../assets/Svg';
+import { BlackOutlineShare } from '../../assets/Svg';
 import { Container, Header as NativeHeader, Content, Tab, Tabs } from 'native-base';
 import { styles } from './indexCss'
 import Tab1 from '../../Screens/BounceUsers/UserFriendsProfile/Tab1.js';
@@ -24,7 +24,21 @@ import Tab2 from '../../Screens/BounceUsers/UserFriendsProfile/Tab2.js';
 import Tab3 from '../../Screens/BounceUsers/UserFriendsProfile/Tab3.js';
 import { FONTSIZE, getHp, getWp } from '@utils'
 import MboxStore from '../../mobx';
-import { observer } from 'mobx-react'; 
+import { observer } from 'mobx-react';
+import EventPageTab1 from '../../Screens/MyEvents/EventTab1'
+import EventPageTab2 from '../../Screens/MyEvents/EventTab2'
+
+
+export const ThreeFooterButtons = ({ icon, ButtonTitle }) => {
+    return (
+        <TouchableOpacity style={styles.bottomContainer}>
+            {icon}
+            <Text style={[{ color: '#000', fontSize: FONTSIZE.Text12, fontFamily: '500',marginTop:5 }]}>
+                {ButtonTitle}
+            </Text>
+        </TouchableOpacity>
+    )
+}
 
 export const PrivacyBlock = () => {
     return (<View>
@@ -34,9 +48,33 @@ export const PrivacyBlock = () => {
     )
 }
 
+export const EventTabview = observer((props) => {
+    return (
+        <View style={{ borderBottomWidth: 1, borderColor: '#EEEEEE', }}>
+            <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
 
+                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
+                    textStyle={{ color: '#999999', fontFamily: '500',fontSize:FONTSIZE.Text16 }}
+                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
+                    activeTextStyle={{ color: '#000', fontFamily: 'ANB',fontSize:FONTSIZE.Text16 }} heading={"Attending"}>
+                    <ScrollView nestedScrollEnabled={true} style={{
+                        height: 300
+                    }}>
+                        <EventPageTab1 partyStore={MboxStore.partyStore} {...props} />
+                    </ScrollView>
+                </Tab >
+
+                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
+                    textStyle={{color: '#999999', fontFamily: '500',fontSize:FONTSIZE.Text16 }}
+                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
+                    activeTextStyle={{ color: '#000', fontFamily: 'ANB',fontSize:FONTSIZE.Text16 }} heading="Featuring">
+                    <EventPageTab2 />
+                </Tab>
+            </Tabs>
+        </View>
+    );
+});
 export const Tabview = observer((props) => {
-
     return (
         <View style={{ marginVertical: 10, borderBottomWidth: 1, borderColor: '#EEEEEE' }}>
             <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
@@ -46,9 +84,9 @@ export const Tabview = observer((props) => {
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
                     activeTextStyle={{ color: '#000', fontFamily: '500' }} heading={"Hosting"}>
                     <ScrollView nestedScrollEnabled={true} style={{
-                        height:300
+                        height: 300
                     }}>
-                    <Tab1 partyStore={MboxStore.partyStore} {...props}/>
+                        <Tab1 partyStore={MboxStore.partyStore} {...props} />
                     </ScrollView>
                 </Tab >
 
@@ -167,7 +205,7 @@ export const VendorCard = ({ item }) => {
                         <BlackOutlineHeart height={22} width={24} />
                         : <FavouritedHeart height={22} width={24} />
                 }
-                <BlackShare height={25} width={27} style={{ marginLeft: 30 }} />
+                <BlackOutlineShare height={25} width={27} style={{ marginLeft: 30 }} />
             </View>
 
         </View>

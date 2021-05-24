@@ -8,6 +8,8 @@ import RadialGradient from 'react-native-radial-gradient';
 
 export default function CustomButton(props) {
     const {
+        onSaveDraftPress = () => { },
+        onContinuePress = () => { },
         ButtonTitle = false,
         ButtonTitle2 = false,
         bar = false,
@@ -76,13 +78,13 @@ export default function CustomButton(props) {
             {  rowDoubleButton ?
                 <>
                     <View style={styles.rowButton}>
-                        <TouchableOpacity style={styles.DoubleButton} onPress={onPress}>
-                            <Text style={[styles.titleStyle, { color: '#1FAEF7', fontSize: FONTSIZE.Text20,  letterSpacing: 0.2 }]}>
+                        <TouchableOpacity style={styles.DoubleButton} onPress={onSaveDraftPress}>
+                            <Text style={[styles.titleStyle, { color: '#1FAEF7', fontSize: FONTSIZE.Text20, letterSpacing: 0.2 }]}>
                                 {ButtonTitle}
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.DoubleButton, { backgroundColor: '#1FAEF7', }]} onPress={onPress}>
-                            <Text style={[styles.titleStyle, { color: '#fff', fontSize: FONTSIZE.Text20,  letterSpacing: 0.2 }]}>
+                        <TouchableOpacity style={[styles.DoubleButton, { backgroundColor: '#1FAEF7', }]} onPress={onContinuePress}>
+                            <Text style={[styles.titleStyle, { color: '#fff', fontSize: FONTSIZE.Text20, letterSpacing: 0.2 }]}>
                                 {ButtonTitle2}
                             </Text>
                         </TouchableOpacity>

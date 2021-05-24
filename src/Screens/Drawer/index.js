@@ -10,7 +10,7 @@ import {
   BlackClose,
   More,
   BlackBorderPen,
-  BlackShare,
+  BlackOutlineShare,
   LockBlack,
   Settings,
   WhiteShare

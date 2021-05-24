@@ -30,7 +30,6 @@ export default function VendorSignup(props) {
         ImagePicker.openPicker({
             width: 300,
             height: 300,
-            cropping: true
         }).then(image => {
             setPicture(image)
         });

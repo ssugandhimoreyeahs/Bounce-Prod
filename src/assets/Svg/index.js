@@ -32,14 +32,13 @@ import AddBlueWhite from './AddBlueWhite.svg'
 import MessageBlack from './MessageBlack.svg'
 import FavouritedHeart from './FavouritedHeart.svg'
 import FavouriteHeart from './FavouriteHeart.svg'
-import BlackShare from './BlackShare.svg'
+import BlackOutlineShare from './BlackOutlineShare.svg'
 import UploadBlue from './UploadBlue.svg'
 import GreyBell from './GreyBell.svg'
 import GreyParty from './GreyParty.svg'
 import GreyPerson from './GreyPerson.svg'
 import DJ from './DJ.svg'
 import PhotoVideo from './PhotoVideo.svg'
-// import Security from './Security.svg'
 import Certified from './Certified.svg'
 import Armed from './Armed.svg'
 import Multilingual from './Multilingual.svg'
@@ -65,17 +64,14 @@ import Spotify from './Spotify.svg'
 import Twitter from './Twitter.svg'
 import Snapchat from './Snapchat.svg'
 import Tiktok from './Tiktok.svg'
-
 import LockBlack from './LockBlack.svg'
 import Settings from './Settings.svg'
 import BlackFilter from './BlackFilter.svg'
-
 import RequestSent from './RequestSent.svg'
 import SendRequest from './SendRequest.svg'
 import BlackOutlineHeart from './BlackOutlineHeart.svg'
 import WhiteMessageOutline from './WhiteMessageOutline.svg'
 import GreyHamburger from './GreyHamburger.svg'
-
 import Bartender from './Bartender.svg'
 import DjMusic from './DJ.svg'
 import Food from './Food.svg'
@@ -83,13 +79,11 @@ import Security from './Security.svg'
 import Cleaning from './Cleaning.svg'
 import PartyRentals from './Party_Rentals.svg'
 import Videographer from './Video.svg'
-
 import Bounce from './Bounce_Logo.svg'
 import Pdf from './Pdf.svg'
 import BounceProLogo from './BounceProLogo.svg'
 import BounceSplash from './Bounce.svg'
 import BlueCross from './BlueCross.svg'
-
 import BlackDollar from './BlackDollar.svg'
 import GreyEye from './GreyEye.svg'
 import BlueEye from './BlueEye.svg'
@@ -102,28 +96,42 @@ import WhiteTick from './WhiteTick.svg'
 import WhiteShare from '../white_svg/Share.svg';
 import WhiteMore from '../white_svg/More_Icons.svg';
 import EditPen from './EditPen.svg';
-
 import YellowStar from './YellowStar.svg';
 import GreyHome from './GreyHome.svg';
 import GreyEvent from './GreyEvent.svg';
 import BlackEvent from './BlackEvent.svg';
 import BlackHome from './BlackHome.svg';
-
 import WhitePerson from './WhitePerson.svg'
 import GreyCross from './GreyCross.svg'
 import InstaNew from './InstaNew.svg'
-
 import Add_Outline from './Add_Outline.svg'
 import Bell_Outline from './Bell_Outline.svg'
 import Home_Outline from './Home_Outline.svg'
 import Search_Outline from './Search_Outline.svg'
-
 import Add_Fill from './Add_Fill.svg'
 import Bell_Fill from './Bell_Fill.svg'
 import Home_Fill from './Home_Fill.svg'
 import Search_Fill from './Search_Fill.svg'
+import ThreeBlackDots from './ThreeBlackDots.svg'
+import BlackOutlineCalender from './BlackOutlineCalender.svg'
+import BlackSolidStar from './BlackSolidStar.svg'
+import BlackSolidShare from './BlackSolidShare.svg'
+import BlackSolidPeoples from './BlackSolidPeoples.svg'
+
+import Going from './Going.svg'
+import Interested from './Interested.svg'
+import Cantgo from './Cantgo.svg'
+
 
 export {
+    Going,
+    Interested,
+    Cantgo,
+    BlackSolidPeoples,
+    BlackSolidShare,
+    BlackSolidStar,
+    BlackOutlineCalender,
+    ThreeBlackDots,
     Add_Fill,
     Bell_Fill,
     Home_Fill,
@@ -201,7 +209,7 @@ export {
     GreyParty,
     GreyPerson,
     UploadBlue,
-    BlackShare,
+    BlackOutlineShare,
     FavouriteHeart,
     FavouritedHeart,
     MessageBlack,

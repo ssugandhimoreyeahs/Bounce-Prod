@@ -6,7 +6,11 @@ import { UploadBlue } from '@svg'
 
 export default function DesignCanva() {
     return (<View style={styles.container}>
-        <Header headerTitle={"Custom Invitation"}
+
+<Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10, fontFamily: 'ANB', fontSize: FONTSIZE.Text22 }]} >
+                {"Under Development"}
+                </Text>
+        {/* <Header headerTitle={"Custom Invitation"}
             back
             onPress={() => navigation.goBack()}
         />
@@ -32,7 +36,7 @@ export default function DesignCanva() {
                     {"Design with Canva"}
                 </Text>
             </TouchableOpacity>
-        </View>
+        </View> */}
     </View>
     )
 }

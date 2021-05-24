@@ -33,12 +33,12 @@ class UserHomeBottomNavigation {
     } = MobxStore;
     const userinfo = authStore.userProfile;
     const { profileImage = {} } = userinfo?.user;
-    
+
     return (
       <UserHomeBottomTab.Navigator
         initialRouteName={UserHomeScreen.routeName}
         labeled={false}
-        barStyle={{ backgroundColor: '#FBFBFB', elevation: 5 }}
+        barStyle={{ backgroundColor: '#FBFBFB', elevation: 5, height: 65 }}
         unmountOnBlur={true}
         keyboardHidesNavigationBar
         screenOptions={{ unmountOnBlur: true }}>
@@ -47,9 +47,9 @@ class UserHomeBottomNavigation {
             unmountOnBlur: true,
             tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
-                <Home_Outline height={30} width={30} />
+                <Home_Outline height={33} width={33} />
               ) : (
-                  <Home_Outline height={30} width={30} />
+                  <Home_Outline height={33} width={33} />
                 );
             },
           }}
@@ -62,9 +62,9 @@ class UserHomeBottomNavigation {
             title: null,
             tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
-                <Search_Outline height={30} width={30} />
+                <Search_Outline height={33} width={33} />
               ) : (
-                  <Search_Outline height={30} width={30} />
+                  <Search_Outline height={33} width={33} />
                 );
             },
           }}
@@ -78,9 +78,10 @@ class UserHomeBottomNavigation {
             // tabBarColor: 'red',
             tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
-                <Add_Outline height={30} width={30} />
+                <Add_Outline height={33} width={33} />
+
               ) : (
-                  <Add_Outline height={30} width={30} />
+                  <Add_Outline height={33} width={33} />
                 );
             },
           }}
@@ -97,9 +98,9 @@ class UserHomeBottomNavigation {
             // tabBarColor: 'red',
             tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
-                <Bell_Outline height={30} width={30} />
+                <Bell_Outline height={33} width={33} />
               ) : (
-                  <Bell_Outline height={30} width={30} />
+                  <Bell_Outline height={33} width={33} />
                 );
             },
           }}
@@ -121,14 +122,14 @@ class UserHomeBottomNavigation {
                   rounded
                   source={{ uri: `${profileImage?.filePath}` }}
                   // source={Placeholder}
-                  style={{ resizeMode: 'contain', height: 26, width: 26 }}
+                  style={{ resizeMode: 'contain', height: 33, width: 33 }}
                 />
               ) : (
                   <Avatar
                     rounded
                     // source={Placeholderr}
                     source={{ uri: `${profileImage?.filePath}` }}
-                    style={{ resizeMode: 'contain', height: 26, width: 26 }}
+                    style={{ resizeMode: 'contain', height: 33, width: 33 }}
                   />
                 );
             },

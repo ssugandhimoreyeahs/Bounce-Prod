@@ -86,7 +86,7 @@ const ModalDropDownComponent = (props) => {
                 onSelect={(index) => {
                     onSelectDropDown({ ...options[index] });
                 }}
-                dropdownStyle={{ marginTop: 20, width: "94%" }}
+                dropdownStyle={{ marginTop: 20, width: "95.5%" }}
             >
 
             </ModalDropdown>

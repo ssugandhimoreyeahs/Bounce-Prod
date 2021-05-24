@@ -20,7 +20,11 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { LocalStorage } from '../../../app/utils/localStorage';
 import { UserContext } from '../../../context/profiledataProvider';
 import MobxStore from '../../../mobx';
+ 
 import moment from 'moment';
+ 
+import { ApiClient } from '../../../app/services';
+ 
 
 export default function ProfilePic(props) {
     const {
@@ -32,8 +36,9 @@ export default function ProfilePic(props) {
     const dispatch = useDispatch()
     const [loader, setLoader] = useState(false);
 
-    const { name, username, password, birthday, live } = props.route.params
+    const { name, username, password, birthday } = props.route.params
     console.log("ProfilePic PROPS -->", props.route.params)
+ 
     console.log(name, username, password, birthday, live);
      
     const handleSubmit = async () => {
@@ -41,6 +46,7 @@ export default function ProfilePic(props) {
             setLoader(true)
             if (picture != null) { 
                 let birthday = moment(birthday).format('YYYY-MM-DD') +' 00:00:00';
+ 
                 let milliseconds = new Date().getTime();
                 console.log("PICTURE", picture);
                 let imgObj = {
@@ -52,11 +58,12 @@ export default function ProfilePic(props) {
                 formData.append('fullName', name);
                 formData.append('username', username);
                 formData.append('password', password);
-                formData.append('birthday', birthday);
+                // formData.append('birthday', birthday);
                 formData.append('profileImageFile', imgObj);
                 formData.append('vendorType', 2);
 
-                const response = await axios.post('http://3.12.168.164:3000/auth/host/register', formData);
+                const response = await ApiClient.instance.post(ApiClient.endPoints.userRegister, formData)
+                axios.post('auth/host/register', formData);
                 if (response.status == 201 || response.status == 200) {
                     const result = await JSON.stringify(response.data)
                     console.log("NEW_USER_REGISTRATION ", result);
@@ -72,7 +79,7 @@ export default function ProfilePic(props) {
         catch (e) {
             setLoader(false)
             console.log('ERROR - ', e);
-            ToastAndroid.show('Please use different username !', 1000);
+            ToastAndroid.show('e', 1000);
 
         }
     }
@@ -159,12 +166,7 @@ export default function ProfilePic(props) {
 
                         <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
                         <ProgressCircle currentProgress={4} containerStyle={{marginBottom: 20}}/>
-                            <TouchableOpacity
-                                onPress={() => ToastAndroid.show("This is under Development!", 1000)}>
-                                <Text style={styles.skip}>
-                                    {"Skip the rest for now"}
-                                </Text>
-                            </TouchableOpacity>
+                          
 
                             <CustomButton
                                 userContinue
@@ -203,11 +205,10 @@ const styles = StyleSheet.create({
     },
     HeadingStyle: {
         marginTop: 40,
-        fontFamily: 'Avenir Next',
+        fontFamily: '500',
         letterSpacing: 0.2,
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text26,
-        fontWeight: 'bold',
     },
     signStyle: {
         fontFamily: 'Avenir Next',

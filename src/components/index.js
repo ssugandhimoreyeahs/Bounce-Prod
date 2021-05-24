@@ -53,7 +53,10 @@ import {
     VendorCard,
     Tabview,
     PrivacyBlock,
+    EventTabview,
+    ThreeFooterButtons
 } from './BreakedComponents'
+
 import DropDown from './CustomDropdown/DropDown'
 import TagsCollapsible from './TagsCollapsible';
 import ProgressCircle from './ProgressCircle';
@@ -61,6 +64,8 @@ import ProgressCircle from './ProgressCircle';
 
 
 export {
+    ThreeFooterButtons,
+    EventTabview,
     PrivacyBlock,
     TagsCollapsible,
     TicketComponent,

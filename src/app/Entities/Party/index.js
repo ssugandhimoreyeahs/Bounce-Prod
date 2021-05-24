@@ -87,8 +87,7 @@ class Party {
         ? moment(fields.date).format('YYYY-MM-DD HH:mm:ss')
         : null; //2020-12-25 12:15:00
 
-      if (isEdit) {
-        newParty.date = moment(fields.date).format('YYYY-MM-DD HH:mm:ss');
+      if (isEdit) { 
         newParty.gallery = fields?.gallery?.map(i => ({id: i.id})) || [];
         newParty.profileImage = fields?.profileImage?.id || 0;
         newParty.ticket = fields.ticket.map(t => {

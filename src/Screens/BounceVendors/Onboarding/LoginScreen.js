@@ -28,6 +28,7 @@ import MobxStore from '../../../mobx';
 import VendorCategory from '../../Signup/Vendor/VendorCategory';
 import NameScreen from './NameScreen';
 import { BounceProLogo, BounceSplash } from '@svg'
+import HostView from '../../MyEvents/HostView';
 
 function LoginScreen(props) {
   const { fetchProfile } = useContext(UserContext);
@@ -120,10 +121,11 @@ function LoginScreen(props) {
             ) : null}
 
             <View style={styles.CardContainer}>
-              <View style={styles.Card}>
+
+              <TouchableOpacity onPress={() => props.navigation.navigate(HostView.routeName)} style={styles.Card}>
                 <Insta height={30} width={30} style={{ margin: 10 }} />
                 <Text style={styles.ThirdParty}>{'Instagram'}</Text>
-              </View>
+              </TouchableOpacity>
 
               <View style={styles.Card}>
                 <Apple height={30} width={30} style={{ margin: 10 }} />

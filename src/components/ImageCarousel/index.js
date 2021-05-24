@@ -88,37 +88,57 @@ export default function ImageCarousel(props) {
                                     </View>
                                 </View>
                                 :
-                                <View style={{}}>
-                                    <TouchableOpacity
-                                        onPress={onPress}
-                                        style={styles.imageButton} >
-                                        <AddBlue height={25} width={25} />
-                                    </TouchableOpacity>
-
+                                value == 'CreateInvitation' ?
                                     <View style={{
                                         alignItems: 'center',
                                         backgroundColor: '#fff'
                                     }}>
-
-                                        <Image
-                                            source={{
-                                                uri: item?.filePath ?
-                                                    item.filePath : `${item.itemImage}`
-                                            }}
-                                            style={{ width: '100%', height: 400, }} />
-                                        {
-                                            imageBottomLeftText ?
-                                                <View style={[styles.flexDirectionStyle, { width: '100%', backgroundColor: '#DDDDDD', }]}>
-                                                    <Text style={[styles.fullInventoryTitleStyle]}>{item.itemName}</Text>
-                                                    <View style={[styles.flexDirectionStyle,]}>
-                                                        <BlackDollar height={26} width={26} />
-                                                        <Text style={[styles.reviewsTitleStyle, { marginLeft: 10, fontSize: FONTSIZE.Text20 }]}>{item.itemCost}</Text>
-                                                    </View>
-                                                </View>
-                                                : null
-                                        }
+                                        <Image source={{
+                                            uri: item
+                                        }}
+                                            style={{ marginLeft: -20, width: '90%', height: 400, }} />
                                     </View>
-                                </View>
+                                    :
+                                    value == 'Normal' ?
+                                        <View style={{
+                                            alignItems: 'center',
+                                            backgroundColor: 'red'
+                                        }}>
+                                            <Image source={item}
+                                                style={{ width: '100%', height: 400, }} />
+                                        </View>
+                                        :
+                                        <View style={{}}>
+                                            <TouchableOpacity
+                                                onPress={onPress}
+                                                style={styles.imageButton} >
+                                                <AddBlue height={25} width={25} />
+                                            </TouchableOpacity>
+
+                                            <View style={{
+                                                alignItems: 'center',
+                                                backgroundColor: '#fff'
+                                            }}>
+
+                                                <Image
+                                                    source={{
+                                                        uri: item?.filePath ?
+                                                            item.filePath : `${item.itemImage}`
+                                                    }}
+                                                    style={{ width: '100%', height: 400, }} />
+                                                {
+                                                    imageBottomLeftText ?
+                                                        <View style={[styles.flexDirectionStyle, { width: '100%', backgroundColor: '#DDDDDD', }]}>
+                                                            <Text style={[styles.fullInventoryTitleStyle]}>{item.itemName}</Text>
+                                                            <View style={[styles.flexDirectionStyle,]}>
+                                                                <BlackDollar height={26} width={26} />
+                                                                <Text style={[styles.reviewsTitleStyle, { marginLeft: 10, fontSize: FONTSIZE.Text20 }]}>{item.itemCost}</Text>
+                                                            </View>
+                                                        </View>
+                                                        : null
+                                                }
+                                            </View>
+                                        </View>
                 }
             </View>
         );
@@ -126,45 +146,40 @@ export default function ImageCarousel(props) {
 
     return (
         <View>
-
             <Carousel
-                // ref={(c) => { carousel = c; }}
                 data={imageArray}
                 renderItem={renderItem}
                 sliderWidth={width}
                 itemWidth={width}
-                // itemHeight={150}
                 onSnapToItem={onSnapToItem}
-
             />
             { !pagination ?
                 null
                 :
                 <Pagination
-                    containerStyle={{ marginTop: -20 }}
+                    containerStyle={{ backgroundColor: 'rgba(52, 52, 52, 0)', marginVertical: -20 }}
+
                     dotsLength={imageArray.length}
                     activeDotIndex={state}
-
-                    // containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.75)', }}
                     dotStyle={{
+
                         width: 10,
                         height: 10,
                         borderRadius: 5,
                         marginHorizontal: -5,
                         backgroundColor: '#1FAEF7',
-
                     }}
                     inactiveDotStyle={{
                         backgroundColor: '#696969'
                     }}
-                    // inactiveDotOpacity={0.4}
                     inactiveDotScale={0.6}
                 />
             }
-
         </View>
     );
 }
+
+
 const styles = StyleSheet.create({
     imageButton: {
         borderRadius: 100,
@@ -173,7 +188,7 @@ const styles = StyleSheet.create({
         padding: 10,
         position: 'absolute',
         zIndex: 100,
-        bottom: 20,
+        bottom: 40,
         right: 20
     },
     friendsImage: {

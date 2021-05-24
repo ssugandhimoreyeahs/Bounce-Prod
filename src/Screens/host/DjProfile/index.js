@@ -273,7 +273,7 @@ function DjProfile(props) {
               onPress={() => {
                 props.navigation.openDrawer();
               }}
-              headerBackColor={{backgroundColor: 'rgba(238, 238, 238, 0.5)'}}
+              headerBackColor={{backgroundColor: '#FFFFFF'}}
             />
 
             <View style={styles.subContainer}>
@@ -388,9 +388,9 @@ function DjProfile(props) {
                   </View>
                 ) : null}
 
-                <View
+                {/* <View
                   style={[styles.partition, {marginTop: 30, marginBottom: 0}]}
-                />
+                /> */}
 
                 {about != null ? (
                   <CustomText

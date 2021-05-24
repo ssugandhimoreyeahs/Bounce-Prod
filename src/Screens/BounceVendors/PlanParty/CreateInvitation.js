@@ -16,7 +16,7 @@ import {
   CustomTextinput,
   FloatingInput,
   InputBox,
-  TagsCollapsible,
+  ImageCarousel,
   TicketComponent,
 } from '@components';
 import {UploadCamera} from '@assets';
@@ -63,6 +63,8 @@ function CreateInvitation(props) {
   const [picture, setPicture] = useState(null);
   const [footer, openFooter] = useState(false);
   const [state, setState] = useState({});
+  const [getImageState, setImageState] = useState(0);
+
   useEffect(() => {
     const listener = partyModel.party?.subscribe(() => {
       setState(() => ({}));
@@ -122,24 +124,41 @@ function CreateInvitation(props) {
       partyModel.party.addGallery(images.map(i => i.path));
     });
   };
-  const ImageFooter = () => {
-    return (
-      <TouchableOpacity
-        onPress={() => setPicture(null)}
-        style={styles.crossButton}>
-        <BlackClose height={15} width={15} />
-      </TouchableOpacity>
-    );
-  };
-  const SmallButton = ({item}) => {
-    console.log('ase', item);
-    return (
-      <TouchableOpacity style={styles.smallButtonStyle}>
-        <Text style={[styles.headerTitle]}>{item}</Text>
-      </TouchableOpacity>
-    );
-  };
+  // const ImageFooter = () => {
+  //   return (
+  //     <TouchableOpacity
+  //       onPress={() => setPicture(null)}
+  //       style={styles.crossButton}>
+  //       <BlackClose height={15} width={15} />
+  //     </TouchableOpacity>
+  //   );
+  // };
+  // const SmallButton = ({ item }) => {
+  //   console.log('ase', item);
+  //   return (
+  //     <TouchableOpacity style={styles.smallButtonStyle}>
+  //       <Text style={[styles.headerTitle]}>{item}</Text>
+  //     </TouchableOpacity>
+  //   );
+  // };
 
+  // console.log("partyModel.party",partyModel?.party?.galleryFiles);
+  const handleCarousel = () => {
+    return (
+      <ImageCarousel
+        value={'CreateInvitation'}
+        // onPress={handleImage}
+        pagination
+        imageArray={
+          partyModel?.party?.galleryFiles?.length == 0
+            ? []
+            : partyModel?.party?.galleryFiles
+        }
+        onSnapToItem={index => setImageState(index)}
+        state={getImageState}
+      />
+    );
+  };
   return (
     <Root>
       <NRoot>
@@ -150,24 +169,31 @@ function CreateInvitation(props) {
               // rightTitle={'Save as Draft'}
               onPressRightTitle={() => handleOnPress(true)}
               onPress={() => {
-                Alert.alert(
-                  'Alert !',
-                  'Are you sure you want to go back ? All your changes will be lost!',
-                  [
-                    {
-                      text: 'OK',
-                      onPress: () => props.navigation.goBack(),
-                    },
-                    {
-                      text: 'Cancel',
-                    },
-                  ],
-                  {cancelable: true},
-                );
+                if (
+                  partyModel?.party?.title === undefined ||
+                  partyModel?.party?.title === ''
+                ) {
+                  props.navigation.goBack();
+                } else {
+                  Alert.alert(
+                    'Alert !',
+                    'Are you sure you want to go back ?. All your changes will be lost!',
+                    [
+                      {
+                        text: 'OK',
+                        onPress: () => props.navigation.goBack(),
+                      },
+                      {
+                        text: 'Cancel',
+                      },
+                    ],
+                    {cancelable: true},
+                  );
+                }
+
                 // Alert.alert("All changes will be lost! Are you sure ? ")
               }}
-            />
-            {/* First Section */}
+            /> 
             <View
               style={{
                 paddingHorizontal: 10,
@@ -185,7 +211,7 @@ function CreateInvitation(props) {
                 styleProp={{borderRadius: 19}}
               />
 
-              {picture == null ? (
+              {partyModel?.party?.galleryFiles?.length == 0 ? (
                 <TouchableOpacity
                   onPress={handleImage}
                   style={{
@@ -212,39 +238,8 @@ function CreateInvitation(props) {
                   </Text>
                 </TouchableOpacity>
               ) : (
-                <>
-                  <View
-                    style={{
-                      marginVertical: getHp(23),
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <TouchableOpacity
-                      onPress={() => openFooter(true)}
-                      style={{marginVertical: 30}}>
-                      <Avatar
-                        source={{
-                          uri: picture.path,
-                        }}
-                        size="xlarge"
-                        rounded
-                      />
-                      <View>
-                        <UploadBlue
-                          height={50}
-                          width={50}
-                          style={{
-                            position: 'absolute',
-                            bottom: -25,
-                            left: 55,
-                            resizeMode: 'contain',
-                          }}
-                        />
-                      </View>
-                      {footer ? <ImageFooter /> : null}
-                    </TouchableOpacity>
-                  </View>
-                </>
+                // null
+                handleCarousel()
               )}
 
               <DatePick
@@ -292,7 +287,6 @@ function CreateInvitation(props) {
                         })} */}
             </View>
 
-            {/* Second Section */}
             <View
               style={{
                 paddingHorizontal: 10,
@@ -301,7 +295,6 @@ function CreateInvitation(props) {
                 justifyContent: 'center',
                 paddingVertical: 20,
               }}>
-              {/* <View style={styles.eventContainer}> */}
               <Text
                 style={[
                   styles.headerTitle,
@@ -309,8 +302,6 @@ function CreateInvitation(props) {
                 ]}>
                 {'Event Settings'}
               </Text>
-              {/* <Icon name="chevron-down" size={15} color="#000" /> */}
-              {/* </View> */}
 
               {/*  
 //             <View style={{marginVertical: 10}}>
@@ -398,7 +389,6 @@ function CreateInvitation(props) {
                     <AgeField /> */}
             </View>
 
-            {/* Tickets Section */}
             {/* <View>
             {TAGS.map(t => {
                 return <TagsCollapsible {...t} />;
@@ -443,9 +433,8 @@ function CreateInvitation(props) {
               rowDoubleButton
               ButtonTitle={'Save As Draft'}
               ButtonTitle2={'Complete'}
-              onsave
-              onContinuePress={() => handleOnPress(false)}
               onSaveDraftPress={() => handleOnPress(true)}
+              onContinuePress={() => handleOnPress(false)}
             />
 
             {/* <View style={styles.bottomContainer}>
@@ -462,9 +451,9 @@ function CreateInvitation(props) {
                         </View> */}
           </ScrollView>
         </View>
-        {/* <View style={{ paddingBottom: 15 }}> */}
+        {/* {/ <View style={{ paddingBottom: 15 }}> /}
 
-        {/* </View> */}
+        {/ </View> /} */}
       </NRoot>
     </Root>
   );

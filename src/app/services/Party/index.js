@@ -15,7 +15,7 @@ class PartyService {
         JSON.stringify(formData),
       );
       console.log('ENDPOINT_ETST - ', endPoint);
-  
+        return;
       MobxStore.appStore.toogleLoader(true);
       const createPartyRes = await ApiClient.authInstance.post(
         endPoint,

@@ -34,7 +34,7 @@ class Party {
   @D.PartyAge('fromAge', {message: 'Invalid Maximum Age'})
   toAge;
 
-  //@ArrayNotEmpty({message: Strings.requiredFieldError('Event Media')})
+  @ArrayNotEmpty({message: Strings.requiredFieldError('Event Media')})
   galleryFiles = [];
 
   gallery = [];
@@ -102,7 +102,7 @@ class Party {
       newParty.date = moment(fields.date).format('YYYY-MM-DD HH:mm:ss');
       newParty.gallery = fields?.gallery?.map(i => ({id: i.id})) || [];
       newParty.profileImage = fields?.profileImage?.id || 0;
-      newParty.tickets = fields.ticket.map(t => {
+      newParty.ticket = fields.ticket.map(t => {
         let obj = {
           title: t.title,
           description: t.description,

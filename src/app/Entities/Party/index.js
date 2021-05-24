@@ -109,7 +109,7 @@ class Party {
           price: t.price,
           quantity: t.quantity,
         };
-        if (t.id) {
+        if (t?.id) {
           obj.id = t.id;
         }
         return obj;

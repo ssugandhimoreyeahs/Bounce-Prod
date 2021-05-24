@@ -16,6 +16,10 @@ import BirthDayScreen from '../../Screens/BounceVendors/Onboarding/BirthDayScree
 import ProfilePic from '../../Screens/BounceVendors/Onboarding/ProfilePic';
 //User Signup screens
 
+//Testing screen
+import HostView from '../../Screens/MyEvents/HostView';
+//Testing screen
+
 const AuthStack = createStackNavigator();
 class AuthStackNavigator {
   static routeName = '/AuthStack';
@@ -31,7 +35,10 @@ class AuthStackNavigator {
           name={LoginScreen.routeName}
           component={LoginScreen}
         />
-
+        <AuthStack.Screen
+          name={HostView.routeName}
+          component={HostView}
+        />
 
         {/* Vendor Signup Screens */}
         <AuthStack.Screen

@@ -9,7 +9,7 @@ import {
     DJ1,
     DJ2,
 } from '@assets';
-import { Download, Chat, BlackShare, Saved } from '@svg'
+import { Download, Chat, BlackOutlineShare, Saved } from '@svg'
 import { Avatar } from 'react-native-elements'
 import { FONTSIZE, getHp } from '@utils'
 
@@ -86,7 +86,7 @@ export default function Media(props) {
                             </Text>
                             <View style={styles.downloadView}>
                                 <Saved height={29} width={29} />
-                                <BlackShare height={29} width={29} />
+                                <BlackOutlineShare height={29} width={29} />
                             </View>
                         </View>
                     </View>

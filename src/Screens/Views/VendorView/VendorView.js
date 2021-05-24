@@ -8,7 +8,7 @@ import {
 import { styles } from './indexCss';
 import {
     AddBlueWhite,
-    BlackShare,
+    BlackOutlineShare,
     PlusWhiteCalender,
     StarWhite,
     DollarOnlyWhite,
@@ -236,7 +236,7 @@ export default function DjProfile(props) {
                             <Header
 
                                 // headerTitle={"DJ Nathan"}
-                                share={<BlackShare height={25} width={25} />}
+                                share={<BlackOutlineShare height={25} width={25} />}
                                 back
                                 onPress={() => props.navigation.goBack()}
                                 headerBackColor={{ backgroundColor: '#fff' }}

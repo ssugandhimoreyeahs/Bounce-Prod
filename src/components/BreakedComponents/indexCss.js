@@ -2,6 +2,24 @@ import { StyleSheet } from 'react-native'
 import { FONTSIZE, getHp, getWp } from '@utils'
 
 export const styles = StyleSheet.create({
+    bottomContainer: {
+        height: getHp(62),
+        width: getWp(105),
+        borderRadius: 20,
+        alignItems: 'center',
+       justifyContent:'center',
+        backgroundColor: '#F2F5F6',
+        elevation: 2,
+    },
+    bottomButton: {
+        borderRadius: 24,
+        backgroundColor: '#333333',
+        flexDirection: 'column',
+        paddingVertical: 10,
+        maxHeight: '100%',
+        minWidth: '45%',
+        alignItems: 'center',
+    },
     pastGuestContainer: {
         justifyContent: 'space-around',
         paddingHorizontal: 15,
@@ -125,24 +143,7 @@ export const styles = StyleSheet.create({
         width: '80%',
         borderRadius: 17
     },
-    bottomContainer: {
-        flexDirection: 'row',
-        padding: 10,
-        justifyContent: 'space-around',
-        position: 'absolute',
-        bottom: 0,
-        backgroundColor: '#000000',
-        width: '100%'
-    },
-    bottomButton: {
-        borderRadius: 24,
-        backgroundColor: '#333333',
-        flexDirection: 'column',
-        paddingVertical: 10,
-        maxHeight: '100%',
-        minWidth: '45%',
-        alignItems: 'center'
-    },
+
     ContainerStyle: {
         width: '100%',
         marginVertical: 4,

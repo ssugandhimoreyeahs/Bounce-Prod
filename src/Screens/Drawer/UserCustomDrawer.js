@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { BlackClose, More, BlackShare, LockBlack, Settings } from '@svg';
+import { BlackClose, More, BlackOutlineShare, LockBlack, Settings } from '@svg';
 import { FONTSIZE, bigHitSlop, smallHitSlop } from '@utils';
 import { useTheme, Switch } from 'react-native-paper';
 import { AuthContext } from '../../context';
@@ -31,7 +31,7 @@ export default function UserCustomDrawer(props) {
       },
     },
     {
-      icon: <BlackShare height={30} width={30} />,
+      icon: <BlackOutlineShare height={30} width={30} />,
       name: 'Share Profile',
       onPress: () => {
         //navigation.navigate("DjSignup")
@@ -49,10 +49,10 @@ export default function UserCustomDrawer(props) {
       name: 'Dark / Light Mode',
       // onPress: () => toggleTheme()
     },
-    {
-      name: 'Subscription',
-      // onPress: () => navigation.navigate("SubscriptionScreen")
-    },
+    // {
+    //   name: 'Subscription',
+    //   // onPress: () => navigation.navigate("SubscriptionScreen")
+    // },
     {
       name: 'About',
       onPress: () => props.navigation.navigate(AboutUs.routeName)

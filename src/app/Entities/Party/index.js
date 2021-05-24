@@ -9,18 +9,19 @@ import {
 import {Decorators as D, ValidationTypes} from '../../Validations';
 import {timezoneToUTC} from '../../utils';
 import moment from 'moment';
+import {Strings} from '../../constants';
 class Party {
-  @IsNotEmpty({message: 'Required title'})
+  @IsNotEmpty({message: Strings.requiredFieldError('Title')})
   title;
-  @IsNotEmpty({message: 'Required Description'})
+  @IsNotEmpty({message: Strings.requiredFieldError('Description')})
   description;
 
-  @IsNotEmpty({message: 'Required Date'})
+  @IsNotEmpty({message: Strings.requiredFieldError('Date')})
   date;
 
   @D.ValidateObjecKey(
     {key: 'addressStr', [ValidationTypes.REQUIRED]: true},
-    {message: 'Required Address'},
+    {message: Strings.requiredFieldError('Address')},
   )
   location = {
     lat: '1',
@@ -33,7 +34,7 @@ class Party {
   @D.PartyAge('fromAge', {message: 'Invalid Maximum Age'})
   toAge;
 
-  @ArrayNotEmpty({message: 'Required Event Media'})
+  @ArrayNotEmpty({message: Strings.requiredFieldError('Event Media')})
   galleryFiles = [];
 
   gallery = [];

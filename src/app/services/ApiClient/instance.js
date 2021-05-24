@@ -1,6 +1,7 @@
 import axios from 'axios';
+import ApiClient from '.';
 import Endpoints from './apiEndPoints';
-
+import MobxStore from '../../../mobx';
 const Instance = () => {
   const instance = axios.create({
     baseURL: Endpoints.baseURL,
@@ -8,9 +9,17 @@ const Instance = () => {
 
   instance.interceptors.request.use(
     config => {
+      if (
+        config.headers[ApiClient.LOADING] &&
+        config.headers[ApiClient.LOADING] == true
+      ) {
+       // MobxStore.appStore.toogleLoader(true);
+      }
+      //delete config.headers[ApiClient.LOADING];
       return config;
     },
     error => {
+      //MobxStore.appStore.toogleLoader(false);
       console.log('REQUEST ERROR >>> ', error);
       return Promise.reject(error);
     },
@@ -18,20 +27,11 @@ const Instance = () => {
 
   instance.interceptors.response.use(
     response => {
-      // let responseTree = {
-      //   url: `${response?.responseURL}`,
-      //   data: JSON.stringify(response?.data),
-      // };
+      //MobxStore.appStore.toogleLoader(false);
       return Promise.resolve(response);
-      //   //console.log(`RESPONSE <<< ${JSON.stringify(responseTree)}`);
-      //   //if (response?.status === 200 && response?.data?.success === true) {
-      //   if (response?.status === 200) {
-      //     return Promise.resolve(response);
-      //   } else {
-      //     return Promise.reject(response);
-      //   }
     },
     error => {
+     // MobxStore.appStore.toogleLoader(false);
       const {config, request, response, isAxiosError} = error;
       let text;
       let responseTreeError = {
@@ -40,16 +40,6 @@ const Instance = () => {
         error: JSON.stringify(error),
       };
       console.log(`RESPONSE ERROR <<< - ${JSON.stringify(responseTreeError)}`);
-      //   if (request?.status === 403 || request?.status === 400) {
-      //     text = response?.data?.message;
-      //   } else {
-      //     text = `Server Error Try Again`;
-      //   }
-      //   // Toast.show({
-      //   //   text,
-      //   //   duration: 5000,
-      //   //   buttonText: 'OK',
-      //   // });
       return Promise.reject(error);
     },
   );

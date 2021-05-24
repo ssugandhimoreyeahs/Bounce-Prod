@@ -8,6 +8,7 @@ import {
   Platform,
   KeyboardAvoidingView,
 } from "react-native";
+import { Root as NRoot} from 'native-base';
 
 const MyWrapper = Platform.select({
   ios: SafeAreaView,
@@ -28,7 +29,7 @@ const RootComponent = ({
       ? "light-content"
       : "default";
   return (
-    <Fragment >
+    <NRoot >
       <StatusBar barStyle={setBarStyle} />
       <MyWrapper
         style={[
@@ -45,7 +46,7 @@ const RootComponent = ({
       >
         {children}
       </SafeAreaView>
-    </Fragment>
+    </NRoot>
   );
 };
 

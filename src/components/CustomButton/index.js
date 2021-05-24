@@ -8,6 +8,8 @@ import RadialGradient from 'react-native-radial-gradient';
 
 export default function CustomButton(props) {
     const {
+        onSaveDraftPress = () => { },
+        onContinuePress = () => { },
         ButtonTitle = false,
         ButtonTitle2 = false,
         bar = false,
@@ -17,9 +19,22 @@ export default function CustomButton(props) {
         rowDoubleButton = false,
         colDoubleButton = false,
         theme = false,
+        onPress1 = () => { },
+        userContinue = false,
     } = props
     return (
-        <View style={{ backgroundColor: '#FEFEFE' }}>
+        <View >
+            {
+                userContinue &&
+                <TouchableOpacity style={[styles.linearGradient, { backgroundColor: '#FFFFFF' }]} onPress={onPress}>
+                    <Text style={[styles.titleStyle, {
+                        letterSpacing: 0.6,
+                        color: '#1FAEF7',
+                    }]}>
+                        {ButtonTitle ? ButtonTitle : "Continue"}</Text>
+
+                </TouchableOpacity>
+            }
             {
                 linear ?
                     <>
@@ -43,7 +58,7 @@ export default function CustomButton(props) {
                     null
             }
             {complete ?
-                <View style={{ backgroundColor: '#FEFEFE',}}>
+                <View style={{ backgroundColor: '#FEFEFE', }}>
                     <Button
                         title={ButtonTitle ? ButtonTitle : "Continue"}
                         containerStyle={[styles.container, {}]}
@@ -62,14 +77,14 @@ export default function CustomButton(props) {
             }
             {  rowDoubleButton ?
                 <>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', marginVertical: getHp(0), borderTopWidth: 0.5, borderColor: '#CCCCCC', paddingTop: 10 }}>
-                        <TouchableOpacity style={styles.DoubleButton} onPress={onPress}>
-                            <Text style={[styles.titleStyle, { color: '#1FAEF7', fontSize: FONTSIZE.Text20, fontWeight: 'bold', letterSpacing: 0.2 }]}>
+                    <View style={styles.rowButton}>
+                        <TouchableOpacity style={styles.DoubleButton} onPress={onSaveDraftPress}>
+                            <Text style={[styles.titleStyle, { color: '#1FAEF7', fontSize: FONTSIZE.Text20, letterSpacing: 0.2 }]}>
                                 {ButtonTitle}
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.DoubleButton, { backgroundColor: '#1FAEF7', }]} onPress={onPress}>
-                            <Text style={[styles.titleStyle, { color: '#fff', fontSize: FONTSIZE.Text20, fontWeight: 'bold', letterSpacing: 0.2 }]}>
+                        <TouchableOpacity style={[styles.DoubleButton, { backgroundColor: '#1FAEF7', }]} onPress={onContinuePress}>
+                            <Text style={[styles.titleStyle, { color: '#fff', fontSize: FONTSIZE.Text20, letterSpacing: 0.2 }]}>
                                 {ButtonTitle2}
                             </Text>
                         </TouchableOpacity>
@@ -82,7 +97,7 @@ export default function CustomButton(props) {
                 <>
                     <View style={{ alignItems: 'center', marginVertical: getHp(0), borderTopWidth: 0.5, borderColor: '#CCCCCC', paddingTop: 10 }}>
 
-                        <TouchableOpacity style={styles.colButtonStyle} onPress={onPress}>
+                        <TouchableOpacity style={styles.colButtonStyle} onPress={onPress1}>
                             <Text style={[styles.titleStyle, { color: '#1FAEF7', fontSize: FONTSIZE.Text20, fontWeight: 'bold', letterSpacing: 0.2 }]}>
                                 {ButtonTitle}
                             </Text>
@@ -102,8 +117,17 @@ export default function CustomButton(props) {
     )
 }
 const styles = StyleSheet.create({
-    colButtonStyle: {
+    rowButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        marginVertical: getHp(0),
+        borderTopWidth: 0.5,
+        borderColor: '#CCCCCC',
+        paddingTop: 10
+    },
 
+    colButtonStyle: {
         width: '95%',
         elevation: 5,
         backgroundColor: '#fff',
@@ -128,10 +152,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 13,
         marginTop: 10,
-        marginBottom:5
+        marginBottom: 5
     },
     barStyle: {
-        height: getHp(5), 
+        height: getHp(5),
         backgroundColor: '#FEFEFE',
         marginBottom: getHp(5),
         marginTop: getHp(10),
@@ -145,18 +169,17 @@ const styles = StyleSheet.create({
         borderRadius: 13,
     },
     titleStyle: {
-        letterSpacing: 1.5,
         fontSize: FONTSIZE.Text21,
-        paddingVertical: 0,
         color: '#fff',
-        fontFamily: 'AvenirNext'
+        fontFamily: '500'
     },
     linearGradient: {
-        // // flex: 1,
-        // width: '48%',
-        height: getHp(54),
+        borderRadius: 17,
+        height: 54,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 20,
+        elevation: 2,
+        marginVertical: 10,
+
     },
 })

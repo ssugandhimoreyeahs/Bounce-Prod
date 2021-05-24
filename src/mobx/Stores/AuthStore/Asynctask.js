@@ -63,8 +63,9 @@ class Asynctask {
     try {
       let tok = token;
       if (token == undefined) {
-        tok = this.authStore.token;
+        tok = this.authStore.userProfile?.token;
       }
+      console.log('FETCH_VENDCOR - ', tok);
       const vendorAutoLoginResponse = await ApiClient.instance.get(
         ApiClient.endPoints.getVendor,
         {

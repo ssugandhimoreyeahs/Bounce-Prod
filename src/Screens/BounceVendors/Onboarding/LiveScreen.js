@@ -4,7 +4,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import {
     Root,
     CustomButton,
-    QRCodes
+    QRCodes,
+    ProgressCircle
 } from '@components'
 import RadialGradient from 'react-native-radial-gradient';
 import {
@@ -54,6 +55,7 @@ export default function LiveScreen(props) {
                     </View>
 
                     <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
+                    <ProgressCircle currentProgress={4} containerStyle={{marginBottom: 20}}/>
                         <CustomButton
                             linear
                             bar

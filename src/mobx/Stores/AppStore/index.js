@@ -1,26 +1,19 @@
-import { action, makeAutoObservable, observable, runInAction } from 'mobx';
-
+import {action, makeAutoObservable, observable, runInAction} from 'mobx';
 
 class AppStore {
-    loader = false;
+  @observable loader = false;
 
-    constructor() {
-        makeAutoObservable(this, {
-            loader: observable,
-            toogleLoader: action
-        });
+  constructor() {
+    makeAutoObservable(this);
+  }
+  @action
+  toogleLoader = (flag = undefined) => {
+    if (flag != undefined) {
+      this.loader = flag;
+      return;
     }
-
-    toogleLoader = (flag = undefined) => {
-        runInAction(()=>{
-            if (flag) {
-                 this.loader = flag;
-                 return;
-            }
-            this.loader = !this.loader;
-        });
-    }
-
-};
+    this.loader = !this.loader;
+  };
+}
 
 export default AppStore;

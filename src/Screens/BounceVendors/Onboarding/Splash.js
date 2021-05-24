@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { BounceProLogo, BounceSplash } from '@svg' 
-import { observer } from 'mobx-react'; 
+import { BounceProLogo, BounceSplash } from '@svg'
+import { observer } from 'mobx-react';
 
-function SplashScreen(props) { 
+function SplashScreen(props) {
     // useEffect(() => {
     //     if (authStore.isAutoLoginDone && authStore.isAuthenticated) {
     //         // console.log('I_AM_HERE_AUTH - ',);
@@ -15,14 +15,15 @@ function SplashScreen(props) {
     //                 screen: "DjProfileScreen",
     //             });
     //         } 
-            
+
     //     } else if (authStore.isAutoLoginDone == true && authStore.isAuthenticated == false) {
     //         props.navigation.replace('LoginScreen');
     //     }
     // }, [authStore.isAutoLoginDone, authStore.isAuthenticated]); 
     return (
         <View style={styles.container}>
-            <BounceSplash />
+            <BounceSplash preserveAspectRatio='none' height={170} width={238} />
+
         </View>
     )
 }

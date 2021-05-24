@@ -13,6 +13,7 @@ import VendorMarketProfile from './VendorMarketProfile';
 
 
 export default function VendorSignup(props) {
+    console.log("REACHED AT VENDOR SIGNUP SCREEN 2 -->")
     const { login, vendorType
     } = useSelector((state) => state.mainExpenseByCategory);
     const [username, setUsername] = useState('')

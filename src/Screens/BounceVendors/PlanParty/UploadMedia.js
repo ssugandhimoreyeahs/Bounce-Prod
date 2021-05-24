@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {
   Header,
@@ -26,6 +27,10 @@ import {Observer, observer} from 'mobx-react';
 import PlanPartyModel from './PlanPartyModel';
 
 function UploadMedia(props) {
+  let goBack = false;
+  if (props.route?.params) {
+    goBack = props.route?.params.goBack;
+  }
   let partyModel = PlanPartyModel.getInstance();
   const [state, setState] = useState({});
   useEffect(() => {
@@ -33,7 +38,7 @@ function UploadMedia(props) {
       setState(() => ({}));
     });
     return () => {
-      listener.unSubscribe();
+      listener.unsubscribe();
     };
   }, []);
   const handleImage = () => {
@@ -44,11 +49,15 @@ function UploadMedia(props) {
       multiple: true,
     })
       .then(images => {
-        partyModel.addGallery(images);
+        partyModel.party.addGallery(images);
       })
-      .catch(e => alert(e));
+      .catch(e => {
+        console.log('ERROR_SEL_IMG - ', e);
+      });
   };
-
+  const deleteImage = (action, path) => {
+    partyModel.party.removeGallery(action,path);
+  }
   const renderItem = ({item, index}) => {
     return (
       <View>
@@ -73,7 +82,7 @@ function UploadMedia(props) {
               ) : null}
               <View>
                 <Avatar
-                  source={{uri: item}}
+                  source={{uri: item.path || item.filePath}}
                   avatarStyle={{borderRadius: 13}}
                   size={125}
                 />
@@ -86,7 +95,21 @@ function UploadMedia(props) {
                     width: 30,
                   }}
                   onPress={() => {
-                    partyModel.party.removeGallery(item);
+                    if (partyModel.isEditMode && item.filePath) {
+                      return Alert.alert('Message', 'Sure Delete Image?', [
+                        {
+                          text: 'Okay',
+                          onPress: () => {
+                              deleteImage(true, item.filePath)
+                          }
+                        },
+                        {
+                          text: 'Cancel'
+                        }
+                      ]);
+                    }
+                    return deleteImage(false, item.path);
+                    
                   }}>
                   <BlackCircleCross height={30} width={30} />
                 </TouchableOpacity>
@@ -102,7 +125,7 @@ function UploadMedia(props) {
                     null} */}
       </View>
     );
-  };
+  }; 
   return (
     <Root>
       <View style={styles.container}>
@@ -115,7 +138,7 @@ function UploadMedia(props) {
           />
 
           <FlatList
-            data={partyModel.party.galleryFiles}
+            data={[...partyModel.party.galleryFiles, ...partyModel.party.gallery]}
             renderItem={renderItem}
           />
           <View
@@ -129,8 +152,11 @@ function UploadMedia(props) {
               colDoubleButton
               ButtonTitle={'Add Images'}
               ButtonTitle2={'Continue'}
+              onPress1={handleImage}
               onPress={() => {
-                handleImage();
+                if (goBack) {
+                  return props.navigation.goBack();
+                }
               }}
             />
           </View>

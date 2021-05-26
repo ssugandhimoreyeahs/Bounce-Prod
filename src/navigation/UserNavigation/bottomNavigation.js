@@ -85,10 +85,8 @@ class UserHomeBottomNavigation {
                 );
             },
           }}
-          name={"Qr"}
-          component={() => {
-            return null;
-          }}
+          name={CreateInvitation.routeNameForBottom}
+          component={CreateInvitation}
           unmountOnBlur={true}
         />
 

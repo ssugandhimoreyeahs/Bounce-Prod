@@ -198,6 +198,7 @@ export default function VendorMarketProfile(props) {
                         <GooglePlacesInput
                             floatingLabel={"City (or cities)"}
                             onPress={(data) => {
+                                console.log('DATA_TESt - ', data);
                                 setCity(data.description)
                             }}
                         />

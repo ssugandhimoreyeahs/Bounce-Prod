@@ -15,17 +15,20 @@ PODS:
   - Flipper (0.75.1):
     - Flipper-Folly (~> 2.5)
     - Flipper-RSocket (~> 1.3)
+  - Flipper-Boost-iOSX (1.76.0.1.10)
   - Flipper-DoubleConversion (1.1.7)
-  - Flipper-Folly (2.5.1):
-    - boost-for-react-native
+  - Flipper-Fmt (7.1.7)
+  - Flipper-Folly (2.6.7):
+    - Flipper-Boost-iOSX
     - Flipper-DoubleConversion
+    - Flipper-Fmt (= 7.1.7)
     - Flipper-Glog
     - libevent (~> 2.1.12)
     - OpenSSL-Universal (= 1.1.180)
   - Flipper-Glog (0.3.6)
   - Flipper-PeerTalk (0.0.4)
-  - Flipper-RSocket (1.3.0):
-    - Flipper-Folly (~> 2.5)
+  - Flipper-RSocket (1.4.3):
+    - Flipper-Folly (~> 2.6)
   - FlipperKit (0.75.1):
     - FlipperKit/Core (= 0.75.1)
   - FlipperKit/Core (0.75.1):
@@ -270,7 +273,7 @@ PODS:
     - React-Core
   - react-native-floating-label-input (1.3.9):
     - React-Core
-  - react-native-image-picker (3.8.0):
+  - react-native-image-picker (3.8.1):
     - React-Core
   - react-native-restart (0.0.22):
     - React-Core
@@ -352,6 +355,8 @@ PODS:
     - React
   - RNDateTimePicker (3.5.0):
     - React-Core
+  - RNExitApp (1.1.0):
+    - React
   - RNGestureHandler (1.10.3):
     - React-Core
   - RNImageCropPicker (0.36.2):
@@ -365,7 +370,7 @@ PODS:
     - TOCropViewController
   - RNPermissions (3.0.4):
     - React-Core
-  - RNReanimated (2.1.0):
+  - RNReanimated (2.2.0):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -473,6 +478,7 @@ DEPENDENCIES:
   - "RNCCheckbox (from `../node_modules/@react-native-community/checkbox`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
+  - RNExitApp (from `../node_modules/react-native-exit-app`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
@@ -489,7 +495,9 @@ SPEC REPOS:
     - boost-for-react-native
     - CocoaAsyncSocket
     - Flipper
+    - Flipper-Boost-iOSX
     - Flipper-DoubleConversion
+    - Flipper-Fmt
     - Flipper-Folly
     - Flipper-Glog
     - Flipper-PeerTalk
@@ -585,6 +593,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
+  RNExitApp:
+    :path: "../node_modules/react-native-exit-app"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNImageCropPicker:
@@ -612,13 +622,15 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: 49cbe4b43e445b06bf29199b6ad2057649e4c8f5
-  FBReactNativeSpec: e7aaaf8fb49086a4f61ba50ae3a41efa6fac3e83
+  FBReactNativeSpec: 34bd25c5b38bfdf0a5385dadae3540bbc4b599c4
   Flipper: d3da1aa199aad94455ae725e9f3aa43f3ec17021
+  Flipper-Boost-iOSX: df3765e7e26b44bc3e68a250ef1fa0afa15963bc
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
-  Flipper-Folly: f7a3caafbd74bda4827954fd7a6e000e36355489
+  Flipper-Fmt: 60cbdd92fc254826e61d669a5d87ef7015396a9b
+  Flipper-Folly: 83af37379faa69497529e414bd43fbfc7cae259a
   Flipper-Glog: 1dfd6abf1e922806c52ceb8701a3599a79a200a6
   Flipper-PeerTalk: 116d8f857dc6ef55c7a5a75ea3ceaafe878aadc9
-  Flipper-RSocket: 602921fee03edacf18f5d6f3d3594ba477f456e5
+  Flipper-RSocket: d9d9ade67cbecf6ac10730304bf5607266dd2541
   FlipperKit: 8a20b5c5fcf9436cac58551dc049867247f64b00
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
@@ -639,7 +651,7 @@ SPEC CHECKSUMS:
   react-native-camera: bf312a2c11c4150fd4f850e78778e23170d78c5b
   react-native-document-picker: 1a7518132d4a06b67f459be9bb1464a567d2b3b4
   react-native-floating-label-input: 0f4fac971ab2a1f4f3e2afe723e4a00b33d6acbc
-  react-native-image-picker: ec63410edbcacc543acd77dcccfc056da39320ab
+  react-native-image-picker: 31971f6184e7c1dcb4fc1f122e1ba2c3fb11ef1e
   react-native-restart: 733a51ad137f15b0f8dc34c4082e55af7da00979
   react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
   React-perflogger: 9c547d8f06b9bf00cb447f2b75e8d7f19b7e02af
@@ -660,10 +672,11 @@ SPEC CHECKSUMS:
   RNCCheckbox: d1749e6a92178ce5dbc31e63becd1f34f0c76bbd
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNDateTimePicker: d4f276aabaf26386bb4dca86e8c92087e7151ba0
+  RNExitApp: c4e052df2568b43bec8a37c7cd61194d4cfee2c3
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNImageCropPicker: 35a3ceb837446fa11547704709bb22b5fac6d584
   RNPermissions: c46788f4cd402287425983e04a4c9bb4356036eb
-  RNReanimated: b8c8004b43446e3c2709fe64b2b41072f87428ad
+  RNReanimated: 9c13c86454bfd54dab7505c1a054470bfecd2563
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
   RNShare: 4df87d1791f50a2c7b1d89432fb9bbb7c02a9c9a
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
@@ -673,6 +686,6 @@ SPEC CHECKSUMS:
   Yoga: 8c8436d4171c87504c648ae23b1d81242bdf3bbf
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 29bfd5af91bde24d835c5054f87b7d722062a179
+PODFILE CHECKSUM: 1fa3368d3a3314f278bd71c79dcd6fcc12bd372d
 
 COCOAPODS: 1.10.1

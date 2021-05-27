@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Button} from 'react-native';
- 
+
 import {Avatar} from 'react-native-elements';
 import {
   Add_Outline,
@@ -20,11 +20,12 @@ import DesignCanva from '../../Screens/Views/Canva/DesignCanva';
 
 import CreateInvitation from '../../Screens/BounceVendors/PlanParty/CreateInvitation';
 import MobxStore from '../../mobx';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { FONTSIZE } from '../../app/utils';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {FONTSIZE, getHp} from '../../app/utils'; 
+
 const UserHomeBottomTab = createBottomTabNavigator();
 
-// const UserHomeBottomTab = createMaterialBottomTabNavigator();
+//const UserHomeBottomTab = createMaterialBottomTabNavigator();
 
 class UserHomeBottomNavigation {
   static routeName = '/UserHomeBottomNavigation';
@@ -34,25 +35,29 @@ class UserHomeBottomNavigation {
     const {profileImage = {}} = userinfo?.user;
 
     return (
-      <UserHomeBottomTab.Navigator
+      <UserHomeBottomTab.Navigator 
         initialRouteName={UserHomeScreen.routeName}
         tabBarOptions={{
           activeTintColor: '#000000',
           inactiveTintColor: '#000000',
           fontSize: FONTSIZE.Text16,
-          paddingVertical: 10
+          paddingVertical: 10,
+          showLabel: false,
+          style: {
+            position: 'absolute',
+            bottom: 0,
+            height: getHp(90)
+          }
         }}
-        sceneContainerStyle={{ backgroundColor: '#FBFBFB', elevation: 5, height: 65, fontSize: FONTSIZE.Text16 }}
-
-      // labeled={false}
-      // barStyle={{ backgroundColor: '#FBFBFB', elevation: 5, height: 65 }}
-      // unmountOnBlur={true}
-      // keyboardHidesNavigationBar
-      // screenOptions={{ unmountOnBlur: true }}
+        sceneContainerStyle={{
+          backgroundColor: '#FBFBFB',
+          elevation: 5,
+          height: 100,
+          fontSize: FONTSIZE.Text16,
+        }} 
       >
         <UserHomeBottomTab.Screen
-          options={{
-            title: '',
+          options={{ 
             unmountOnBlur: true,
             tabBarIcon: ({tintColor, focused}) => {
               return focused ? (
@@ -62,15 +67,14 @@ class UserHomeBottomNavigation {
               );
             },
           }}
-
           name={UserHomeScreen.routeName}
           component={UserHomeScreen}
         />
 
         <UserHomeBottomTab.Screen
           options={{
-            title: '',
-            tabBarIcon: ({ tintColor, focused }) => {
+            unmountOnBlur: true,
+            tabBarIcon: ({tintColor, focused}) => {
               return focused ? (
                 <Search_Outline height={33} width={33} />
               ) : (
@@ -83,29 +87,26 @@ class UserHomeBottomNavigation {
         />
 
         <UserHomeBottomTab.Screen
-          options={{
-            title: '',
+          options={{ 
             unmountOnBlur: true,
             // tabBarColor: 'red',
-            tabBarIcon: ({ tintColor, focused }) => {
+            tabBarIcon: ({tintColor, focused}) => {
               return focused ? (
-                <Add_Outline height={33} width={33} /> )
-                :
-                (
-                  <Add_Outline height={33} width={33} />
-                )
-             
-            }
+                <Add_Outline height={33} width={33} />
+              ) : (
+                <Add_Outline height={33} width={33} />
+              );
+            },
+            tabBarVisible: false
           }}
           name={CreateInvitation.routeNameForBottom}
-          component={CreateInvitation.BottomComponent}
+          component={(_) => <CreateInvitation {..._} />}
         />
 
         <UserHomeBottomTab.Screen
           options={{
-            unmountOnBlur: true,
-            title: '',
-            tabBarIcon: ({ tintColor, focused }) => {
+            unmountOnBlur: true, 
+            tabBarIcon: ({tintColor, focused}) => {
               return focused ? (
                 <Bell_Outline height={33} width={33} />
               ) : (
@@ -114,18 +115,14 @@ class UserHomeBottomNavigation {
             },
           }}
           name={'Home'}
-          component={() => {
-            return null;
-          }}
-
+          component={() => { return null; }}
         />
 
         {/* User profile image will come here */}
         <UserHomeBottomTab.Screen
           options={{
-            unmountOnBlur: true,
-            title: '',
-            tabBarIcon: ({ tintColor, focused }) => {
+            unmountOnBlur: true, 
+            tabBarIcon: ({tintColor, focused}) => {
               return focused ? (
                 <Avatar
                   rounded
@@ -144,10 +141,7 @@ class UserHomeBottomNavigation {
             },
           }}
           name={'Temp'}
-          component={() => {
-            return null;
-          }}
-
+          component={() => { return null; }}
         />
       </UserHomeBottomTab.Navigator>
     );

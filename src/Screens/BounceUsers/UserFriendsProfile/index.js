@@ -49,6 +49,7 @@ import CreateInvitation from '../../../Screens/BounceVendors/PlanParty/CreateInv
 import { observer } from 'mobx-react';
 import axios from "axios";
 import { FONTSIZE, getHp, getWp } from '@utils'
+import { Scaffold } from "../../../components";
 
 const ACCOUNTS = [
   {
@@ -141,9 +142,9 @@ function UserFriendsProfile(props) {
   }, []);
 
   const fetchProfile = async () => {
-    const SERVER_RESPONSE = await postData()
-    console.log("Spotify_all_playlist", SERVER_RESPONSE);
-    setSpotifyData(SERVER_RESPONSE)
+    // const SERVER_RESPONSE = await postData()
+    // console.log("Spotify_all_playlist", SERVER_RESPONSE);
+    // setSpotifyData(SERVER_RESPONSE)
   };
 
   const handleImage = async () => {
@@ -185,6 +186,7 @@ function UserFriendsProfile(props) {
   }
 
   return (
+    <Scaffold>
     <View style={styles.container}>
 
       <ScrollView keyboardShouldPersistTaps={"always"}>
@@ -314,8 +316,7 @@ function UserFriendsProfile(props) {
 
               <View style={{ backgroundColor: '#EEEEEE', height: 1, marginVertical: 10 }} />
 
-              {/ Social Media Section Start /}
-              {/ 1st /}
+             
               <View style={styles.flex}>
                 <TouchableOpacity style={styles.socialButton}>
                   <View style={styles.flex}>
@@ -333,7 +334,7 @@ function UserFriendsProfile(props) {
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
 
-              {/ 2nd /}
+ 
               <View style={styles.flex}>
                 <TouchableOpacity style={styles.socialButton}>
                   <View style={styles.flex}>
@@ -346,7 +347,7 @@ function UserFriendsProfile(props) {
               </View>
 
 
-              {/ 3rd /}
+              
               <View style={[styles.flex, { marginTop: 15 }]}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
@@ -366,7 +367,7 @@ function UserFriendsProfile(props) {
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
-              {/ 4th /}
+           
               <View style={styles.flex}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
@@ -386,7 +387,7 @@ function UserFriendsProfile(props) {
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
-              {/ 5th /}
+            
               <View style={styles.flex}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
@@ -407,10 +408,10 @@ function UserFriendsProfile(props) {
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
-              {/ Social Media Section /}
+             
 
               <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} />
-              {/ First Gallery Block of Friends /}
+              
               <View style={{ marginVertical: 5, paddingVertical: 10 }}>
                 <View style={[styles.flex]}>
                   <BlackPerson height={20} width={14} />
@@ -423,10 +424,10 @@ function UserFriendsProfile(props) {
                   </Text>
                 </TouchableOpacity>
               </View>
-              {/*END** First Gallery Block of Friends /}
+              
               <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} />
 
-              {/*Start** Second Gallery Block of Friends /}
+              
               <View style={[styles.flex, {
                 marginVertical: 10,
               }]}>
@@ -436,11 +437,11 @@ function UserFriendsProfile(props) {
                 </Text>
               </View>
               {handleCarousel("Instagram")}
-              {/*END** Second Gallery Block of Friends /}
+              
 
               <View>
                 <Text style={styles.InstaText}>{"Favorite Music"}</Text>
-                <ScrollView horizontal >
+                {/* <ScrollView horizontal >
                   {getSpotify.length == 0 ?
                     null :
                     getSpotify.items.map((items) => {
@@ -448,15 +449,16 @@ function UserFriendsProfile(props) {
                       return <RenderSpotify items={items} />
                     })
                   }
-                </ScrollView>
+                </ScrollView> */}
               </View>
 
             </View>
           </>
         )}
       </ScrollView>
-      {/ <Footer buttonStack={DATA} /> /}
+       {/* <Footer buttonStack={DATA} />   */}
     </View >
+    </Scaffold>
   );
 }
 UserFriendsProfile.routeName = "/UserFriendsProfile";

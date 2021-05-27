@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import {Button} from 'react-native';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+ 
 import {Avatar} from 'react-native-elements';
 import {
   Add_Outline,

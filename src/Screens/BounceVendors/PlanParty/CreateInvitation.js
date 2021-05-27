@@ -575,17 +575,7 @@ const styles = StyleSheet.create({
     right: -10,
     top: -10,
   },
-});
-CreateInvitation.BottomComponent = ({navigation}) => {
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      navigation.navigate(CreateInvitation.routeName);
-    });
-
-    return unsubscribe;
-  }, [navigation]);
-  return null;
-};
+}); 
 CreateInvitation.routeName = '/CreateInvitation';
 CreateInvitation.routeNameForBottom = '/CreateInvitationForBottom';
 export default observer(CreateInvitation);

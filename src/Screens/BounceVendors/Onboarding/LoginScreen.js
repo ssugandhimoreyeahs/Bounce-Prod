@@ -74,7 +74,9 @@ function LoginScreen(props) {
   };
 
   return (
-    <Scaffold statusBarStyle={{backgroundColor: '#FBFBFB'}}>
+    <Scaffold
+      contentContainerStyle={{backgroundColor: '#FBFBFB'}}
+      statusBarStyle={{backgroundColor: '#FBFBFB'}}>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
         <KeyboardAwareScrollView style={{flex: 1, backgroundColor: '#FBFBFB'}}>

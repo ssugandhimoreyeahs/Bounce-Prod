@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useRef, useState} from 'react';
+import React, {Component, Fragment, useEffect, useRef, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,8 +7,10 @@ import {
   TextInput,
   SafeAreaView,
   Button,
+  Animated,
+  StatusBar,
 } from 'react-native';
-
+import {AppStatusBar} from '@components';
 import {Provider as PaperProvider} from 'react-native-paper';
 // import MainStack from './src/navigation/MainStack';
 import {Provider} from 'react-redux';
@@ -36,13 +38,10 @@ function App() {
         //visible={true}
       />
       <PaperProvider theme={uiStore.theme}>
-        <SafeAreaView style={{flex: 1}}>
-          {/* <MainStack /> */}
-          <Navigation theme={uiStore.theme} />
-        </SafeAreaView>
+        {/* <MainStack /> */}
+        <Navigation theme={uiStore.theme} />
       </PaperProvider>
     </Provider>
   );
 }
 export default observer(App);
-

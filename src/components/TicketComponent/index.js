@@ -112,12 +112,14 @@ const styles = StyleSheet.create({
     elevation: 0,
     borderWidth: 0.3,
     borderColor: '#999999',
-    fontSize: FONTSIZE.Text16,
+    fontSize: FONTSIZE.Text14,
     backgroundColor: '#fff',
     paddingLeft: 10,
     marginVertical: 5,
     borderRadius: 9.5,
     color: '#000',
+     height: getHp(45),
+
   },
   eventContainer: {
     flexDirection: 'row',

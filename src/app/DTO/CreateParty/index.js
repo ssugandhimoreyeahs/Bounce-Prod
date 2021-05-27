@@ -6,7 +6,7 @@ import {ReactModel} from '../../core';
 import {Validation} from '../../Validations';
 
 @ReactModel()
-class CreatePartyDTO extends CreatePartyEntity {
+class CreatePartyDTO extends CreatePartyEntity { 
   partyError = {};
 
   set = fields => {

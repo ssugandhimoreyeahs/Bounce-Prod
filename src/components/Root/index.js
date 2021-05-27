@@ -30,7 +30,7 @@ const RootComponent = ({
       : "default";
   return (
     <NRoot >
-      <StatusBar barStyle={setBarStyle} />
+      
       <MyWrapper
         style={[
           style.customStatusBar,

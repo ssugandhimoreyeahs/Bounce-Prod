@@ -314,8 +314,8 @@ function UserFriendsProfile(props) {
 
               <View style={{ backgroundColor: '#EEEEEE', height: 1, marginVertical: 10 }} />
 
-              {/* Social Media Section Start */}
-              {/* 1st */}
+              {/ Social Media Section Start /}
+              {/ 1st /}
               <View style={styles.flex}>
                 <TouchableOpacity style={styles.socialButton}>
                   <View style={styles.flex}>
@@ -333,7 +333,7 @@ function UserFriendsProfile(props) {
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
 
-              {/* 2nd */}
+              {/ 2nd /}
               <View style={styles.flex}>
                 <TouchableOpacity style={styles.socialButton}>
                   <View style={styles.flex}>
@@ -346,7 +346,7 @@ function UserFriendsProfile(props) {
               </View>
 
 
-              {/* 3rd */}
+              {/ 3rd /}
               <View style={[styles.flex, { marginTop: 15 }]}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
@@ -366,7 +366,7 @@ function UserFriendsProfile(props) {
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
-              {/* 4th */}
+              {/ 4th /}
               <View style={styles.flex}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
@@ -386,7 +386,7 @@ function UserFriendsProfile(props) {
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
-              {/* 5th */}
+              {/ 5th /}
               <View style={styles.flex}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
@@ -407,10 +407,10 @@ function UserFriendsProfile(props) {
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
-              {/* Social Media Section */}
+              {/ Social Media Section /}
 
               <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} />
-              {/* First Gallery Block of Friends */}
+              {/ First Gallery Block of Friends /}
               <View style={{ marginVertical: 5, paddingVertical: 10 }}>
                 <View style={[styles.flex]}>
                   <BlackPerson height={20} width={14} />
@@ -423,10 +423,10 @@ function UserFriendsProfile(props) {
                   </Text>
                 </TouchableOpacity>
               </View>
-              {/*END*** First Gallery Block of Friends */}
+              {/*END** First Gallery Block of Friends /}
               <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} />
 
-              {/*Start*** Second Gallery Block of Friends */}
+              {/*Start** Second Gallery Block of Friends /}
               <View style={[styles.flex, {
                 marginVertical: 10,
               }]}>
@@ -436,7 +436,7 @@ function UserFriendsProfile(props) {
                 </Text>
               </View>
               {handleCarousel("Instagram")}
-              {/*END*** Second Gallery Block of Friends */}
+              {/*END** Second Gallery Block of Friends /}
 
               <View>
                 <Text style={styles.InstaText}>{"Favorite Music"}</Text>
@@ -455,7 +455,7 @@ function UserFriendsProfile(props) {
           </>
         )}
       </ScrollView>
-      {/* <Footer buttonStack={DATA} /> */}
+      {/ <Footer buttonStack={DATA} /> /}
     </View >
   );
 }

@@ -66,7 +66,6 @@
 		1CAA81B9265B993E00C8AE3A /* boost_system.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = boost_system.xcframework; path = "Pods/Flipper-Boost-iOSX/frameworks/boost_system.xcframework"; sourceTree = "<group>"; };
 		1CAA81BB265B993E00C8AE3A /* boost_thread.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = boost_thread.xcframework; path = "Pods/Flipper-Boost-iOSX/frameworks/boost_thread.xcframework"; sourceTree = "<group>"; };
 		1CDF7D7CDB564B1FBA374040 /* AvenirNext.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AvenirNext.ttf; path = ../src/assets/fonts/AvenirNext.ttf; sourceTree = "<group>"; };
-		1CE908772645336000C00DB3 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		2BB00B674CB80BE180C0D546 /* libPods-bounce-bounceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bounce-bounceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D0D0E3EDB1D4E718569CB3F /* ANB.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = ANB.otf; path = ../src/assets/fonts/ANB.otf; sourceTree = "<group>"; };
 		2E1B0B9C06324356B94F8A22 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -288,7 +287,10 @@
 				FD1B6802CA824ACAAA1469C1 /* rubicon-icon-font.ttf */,
 				7F102348E00A4C7EAF662A23 /* SimpleLineIcons.ttf */,
 				5D6BEC1A4752468DAF80D5C4 /* Zocial.ttf */,
+<<<<<<< HEAD
 				FD4F5A8127FF45D69C11C6BE /* A-Five.ttf */,
+=======
+>>>>>>> 416dfc44e6d8542418414f66daab5bd69cbaa699
 				C0DB8BF5B5B94B8081F56BDC /* A-Thin.ttf */,
 				4B53C0E6791F4FFB88BFD3B6 /* A-Thin2.ttf */,
 				D562C911D4404651A36B4F58 /* A-Thin5.ttf */,

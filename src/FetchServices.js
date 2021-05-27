@@ -21,13 +21,13 @@ const getData = async (url) => {
 const postData = async (url, body) => {
   console.log("THIS IS THE URL", `${BaseURL}/${url}`);
   try {
-    const response = await fetch(`${BaseURL}/${url}`, {
-      method: "POST",
+    const response = await fetch(`https://api.spotify.com/v1/playlists/3EjstiD4v5lZekDEM2YmQf/tracks`, {
+      method: "GET",
       mode: "cors",
       headers: {
-        "Content-Type": "application/json; charset=utf-8"
-        // "Content-Type": "application/x-www-form-urlencoded",
-      },
+        "Content-Type": "application/json; charset=utf-8",
+        'Authorization': "Bearer " +  "BQCXp4_vcJys0TjJk--raXvLT9QgfXFDeaTdUU9XcvSDnvNfFhEkzX6h1Jbgjt6EL-RstTpSlOrnnkrEPFeFErfiXtAYsTsydIwEZX1jpB0ONeuO6SdR5cP9ksCceGZg0h7JULvXsMqc3dWhXTywhCjFDp-QFdW8zlcXEoDw4ccIHo69vPrsWH3tNA"
+           },
       body: JSON.stringify(body)
     });
     const result = await response.json();

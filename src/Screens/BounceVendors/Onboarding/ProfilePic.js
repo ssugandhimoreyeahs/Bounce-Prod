@@ -39,7 +39,7 @@ export default function ProfilePic(props) {
     const { name, username, password, birthday } = props.route.params
     console.log("ProfilePic PROPS -->", props.route.params)
  
-    console.log(name, username, password, birthday, live);
+    console.log(name, username, password, birthday);
      
     const handleSubmit = async () => {
         try {

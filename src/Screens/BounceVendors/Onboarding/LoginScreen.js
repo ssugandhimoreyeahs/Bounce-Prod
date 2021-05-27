@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     fontSize: FONTSIZE.Text16,
     // fontWeight: 'bold',
-    marginTop: 10,
+    marginTop: 20,
     color: '#000'
   },
   // textInput: {

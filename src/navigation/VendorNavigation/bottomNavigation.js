@@ -13,8 +13,11 @@ import {
 } from '@svg';
 import MobxStore from '../../mobx';
 import { Avatar } from 'react-native-elements';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FONTSIZE } from '../../app/utils';
+const VendorBottomTab = createBottomTabNavigator();
 
-const VendorBottomTab = createMaterialBottomTabNavigator();
+// const VendorBottomTab = createMaterialBottomTabNavigator();
 
 class VendorBottomNavigation {
   static routeName = '/HomeBottom';
@@ -27,11 +30,12 @@ class VendorBottomNavigation {
     return (
       <VendorBottomTab.Navigator
         initialRouteName={DjProfileScreen.routeName}
-        labeled={false}
-        barStyle={{backgroundColor: '#FBFBFB', elevation: 5,height:65}}
-        unmountOnBlur={true}
-        keyboardHidesNavigationBar
-        screenOptions={{unmountOnBlur: true}}>
+        // labeled={false}
+        // barStyle={{backgroundColor: '#FBFBFB', elevation: 5,height:65}}
+        // unmountOnBlur={true}
+        // keyboardHidesNavigationBar
+        // screenOptions={{unmountOnBlur: true}}
+        >
         <VendorBottomTab.Screen
           options={{
             unmountOnBlur: true,
@@ -49,7 +53,7 @@ class VendorBottomNavigation {
 
         <VendorBottomTab.Screen
           options={{
-            title: null,
+            title: '',
             tabBarIcon: ({tintColor, focused}) => {
               return !focused ? (
                 <GreyBell height={33} width={33} />
@@ -65,7 +69,7 @@ class VendorBottomNavigation {
         <VendorBottomTab.Screen
           options={{
             unmountOnBlur: true,
-            tabBarColor: 'red',
+            // tabBarColor: 'red',
             tabBarIcon: ({tintColor, focused}) => {
               return !focused ? (
                 // <GreyPerson height={33} width={33} />
@@ -88,7 +92,7 @@ class VendorBottomNavigation {
           }}
           name={DjProfileScreen.routeName}
           component={DjProfileScreen}
-          unmountOnBlur={true}
+          // unmountOnBlur={true}
         />
       </VendorBottomTab.Navigator>
     );

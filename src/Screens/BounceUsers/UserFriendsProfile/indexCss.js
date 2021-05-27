@@ -5,6 +5,9 @@ import { FONTSIZE } from '@utils'
 const { height, width } = Dimensions.get("screen")
 
 const styles = StyleSheet.create({
+   textImage: {
+      color: '#000',
+   },
    Tiktok: {
       marginLeft: 10,
       fontFamily: 'ANB',
@@ -156,7 +159,7 @@ const styles = StyleSheet.create({
    InstaText: {
       color: '#000',
       fontSize: FONTSIZE.Text14,
-      marginLeft: 10 ,
+      marginLeft: 10,
       fontFamily: 'ANB'
    },
 

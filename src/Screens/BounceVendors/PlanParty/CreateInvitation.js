@@ -44,7 +44,8 @@ import moment from 'moment';
 import {Root as NRoot} from 'native-base';
 import {Toast} from '../../../app/constants';
 import Collapsible from 'react-native-collapsible';
-
+import {useBackHandler} from '@react-native-community/hooks';
+import UserHomeScreen from '../../BounceUsers/UserFriendsProfile';
 const TAGS = [
   {
     name: 'Entertainment',
@@ -60,8 +61,6 @@ function CreateInvitation(props) {
     isEditParty = props.route?.params?.isEditParty;
   }
   const partyModel = PlanPartyModel.getInstance();
-  const [picture, setPicture] = useState(null);
-  const [footer, openFooter] = useState(false);
   const [state, setState] = useState({});
   const [getImageState, setImageState] = useState(0);
 
@@ -69,7 +68,6 @@ function CreateInvitation(props) {
     const listener = partyModel.party?.subscribe(() => {
       setState(() => ({}));
     });
-
     if (isEditParty) {
       partyModel.setEditParty(party);
     }
@@ -79,12 +77,10 @@ function CreateInvitation(props) {
       listener.unsubscribe();
     };
   }, []);
-  useEffect(() => {
-    const navUnsubscribe = props.navigation.addListener('blur', () => {
-      partyModel.reset();
-    });
-    return navUnsubscribe;
-  }, []);
+  useBackHandler(()=>{
+    props.navigation.navigate(UserHomeScreen.routeName);
+    return false;
+  });
   const handleOnPress = async isDraftMode => {
     try {
       console.log('DFMD - ', isDraftMode);
@@ -186,7 +182,9 @@ function CreateInvitation(props) {
     <Root>
       <NRoot>
         <View style={styles.container}>
-          <ScrollView style={{flex: 1, backgroundColor: '#FBFBFB'}} contentContainerStyle={{flexGrow: 1}}>
+          <ScrollView
+            style={{flex: 1, backgroundColor: '#FBFBFB'}}
+            contentContainerStyle={{flexGrow: 1}}>
             <Header
               back
               // rightTitle={'Save as Draft'}
@@ -376,11 +374,11 @@ function CreateInvitation(props) {
                       textAlign: 'center',
                       fontSize: FONTSIZE.Text18,
                       color: 'black',
-                      height:45,
+                      height: 45,
                       justifyContent: 'center',
-                      alignItems:'center',
-                      alignSelf:'center',
-                      minHeight: 0
+                      alignItems: 'center',
+                      alignSelf: 'center',
+                      minHeight: 0,
                     },
                   ]}
                 />
@@ -413,11 +411,11 @@ function CreateInvitation(props) {
                       textAlign: 'center',
                       fontSize: FONTSIZE.Text18,
                       color: 'black',
-                      height:45,
+                      height: 45,
                       justifyContent: 'center',
-                      alignItems:'center',
-                      alignSelf:'center',
-                      minHeight: 0
+                      alignItems: 'center',
+                      alignSelf: 'center',
+                      minHeight: 0,
                     },
                   ]}
                 />
@@ -507,12 +505,12 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderRadius: 9.5,
     color: '#999999',
-    alignSelf:'center'
+    alignSelf: 'center',
   },
   eventContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: getHp(10)
+    marginVertical: getHp(10),
   },
   smallButtonStyle: {
     margin: getWp(5),
@@ -578,6 +576,16 @@ const styles = StyleSheet.create({
     top: -10,
   },
 });
+CreateInvitation.BottomComponent = ({navigation}) => {
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      navigation.navigate(CreateInvitation.routeName);
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+  return null;
+};
 CreateInvitation.routeName = '/CreateInvitation';
 CreateInvitation.routeNameForBottom = '/CreateInvitationForBottom';
 export default observer(CreateInvitation);

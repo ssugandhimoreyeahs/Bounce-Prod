@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   Text,
@@ -8,44 +8,44 @@ import {
   BackHandler,
   ToastAndroid,
 } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Root } from '@components';
-import { Apple, Insta, Google, Bounce } from '@svg';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {Scaffold} from '@components';
+import {Apple, Insta, Google, Bounce} from '@svg';
 import LinearGradient from 'react-native-linear-gradient';
-import { TouchableOpacity } from 'react-native';
-import { FONTSIZE, getHp, getWp } from '@utils';
-import { connect, useSelector, useDispatch } from 'react-redux';
-import { postData } from '../../../FetchServices';
-import { Alert } from 'react-native';
+import {TouchableOpacity} from 'react-native';
+import {FONTSIZE, getHp, getWp} from '@utils';
+import {connect, useSelector, useDispatch} from 'react-redux';
+import {postData} from '../../../FetchServices';
+import {Alert} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 import RadialGradient from 'react-native-radial-gradient';
-import { axiosPost, getData } from '../../../FetchServices';
-import { fetchCurrentLoginData } from '../../../reducer/CurrentData';
-import { LocalStorage } from '../../../app/utils/localStorage';
-import { UserContext } from '../../../context/profiledataProvider';
+import {axiosPost, getData} from '../../../FetchServices';
+import {fetchCurrentLoginData} from '../../../reducer/CurrentData';
+import {LocalStorage} from '../../../app/utils/localStorage';
+import {UserContext} from '../../../context/profiledataProvider';
 import MobxStore from '../../../mobx';
 import VendorCategory from '../../Signup/Vendor/VendorCategory';
 import NameScreen from './NameScreen';
-import { BounceProLogo, BounceSplash } from '@svg'
+import {BounceProLogo, BounceSplash} from '@svg';
 import HostView from '../../MyEvents/HostView';
 
 function LoginScreen(props) {
-  const { fetchProfile } = useContext(UserContext);
+  const {fetchProfile} = useContext(UserContext);
   const [animated, setAnimated] = useState({
     ballAnimation: new Animated.Value(-25),
   });
-  const { navigation } = props;
+  const {navigation} = props;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { vendorProfileData } = useSelector(state => state.mainExpenseByCategory);
+  const {vendorProfileData} = useSelector(state => state.mainExpenseByCategory);
   const [loader, setLoader] = useState(false);
   const isFocused = useIsFocused();
   const [originalLangArray, setOriginalLangArray] = useState([]);
   const [originalGenreArray, setOriginalGenreArray] = useState([]);
   const [originalGuardArray, setOriginalGuardArray] = useState([]);
   const dispatch = useDispatch();
-  const { authStore } = MobxStore;
+  const {authStore} = MobxStore;
   const handleUserLogin = async () => {
     try {
       const loginResponse = await authStore.async.login(username, password);
@@ -74,13 +74,17 @@ function LoginScreen(props) {
   };
 
   return (
-    <Root>
+    <Scaffold statusBarStyle={{backgroundColor: '#FBFBFB'}}>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
-        <KeyboardAwareScrollView style={{ flex: 1, backgroundColor: '#FBFBFB' }}>
+        <KeyboardAwareScrollView style={{flex: 1, backgroundColor: '#FBFBFB'}}>
           <View style={styles.container}>
-            <View style={{ alignItems: 'center', marginVertical: 50, }}>
-              <BounceSplash preserveAspectRatio='none' height={170} width={238} />
+            <View style={{alignItems: 'center', marginVertical: 50}}>
+              <BounceSplash
+                preserveAspectRatio="none"
+                height={170}
+                width={238}
+              />
             </View>
 
             <Text style={styles.signStyle}>{'Sign In'}</Text>
@@ -106,12 +110,12 @@ function LoginScreen(props) {
                 />
 
                 <LinearGradient
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 1 }}
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 1}}
                   colors={['#1FAEF7', '#1FAEF7', '#AEE4FF']}
                   style={[
                     styles.linearGradient,
-                    { marginTop: 30, marginBottom: 15, width: '100%' },
+                    {marginTop: 30, marginBottom: 15, width: '100%'},
                   ]}>
                   <TouchableOpacity onPress={handleUserLogin}>
                     <Text style={styles.buttonText}>{'Login'}</Text>
@@ -121,19 +125,20 @@ function LoginScreen(props) {
             ) : null}
 
             <View style={styles.CardContainer}>
-
-              <TouchableOpacity onPress={() => props.navigation.navigate(HostView.routeName)} style={styles.Card}>
-                <Insta height={30} width={30} style={{ margin: 10 }} />
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate(HostView.routeName)}
+                style={styles.Card}>
+                <Insta height={30} width={30} style={{margin: 10}} />
                 <Text style={styles.ThirdParty}>{'Instagram'}</Text>
               </TouchableOpacity>
 
               <View style={styles.Card}>
-                <Apple height={30} width={30} style={{ margin: 10 }} />
+                <Apple height={30} width={30} style={{margin: 10}} />
                 <Text style={styles.ThirdParty}>{'Apple'}</Text>
               </View>
 
               <View style={styles.Card}>
-                <Google height={30} width={30} style={{ margin: 10 }} />
+                <Google height={30} width={30} style={{margin: 10}} />
                 <Text style={styles.ThirdParty}>{'Google'}</Text>
               </View>
             </View>
@@ -146,18 +151,15 @@ function LoginScreen(props) {
               }}>
               <View style={styles.Line} />
               <View>
-                <Text style={styles.OR}>
-                  {"or"}
-                </Text>
+                <Text style={styles.OR}>{'or'}</Text>
               </View>
               <View style={styles.Line} />
             </View>
 
-
             <TouchableOpacity
-              style={[styles.linearGradient, { marginTop: 20 }]}
+              style={[styles.linearGradient, {marginTop: 20}]}
               onPress={() => navigation.navigate(NameScreen.routeName)}>
-              <Text style={[styles.buttonText, { color: '#1FAEF7' }]}>
+              <Text style={[styles.buttonText, {color: '#1FAEF7'}]}>
                 {'User Sign Up'}
               </Text>
             </TouchableOpacity>
@@ -167,16 +169,14 @@ function LoginScreen(props) {
               onPress={() =>
                 props.navigation.navigate(VendorCategory.routeName)
               }>
-              <Text style={[styles.buttonText, { color: '#F8A41E' }]}>
+              <Text style={[styles.buttonText, {color: '#F8A41E'}]}>
                 {'Vendor Sign Up'}
               </Text>
             </TouchableOpacity>
-
           </View>
-
         </KeyboardAwareScrollView>
       )}
-    </Root>
+    </Scaffold>
   );
 }
 LoginScreen.routeName = '/LoginScreen';

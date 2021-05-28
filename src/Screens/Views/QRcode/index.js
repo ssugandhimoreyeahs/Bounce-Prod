@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, Alert, Text, TouchableOpacity } from 'react-native';
-import { QRCodes, Header, CustomButton } from '@components';
+import { QRCodes, Header, CustomButton, Scaffold } from '@components';
 import { UserContext } from '../../../context/profiledataProvider';
 import { FONTSIZE, getHp, getWp } from '@utils';
 import { ApiClient } from '../../../app/services';
@@ -39,6 +39,14 @@ export default function QRcode({ navigation }) {
     })();
   }, []);
   return (
+    <Scaffold statusBarStyle={{
+      backgroundColor: '#000',
+      barStyle: 'light-content'
+    }}
+    contentContainerStyle={{
+      backgroundColor: '#000'
+    }}
+    >
     <View style={styles.container}>
       <Header
         headerStyleProp={{ color: '#1FAEF7' }}
@@ -80,6 +88,7 @@ export default function QRcode({ navigation }) {
       </View>
       {/* <View style={[styles.barStyle]} /> */}
     </View>
+    </Scaffold>
   );
 }
 QRcode.routeName = '/QRcode'

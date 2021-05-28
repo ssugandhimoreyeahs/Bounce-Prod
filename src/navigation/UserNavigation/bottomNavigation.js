@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Button} from 'react-native';
+import {Button, TouchableOpacity} from 'react-native';
 
 import {Avatar} from 'react-native-elements';
 import {
@@ -21,7 +21,7 @@ import DesignCanva from '../../Screens/Views/Canva/DesignCanva';
 import CreateInvitation from '../../Screens/BounceVendors/PlanParty/CreateInvitation';
 import MobxStore from '../../mobx';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {FONTSIZE, getHp} from '../../app/utils'; 
+import {FONTSIZE, getHp} from '../../app/utils';  
 
 const UserHomeBottomTab = createBottomTabNavigator();
 
@@ -97,7 +97,7 @@ class UserHomeBottomNavigation {
                 <Add_Outline height={33} width={33} />
               );
             },
-            tabBarVisible: false
+            tabBarVisible: false, 
           }}
           name={CreateInvitation.routeNameForBottom}
           component={(_) => <CreateInvitation {..._} />}

@@ -3,6 +3,8 @@ import {
   View,
   Text,
   Image,
+  Linking,
+  FlatList,
   ScrollView,
   TextInput,
   TouchableOpacity,
@@ -20,7 +22,6 @@ import { styles } from "./indexCss";
 import { BlackMenubar, Scanner } from "@svg";
 import { Avatar } from "react-native-elements";
 import ImagePicker from "react-native-image-crop-picker";
-import { FONTSIZE } from "@utils";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { fetchVendorData } from "../../../reducer/mainexpensecategory";
 import Spinner from "react-native-loading-spinner-overlay";
@@ -46,6 +47,9 @@ import { BlackPerson } from "../../../assets/Svg";
 import { PartyService } from '../../../app/services';
 import CreateInvitation from '../../../Screens/BounceVendors/PlanParty/CreateInvitation'
 import { observer } from 'mobx-react';
+import axios from "axios";
+import { FONTSIZE, getHp, getWp } from '@utils'
+import { Scaffold } from "../../../components";
 
 const ACCOUNTS = [
   {
@@ -89,6 +93,8 @@ function UserFriendsProfile(props) {
   const dispatch = useDispatch();
   const imageArray = [DJ, DJ1, DJ2];
   const [state, setState] = useState(0);
+  const [getSpotify, setSpotifyData] = useState([])
+
   console.log("PROPS", props);
 
   //Social media states
@@ -115,7 +121,8 @@ function UserFriendsProfile(props) {
   } = userinfo?.user;
   console.log("userinfo", userinfo)
 
-  useEffect(()=>{
+  useEffect(() => {
+
     PartyService.getParty();
   }, []);
   const handleCarousel = (value) => {
@@ -130,23 +137,15 @@ function UserFriendsProfile(props) {
     );
   };
 
-  // useEffect(() => {
-  //   fetchProfile();
-  // }, [props]);
+  useEffect(() => {
+    fetchProfile();
+  }, []);
 
-  //   const fetchProfile = async () => {
-  //     setLoader(true);
-  //     // let token = "Bearer " + AccessToken
-  //     console.log("body", body);
-  //     let SERVER_RESPONSE = await postData("user/userlogin", body);
-  //     console.log("ORIGINL_USER_RES", SERVER_RESPONSE);
-  //     // console.log("USER_SERVER_RESPONSE", JSON.stringify(SERVER_RESPONSE));
-  //     if (!(SERVER_RESPONSE.statusCode == 401)) {
-  //       dispatch(fetchVendorData(["USER_PROFILE_DATA", SERVER_RESPONSE]));
-  //       setLoader(false);
-  //     }
-  //     setLoader(false);
-  //   };
+  const fetchProfile = async () => {
+    // const SERVER_RESPONSE = await postData()
+    // console.log("Spotify_all_playlist", SERVER_RESPONSE);
+    // setSpotifyData(SERVER_RESPONSE)
+  };
 
   const handleImage = async () => {
     {
@@ -169,7 +168,25 @@ function UserFriendsProfile(props) {
     }
   };
 
+  const RenderSpotify = ({ items }) => {
+    console.log("PROPS OF SPOTIFY", items.track)
+    return (
+      <View style={{ marginRight: 10, flexDirection: 'row', marginVertical: 10, paddingVertical: 10, flex: 1 }}>
+        <View style={{ alignItems: 'center' }}>
+          <Image source={{ uri: items.track.album.images[0].url }} style={{ borderRadius: 7, width: 150, height:150 , margin: 2 }} />
+
+          <Text style={[styles.textImage, { marginVertical: 5, paddingBottom: 0, fontSize: FONTSIZE.Text16, fontFamily: '500' }]}>{items.track.name}</Text>
+
+          <Text style={[styles.textImage, { marginVertical: 5, paddingBottom: 0, fontSize: FONTSIZE.Text13 }]}>{items.track.artists[0].name}</Text>
+
+          <Text style={[styles.textImage, { color: '#696969', paddingBottom: 0, fontSize: FONTSIZE.Text12 }]}>{items.track.album.album_type}</Text>
+        </View>
+      </View>
+    )
+  }
+
   return (
+    <Scaffold>
     <View style={styles.container}>
 
       <ScrollView keyboardShouldPersistTaps={"always"}>
@@ -240,7 +257,7 @@ function UserFriendsProfile(props) {
                     )
                   }
                 >
-                  <Insta height={30} width={30} />
+                  <Insta height={40} width={40} />
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -279,7 +296,7 @@ function UserFriendsProfile(props) {
                 placeholderTextColor='#999999'
               />
 
-              <Tabview 
+              <Tabview
                 {...props}
               />
               <LinearGradient
@@ -289,8 +306,8 @@ function UserFriendsProfile(props) {
                 style={[
                   styles.linearGradient
                 ]}>
-                <TouchableOpacity style={{ flexDirection: "row" }} 
-                onPress={()=>props.navigation.navigate(CreateInvitation.routeName)}>
+                <TouchableOpacity style={{ flexDirection: "row" }}
+                  onPress={() => props.navigation.navigate(CreateInvitation.routeName)}>
                   <WhitePerson height={27} width={19} />
                   <Text style={[styles.textStyle, { marginLeft: 20, fontFamily: '500', color: '#FFFFFF' }]}>
                     {'Create Invitation'}</Text>
@@ -299,12 +316,11 @@ function UserFriendsProfile(props) {
 
               <View style={{ backgroundColor: '#EEEEEE', height: 1, marginVertical: 10 }} />
 
-              {/* Social Media Section Start */}
-              {/* 1st */}
+             
               <View style={styles.flex}>
                 <TouchableOpacity style={styles.socialButton}>
                   <View style={styles.flex}>
-                    <Insta height={30} width={30} />
+                    <Insta height={40} width={40} />
                     <TextInput
                       placeholder={`Instagram `}
                       placeholderTextColor={'#000'}
@@ -313,12 +329,12 @@ function UserFriendsProfile(props) {
                       style={[styles.headerTitle, { marginLeft: 10, fontWeight: 'bold' }]}
                     />
                   </View>
-                  <Text style={[styles.headerTitle, { color: '#1FAEF7',  }]}>{"Connect"}</Text>
+                  <Text style={[styles.headerTitle, { color: '#1FAEF7', }]}>{"Connect"}</Text>
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
 
-              {/* 2nd */}
+ 
               <View style={styles.flex}>
                 <TouchableOpacity style={styles.socialButton}>
                   <View style={styles.flex}>
@@ -331,7 +347,7 @@ function UserFriendsProfile(props) {
               </View>
 
 
-              {/* 3rd */}
+              
               <View style={[styles.flex, { marginTop: 15 }]}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
@@ -351,7 +367,7 @@ function UserFriendsProfile(props) {
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
-              {/* 4th */}
+           
               <View style={styles.flex}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
@@ -371,7 +387,7 @@ function UserFriendsProfile(props) {
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
-              {/* 5th */}
+            
               <View style={styles.flex}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
@@ -392,10 +408,10 @@ function UserFriendsProfile(props) {
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
               </View>
-              {/* Social Media Section */}
+             
 
               <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} />
-              {/* First Gallery Block of Friends */}
+              
               <View style={{ marginVertical: 5, paddingVertical: 10 }}>
                 <View style={[styles.flex]}>
                   <BlackPerson height={20} width={14} />
@@ -408,32 +424,41 @@ function UserFriendsProfile(props) {
                   </Text>
                 </TouchableOpacity>
               </View>
-              {/*END*** First Gallery Block of Friends */}
+              
               <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} />
 
-              {/*Start*** Second Gallery Block of Friends */}
+              
               <View style={[styles.flex, {
                 marginVertical: 10,
               }]}>
-                <InstaNew height={20} width={14} />
+                <InstaNew height={30} width={20} />
                 <Text style={styles.InstaText} >
                   {"Instagram"}
                 </Text>
               </View>
               {handleCarousel("Instagram")}
-              {/*END*** Second Gallery Block of Friends */}
-
+              
 
               <View>
                 <Text style={styles.InstaText}>{"Favorite Music"}</Text>
-                {handleCarousel("Music")}
+                {/* <ScrollView horizontal >
+                  {getSpotify.length == 0 ?
+                    null :
+                    getSpotify.items.map((items) => {
+                      // console.log("THIS IS SINGLE ITEM:", items)
+                      return <RenderSpotify items={items} />
+                    })
+                  }
+                </ScrollView> */}
               </View>
+
             </View>
           </>
         )}
       </ScrollView>
-      <Footer buttonStack={DATA} />
-    </View>
+       {/* <Footer buttonStack={DATA} />   */}
+    </View >
+    </Scaffold>
   );
 }
 UserFriendsProfile.routeName = "/UserFriendsProfile";

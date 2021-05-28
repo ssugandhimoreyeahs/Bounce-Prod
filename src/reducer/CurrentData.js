@@ -114,7 +114,7 @@ export const fetchCurrentLoginData = (fullDataSet) => {
 export const fetchMiscData = () => async (dispatch) => {
   try {
     let LANGUAGE_SERVER = await ApiClient.instance.get(ApiClient.endPoints.getLanguage);
-    console.log("current data CHECKING->", LANGUAGE_SERVER)
+    // console.log("current data CHECKING->", LANGUAGE_SERVER)
     dispatch(fetchCurrentLoginData(['ORIGINAL_LANG', LANGUAGE_SERVER]));
     let tempLanguage = [];
     await LANGUAGE_SERVER.data.map(item => {

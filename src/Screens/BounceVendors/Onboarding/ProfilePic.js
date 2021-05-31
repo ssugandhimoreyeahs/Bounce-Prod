@@ -1,39 +1,40 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
-  ToastAndroid,
+  
 } from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {Root, CustomButton, ProgressCircle} from '@components';
-import {UploadBlue, BlackClose, Google} from '@svg';
-import {connect, useSelector, useDispatch} from 'react-redux';
-import {FONTSIZE, getHp, getWp} from '@utils';
-import {Avatar} from 'react-native-elements';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Root, CustomButton, ProgressCircle } from '@components';
+import { UploadBlue, BlackClose, Google } from '@svg';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { FONTSIZE, getHp, getWp } from '@utils';
+import { Avatar } from 'react-native-elements';
 import ImagePicker from 'react-native-image-crop-picker';
-import {launchImageLibrary} from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 import axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
-import {LocalStorage} from '../../../app/utils/localStorage';
-import {UserContext} from '../../../context/profiledataProvider';
+import { LocalStorage } from '../../../app/utils/localStorage';
+import { UserContext } from '../../../context/profiledataProvider';
 import MobxStore from '../../../mobx';
-
 import moment from 'moment';
+import { ApiClient } from '../../../app/services';
+import { Scaffold } from '@components'
+import { Toast } from '@constants';
 
-import {ApiClient} from '../../../app/services';
 
 export default function ProfilePic(props) {
-  const {authStore} = MobxStore;
-  const {navigation} = props;
+  const { authStore } = MobxStore;
+  const { navigation } = props;
   const [picture, setPicture] = useState(null);
   const [footer, openFooter] = useState(false);
   const dispatch = useDispatch();
   const [loader, setLoader] = useState(false);
 
-  const {name, username, password, birthday} = props.route.params;
+  const { name, username, password, birthday } = props.route.params;
   console.log('ProfilePic PROPS -->', props.route.params);
 
   console.log(name, username, password, birthday);
@@ -72,12 +73,12 @@ export default function ProfilePic(props) {
         }
       } else {
         setLoader(false);
-        ToastAndroid.show('Please select a picture!', 1000);
+        Toast.show('Please select a picture!');
       }
     } catch (e) {
       setLoader(false);
       console.log('ERROR - ', e);
-      ToastAndroid.show('e', 1000);
+      Toast.show('e');
     }
   };
 
@@ -130,18 +131,18 @@ export default function ProfilePic(props) {
     );
   };
   return (
-    <Root>
+    <Scaffold>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
         <KeyboardAwareScrollView
-          style={{flexGrow: 1}}
-          contentContainerStyle={{flex: 1}}>
+          style={{ flexGrow: 1 }}
+          contentContainerStyle={{ flex: 1 }}>
           <View style={styles.container}>
             <Text style={styles.HeadingStyle}>
               {'Add a 🔥🔥🔥 profile pic!'}
             </Text>
 
-            <View style={{marginVertical: 40}}>
+            <View style={{ marginVertical: 40 }}>
               {picture == null ? (
                 <TouchableOpacity
                   onPress={handleImage}
@@ -164,35 +165,35 @@ export default function ProfilePic(props) {
                   </Text>
                 </TouchableOpacity>
               ) : (
-                <>
-                  <View
-                    style={{justifyContent: 'center', alignItems: 'center'}}>
-                    <TouchableOpacity
-                      onPress={() => openFooter(true)}
-                      style={{marginVertical: 30}}>
-                      <Avatar
-                        source={{uri: picture.uri}}
-                        size={getHp(224)}
-                        rounded
-                      />
-
-                      <View>
-                        <UploadBlue
-                          height={getHp(69)}
-                          width={getHp(69)}
-                          style={{
-                            position: 'absolute',
-                            bottom: -30,
-                            left: 75,
-                            resizeMode: 'contain',
-                          }}
+                  <>
+                    <View
+                      style={{ justifyContent: 'center', alignItems: 'center' }}>
+                      <TouchableOpacity
+                        onPress={() => openFooter(true)}
+                        style={{ marginVertical: 30 }}>
+                        <Avatar
+                          source={{ uri: picture.uri }}
+                          size={getHp(224)}
+                          rounded
                         />
-                      </View>
-                      {picture == null ? null : <ImageFooter />}
-                    </TouchableOpacity>
-                  </View>
-                </>
-              )}
+
+                        <View>
+                          <UploadBlue
+                            height={getHp(69)}
+                            width={getHp(69)}
+                            style={{
+                              position: 'absolute',
+                              bottom: -30,
+                              left: 75,
+                              resizeMode: 'contain',
+                            }}
+                          />
+                        </View>
+                        {picture == null ? null : <ImageFooter />}
+                      </TouchableOpacity>
+                    </View>
+                  </>
+                )}
             </View>
 
             <View
@@ -204,7 +205,7 @@ export default function ProfilePic(props) {
               }}>
               <ProgressCircle
                 currentProgress={4}
-                containerStyle={{marginBottom: 20}}
+                containerStyle={{ marginBottom: 20 }}
               />
 
               <CustomButton userContinue onPress={handleSubmit} />
@@ -212,84 +213,84 @@ export default function ProfilePic(props) {
           </View>
         </KeyboardAwareScrollView>
       )}
-    </Root>
+    </Scaffold>
   );
 }
 
 ProfilePic.routeName = '/ProfilePic';
 
 const styles = StyleSheet.create({
-    uploadText: {
-        fontSize: FONTSIZE.Text16,
-        color: '#000',
-        marginTop: 10,
-        fontFamily: 'AvenirNext-Regular',
-        marginTop: 15,
-    },
-    skip: {
-        fontSize: FONTSIZE.Text19,
-        color: '#1FAEF7',
-        marginBottom: getHp(15),
-        fontFamily: 'AvenirNext-Regular',
-        fontWeight: 'bold',
-        alignSelf: 'center',
-    },
-    container: {
-        flex: 1,
-        padding: 15,
-        flexDirection: 'column',
-    },
-    HeadingStyle: {
-        marginTop: 40,
-        fontFamily: 'AvenirNext-Medium',
-        letterSpacing: 0.2,
-        color: '#1FAEF7',
-        fontSize: FONTSIZE.Text26,
-    },
-    signStyle: {
-        fontFamily: 'Avenir Next',
-        letterSpacing: 1,
-        color: '#000',
-        fontSize: FONTSIZE.Text22,
-        fontWeight: 'bold'
-    },
-    textInput: {
-        borderBottomColor: '#1FAEF7',
-        borderBottomWidth: 2,
-        fontSize: FONTSIZE.Text22,
-        fontWeight: 'bold',
-        marginTop: 10,
-        fontFamily: 'AvenirNext-Regular',
-        color: '#000'
-    },
-    TitleStyle: {
-        fontSize: 14,
-        paddingVertical: 0,
-        fontFamily: 'AvenirNext-Regular',
-    },
-    Card: {
-        backgroundColor: '#fff',
-        borderRadius: 20,
-        elevation: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '30%',
-        height: 100
-    },
-    CardContainer: {
-        marginVertical: 30,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        // backgroundColor: 'red'
-    },
-    crossButton: {
-        elevation: 10,
-        backgroundColor: '#fff',
-        borderRadius: 50,
-        padding: 10,
-        position: 'absolute',
-        right: -10,
-        top: -10
-    },
+  uploadText: {
+    fontSize: FONTSIZE.Text16,
+    color: '#000',
+    marginTop: 10,
+    fontFamily: 'AvenirNext-Regular',
+    marginTop: 15,
+  },
+  skip: {
+    fontSize: FONTSIZE.Text19,
+    color: '#1FAEF7',
+    marginBottom: getHp(15),
+    fontFamily: 'AvenirNext-Regular',
+    fontWeight: 'bold',
+    alignSelf: 'center',
+  },
+  container: {
+    flex: 1,
+    padding: 15,
+    flexDirection: 'column',
+  },
+  HeadingStyle: {
+    marginTop: 40,
+    fontFamily: 'AvenirNext-Medium',
+    letterSpacing: 0.2,
+    color: '#1FAEF7',
+    fontSize: FONTSIZE.Text26,
+  },
+  signStyle: {
+    fontFamily: 'AvenirNext-Regular',
+    letterSpacing: 1,
+    color: '#000',
+    fontSize: FONTSIZE.Text22,
+    fontWeight: 'bold'
+  },
+  textInput: {
+    borderBottomColor: '#1FAEF7',
+    borderBottomWidth: 2,
+    fontSize: FONTSIZE.Text22,
+    fontWeight: 'bold',
+    marginTop: 10,
+    fontFamily: 'AvenirNext-Regular',
+    color: '#000'
+  },
+  TitleStyle: {
+    fontSize: 14,
+    paddingVertical: 0,
+    fontFamily: 'AvenirNext-Regular',
+  },
+  Card: {
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    elevation: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '30%',
+    height: 100
+  },
+  CardContainer: {
+    marginVertical: 30,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    // backgroundColor: 'red'
+  },
+  crossButton: {
+    elevation: 10,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    padding: 10,
+    position: 'absolute',
+    right: -10,
+    top: -10
+  },
 
 })

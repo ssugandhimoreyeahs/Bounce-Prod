@@ -49,10 +49,10 @@ import CreateInvitation from '../../../Screens/BounceVendors/PlanParty/CreateInv
 import { observer } from 'mobx-react';
 import axios from "axios";
 import { FONTSIZE, getHp, getWp } from '@utils'
- 
-import { Scaffold } from "../../../components";
+import { Scaffold } from '@components'
+import { Toast } from '@constants';
 import HostProfile from "../HostProfile/HostProfile";
- 
+
 
 const ACCOUNTS = [
   {
@@ -176,7 +176,7 @@ function UserFriendsProfile(props) {
     return (
       <View style={{ marginRight: 10, flexDirection: 'row', marginVertical: 10, paddingVertical: 10, flex: 1 }}>
         <View style={{ alignItems: 'center' }}>
-          <Image source={{ uri: items.track.album.images[0].url }} style={{ borderRadius: 7, width: 150, height:150 , margin: 2 }} />
+          <Image source={{ uri: items.track.album.images[0].url }} style={{ borderRadius: 7, width: 150, height: 150, margin: 2 }} />
 
           <Text style={[styles.textImage, { marginVertical: 5, paddingBottom: 0, fontSize: FONTSIZE.Text16, fontFamily: 'AvenirNext-Medium' }]}>{items.track.name}</Text>
 
@@ -188,9 +188,10 @@ function UserFriendsProfile(props) {
     )
   }
 
-  return (
-
-    <Scaffold>
+  return (<Scaffold
+    contentContainerStyle={{}}
+    statusBarStyle={{ backgroundColor: '#FFFFFF' }}
+  >
     <View style={styles.container}>
 
       <ScrollView keyboardShouldPersistTaps={"always"}>
@@ -461,9 +462,8 @@ function UserFriendsProfile(props) {
           </>
         )}
       </ScrollView>
-      {/* <Footer buttonStack={DATA} /> */}
     </View >
-    </Scaffold>
+  </Scaffold>
   );
 }
 UserFriendsProfile.routeName = "/UserFriendsProfile";

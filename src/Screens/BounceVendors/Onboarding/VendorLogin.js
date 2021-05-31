@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, ToastAndroid, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { Header, SearchBar, Root, SignupDoubleButton } from '@components'
 import { FONTSIZE } from '@utils'
 import { connect } from "react-redux";
@@ -10,6 +10,7 @@ import { postData } from '../../../FetchServices'
 import { Alert } from 'react-native';
 import { useFirebaseUpload } from '@hooks'
 import axios from 'axios';
+import { Toast } from '@constants'
 
 function VendorLogin(props) {
     const [email, setEmail] = useState('')
@@ -35,7 +36,7 @@ function VendorLogin(props) {
                 }
             })
         } else if (!(parsed.success)) {
-            ToastAndroid.show("Login Failed :( ")
+            Toast.show("Login Failed :( ")
         }
     }
     return (

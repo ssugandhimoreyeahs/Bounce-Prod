@@ -30,7 +30,7 @@ function CustomDropdown(props) {
                 </View> */}
                 <DropDownPicker
                     globalTextStyle={{
-                        fontFamily: "AvenirNext",
+                        fontFamily: "AvenirNext-Regular",
                         fontSize: FONTSIZE.Text30
                     }}
                     min={0}
@@ -58,7 +58,7 @@ function CustomDropdown(props) {
                     defaultValue={value}
                     containerStyle={{ height: 60, flex: 1, flexGrow: 1, borderRadius: 9.5 }}
                     labelStyle={{
-                        fontFamily: "AvenirNext",
+                        fontFamily: "AvenirNext-Regular",
                         fontSize: FONTSIZE.Text15,
                         color: '#000',
 

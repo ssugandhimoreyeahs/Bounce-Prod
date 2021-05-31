@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   View,
   Text,
@@ -15,7 +15,7 @@ import {
   Root,
   GooglePlacesInput,
 } from '@components';
-import {Avatar} from 'react-native-elements';
+import { Avatar } from 'react-native-elements';
 import {
   UploadBlue,
   BlackClose,
@@ -26,18 +26,23 @@ import {
   Snapchat,
 } from '@svg';
 import ImagePicker from 'react-native-image-crop-picker';
-import {FONTSIZE} from '@utils';
-import {useSelector, useDispatch} from 'react-redux';
-import {getHp, getWp} from '@utils';
+import { FONTSIZE } from '@utils';
+import { useSelector, useDispatch } from 'react-redux';
+import { getHp, getWp } from '@utils';
 import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
-import {UserContext} from '../../../context/profiledataProvider';
-import {ApiClient} from '../../../app/services';
-import {PrivacyBlock} from '../../../components';
+import { UserContext } from '../../../context/profiledataProvider';
+import { ApiClient } from '../../../app/services';
+import { PrivacyBlock } from '../../../components';
 import MobxStore from '../../../mobx';
+import { Scaffold } from '@components'
+import { Toast } from '@constants';
+
+
+
 export default function HostProfile(props) {
-//   const {userinfo, fetchProfile} = useContext(UserContext);
-  const {userProfile: userinfo} = MobxStore.authStore;
+  //   const {userinfo, fetchProfile} = useContext(UserContext);
+  const { userProfile: userinfo } = MobxStore.authStore;
   const [loader, setLoader] = useState(false);
   const [fullName, setFullname] = useState(null);
   const [getBirthday, setBirthday] = useState(null);
@@ -156,20 +161,21 @@ export default function HostProfile(props) {
     if (SERVER_RESPONSE.status == 201 || SERVER_RESPONSE.status == 200) {
       props.navigation.goBack();
       setTimeout(() => {
-        ToastAndroid.show('Profile Updated Successfully!');
+        Toast.show('Profile Updated Successfully!');
       }, 200);
     }
     setLoader(false);
   };
 
   return (
-    <Root>
+    <Scaffold
+      statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
         <ScrollView
           // keyboardShouldPersistTaps='always'
-          style={{backgroundColor: '#fff', flex: 1}}
-          contentContainerStyle={{flexGrow: 1}}>
+          style={{ backgroundColor: '#fff', flex: 1 }}
+          contentContainerStyle={{ flexGrow: 1 }}>
           {picture == null ? (
             <TouchableOpacity
               onPress={handleImage}
@@ -191,39 +197,39 @@ export default function HostProfile(props) {
               </Text>
             </TouchableOpacity>
           ) : (
-            <>
-              <View
-                style={{
-                  marginVertical: getHp(0),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <TouchableOpacity
-                  onPress={() => openFooter(true)}
-                  style={{marginVertical: 30}}>
-                  <Avatar
-                    source={{
-                      uri: picture,
-                    }}
-                    size={getHp(250)}
-                    rounded
-                  />
-                  <View style={{alignItems: 'center'}}>
-                    <UploadBlue
-                      height={getHp(50)}
-                      width={getWp(50)}
-                      style={{
-                        position: 'absolute',
-                        bottom: -25,
-                        resizeMode: 'contain',
+              <>
+                <View
+                  style={{
+                    marginVertical: getHp(0),
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <TouchableOpacity
+                    onPress={() => openFooter(true)}
+                    style={{ marginVertical: 30 }}>
+                    <Avatar
+                      source={{
+                        uri: picture,
                       }}
+                      size={getHp(250)}
+                      rounded
                     />
-                  </View>
-                  {footer ? <ImageFooter /> : null}
-                </TouchableOpacity>
-              </View>
-            </>
-          )}
+                    <View style={{ alignItems: 'center' }}>
+                      <UploadBlue
+                        height={getHp(50)}
+                        width={getWp(50)}
+                        style={{
+                          position: 'absolute',
+                          bottom: -25,
+                          resizeMode: 'contain',
+                        }}
+                      />
+                    </View>
+                    {footer ? <ImageFooter /> : null}
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
 
           <View
             style={{
@@ -277,7 +283,7 @@ export default function HostProfile(props) {
                 <Text
                   style={[
                     styles.headerTitle,
-                    {fontWeight: 'bold', marginLeft: 10},
+                    { fontWeight: 'bold', marginLeft: 10 },
                   ]}>
                   {'Spotify'}
                 </Text>
@@ -285,7 +291,7 @@ export default function HostProfile(props) {
               <Text
                 style={[
                   styles.headerTitle,
-                  {color: '#1FAEF7', fontWeight: 'bold'},
+                  { color: '#1FAEF7', fontWeight: 'bold' },
                 ]}>
                 {'Connect'}
               </Text>
@@ -293,7 +299,7 @@ export default function HostProfile(props) {
             <Text
               style={[
                 styles.headerTitle,
-                {color: '#999999', fontWeight: 'bold', marginBottom: 8},
+                { color: '#999999', fontWeight: 'bold', marginBottom: 8 },
               ]}>
               {'Tap to Refresh'}
             </Text>
@@ -308,14 +314,14 @@ export default function HostProfile(props) {
                   onChangeText={value => setInstagram(value)}
                   style={[
                     styles.headerTitle,
-                    {marginLeft: 10, fontWeight: 'bold'},
+                    { marginLeft: 10, fontWeight: 'bold' },
                   ]}
                 />
               </View>
               <Text
                 style={[
                   styles.headerTitle,
-                  {color: '#1FAEF7', fontWeight: 'bold'},
+                  { color: '#1FAEF7', fontWeight: 'bold' },
                 ]}>
                 {'Connect'}
               </Text>
@@ -360,11 +366,11 @@ export default function HostProfile(props) {
               </View>
             </TouchableOpacity>
 
-            {/* <PrivacyBlock /> */}
-            {/* This is incomplete bcoz of Host Profile.js was not rendering */}
+            {/* {/ <PrivacyBlock /> /}
+            {/ This is incomplete bcoz of Host Profile.js was not rendering /} */}
           </View>
 
-          <View style={{paddingHorizontal: getWp(10)}}>
+          <View style={{ paddingHorizontal: getWp(10) }}>
             <CustomButton
               complete
               bar
@@ -374,79 +380,79 @@ export default function HostProfile(props) {
           </View>
         </ScrollView>
       )}
-    </Root>
+    </Scaffold>
   );
 }
 HostProfile.routeName = '/HostProfile';
 const styles = StyleSheet.create({
-    Tiktok: {
-        marginLeft: 10,
-        fontWeight: 'bold',
-        color: '#000',
-        width: '100%'
-    },
-    headerTitle: {
-        // alignContent: 'center',
-        color: '#000',
-        fontSize: FONTSIZE.Text16,
-        // fontWeight: 'bold',
-        fontFamily: 'AvenirNext-Regular',
-    },
-    addInterest: {
-        elevation: 5,
-        backgroundColor: '#fff',
-        height: getHp(130),
-        width: getHp(150),
-        borderRadius: 24,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    flex: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    },
-    socialButton: {
-        elevation: 5,
-        borderRadius: 13,
-        padding: 10,
-        backgroundColor: '#fff',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginVertical: 7,
-    },
-    container: {
-        backgroundColor: '#fff',
-        flex: 1
-    },
-    linearGradient: {
-        flex: 1,
-        borderRadius: 20,
-    },
-    ContainerStyle: {
-        width: '100%',
-        marginVertical: 4,
-    },
-    ButtonStyle: {
-        backgroundColor: '#212121',
-        borderRadius: 10,
-        justifyContent: 'flex-start',
-        paddingLeft: 20
-    },
-    TitleStyle: {
-        fontFamily: 'AvenirNext-Regular',
-        fontSize: 16,
-        paddingVertical: 5
-    },
-    crossButton: {
-        elevation: 10,
-        backgroundColor: '#fff',
-        borderRadius: 50,
-        padding: 10,
-        position: 'absolute',
-        right: -10,
-        top: -10
-    },
+  Tiktok: {
+    marginLeft: 10,
+    fontWeight: 'bold',
+    color: '#000',
+    width: '100%'
+  },
+  headerTitle: {
+    // alignContent: 'center',
+    color: '#000',
+    fontSize: FONTSIZE.Text16,
+    // fontWeight: 'bold',
+    fontFamily: 'AvenirNext-Regular',
+  },
+  addInterest: {
+    elevation: 5,
+    backgroundColor: '#fff',
+    height: getHp(130),
+    width: getHp(150),
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  flex: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  socialButton: {
+    elevation: 5,
+    borderRadius: 13,
+    padding: 10,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 7,
+  },
+  container: {
+    backgroundColor: '#fff',
+    flex: 1
+  },
+  linearGradient: {
+    flex: 1,
+    borderRadius: 20,
+  },
+  ContainerStyle: {
+    width: '100%',
+    marginVertical: 4,
+  },
+  ButtonStyle: {
+    backgroundColor: '#212121',
+    borderRadius: 10,
+    justifyContent: 'flex-start',
+    paddingLeft: 20
+  },
+  TitleStyle: {
+    fontFamily: 'AvenirNext-Regular',
+    fontSize: 16,
+    paddingVertical: 5
+  },
+  crossButton: {
+    elevation: 10,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    padding: 10,
+    position: 'absolute',
+    right: -10,
+    top: -10
+  },
 
 })

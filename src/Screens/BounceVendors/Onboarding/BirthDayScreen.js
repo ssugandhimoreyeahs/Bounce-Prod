@@ -18,6 +18,8 @@ import { fetchVendorData, } from "../../../reducer/mainexpensecategory";
 import { FONTSIZE } from '@utils'
 import ProfilePic from './ProfilePic';
 import moment from 'moment';
+import { Scaffold } from '@components'
+import { Toast } from '@constants';
 
 export default function BirthDayScreen(props) {
     const {
@@ -40,11 +42,11 @@ export default function BirthDayScreen(props) {
                 name
             })
         } else {
-            ToastAndroid.show("Please select birthday!", 1000)
+            Toast.show("Please select birthday!")
         }
     }
     return (
-        <Root>
+        <Scaffold>
             <KeyboardAwareScrollView style={{ flexGrow: 1 }} contentContainerStyle={{ flex: 1 }}>
                 <View style={styles.container}>
                     <Text style={styles.HeadingStyle}>{"When’s your birthday? 🎂"}</Text>
@@ -68,7 +70,7 @@ export default function BirthDayScreen(props) {
 
                 </View>
             </KeyboardAwareScrollView>
-        </Root>
+        </Scaffold>
     )
 }
 

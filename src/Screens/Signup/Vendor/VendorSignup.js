@@ -133,7 +133,7 @@ export default function VendorSignup(props) {
                             </View>
 
                             <Text style={{
-                                fontSize: FONTSIZE.Text16, color: '#000', marginTop: 15, fontFamily: 'AvenirNext',
+                                fontSize: FONTSIZE.Text16, color: '#000', marginTop: 15, fontFamily: 'AvenirNext-Regular',
                             }}>{"Upload Profile Picture"}</Text>
                         </TouchableOpacity>
                     </View>

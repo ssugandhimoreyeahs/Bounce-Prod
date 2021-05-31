@@ -105,10 +105,10 @@ const styles = StyleSheet.create({
     ThirdParty: {
         color: '#000',
         fontSize: FONTSIZE.Text16,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     buttonText: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         fontSize: FONTSIZE.Text14,
         // fontFamily: 'Gill Sans',
         textAlign: 'center',
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     signStyle: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         letterSpacing: 1,
         color: '#000',
         fontSize: FONTSIZE.Text18,
@@ -148,12 +148,12 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
         fontSize: FONTSIZE.Text16,
         marginTop: 10,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     TitleStyle: {
         fontSize: FONTSIZE.Text14,
         paddingVertical: 0,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     Card: {
         backgroundColor: '#fff',

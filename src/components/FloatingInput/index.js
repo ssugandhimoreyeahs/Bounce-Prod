@@ -100,12 +100,12 @@ const FloatingInput = props => {
             isPassword={Password}
             labelStyles={{
               color: '#000',
-              fontFamily: 'AvenirNext',
+              fontFamily: 'AvenirNext-Regular',
             }}
             numberOfLines={10}
             inputStyles={{
               // paddingLeft:getWp(5),
-              fontFamily: 'Roboto-Bold',
+              fontFamily: 'AvenirNext-DemiBold',
               color: '#000',
               fontWeight: 'bold',
               fontSize: FONTSIZE.Text17,
@@ -114,7 +114,7 @@ const FloatingInput = props => {
             value={value}
             onChangeText={onChange}
             containerStyles={{
-              fontFamily: 'AvenirNext',
+              fontFamily: 'AvenirNext-Regular',
               paddingHorizontal: 10,
               elevation: 2,
               height: getHp(65),
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     fontSize: FONTSIZE.Text17,
     // backgroundColor:'red',
     // maxHeight:30
-    fontFamily: 'AvenirNext',
+    fontFamily: 'AvenirNext-Regular',
   },
   ContainerStyle: {
     width: '100%',
@@ -161,11 +161,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     opacity: 0.7,
     color: '#000',
-    fontFamily: 'AvenirNext',
+    fontFamily: 'AvenirNext-Regular',
   },
   Title2Style: {
     fontSize: FONTSIZE.Text15,
-    fontFamily: 'AvenirNext',
+    fontFamily: 'AvenirNext-Regular',
     // opacity:0.8,
     // fontWeight: 'bold',
     color: '#000',
@@ -294,12 +294,12 @@ const styles = StyleSheet.create({
 
 //                             labelStyles={{
 //                                 color: '#000',
-//                                 fontFamily: 'AvenirNext'
+//                                 fontFamily: 'AvenirNext-Regular'
 //                             }}
 //                             numberOfLines={10}
 //                             inputStyles={{
 //                                 // paddingLeft:getWp(5),
-//                                 fontFamily: 'Roboto-Bold',
+//                                 fontFamily: 'AvenirNext-DemiBold',
 //                                 color: '#000',
 //                                 fontWeight: 'bold',
 //                                 fontSize: FONTSIZE.Text17,
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
 //                             value={value}
 //                             onChangeText={onChange}
 //                             containerStyles={{
-//                                 fontFamily: 'AvenirNext',
+//                                 fontFamily: 'AvenirNext-Regular',
 //                                 paddingHorizontal: 10,
 //                                 // elevation: 1,
 //                                 height: getHp(65),
@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
 //         fontSize: FONTSIZE.Text17,
 //         // backgroundColor:'red',
 //         // maxHeight:30
-//         fontFamily: 'AvenirNext',
+//         fontFamily: 'AvenirNext-Regular',
 //     },
 //     ContainerStyle: {
 //         width: '100%',
@@ -386,11 +386,11 @@ const styles = StyleSheet.create({
 //         fontWeight: "bold",
 //         opacity: 0.7,
 //         color: '#000',
-//         fontFamily: 'AvenirNext',
+//         fontFamily: 'AvenirNext-Regular',
 //     },
 //     Title2Style: {
 //         fontSize: FONTSIZE.Text15,
-//         fontFamily: 'AvenirNext',
+//         fontFamily: 'AvenirNext-Regular',
 //         // opacity:0.8,
 //         // fontWeight: 'bold',
 //         color: '#000'

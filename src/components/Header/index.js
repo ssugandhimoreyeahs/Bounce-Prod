@@ -101,7 +101,7 @@ function Header(props) {
                         </TouchableOpacity>
                         : null
                 }
-                <Text style={[styles.headerTitleStyle, headerStyleProp, headerTitle == 'Upload Media' ? { fontFamily: 'AvenirNext-Medium', fontFamily: 'AvenirNext-Medium' } : null]}>
+                <Text style={[styles.headerTitleStyle, headerStyleProp, { fontFamily: 'AvenirNext-DemiBold' }]}>
                     {headerTitle}
                 </Text>
                 <View >
@@ -214,11 +214,11 @@ const styles = StyleSheet.create({
 
     },
     headerTitleStyle: {
-        fontFamily: 'AvenirNext-UltraLight',
+        fontFamily: 'AvenirNext-DemiBold',
         color: "#000",
         fontSize: FONTSIZE.Text22,
         letterSpacing: 0.1,
-        fontWeight: 'bold'
+        // fontWeight: 'bold'
     },
     rightTitleStyle: {
         color: "#1FAEF7",

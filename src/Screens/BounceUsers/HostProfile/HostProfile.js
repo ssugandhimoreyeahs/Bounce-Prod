@@ -160,7 +160,7 @@ export default function HostProfile(props) {
                     <TouchableOpacity onPress={handleImage} style={{ padding: 20, marginVertical: getHp(30), justifyContent: 'center', alignItems: 'center' }}>
                         <UploadBlue height={getHp(90)} width={getHp(90)} />
                         <Text style={{
-                            fontSize: FONTSIZE.Text19, color: '#000', marginTop: 10, fontFamily: 'AvenirNext',
+                            fontSize: FONTSIZE.Text19, color: '#000', marginTop: 10, fontFamily: 'AvenirNext-Regular',
                         }}>Upload Profile Picture</Text>
                     </TouchableOpacity>
                     :
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: FONTSIZE.Text16,
         // fontWeight: 'bold',
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     addInterest: {
         elevation: 5,
@@ -354,7 +354,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
     TitleStyle: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         fontSize: 16,
         paddingVertical: 5
     },

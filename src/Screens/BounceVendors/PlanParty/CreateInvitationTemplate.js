@@ -177,7 +177,7 @@ function CreateInvitationTemplate(props) {
                                             fontSize: FONTSIZE.Text14,
                                             color: '#000',
                                             marginTop: 10,
-                                            fontFamily: 'AvenirNext',
+                                            fontFamily: 'AvenirNext-Regular',
                                         }}>
                                         {'Upload Media'}
                                     </Text>

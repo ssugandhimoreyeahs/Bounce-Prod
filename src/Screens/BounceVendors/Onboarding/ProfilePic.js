@@ -187,14 +187,14 @@ const styles = StyleSheet.create({
         fontSize: FONTSIZE.Text16,
         color: '#000',
         marginTop: 10,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         marginTop: 15,
     },
     skip: {
         fontSize: FONTSIZE.Text19,
         color: '#1FAEF7',
         marginBottom: getHp(15),
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         fontWeight: 'bold',
         alignSelf: 'center',
     },
@@ -223,13 +223,13 @@ const styles = StyleSheet.create({
         fontSize: FONTSIZE.Text22,
         fontWeight: 'bold',
         marginTop: 10,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         color: '#000'
     },
     TitleStyle: {
         fontSize: 14,
         paddingVertical: 0,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     Card: {
         backgroundColor: '#fff',

@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     belowHeading: {
         fontSize: FONTSIZE.Text16,
         color: '#000',
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     container: {
         flexDirection: 'row',

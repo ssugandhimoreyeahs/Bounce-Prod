@@ -272,11 +272,14 @@ function CreateInvitation(props) {
 
             <DatePick
               placeholder={'Date / Time'}
-              handleChange={date => partyModel.party.set({ date })}
+              handleChange={date => {
+                console.log('DATE_ON_CHANGE - ', date);
+                partyModel.party.set({ date });
+              }}
               value={partyModel.party.date}
               pickerMode={'datetime'}
               minimumDate={moment().add(1, 'day').toDate()}
-              maximumDate={moment().add(7, 'day').toDate()}
+              maximumDate={moment().add(30, 'day').toDate()}
               errorMessage={partyModel.party?.partyError?.date}
             />
             <FloatingInput

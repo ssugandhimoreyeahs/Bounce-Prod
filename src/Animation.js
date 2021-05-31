@@ -13,6 +13,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { TouchableOpacity } from 'react-native';
 import { FONTSIZE } from '@utils'
 import { connect, useSelector, useDispatch } from "react-redux";
+import { Toast } from '@constants';
 const { height, width } = Dimensions.get('screen')
 
 
@@ -38,7 +39,7 @@ export default function LoginScreen(props) {
         if (SERVER_USER_LOGIN.success == true) {
             navigation.navigate('UserFriendsProfile')
         } else {
-                Toast.show("Invalid Credentials!")
+                Toast("Invalid Credentials!")
         }
     }
 

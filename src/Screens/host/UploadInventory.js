@@ -18,7 +18,7 @@ import { UserContext } from "../../context/profiledataProvider";
 import axios from 'axios'
 import Spinner from "react-native-loading-spinner-overlay";
 import MobxStore from '../../mobx';
-
+import { Toast } from '@constants';
 export default function UploadInventory(props) {
     // const { userinfo, fetchProfile, } = useContext(UserContext)
     const {
@@ -90,11 +90,11 @@ export default function UploadInventory(props) {
                 // props.navigation.navigate("btmstack", {
                 //     screen: "DjProfileScreen",
                 // })
-                Toast.show("Inventory created successfully !");
+                Toast("Inventory created successfully !");
 
             } else {
                 setLoader(false)
-                Toast.show('Something went wrong!')
+                Toast('Something went wrong!')
             }
         } catch (error) {
             setLoader(false)

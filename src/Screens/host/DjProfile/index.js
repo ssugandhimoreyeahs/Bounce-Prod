@@ -201,7 +201,7 @@ function DjProfile(props) {
     // console.log("imgTemp", imgTemp);
     setMedia(imgTemp);
     if (RES_IMAGE.status == 201 || RES_IMAGE.status == 200) {
-      Toast.show('Media Added Successfully!');
+      Toast('Media Added Successfully!');
     }
   };
   // Handle Image not working after the UI change

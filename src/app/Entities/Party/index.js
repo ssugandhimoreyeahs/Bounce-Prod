@@ -6,7 +6,7 @@ import {
   ArrayNotEmpty,
   Min,
 } from 'class-validator';
-import {Decorators as D, ValidationTypes} from '../../Validations';
+import {ValidationTypes} from '../../Validations';
 import {timezoneToUTC} from '../../utils';
 import moment from 'moment';
 import {Strings} from '../../constants';
@@ -19,19 +19,19 @@ class Party {
   @IsNotEmpty({message: Strings.requiredFieldError('Date')})
   date;
 
-  @D.ValidateObjecKey(
-    {key: 'addressStr', [ValidationTypes.REQUIRED]: true},
-    {message: Strings.requiredFieldError('Address')},
-  )
+  // @D.ValidateObjecKey(
+  //   {key: 'addressStr', [ValidationTypes.REQUIRED]: true},
+  //   {message: Strings.requiredFieldError('Address')},
+  // )
   location = {
     lat: '1',
     lon: '1',
     addressStr: '',
   };
 
-  @D.PartyAge('toAge', {message: 'Invalid Minimum Age'})
+  // @D.PartyAge('toAge', {message: 'Invalid Minimum Age'})
   fromAge;
-  @D.PartyAge('fromAge', {message: 'Invalid Maximum Age'})
+  // @D.PartyAge('fromAge', {message: 'Invalid Maximum Age'})
   toAge;
 
   @ArrayNotEmpty({message: Strings.requiredFieldError('Event Media')})

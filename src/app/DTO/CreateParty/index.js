@@ -3,7 +3,7 @@ import {
   Ticket as TicketEntity,
 } from '../../Entities';
 import {ReactModel} from '../../core';
-import {Validation} from '../../Validations';
+import {ClassValidator} from '../../Validations';
 
 @ReactModel()
 class CreatePartyDTO extends CreatePartyEntity { 
@@ -53,7 +53,7 @@ class CreatePartyDTO extends CreatePartyEntity {
     if (validateParty.galleryFiles.length == 0) {
       validateParty.galleryFiles.push(undefined);
     }
-    const isValid = await Validation.validateClassDecorator(validateParty);
+    const isValid = await ClassValidator.isValidate(validateParty);
     if (!isValid.success) {
       console.log('ERROR_PARTY - ', JSON.stringify(isValid));
       schema.error = isValid.errors;

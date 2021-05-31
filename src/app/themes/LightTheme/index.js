@@ -29,7 +29,10 @@ class LightTheme extends LightThemeColors {
   };
   serialize = () => {
     let theme = {type: this.type, theme: this};
-    return JSON.stringify(theme);
+    return JSON.stringify(theme.theme);
   };
+  get isLightTheme() {
+    return true;
+  }
 }
 export default LightTheme;

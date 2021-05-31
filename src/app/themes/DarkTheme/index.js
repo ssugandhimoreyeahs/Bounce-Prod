@@ -25,7 +25,10 @@ class DarkTheme extends DarkThemeColors {
     }
     serialize = () => {
         let theme = {type: this.type, theme: this};
-        return JSON.stringify(theme);
+        return JSON.stringify(theme.theme);
+    }
+    get isDarkTheme() {
+        return true;
     }
 }
 export default DarkTheme;

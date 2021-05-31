@@ -23,7 +23,7 @@ export default function BirthDayScreen(props) {
     const {
         navigation
     } = props
-    const { name, username, password } = props.route.params
+    const { name, username, password } = props.route?.params
     console.log("BIRTHDAY PROPS -->", props.route.params)
     const [birthday, setBirthday] = useState('')
     const [putFocus, setFocus] = useState(false)

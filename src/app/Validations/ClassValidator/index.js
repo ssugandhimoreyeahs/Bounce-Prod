@@ -1,24 +1,10 @@
 import {RegexCollection} from '../../constants';
 import {validate} from 'class-validator';
 import ValidationTypes from '../ValidationTypes';
-class Validation {
-  static required = value => {
-    let requiredReg = new RegExp(RegexCollection.requiredString);
-    return requiredReg.test(String(value).trim());
-  };
 
-  static validateForm = validatableInput => {
-    let isValid = true;
-    Object.keys(validatableInput).map(vKey => {
-      switch (vKey) {
-        case ValidationTypes.REQUIRED:
-          isValid = isValid && this.required(validatableInput.value);
-          break;
-      }
-    });
-    return isValid;
-  };
-  static validateClassDecorator = async instance => {
+
+class ClassValidator {
+  isValidate = async instance => {
     let valid = {
       success: false,
       errors: {},
@@ -38,5 +24,5 @@ class Validation {
     return valid;
   };
 }
-
-export default Validation;
+let classValidator = new ClassValidator();
+export default classValidator;

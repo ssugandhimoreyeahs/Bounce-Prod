@@ -50,6 +50,7 @@ import { observer } from 'mobx-react';
 import axios from "axios";
 import { FONTSIZE, getHp, getWp } from '@utils'
 import { Scaffold } from "../../../components";
+import HostProfile from "../HostProfile/HostProfile";
 
 const ACCOUNTS = [
   {
@@ -245,7 +246,7 @@ function UserFriendsProfile(props) {
               <View style={[styles.flex, { width: "70%", marginVertical: 10, justifyContent: 'space-evenly' }]}>
                 <TouchableOpacity
                   style={[styles.editButtonStyle]}
-                  onPress={() => props.navigation.navigate("HostProfile")}
+                  onPress={() => props.navigation.navigate(HostProfile.routeName)}
                 >
                   <Text style={styles.editButton}>{"Edit Profile"}</Text>
                 </TouchableOpacity>

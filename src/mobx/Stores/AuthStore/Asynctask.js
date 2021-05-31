@@ -144,5 +144,15 @@ class Asynctask {
       return Promise.reject(error);
     }
   };
+  reloadUser = async () => {
+    try {
+      const userDataRes = await this.fetchUser();
+      this.authStore.onReloadVendor(userDataRes.data);
+      return Promise.resolve(userDataRes.data);
+    }catch(error) {
+      return Promise.reject(error);
+    }
+
+  }
 }
 export default Asynctask;

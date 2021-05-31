@@ -22,7 +22,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Icon from 'react-native-vector-icons/Entypo';
 import Navigation from './src/navigation';
 import {RNErrorHandlerService} from './src/app/services';
-
+import {CustomValidator, ValidationTypes} from './src/app/Validations';
 Icon.loadFont();
 function App() {
   LogBox.ignoreAllLogs(true);
@@ -44,4 +44,32 @@ function App() {
     </Provider>
   );
 }
-export default observer(App); 
+export default observer(App);
+
+// const App2 = () => {
+//   const [txt, setTxt] = useState('');
+//   const onCheck = () => {
+//     const data = CustomValidator.validate({
+//       value: txt,
+//       [ValidationTypes.required]: 'Required Text',
+//     });
+//     console.log(data);
+//   };
+//   return (
+//     <Fragment>
+//       <TextInput
+//         onChangeText={setTxt}
+//         value={txt}
+//         placeholder={'Enter title'}
+//       />
+//       <Button
+//         title={'Press me'}
+//         onPress={() => {
+//           onCheck();
+//         }}
+//       />
+//     </Fragment>
+//   );
+// };
+
+// export default App2;

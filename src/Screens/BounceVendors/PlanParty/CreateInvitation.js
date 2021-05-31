@@ -278,7 +278,7 @@ function CreateInvitation(props) {
               }}
               value={partyModel.party.date}
               pickerMode={'datetime'}
-              minimumDate={moment().add(1, 'day').toDate()}
+              minimumDate={moment().toDate()}
               maximumDate={moment().add(30, 'day').toDate()}
               errorMessage={partyModel.party?.partyError?.date}
             />

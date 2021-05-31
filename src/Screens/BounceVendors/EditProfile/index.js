@@ -230,7 +230,7 @@ function DJSignup(props) {
                                         <UploadBlue height={getHp(100)} width={getHp(100)} />
                                     </View>
                                     <Text style={{
-                                        fontSize: FONTSIZE.Text19, color: '#000', marginTop: 10, fontFamily: 'AvenirNext',
+                                        fontSize: FONTSIZE.Text19, color: '#000', marginTop: 10, fontFamily: 'AvenirNext-Regular',
                                     }}>{"Upload Profile Picture"}</Text>
                                 </TouchableOpacity>
                                 :
@@ -463,7 +463,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
     TitleStyle: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         fontSize: 16,
         paddingVertical: 5
     },

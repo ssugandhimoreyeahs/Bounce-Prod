@@ -56,10 +56,10 @@ export default function AccountSetting(props) {
                 />
                 <View style={{ width: '70%', paddingVertical: getHp(20) }}>
                     <Text style={{
-                        fontSize: FONTSIZE.Text20, fontWeight:'bold', color: '#000', marginVertical: 10, fontFamily: 'AvenirNext',
+                        fontSize: FONTSIZE.Text20, fontWeight:'bold', color: '#000', marginVertical: 10, fontFamily: 'AvenirNext-Regular',
                     }}>Invitaiton Notifications</Text>
                     <Text style={{
-                        fontSize: FONTSIZE.Text17, color: '#696969', marginVertical: 0, fontFamily: 'AvenirNext', lineHeight: 24
+                        fontSize: FONTSIZE.Text17, color: '#696969', marginVertical: 0, fontFamily: 'AvenirNext-Regular', lineHeight: 24
                     }}>How would you like to recieve event invitations? </Text>
                 </View>
                 <Checkbox
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
     TitleStyle: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         fontSize: 16,
         paddingVertical: 5
     },

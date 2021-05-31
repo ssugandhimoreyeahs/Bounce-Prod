@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
       color: '#000',
       fontSize: 18,
       opacity: 0.8,
-      fontFamily: 'AvenirNext',
+      fontFamily: 'AvenirNext-Regular',
    },
    belowTextStyle: {
       color: '#000',
@@ -66,14 +66,14 @@ const styles = StyleSheet.create({
       fontSize: 18,
       opacity: 0.5,
       marginBottom: 5,
-      fontFamily: 'AvenirNext',
+      fontFamily: 'AvenirNext-Regular',
    },
    BasePackageTitle: {
       color: '#000',
       fontSize: 18,
       opacity: 0.5,
       marginBottom: 5,
-      fontFamily: 'AvenirNext',
+      fontFamily: 'AvenirNext-Regular',
    },
    websiteImageStyle: {
       height: 80,
@@ -85,13 +85,13 @@ const styles = StyleSheet.create({
       alignSelf: 'center',
       color: '#1FAEF7',
       fontSize: 12,
-      fontFamily: 'AvenirNext',
+      fontFamily: 'AvenirNext-Regular',
    },
    hostDetail: {
       color: '#000',
       fontSize: 20,
       opacity: 0.9,
-      fontFamily: 'AvenirNext',
+      fontFamily: 'AvenirNext-Regular',
       textAlign: 'center',
       marginVertical: 15
 

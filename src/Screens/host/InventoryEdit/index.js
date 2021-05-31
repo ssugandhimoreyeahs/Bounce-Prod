@@ -248,7 +248,7 @@
 //                                 <TouchableOpacity onPress={handleImage} style={{ padding: 20, marginVertical: getHp(30), justifyContent: 'center', alignItems: 'center' }}>
 //                                     <UploadBlue height={getHp(90)} width={getHp(90)} />
 //                                     <Text style={{
-//                                         fontSize: FONTSIZE.Text19, color: '#000', marginTop: 10, fontFamily: 'AvenirNext',
+//                                         fontSize: FONTSIZE.Text19, color: '#000', marginTop: 10, fontFamily: 'AvenirNext-Regular',
 //                                     }}>{"Upload Profile Picture"}</Text>
 //                                 </TouchableOpacity>
 //                                 :
@@ -471,7 +471,7 @@
 //         paddingLeft: 20
 //     },
 //     TitleStyle: {
-//         fontFamily: 'AvenirNext',
+//         fontFamily: 'AvenirNext-Regular',
 //         fontSize: 16,
 //         paddingVertical: 5
 //     },

@@ -219,76 +219,77 @@ export default function ProfilePic(props) {
 ProfilePic.routeName = '/ProfilePic';
 
 const styles = StyleSheet.create({
-  uploadText: {
-    fontSize: FONTSIZE.Text16,
-    color: '#000',
-    marginTop: 10,
-    fontFamily: 'AvenirNext',
-    marginTop: 15,
-  },
-  skip: {
-    fontSize: FONTSIZE.Text19,
-    color: '#1FAEF7',
-    marginBottom: getHp(15),
-    fontFamily: 'AvenirNext',
-    fontWeight: 'bold',
-    alignSelf: 'center',
-  },
-  container: {
-    flex: 1,
-    padding: 15,
-    flexDirection: 'column',
-  },
-  HeadingStyle: {
-    marginTop: 40,
-    fontFamily: '500',
-    letterSpacing: 0.2,
-    color: '#1FAEF7',
-    fontSize: FONTSIZE.Text26,
-  },
-  signStyle: {
-    fontFamily: 'Avenir Next',
-    letterSpacing: 1,
-    color: '#000',
-    fontSize: FONTSIZE.Text22,
-    fontWeight: 'bold',
-  },
-  textInput: {
-    borderBottomColor: '#1FAEF7',
-    borderBottomWidth: 2,
-    fontSize: FONTSIZE.Text22,
-    fontWeight: 'bold',
-    marginTop: 10,
-    fontFamily: 'AvenirNext',
-    color: '#000',
-  },
-  TitleStyle: {
-    fontSize: 14,
-    paddingVertical: 0,
-    fontFamily: 'AvenirNext',
-  },
-  Card: {
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    elevation: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '30%',
-    height: 100,
-  },
-  CardContainer: {
-    marginVertical: 30,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    // backgroundColor: 'red'
-  },
-  crossButton: {
-    elevation: 10,
-    backgroundColor: '#fff',
-    borderRadius: 50,
-    padding: 10,
-    position: 'absolute',
-    right: -10,
-    top: -10,
-  },
-});
+    uploadText: {
+        fontSize: FONTSIZE.Text16,
+        color: '#000',
+        marginTop: 10,
+        fontFamily: 'AvenirNext-Regular',
+        marginTop: 15,
+    },
+    skip: {
+        fontSize: FONTSIZE.Text19,
+        color: '#1FAEF7',
+        marginBottom: getHp(15),
+        fontFamily: 'AvenirNext-Regular',
+        fontWeight: 'bold',
+        alignSelf: 'center',
+    },
+    container: {
+        flex: 1,
+        padding: 15,
+        flexDirection: 'column',
+    },
+    HeadingStyle: {
+        marginTop: 40,
+        fontFamily: 'AvenirNext-Medium',
+        letterSpacing: 0.2,
+        color: '#1FAEF7',
+        fontSize: FONTSIZE.Text26,
+    },
+    signStyle: {
+        fontFamily: 'Avenir Next',
+        letterSpacing: 1,
+        color: '#000',
+        fontSize: FONTSIZE.Text22,
+        fontWeight: 'bold'
+    },
+    textInput: {
+        borderBottomColor: '#1FAEF7',
+        borderBottomWidth: 2,
+        fontSize: FONTSIZE.Text22,
+        fontWeight: 'bold',
+        marginTop: 10,
+        fontFamily: 'AvenirNext-Regular',
+        color: '#000'
+    },
+    TitleStyle: {
+        fontSize: 14,
+        paddingVertical: 0,
+        fontFamily: 'AvenirNext-Regular',
+    },
+    Card: {
+        backgroundColor: '#fff',
+        borderRadius: 20,
+        elevation: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '30%',
+        height: 100
+    },
+    CardContainer: {
+        marginVertical: 30,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        // backgroundColor: 'red'
+    },
+    crossButton: {
+        elevation: 10,
+        backgroundColor: '#fff',
+        borderRadius: 50,
+        padding: 10,
+        position: 'absolute',
+        right: -10,
+        top: -10
+    },
+
+})

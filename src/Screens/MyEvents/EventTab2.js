@@ -82,6 +82,6 @@ const styles = StyleSheet.create({
         marginVertical: 3,
         color: '#000',
         fontSize: FONTSIZE.Text16,
-        fontFamily: 'AvenirNext'
+        fontFamily: 'AvenirNext-Regular'
     },
 })

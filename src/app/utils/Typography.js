@@ -15,6 +15,6 @@ export const typography = () => {
 
 const styles = StyleSheet.create({
   defaultText: {
-    fontFamily: 'AvenirNext',
+    fontFamily: 'AvenirNext-Regular',
   }
 });

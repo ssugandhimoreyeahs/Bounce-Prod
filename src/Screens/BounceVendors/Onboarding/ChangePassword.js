@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     buttonText: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         fontSize: FONTSIZE.Text16,
         fontFamily: 'Gill Sans',
         textAlign: 'center',
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
     TitleStyle: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         fontSize: 16,
         paddingVertical: 5
     },

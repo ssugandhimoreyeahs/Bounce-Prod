@@ -42,13 +42,13 @@ export default function EventTab1() {
                         {"Guest Interests"}
                     </Text>
                     <View>
-                        <Text style={[styles.aboutText, { fontFamily: '500' }]}>
+                        <Text style={[styles.aboutText, { fontFamily: 'AvenirNext-Medium' }]}>
                             {"  ⛺  Outdoors"}
                         </Text>
-                        <Text style={[styles.aboutText, { fontFamily: '500' }]}>
+                        <Text style={[styles.aboutText, { fontFamily: 'AvenirNext-Medium' }]}>
                             {"  ⛺  Outdoors"}
                         </Text>
-                        <Text style={[styles.aboutText, { fontFamily: '500' }]}>
+                        <Text style={[styles.aboutText, { fontFamily: 'AvenirNext-Medium' }]}>
                             {"  ⛺  Outdoors"}
                         </Text>
                     </View>
@@ -61,7 +61,7 @@ export default function EventTab1() {
                 <View style={{ justifyContent: 'space-between', flexDirection: 'column', width: '60%' }}>
 
                     <Text style={[styles.aboutText, { width: '80%', alignSelf: 'center' }]}>
-                        <Text style={[styles.aboutText, { fontFamily: 'ANB' }]}>
+                        <Text style={[styles.aboutText, { fontFamily: 'AvenirNext-Bold' }]}>
                             {"90% "}
                         </Text>
                         {"of your guests enjoy EDM music"}
@@ -70,7 +70,7 @@ export default function EventTab1() {
                     <View style={{ backgroundColor: 'rgba(0, 224, 143, 0.33)', width: '100%', height: 1 }} />
 
                     <Text style={[styles.aboutText, { width: '80%', alignSelf: 'center' }]}>
-                        <Text style={[styles.aboutText, { fontFamily: 'ANB' }]}>
+                        <Text style={[styles.aboutText, { fontFamily: 'AvenirNext-Bold' }]}>
                             {"90% "}
                         </Text>
                         {"of your guests enjoy EDM music"}
@@ -93,7 +93,7 @@ export default function EventTab1() {
 const styles = StyleSheet.create({
     Tiktok: {
         marginLeft: 10,
-        fontFamily: 'ANB',
+        fontFamily: 'AvenirNext-Bold',
         color: '#000',
         width: '100%'
     },
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         // opacity: 0.5,
         // marginBottom: 5,
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
     },
     BasePackageTitle: {
         color: '#000',
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: FONTSIZE.Text14,
         marginLeft: 10,
-        fontFamily: 'ANB'
+        fontFamily: 'AvenirNext-Bold'
     },
     allFrnds: {
         elevation: 2,

@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#EEEEEE',
         borderBottomWidth: 2,
         fontSize: FONTSIZE.Text22,
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         color: '#000'
     },
 })

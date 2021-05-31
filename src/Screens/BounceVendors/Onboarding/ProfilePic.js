@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     },
     HeadingStyle: {
         marginTop: 40,
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         letterSpacing: 0.2,
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text26,

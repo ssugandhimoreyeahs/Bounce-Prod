@@ -17,25 +17,25 @@ export default function AboutUs() {
             </Text>
 
             <TouchableOpacity style={[styles.allFrnds,{marginVertical:20}]}>
-                <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text15, fontFamily: 'ANB', color: '#1FAEF7' }]}>
+                <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text15, fontFamily: 'AvenirNext-Bold', color: '#1FAEF7' }]}>
                     {"Help spread the love"}
                 </Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={[styles.allFrnds,{elevation:1,marginTop:20,alignItems:'flex-start',height:68}]}>
-                <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text18, fontFamily: '500',marginLeft:20 }]}>
+                <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text18, fontFamily: 'AvenirNext-Medium',marginLeft:20 }]}>
                     {"User Agreement"}
                 </Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={[styles.allFrnds,{elevation:1,marginTop:10,alignItems:'flex-start',height:68}]}>
-                <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text18, fontFamily: '500',marginLeft:20 }]}>
+                <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text18, fontFamily: 'AvenirNext-Medium',marginLeft:20 }]}>
                     {"Privacy Policy"}
                 </Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={[styles.allFrnds,{elevation:1,marginTop:10,alignItems:'flex-start',height:68}]}>
-                <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text18, fontFamily: '500',marginLeft:20 }]}>
+                <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text18, fontFamily: 'AvenirNext-Medium',marginLeft:20 }]}>
                     {"End User Licence Agreement"}
                 </Text>
             </TouchableOpacity>

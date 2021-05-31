@@ -7,7 +7,7 @@ import { UploadBlue } from '@svg'
 export default function DesignCanva() {
     return (<View style={styles.container}>
 
-<Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10, fontFamily: 'ANB', fontSize: FONTSIZE.Text22 }]} >
+<Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10, fontFamily: 'AvenirNext-Bold', fontSize: FONTSIZE.Text22 }]} >
                 {"Under Development"}
                 </Text>
         {/* <Header headerTitle={"Custom Invitation"}
@@ -16,14 +16,14 @@ export default function DesignCanva() {
         />
         <View style={styles.subContainer}>
 
-            <Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10, fontFamily: 'ANB', fontSize: FONTSIZE.Text22 }]} >
+            <Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10, fontFamily: 'AvenirNext-Bold', fontSize: FONTSIZE.Text22 }]} >
                 {"Adelson School Gala"}
             </Text>
             <Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10 }]} >
                 {"Dec 31, 8:00 PM"}
             </Text>
 
-            <Text style={[styles.textStyle, { textDecorationLine: 'underline', fontSize: FONTSIZE.Text14, fontFamily: '500', color: '#1FAEF7' }]}>
+            <Text style={[styles.textStyle, { textDecorationLine: 'underline', fontSize: FONTSIZE.Text14, fontFamily: 'AvenirNext-Medium', color: '#1FAEF7' }]}>
                 {"8440 W. Lake Mead Blvd., Las Vegas,... "}
             </Text>
 

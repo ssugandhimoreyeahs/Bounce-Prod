@@ -33,7 +33,7 @@ export const ThreeFooterButtons = ({ icon, ButtonTitle }) => {
     return (
         <TouchableOpacity style={styles.bottomContainer}>
             {icon}
-            <Text style={[{ color: '#000', fontSize: FONTSIZE.Text12, fontFamily: '500',marginTop:5 }]}>
+            <Text style={[{ color: '#000', fontSize: FONTSIZE.Text12, fontFamily: 'AvenirNext-Medium',marginTop:5 }]}>
                 {ButtonTitle}
             </Text>
         </TouchableOpacity>
@@ -54,9 +54,9 @@ export const EventTabview = observer((props) => {
             <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{ color: '#999999', fontFamily: '500',fontSize:FONTSIZE.Text16 }}
+                    textStyle={{ color: '#999999', fontFamily: 'AvenirNext-Medium',fontSize:FONTSIZE.Text16 }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-                    activeTextStyle={{ color: '#000', fontFamily: 'ANB',fontSize:FONTSIZE.Text16 }} heading={"Attending"}>
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Bold',fontSize:FONTSIZE.Text16 }} heading={"Attending"}>
                     <ScrollView nestedScrollEnabled={true} style={{
                         height: 300
                     }}>
@@ -65,9 +65,9 @@ export const EventTabview = observer((props) => {
                 </Tab >
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{color: '#999999', fontFamily: '500',fontSize:FONTSIZE.Text16 }}
+                    textStyle={{color: '#999999', fontFamily: 'AvenirNext-Medium',fontSize:FONTSIZE.Text16 }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-                    activeTextStyle={{ color: '#000', fontFamily: 'ANB',fontSize:FONTSIZE.Text16 }} heading="Featuring">
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Bold',fontSize:FONTSIZE.Text16 }} heading="Featuring">
                     <EventPageTab2 />
                 </Tab>
             </Tabs>
@@ -80,9 +80,9 @@ export const Tabview = observer((props) => {
             <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{ color: '#000', fontFamily: '500' }}
+                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-                    activeTextStyle={{ color: '#000', fontFamily: '500' }} heading={"Hosting"}>
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading={"Hosting"}>
                     <ScrollView nestedScrollEnabled={true} style={{
                         height: 300
                     }}>
@@ -91,16 +91,16 @@ export const Tabview = observer((props) => {
                 </Tab >
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{ color: '#000', fontFamily: '500' }}
+                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-                    activeTextStyle={{ color: '#000', fontFamily: '500' }} heading="Attending">
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="Attending">
                     <Tab2 />
                 </Tab>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{ color: '#000', fontFamily: '500' }}
+                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-                    activeTextStyle={{ color: '#000', fontFamily: '500' }} heading="Interested">
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="Interested">
                     <Tab3 />
                 </Tab>
 
@@ -376,7 +376,7 @@ export const RenderSmallButton = ({ item }) => {
         // <LinearGradient colors={['#1FAEF7', '#AEE4FF']} style={[styles.linearGradient, { marginTop: getHp(15), flexDirection: 'row', alignItems: 'center', }]}>
 
         <TouchableOpacity style={[styles.allButtonStyle, { backgroundColor: '#F2F5F6', alignSelf: 'flex-start', marginRight: 5 }]}>
-            <Text style={[styles.allTitleStyle, { fontFamily: '500' }]}>
+            <Text style={[styles.allTitleStyle, { fontFamily: 'AvenirNext-Medium' }]}>
                 {item}
             </Text>
         </TouchableOpacity>

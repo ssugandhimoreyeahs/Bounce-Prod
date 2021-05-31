@@ -18,23 +18,23 @@
 //             <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
 
 //                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-//                     textStyle={{ color: '#000', fontFamily: '500' }}
+//                     textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
 //                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-//                     activeTextStyle={{ color: '#000', fontFamily: '500' }} heading={"Hosting"}>
+//                     activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading={"Hosting"}>
 //                     <Tab1 DATA={DATA} />
 //                 </Tab >
 
 //                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-//                     textStyle={{ color: '#000', fontFamily: '500' }}
+//                     textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
 //                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-//                     activeTextStyle={{ color: '#000', fontFamily: '500' }} heading="Attending">
+//                     activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="Attending">
 //                     <Tab2 />
 //                 </Tab>
 
 //                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-//                     textStyle={{ color: '#000', fontFamily: '500' }}
+//                     textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
 //                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-//                     activeTextStyle={{ color: '#000', fontFamily: '500' }} heading="Interested">
+//                     activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="Interested">
 //                     <Tab3 />
 //                 </Tab>
 
@@ -46,6 +46,6 @@
 //     textStyle: {
 //         color: '#FFFFFF',
 //         fontSize: FONTSIZE.Text13,
-//         fontFamily: 'ANB',
+//         fontFamily: 'AvenirNext-Bold',
 //     }
 // })

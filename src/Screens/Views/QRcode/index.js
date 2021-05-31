@@ -79,7 +79,7 @@ export default function QRcode({ navigation }) {
               <UploadBlue height={getHp(100)} width={getHp(100)} />
             </View>
             <Text style={{
-              fontSize: FONTSIZE.Text16, color: '#1FAEF7', marginTop: 15, fontFamily: 'ANB',
+              fontSize: FONTSIZE.Text16, color: '#1FAEF7', marginTop: 15, fontFamily: 'AvenirNext-Bold',
             }}>{"Camera"}</Text>
           </TouchableOpacity>
         </View>

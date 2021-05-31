@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     infoText: {
         fontSize: FONTSIZE.Text16,
         color: '#999999',
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         letterSpacing: 0.1,
         marginTop: 10
     },
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     },
     HeadingStyle: {
         marginTop: 40,
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         letterSpacing: 0.2,
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text26,
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#EEEEEE',
         borderBottomWidth: 2,
         fontSize: FONTSIZE.Text22,
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         marginTop: 10,
         color: '#000000'
     },

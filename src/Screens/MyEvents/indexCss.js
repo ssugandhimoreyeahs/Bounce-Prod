@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
    },
    Tiktok: {
       marginLeft: 10,
-      fontFamily: 'ANB',
+      fontFamily: 'AvenirNext-Bold',
       color: '#000',
       width: '100%'
    },
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
       fontSize: 18,
       // opacity: 0.5,
       // marginBottom: 5,
-      fontFamily: '500',
+      fontFamily: 'AvenirNext-Medium',
    },
    BasePackageTitle: {
       color: '#000',
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
       color: '#000',
       fontSize: FONTSIZE.Text14,
       marginLeft: 10,
-      fontFamily: 'ANB'
+      fontFamily: 'AvenirNext-Bold'
    },
 
    aboutText: {

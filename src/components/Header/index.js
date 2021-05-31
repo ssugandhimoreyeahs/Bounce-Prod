@@ -101,7 +101,7 @@ function Header(props) {
                         </TouchableOpacity>
                         : null
                 }
-                <Text style={[styles.headerTitleStyle, headerStyleProp, headerTitle == 'Upload Media' ? { fontFamily: '500', fontFamily: '500' } : null]}>
+                <Text style={[styles.headerTitleStyle, headerStyleProp, headerTitle == 'Upload Media' ? { fontFamily: 'AvenirNext-Medium', fontFamily: 'AvenirNext-Medium' } : null]}>
                     {headerTitle}
                 </Text>
                 <View >
@@ -181,7 +181,7 @@ function Header(props) {
                     )
                 }
                 <TouchableOpacity style={{ elevation: 5, backgroundColor: '#F2F5F6', borderRadius: 18, paddingVertical: 10, alignItems: 'center', marginVertical: 8 }}>
-                    <Text style={{ color: '#000000', fontSize: FONTSIZE.Text16, fontFamily: 'ANB' }}>
+                    <Text style={{ color: '#000000', fontSize: FONTSIZE.Text16, fontFamily: 'AvenirNext-Bold' }}>
                         {"New Account"}
                     </Text>
                 </TouchableOpacity>
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
 
     },
     headerTitleStyle: {
-        fontFamily: '100',
+        fontFamily: 'AvenirNext-UltraLight',
         color: "#000",
         fontSize: FONTSIZE.Text22,
         letterSpacing: 0.1,

@@ -2,7 +2,7 @@ import {Alert, BackHandler} from 'react-native';
 
 import RNRestart from 'react-native-restart';
 import {setJSExceptionHandler} from 'react-native-exception-handler';
-import RNExitApp from 'react-native-exit-app';
+// import RNExitApp from 'react-native-exit-app';
 class RNErrorHandler {
   static instance;
   jsExceptionHandler = (e, isFatal) => {
@@ -16,7 +16,7 @@ class RNErrorHandler {
             text: 'Exit App',
             onPress: () => {
               //BackHandler.exitApp();
-              RNExitApp.exitApp();
+              // RNExitApp.exitApp();
             },
           },
           {

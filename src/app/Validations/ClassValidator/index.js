@@ -1,9 +1,9 @@
 import {RegexCollection} from '../../constants';
 import {validate} from 'class-validator';
 import ValidationTypes from '../ValidationTypes';
+import ClassValidatorDecorators from './decorators';
 
-
-class ClassValidator {
+class ClassValidator extends ClassValidatorDecorators {
   isValidate = async instance => {
     let valid = {
       success: false,

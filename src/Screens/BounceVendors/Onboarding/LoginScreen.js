@@ -29,6 +29,9 @@ import VendorCategory from '../../Signup/Vendor/VendorCategory';
 import NameScreen from './NameScreen';
 import { BounceProLogo, BounceSplash } from '@svg';
 import HostView from '../../MyEvents/HostView';
+import { Root } from 'native-base';
+import { Toast } from '@constants';
+
 
 function LoginScreen(props) {
   const { fetchProfile } = useContext(UserContext);
@@ -77,6 +80,7 @@ function LoginScreen(props) {
     <Scaffold
       contentContainerStyle={{ backgroundColor: '#FBFBFB' }}
       statusBarStyle={{ backgroundColor: '#FBFBFB' }}>
+        <Root>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
         <KeyboardAwareScrollView style={{ flex: 1, backgroundColor: '#FBFBFB' }}>
@@ -178,6 +182,7 @@ function LoginScreen(props) {
           </View>
         </KeyboardAwareScrollView>
       )}
+      </Root>
     </Scaffold>
   );
 }

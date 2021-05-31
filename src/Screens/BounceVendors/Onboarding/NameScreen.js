@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, TextInput, Alert, ToastAndroid } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Alert } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
     Root,
@@ -17,7 +17,10 @@ import { fetchVendorData, } from "../../../reducer/mainexpensecategory";
 import { FONTSIZE } from '@utils'
 import { ScrollView } from 'react-native';
 import UserNameScreen from './UsernameScreen';
- 
+import { Scaffold } from '@components'
+import { Toast } from '@constants'; 
+
+
 export default function NameScreen(props) {
     const {
         navigation
@@ -32,12 +35,12 @@ export default function NameScreen(props) {
                 name: name
             })
         } else {
-            ToastAndroid.show("Please enter your name!", 1000);
+            Toast("Please enter your name!");
 
         }
     }
     return (
-        <Root>
+        <Scaffold>
             <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
                 <View style={styles.container}>
                     <Text style={styles.HeadingStyle}>
@@ -60,7 +63,7 @@ export default function NameScreen(props) {
                     </View>
                 </View>
             </ScrollView>
-        </Root>
+        </Scaffold>
     )
 }
 NameScreen.routeName = "/NameScreen";
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
     infoText: {
         fontSize: FONTSIZE.Text16,
         color: '#999999',
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         letterSpacing: 0.1,
         marginTop: 10
     },
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
     },
     HeadingStyle: {
         marginTop: 40,
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         letterSpacing: 0.2,
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text26,
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#EEEEEE',
         borderBottomWidth: 2,
         fontSize: FONTSIZE.Text22,
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         marginTop: 10,
         color: '#000000'
     },

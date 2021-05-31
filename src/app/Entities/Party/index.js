@@ -6,7 +6,8 @@ import {
   ArrayNotEmpty,
   Min,
 } from 'class-validator';
-import {Decorators as D, ValidationTypes} from '../../Validations';
+import {ValidationTypes} from '../../Validations';
+import {ClassValidator as CV} from '../../Validations';
 import {timezoneToUTC} from '../../utils';
 import moment from 'moment';
 import {Strings} from '../../constants';
@@ -19,19 +20,19 @@ class Party {
   @IsNotEmpty({message: Strings.requiredFieldError('Date')})
   date;
 
-  @D.ValidateObjecKey(
-    {key: 'addressStr', [ValidationTypes.REQUIRED]: true},
-    {message: Strings.requiredFieldError('Address')},
-  )
+  // @D.ValidateObjecKey(
+  //   {key: 'addressStr', [ValidationTypes.REQUIRED]: true},
+  //   {message: Strings.requiredFieldError('Address')},
+  // )
   location = {
     lat: '1',
     lon: '1',
     addressStr: '',
   };
 
-  @D.PartyAge('toAge', {message: 'Invalid Minimum Age'})
+  @CV.PartyAge('toAge', {message: 'Invalid Minimum Age'})
   fromAge;
-  @D.PartyAge('fromAge', {message: 'Invalid Maximum Age'})
+  @CV.PartyAge('fromAge', {message: 'Invalid Maximum Age'})
   toAge;
 
   @ArrayNotEmpty({message: Strings.requiredFieldError('Event Media')})
@@ -53,7 +54,7 @@ class Party {
       let newParty = this.toJSON(fields);
       if (fields.date) {
         newParty.date = timezoneToUTC(fields.date);
-      } 
+      }
       newParty.gallery = fields?.gallery || [];
       newParty.tickets = fields?.tickets;
       newParty.isPrivate = fields?.isPrivate;

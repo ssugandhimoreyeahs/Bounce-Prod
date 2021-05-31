@@ -18,12 +18,14 @@ import { fetchVendorData, } from "../../../reducer/mainexpensecategory";
 import { FONTSIZE } from '@utils'
 import ProfilePic from './ProfilePic';
 import moment from 'moment';
+import { Scaffold } from '@components'
+import { Toast } from '@constants';
 
 export default function BirthDayScreen(props) {
     const {
         navigation
     } = props
-    const { name, username, password } = props.route.params
+    const { name, username, password } = props.route?.params
     console.log("BIRTHDAY PROPS -->", props.route.params)
     const [birthday, setBirthday] = useState('')
     const [putFocus, setFocus] = useState(false)
@@ -40,11 +42,11 @@ export default function BirthDayScreen(props) {
                 name
             })
         } else {
-            ToastAndroid.show("Please select birthday!", 1000)
+            Toast("Please select birthday!")
         }
     }
     return (
-        <Root>
+        <Scaffold>
             <KeyboardAwareScrollView style={{ flexGrow: 1 }} contentContainerStyle={{ flex: 1 }}>
                 <View style={styles.container}>
                     <Text style={styles.HeadingStyle}>{"When’s your birthday? 🎂"}</Text>
@@ -68,7 +70,7 @@ export default function BirthDayScreen(props) {
 
                 </View>
             </KeyboardAwareScrollView>
-        </Root>
+        </Scaffold>
     )
 }
 
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
     infoText: {
         fontSize: FONTSIZE.Text16,
         color: '#999999',
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         letterSpacing: 0.1,
         marginTop: 10
     },
@@ -89,7 +91,7 @@ const styles = StyleSheet.create({
     },
     HeadingStyle: {
         marginTop: 40,
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         letterSpacing: 0.2,
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text26,
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#EEEEEE',
         borderBottomWidth: 2,
         fontSize: FONTSIZE.Text22,
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         marginTop: 10,
         color: '#000000'
     },

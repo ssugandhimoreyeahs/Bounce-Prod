@@ -14,7 +14,7 @@ target 'bounce' do
     :hermes_enabled => false
   )
 
-  pod 'RNExitApp', :path => '../node_modules/react-native-exit-app'
+  # pod 'RNExitApp', :path => '../node_modules/react-native-exit-app'
 
   target 'bounceTests' do
     inherit! :complete

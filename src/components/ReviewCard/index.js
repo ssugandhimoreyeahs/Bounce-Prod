@@ -85,20 +85,20 @@ const styles = StyleSheet.create({
     reviewsTitleStyle: {
         color: '#000',
         fontSize: FONTSIZE.Text22,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         // fontWeight:'bold'
     },
     viewAllStyle: {
         color: '#1FAEF7',
         fontSize: 18,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     userFeedbackTextStyle: {
         color: '#fff',
         fontSize: 20,
         opacity: 0.6,
         textAlign: 'center',
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     }
 
 })

@@ -8,6 +8,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { KeyboardAvoidingView } from 'react-native';
 import { postData } from '../../../FetchServices'
 import { useFirebaseUpload } from '@hooks'
+import { Toast } from '../../../app/constants';
 
 export default function ChangePassword(props) {
     const [confirm, confirmPassword] = useState('')
@@ -17,10 +18,10 @@ export default function ChangePassword(props) {
     const handleData = async () => {
         console.log("both", password, confirmPassword)
         if (password.length <= 6) {
-            ToastAndroid.show("Atleast 6 character should be.. !")
+            Toast("Atleast 6 character should be.. !")
         }
         else if (password !== confirm) {
-            ToastAndroid.show("Password does not matched !")
+            Toast("Password does not matched !")
         } else {
             props.navigation.navigate("LoginScreen")
         }
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     buttonText: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         fontSize: FONTSIZE.Text16,
         fontFamily: 'Gill Sans',
         textAlign: 'center',
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
     TitleStyle: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         fontSize: 16,
         paddingVertical: 5
     },

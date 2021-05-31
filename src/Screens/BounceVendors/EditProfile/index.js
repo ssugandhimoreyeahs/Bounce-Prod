@@ -14,7 +14,8 @@ import MobxStore from '../../../mobx';
 import { observer } from 'mobx-react'; 
 import UploadInventory from '../../host/UploadInventory';
 // import { na } from '@react-navigation/native';
-
+import { Scaffold } from '@components'
+import { Toast } from '@constants';
 
 function DJSignup(props) {
     const { authStore } = MobxStore;
@@ -188,7 +189,7 @@ function DJSignup(props) {
         })
         setLoader(false);
         if (venderRegisterResponse.status == 201 || venderRegisterResponse.status == 200) {
-            ToastAndroid.show("Profile Updated Successfully!",1000)
+            Toast("Profile Updated Successfully!")
             authStore.async.reloadVendor();
         }
 
@@ -203,7 +204,7 @@ function DJSignup(props) {
     }
     console.log("LANG_TEST - ", language.lang);
     return (
-        <Root>
+        <Scaffold>
             <Spinner visible={loader} color={'#1FAEF7'} />
            
                 <View style={styles.container}>
@@ -230,7 +231,7 @@ function DJSignup(props) {
                                         <UploadBlue height={getHp(100)} width={getHp(100)} />
                                     </View>
                                     <Text style={{
-                                        fontSize: FONTSIZE.Text19, color: '#000', marginTop: 10, fontFamily: 'AvenirNext',
+                                        fontSize: FONTSIZE.Text19, color: '#000', marginTop: 10, fontFamily: 'AvenirNext-Regular',
                                     }}>{"Upload Profile Picture"}</Text>
                                 </TouchableOpacity>
                                 :
@@ -421,7 +422,7 @@ function DJSignup(props) {
                     </ScrollView>
                 </View>
     
-        </Root >
+        </Scaffold >
     )
 }
 const styles = StyleSheet.create({
@@ -463,7 +464,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
     TitleStyle: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         fontSize: 16,
         paddingVertical: 5
     },

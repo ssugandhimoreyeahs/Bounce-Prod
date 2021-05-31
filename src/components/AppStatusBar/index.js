@@ -2,7 +2,7 @@ import React from 'react';
 import {View, SafeAreaView, StatusBar} from 'react-native';
 const AppStatusBar = props => {
   const {
-    backgroundColor = '#FFF', 
+    backgroundColor = '#FBFBFB', 
     statusBarHeight = StatusBar.currentHeight,
     ...statusBarProps
   } = props;

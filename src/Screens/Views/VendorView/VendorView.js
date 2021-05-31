@@ -318,11 +318,11 @@ export default function DjProfile(props) {
 
                             {!(getMedia == null) ?
                                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                                    <Text style={{ color: '#000', fontSize: FONTSIZE.Text24, marginLeft: 0, fontFamily: 'AvenirNext', }}>Media</Text>
+                                    <Text style={{ color: '#000', fontSize: FONTSIZE.Text24, marginLeft: 0, fontFamily: 'AvenirNext-Regular', }}>Media</Text>
                                     <TouchableOpacity onPress={handleImage} >
-                                        <View style={{ flexDirection: 'row', alignItems: 'center', fontFamily: 'AvenirNext', }}>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center', fontFamily: 'AvenirNext-Regular', }}>
                                             <AddBlueWhite height={20} width={20} />
-                                            <Text style={{ color: '#000', fontSize: FONTSIZE.Text20, marginLeft: 10, fontFamily: 'AvenirNext', }}>Add</Text>
+                                            <Text style={{ color: '#000', fontSize: FONTSIZE.Text20, marginLeft: 10, fontFamily: 'AvenirNext-Regular', }}>Add</Text>
                                         </View>
                                     </TouchableOpacity>
                                 </View>
@@ -334,7 +334,7 @@ export default function DjProfile(props) {
                                         <TouchableOpacity onPress={handleImage} style={styles.addMediaButton} >
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                                 <AddBlueWhite height={20} width={20} />
-                                                <Text style={{ color: '#1FAEF7', fontSize: FONTSIZE.Text20, marginLeft: 10, fontFamily: 'AvenirNext', }}> {'Add Media'} </Text>
+                                                <Text style={{ color: '#1FAEF7', fontSize: FONTSIZE.Text20, marginLeft: 10, fontFamily: 'AvenirNext-Regular', }}> {'Add Media'} </Text>
                                             </View>
                                         </TouchableOpacity>
                                         :
@@ -342,13 +342,13 @@ export default function DjProfile(props) {
                                             {getPdf != null ?
                                                 <>
                                                     <TouchableOpacity onPress={handleUploadPdf} style={styles.addMediaButton} >
-                                                        <Text style={{ color: '#1FAEF7', fontSize: FONTSIZE.Text20, fontFamily: 'AvenirNext', }}> {'View Menu'} </Text>
+                                                        <Text style={{ color: '#1FAEF7', fontSize: FONTSIZE.Text20, fontFamily: 'AvenirNext-Regular', }}> {'View Menu'} </Text>
                                                     </TouchableOpacity>
 
                                                 </>
                                                 :
                                                 <TouchableOpacity onPress={handleImage} style={styles.addMediaButton} >
-                                                    <Text style={{ color: '#1FAEF7', fontSize: FONTSIZE.Text20, fontFamily: 'AvenirNext' }}> {'Upload Menu'} </Text>
+                                                    <Text style={{ color: '#1FAEF7', fontSize: FONTSIZE.Text20, fontFamily: 'AvenirNext-Regular' }}> {'Upload Menu'} </Text>
                                                 </TouchableOpacity>
 
                                             }

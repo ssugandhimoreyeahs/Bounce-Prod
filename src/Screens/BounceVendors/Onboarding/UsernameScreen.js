@@ -12,8 +12,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchVendorData } from "../../../reducer/mainexpensecategory";
 import BirthDayScreen from './BirthDayScreen';
 import { ApiClient } from '../../../app/services';
-import { Toast } from '../../../app/constants';
- 
+import { Scaffold } from '@components'
+import { Toast } from '@constants';
+
 export default function UserNameScreen(props) {
     const {
         navigation
@@ -27,6 +28,12 @@ export default function UserNameScreen(props) {
 
     const handleSubmit = async () => {
         try {
+            if (username.length == 0) {
+                return Toast('Username is required!');
+            }
+            if (password.length == 0) {
+                return Toast('Password is required!');
+            }
             let body = {
                 vendorType: "2",
                 name,
@@ -37,7 +44,7 @@ export default function UserNameScreen(props) {
             let validateP = await validatePass(password)
             if (!validateP) {
                 console.log("values res of pass", validateP);
-                ToastAndroid.show("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !", ToastAndroid.SHORT);
+                Toast("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !");
 
             } else if (username.length > 0 &&
                 password.length > 0
@@ -56,11 +63,11 @@ export default function UserNameScreen(props) {
                     })
                 } else if (res.statusCode == 404) {
                     setLoader(false)
-                    ToastAndroid.show(res.message, ToastAndroid.SHORT);
+                    Toast(res.message);
                 }
             } else {
                 setLoader(false)
-                ToastAndroid.show("Please fill all the field's with valid data !", ToastAndroid.SHORT);
+                Toast("Please fill all the field's with valid data !");
 
             }
         } catch (error) {
@@ -101,7 +108,7 @@ export default function UserNameScreen(props) {
 
 
     return ( 
-        <Root>
+        <Scaffold>
             <KeyboardAwareScrollView style={{ flexGrow: 1 }} contentContainerStyle={{ flex: 1 }}>
                 <View style={styles.container}>
                     <Text style={styles.HeadingStyle}>{"Pick a username! 😜"}</Text>
@@ -135,7 +142,7 @@ export default function UserNameScreen(props) {
 
                 </View>
             </KeyboardAwareScrollView>
-        </Root>
+        </Scaffold>
     )
 }
 UserNameScreen.routeName = "/UserNameScreen";
@@ -144,7 +151,7 @@ const styles = StyleSheet.create({
     infoText: {
         fontSize: FONTSIZE.Text16,
         color: '#999999',
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         letterSpacing: 0.1,
         marginTop: 10
     },
@@ -155,7 +162,7 @@ const styles = StyleSheet.create({
     },
     HeadingStyle: {
         marginTop: 40,
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         letterSpacing: 0.2,
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text26,
@@ -164,7 +171,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#EEEEEE',
         borderBottomWidth: 2,
         fontSize: FONTSIZE.Text22,
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         marginTop: 10,
         color: '#000000'
     },

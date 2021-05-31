@@ -1,6 +1,5 @@
-import Decorators from './Decorators';
-import DecoratorValidation from './DecoratorValidation';
-import Validation from './Validation';
+import ClassValidator from './ClassValidator';
 import ValidationTypes from './ValidationTypes';
+import CustomValidator from './CustomValidator';
 
-export {Decorators, DecoratorValidation, Validation, ValidationTypes};
+export {ClassValidator, ValidationTypes, CustomValidator};

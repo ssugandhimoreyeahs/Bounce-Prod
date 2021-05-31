@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     titleStyle: {
         fontSize: FONTSIZE.Text21,
         color: '#fff',
-        fontFamily: '500'
+        fontFamily: 'AvenirNext-Medium'
     },
     linearGradient: {
         borderRadius: 17,

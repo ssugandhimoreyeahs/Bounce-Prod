@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { View, Text, StyleSheet, ToastAndroid, ScrollView } from 'react-native'
+import { View, Text, StyleSheet,  ScrollView } from 'react-native'
 import { Header, Root, Checkbox, SignupDoubleButton, CustomButton, FloatingInput } from '@components'
 import { Interested, Going, Arrived, CantGo, UploadCamera, DJ2 } from '@assets';
 import { Avatar } from 'react-native-elements'
@@ -13,7 +13,7 @@ import { useLoader } from '@hooks'
 import David from '@assets/David.png'
 import { Alert } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native';
-
+import { Toast } from '@constants';
 export default function AccountSetting(props) {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -22,7 +22,7 @@ export default function AccountSetting(props) {
         let regSpace = new RegExp(/\s/);
         if (regSpace.test(value)) {
             setUsername(value.trim())
-            ToastAndroid.show("Username cannot contain space !")
+            Toast("Username cannot contain space !")
         } else {
             setUsername(value)
         }
@@ -56,10 +56,10 @@ export default function AccountSetting(props) {
                 />
                 <View style={{ width: '70%', paddingVertical: getHp(20) }}>
                     <Text style={{
-                        fontSize: FONTSIZE.Text20, fontWeight:'bold', color: '#000', marginVertical: 10, fontFamily: 'AvenirNext',
+                        fontSize: FONTSIZE.Text20, fontWeight:'bold', color: '#000', marginVertical: 10, fontFamily: 'AvenirNext-Regular',
                     }}>Invitaiton Notifications</Text>
                     <Text style={{
-                        fontSize: FONTSIZE.Text17, color: '#696969', marginVertical: 0, fontFamily: 'AvenirNext', lineHeight: 24
+                        fontSize: FONTSIZE.Text17, color: '#696969', marginVertical: 0, fontFamily: 'AvenirNext-Regular', lineHeight: 24
                     }}>How would you like to recieve event invitations? </Text>
                 </View>
                 <Checkbox
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
     TitleStyle: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         fontSize: 16,
         paddingVertical: 5
     },

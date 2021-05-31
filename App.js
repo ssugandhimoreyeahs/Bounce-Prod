@@ -1,4 +1,4 @@
-import React, {Component, Fragment, useEffect, useRef, useState} from 'react';
+import React, { Component, Fragment, useEffect, useRef, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,18 +10,20 @@ import {
   Animated,
   StatusBar,
 } from 'react-native';
-import {AppStatusBar} from '@components';
-import {Provider as PaperProvider} from 'react-native-paper';
+import { AppStatusBar } from '@components';
+import { Provider as PaperProvider } from 'react-native-paper';
 // import MainStack from './src/navigation/MainStack';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import Store from './src/reducer/store';
-import {LogBox} from 'react-native';
+import { LogBox } from 'react-native';
 import MobxStore from './src/mobx';
-import {observer} from 'mobx-react';
+import { observer } from 'mobx-react';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Icon from 'react-native-vector-icons/Entypo';
 import Navigation from './src/navigation';
-import {RNErrorHandlerService} from './src/app/services';
+import { RNErrorHandlerService } from './src/app/services';
+import { CustomValidator, ValidationTypes } from './src/app/Validations';
+import { Root as NativebaseRoot } from 'native-base';
 
 Icon.loadFont();
 function App() {
@@ -30,18 +32,47 @@ function App() {
   useEffect(() => {
     RNErrorHandlerService.getInstance().init();
   }, []);
-  const {uiStore} = MobxStore;
+  const { uiStore } = MobxStore;
   return (
-    <Provider store={Store}>
-      <Spinner
-        visible={MobxStore.appStore.loader}
+    <NativebaseRoot>
+      <Provider store={Store}>
+        <Spinner
+          visible={MobxStore.appStore.loader}
         //visible={true}
-      />
-      <PaperProvider theme={uiStore.theme}>
-        {/* <MainStack /> */}
-        <Navigation theme={uiStore.theme} />
-      </PaperProvider>
-    </Provider>
+        />
+        <PaperProvider theme={uiStore.theme}>
+          <Navigation theme={uiStore.theme} />
+        </PaperProvider>
+      </Provider>
+    </NativebaseRoot>
   );
 }
 export default observer(App);
+
+// const App2 = () => {
+//   const [txt, setTxt] = useState('');
+//   const onCheck = () => {
+//     const data = CustomValidator.validate({
+//       value: txt,
+//       [ValidationTypes.required]: 'Required Text',
+//     });
+//     console.log(data);
+//   };
+//   return (
+//     <Fragment>
+//       <TextInput
+//         onChangeText={setTxt}
+//         value={txt}
+//         placeholder={'Enter title'}
+//       />
+//       <Button
+//         title={'Press me'}
+//         onPress={() => {
+//           onCheck();
+//         }}
+//       />
+//     </Fragment>
+//   );
+// };
+
+// export default App2;

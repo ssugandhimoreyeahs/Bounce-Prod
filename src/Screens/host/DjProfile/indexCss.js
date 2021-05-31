@@ -18,19 +18,19 @@ const styles = (theme) => {
          color: '#1FAEF7',
          fontSize: FONTSIZE.Text20,
          marginLeft: 5,
-         fontFamily: 'AvenirNext',
+         fontFamily: 'AvenirNext-Regular',
          marginVertical:getHp(5)
       },
       onlyFlex: {
          flexDirection: 'row',
          alignItems: 'center',
-         fontFamily: 'AvenirNext',
+         fontFamily: 'AvenirNext-Regular',
       },
       addButton: {
          color: '#1FAEF7',
          fontSize: FONTSIZE.Text20,
          marginLeft: 10,
-         fontFamily: 'AvenirNext',
+         fontFamily: 'AvenirNext-Regular',
       },
       prView: {
          flexDirection: 'row',
@@ -39,14 +39,14 @@ const styles = (theme) => {
          paddingHorizontal: 10
       },
       webText: {
-         fontFamily: 'AvenirNext',
+         fontFamily: 'AvenirNext-Regular',
          color: '#1FAEF7',
          fontSize: FONTSIZE.Text16,
          marginLeft: 10,
          textDecorationLine: 'underline'
       },
       hourStyle: {
-         fontFamily: 'AvenirNext',
+         fontFamily: 'AvenirNext-Regular',
          color: '#000',
          fontSize: FONTSIZE.Text18,
          marginLeft: 5
@@ -86,13 +86,13 @@ const styles = (theme) => {
          color: '#000',
          fontSize: 18,
          opacity: 0.8,
-         fontFamily: 'AvenirNext',
+         fontFamily: 'AvenirNext-Regular',
       },
       belowTextStyle: {
          color: '#000',
          fontSize: FONTSIZE.Text18,
          opacity: 0.8,
-         fontFamily: 'AvenirNext',
+         fontFamily: 'AvenirNext-Regular',
       },
    });
 }

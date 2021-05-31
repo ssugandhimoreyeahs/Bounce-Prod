@@ -177,7 +177,7 @@ function CreateInvitationTemplate(props) {
                                             fontSize: FONTSIZE.Text14,
                                             color: '#000',
                                             marginTop: 10,
-                                            fontFamily: 'AvenirNext',
+                                            fontFamily: 'AvenirNext-Regular',
                                         }}>
                                         {'Upload Media'}
                                     </Text>
@@ -471,7 +471,7 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: FONTSIZE.Text14,
         // fontWeight: 'bold',
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
     },
 
     cameraStyle: {

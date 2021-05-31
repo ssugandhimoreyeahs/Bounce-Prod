@@ -6,7 +6,7 @@ import {
     ScrollView,
     StyleSheet,
     TouchableOpacity,
-    Alert,ToastAndroid
+    Alert
 } from "react-native";
 import { Header, Root, CustomButton, FloatingInput } from "@components";
 import { GreyHamburger, BlackClose } from "@svg";
@@ -18,7 +18,7 @@ import { UserContext } from "../../context/profiledataProvider";
 import axios from 'axios'
 import Spinner from "react-native-loading-spinner-overlay";
 import MobxStore from '../../mobx';
-
+import { Toast } from '@constants';
 export default function UploadInventory(props) {
     // const { userinfo, fetchProfile, } = useContext(UserContext)
     const {
@@ -90,11 +90,11 @@ export default function UploadInventory(props) {
                 // props.navigation.navigate("btmstack", {
                 //     screen: "DjProfileScreen",
                 // })
-                ToastAndroid.show("Inventory created successfully !", ToastAndroid.SHORT);
+                Toast("Inventory created successfully !");
 
             } else {
                 setLoader(false)
-                ToastAndroid.show('Something went wrong!', ToastAndroid.SHORT)
+                Toast('Something went wrong!')
             }
         } catch (error) {
             setLoader(false)

@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: FONTSIZE.Text14,
         fontWeight: 'bold',
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
 
 })

@@ -13,6 +13,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { TouchableOpacity } from 'react-native';
 import { FONTSIZE } from '@utils'
 import { connect, useSelector, useDispatch } from "react-redux";
+import { Toast } from '@constants';
 const { height, width } = Dimensions.get('screen')
 
 
@@ -38,7 +39,7 @@ export default function LoginScreen(props) {
         if (SERVER_USER_LOGIN.success == true) {
             navigation.navigate('UserFriendsProfile')
         } else {
-                ToastAndroid.show("Invalid Credentials!")
+                Toast("Invalid Credentials!")
         }
     }
 
@@ -105,10 +106,10 @@ const styles = StyleSheet.create({
     ThirdParty: {
         color: '#000',
         fontSize: FONTSIZE.Text16,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     buttonText: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         fontSize: FONTSIZE.Text14,
         // fontFamily: 'Gill Sans',
         textAlign: 'center',
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     signStyle: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         letterSpacing: 1,
         color: '#000',
         fontSize: FONTSIZE.Text18,
@@ -148,12 +149,12 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
         fontSize: FONTSIZE.Text16,
         marginTop: 10,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     TitleStyle: {
         fontSize: FONTSIZE.Text14,
         paddingVertical: 0,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     Card: {
         backgroundColor: '#fff',

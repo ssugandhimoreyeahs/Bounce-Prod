@@ -1,53 +1,53 @@
-import React, { useState } from "react";
-import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { FONTSIZE } from '@utils'
+import React, {useState} from 'react';
+import {StyleSheet, View, TextInput, TouchableOpacity} from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {FONTSIZE} from '@utils';
 import moment from 'moment';
 
-export default DatePicker = ({ birthday, setBirthday, tillToday }) => {
-    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const showDatePicker = () => {
-        setDatePickerVisibility(true);
-    };
+export default DatePicker = ({birthday, setBirthday, tillToday}) => {
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
 
-    const hideDatePicker = () => {
-        setDatePickerVisibility(false);
-    };
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
 
-    const handleConfirm = (date) => { 
-        setBirthday(date)
-        hideDatePicker();
-    };
+  const handleConfirm = date => {
+    setBirthday(date);
+    hideDatePicker();
+  };
 
-    return (
-        <View>
-            <TouchableOpacity onPress={showDatePicker}>
-                <TextInput
-                    placeholder={"Birthday"}
-                    style={styles.textInput}
-                    onChangeText={(value) => setBirthday(value)}
-                    editable={false}
-                    value={`${birthday}`}
-                />
-            </TouchableOpacity>
-            {/* {showDatePicker} */}
-            <DateTimePickerModal
-                isVisible={isDatePickerVisible}
-                mode="date"
-                onConfirm={handleConfirm}
-                onCancel={hideDatePicker}
-                maximumDate={new Date()}
-
-            />
-        </View>
-    );
+  return (
+    <View>
+      <TouchableOpacity onPress={showDatePicker}>
+        <TextInput
+          pointerEvents="none"
+          placeholder={'Birthday'}
+          style={styles.textInput}
+          onChangeText={value => setBirthday(value)}
+          editable={false}
+          value={`${birthday}`}
+        />
+      </TouchableOpacity>
+      {/* {showDatePicker} */}
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+        maximumDate={new Date()}
+      />
+    </View>
+  );
 };
 const styles = StyleSheet.create({
     textInput: {
         borderBottomColor: '#EEEEEE',
         borderBottomWidth: 2,
         fontSize: FONTSIZE.Text22,
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
         color: '#000'
     },
 })

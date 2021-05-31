@@ -6,8 +6,7 @@ import {
   ScrollView,
   Linking,
   TouchableOpacity,
-  ToastAndroid,
-} from 'react-native';
+  } from 'react-native';
 import {
   Header,
   ImageCarousel,
@@ -46,6 +45,9 @@ import DocumentPicker from 'react-native-document-picker';
 import MobxStore from '../../../mobx';
 import {observer} from 'mobx-react';
 import UploadInventoryScreen from '../UploadInventory';
+import { Scaffold } from '@components'
+import { Toast } from '@constants';
+
 
 const DATA = [
   {
@@ -199,7 +201,7 @@ function DjProfile(props) {
     // console.log("imgTemp", imgTemp);
     setMedia(imgTemp);
     if (RES_IMAGE.status == 201 || RES_IMAGE.status == 200) {
-      ToastAndroid.show('Media Added Successfully!', ToastAndroid.SHORT);
+      Toast('Media Added Successfully!');
     }
   };
   // Handle Image not working after the UI change
@@ -259,6 +261,7 @@ function DjProfile(props) {
   };
 
   return (
+    <Scaffold>
     <View style={styles.container}>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
@@ -674,6 +677,7 @@ function DjProfile(props) {
         </ScrollView>
       )}
     </View>
+    </Scaffold>
   );
 }
 {

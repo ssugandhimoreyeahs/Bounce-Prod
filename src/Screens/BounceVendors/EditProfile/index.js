@@ -14,7 +14,8 @@ import MobxStore from '../../../mobx';
 import { observer } from 'mobx-react'; 
 import UploadInventory from '../../host/UploadInventory';
 // import { na } from '@react-navigation/native';
-
+import { Scaffold } from '@components'
+import { Toast } from '@constants';
 
 function DJSignup(props) {
     const { authStore } = MobxStore;
@@ -188,7 +189,7 @@ function DJSignup(props) {
         })
         setLoader(false);
         if (venderRegisterResponse.status == 201 || venderRegisterResponse.status == 200) {
-            ToastAndroid.show("Profile Updated Successfully!",1000)
+            Toast.show("Profile Updated Successfully!")
             authStore.async.reloadVendor();
         }
 
@@ -203,7 +204,7 @@ function DJSignup(props) {
     }
     console.log("LANG_TEST - ", language.lang);
     return (
-        <Root>
+        <Scaffold>
             <Spinner visible={loader} color={'#1FAEF7'} />
            
                 <View style={styles.container}>
@@ -421,7 +422,7 @@ function DJSignup(props) {
                     </ScrollView>
                 </View>
     
-        </Root >
+        </Scaffold >
     )
 }
 const styles = StyleSheet.create({

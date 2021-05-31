@@ -6,7 +6,7 @@ import {
     ScrollView,
     StyleSheet,
     TouchableOpacity,
-    Alert,ToastAndroid
+    Alert
 } from "react-native";
 import { Header, Root, CustomButton, FloatingInput } from "@components";
 import { GreyHamburger, BlackClose } from "@svg";
@@ -90,11 +90,11 @@ export default function UploadInventory(props) {
                 // props.navigation.navigate("btmstack", {
                 //     screen: "DjProfileScreen",
                 // })
-                ToastAndroid.show("Inventory created successfully !", ToastAndroid.SHORT);
+                Toast.show("Inventory created successfully !");
 
             } else {
                 setLoader(false)
-                ToastAndroid.show('Something went wrong!', ToastAndroid.SHORT)
+                Toast.show('Something went wrong!')
             }
         } catch (error) {
             setLoader(false)

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, ScrollView, FlatList, TouchableOpacity, Alert } from 'react-native'
-import { Header, Root } from '@components'
+import { Header, Scaffold } from '@components'
 import { getData } from '../../../FetchServices'
 import { FONTSIZE, getHp, getWp } from '@utils'
 import { useDispatch } from "react-redux";
@@ -18,10 +18,10 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { SvgUri } from 'react-native-svg';
 import { ApiClient } from '../../../app/services';
 import VendorSignup from './VendorSignup';
-
+import { Toast } from '@constants';
 
 export default function VendorCategory(props) {
-     
+
     const dispatch = useDispatch()
     const [loader, setLoader] = useState(true)
     const [vendorList, setVendorList] = useState(null)
@@ -69,26 +69,25 @@ export default function VendorCategory(props) {
         </TouchableOpacity>
         )
     }
-    return (
-        <Root>
-            <Spinner visible={loader} color={'#1FAEF7'} />
-            { !loader &&
-                < View style={styles.container}>
-                    <ScrollView>
-                        <Header
-                            headerBackColor={{ backgroundColor: 'rgba(238, 238, 238, 0.5)' }}
-                            back
-                            headerTitle={"Select Business"}
-                            onPress={() => props.navigation.goBack()}
-                        />
-                        <FlatList
-                            data={vendorList}
-                            renderItem={renderItem}
-                            keyExtractor={(index) => index}
-                        />
-                    </ScrollView>
-                </View>}
-        </Root >
+    return (<Scaffold>
+        <Spinner visible={loader} color={'#1FAEF7'} />
+        { !loader &&
+            < View style={styles.container}>
+                <ScrollView>
+                    <Header
+                        headerBackColor={{ backgroundColor: 'rgba(238, 238, 238, 0.5)' }}
+                        back
+                        headerTitle={"Select Business"}
+                        onPress={() => props.navigation.goBack()}
+                    />
+                    <FlatList
+                        data={vendorList}
+                        renderItem={renderItem}
+                        keyExtractor={(index) => index}
+                    />
+                </ScrollView>
+            </View>}
+    </Scaffold>
     )
 }
 VendorCategory.routeName = "/VendorCategory";

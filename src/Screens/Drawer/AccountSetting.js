@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { View, Text, StyleSheet, ToastAndroid, ScrollView } from 'react-native'
+import { View, Text, StyleSheet,  ScrollView } from 'react-native'
 import { Header, Root, Checkbox, SignupDoubleButton, CustomButton, FloatingInput } from '@components'
 import { Interested, Going, Arrived, CantGo, UploadCamera, DJ2 } from '@assets';
 import { Avatar } from 'react-native-elements'
@@ -22,7 +22,7 @@ export default function AccountSetting(props) {
         let regSpace = new RegExp(/\s/);
         if (regSpace.test(value)) {
             setUsername(value.trim())
-            ToastAndroid.show("Username cannot contain space !")
+            Toast.show("Username cannot contain space !")
         } else {
             setUsername(value)
         }

@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     },
     HeadingStyle: {
         marginTop: 40,
-        fontFamily: 'Avenir Next',
+        fontFamily: 'AvenirNext-Regular',
         letterSpacing: 1.6,
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text26,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         // alignSelf:'center'
     },
     signStyle: {
-        fontFamily: 'Avenir Next',
+        fontFamily: 'AvenirNext-Regular',
         letterSpacing: 1,
         color: '#000',
         fontSize: FONTSIZE.Text22,

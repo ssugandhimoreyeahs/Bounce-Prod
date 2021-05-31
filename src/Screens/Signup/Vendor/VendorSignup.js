@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Alert, ScrollView, TouchableOpacity, ToastAndroid } from 'react-native'
+import { View, Text, StyleSheet, Alert, ScrollView, TouchableOpacity } from 'react-native'
 import { Header, FloatingInput, CustomButton, Root } from '@components'
 import { Avatar } from 'react-native-elements'
 import { UploadBlue, BlackClose } from '@svg';
@@ -10,7 +10,8 @@ import { fetchVendorData } from "../../../reducer/mainexpensecategory";
 import { getHp, getWp, } from '@utils'
 import { ApiClient } from '../../../app/services';
 import VendorMarketProfile from './VendorMarketProfile';
-
+import { Scaffold } from '@components'
+import { Toast } from '@constants';
 
 export default function VendorSignup(props) {
     console.log("REACHED AT VENDOR SIGNUP SCREEN 2 -->")
@@ -61,11 +62,11 @@ export default function VendorSignup(props) {
 
             if (!validateE) {
                 console.log("values res of email", validateE);
-                ToastAndroid.show("Please enter valid email !", ToastAndroid.SHORT);
+                Toast.show("Please enter valid email !");
 
             } else if (!validateP) {
                 console.log("values res of pass", validateP);
-                ToastAndroid.show("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !", ToastAndroid.SHORT);
+                Toast.show("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !");
 
             } else
                 if (username.length > 0 &&
@@ -86,19 +87,19 @@ export default function VendorSignup(props) {
                     } else if (res.statusCode == 404) {
                         console.log("1.2 blockk");
                         setLoader(false)
-                        ToastAndroid.show(res.message, ToastAndroid.SHORT);
+                        Toast.show(res.message);
                         // Alert.alert(res.message)
 
                     }
                 } else {
                     console.log("2 blockk");
                     setLoader(false)
-                    ToastAndroid.show("Please fill all the field's with valid data !", ToastAndroid.SHORT);
+                    Toast.show("Please fill all the field's with valid data !");
 
                 }
         } catch (err) {
             // console.log("Error", err.message)
-            ToastAndroid.show("Vendor Username or Number already exist!", ToastAndroid.SHORT);
+            Toast.show("Vendor Username or Number already exist!");
         }
     }
 
@@ -106,12 +107,12 @@ export default function VendorSignup(props) {
         let regSpace = new RegExp(/\s/);
         if (regSpace.test(value)) {
             setUsername(value.trim())
-            ToastAndroid.show("Username cannot contain space !", ToastAndroid.SHORT);
+            Toast.show("Username cannot contain space !");
         } else {
             setUsername(value)
         }
     }
-    return (<Root>
+    return (<Scaffold>
         <ScrollView
             keyboardShouldPersistTaps='always'
             contentContainerStyle={{ flexGrow: 1 }}
@@ -190,7 +191,7 @@ export default function VendorSignup(props) {
                 />
             </View>
         </ScrollView>
-    </Root>
+    </Scaffold>
     )
 }
 VendorSignup.routeName = "/VendorSignup";

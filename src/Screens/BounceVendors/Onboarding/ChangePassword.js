@@ -17,10 +17,10 @@ export default function ChangePassword(props) {
     const handleData = async () => {
         console.log("both", password, confirmPassword)
         if (password.length <= 6) {
-            ToastAndroid.show("Atleast 6 character should be.. !")
+            Toast.show("Atleast 6 character should be.. !")
         }
         else if (password !== confirm) {
-            ToastAndroid.show("Password does not matched !")
+            Toast.show("Password does not matched !")
         } else {
             props.navigation.navigate("LoginScreen")
         }

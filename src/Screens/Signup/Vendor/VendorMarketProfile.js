@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
-import { View, Text, StyleSheet, ToastAndroid, ScrollView, Alert } from 'react-native'
+import { View, Text, StyleSheet,  ScrollView, Alert } from 'react-native'
 import {
     Header, GooglePlacesInput, CustomDropdown, Root, CustomButton, FloatingInput,
     ModalDropDownComponent
@@ -15,7 +15,8 @@ import { UserContext } from '../../../context/profiledataProvider';
 import Spinner from "react-native-loading-spinner-overlay";
 import MobxStore from '../../../mobx';
 import { ApiClient } from '../../../app/services';
-
+import { Scaffold } from '@components'
+import { Toast } from '@constants';
 
 export default function VendorMarketProfile(props) {
     console.log("REACHED AT VENDOR MARKETPLACE SCREEN 3 -->")
@@ -126,7 +127,7 @@ export default function VendorMarketProfile(props) {
             }
             else {
                 setLoader(false)
-                ToastAndroid.show("Please fill all the field's with valid data !", ToastAndroid.SHORT);
+                Toast.show("Please fill all the field's with valid data !");
 
             }
         } catch (error) {
@@ -174,7 +175,7 @@ export default function VendorMarketProfile(props) {
     }, [])
 
 
-    return (<Root>
+    return (<Scaffold>
         <Spinner visible={loader} color={"#1FAEF7"} />
         {!loader && (
             <View style={styles.container}>
@@ -351,7 +352,7 @@ export default function VendorMarketProfile(props) {
                 </ScrollView>
             </View>
         )}
-    </Root>
+    </Scaffold>
     )
 }
 VendorMarketProfile.routeName = "/VendorMarketProfile";

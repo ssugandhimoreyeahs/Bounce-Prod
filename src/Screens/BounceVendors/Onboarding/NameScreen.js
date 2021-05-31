@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, TextInput, Alert, ToastAndroid } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Alert } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
     Root,
@@ -17,7 +17,10 @@ import { fetchVendorData, } from "../../../reducer/mainexpensecategory";
 import { FONTSIZE } from '@utils'
 import { ScrollView } from 'react-native';
 import UserNameScreen from './UsernameScreen';
- 
+import { Scaffold } from '@components'
+import { Toast } from '@constants'; 
+
+
 export default function NameScreen(props) {
     const {
         navigation
@@ -32,12 +35,12 @@ export default function NameScreen(props) {
                 name: name
             })
         } else {
-            ToastAndroid.show("Please enter your name!", 1000);
+            Toast.show("Please enter your name!");
 
         }
     }
     return (
-        <Root>
+        <Scaffold>
             <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
                 <View style={styles.container}>
                     <Text style={styles.HeadingStyle}>
@@ -60,7 +63,7 @@ export default function NameScreen(props) {
                     </View>
                 </View>
             </ScrollView>
-        </Root>
+        </Scaffold>
     )
 }
 NameScreen.routeName = "/NameScreen";

@@ -121,9 +121,11 @@ import BlackSolidPeoples from './BlackSolidPeoples.svg'
 import Going from './Going.svg'
 import Interested from './Interested.svg'
 import Cantgo from './Cantgo.svg'
+import Linkedin from './Linkedin.svg'
 
 
 export {
+    Linkedin,
     Going,
     Interested,
     Cantgo,

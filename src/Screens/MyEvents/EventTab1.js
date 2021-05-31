@@ -42,13 +42,13 @@ export default function EventTab1() {
                         {"Guest Interests"}
                     </Text>
                     <View>
-                        <Text style={[styles.aboutText, { fontFamily: '500' }]}>
+                        <Text style={[styles.aboutText, { fontFamily: 'AvenirNext-Medium' }]}>
                             {"  ⛺  Outdoors"}
                         </Text>
-                        <Text style={[styles.aboutText, { fontFamily: '500' }]}>
+                        <Text style={[styles.aboutText, { fontFamily: 'AvenirNext-Medium' }]}>
                             {"  ⛺  Outdoors"}
                         </Text>
-                        <Text style={[styles.aboutText, { fontFamily: '500' }]}>
+                        <Text style={[styles.aboutText, { fontFamily: 'AvenirNext-Medium' }]}>
                             {"  ⛺  Outdoors"}
                         </Text>
                     </View>
@@ -61,7 +61,7 @@ export default function EventTab1() {
                 <View style={{ justifyContent: 'space-between', flexDirection: 'column', width: '60%' }}>
 
                     <Text style={[styles.aboutText, { width: '80%', alignSelf: 'center' }]}>
-                        <Text style={[styles.aboutText, { fontFamily: 'ANB' }]}>
+                        <Text style={[styles.aboutText, { fontFamily: 'AvenirNext-Bold' }]}>
                             {"90% "}
                         </Text>
                         {"of your guests enjoy EDM music"}
@@ -70,7 +70,7 @@ export default function EventTab1() {
                     <View style={{ backgroundColor: 'rgba(0, 224, 143, 0.33)', width: '100%', height: 1 }} />
 
                     <Text style={[styles.aboutText, { width: '80%', alignSelf: 'center' }]}>
-                        <Text style={[styles.aboutText, { fontFamily: 'ANB' }]}>
+                        <Text style={[styles.aboutText, { fontFamily: 'AvenirNext-Bold' }]}>
                             {"90% "}
                         </Text>
                         {"of your guests enjoy EDM music"}
@@ -93,7 +93,7 @@ export default function EventTab1() {
 const styles = StyleSheet.create({
     Tiktok: {
         marginLeft: 10,
-        fontFamily: 'ANB',
+        fontFamily: 'AvenirNext-Bold',
         color: '#000',
         width: '100%'
     },
@@ -179,27 +179,27 @@ const styles = StyleSheet.create({
     textStyle: {
         color: '#000',
         fontSize: 18,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     belowTextStyle: {
         color: '#000',
         fontSize: FONTSIZE.Text18,
         opacity: 0.8,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     headerTitle: {
         color: '#000',
         fontSize: 18,
         // opacity: 0.5,
         // marginBottom: 5,
-        fontFamily: '500',
+        fontFamily: 'AvenirNext-Medium',
     },
     BasePackageTitle: {
         color: '#000',
         fontSize: 18,
         opacity: 0.5,
         marginBottom: 5,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     websiteImageStyle: {
         height: 80,
@@ -211,13 +211,13 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: '#1FAEF7',
         fontSize: 12,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     hostDetail: {
         color: '#000',
         fontSize: 20,
         opacity: 0.9,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         textAlign: 'center',
         marginVertical: 15
 
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: FONTSIZE.Text14,
         marginLeft: 10,
-        fontFamily: 'ANB'
+        fontFamily: 'AvenirNext-Bold'
     },
     allFrnds: {
         elevation: 2,
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
         marginVertical: 3,
         color: '#000',
         fontSize: FONTSIZE.Text16,
-        fontFamily: 'AvenirNext'
+        fontFamily: 'AvenirNext-Regular'
     },
     Textarea: {
         borderWidth: 1,
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text14,
         fontWeight: 'bold',
-        fontFamily: 'AvenirNext'
+        fontFamily: 'AvenirNext-Regular'
     }
 })
 

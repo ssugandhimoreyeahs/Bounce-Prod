@@ -82,7 +82,7 @@ function Tab1(props) {
                   color: '#000',
                   marginVertical: 3,
                   fontSize: FONTSIZE.Text13,
-                  fontFamily: '500',
+                  fontFamily: 'AvenirNext-Medium',
                 },
               ]}>
               {item?.location?.addressStr}
@@ -94,7 +94,7 @@ function Tab1(props) {
                   color: '#000',
                   marginVertical: 3,
                   fontSize: FONTSIZE.Text13,
-                  fontFamily: '500',
+                  fontFamily: 'AvenirNext-Medium',
                 },
               ]}>
               {/* {'Dec. 31, 7:00 PM'} */}
@@ -118,7 +118,7 @@ function Tab1(props) {
         <Text
           style={[
             styles.numberTextStyle,
-            {fontSize: FONTSIZE.Text16, fontFamily: '500', marginLeft: 10},
+            {fontSize: FONTSIZE.Text16, fontFamily: 'AvenirNext-Medium', marginLeft: 10},
           ]}>
           {item}
         </Text>
@@ -177,12 +177,12 @@ const styles = StyleSheet.create({
   textStyle: {
     color: '#FFFFFF',
     fontSize: FONTSIZE.Text13,
-    fontFamily: 'ANB',
+    fontFamily: 'AvenirNext-Bold',
   },
   numberTextStyle: {
     color: '#000000',
     fontSize: FONTSIZE.Text14,
-    fontFamily: 'ANB',
+    fontFamily: 'AvenirNext-Bold',
   },
   numberingStyle: {
     height: 24,

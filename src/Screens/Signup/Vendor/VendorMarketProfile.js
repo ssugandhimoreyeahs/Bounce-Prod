@@ -387,19 +387,19 @@ const styles = StyleSheet.create({
         fontSize: 18,
         opacity: 0.7,
         color: '#fff',
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     Title2Style: {
         fontSize: 17,
         // opacity:0.8,
         // fontWeight: 'bold',
         color: '#fff',
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
     TitleStyle: {
         fontSize: 16,
         paddingVertical: 5,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
 
 })

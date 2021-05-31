@@ -204,14 +204,14 @@ const styles = StyleSheet.create({
         marginVertical: 10
     },
     textImage: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         color: '#000',
         fontSize: FONTSIZE.Text15,
         fontWeight: 'bold',
         paddingBottom: 10
     },
     fullInventoryTitleStyle: {
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         color: '#000',
         fontSize: FONTSIZE.Text17
     },
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     reviewsTitleStyle: {
-        fontFamily: 'Roboto-Bold',
+        fontFamily: 'AvenirNext-DemiBold',
         color: '#000',
         fontSize: 20,
     },

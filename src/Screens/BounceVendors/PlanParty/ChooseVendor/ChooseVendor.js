@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: FONTSIZE.Text18,
         marginLeft: 40,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         marginVertical: getHp(20)
     },
     iconStyle: {

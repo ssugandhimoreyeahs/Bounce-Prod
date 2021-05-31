@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
     fontSize: FONTSIZE.Text17,
-    fontFamily: 'AvenirNext',
+    fontFamily: 'AvenirNext-Regular',
     marginLeft: -10,
     // textAlign: 'center'
   },
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
     fontSize: FONTSIZE.Text17,
-    fontFamily: 'AvenirNext',
+    fontFamily: 'AvenirNext-Regular',
   },
   ContainerStyle: {
     width: '100%',
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     fontSize: FONTSIZE.Text15,
     opacity: 0.7,
     color: '#000',
-    fontFamily: 'AvenirNext',
+    fontFamily: 'AvenirNext-Regular',
   },
   Title2Style: {
     fontSize: FONTSIZE.Text13,

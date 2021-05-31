@@ -26,7 +26,7 @@ export default CustomTextinput = props => {
           textAlignVertical: 'top',
           color: 'black',
 
-          fontFamily: 'Roboto-Bold',
+          fontFamily: 'AvenirNext-DemiBold',
           fontWeight: 'bold',
           fontSize: FONTSIZE.Text17,
         }}
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
     fontSize: FONTSIZE.Text17,
-    fontFamily: 'Roboto-Bold',
+    fontFamily: 'AvenirNext-DemiBold',
   },
   container: {
     padding: getHp(12),
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     // lineHeight: 20,
     // letterSpacing: 0.5,
     backgroundColor: '#fff',
-    fontFamily: 'AvenirNext',
+    fontFamily: 'AvenirNext-Regular',
     borderRadius: 10,
   },
 });

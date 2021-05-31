@@ -67,7 +67,7 @@ export default function Filter(props) {
 
 
                         <View>
-                            <Text style={[styles.label, { fontSize: FONTSIZE.Text20, fontFamily: 'ANB', marginVertical: 5, fontWeight: 'bold' }]}>
+                            <Text style={[styles.label, { fontSize: FONTSIZE.Text20, fontFamily: 'AvenirNext-Bold', marginVertical: 5, fontWeight: 'bold' }]}>
                                 {"Guard certification"}
                             </Text>
                             <FlatList
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: FONTSIZE.Text18,
         marginLeft: 40,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         marginVertical: getHp(20)
     },
     iconStyle: {

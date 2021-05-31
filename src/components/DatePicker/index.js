@@ -43,11 +43,11 @@ export default DatePicker = ({birthday, setBirthday, tillToday}) => {
   );
 };
 const styles = StyleSheet.create({
-  textInput: {
-    borderBottomColor: '#EEEEEE',
-    borderBottomWidth: 2,
-    fontSize: FONTSIZE.Text22,
-    fontFamily: '500',
-    color: '#000',
-  },
-});
+    textInput: {
+        borderBottomColor: '#EEEEEE',
+        borderBottomWidth: 2,
+        fontSize: FONTSIZE.Text22,
+        fontFamily: 'AvenirNext-Medium',
+        color: '#000'
+    },
+})

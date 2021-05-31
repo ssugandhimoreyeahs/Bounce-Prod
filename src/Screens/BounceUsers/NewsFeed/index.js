@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: FONTSIZE.Text31,
         fontWeight: 'bold',
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
     },
 
 })

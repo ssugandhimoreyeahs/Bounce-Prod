@@ -190,6 +190,7 @@ export default function HostProfile(props) {
                 Upload Profile Picture
               </Text>
             </TouchableOpacity>
+<<<<<<< HEAD
           ) : (
             <>
               <View
@@ -217,6 +218,135 @@ export default function HostProfile(props) {
                         bottom: -25,
                         resizeMode: 'contain',
                       }}
+=======
+        )
+    }
+    useEffect(() => {
+        fetchProfile()
+        setData()
+    }, [])
+
+    const setData = async () => {
+        setLoader(true)
+
+        setPicture(user?.profileImage?.filePath)
+        setFullname(user?.fullName)
+        setBio(user?.about)
+        setCity(user?.city)
+        setBirthday(user.birthday)
+        setInstagram(user.instagramUsername)
+        setSnapchat(user.snapchatUsername)
+        setLoader(false)
+    }
+
+    const handleSubmit = async () => {
+        // console.log("HANDLE SUBMIT CALLED");
+        setLoader(true)
+
+        let milliseconds = new Date().getTime();
+
+        let imgObj = {
+            uri: `${picture}`,
+            type: "image/jpeg",
+            name: `image-${milliseconds}.jpg`,
+        }
+
+        console.log("PICTURE", picture);
+        console.log("THIS IS FULL NAME", fullName)
+        console.log("THIS IS FULL city", city)
+        console.log("THIS IS FULL getBirthday", getBirthday)
+        console.log("THIS IS FULL bio", bio)
+        console.log("THIS IS FULL snapchat", snapchat)
+        console.log("THIS IS FULL instagram", instagram)
+
+        let formData = new FormData()
+        formData.append('fullName', fullName)
+        formData.append('city', city)
+        formData.append('birthday', getBirthday)
+        formData.append('about', bio)
+        formData.append('snapchatUsername', snapchat)
+        formData.append('instagramUsername', instagram)
+        formData.append('profileImageFile', imgObj)
+
+        console.log("TOKEN", token);
+
+        const SERVER_RESPONSE = await ApiClient.authInstance.post(ApiClient.endPoints.postUser, formData).then(async (i) => {
+            await fetchProfile()
+
+            console.log(i)
+            setLoader(false)
+        }).catch(e => {
+            console.log(e)
+            setLoader(false)
+        })
+
+
+        console.log("SERVER_RESPONSE", SERVER_RESPONSE);
+        console.log("PROFILE_SERVER_RESPONSE", SERVER_RESPONSE);
+        let StringifyData = await JSON.stringify(SERVER_RESPONSE.data)
+        console.log("parsedData", JSON.parse(StringifyData))
+
+        let ParsedData = await JSON.parse(StringifyData)
+        console.log("PROFILE_ACCESS_TOKEN", ParsedData.accessToken);
+
+        if (SERVER_RESPONSE.status == 201 || SERVER_RESPONSE.status == 200) {
+            props.navigation.goBack()
+            setTimeout(() => {
+                ToastAndroid.show("Profile Updated Successfully!")
+            }, 200);
+        }
+        setLoader(false)
+    }
+
+
+    return (<Root>
+        <Spinner visible={loader} color={'#1FAEF7'} />
+        {!loader &&
+
+            <ScrollView
+                // keyboardShouldPersistTaps='always'
+                style={{ backgroundColor: '#fff', flex: 1 }}
+                contentContainerStyle={{ flexGrow: 1 }}
+            >
+                {picture == null ?
+                    <TouchableOpacity onPress={handleImage} style={{ padding: 20, marginVertical: getHp(30), justifyContent: 'center', alignItems: 'center' }}>
+                        <UploadBlue height={getHp(90)} width={getHp(90)} />
+                        <Text style={{
+                            fontSize: FONTSIZE.Text19, color: '#000', marginTop: 10, fontFamily: 'AvenirNext-Regular',
+                        }}>Upload Profile Picture</Text>
+                    </TouchableOpacity>
+                    :
+                    <>
+                        <View style={{ marginVertical: getHp(0), justifyContent: 'center', alignItems: 'center' }}>
+                            <TouchableOpacity onPress={() => openFooter(true)} style={{ marginVertical: 30 }}>
+                                <Avatar source={{
+                                    uri: picture,
+                                }} size={getHp(250)} rounded />
+                                <View style={{ alignItems: 'center' }}>
+                                    <UploadBlue height={getHp(50)} width={getWp(50)} style={{ position: 'absolute', bottom: -25, resizeMode: 'contain' }} />
+                                </View>
+                                {footer ?
+                                    <ImageFooter />
+                                    : null
+                                }
+                            </TouchableOpacity>
+                        </View>
+
+                    </>
+                }
+
+                <View style={{ paddingHorizontal: getWp(10), backgroundColor: '#fff', paddingBottom: 15 }}>
+                    <FloatingInput
+                        floatingLabel={"Full Name"}
+                        value={fullName == null ? user.fullName : fullName}
+                        onChange={(value) => setFullname(value)}
+                    />
+
+                    <FloatingInput
+                        floatingLabel={"Birthday"}
+                        onChange={(value) => setBirthday(value)}
+                        value={getBirthday == null ? user.birthday : getBirthday}
+>>>>>>> cbf1d4f (font family resolved)
                     />
                   </View>
                   {footer ? <ImageFooter /> : null}
@@ -379,6 +509,7 @@ export default function HostProfile(props) {
 }
 HostProfile.routeName = '/HostProfile';
 const styles = StyleSheet.create({
+<<<<<<< HEAD
   Tiktok: {
     marginLeft: 10,
     fontWeight: 'bold',
@@ -449,3 +580,76 @@ const styles = StyleSheet.create({
     top: -10,
   },
 });
+=======
+    Tiktok: {
+        marginLeft: 10,
+        fontWeight: 'bold',
+        color: '#000',
+        width: '100%'
+    },
+    headerTitle: {
+        // alignContent: 'center',
+        color: '#000',
+        fontSize: FONTSIZE.Text16,
+        // fontWeight: 'bold',
+        fontFamily: 'AvenirNext-Regular',
+    },
+    addInterest: {
+        elevation: 5,
+        backgroundColor: '#fff',
+        height: getHp(130),
+        width: getHp(150),
+        borderRadius: 24,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    flex: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    socialButton: {
+        elevation: 5,
+        borderRadius: 13,
+        padding: 10,
+        backgroundColor: '#fff',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginVertical: 7,
+    },
+    container: {
+        backgroundColor: '#fff',
+        flex: 1
+    },
+    linearGradient: {
+        flex: 1,
+        borderRadius: 20,
+    },
+    ContainerStyle: {
+        width: '100%',
+        marginVertical: 4,
+    },
+    ButtonStyle: {
+        backgroundColor: '#212121',
+        borderRadius: 10,
+        justifyContent: 'flex-start',
+        paddingLeft: 20
+    },
+    TitleStyle: {
+        fontFamily: 'AvenirNext-Regular',
+        fontSize: 16,
+        paddingVertical: 5
+    },
+    crossButton: {
+        elevation: 10,
+        backgroundColor: '#fff',
+        borderRadius: 50,
+        padding: 10,
+        position: 'absolute',
+        right: -10,
+        top: -10
+    },
+
+})
+>>>>>>> cbf1d4f (font family resolved)

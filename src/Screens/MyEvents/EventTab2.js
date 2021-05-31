@@ -35,8 +35,8 @@ export default function EventTab2() {
                     <View style={{ flexDirection: 'row', marginTop: 5 }}>
                         <Avatar source={item.image} size={40} rounded />
                         <View style={{ marginLeft: 20 }}>
-                            <Text style={{ color: '#000', fontFamily: '500', fontSize: FONTSIZE.Text16 }}>{item.name}</Text>
-                            <Text style={{ color: '#999999', fontFamily: '500', fontSize: FONTSIZE.Text16 }}>{item.name}</Text>
+                            <Text style={{ color: '#000', fontFamily: 'AvenirNext-Medium', fontSize: FONTSIZE.Text16 }}>{item.name}</Text>
+                            <Text style={{ color: '#999999', fontFamily: 'AvenirNext-Medium', fontSize: FONTSIZE.Text16 }}>{item.name}</Text>
                         </View>
                     </View>
 
@@ -82,6 +82,6 @@ const styles = StyleSheet.create({
         marginVertical: 3,
         color: '#000',
         fontSize: FONTSIZE.Text16,
-        fontFamily: 'AvenirNext'
+        fontFamily: 'AvenirNext-Regular'
     },
 })

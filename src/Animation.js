@@ -13,6 +13,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { TouchableOpacity } from 'react-native';
 import { FONTSIZE } from '@utils'
 import { connect, useSelector, useDispatch } from "react-redux";
+import { Toast } from '@constants';
 const { height, width } = Dimensions.get('screen')
 
 

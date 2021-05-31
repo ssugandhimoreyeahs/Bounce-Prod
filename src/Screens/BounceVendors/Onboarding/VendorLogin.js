@@ -36,7 +36,7 @@ function VendorLogin(props) {
                 }
             })
         } else if (!(parsed.success)) {
-            Toast.show("Login Failed :( ")
+            Toast("Login Failed :( ")
         }
     }
     return (

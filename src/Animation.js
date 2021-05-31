@@ -38,7 +38,7 @@ export default function LoginScreen(props) {
         if (SERVER_USER_LOGIN.success == true) {
             navigation.navigate('UserFriendsProfile')
         } else {
-                Toast.show("Invalid Credentials!")
+                Toast("Invalid Credentials!")
         }
     }
 

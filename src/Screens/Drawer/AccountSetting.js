@@ -22,7 +22,7 @@ export default function AccountSetting(props) {
         let regSpace = new RegExp(/\s/);
         if (regSpace.test(value)) {
             setUsername(value.trim())
-            Toast.show("Username cannot contain space !")
+            Toast("Username cannot contain space !")
         } else {
             setUsername(value)
         }

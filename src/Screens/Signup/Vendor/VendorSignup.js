@@ -62,11 +62,11 @@ export default function VendorSignup(props) {
 
             if (!validateE) {
                 console.log("values res of email", validateE);
-                Toast.show("Please enter valid email !");
+                Toast("Please enter valid email !");
 
             } else if (!validateP) {
                 console.log("values res of pass", validateP);
-                Toast.show("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !");
+                Toast("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !");
 
             } else
                 if (username.length > 0 &&
@@ -87,19 +87,19 @@ export default function VendorSignup(props) {
                     } else if (res.statusCode == 404) {
                         console.log("1.2 blockk");
                         setLoader(false)
-                        Toast.show(res.message);
+                        Toast(res.message);
                         // Alert.alert(res.message)
 
                     }
                 } else {
                     console.log("2 blockk");
                     setLoader(false)
-                    Toast.show("Please fill all the field's with valid data !");
+                    Toast("Please fill all the field's with valid data !");
 
                 }
         } catch (err) {
             // console.log("Error", err.message)
-            Toast.show("Vendor Username or Number already exist!");
+            Toast("Vendor Username or Number already exist!");
         }
     }
 
@@ -107,7 +107,7 @@ export default function VendorSignup(props) {
         let regSpace = new RegExp(/\s/);
         if (regSpace.test(value)) {
             setUsername(value.trim())
-            Toast.show("Username cannot contain space !");
+            Toast("Username cannot contain space !");
         } else {
             setUsername(value)
         }

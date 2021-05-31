@@ -127,7 +127,7 @@ export default function VendorMarketProfile(props) {
             }
             else {
                 setLoader(false)
-                Toast.show("Please fill all the field's with valid data !");
+                Toast("Please fill all the field's with valid data !");
 
             }
         } catch (error) {

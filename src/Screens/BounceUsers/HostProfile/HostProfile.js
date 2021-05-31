@@ -161,7 +161,7 @@ export default function HostProfile(props) {
     if (SERVER_RESPONSE.status == 201 || SERVER_RESPONSE.status == 200) {
       props.navigation.goBack();
       setTimeout(() => {
-        Toast.show('Profile Updated Successfully!');
+        Toast('Profile Updated Successfully!');
       }, 200);
     }
     setLoader(false);

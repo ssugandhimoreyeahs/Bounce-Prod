@@ -90,11 +90,11 @@ export default function UploadInventory(props) {
                 // props.navigation.navigate("btmstack", {
                 //     screen: "DjProfileScreen",
                 // })
-                Toast.show("Inventory created successfully !");
+                Toast("Inventory created successfully !");
 
             } else {
                 setLoader(false)
-                Toast.show('Something went wrong!')
+                Toast('Something went wrong!')
             }
         } catch (error) {
             setLoader(false)

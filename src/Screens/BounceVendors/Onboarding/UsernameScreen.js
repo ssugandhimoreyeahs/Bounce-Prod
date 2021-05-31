@@ -28,6 +28,12 @@ export default function UserNameScreen(props) {
 
     const handleSubmit = async () => {
         try {
+            if (username.length == 0) {
+                return Toast('Username is required!');
+            }
+            if (password.length == 0) {
+                return Toast('Password is required!');
+            }
             let body = {
                 vendorType: "2",
                 name,
@@ -38,7 +44,7 @@ export default function UserNameScreen(props) {
             let validateP = await validatePass(password)
             if (!validateP) {
                 console.log("values res of pass", validateP);
-                Toast.show("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !");
+                Toast("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !");
 
             } else if (username.length > 0 &&
                 password.length > 0
@@ -57,11 +63,11 @@ export default function UserNameScreen(props) {
                     })
                 } else if (res.statusCode == 404) {
                     setLoader(false)
-                    Toast.show(res.message);
+                    Toast(res.message);
                 }
             } else {
                 setLoader(false)
-                Toast.show("Please fill all the field's with valid data !");
+                Toast("Please fill all the field's with valid data !");
 
             }
         } catch (error) {

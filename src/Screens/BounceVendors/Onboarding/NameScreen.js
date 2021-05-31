@@ -35,7 +35,7 @@ export default function NameScreen(props) {
                 name: name
             })
         } else {
-            Toast.show("Please enter your name!");
+            Toast("Please enter your name!");
 
         }
     }

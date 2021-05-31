@@ -48,7 +48,7 @@ export default function ProfilePic(props) {
         let milliseconds = new Date().getTime();
         console.log('PICTURE', picture);
         let imgObj = {
-          uri: `${picture.path}`,
+          uri: `${picture.uri}`,
           type: 'image/jpeg',
           name: `image-${milliseconds}.jpg`,
         };
@@ -73,12 +73,12 @@ export default function ProfilePic(props) {
         }
       } else {
         setLoader(false);
-        Toast.show('Please select a picture!');
+        Toast('Please select a picture!');
       }
     } catch (e) {
       setLoader(false);
       console.log('ERROR - ', e);
-      Toast.show('e');
+      Toast('Something went wrong!');
     }
   };
 

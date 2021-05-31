@@ -69,6 +69,7 @@ export default DatePicker = props => {
     <View>
       <TouchableOpacity onPress={showDatePicker}>
         <TextInput
+        pointerEvents="none"
           placeholderTextColor={'#696969'}
           placeholder={placeholder}
           style={[
@@ -91,7 +92,7 @@ export default DatePicker = props => {
         onCancel={hideDatePicker}
         minimumDate={minimumDate}
         maximumDate={maximumDate}
-        isDarkModeEnabled={true}
+        // isDarkModeEnabled={true}
       />
     </View>
   );

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera Permission</string>
+	<string>OPEN</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -27,8 +27,6 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>OPEN</string>
-	<key>NSCameraUsageDescription</key>
 	<string>OPEN</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>OPEN</string>

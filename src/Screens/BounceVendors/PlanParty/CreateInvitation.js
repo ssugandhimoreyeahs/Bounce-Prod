@@ -17,6 +17,7 @@ import {
   InputBox,
   ImageCarousel,
   TicketComponent,
+  Scaffold
 } from '@components';
 import { UploadCamera } from '@assets';
 import { UploadBlue, BlackClose, BlueCamera, Add_Outline, AddBlue } from '@svg';
@@ -181,6 +182,7 @@ function CreateInvitation(props) {
     );
   };
   return (
+    <Scaffold>
     <Root>
       <View style={styles.container}>
         <ScrollView
@@ -488,6 +490,7 @@ function CreateInvitation(props) {
         </ScrollView>
       </View>
     </Root>
+    </Scaffold>
   );
 }
 

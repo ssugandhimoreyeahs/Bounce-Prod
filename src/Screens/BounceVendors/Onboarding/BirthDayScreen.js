@@ -42,7 +42,7 @@ export default function BirthDayScreen(props) {
                 name
             })
         } else {
-            Toast.show("Please select birthday!")
+            Toast("Please select birthday!")
         }
     }
     return (

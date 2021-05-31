@@ -189,7 +189,7 @@ function DJSignup(props) {
         })
         setLoader(false);
         if (venderRegisterResponse.status == 201 || venderRegisterResponse.status == 200) {
-            Toast.show("Profile Updated Successfully!")
+            Toast("Profile Updated Successfully!")
             authStore.async.reloadVendor();
         }
 

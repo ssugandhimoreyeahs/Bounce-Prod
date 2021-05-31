@@ -13,7 +13,7 @@ import { useLoader } from '@hooks'
 import David from '@assets/David.png'
 import { Alert } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native';
-
+import { Toast } from '@constants';
 export default function AccountSetting(props) {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -22,7 +22,7 @@ export default function AccountSetting(props) {
         let regSpace = new RegExp(/\s/);
         if (regSpace.test(value)) {
             setUsername(value.trim())
-            Toast.show("Username cannot contain space !")
+            Toast("Username cannot contain space !")
         } else {
             setUsername(value)
         }

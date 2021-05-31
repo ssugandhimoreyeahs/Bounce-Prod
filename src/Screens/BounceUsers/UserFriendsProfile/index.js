@@ -49,11 +49,10 @@ import CreateInvitation from '../../../Screens/BounceVendors/PlanParty/CreateInv
 import { observer } from 'mobx-react';
 import axios from "axios";
 import { FONTSIZE, getHp, getWp } from '@utils'
-<<<<<<< HEAD
+ 
 import { Scaffold } from "../../../components";
 import HostProfile from "../HostProfile/HostProfile";
-=======
->>>>>>> cbf1d4f (font family resolved)
+ 
 
 const ACCOUNTS = [
   {
@@ -179,7 +178,7 @@ function UserFriendsProfile(props) {
         <View style={{ alignItems: 'center' }}>
           <Image source={{ uri: items.track.album.images[0].url }} style={{ borderRadius: 7, width: 150, height:150 , margin: 2 }} />
 
-          <Text style={[styles.textImage, { marginVertical: 5, paddingBottom: 0, fontSize: FONTSIZE.Text16, fontFamily: '500' }]}>{items.track.name}</Text>
+          <Text style={[styles.textImage, { marginVertical: 5, paddingBottom: 0, fontSize: FONTSIZE.Text16, fontFamily: 'AvenirNext-Medium' }]}>{items.track.name}</Text>
 
           <Text style={[styles.textImage, { marginVertical: 5, paddingBottom: 0, fontSize: FONTSIZE.Text13 }]}>{items.track.artists[0].name}</Text>
 
@@ -312,7 +311,7 @@ function UserFriendsProfile(props) {
                 <TouchableOpacity style={{ flexDirection: "row" }}
                   onPress={() => props.navigation.navigate(CreateInvitation.routeName)}>
                   <WhitePerson height={27} width={19} />
-                  <Text style={[styles.textStyle, { marginLeft: 20, fontFamily: '500', color: '#FFFFFF' }]}>
+                  <Text style={[styles.textStyle, { marginLeft: 20, fontFamily: 'AvenirNext-Medium', color: '#FFFFFF' }]}>
                     {'Create Invitation'}</Text>
                 </TouchableOpacity>
               </LinearGradient>

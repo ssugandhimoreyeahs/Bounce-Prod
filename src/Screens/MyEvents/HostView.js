@@ -59,7 +59,7 @@ export default function HostView() {
                 marginRight: 10,
                 flexDirection: 'row', alignItems: 'center', marginBottom: 10
             }]}>
-                <Text style={{ fontFamily: '500', fontSize: FONTSIZE.Text12, color: '#000' }}>{item}</Text>
+                <Text style={{ fontFamily: 'AvenirNext-Medium', fontSize: FONTSIZE.Text12, color: '#000' }}>{item}</Text>
 
             </TouchableOpacity>
         )
@@ -101,7 +101,7 @@ export default function HostView() {
 
                 <Text style={[styles.tagTextStyle, {
                     margin
-                        : 10, letterSpacing: 0.24, fontFamily: '500', lineHeight: 26
+                        : 10, letterSpacing: 0.24, fontFamily: 'AvenirNext-Medium', lineHeight: 26
                 }]}>
                     {"This will be the best gala yet, with Mark Cuban as the keynote speaker! Dress in comfy cocktail attire. Wear your dancing shoes. Have a fantastic night out while suppoting us!"}
                 </Text>

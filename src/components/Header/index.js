@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
 
     },
     headerTitleStyle: {
-        fontFamily: '100',
+        fontFamily: 'AvenirNext-UltraLight',
         color: "#000",
         fontSize: FONTSIZE.Text22,
         letterSpacing: 0.1,

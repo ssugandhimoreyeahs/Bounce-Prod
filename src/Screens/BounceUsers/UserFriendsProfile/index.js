@@ -189,6 +189,8 @@ function UserFriendsProfile(props) {
   }
 
   return (
+
+    <Scaffold>
     <View style={styles.container}>
 
       <ScrollView keyboardShouldPersistTaps={"always"}>
@@ -461,6 +463,7 @@ function UserFriendsProfile(props) {
       </ScrollView>
       {/* <Footer buttonStack={DATA} /> */}
     </View >
+    </Scaffold>
   );
 }
 UserFriendsProfile.routeName = "/UserFriendsProfile";

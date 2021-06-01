@@ -40,13 +40,12 @@ import { Strings } from '../../../app/constants';
 import UploadMedia from './UploadMedia';
 import { CreateFormData, PartyService } from '../../../app/services';
 import DatePick from '../../../components/DatePick';
-import moment from 'moment';
-import { Root } from 'native-base';
-import { Toast } from '@constants';
+import moment from 'moment'; 
+import { Toast } from '../../../app/constants';
 import Collapsible from 'react-native-collapsible';
 import { useBackHandler } from '@react-native-community/hooks';
 import UserHomeScreen from '../../BounceUsers/UserFriendsProfile';
-
+ 
 
 const TAGS = [
   {
@@ -80,10 +79,10 @@ function CreateInvitation(props) {
       listener.unsubscribe();
     };
   }, []);
-  useBackHandler(() => {
-    props.navigation.navigate(UserHomeScreen.routeName);
-    return false;
-  });
+  // useBackHandler(() => {
+  //   props.navigation.navigate(UserHomeScreen.routeName);
+  //   return false;
+  // });
   const handleOnPress = async isDraftMode => {
     try {
       console.log('DFMD - ', isDraftMode);
@@ -91,6 +90,7 @@ function CreateInvitation(props) {
         isDraftMode,
         partyModel.isEditMode,
       );
+      
       if (!res.success) {
         let key = Object.keys(res.error)[0];
         let msg = res.error[key] || 'Something went wrong!';
@@ -182,8 +182,7 @@ function CreateInvitation(props) {
     );
   };
   return (
-    <Scaffold>
-    <Root>
+    <Scaffold> 
       <View style={styles.container}>
         <ScrollView
           style={{ flex: 1, backgroundColor: '#FBFBFB' }}
@@ -491,8 +490,7 @@ function CreateInvitation(props) {
                             />
                         </View> */}
         </ScrollView>
-      </View>
-    </Root>
+      </View> 
     </Scaffold>
   );
 }

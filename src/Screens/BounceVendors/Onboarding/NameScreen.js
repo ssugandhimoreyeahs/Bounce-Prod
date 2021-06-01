@@ -36,7 +36,6 @@ export default function NameScreen(props) {
             })
         } else {
             Toast("Please enter your name!");
-
         }
     }
     return (

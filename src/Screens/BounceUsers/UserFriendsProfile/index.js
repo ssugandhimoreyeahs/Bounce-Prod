@@ -315,7 +315,7 @@ function UserFriendsProfile(props) {
                   onPress={() => props.navigation.navigate(CreateInvitation.routeName)}>
                   <WhitePerson height={27} width={19} />
                   <Text style={[styles.textStyle, { marginLeft: 20, fontFamily: 'AvenirNext-Medium', color: '#FFFFFF' }]}>
-                    {'Create Invitation'}</Text>
+                    {'Add Friend'}</Text>
                 </TouchableOpacity>
               </LinearGradient>
 

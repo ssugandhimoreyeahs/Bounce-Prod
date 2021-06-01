@@ -189,6 +189,7 @@ function CreateInvitation(props) {
           style={{ flex: 1, backgroundColor: '#FBFBFB' }}
           contentContainerStyle={{ flexGrow: 1 }}>
           <Header
+          headerBackColor={{backgroundColor:'#FFFFFF'}}
             back
             // rightTitle={'Save as Draft'}
             onPressRightTitle={() => handleOnPress(true)}

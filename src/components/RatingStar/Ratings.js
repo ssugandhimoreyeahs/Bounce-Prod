@@ -13,7 +13,7 @@ export default function Ratings({ rating }) {
                 <View style={{ backgroundColor: rating == 'N/A' ? '#CCCCCC' : '#F8A41E', borderRadius: 5, padding: 2 }}>
                     <StarWhite height={18} width={18} />
                 </View>
-                <Text style={{ color:rating == 'N/A' ? '#BBBBBB' : '#000', fontSize: FONTSIZE.Text18, marginLeft: 5 }}>{rating}</Text>
+                <Text style={{ color:rating == 'N/A' ? '#BBBBBB' : '#000', fontSize: FONTSIZE.Text16, marginLeft: 5 }}>{rating}</Text>
             </View>
         </View>
     )

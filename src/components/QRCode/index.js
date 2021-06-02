@@ -31,11 +31,11 @@ export default class ScanScreen extends Component {
 
   render() {
     const { qrValue, qrUserPic } = this.props;
-console.log("asdasdasa",qrUserPic)
+    console.log("asdasdasa", qrUserPic)
     return (
       <View style={{ backgroundColor: '#fff', borderRadius: 42 }}>
         <QRCode
-
+          // style={{ borderRadius: 20 }}
           value={qrValue}
           logo={{ uri: qrUserPic }}
           logoBorderRadius={100}

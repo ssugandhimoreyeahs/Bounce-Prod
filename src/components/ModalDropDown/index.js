@@ -55,7 +55,8 @@ const ModalDropDownComponent = (props) => {
             backgroundColor: '#fff',
             borderRadius: 9.5,
             marginVertical: 10,
-            height: getHp(50),
+            justifyContent:'center',
+            height: getHp(65),
             marginBottom: 10
         }}>
             <ModalDropdown
@@ -110,7 +111,9 @@ const ModalDropDownComponent = (props) => {
                     flexWrap: 'wrap'
                 }}>
                 <Text style={{
-                    color: 'black',
+                    color: '#000',
+                    marginLeft:12,
+                    opacity:0.8,
                     alignSelf: 'center',
                     fontSize: FONTSIZE.Text15
                 }}>

@@ -169,7 +169,7 @@ function Header(props) {
                         <>
                             <TouchableOpacity style={[styles.headerDropdown, { paddingVertical: 10, }]}>
                                 <Avatar source={{ uri: userinfo?.user?.profileImage?.filePath }} size={getHp(50)} rounded />
-                                <Text style={[{ marginLeft: getWp(20), color: '#000', fontSize: FONTSIZE.Text18, fontWeight: 'normal' }]}>
+                                <Text style={[{ marginLeft: getWp(20), color: '#000', fontSize: FONTSIZE.Text18, fontFamily:'AvenirNext-Medium' }]}>
                                     {userinfo?.user?.fullName}
                                 </Text>
                             </TouchableOpacity>
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
         borderBottomLeftRadius: 24,
         borderBottomRightRadius: 24,
-        borderWidth: 1,
+        borderWidth: 0.5,
         borderColor: '#CCCCCC',
         backgroundColor: '#FFFFFF',
         padding: 10

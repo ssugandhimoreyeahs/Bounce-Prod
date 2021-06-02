@@ -112,12 +112,14 @@ export default function VendorSignup(props) {
             setUsername(value)
         }
     }
-    return (<Scaffold>
+    return (<Scaffold
+        statusBarStyle={{ backgroundColor: '#F4F4F4' }}>
         <ScrollView
             keyboardShouldPersistTaps='always'
             contentContainerStyle={{ flexGrow: 1 }}
             style={{ backgroundColor: '#FBFBFB', flex: 1 }}>
             <Header
+                headerBackColor={{ paddingBottom: 20, backgroundColor: 'rgba(238, 238, 238, 0.5)' }}
                 back
                 headerTitle={`Create ${vendorType} Profile`}
                 onPress={() => props.navigation.goBack()}

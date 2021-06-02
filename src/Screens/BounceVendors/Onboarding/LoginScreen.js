@@ -6,7 +6,7 @@ import {
   TextInput,
   Animated,
   BackHandler,
-  
+
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Scaffold } from '@components';
@@ -86,6 +86,9 @@ function LoginScreen(props) {
               placeholder="Username"
               style={[styles.textInput, { paddingBottom: getHp(10) }]}
               onChangeText={value => {
+                if (value.length == 0) {
+                  animated.ballAnimation.setValue(-25);
+                }
                 setUsername(value);
                 animateBall();
               }}
@@ -183,6 +186,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 5,
     shadowRadius: 10,
+    elevation:5,
   },
   Line: {
     flex: 1,
@@ -234,7 +238,7 @@ const styles = StyleSheet.create({
   },
   signStyle: {
     marginLeft: '2%',
-    fontFamily: 'AvenirNext-DemiBold',
+    fontFamily: 'AvenirNext-Bold',
     letterSpacing: 1,
     color: '#000',
     fontSize: FONTSIZE.Text18,
@@ -265,6 +269,5 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // backgroundColor: 'red'
   },
 });

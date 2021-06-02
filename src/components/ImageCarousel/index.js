@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
         padding: 10,
         position: 'absolute',
         zIndex: 100,
-        bottom: 40,
+        bottom: 20,
         right: 20
     },
     friendsImage: {

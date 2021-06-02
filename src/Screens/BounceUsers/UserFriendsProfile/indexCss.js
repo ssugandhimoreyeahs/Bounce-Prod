@@ -5,6 +5,13 @@ import { FONTSIZE } from '@utils'
 const { height, width } = Dimensions.get("screen")
 
 const styles = StyleSheet.create({
+   buttonText: {
+      fontSize: FONTSIZE.Text16,
+      // textAlign: 'center',
+      fontFamily: 'AvenirNext-Medium',
+      // marginVertical: 10,
+      color: '#ffffff',
+   },
    boxShadow: {
       shadowColor: '#EFEFEF',
       shadowOffset: { width: 0, height: 1 },

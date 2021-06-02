@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
         borderRadius: 13,
     },
     titleStyle: {
-        fontSize: FONTSIZE.Text21,
+        fontSize: FONTSIZE.Text22,
         color: '#fff',
         fontFamily: 'AvenirNext-Medium'
     },

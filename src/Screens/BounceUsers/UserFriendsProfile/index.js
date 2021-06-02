@@ -41,6 +41,7 @@ import {
   Insta,
   Twitter,
   Tiktok,
+  Linkedin,
   Snapchat
 } from "@svg";
 import { BlackPerson } from "../../../assets/Svg";
@@ -52,7 +53,7 @@ import { FONTSIZE, getHp, getWp } from '@utils'
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
 import HostProfile from "../HostProfile/HostProfile";
-
+import Right from 'react-native-vector-icons/FontAwesome'
 
 const ACCOUNTS = [
   {
@@ -247,7 +248,7 @@ function UserFriendsProfile(props) {
                 </View>
               </View>
 
-              <View style={[styles.flex, { width: "70%", marginVertical: 10, justifyContent: 'space-evenly' }]}>
+              <View style={[styles.flex, { width: "90%", marginVertical: 10, justifyContent: 'space-evenly' }]}>
                 <TouchableOpacity
                   style={[styles.editButtonStyle]}
                   onPress={() => props.navigation.navigate(HostProfile.routeName)}
@@ -290,7 +291,29 @@ function UserFriendsProfile(props) {
                 >
                   <Tiktok height={30} width={30} />
                 </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
+                  }
+                >
+                  <Linkedin height={32} width={32} />
+                </TouchableOpacity>
               </View>
+
+              <LinearGradient
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                colors={['#16B0FE', '#3FBEFF']}
+                style={[
+                  styles.linearGradient,
+                  { marginVertical: 20, width: '100%' ,height: getHp(38),borderRadius:13},
+                ]}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} >
+                  <Text style={[styles.buttonText, { marginRight: 15 }]}>{'Things to do with Friends'}</Text>
+                  <Right name="angle-right" color='#FFFFFF' size={25} />
+                </TouchableOpacity>
+              </LinearGradient>
+
 
               <TextInput
                 multiline
@@ -431,7 +454,10 @@ function UserFriendsProfile(props) {
                 </TouchableOpacity>
               </View>
               {/*END*** First Gallery Block of Friends */}
-              <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} />
+              <View style={{
+                height: 1, backgroundColor: '#EEEEEE', marginTop: 10,
+                marginBottom: 25
+              }} />
 
               {/*Start*** Second Gallery Block of Friends */}
               <View style={[styles.flex, {

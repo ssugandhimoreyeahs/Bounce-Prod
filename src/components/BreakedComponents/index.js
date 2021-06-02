@@ -79,94 +79,64 @@ export const PrivacyBlock = () => {
         }
       </Text>
     </View>
-  );
-};
+    )
+}
 
-export const EventTabview = observer(props => {
-  return (
-    <View style={{borderBottomWidth: 1, borderColor: '#EEEEEE'}}>
-      <Tabs tabBarUnderlineStyle={{backgroundColor: '#000000'}}>
-        <Tab
-          tabStyle={{backgroundColor: '#FBFBFB'}}
-          textStyle={{
-            color: '#999999',
-            fontFamily: 'AvenirNext-Medium',
-            fontSize: FONTSIZE.Text16,
-          }}
-          activeTabStyle={{backgroundColor: '#FBFBFB'}}
-          activeTextStyle={{
-            color: '#000',
-            fontFamily: 'AvenirNext-Bold',
-            fontSize: FONTSIZE.Text16,
-          }}
-          heading={'Attending'}>
-          <ScrollView
-            nestedScrollEnabled={true}
-            style={{
-              height: 300,
-            }}>
-            <EventPageTab1 partyStore={MboxStore.partyStore} {...props} />
-          </ScrollView>
-        </Tab>
+export const EventTabview = observer((props) => {
+    return (
+        <View style={{ borderBottomWidth: 1, borderColor: '#EEEEEE', }}>
+            <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
 
-        <Tab
-          tabStyle={{backgroundColor: '#FBFBFB'}}
-          textStyle={{
-            color: '#999999',
-            fontFamily: 'AvenirNext-Medium',
-            fontSize: FONTSIZE.Text16,
-          }}
-          activeTabStyle={{backgroundColor: '#FBFBFB'}}
-          activeTextStyle={{
-            color: '#000',
-            fontFamily: 'AvenirNext-Bold',
-            fontSize: FONTSIZE.Text16,
-          }}
-          heading="Featuring">
-          <EventPageTab2 />
-        </Tab>
-      </Tabs>
-    </View>
-  );
+                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
+                    textStyle={{ color: '#999999', fontFamily: 'AvenirNext-Medium',fontSize:FONTSIZE.Text16 }}
+                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Bold',fontSize:FONTSIZE.Text16 }} heading={"Attending"}>
+                    <ScrollView nestedScrollEnabled={true} style={{
+                        height: 300
+                    }}>
+                        <EventPageTab1 partyStore={MboxStore.partyStore} {...props} />
+                    </ScrollView>
+                </Tab>
+
+                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
+                    textStyle={{color: '#999999', fontFamily: 'AvenirNext-Medium',fontSize:FONTSIZE.Text16 }}
+                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Bold',fontSize:FONTSIZE.Text16 }} heading="Featuring">
+                    <EventPageTab2 />
+                </Tab>
+            </Tabs>
+        </View>
+    );
 });
-export const Tabview = observer(props => {
-  return (
-    <View
-      style={{
-        marginVertical: 10,
-        borderBottomWidth: 1,
-        borderColor: '#EEEEEE',
-      }}>
-      <Tabs tabBarUnderlineStyle={{backgroundColor: '#000000'}}>
-        <Tab
-          tabStyle={{backgroundColor: '#FBFBFB'}}
-          textStyle={{color: '#000', fontFamily: 'AvenirNext-Medium'}}
-          activeTabStyle={{backgroundColor: '#FBFBFB'}}
-          activeTextStyle={{color: '#000', fontFamily: 'AvenirNext-Medium'}}
-          heading={'Hosting'}>
-          <Tab1 partyStore={MboxStore.partyStore} {...props} />
-        </Tab>
+export const Tabview = observer((props) => {
+    return (
+        <View style={{ marginVertical: 10, borderBottomWidth: 1, borderColor: '#EEEEEE' }}>
+            <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
 
-        <Tab
-          tabStyle={{backgroundColor: '#FBFBFB'}}
-          textStyle={{color: '#000', fontFamily: 'AvenirNext-Medium'}}
-          activeTabStyle={{backgroundColor: '#FBFBFB'}}
-          activeTextStyle={{color: '#000', fontFamily: 'AvenirNext-Medium'}}
-          heading="Attending">
-          <Tab2 />
-        </Tab>
+                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
+                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
+                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading={"Hosting"}>
+                    <Tab1 partyStore={MboxStore.partyStore} {...props} />
+                </Tab>
 
-        <Tab
-          tabStyle={{backgroundColor: '#FBFBFB'}}
-          textStyle={{color: '#000', fontFamily: 'AvenirNext-Medium'}}
-          activeTabStyle={{backgroundColor: '#FBFBFB'}}
-          activeTextStyle={{color: '#000', fontFamily: 'AvenirNext-Medium'}}
-          heading="Interested">
-          <Tab3 />
-        </Tab>
-      </Tabs>
-    </View>
-  );
+                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
+                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
+                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="Attending">
+                    <Tab2 />
+                </Tab>
+
+                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
+                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
+                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="Interested">
+                    <Tab3 />
+                </Tab>
+
+            </Tabs>
+        </View>
+    );
 });
 
 export const VendorCard = ({item}) => {
@@ -425,9 +395,9 @@ export const SwitchButton = props => {
         </TouchableOpacity>
       </View>
 
-      <View style={{position: 'absolute', right: -45}}>
+      {/* <View style={{position: 'absolute', right: -45}}>
         <Info height={25} width={25} />
-      </View>
+      </View> */}
     </View>
   );
 };

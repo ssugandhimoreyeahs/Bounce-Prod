@@ -48,7 +48,7 @@ function App() {
     </NativebaseRoot>
   );
 }
-//export default observer(App);
+export default observer(App);
 
 const App2 = () => {
   const [txt, setTxt] = useState('');
@@ -91,4 +91,4 @@ const App2 = () => {
   );
 };
 
-export default App2;
+//export default App2;

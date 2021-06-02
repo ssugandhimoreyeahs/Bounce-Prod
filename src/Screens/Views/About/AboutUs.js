@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, StyleSheet, Alert, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Alert, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import { QRCodes, Header, CustomButton } from '@components';
 import { FONTSIZE, getHp, getWp } from '@utils';
 import { UploadBlue } from '@svg'
 
 export default function AboutUs() {
-    return (<View style={styles.container}>
+    return (<SafeAreaView style={styles.container}>
         <Header headerTitle={"About Bounce"}
             back
             onPress={() => navigation.goBack()}
@@ -41,7 +41,7 @@ export default function AboutUs() {
             </TouchableOpacity>
 
         </View>
-    </View>
+    </SafeAreaView>
     )
 }
 AboutUs.routeName = "/AboutUs";

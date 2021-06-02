@@ -178,10 +178,11 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   boxShadow: {
-    shadowColor: '#EFEFEF',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 5,
-    shadowRadius: 10,
+    shadowColor: 'rgba(0, 0, 0, 0.2)',
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 15 ,
+    shadowOffset : { width: 1, height: 13},
   },
   Line: {
     flex: 1,
@@ -254,7 +255,6 @@ const styles = StyleSheet.create({
   Card: {
     backgroundColor: '#fff',
     borderRadius: 20,
-    elevation: 2,
     justifyContent: 'center',
     alignItems: 'center',
     width: '28%',

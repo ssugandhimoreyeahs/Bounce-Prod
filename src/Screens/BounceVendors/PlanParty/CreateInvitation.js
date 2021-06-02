@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -17,35 +17,43 @@ import {
   InputBox,
   ImageCarousel,
   TicketComponent,
-  Scaffold
+  Scaffold,
 } from '@components';
-import { UploadCamera } from '@assets';
-import { UploadBlue, BlackClose, BlueCamera, Add_Outline, AddBlue } from '@svg';
-import { Keyboard } from 'react-native';
+import {UploadCamera} from '@assets';
+import {
+  UploadBlue,
+  BlackClose,
+  BlueCamera,
+  Add_Outline,
+  AddBlue,
+  Info,
+} from '@svg';
+import {Keyboard} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
-import { connect } from 'react-redux';
-import { FONTSIZE, getHp, getWp } from '@utils';
+import {connect} from 'react-redux';
+import {FONTSIZE, getHp, getWp} from '@utils';
 import {
   AgeField,
   SwitchButton,
   DollarField,
 } from '../../../components/BreakedComponents';
-import { Avatar } from 'react-native-elements';
+import {Avatar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PlanPartyModel from './PlanPartyModel';
-import { observer } from 'mobx-react';
-import { Formik } from 'formik';
+import {observer} from 'mobx-react';
+import {Formik} from 'formik';
 import * as Yup from 'yup';
-import { Strings } from '../../../app/constants';
+import {Strings} from '../../../app/constants';
 import UploadMedia from './UploadMedia';
-import { CreateFormData, PartyService } from '../../../app/services';
+import {CreateFormData, PartyService} from '../../../app/services';
 import DatePick from '../../../components/DatePick';
-import moment from 'moment'; 
-import { Toast } from '../../../app/constants';
+import moment from 'moment';
+import {Root} from 'native-base';
+import {Toast} from '@constants';
 import Collapsible from 'react-native-collapsible';
-import { useBackHandler } from '@react-native-community/hooks';
+import {useBackHandler} from '@react-native-community/hooks';
 import UserHomeScreen from '../../BounceUsers/UserFriendsProfile';
- 
+import ToggleSwitch from 'toggle-switch-react-native';
 
 const TAGS = [
   {
@@ -90,7 +98,6 @@ function CreateInvitation(props) {
         isDraftMode,
         partyModel.isEditMode,
       );
-      
       if (!res.success) {
         let key = Object.keys(res.error)[0];
         let msg = res.error[key] || 'Something went wrong!';
@@ -107,8 +114,8 @@ function CreateInvitation(props) {
         partyModel.isEditMode
           ? 'Party Updated Successfully'
           : isDraftMode
-            ? 'Party saved to Draft'
-            : 'Party Created Successfully',
+          ? 'Party saved to Draft'
+          : 'Party Created Successfully',
       );
       if (!isEditParty) {
         partyModel.reset();
@@ -159,7 +166,7 @@ function CreateInvitation(props) {
     if (partyModel?.party?.gallery?.length > 0) {
       partyModel.party.gallery.map(i => img.push(i.filePath));
     }
-    console.log('IMG_TEST ', img);
+    
     return (
       <View>
         <ImageCarousel
@@ -175,130 +182,149 @@ function CreateInvitation(props) {
           onPress={() => {
             handleImage();
           }}
-          style={{ position: 'absolute', bottom: 10, right: 20 }}>
+          style={{position: 'absolute', bottom: 10, right: 20}}>
           <AddBlue height={33} width={33} />
         </TouchableOpacity>
       </View>
     );
   };
   return (
-    <Scaffold> 
-      <View style={styles.container}>
-        <ScrollView
-          style={{ flex: 1, backgroundColor: '#FBFBFB' }}
-          contentContainerStyle={{ flexGrow: 1 }}>
-          <Header
-            back
-            // rightTitle={'Save as Draft'}
-            onPressRightTitle={() => handleOnPress(true)}
-            onPress={() => {
-              if (
-                partyModel?.party?.title === undefined ||
-                partyModel?.party?.title === ''
-              ) {
-                props.navigation.goBack();
-              } else {
-                Alert.alert(
-                  'Alert !',
-                  'Are you sure you want to go back ?. All your changes will be lost!',
-                  [
-                    {
-                      text: 'OK',
-                      onPress: () => props.navigation.goBack(),
-                    },
-                    {
-                      text: 'Cancel',
-                    },
-                  ],
-                  { cancelable: true },
-                );
-              }
+    <Scaffold>
+      <Root>
+        <View style={styles.container}>
+          <ScrollView
+            style={{flex: 1, backgroundColor: '#FBFBFB'}}
+            contentContainerStyle={{flexGrow: 1}}>
+            <Header
+              back
+              // rightTitle={'Save as Draft'}
+              onPressRightTitle={() => handleOnPress(true)}
+              onPress={() => {
+                if (
+                  partyModel?.party?.title === undefined ||
+                  partyModel?.party?.title === ''
+                ) {
+                  props.navigation.goBack();
+                } else {
+                  Alert.alert(
+                    'Alert !',
+                    'Are you sure you want to go back ?. All your changes will be lost!',
+                    [
+                      {
+                        text: 'OK',
+                        onPress: () => props.navigation.goBack(),
+                      },
+                      {
+                        text: 'Cancel',
+                      },
+                    ],
+                    {cancelable: true},
+                  );
+                }
 
-              // Alert.alert("All changes will be lost! Are you sure ? ")
-            }}
-          />
-          <View
-            style={{
-              paddingHorizontal: 10,
-              marginBottom: 3,
-              backgroundColor: '#FBFBFB',
-              paddingBottom: 20,
-            }}>
-            <FloatingInput
-              floatingLabel={'Event title'}
-              value={partyModel.party.title?.toString()}
-              onChange={title => {
-                partyModel.party.set({ title: title });
+                // Alert.alert("All changes will be lost! Are you sure ? ")
               }}
-              errorMessage={partyModel.party?.partyError?.title}
-              styleProp={{ borderRadius: 19 }}
             />
+            <View
+              style={{
+                paddingHorizontal: 10,
+                marginBottom: 3,
+                backgroundColor: '#FBFBFB',
+                paddingBottom: 20,
+              }}>
+              <FloatingInput
+                floatingLabel={'Event title'}
+                value={partyModel.party.title?.toString()}
+                onChange={title => {
+                  partyModel.party.set({title: title});
+                }}
+                errorMessage={partyModel.party?.partyError?.title}
+                styleProp={{
+                  borderRadius: 19,
+                  shadowColor: 'rgba(0, 0, 0, 0.2)',
+                  shadowOpacity: 0.8,
+                  elevation: 6,
+                  shadowRadius: 15,
+                  shadowOffset: {width: 1, height: 13},
+                }}
+              />
 
-            {!partyModel.isEditMode ? (
-              partyModel?.party?.galleryFiles?.length == 0 ? (
-                <TouchableOpacity
-                  onPress={handleImage}
-                  style={{
-                    marginVertical: getHp(40),
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <View
+              {!partyModel.isEditMode ? (
+                partyModel?.party?.galleryFiles?.length == 0 ? (
+                  <TouchableOpacity
+                    onPress={handleImage}
                     style={{
-                      borderRadius: 100,
-                      elevation: 10,
-                      backgroundColor: '#fff',
+                      marginVertical: getHp(40),
+                      justifyContent: 'center',
+                      alignItems: 'center',
                     }}>
-                    <UploadBlue height={getHp(100)} width={getHp(100)} />
-                  </View>
-                  <Text
-                    style={{
-                      fontSize: FONTSIZE.Text14,
-                      color: '#000',
-                      marginTop: 10,
-                      fontFamily: 'AvenirNext-Regular',
-                    }}>
-                    {'Upload Media'}
-                  </Text>
-                </TouchableOpacity>
-              ) : (
+                    <View
+                      style={{
+                        borderRadius: 100,
+                        backgroundColor: '#fff',
+                        shadowColor: 'rgba(0, 0, 0, 0.2)',
+                        shadowOpacity: 0.8,
+                        elevation: 6,
+                        shadowRadius: 15,
+                        shadowOffset: {width: 1, height: 13},
+                      }}>
+                      <UploadBlue height={getHp(100)} width={getHp(100)} />
+                    </View>
+                    <Text
+                      style={{
+                        fontSize: FONTSIZE.Text14,
+                        color: '#000',
+                        marginTop: 10,
+                        fontFamily: 'AvenirNext-Regular',
+                      }}>
+                      {'Upload Media'}
+                    </Text>
+                  </TouchableOpacity>
+                ) : (
                   // null
                   handleCarousel()
                 )
-            ) : (
+              ) : (
                 handleCarousel()
               )}
 
-            <DatePick
-              placeholder={'Date / Time'}
-              handleChange={date => {
-                console.log('DATE_ON_CHANGE - ', date);
-                partyModel.party.set({ date });
-              }}
-              value={partyModel.party.date}
-              pickerMode={'datetime'}
-              minimumDate={moment().toDate()}
-              maximumDate={moment().add(30, 'day').toDate()}
-              errorMessage={partyModel.party?.partyError?.date}
-            />
-            <FloatingInput
-              floatingLabel={'Address'}
-              value={partyModel.party.location?.addressStr?.toString()}
-              onChange={address => {
-                partyModel.party.setAddress(address);
-              }}
-              errorMessage={partyModel.party?.partyError?.address}
-            />
-            <CustomTextinput
-              text={'Description...'}
-              multiline
-              value={partyModel.party.description?.toString()}
-              onChange={description => {
-                partyModel.party.set({ description: description });
-              }}
-              errorMessage={partyModel.party?.partyError?.description}
-            />
-            {/* {INTEREST.map((item) => {
+              <DatePick
+                placeholder={'Date / Time'}
+                handleChange={date => {
+                  console.log('DATE_ON_CHANGE - ', date);
+                  partyModel.party.set({date});
+                }}
+                value={partyModel.party.date}
+                pickerMode={'datetime'}
+                minimumDate={moment().toDate()}
+                maximumDate={moment().add(30, 'day').toDate()}
+                errorMessage={partyModel.party?.partyError?.date}
+              />
+              <FloatingInput
+                floatingLabel={'Address'}
+                value={partyModel.party.location?.addressStr?.toString()}
+                onChange={address => {
+                  partyModel.party.setAddress(address);
+                }}
+                errorMessage={partyModel.party?.partyError?.address}
+                styleProp={{
+                  shadowColor: 'rgba(0, 0, 0, 0.2)',
+                  shadowOpacity: 0.8,
+                  elevation: 6,
+                  shadowRadius: 15,
+                  shadowOffset: {width: 1, height: 13},
+                }}
+              />
+              <CustomTextinput
+                text={'Description...'}
+                multiline
+                value={partyModel.party.description?.toString()}
+                onChange={description => {
+                  partyModel.party.set({description: description});
+                }}
+                errorMessage={partyModel.party?.partyError?.description}
+              />
+              {/* {INTEREST.map((item) => {
                             return (
                                 <View style={{ marginVertical: 10 }}>
                                     <Text style={[styles.headerTitle, { fontSize: FONTSIZE.Text20, marginVertical: 0 }]}>
@@ -315,25 +341,38 @@ function CreateInvitation(props) {
                                 </View>
                             )
                         })} */}
-          </View>
+            </View>
 
-          <View
-            style={{
-              paddingHorizontal: 10,
-              marginVertical: 3,
-              backgroundColor: '#fff',
-              justifyContent: 'center',
-              paddingVertical: 20,
-            }}>
-            <Text
-              style={[
-                styles.headerTitle,
-                { fontSize: FONTSIZE.Text20, marginRight: 5 },
-              ]}>
-              {'Event Settings'}
-            </Text>
+            <View
+              style={{
+                paddingHorizontal: 10,
+                marginVertical: 3,
+                backgroundColor: '#fff',
+                justifyContent: 'center',
+                paddingVertical: 20,
+              }}>
+              <View style={{flexDirection: 'row',}}>
+                <Text
+                  style={[
+                    styles.headerTitle,
+                    {fontSize: FONTSIZE.Text20, marginRight: 5},
+                  ]}>
+                  {'Custom Invitation'}
+                </Text>
+                <View style={{marginVertical: 3, marginLeft: 15}}>
+                  <Info height={20} width={20} />
+                </View>
+                <View style={{position: 'absolute', right: 0, marginTop: 2}}>
+                  <ToggleSwitch
+                    isOn={false}
+                    onColor="#1FAEF7"
+                    offColor="#EEEEEE"
+                    onToggle={isOn => console.log('changed to : ', isOn)}
+                  />
+                </View>
+              </View>
 
-            {/*  
+              {/*  
 //             <View style={{marginVertical: 10}}>
 //               <SwitchButton
 //                 onPrivatePress={() => setPrivate()}
@@ -344,140 +383,145 @@ function CreateInvitation(props) {
 //             <AgeField />
 //           </View> */}
 
-            <View style={{ marginVertical: 10 }}>
-              <SwitchButton
-                value={partyModel.party.isPrivate}
-                onPrivatePress={() => partyModel.party.setIsPrivate(true)}
-                onPublicPress={() => partyModel.party.setIsPrivate(false)}
-              />
-            </View>
+              <View style={{marginVertical: 10}}>
+                <SwitchButton
+                  value={partyModel.party.isPrivate}
+                  onPrivatePress={() => partyModel.party.setIsPrivate(true)}
+                  onPublicPress={() => partyModel.party.setIsPrivate(false)}
+                />
+              </View>
 
-            <View
-              style={[
-                styles.eventContainer,
-                { justifyContent: 'space-between' },
-              ]}>
-              <Text
-                style={[
-                  styles.headerTitle,
-                  { fontSize: FONTSIZE.Text20, marginRight: 5 },
-                ]}>
-                {'Minimum Age'}
-              </Text>
-              <TextInput
-                keyboardType={'numeric'}
-                placeholder={'0'}
-                value={partyModel.party.fromAge?.toString()}
-                onChangeText={fromAge => {
-                  partyModel.party.set({ fromAge: fromAge });
-                }}
-                errorMessage={partyModel.party?.partyError?.fromAge}
-                style={[
-                  styles.textInput,
-                  {
-                    width: '35%',
-                    textAlign: 'center',
-                    fontSize: FONTSIZE.Text18,
-                    color: 'black',
-                    height: 45,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    alignSelf: 'center',
-                    minHeight: 0,
-                  },
-                ]}
-              />
-            </View>
+              {!partyModel.party.isPrivate && (
+                <View
+                  style={[
+                    styles.eventContainer,
+                    {justifyContent: 'space-between'},
+                  ]}>
+                  <Text
+                    style={[
+                      styles.headerTitle,
+                      {fontSize: FONTSIZE.Text20, marginRight: 5},
+                    ]}>
+                    {'Minimum Age'}
+                  </Text>
+                  <TextInput
+                    keyboardType={'numeric'}
+                    placeholder={'0'}
+                    value={partyModel.party.fromAge?.toString()}
+                    onChangeText={fromAge => {
+                      partyModel.party.set({fromAge: fromAge});
+                    }}
+                    errorMessage={partyModel.party?.partyError?.fromAge}
+                    style={[
+                      styles.textInput,
+                      {
+                        width: '35%',
+                        textAlign: 'center',
+                        fontSize: FONTSIZE.Text18,
+                        color: 'black',
+                        height: 45,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        minHeight: 0,
+                      },
+                    ]}
+                  />
+                </View>
+              )}
 
-            <View
-              style={[
-                styles.eventContainer,
-                { justifyContent: 'space-between' },
-              ]}>
-              <Text
-                style={[
-                  styles.headerTitle,
-                  { fontSize: FONTSIZE.Text20, marginRight: 5 },
-                ]}>
-                {'Maximum Age'}
-              </Text>
-              <TextInput
-                keyboardType={'numeric'}
-                value={partyModel.party.toAge?.toString()}
-                onChangeText={toAge => {
-                  partyModel.party.set({ toAge: toAge });
-                }}
-                errorMessage={partyModel.party?.partyError?.toAge}
-                placeholder={'0'}
-                style={[
-                  styles.textInput,
-                  {
-                    width: '35%',
-                    textAlign: 'center',
-                    fontSize: FONTSIZE.Text18,
-                    color: 'black',
-                    height: 45,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    alignSelf: 'center',
-                    minHeight: 0,
-                  },
-                ]}
-              />
-            </View>
-            {/* <DollarField />
+              {!partyModel.party.isPrivate && (
+                <View
+                  style={[
+                    styles.eventContainer,
+                    {justifyContent: 'space-between'},
+                  ]}>
+                  <Text
+                    style={[
+                      styles.headerTitle,
+                      {fontSize: FONTSIZE.Text20, marginRight: 5},
+                    ]}>
+                    {'Maximum Age'}
+                  </Text>
+                  <TextInput
+                    keyboardType={'numeric'}
+                    value={partyModel.party.toAge?.toString()}
+                    onChangeText={toAge => {
+                      partyModel.party.set({toAge: toAge});
+                    }}
+                    errorMessage={partyModel.party?.partyError?.toAge}
+                    placeholder={'0'}
+                    style={[
+                      styles.textInput,
+                      {
+                        width: '35%',
+                        textAlign: 'center',
+                        fontSize: FONTSIZE.Text18,
+                        color: 'black',
+                        height: 45,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        minHeight: 0,
+                      },
+                    ]}
+                  />
+                </View>
+              )}
+
+              {/* <DollarField />
                     <AgeField /> */}
-          </View>
+            </View>
 
-          {/* <View>
+            {/* <View>
             {TAGS.map(t => {
                 return <TagsCollapsible {...t} />;
               })} 
             </View> */}
-          <TouchableOpacity
-            onPress={() => {
-              partyModel.party.addTicketType();
-            }}
-            style={{
-              backgroundColor: '#F2F5F6',
-              borderRadius: 9,
-            }}>
-            <Text
-              style={[
-                styles.headerTitle,
-                {
-                  fontSize: FONTSIZE.Text18,
-                  color: '#1FAEF7',
-                  paddingVertical: 10,
-                  textAlign: 'center',
-                },
-              ]}>
-              {'Add Ticket Type'}
-            </Text>
-          </TouchableOpacity>
-          {partyModel.party.tickets?.map((t, index) => {
-            return (
-              <TicketComponent
-                data={t}
-                onChangeText={data => {
-                  partyModel.party.onTicketChangeText(data, index);
-                }}
-                onTicketDelete={() => {
-                  partyModel.party.onTicketDelete(index);
-                }}
-              />
-            );
-          })}
-          <CustomButton
-            bar
-            rowDoubleButton
-            ButtonTitle={'Save As Draft'}
-            ButtonTitle2={'Complete'}
-            onSaveDraftPress={() => handleOnPress(true)}
-            onContinuePress={() => handleOnPress(false)}
-          />
+            <TouchableOpacity
+              onPress={() => {
+                partyModel.party.addTicketType();
+              }}
+              style={{
+                backgroundColor: '#F2F5F6',
+                borderRadius: 9,
+              }}>
+              <Text
+                style={[
+                  styles.headerTitle,
+                  {
+                    fontSize: FONTSIZE.Text18,
+                    color: '#1FAEF7',
+                    paddingVertical: 10,
+                    textAlign: 'center',
+                  },
+                ]}>
+                {'Add Ticket Type'}
+              </Text>
+            </TouchableOpacity>
+            {partyModel.party.tickets?.map((t, index) => {
+              return (
+                <TicketComponent
+                  data={t}
+                  onChangeText={data => {
+                    partyModel.party.onTicketChangeText(data, index);
+                  }}
+                  onTicketDelete={() => {
+                    partyModel.party.onTicketDelete(index);
+                  }}
+                />
+              );
+            })}
+            <CustomButton
+              bar
+              rowDoubleButton
+              ButtonTitle={'Save As Draft'}
+              ButtonTitle2={'Complete'}
+              onSaveDraftPress={() => handleOnPress(true)}
+              onContinuePress={() => handleOnPress(false)}
+            />
 
-          {/* <View style={styles.bottomContainer}>
+            {/* <View style={styles.bottomContainer}>
                             <TouchableButton
                                 icon={<Peoples height={30} width={30} />}
                                 ButtonTitle={"Invite Friends"}
@@ -489,15 +533,15 @@ function CreateInvitation(props) {
                                 ButtonStyle={styles.bottomButton}
                             />
                         </View> */}
-        </ScrollView>
-      </View> 
+          </ScrollView>
+        </View>
+      </Root>
     </Scaffold>
   );
 }
 
 const styles = StyleSheet.create({
   textInput: {
-    elevation: 0,
     borderWidth: 0.3,
     borderColor: '#999999',
     fontSize: FONTSIZE.Text16,
@@ -507,6 +551,11 @@ const styles = StyleSheet.create({
     borderRadius: 9.5,
     color: '#999999',
     alignSelf: 'center',
+    shadowColor: 'rgba(0, 0, 0, 0.2)',
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 15,
+    shadowOffset: {width: 1, height: 13},
   },
   eventContainer: {
     flexDirection: 'row',

@@ -6,7 +6,7 @@ const ToastUtil = (text = '', prop = {}) => {
     text: text,
     duration: 1000,
     style: style.toastStyle,
-    buttonText: 'Okay',
+    position: "bottom",
     ...prop,
   });
 };

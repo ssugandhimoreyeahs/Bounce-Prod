@@ -29,7 +29,7 @@ export default DatePicker = props => {
     setDatePickerVisibility(false);
   };
 
-  const handleConfirm = date => { 
+  const handleConfirm = date => {
     console.log('ON_DATE_SELECT - ', date);
     console.log("CUR_DATE - ' ", new Date());
     handleChange(date);
@@ -48,7 +48,7 @@ export default DatePicker = props => {
         case 'time':
           format = RegexCollection.TimeFormat;
           break;
-      } 
+      }
       return moment(value).format(format);
     } else {
       return '';
@@ -65,11 +65,12 @@ export default DatePicker = props => {
     }
     return startDate.toDate();
   };
+
   return (
     <View>
       <TouchableOpacity onPress={showDatePicker}>
         <TextInput
-        pointerEvents="none"
+          pointerEvents="none"
           placeholderTextColor={'#696969'}
           placeholder={placeholder}
           style={[
@@ -99,16 +100,18 @@ export default DatePicker = props => {
 };
 const styles = StyleSheet.create({
   textInput: {
-    elevation: 2,
     height: 58,
     backgroundColor: '#fff',
-    // borderColor: '#DDDDDD',
     borderRadius: 9.5,
-    // borderWidth: 1,
     paddingLeft: 15,
     fontSize: FONTSIZE.Text14,
     marginTop: 10,
     color: '#000',
+    shadowColor: 'rgba(0, 0, 0, 0.2)',
+    shadowOpacity: 0.2,
+    elevation: 6,
+    shadowRadius: 15,
+    shadowOffset: {width: 1, height: 13},
   },
   errorContainer: {
     marginTop: 5,

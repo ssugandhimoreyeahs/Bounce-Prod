@@ -425,9 +425,9 @@ export const SwitchButton = props => {
         </TouchableOpacity>
       </View>
 
-      <View style={{position: 'absolute', right: -45}}>
+      {/* <View style={{position: 'absolute', right: -45}}>
         <Info height={25} width={25} />
-      </View>
+      </View> */}
     </View>
   );
 };

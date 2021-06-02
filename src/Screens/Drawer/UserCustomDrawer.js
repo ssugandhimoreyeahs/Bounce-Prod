@@ -1,26 +1,24 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { BlackClose, More, BlackOutlineShare, LockBlack, Settings } from '@svg';
-import { FONTSIZE, bigHitSlop, smallHitSlop } from '@utils';
-import { useTheme, Switch } from 'react-native-paper';
-import { AuthContext } from '../../context';
-import { LocalStorage } from '../../app/utils/localStorage';
+import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
+import {BlackClose, More, BlackOutlineShare, LockBlack, Settings} from '@svg';
+import {FONTSIZE, bigHitSlop, smallHitSlop} from '@utils';
+import {useTheme, Switch} from 'react-native-paper';
+import {AuthContext} from '../../context';
+import {LocalStorage} from '../../app/utils/localStorage';
 import MobxStore from '../../mobx';
-import AboutUs from '../Views/About/AboutUs'
-
-
+import AboutUs from '../Views/About/AboutUs';
 
 export default function UserCustomDrawer(props) {
-  const { authStore } = MobxStore;
+  const {authStore} = MobxStore;
   // const { toggleTheme } = React.useContext(AuthContext)
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const paperTheme = useTheme();
   const SERVICES = [
     {
       icon: <Settings height={30} width={30} />,
       name: 'Account Settings',
       onPress: () => {
-        props.navigation.navigate("AccountSetting")
+        props.navigation.navigate('AccountSetting');
       },
     },
     {
@@ -40,7 +38,7 @@ export default function UserCustomDrawer(props) {
     {
       icon: <More height={30} width={30} />,
       name: 'More',
-      onPress: () => { },
+      onPress: () => {},
     },
   ];
 
@@ -55,7 +53,7 @@ export default function UserCustomDrawer(props) {
     // },
     {
       name: 'About',
-      onPress: () => props.navigation.navigate(AboutUs.routeName)
+      onPress: () => props.navigation.navigate(AboutUs.routeName),
     },
     {
       name: 'Log Out',
@@ -66,7 +64,7 @@ export default function UserCustomDrawer(props) {
     },
   ];
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({item, index}) => {
     return (
       <View
         style={styles.renderContainer}
@@ -74,7 +72,7 @@ export default function UserCustomDrawer(props) {
         key={index.toString()}>
         <TouchableOpacity
           onPress={item.onPress}
-          style={{ flexDirection: 'row', alignItems: 'center' }}>
+          style={{flexDirection: 'row', alignItems: 'center'}}>
           {item.icon}
           <Text
             style={[
@@ -91,46 +89,45 @@ export default function UserCustomDrawer(props) {
         </TouchableOpacity>
         {item.name === 'More'
           ? MORE.map(item => {
-            return (
-              <TouchableOpacity
-                style={{
-                  paddingLeft: 20,
-                  paddingTop: 15,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}
-                onPress={item.onPress}
-                key={index.toString()}>
-                {/* {item.name == "Dark / Light Mode" ?
-                                        <View pointerEvents="none">
-                                            {console.log("paperTheme.dark",paperTheme.dark)}
-                                            <Switch value={paperTheme.dark} />
-                                        </View>
-                                        : null
-                                    } */}
+              return (
+                <TouchableOpacity
+                  style={{
+                    paddingLeft: 20,
+                    paddingTop: 15,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}
+                  onPress={item.onPress}
+                  key={index.toString()}>
+                  {/* {item.name == 'Dark / Light Mode' ? (
+                    <View pointerEvents="none">
+                      {console.log('paperTheme.dark', paperTheme.dark)}
+                      <Switch value={paperTheme.dark} />
+                    </View>
+                  ) : null} */}
 
-                <Text
-                  style={[
-                    styles.heading,
-                    {
-                      marginLeft: 15,
-                      fontSize: FONTSIZE.Text18,
-                      fontWeight: 'normal',
-                      color: '#696969',
-                    },
-                  ]}>
-                  {item.name}
-                </Text>
-              </TouchableOpacity>
-            );
-          })
+                  <Text
+                    style={[
+                      styles.heading,
+                      {
+                        marginLeft: 15,
+                        fontSize: FONTSIZE.Text18,
+                        fontWeight: 'normal',
+                        color: '#696969',
+                      },
+                    ]}>
+                    {item.name}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })
           : null}
       </View>
     );
   };
   return (
     <View style={styles.container}>
-      <View style={[styles.flex, { padding: 15 }]}>
+      <View style={[styles.flex, {padding: 15}]}>
         <Text style={styles.heading}>Settings</Text>
         <BlackClose
           hitSlop={bigHitSlop}

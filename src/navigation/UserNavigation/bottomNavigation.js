@@ -46,7 +46,8 @@ class UserHomeBottomNavigation {
           style: {
             position: 'absolute',
             bottom: 0,
-            height: getHp(90)
+            height: getHp(90),
+            borderWidth: 1
           }
         }}
         sceneContainerStyle={{
@@ -61,7 +62,7 @@ class UserHomeBottomNavigation {
             unmountOnBlur: true,
             tabBarIcon: ({tintColor, focused}) => {
               return focused ? (
-                <Home_Outline height={33} width={33} />
+                <Home_Fill height={33} width={33} />
               ) : (
                 <Home_Outline height={33} width={33} />
               );

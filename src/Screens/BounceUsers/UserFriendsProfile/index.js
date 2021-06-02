@@ -194,7 +194,7 @@ function UserFriendsProfile(props) {
   >
     <View style={styles.container}>
 
-      <ScrollView keyboardShouldPersistTaps={"always"}>
+      <ScrollView keyboardShouldPersistTaps={"always"} style={{marginBottom: 60}}>
         <Spinner visible={loader} color={"#1FAEF7"} />
         {!loader && (
           <>
@@ -323,7 +323,7 @@ function UserFriendsProfile(props) {
 
               {/* Social Media Section Start */}
               {/* 1st */}
-              <View style={styles.flex}>
+              {/* <View style={styles.flex}>
                 <TouchableOpacity style={styles.socialButton}>
                   <View style={styles.flex}>
                     <Insta height={30} width={30} />
@@ -338,10 +338,10 @@ function UserFriendsProfile(props) {
                   <Text style={[styles.headerTitle, { color: '#1FAEF7', }]}>{"Connect"}</Text>
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
-              </View>
+              </View> */}
 
               {/* 2nd */}
-              <View style={styles.flex}>
+              {/* <View style={styles.flex}>
                 <TouchableOpacity style={styles.socialButton}>
                   <View style={styles.flex}>
                     <Spotify height={30} width={30} />
@@ -350,11 +350,11 @@ function UserFriendsProfile(props) {
                   <Text style={[styles.headerTitle, { color: '#1FAEF7', }]}>{"Connect"}</Text>
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
-              </View>
+              </View> */}
 
 
               {/* 3rd */}
-              <View style={[styles.flex, { marginTop: 15 }]}>
+              {/* <View style={[styles.flex, { marginTop: 15 }]}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
                   borderColor: '#DDDDDD',
@@ -372,9 +372,10 @@ function UserFriendsProfile(props) {
                   </View>
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
-              </View>
+              </View> */}
+
               {/* 4th */}
-              <View style={styles.flex}>
+              {/* <View style={styles.flex}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
                   borderColor: '#DDDDDD',
@@ -392,9 +393,10 @@ function UserFriendsProfile(props) {
                   </View>
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
-              </View>
+              </View> */}
+
               {/* 5th */}
-              <View style={styles.flex}>
+              {/* <View style={styles.flex}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
                   borderColor: '#DDDDDD',
@@ -413,20 +415,22 @@ function UserFriendsProfile(props) {
                   </View>
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
-              </View>
+              </View> */}
               {/* Social Media Section */}
 
-              <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} />
+              {/* <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} /> */}
               {/* First Gallery Block of Friends */}
               <View style={{ marginVertical: 5, paddingVertical: 10 }}>
                 <View style={[styles.flex]}>
                   <BlackPerson height={20} width={14} />
-                  <Text style={[styles.InstaText]}> {"240 friends"}</Text>
+                  <Text style={[styles.InstaText]}> {"Friends "}
+                  <Text style={[styles.InstaText, {color: '#696969'}]}>{" 240"}</Text>
+                  </Text>
                 </View>
                 {handleCarousel("Friends")}
                 <TouchableOpacity style={styles.allFrnds}>
-                  <Text style={[styles.aboutText, { fontWeight: "bold" }]}>
-                    {"All Friends"}
+                  <Text style={[styles.aboutText]}>
+                    {"See All Friends"}
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -462,7 +466,7 @@ function UserFriendsProfile(props) {
           </>
         )}
       </ScrollView>
-    </View >
+    </View>
   </Scaffold>
   );
 }

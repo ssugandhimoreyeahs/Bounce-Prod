@@ -166,7 +166,7 @@ function CreateInvitation(props) {
     if (partyModel?.party?.gallery?.length > 0) {
       partyModel.party.gallery.map(i => img.push(i.filePath));
     }
-    console.log('IMG_TEST ', img);
+    
     return (
       <View>
         <ImageCarousel

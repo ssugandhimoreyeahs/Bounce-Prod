@@ -62,7 +62,7 @@ export const EventTabview = observer((props) => {
                     }}>
                         <EventPageTab1 partyStore={MboxStore.partyStore} {...props} />
                     </ScrollView>
-                </Tab >
+                </Tab>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
                     textStyle={{color: '#999999', fontFamily: 'AvenirNext-Medium',fontSize:FONTSIZE.Text16 }}
@@ -83,12 +83,8 @@ export const Tabview = observer((props) => {
                     textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
                     activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading={"Hosting"}>
-                    <ScrollView nestedScrollEnabled={true} style={{
-                        height: 300
-                    }}>
-                        <Tab1 partyStore={MboxStore.partyStore} {...props} />
-                    </ScrollView>
-                </Tab >
+                    <Tab1 partyStore={MboxStore.partyStore} {...props} />
+                </Tab>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
                     textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
@@ -194,7 +190,7 @@ export const VendorCard = ({ item }) => {
                     </Text>
                 </View>
             </View>
-            {/ Heart Share /}
+            {/* Heart Share */}
             <View style={{
                 flexDirection: "row",
                 alignItems: "center",
@@ -327,9 +323,9 @@ export const SwitchButton = (props) => {
                 </TouchableOpacity>
             </View>
 
-            <View style={{ position: 'absolute', right: -45 }}>
+            {/* <View style={{ position: 'absolute', right: -45 }}>
                 <Info height={25} width={25} />
-            </View>
+            </View> */}
         </View>
     )
 }

@@ -155,8 +155,8 @@ function Tab1(props) {
               styles.numberTextStyle,
               {
                 fontSize: FONTSIZE.Text16,
+                fontWeight: '600',
                 marginVertical: 15,
-                alignSelf: 'center',
               },
             ]}>
             {'Click “+” to get started!'}

@@ -82,7 +82,7 @@ function LoginScreen(props) {
             <TextInput
               returnKeyType="done"
               placeholder="Username"
-              placeholderTextColor="#999999"
+              placeholderTextColor="#999"
               style={[styles.textInput, {paddingBottom: getHp(10)}]}
               onChangeText={value => {
                 if (value.length == 0) {

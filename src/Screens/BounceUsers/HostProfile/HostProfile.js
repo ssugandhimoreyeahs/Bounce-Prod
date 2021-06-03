@@ -266,8 +266,17 @@ export default function HostProfile(props) {
               custom
               floatingLabel={'Birthday'}
               onChange={value => setBirthday(value)}
-              value={getBirthday == '' ? '' : getBirthday}
-            /> */}
+              value={getBirthday == null ? user.birthday : getBirthday}
+            />
+            {console.log('user.city', user.city)}
+            <GooglePlacesInput
+              floatingLabel={'City (or cities)'}
+              onPress={data => {
+                console.log('DATA_ON_SEL - ', data);
+                setCity(data.description);
+              }}
+              value={city == null ? user.city : city}
+            />
 
 
               <CustomTextinput

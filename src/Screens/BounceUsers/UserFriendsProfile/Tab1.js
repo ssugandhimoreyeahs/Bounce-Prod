@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, Fragment} from 'react';
 import {
   View,
   Text,
@@ -14,9 +14,12 @@ import {FlatList} from 'react-native-gesture-handler';
 import CreateInvitation from '../../BounceVendors/PlanParty/CreateInvitation';
 import moment from 'moment';
 import {observer} from 'mobx-react';
-import { toCurrentTimeZone } from '../../../app/utils';
-import { RegexCollection } from '../../../app/constants';
+import {getHp, toCurrentTimeZone} from '../../../app/utils';
+import {RegexCollection} from '../../../app/constants';
+import {Button} from 'native-base';
+import AntDesign from  'react-native-vector-icons/AntDesign';
 
+AntDesign.loadFont();
 const STATIC_DATA = [
   'Create an event page',
   'Invite friends',
@@ -26,6 +29,8 @@ const STATIC_DATA = [
 
 function Tab1(props) {
   const {partyStore} = props;
+  const [showMore, setShowMore] = useState(false);
+
   const renderItems = ({item, index}) => {
     return (
       <TouchableOpacity
@@ -118,7 +123,11 @@ function Tab1(props) {
         <Text
           style={[
             styles.numberTextStyle,
-            {fontSize: FONTSIZE.Text16, fontFamily: 'AvenirNext-Medium', marginLeft: 10},
+            {
+              fontSize: FONTSIZE.Text16,
+              fontFamily: 'AvenirNext-Medium',
+              marginLeft: 10,
+            },
           ]}>
           {item}
         </Text>
@@ -133,15 +142,40 @@ function Tab1(props) {
       </View>
     );
   }
+  let partyData = partyStore.party ?? [];
+
   return (
     <View>
-      {partyStore.party?.length > 0 ? (
-        <FlatList
-          data={partyStore.party}
-          showsHorizontalScrollIndicator={false}
-          renderItem={renderItems}
-          keyExtractor={index => index}
-        />
+      {partyData.length > 0 ? (
+        <Fragment>
+          <FlatList
+            scrollEnabled={false}
+            data={!showMore ? partyData.slice(0, 2) : partyData}
+            showsHorizontalScrollIndicator={false}
+            renderItem={renderItems}
+            keyExtractor={index => index}
+          />
+          {partyData.length > 2 && (
+            <Button
+              onPress={() => {
+                setShowMore(i => !i);
+              }}
+              full
+              light
+              style={styles.showMoreButtonContainer}>
+              <Text style={styles.showMoreTextStyle}>
+                {!showMore ? `${partyData.length - 2} More` : `Hide`}
+              </Text>
+              <View style={{marginStart: getHp(10)}}>
+                  <AntDesign 
+                    color={'black'}
+                    size={getHp(15)}
+                    name={!showMore ? 'down': 'up'}
+                  />
+              </View>
+            </Button>
+          )}
+        </Fragment>
       ) : (
         <View style={{paddingVertical: 10, backgroundColor: '#FBFBFB'}}>
           <FlatList
@@ -155,8 +189,8 @@ function Tab1(props) {
               styles.numberTextStyle,
               {
                 fontSize: FONTSIZE.Text16,
+                fontWeight: '600',
                 marginVertical: 15,
-                alignSelf: 'center',
               },
             ]}>
             {'Click “+” to get started!'}
@@ -167,6 +201,22 @@ function Tab1(props) {
   );
 }
 const styles = StyleSheet.create({
+  showMoreButtonContainer: {
+    flexDirection: 'row',
+    marginTop: getHp(16),
+    backgroundColor: '#F2F5F6',
+    borderWidth: 1,
+    borderColor: '#E4EEF1',
+    borderRadius: getHp(10),
+    borderBottomLeftRadius: getHp(10),
+    borderBottomRightRadius: getHp(10),
+  },
+  showMoreTextStyle: {
+    fontWeight: '500',
+    fontFamily: 'AvenirNext-Regular',
+    fontSize: FONTSIZE.Text16,
+    lineHeight: getHp(22),
+  },
   loadingContainer: {
     flex: 1,
     height: 300,

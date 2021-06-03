@@ -65,6 +65,7 @@ export default DatePicker = props => {
     }
     return startDate.toDate();
   };
+
   return (
     <View style={styles.shadowStyle}>
       <TouchableOpacity onPress={showDatePicker}>
@@ -108,7 +109,6 @@ const styles = StyleSheet.create({
     // elevation: 2,
     height: getHp(65),
     backgroundColor: '#fff',
-    // borderColor: '#DDDDDD',
     borderRadius: 9.5,
     fontFamily:'AvenirNext-Regular',
     // borderWidth: 1,
@@ -116,6 +116,11 @@ const styles = StyleSheet.create({
     fontSize: FONTSIZE.Text15,
     marginTop: 10,
     color: '#000',
+    shadowColor: 'rgba(0, 0, 0, 0.2)',
+    shadowOpacity: 0.2,
+    elevation: 6,
+    shadowRadius: 15,
+    shadowOffset: {width: 1, height: 13},
   },
   errorContainer: {
     marginTop: 5,

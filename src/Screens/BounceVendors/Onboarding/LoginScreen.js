@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   container: {
-    // backgroundColor:'#fff',
+    backgroundColor:'#FBFBFB',
     flex: 1,
     padding: 15,
     flexDirection: 'column',

@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: FONTSIZE.Text15,
     color: '#000',
-    shadowColor: 'rgba(0, 0, 0, 0.2)',
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
     shadowOpacity: 0.2,
     elevation: 2,
     shadowRadius: 15,

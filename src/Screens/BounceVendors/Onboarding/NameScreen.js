@@ -50,6 +50,7 @@ export default function NameScreen(props) {
                     <View style={{ marginTop: 100 }}>
                         <TextInput
                             placeholder={"Name"}
+                            placeholderTextColor="#999999"
                             style={styles.textInput}
                             onChangeText={(value) => setName(value)}
                             value={name}

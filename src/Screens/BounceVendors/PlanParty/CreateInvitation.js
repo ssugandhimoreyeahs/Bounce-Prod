@@ -534,6 +534,11 @@ const styles = StyleSheet.create({
     borderRadius: 9.5,
     color: '#999999',
     alignSelf: 'center',
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOpacity: 0.3,
+    elevation: 2,
+    shadowRadius: 15,
+    shadowOffset: {width: 1, height: 13},
   },
   eventContainer: {
     flexDirection: 'row',

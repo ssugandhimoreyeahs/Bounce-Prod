@@ -240,7 +240,14 @@ function CreateInvitation(props) {
                   partyModel.party.set({ title: title });
                 }}
                 errorMessage={partyModel.party?.partyError?.title}
-                styleProp={{ borderRadius: 19 }}
+                styleProp={{
+                  borderRadius: 19,
+                  shadowColor: 'rgba(0, 0, 0, 0.1)',
+                  shadowOpacity: 0.3,
+                  elevation: 2,
+                  shadowRadius: 15,
+                  shadowOffset: {width: 1, height: 13},
+                }}
               />
 
               {!partyModel.isEditMode ? (
@@ -257,6 +264,11 @@ function CreateInvitation(props) {
                         borderRadius: 100,
                         elevation: 2,
                         backgroundColor: '#fff',
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                        shadowOpacity: 0.3,
+                        elevation: 2,
+                        shadowRadius: 15,
+                        shadowOffset: {width: 1, height: 13},
                       }]}>
                       <UploadBlue height={getHp(100)} width={getHp(100)} />
                     </View>
@@ -298,6 +310,13 @@ function CreateInvitation(props) {
                   partyModel.party.setAddress(address);
                 }}
                 errorMessage={partyModel.party?.partyError?.address}
+                styleProp={{
+                  shadowColor: 'rgba(0, 0, 0, 0.1)',
+                  shadowOpacity: 0.3,
+                  elevation: 2,
+                  shadowRadius: 15,
+                  shadowOffset: {width: 1, height: 13},
+                }}
               />
 
               <CustomTextinput
@@ -524,6 +543,11 @@ const styles = StyleSheet.create({
     borderRadius: 9.5,
     color: '#999999',
     alignSelf: 'center',
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOpacity: 0.3,
+    elevation: 2,
+    shadowRadius: 15,
+    shadowOffset: {width: 1, height: 13},
   },
   eventContainer: {
     flexDirection: 'row',

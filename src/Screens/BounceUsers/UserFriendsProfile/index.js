@@ -198,7 +198,7 @@ function UserFriendsProfile(props) {
   >
     <View style={styles.container}>
 
-      <ScrollView keyboardShouldPersistTaps={"always"} >
+      <ScrollView keyboardShouldPersistTaps={"always"} style={{marginBottom: 60}}>
         <Spinner visible={loader} color={"#1FAEF7"} />
         {!loader && (
           <>

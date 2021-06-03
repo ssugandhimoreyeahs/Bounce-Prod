@@ -48,47 +48,47 @@ function App() {
     </NativebaseRoot>
   );
 }
-//export default observer(App);
+export default observer(App);
 
-const App2 = () => {
-  const [txt, setTxt] = useState('');
-  const onCheck = () => {
-    // const data = CustomValidator.validate({
-    //   value: txt,
-    //   [ValidationTypes.required]: 'Required Text',
-    // });
-    // console.log(data);
-    let dt = transform([['box-shadow', '10px 20px 16px rgba(0, 0, 0, 0.08)']]);
-    console.log(dt);
-  };
-  return (
-    <View style={{backgroundColor: 'rgba(251,251,251)', flex: 1}}>
-      <TextInput
-        onChangeText={setTxt}
-        value={txt}
-        placeholder={'Enter title'}
-      />
+// const App2 = () => {
+//   const [txt, setTxt] = useState('');
+//   const onCheck = () => {
+//     // const data = CustomValidator.validate({
+//     //   value: txt,
+//     //   [ValidationTypes.required]: 'Required Text',
+//     // });
+//     // console.log(data);
+//     let dt = transform([['box-shadow', '10px 20px 16px rgba(0, 0, 0, 0.08)']]);
+//     console.log(dt);
+//   };
+//   return (
+//     <View style={{backgroundColor: 'rgba(251,251,251)', flex: 1}}>
+//       <TextInput
+//         onChangeText={setTxt}
+//         value={txt}
+//         placeholder={'Enter title'}
+//       />
 
-      <View
-        style={{
-          backgroundColor: 'white',
-          margin: 30,
-          height: 150,
-          width: 150, 
-          borderColor: 'black', 
-          borderRadius : 20,
-          elevation: 3,
-        }}>
-        <Text>Hello</Text>
-      </View>
-      <Button
-        title={'Press me'}
-        onPress={() => {
-          onCheck();
-        }}
-      />
-    </View>
-  );
-};
+//       <View
+//         style={{
+//           backgroundColor: 'white',
+//           margin: 30,
+//           height: 150,
+//           width: 150, 
+//           borderColor: 'black', 
+//           borderRadius : 20,
+//           elevation: 3,
+//         }}>
+//         <Text>Hello</Text>
+//       </View>
+//       <Button
+//         title={'Press me'}
+//         onPress={() => {
+//           onCheck();
+//         }}
+//       />
+//     </View>
+//   );
+// };
 
-export default App2;
+// export default App2;

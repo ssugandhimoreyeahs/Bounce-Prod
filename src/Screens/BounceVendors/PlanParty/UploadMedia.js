@@ -10,11 +10,11 @@ import {
 } from 'react-native';
 import {
   Header,
-  Root,
   CustomButton,
   ReviewCard,
   Footer,
   CustomText,
+  Scaffold,
 } from '@components';
 import {GreyHamburger, BlackCircleCross} from '@svg';
 // import { handleImage } from '@components/ImageVideoPlaceholder'
@@ -25,7 +25,7 @@ import {Avatar} from 'react-native-elements';
 import Modal from 'react-native-modal';
 import {Observer, observer} from 'mobx-react';
 import PlanPartyModel from './PlanPartyModel';
-import { Toast } from '../../../app/constants';
+import {Toast} from '../../../app/constants';
 
 function UploadMedia(props) {
   let goBack = false;
@@ -57,12 +57,13 @@ function UploadMedia(props) {
       });
   };
   const deleteImage = (action, path) => {
-    partyModel.party.removeGallery(action,path);
-  }
+    partyModel.party.removeGallery(action, path);
+  };
   const renderItem = ({item, index}) => {
     if (item == undefined) {
       return false;
     }
+    console.log('ITEM_UPLOAD_MEDIA - ', item);
     return (
       <View>
         <View
@@ -104,16 +105,15 @@ function UploadMedia(props) {
                         {
                           text: 'Okay',
                           onPress: () => {
-                              deleteImage(true, item.filePath)
-                          }
+                            deleteImage(true, item.filePath);
+                          },
                         },
                         {
-                          text: 'Cancel'
-                        }
+                          text: 'Cancel',
+                        },
                       ]);
                     }
                     return deleteImage(false, item.path);
-                    
                   }}>
                   <BlackCircleCross height={30} width={30} />
                 </TouchableOpacity>
@@ -129,9 +129,9 @@ function UploadMedia(props) {
                     null} */}
       </View>
     );
-  }; 
+  };
   return (
-    <Root>
+    <Scaffold>
       <View style={styles.container}>
         <ScrollView contentContainerStyle={{flexGrow: 1}} style={{flex: 1}}>
           <Header
@@ -142,7 +142,10 @@ function UploadMedia(props) {
           />
 
           <FlatList
-            data={[...partyModel.party.galleryFiles.filter(i => i!=undefined), ...partyModel.party.gallery]}
+            data={[
+              ...partyModel.party.galleryFiles.filter(i => i != undefined),
+              ...partyModel.party.gallery,
+            ]}
             renderItem={renderItem}
           />
           <View
@@ -166,7 +169,7 @@ function UploadMedia(props) {
           </View>
         </ScrollView>
       </View>
-    </Root>
+    </Scaffold>
   );
 }
 const styles = StyleSheet.create({

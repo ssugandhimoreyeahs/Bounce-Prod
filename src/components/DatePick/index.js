@@ -71,51 +71,16 @@ export default DatePicker = props => {
     <View style={styles.shadowStyle}>
 
       <TouchableOpacity onPress={showDatePicker}>
-        {createEvent ?
-          <>
-            <Text style={{
-              color: '#696969',
-              fontSize: FONTSIZE.Text14,
-              fontFamily: 'AvenirNext-Regular',
-              position: 'absolute',
-              left: 15,
-              zIndex: 1,
-              top: 5,
-              borderRadius: 9.5
-            }}>{placeholder}</Text>
-            <TextInput
-              pointerEvents="none"
-              textAlignVertical='bottom'
-              
-              style={[
-                styles.textInput, {
-                  
-                  elevation:0,
-                  marginTop: 5,
-                  backgroundColor: '#fff',
-                  fontFamily: 'AvenirNext-DemiBold',
-                },
-                errorMessage.length > 0 && {
-                  borderColor: 'red',
-                },
-              ]}
-              value={getValue()}
-              editable={false} />
-          </>
-          :
-          <TextInput
-            pointerEvents="none"
-            placeholderTextColor={'#000'}
-            placeholder={placeholder}
-            style={[
-              styles.textInput,
-              errorMessage.length > 0 && { borderColor: 'red' },
-            ]}
-            value={getValue()}
-            editable={false} />
-        }
-
-
+        <TextInput
+          pointerEvents="none"
+          placeholderTextColor={'#999999'}
+          placeholder={placeholder}
+          style={[
+            styles.textInput,
+            errorMessage.length > 0 && {borderColor: 'red'},
+          ]}
+          value={getValue()}
+          editable={false}></TextInput>
         {errorMessage?.length > 0 && (
           <View style={styles.errorContainer}>
             <Text style={styles.errorTextStyle}>{errorMessage}</Text>

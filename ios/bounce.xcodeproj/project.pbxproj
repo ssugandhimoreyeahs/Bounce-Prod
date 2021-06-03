@@ -138,7 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0607CA510879AAC7ADF91D14 /* libPods-bounce.a in Frameworks */,
+				7E4C908043DC14B3B2D2962A /* libPods-bounce.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

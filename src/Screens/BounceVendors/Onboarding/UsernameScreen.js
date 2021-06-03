@@ -118,7 +118,11 @@ export default function UserNameScreen(props) {
                     <View style={{ marginTop: 100 }}>
                         <TextInput
                             placeholder="@Username"
+<<<<<<< HEAD
                             placeholderTextColor="#999"
+=======
+                            placeholderTextColor="#999999"
+>>>>>>> Shadow Fixed
                             style={styles.textInput}
                             onChangeText={(value) => setUsername(value)}
                         />

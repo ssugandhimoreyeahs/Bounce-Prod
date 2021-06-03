@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -17,7 +17,7 @@ import {
   Toggle,
   ImageCarousel,
   TicketComponent,
-  Scaffold,
+  Scaffold
 } from '@components';
 import { UploadCamera } from '@assets';
 import {
@@ -29,30 +29,30 @@ import {
 } from '@svg';
 import { Keyboard } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
-import {connect} from 'react-redux';
-import {FONTSIZE, getHp, getWp} from '@utils';
+import { connect } from 'react-redux';
+import { FONTSIZE, getHp, getWp } from '@utils';
 import {
   AgeField,
   SwitchButton,
   DollarField,
 } from '../../../components/BreakedComponents';
-import {Avatar} from 'react-native-elements';
+import { Avatar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PlanPartyModel from './PlanPartyModel';
-import {observer} from 'mobx-react';
-import {Formik} from 'formik';
+import { observer } from 'mobx-react';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import {Strings} from '../../../app/constants';
+import { Strings } from '../../../app/constants';
 import UploadMedia from './UploadMedia';
-import {CreateFormData, PartyService} from '../../../app/services';
+import { CreateFormData, PartyService } from '../../../app/services';
 import DatePick from '../../../components/DatePick';
 import moment from 'moment';
-import {Root} from 'native-base';
-import {Toast} from '@constants';
+import { Root } from 'native-base';
+import { Toast } from '@constants';
 import Collapsible from 'react-native-collapsible';
-import {useBackHandler} from '@react-native-community/hooks';
+import { useBackHandler } from '@react-native-community/hooks';
 import UserHomeScreen from '../../BounceUsers/UserFriendsProfile';
-import ToggleSwitch from 'toggle-switch-react-native';
+
 
 const TAGS = [
   {
@@ -113,8 +113,8 @@ function CreateInvitation(props) {
         partyModel.isEditMode
           ? 'Party Updated Successfully'
           : isDraftMode
-          ? 'Party saved to Draft'
-          : 'Party Created Successfully',
+            ? 'Party saved to Draft'
+            : 'Party Created Successfully',
       );
       if (!isEditParty) {
         partyModel.reset();
@@ -165,7 +165,7 @@ function CreateInvitation(props) {
     if (partyModel?.party?.gallery?.length > 0) {
       partyModel.party.gallery.map(i => img.push(i.filePath));
     }
-    
+    console.log('IMG_TEST ', img);
     return (
       <View>
         <ImageCarousel
@@ -181,14 +181,15 @@ function CreateInvitation(props) {
           onPress={() => {
             handleImage();
           }}
-          style={{position: 'absolute', bottom: 10, right: 20}}>
+          style={{ position: 'absolute', bottom: 10, right: 20 }}>
           <AddBlue height={33} width={33} />
         </TouchableOpacity>
       </View>
     );
   };
   return (
-    <Scaffold> 
+    <Scaffold>
+      <Root>
         <View style={styles.container}>
           <ScrollView
             style={{ flex: 1, backgroundColor: '#FBFBFB' }}
@@ -224,29 +225,6 @@ function CreateInvitation(props) {
                 // Alert.alert("All changes will be lost! Are you sure ? ")
               }}
             />
-            <View
-              style={{
-                paddingHorizontal: 10,
-                marginBottom: 3,
-                backgroundColor: '#FBFBFB',
-                paddingBottom: 20,
-              }}>
-              <FloatingInput
-                floatingLabel={'Event title'}
-                value={partyModel.party.title?.toString()}
-                onChange={title => {
-                  partyModel.party.set({title: title});
-                }}
-                errorMessage={partyModel.party?.partyError?.title}
-                styleProp={{
-                  borderRadius: 19,
-                  shadowColor: 'rgba(0, 0, 0, 0.2)',
-                  shadowOpacity: 0.8,
-                  elevation: 6,
-                  shadowRadius: 15,
-                  shadowOffset: {width: 1, height: 13},
-                }}
-              />
 
 
             <View
@@ -312,6 +290,7 @@ function CreateInvitation(props) {
                 maximumDate={moment().add(30, 'day').toDate()}
                 errorMessage={partyModel.party?.partyError?.date}
               />
+
               <FloatingInput
                 floatingLabel={'Address'}
                 value={partyModel.party.location?.addressStr?.toString()}
@@ -509,10 +488,9 @@ function CreateInvitation(props) {
                                 ButtonStyle={styles.bottomButton}
                             />
                         </View> */}
-            </View>
           </ScrollView>
-          
-        </View> 
+        </View>
+      </Root>
     </Scaffold>
   );
 }
@@ -536,6 +514,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
   },
   textInput: {
+    elevation: 0,
     borderWidth: 0.3,
     borderColor: '#EEEEEE',
     fontSize: FONTSIZE.Text16,
@@ -545,11 +524,6 @@ const styles = StyleSheet.create({
     borderRadius: 9.5,
     color: '#999999',
     alignSelf: 'center',
-    shadowColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOpacity: 0.8,
-    elevation: 6,
-    shadowRadius: 15,
-    shadowOffset: {width: 1, height: 13},
   },
   eventContainer: {
     flexDirection: 'row',

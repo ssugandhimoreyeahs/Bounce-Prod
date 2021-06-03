@@ -45,8 +45,7 @@ class UserHomeBottomNavigation {
           style: {
             position: 'absolute',
             bottom: 0,
-            height: getHp(90),
-            borderWidth: 1
+            height: getHp(80), 
           }
         }}
         sceneContainerStyle={{

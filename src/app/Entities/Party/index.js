@@ -36,7 +36,7 @@ class Party {
   @CV.PartyAge('toAge', {message: 'Invalid Minimum Age'})
   fromAge;
 
-  @CV.PartyAge('toAge', {message: 'Invalid Maximum Age'})
+  @CV.PartyAge('fromAge', {message: 'Invalid Maximum Age'})
   toAge;
 
   @ArrayNotEmpty({message: Strings.requiredFieldError('Event Media')})
@@ -44,7 +44,7 @@ class Party {
 
   gallery = [];
 
-  @ArrayNotEmpty({message: 'Add atleast 1 Ticket Type'}) 
+  @ArrayNotEmpty({message: 'Add atleast 1 Ticket Type'})
   tickets = [];
   needBouncer = false;
   needDJ = false;
@@ -71,6 +71,7 @@ class Party {
   };
   static toJSON = (fields, isEdit = false) => {
     try {
+      console.log('TO_JSON_EN_RECIEVE - ', JSON.stringify(fields));
       let newParty = new Party();
       Object.keys(fields).map(fKey => {
         if (Object.keys(newParty).includes(fKey)) {

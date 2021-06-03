@@ -201,13 +201,13 @@ const styles = StyleSheet.create({
    },
    Textarea: {
       height: 101,
-      borderWidth: 1,
+      borderWidth: .5,
       borderColor: "#DDDDDD",
       backgroundColor: '#FFFFFF',
-      marginVertical: 10,
+      marginVertical: getHp(10),
       fontSize: FONTSIZE.Text16,
-      borderRadius: 15,
-      paddingLeft: 20,
+      borderRadius: getHp(15),
+      paddingLeft: 20, 
    }
    ,
 

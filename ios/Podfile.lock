@@ -16,9 +16,13 @@ PODS:
     - Flipper-Folly (~> 2.5)
     - Flipper-RSocket (~> 1.3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   - Flipper-Boost-iOSX (1.76.0.1.11)
 >>>>>>> 9606cf0 (SignUp UI)
+=======
+  - Flipper-Boost-iOSX (1.76.0.1.11)
+>>>>>>> 45f993a (SignUp UI)
   - Flipper-DoubleConversion (1.1.7)
   - Flipper-Folly (2.5.1):
     - boost-for-react-native
@@ -617,6 +621,7 @@ SPEC CHECKSUMS:
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: 49cbe4b43e445b06bf29199b6ad2057649e4c8f5
 <<<<<<< HEAD
+<<<<<<< HEAD
   FBReactNativeSpec: e7aaaf8fb49086a4f61ba50ae3a41efa6fac3e83
   Flipper: d3da1aa199aad94455ae725e9f3aa43f3ec17021
 =======
@@ -624,6 +629,11 @@ SPEC CHECKSUMS:
   Flipper: d3da1aa199aad94455ae725e9f3aa43f3ec17021
   Flipper-Boost-iOSX: fd1e2b8cbef7e662a122412d7ac5f5bea715403c
 >>>>>>> 9606cf0 (SignUp UI)
+=======
+  FBReactNativeSpec: 3597064b09a98e32079deb168e690df07dca4543
+  Flipper: d3da1aa199aad94455ae725e9f3aa43f3ec17021
+  Flipper-Boost-iOSX: fd1e2b8cbef7e662a122412d7ac5f5bea715403c
+>>>>>>> 45f993a (SignUp UI)
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
   Flipper-Folly: f7a3caafbd74bda4827954fd7a6e000e36355489
   Flipper-Glog: 1dfd6abf1e922806c52ceb8701a3599a79a200a6

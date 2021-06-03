@@ -162,7 +162,7 @@ export const VendorCard = ({ item }) => {
         />
 
         <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
-            {/ Rating and Hourly Rate /}
+          
             <View
                 style={{
                     flexDirection: "row",

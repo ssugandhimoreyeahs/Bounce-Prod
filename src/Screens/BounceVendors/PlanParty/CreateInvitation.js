@@ -241,9 +241,9 @@ function CreateInvitation(props) {
                 errorMessage={partyModel.party?.partyError?.title}
                 styleProp={{
                   borderRadius: 19,
-                  shadowColor: 'rgba(0, 0, 0, 0.2)',
-                  shadowOpacity: 0.8,
-                  elevation: 6,
+                  shadowColor: 'rgba(0, 0, 0, 0.1)',
+                  shadowOpacity: 0.3,
+                  elevation: 2,
                   shadowRadius: 15,
                   shadowOffset: {width: 1, height: 13},
                 }}
@@ -262,9 +262,9 @@ function CreateInvitation(props) {
                       style={{
                         borderRadius: 100,
                         backgroundColor: '#fff',
-                        shadowColor: 'rgba(0, 0, 0, 0.2)',
-                        shadowOpacity: 0.8,
-                        elevation: 6,
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                        shadowOpacity: 0.3,
+                        elevation: 2,
                         shadowRadius: 15,
                         shadowOffset: {width: 1, height: 13},
                       }}>
@@ -308,9 +308,9 @@ function CreateInvitation(props) {
                 }}
                 errorMessage={partyModel.party?.partyError?.address}
                 styleProp={{
-                  shadowColor: 'rgba(0, 0, 0, 0.2)',
-                  shadowOpacity: 0.8,
-                  elevation: 6,
+                  shadowColor: 'rgba(0, 0, 0, 0.1)',
+                  shadowOpacity: 0.3,
+                  elevation: 2,
                   shadowRadius: 15,
                   shadowOffset: {width: 1, height: 13},
                 }}
@@ -551,9 +551,9 @@ const styles = StyleSheet.create({
     borderRadius: 9.5,
     color: '#999999',
     alignSelf: 'center',
-    shadowColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOpacity: 0.8,
-    elevation: 6,
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOpacity: 0.3,
+    elevation: 2,
     shadowRadius: 15,
     shadowOffset: {width: 1, height: 13},
   },

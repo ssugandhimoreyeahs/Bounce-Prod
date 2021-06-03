@@ -116,6 +116,7 @@ export default function UserNameScreen(props) {
                     <View style={{ marginTop:100 }}>
                         <TextInput
                             placeholder="@Username"
+                            placeholderTextColor="#999999"
                             style={styles.textInput}
                             onChangeText={(value) => setUsername(value)}
                         />
@@ -125,6 +126,7 @@ export default function UserNameScreen(props) {
                     <View style={{ marginVertical: 10 }}>
                         <TextInput
                             placeholder="Password"
+                            placeholderTextColor="#999999"
                             style={styles.textInput}
                             secureTextEntry
                             onChangeText={(value) => setPassword(value)}

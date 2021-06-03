@@ -82,6 +82,7 @@ function LoginScreen(props) {
             <TextInput
               returnKeyType="done"
               placeholder="Username"
+              placeholderTextColor="#999999"
               style={[styles.textInput, {paddingBottom: getHp(10)}]}
               onChangeText={value => {
                 if (value.length == 0) {
@@ -178,9 +179,9 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   boxShadow: {
-    shadowColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOpacity: 0.8,
-    elevation: 6,
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOpacity: 0.3,
+    elevation: 2,
     shadowRadius: 15 ,
     shadowOffset : { width: 1, height: 13},
   },
@@ -212,13 +213,12 @@ const styles = StyleSheet.create({
   linearGradient: {
     justifyContent: 'center',
     height: 50,
-    elevation: 2,
     backgroundColor: '#fff',
     marginVertical: 10,
     borderRadius: 20,
   },
   container: {
-    // backgroundColor:'#fff',
+    backgroundColor:'#FBFBFB',
     flex: 1,
     padding: 15,
     flexDirection: 'column',

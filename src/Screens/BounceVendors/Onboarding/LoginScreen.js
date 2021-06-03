@@ -79,25 +79,19 @@ function LoginScreen(props) {
             </View>
 
             <Text style={styles.signStyle}>{'Sign In'}</Text>
-            <View style={[styles.textInput,{justifyContent:'space-between'}]}>
-              <TextInput
-                returnKeyType="done"
-                placeholderTextColor={"#999999"}
-                placeholder="Username"
-                style={{ fontSize: FONTSIZE.Text16, letterSpacing: 0.1 }}
-                onChangeText={value => {
-                  if (value.length == 0) {
-                    animated.ballAnimation.setValue(-25);
-                  }
-                  setUsername(value);
-                  animateBall();
-                }}
-              />
-              <Text style={[{ fontSize: FONTSIZE.Text12,marginRight:10, fontFamily: 'AvenirNext-Regular', color: '#1FAEF7' }]}>
-                {'Forgot Username'}
-              </Text>
-            </View>
-
+            <TextInput
+              returnKeyType="done"
+              placeholder="Username"
+              placeholderTextColor="#999"
+              style={[styles.textInput, {paddingBottom: getHp(10)}]}
+              onChangeText={value => {
+                if (value.length == 0) {
+                  animated.ballAnimation.setValue(-25);
+                }
+                setUsername(value);
+                animateBall();
+              }}
+            />
 
             {username.length >= 1 ? (
               <Animated.View style={[ballAnimation]}>

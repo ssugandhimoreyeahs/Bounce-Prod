@@ -255,7 +255,6 @@ const styles = StyleSheet.create({
   Card: {
     backgroundColor: '#fff',
     borderRadius: 20,
-    elevation: 2,
     justifyContent: 'center',
     alignItems: 'center',
     width: '28%',

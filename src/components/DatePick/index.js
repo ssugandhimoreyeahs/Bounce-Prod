@@ -73,8 +73,8 @@ export default DatePicker = props => {
       <TouchableOpacity onPress={showDatePicker}>
         <TextInput
           pointerEvents="none"
-          placeholderTextColor={'#999999'}
           placeholder={placeholder}
+          placeholderTextColor="#999999"
           style={[
             styles.textInput,
             errorMessage.length > 0 && {borderColor: 'red'},

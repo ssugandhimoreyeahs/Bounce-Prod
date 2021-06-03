@@ -149,9 +149,9 @@ export default function ProfilePic(props) {
                     style={{
                       borderRadius: 100,
                       backgroundColor: '#fff',
-                      shadowColor: 'rgba(0, 0, 0, 0.2)',
-                      shadowOpacity: 0.8,
-                      elevation: 6,
+                      shadowColor: 'rgba(0, 0, 0, 0.1)',
+                      shadowOpacity: 0.3,
+                      elevation: 2,
                       shadowRadius: 15,
                       shadowOffset: {width: 1, height: 13},
                     }}>
@@ -293,10 +293,9 @@ const styles = StyleSheet.create({
     top: -10,
   },
   shadowBox: {
-    
-    shadowColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOpacity: 0.8,
-    elevation: 6,
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOpacity: 0.3,
+    elevation: 2,
     shadowRadius: 15,
     shadowOffset: {width: 1, height: 13},
   },

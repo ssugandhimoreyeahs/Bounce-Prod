@@ -30,7 +30,7 @@ const SingleButton = props => {
       onPress={onPress}
       style={{
         height: getHp(46),
-        width: getHp(150),
+        width: "45%",
         ...styles.viewContainer,
         backgroundColor: 'rgba(238,238,238,0.6',
         backgroundColor: '#EEEEEE',

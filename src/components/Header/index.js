@@ -78,11 +78,10 @@ function Header(props) {
                     leftDropdown ?
                         <TouchableOpacity onPress={() => setShow(!showDropdown)} >
                             <View style={styles.headerDropdown}>
-                                <Icon name="angle-right" size={getHp(30)} color="#000" style={{ marginHorizontal: 5 }} />
-                                <Text style={[styles.leftTitleStyle, rightTitleStyle, { marginLeft: getWp(5) }]}>
+                                <Text style={[styles.leftTitleStyle, rightTitleStyle, { marginRight: getWp(5) }]}>
                                     {`${leftDropdown}`}
                                 </Text>
-
+                                <Icon name="angle-down" size={getHp(30)} color="#000" style={{ marginHorizontal: 5 }} />
                             </View>
                         </TouchableOpacity>
                         : null
@@ -101,7 +100,7 @@ function Header(props) {
                         </TouchableOpacity>
                         : null
                 }
-                <Text style={[styles.headerTitleStyle, headerStyleProp, {fontFamily: 'AvenirNext-DemiBold'} ]}>
+                <Text style={[styles.headerTitleStyle, headerStyleProp, { fontFamily: 'AvenirNext-DemiBold' }]}>
                     {headerTitle}
                 </Text>
                 <View >
@@ -169,7 +168,7 @@ function Header(props) {
                         <>
                             <TouchableOpacity style={[styles.headerDropdown, { paddingVertical: 10, }]}>
                                 <Avatar source={{ uri: userinfo?.user?.profileImage?.filePath }} size={getHp(50)} rounded />
-                                <Text style={[{ marginLeft: getWp(20), color: '#000', fontSize: FONTSIZE.Text18, fontFamily:'AvenirNext-Medium' }]}>
+                                <Text style={[{ marginLeft: getWp(20), color: '#000', fontSize: FONTSIZE.Text18, fontFamily: 'AvenirNext-Medium' }]}>
                                     {userinfo?.user?.fullName}
                                 </Text>
                             </TouchableOpacity>

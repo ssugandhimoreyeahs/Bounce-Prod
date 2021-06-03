@@ -25,40 +25,54 @@ const FloatingInput = props => {
   return (
     <View>
       {custom ? (
-        <View style={{ flex: 1, backgroundColor: '#fff', marginVertical: 10 }}>
+        <View
+          style={{
+            flex: 1,
+            marginVertical: 10,
+            shadowColor: '#000',
+            shadowOffset: { width: 1, height: 1 },
+            shadowRadius: 4,
+            shadowOpacity: 0.1,
+            elevation: 1,
+          }}>
           <FloatingLabelInput
             returnKeyType="done"
             blurOnSubmit={blurOnSubmit}
-            isFocused={true}
-            label={floatingLabel}
-            onSubmit={onSubmitEditing}
             keyboardType={keyboardType}
+            isFocused={isFocused}
+            customShowPasswordComponent={<GreyEye height={25} width={33} />}
+            customHidePasswordComponent={<BlueEye height={25} width={33} />}
+            label={floatingLabel}
             customLabelStyles={{
-              fontWeight: 'normal',
-              colorFocused: '#696969',
-              fontSizeBlurred: FONTSIZE.Text12,
-              fontSizeFocused: FONTSIZE.Text12,
-              colorBlurred: '#696969',
+              colorFocused: '#000',
+              fontSizeBlurred: FONTSIZE.Text15,
+              fontSizeFocused: FONTSIZE.Text15,
+              colorBlurred: '#000',
             }}
             isPassword={Password}
             labelStyles={{
-              color: 'red',
+             
+              opacity:0.5,
+              color: '#000',
+              fontFamily: 'AvenirNext-Medium',
             }}
             numberOfLines={10}
             inputStyles={{
-              // paddingLeft:getWp(5),
-              marginTop: 5,
+              paddingBottom:-10,
+              fontFamily: 'AvenirNext-Medium',
               color: '#000',
-              fontWeight: 'bold',
-              fontSize: FONTSIZE.Text15,
+              // fontWeight: 'bold',
+              fontSize: FONTSIZE.Text17,
+              marginTop: 10,
             }}
             value={value}
-            key={key}
             onChangeText={onChange}
             containerStyles={{
-              paddingLeft: 5,
-              elevation: 2,
-              height: getHp(50),
+              fontFamily: 'AvenirNext-Regular',
+              paddingHorizontal: 10,
+              borderWidth: 0.5,
+              borderColor: '#DDDDDD',
+              height: getHp(65),
               backgroundColor: '#fff',
               borderRadius: 9.5,
             }}
@@ -66,6 +80,11 @@ const FloatingInput = props => {
               Keyboard.dismiss();
             }}
           />
+          {errorMessage.length > 0 && (
+            <View style={styles.errorContainer}>
+              <Text style={styles.errorText}>{errorMessage}</Text>
+            </View>
+          )}
         </View>
       ) : (
           <View

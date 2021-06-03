@@ -4,35 +4,69 @@ import { View, Text } from 'react-native';
 import { FONTSIZE, getHp } from '@utils';
 
 export default CustomTextinput = props => {
-  const { text, multiline = true, onChange, value = '' } = props;
+  const { text, multiline = true, onChange, value = '', custom } = props;
   return (
-    <View style={styles.container}>
-      <Text
-        style={{
-          color: '#696969',
-          fontWeight: '400',
-          fontSize: FONTSIZE.Text15,
-          
-        }}>
-        {text}
-      </Text>
+    <>
+      {
+        custom ?
+          (
+            <View style={styles.container1}>
+              <Text
+                style={{
+                  marginTop: 10,
+                  opacity: 0.5,
+                  color: '#000',
+                  fontSize: FONTSIZE.Text15,
+                  fontFamily: 'AvenirNext-Medium',
+                }}>
+                {text}
+              </Text>
+              <TextInput
+                multiline={multiline}
+                value={value}
+                onChangeText={onChange}
+                style={{
+                  marginTop: getHp(3),
+                  height: getHp(110),
+                  textAlignVertical: 'top',
+                  color: 'black',
+                  fontFamily: 'AvenirNext-Medium',
 
-      <TextInput
-        multiline={multiline}
-        value={value}
-        onChangeText={onChange}
-        style={{
-          marginTop: getHp(3),
-          height: getHp(110),
-          textAlignVertical: 'top',
-          color: 'black',
-          fontFamily: 'AvenirNext-DemiBold',
-          fontWeight: 'bold',
-          fontSize: FONTSIZE.Text17,
-        }}
-      />
-
-    </View>
+                  fontSize: FONTSIZE.Text17,
+                }}
+              />
+            </View>
+          )
+          : (
+            <View style={styles.container}>
+              <Text
+                style={{
+                  color: '#000',
+                  fontWeight: '400',
+                  fontSize: FONTSIZE.Text15,
+                  marginTop: 10,
+                  fontFamily: 'AvenirNext-Regular',
+                }}>
+                {text}
+              </Text>
+              <TextInput
+                multiline={multiline}
+                value={value}
+                onChangeText={onChange}
+                style={{
+                  marginTop: getHp(3),
+                  height: getHp(110),
+                  textAlignVertical: 'top',
+                  color: 'black',
+                  fontFamily: 'AvenirNext-DemiBold',
+                  fontWeight: 'bold',
+                  fontSize: FONTSIZE.Text17,
+                }}
+              />
+            </View>
+          )
+      }
+    </>
   );
 };
 const styles = StyleSheet.create({
@@ -46,18 +80,30 @@ const styles = StyleSheet.create({
   },
   container: {
     height: getHp(161),
-    paddingTop:5,
-    paddingLeft:18,
+    paddingTop: 5,
+    paddingLeft: 18,
     width: '100%',
     alignSelf: 'center',
     backgroundColor: '#fff',
     borderRadius: 9.5,
     marginVertical: 10,
-    // shadowColor: '#DCE4F9',
-    // shadowOffset: { width: 0, height: 2 },
-    // shadowRadius: 10,
-    // shadowOpacity: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    shadowRadius: 4,
+    shadowOpacity: 0.1,
     elevation: 2,
+  },
+  container1: {
+    height: getHp(161),
+    paddingTop: 5,
+    paddingLeft: 18,
+    width: '100%',
+    alignSelf: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 9.5,
+    marginVertical: 3,
+    borderWidth: 0.5,
+    borderColor: '#DDDDDD',
   },
   textStyle: {
     paddingLeft: 10,

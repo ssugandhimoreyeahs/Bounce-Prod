@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -7,13 +7,13 @@ import {
   Text,
 } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {FONTSIZE, toCurrentTimeZone} from '@utils';
+import { FONTSIZE, getHp, getWp, toCurrentTimeZone } from '@utils';
 import moment from 'moment';
 import dateFormat from 'dateformat';
-import {RegexCollection} from '../../app/constants';
+import { RegexCollection } from '../../app/constants';
 export default DatePicker = props => {
   const {
-    handleChange = () => {},
+    handleChange = () => { },
     value,
     pickerMode,
     maximumDate,
@@ -29,7 +29,7 @@ export default DatePicker = props => {
     setDatePickerVisibility(false);
   };
 
-  const handleConfirm = date => { 
+  const handleConfirm = date => {
     console.log('ON_DATE_SELECT - ', date);
     console.log("CUR_DATE - ' ", new Date());
     handleChange(date);
@@ -48,7 +48,7 @@ export default DatePicker = props => {
         case 'time':
           format = RegexCollection.TimeFormat;
           break;
-      } 
+      }
       return moment(value).format(format);
     } else {
       return '';
@@ -66,15 +66,15 @@ export default DatePicker = props => {
     return startDate.toDate();
   };
   return (
-    <View>
+    <View style={styles.shadowStyle}>
       <TouchableOpacity onPress={showDatePicker}>
         <TextInput
-        pointerEvents="none"
-          placeholderTextColor={'#696969'}
+          pointerEvents="none"
+          placeholderTextColor={'#000'}
           placeholder={placeholder}
           style={[
             styles.textInput,
-            errorMessage.length > 0 && {borderColor: 'red'},
+            errorMessage.length > 0 && { borderColor: 'red' },
           ]}
           value={getValue()}
           editable={false}></TextInput>
@@ -92,21 +92,28 @@ export default DatePicker = props => {
         onCancel={hideDatePicker}
         minimumDate={minimumDate}
         maximumDate={maximumDate}
-        // isDarkModeEnabled={true}
+      // isDarkModeEnabled={true}
       />
     </View>
   );
 };
 const styles = StyleSheet.create({
+  shadowStyle:{
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    shadowRadius: 4,
+    shadowOpacity: 0.1,
+  },
   textInput: {
-    elevation: 2,
-    height: 58,
+    // elevation: 2,
+    height: getHp(65),
     backgroundColor: '#fff',
     // borderColor: '#DDDDDD',
     borderRadius: 9.5,
+    fontFamily:'AvenirNext-Regular',
     // borderWidth: 1,
     paddingLeft: 15,
-    fontSize: FONTSIZE.Text14,
+    fontSize: FONTSIZE.Text15,
     marginTop: 10,
     color: '#000',
   },

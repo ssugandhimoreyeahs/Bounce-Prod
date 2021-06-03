@@ -33,20 +33,14 @@ export const ThreeFooterButtons = ({ icon, ButtonTitle }) => {
     return (
         <TouchableOpacity style={styles.bottomContainer}>
             {icon}
-            <Text style={[{ color: '#000', fontSize: FONTSIZE.Text12, fontFamily: 'AvenirNext-Medium',marginTop:5 }]}>
+            <Text style={[{ color: '#000', fontSize: FONTSIZE.Text12, fontFamily: 'AvenirNext-Medium', marginTop: 5 }]}>
                 {ButtonTitle}
             </Text>
         </TouchableOpacity>
     )
 }
 
-export const PrivacyBlock = () => {
-    return (<View>
-        <Text style={styles.headerTitle}>{"Privacy Settings"}</Text>
-        <Text style={styles.headerTitle}>{"Choose what you want to share with friends. Only public events can be displayed on your profile."}</Text>
-    </View>
-    )
-}
+
 
 export const EventTabview = observer((props) => {
     return (
@@ -54,9 +48,9 @@ export const EventTabview = observer((props) => {
             <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{ color: '#999999', fontFamily: 'AvenirNext-Medium',fontSize:FONTSIZE.Text16 }}
+                    textStyle={{ color: '#999999', fontFamily: 'AvenirNext-Medium', fontSize: FONTSIZE.Text16 }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Bold',fontSize:FONTSIZE.Text16 }} heading={"Attending"}>
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Bold', fontSize: FONTSIZE.Text16 }} heading={"Attending"}>
                     <ScrollView nestedScrollEnabled={true} style={{
                         height: 300
                     }}>
@@ -65,9 +59,9 @@ export const EventTabview = observer((props) => {
                 </Tab >
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{color: '#999999', fontFamily: 'AvenirNext-Medium',fontSize:FONTSIZE.Text16 }}
+                    textStyle={{ color: '#999999', fontFamily: 'AvenirNext-Medium', fontSize: FONTSIZE.Text16 }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Bold',fontSize:FONTSIZE.Text16 }} heading="Featuring">
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Bold', fontSize: FONTSIZE.Text16 }} heading="Featuring">
                     <EventPageTab2 />
                 </Tab>
             </Tabs>
@@ -296,7 +290,7 @@ export const PastGuestList = ({ PAST_LIST_ARRAY, heading, pen = false, onPressGu
     )
 }
 
-export const SwitchButton = (props) => { 
+export const SwitchButton = (props) => {
     const {
         value,
         onPrivatePress,
@@ -305,31 +299,69 @@ export const SwitchButton = (props) => {
     const {
     } = props
     const onValues = {
-        backgroundColor: '#fff',
-        height: getHp(46),
-        elevation: 10
+        backgroundColor: 'red',
     }
     const offValues = {
-        backgroundColor: '#EEEEEE',
-        height: getHp(38)
+        backgroundColor: 'orange',
+
     }
     return (
         <View style={styles.doubleButton}>
-            <View style={styles.doubleSubcontainer}>
+            <LinearGradient
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                colors={value ? ['#3CBDFF', '#6FD0FF'] : ['#F3F3F3', '#F3F3F3']}
+                style={[
+                    styles.linearGradient,
+                    value ? onValues : offValues, {
+                        borderTopLeftRadius: 13,
+                        borderBottomLeftRadius: 13
+                    }
+                ]}>
                 <TouchableOpacity
-                    style={[styles.private,
-                        value ? onValues : offValues]} onPress={() => onPrivatePress()}>
-                    <Text style={[styles.TitleStyle, value ? { color: '#1FAEF7', fontWeight: 'bold' } : { color: '#000', fontWeight: 'normal' }]}>{"Private"}</Text>
+                    style={[]}
+                    onPress={() => onPrivatePress()}>
+                    <Text style={[styles.TitleStyle, value ?
+                        {
+                            color: '#fff',
+                            fontFamily: 'AvenirNext-DemiBold',
+                            fontSize: FONTSIZE.Text18
+                        } :
+                        {
+                            color: '#000',
+                            fontFamily: 'AvenirNext-Regular',
+                            fontSize: FONTSIZE.Text16
+                        }]}>
+                        {"Private"}
+                    </Text>
                 </TouchableOpacity>
+            </LinearGradient>
 
-                <TouchableOpacity style={[styles.private, value ? offValues : onValues]} onPress={() => onPublicPress()}>
-                    <Text style={[styles.TitleStyle, !value ? { color: '#1FAEF7', fontWeight: 'bold' } : { color: '#000', fontWeight: 'normal' }]}>{"Public"}</Text>
+            <LinearGradient
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                colors={!value ? ['#3CBDFF', '#6FD0FF'] : ['#F3F3F3', '#F3F3F3']}
+                style={[
+                    styles.linearGradient,
+                    (!value ? onValues : offValues), {
+                        borderTopRightRadius: 13,
+                        borderBottomRightRadius: 13
+                    }
+                ]}>
+                <TouchableOpacity style={{}}
+                    onPress={() => onPublicPress()}>
+                    <Text style={[styles.TitleStyle, !value ? {
+                        color: '#fff',
+                        fontFamily: 'AvenirNext-DemiBold',
+                        fontSize: FONTSIZE.Text18
+                    } :
+                        {
+                            color: '#000',
+                            fontFamily: 'AvenirNext-Regular',
+                            fontSize: FONTSIZE.Text16
+                        }]}>{"Public"}</Text>
                 </TouchableOpacity>
-            </View>
-
-            <View style={{ position: 'absolute', right: -45 }}>
-                <Info height={25} width={25} />
-            </View>
+            </LinearGradient>
         </View>
     )
 }

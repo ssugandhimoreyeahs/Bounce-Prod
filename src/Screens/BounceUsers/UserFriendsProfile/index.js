@@ -37,6 +37,7 @@ import {
   , UploadBlue,
   InstaNew,
   GreyCross,
+  FavouriteMusic,
   Spotify,
   Insta,
   Twitter,
@@ -54,6 +55,8 @@ import { Scaffold } from '@components'
 import { Toast } from '@constants';
 import HostProfile from "../HostProfile/HostProfile";
 import Right from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/Entypo'
+
 
 const ACCOUNTS = [
   {
@@ -195,7 +198,7 @@ function UserFriendsProfile(props) {
   >
     <View style={styles.container}>
 
-      <ScrollView keyboardShouldPersistTaps={"always"}>
+      <ScrollView keyboardShouldPersistTaps={"always"} >
         <Spinner visible={loader} color={"#1FAEF7"} />
         {!loader && (
           <>
@@ -226,29 +229,47 @@ function UserFriendsProfile(props) {
                   size="large"
                   rounded
                 />
+
                 <View style={{ paddingLeft: 15 }}>
                   <Text
                     style={{
                       color: "#000",
                       fontSize: FONTSIZE.Text20,
                       fontFamily: "AvenirNext-Regular",
+                      marginBottom: getHp(5)
                     }}
                   >
                     {fullName}
                   </Text>
-                  <Text
-                    style={{
-                      color: "#696969",
-                      fontSize: FONTSIZE.Text14,
-                      fontFamily: "AvenirNext-Regular",
-                    }}
-                  >
-                    {city}
-                  </Text>
+
+                  <View style={styles.flex}>
+                    <Text style={styles.cityAll}>
+                      {'19'}
+                    </Text>
+                    <View style={styles.dot} />
+                    <Text style={styles.cityAll}>
+                      {city}
+                    </Text>
+                    <View style={styles.dot} />
+                    <TouchableOpacity
+                      style={[styles.editButtonStyle, { width: getWp(45), paddingHorizontal: 2 }]}
+                      onPress={() => props.navigation.navigate(HostProfile.routeName)}
+                    >
+                      <Icon name="plus" color={'#1FAEF7'} size={15} />
+                      <Text style={[styles.editButton, {
+                        marginLeft: 2
+                      }]}>
+                        {"Job"}
+                      </Text>
+                    </TouchableOpacity>
+
+                  </View>
+
+
                 </View>
               </View>
 
-              <View style={[styles.flex, { width: "90%", marginVertical: 10, justifyContent: 'space-evenly' }]}>
+              <View style={[styles.flex, { width: "90%", marginVertical: 10, justifyContent: 'space-between' }]}>
                 <TouchableOpacity
                   style={[styles.editButtonStyle]}
                   onPress={() => props.navigation.navigate(HostProfile.routeName)}
@@ -306,7 +327,7 @@ function UserFriendsProfile(props) {
                 colors={['#16B0FE', '#3FBEFF']}
                 style={[
                   styles.linearGradient,
-                  { marginVertical: 20, width: '100%' ,height: getHp(38),borderRadius:13},
+                  { marginVertical: 20, width: '100%', height: getHp(38), borderRadius: 13 },
                 ]}>
                 <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} >
                   <Text style={[styles.buttonText, { marginRight: 15 }]}>{'Things to do with Friends'}</Text>
@@ -324,9 +345,9 @@ function UserFriendsProfile(props) {
                 placeholderTextColor='#999999'
               />
 
-              <Tabview
+              {/* <Tabview
                 {...props}
-              />
+              /> */}
               <LinearGradient
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
@@ -454,26 +475,37 @@ function UserFriendsProfile(props) {
                 </TouchableOpacity>
               </View>
               {/*END*** First Gallery Block of Friends */}
-              <View style={{
-                height: 1, backgroundColor: '#EEEEEE', marginTop: 10,
-                marginBottom: 25
-              }} />
 
-              {/*Start*** Second Gallery Block of Friends */}
-              <View style={[styles.flex, {
-                marginVertical: 10,
-              }]}>
-                <InstaNew height={20} width={14} />
-                <Text style={styles.InstaText} >
-                  {"Instagram"}
-                </Text>
-              </View>
-              {handleCarousel("Instagram")}
-              {/*END*** Second Gallery Block of Friends */}
 
-              <View>
-                <Text style={styles.InstaText}>{"Favorite Music"}</Text>
-                {/* <ScrollView horizontal >
+            </View>
+            <View style={{
+              height: 1, backgroundColor: '#EEEEEE', marginTop: 10,
+              marginBottom: 25
+            }} />
+
+            {/*Start*** Second Gallery Block of Friends */}
+            <View style={[styles.flex, {
+              margin: 10,
+            }]}>
+              <InstaNew height={20} width={14} />
+              <Text style={styles.InstaText} >
+                {"Instagram"}
+              </Text>
+            </View>
+            {handleCarousel("Instagram")}
+            {/*END*** Second Gallery Block of Friends */}
+
+            <View style={[styles.flex, {
+              margin: 10,
+            }]}>
+              <FavouriteMusic height={17} width={10} />
+              <Text style={styles.InstaText} >
+                {"Favourite Music"}
+              </Text>
+            </View>
+            <View>
+
+              {/* <ScrollView horizontal >
                   {getSpotify.length == 0 ?
                     null :
                     getSpotify.items.map((items) => {
@@ -482,8 +514,6 @@ function UserFriendsProfile(props) {
                     })
                   }
                 </ScrollView> */}
-              </View>
-
             </View>
           </>
         )}

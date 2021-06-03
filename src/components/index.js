@@ -52,7 +52,6 @@ import {
     ChooseVendorCard,
     VendorCard,
     Tabview,
-    PrivacyBlock,
     EventTabview,
     ThreeFooterButtons
 } from './BreakedComponents'
@@ -67,7 +66,6 @@ export {
     Scaffold,
     ThreeFooterButtons,
     EventTabview,
-    PrivacyBlock,
     TagsCollapsible,
     TicketComponent,
     Tabview,

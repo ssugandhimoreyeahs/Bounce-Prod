@@ -78,7 +78,7 @@ export default function CustomButton(props) {
             {  rowDoubleButton ?
                 <>
                     <View style={styles.rowButton}>
-                        <TouchableOpacity style={styles.DoubleButton} onPress={onSaveDraftPress}>
+                        <TouchableOpacity style={[styles.DoubleButton,styles.shadowStyle]} onPress={onSaveDraftPress}>
                             <Text style={[styles.titleStyle, { color: '#1FAEF7', fontSize: FONTSIZE.Text20, letterSpacing: 0.2 }]}>
                                 {ButtonTitle}
                             </Text>
@@ -173,6 +173,12 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontFamily: 'AvenirNext-Medium'
     },
+    shadowStyle: {
+        shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowRadius: 4,
+        shadowOpacity: 0.1,
+      },
     linearGradient: {
         borderRadius: 17,
         height: 54,

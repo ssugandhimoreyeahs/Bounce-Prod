@@ -1,10 +1,16 @@
 import { StyleSheet } from 'react-native'
 import { Dimensions } from 'react-native'
 import { FONTSIZE } from '@utils'
+import { getWp, getHp } from '@utils'
 
 const { height, width } = Dimensions.get("screen")
 
 const styles = StyleSheet.create({
+   cityAll: {
+      color: "#696969",
+      fontSize: FONTSIZE.Text14,
+      fontFamily: "AvenirNext-Regular",
+   },
    buttonText: {
       fontSize: FONTSIZE.Text16,
       // textAlign: 'center',
@@ -27,17 +33,26 @@ const styles = StyleSheet.create({
       color: '#000',
       width: '100%'
    },
+   dot: {
+      backgroundColor: '#696969',
+      borderRadius: 5,
+      padding: 4,
+      marginHorizontal: getWp(10)
+   },
    flex: {
       flexDirection: 'row',
       alignItems: 'center',
       // justifyContent: 'space-between'
    },
    editButtonStyle: {
+      flexDirection: 'row',
       elevation: 2,
       borderRadius: 7,
-      paddingHorizontal: 15,
-      paddingVertical: 5,
+      width: getWp(100),
+      height: getHp(26),
       backgroundColor: '#fff',
+      justifyContent: 'center',
+      alignItems: 'center'
    },
    socialButton: {
       width: '90%',
@@ -105,6 +120,7 @@ const styles = StyleSheet.create({
    },
    container: {
       // justifyContent:'center',
+      marginBottom:80,
       flex: 1,
       backgroundColor: '#FBFBFB',
    },

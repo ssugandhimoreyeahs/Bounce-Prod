@@ -26,15 +26,15 @@ export default function ImageCarousel(props) {
                 {
                     value === 'Instagram' ?
                         <View style={{}}>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Image source={item} style={{ borderRadius: 7, width: '30%', height: getHp(125), margin: 2 }} />
-                                <Image source={item} style={{ borderRadius: 7, width: '30%', height: getHp(125), margin: 2 }} />
-                                <Image source={item} style={{ borderRadius: 7, width: '30%', height: getHp(125), margin: 2 }} />
+                            <View style={{ flexDirection: 'row',justifyContent:'space-evenly'}}>
+                                <Image source={item} style={styles.instaStyles} />
+                                <Image source={item} style={styles.instaStyles} />
+                                <Image source={item} style={styles.instaStyles} />
                             </View>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Image source={item} style={{ borderRadius: 7, width: '30%', height: getHp(125), margin: 2 }} />
-                                <Image source={item} style={{ borderRadius: 7, width: '30%', height: getHp(125), margin: 2 }} />
-                                <Image source={item} style={{ borderRadius: 7, width: '30%', height: getHp(125), margin: 2 }} />
+                            <View style={{ flexDirection: 'row',justifyContent:'space-evenly'}}>
+                                <Image source={item} style={styles.instaStyles} />
+                                <Image source={item} style={styles.instaStyles} />
+                                <Image source={item} style={styles.instaStyles} />
                             </View>
                         </View>
                         :
@@ -181,6 +181,13 @@ export default function ImageCarousel(props) {
 
 
 const styles = StyleSheet.create({
+    instaStyles: {
+        borderRadius: 4,
+        // width: '32%',
+        height: getHp(118),
+        width: getWp(118),
+        margin: 2
+    },
     imageButton: {
         borderRadius: 100,
         elevation: 10,

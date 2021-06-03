@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         width: getWp(105),
         borderRadius: 20,
         alignItems: 'center',
-       justifyContent:'center',
+        justifyContent: 'center',
         backgroundColor: '#F2F5F6',
         elevation: 2,
     },
@@ -87,17 +87,9 @@ export const styles = StyleSheet.create({
         paddingVertical: 30,
         justifyContent: 'space-evenly'
     },
-    private: {
-        borderRadius: 17,
-        alignItems: 'center',
-        // paddingVertical: 15,
-        flex: 1,
-        justifyContent: 'center',
-    },
     doubleSubcontainer: {
         alignItems: 'center',
         flexDirection: 'row',
-        // elevation: 10,
         backgroundColor: '#EEEEEE',
         borderRadius: 17,
         height: getHp(38),
@@ -105,16 +97,8 @@ export const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     doubleButton: {
-        marginVertical: getHp(15),
         justifyContent: 'center',
-        alignSelf: 'center',
-        alignItems: 'center',
         flexDirection: 'row',
-        // marginVertical: 20,
-        // elevation: 10,
-        backgroundColor: '#fff',
-        // flex: 1,
-        borderRadius: 10,
     },
     container: {
         backgroundColor: '#fff',
@@ -159,10 +143,13 @@ export const styles = StyleSheet.create({
         paddingVertical: 0
     },
     linearGradient: {
-        // flex: 1,
-        // width: '48%',
-        alignSelf: 'flex-start',
-        borderRadius: 20,
+        justifyContent: 'center',
+        height: getHp(46),
+        //   backgroundColor: '#fff',
+        marginVertical: 10,
+
+        alignItems: 'center',
+        flex: 1,
     },
 
 })

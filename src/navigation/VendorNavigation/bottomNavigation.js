@@ -1,5 +1,6 @@
 import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { Button, TouchableOpacity, View } from 'react-native';
 import DjProfileScreen from '../../Screens/host/DjProfile';
 import BENotification from '../../Screens/BounceUsers/Notifications/Before/Notifications';
 import PartyRental from '../../Screens/BounceVendors/PartyRentals';
@@ -18,8 +19,6 @@ import { Avatar } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FONTSIZE, getHp, getWp } from '@utils';
 const VendorBottomTab = createBottomTabNavigator();
-
-// const VendorBottomTab = createMaterialBottomTabNavigator();
 
 class VendorBottomNavigation {
   static routeName = '/HomeBottom';
@@ -57,9 +56,9 @@ class VendorBottomNavigation {
             title: '',
             tabBarIcon: ({ tintColor, focused }) => {
               return !focused ? (
-                <Party_Outline height={34} width={34} />
+                <Party_Outline height={40} width={40} />
               ) : (
-                  <Party_Outline height={34} width={34} />
+                  <Party_Outline height={40} width={40} />
                 );
             },
           }}
@@ -72,9 +71,9 @@ class VendorBottomNavigation {
             title: '',
             tabBarIcon: ({ tintColor, focused }) => {
               return !focused ? (
-                <Bell_Outline height={35} width={25} />
+                <Bell_Outline height={33} width={33} />
               ) : (
-                  <Bell_Outline height={35} width={25} />
+                  <Bell_Outline height={33} width={33} />
                 );
             },
           }}
@@ -89,18 +88,31 @@ class VendorBottomNavigation {
             // tabBarColor: 'red',
             tabBarIcon: ({ tintColor, focused }) => {
               return !focused ? (
-                <Avatar
-                  rounded
-                  source={{ uri: `${profileImage?.filePath}` }}
-                  style={{ resizeMode: 'contain', height: 23, width: 23 }}
-                />
-              ) : (
+                <View style={{
+                  borderWidth: 2,
+                  borderRadius: 50,
+                  padding: 2,
+                  borderColor: 'black'
+                }}>
                   <Avatar
                     rounded
                     source={{ uri: `${profileImage?.filePath}` }}
-
-                    style={{ resizeMode: 'contain', height: 23, width: 23 }}
+                    style={{ resizeMode: 'contain', height: 30, width: 30 }}
                   />
+                </View>
+              ) : (
+                  <View style={{
+                    borderWidth: 2,
+                    borderRadius: 50,
+                    padding: 2,
+                    borderColor: 'black'
+                  }}>
+                    <Avatar
+                      rounded
+                      source={{ uri: `${profileImage?.filePath}` }}
+                      style={{ resizeMode: 'contain', height: 30, width: 30 }}
+                    />
+                  </View>
                 );
             },
           }}

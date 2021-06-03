@@ -188,16 +188,19 @@ const styles = StyleSheet.create({
    InstaText: {
       color: '#000',
       fontSize: FONTSIZE.Text14,
+      fontWeight: "500",
       marginLeft: 10,
       fontFamily: 'AvenirNext-Bold'
    },
-
    aboutText: {
       color: '#000',
       fontSize: FONTSIZE.Text16,
+      fontWeight: '600',
+      lineHeight: 28,
       fontFamily: 'AvenirNext-Regular'
    },
    Textarea: {
+      height: 101,
       borderWidth: 1,
       borderColor: "#DDDDDD",
       backgroundColor: '#FFFFFF',

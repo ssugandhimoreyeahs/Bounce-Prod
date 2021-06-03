@@ -62,6 +62,7 @@ import TagsCollapsible from './TagsCollapsible';
 import ProgressCircle from './ProgressCircle';
 import AppStatusBar from './AppStatusBar';
 import Scaffold from './Scaffold';
+import PublicPrivateButton from './PublicPrivateButton';
 
 export {
     Scaffold,
@@ -122,5 +123,6 @@ export {
     ImageCarousel,
     ModalDropDownComponent,
     ProgressCircle,
-    AppStatusBar
+    AppStatusBar,
+    PublicPrivateButton
 }

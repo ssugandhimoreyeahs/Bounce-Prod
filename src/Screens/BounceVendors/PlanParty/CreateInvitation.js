@@ -18,6 +18,7 @@ import {
   ImageCarousel,
   TicketComponent,
   Scaffold,
+  PublicPrivateButton,
 } from '@components';
 import {UploadCamera} from '@assets';
 import {
@@ -54,6 +55,8 @@ import Collapsible from 'react-native-collapsible';
 import {useBackHandler} from '@react-native-community/hooks';
 import UserHomeScreen from '../../BounceUsers/UserFriendsProfile';
 import ToggleSwitch from 'toggle-switch-react-native';
+import transform from 'css-to-react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 const TAGS = [
   {
@@ -79,6 +82,7 @@ function CreateInvitation(props) {
       setState(() => ({}));
     });
     if (isEditParty) {
+      console.log('PARTY_RECIEVE_NEW_HERE - ', JSON.stringify(party));
       partyModel.setEditParty(party);
     }
     return () => {
@@ -166,7 +170,7 @@ function CreateInvitation(props) {
     if (partyModel?.party?.gallery?.length > 0) {
       partyModel.party.gallery.map(i => img.push(i.filePath));
     }
-    
+
     return (
       <View>
         <ImageCarousel
@@ -188,6 +192,7 @@ function CreateInvitation(props) {
       </View>
     );
   };
+
   return (
     <Scaffold>
       <Root>
@@ -351,7 +356,7 @@ function CreateInvitation(props) {
                 justifyContent: 'center',
                 paddingVertical: 20,
               }}>
-              <View style={{flexDirection: 'row',}}>
+              <View style={{flexDirection: 'row'}}>
                 <Text
                   style={[
                     styles.headerTitle,
@@ -371,7 +376,12 @@ function CreateInvitation(props) {
                   />
                 </View>
               </View>
-
+              <PublicPrivateButton
+                containerStyle={{marginVertical: 25}}
+                value={partyModel.party.isPrivate}
+                onPrivatePress={() => partyModel.party.setIsPrivate(true)}
+                onPublicPress={() => partyModel.party.setIsPrivate(false)}
+              />
               {/*  
 //             <View style={{marginVertical: 10}}>
 //               <SwitchButton
@@ -382,92 +392,88 @@ function CreateInvitation(props) {
 //             <DollarField />
 //             <AgeField />
 //           </View> */}
-
+              {/* 
               <View style={{marginVertical: 10}}>
                 <SwitchButton
                   value={partyModel.party.isPrivate}
                   onPrivatePress={() => partyModel.party.setIsPrivate(true)}
                   onPublicPress={() => partyModel.party.setIsPrivate(false)}
                 />
+              </View> */}
+
+              <View
+                style={[
+                  styles.eventContainer,
+                  {justifyContent: 'space-between'},
+                ]}>
+                <Text
+                  style={[
+                    styles.headerTitle,
+                    {fontSize: FONTSIZE.Text20, marginRight: 5},
+                  ]}>
+                  {'Minimum Age'}
+                </Text>
+                <TextInput
+                  keyboardType={'numeric'}
+                  placeholder={'0'}
+                  value={partyModel.party.fromAge?.toString()}
+                  onChangeText={fromAge => {
+                    partyModel.party.set({fromAge: fromAge});
+                  }}
+                  errorMessage={partyModel.party?.partyError?.fromAge}
+                  style={[
+                    styles.textInput,
+                    {
+                      width: '35%',
+                      textAlign: 'center',
+                      fontSize: FONTSIZE.Text18,
+                      color: 'black',
+                      height: 45,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      alignSelf: 'center',
+                      minHeight: 0,
+                    },
+                  ]}
+                />
               </View>
 
-              {!partyModel.party.isPrivate && (
-                <View
+              <View
+                style={[
+                  styles.eventContainer,
+                  {justifyContent: 'space-between'},
+                ]}>
+                <Text
                   style={[
-                    styles.eventContainer,
-                    {justifyContent: 'space-between'},
+                    styles.headerTitle,
+                    {fontSize: FONTSIZE.Text20, marginRight: 5},
                   ]}>
-                  <Text
-                    style={[
-                      styles.headerTitle,
-                      {fontSize: FONTSIZE.Text20, marginRight: 5},
-                    ]}>
-                    {'Minimum Age'}
-                  </Text>
-                  <TextInput
-                    keyboardType={'numeric'}
-                    placeholder={'0'}
-                    value={partyModel.party.fromAge?.toString()}
-                    onChangeText={fromAge => {
-                      partyModel.party.set({fromAge: fromAge});
-                    }}
-                    errorMessage={partyModel.party?.partyError?.fromAge}
-                    style={[
-                      styles.textInput,
-                      {
-                        width: '35%',
-                        textAlign: 'center',
-                        fontSize: FONTSIZE.Text18,
-                        color: 'black',
-                        height: 45,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        alignSelf: 'center',
-                        minHeight: 0,
-                      },
-                    ]}
-                  />
-                </View>
-              )}
-
-              {!partyModel.party.isPrivate && (
-                <View
+                  {'Maximum Age'}
+                </Text>
+                <TextInput
+                  keyboardType={'numeric'}
+                  value={partyModel.party.toAge?.toString()}
+                  onChangeText={toAge => {
+                    partyModel.party.set({toAge: toAge});
+                  }}
+                  errorMessage={partyModel.party?.partyError?.toAge}
+                  placeholder={'0'}
                   style={[
-                    styles.eventContainer,
-                    {justifyContent: 'space-between'},
-                  ]}>
-                  <Text
-                    style={[
-                      styles.headerTitle,
-                      {fontSize: FONTSIZE.Text20, marginRight: 5},
-                    ]}>
-                    {'Maximum Age'}
-                  </Text>
-                  <TextInput
-                    keyboardType={'numeric'}
-                    value={partyModel.party.toAge?.toString()}
-                    onChangeText={toAge => {
-                      partyModel.party.set({toAge: toAge});
-                    }}
-                    errorMessage={partyModel.party?.partyError?.toAge}
-                    placeholder={'0'}
-                    style={[
-                      styles.textInput,
-                      {
-                        width: '35%',
-                        textAlign: 'center',
-                        fontSize: FONTSIZE.Text18,
-                        color: 'black',
-                        height: 45,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        alignSelf: 'center',
-                        minHeight: 0,
-                      },
-                    ]}
-                  />
-                </View>
-              )}
+                    styles.textInput,
+                    {
+                      width: '35%',
+                      textAlign: 'center',
+                      fontSize: FONTSIZE.Text18,
+                      color: 'black',
+                      height: 45,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      alignSelf: 'center',
+                      minHeight: 0,
+                    },
+                  ]}
+                />
+              </View>
 
               {/* <DollarField />
                     <AgeField /> */}

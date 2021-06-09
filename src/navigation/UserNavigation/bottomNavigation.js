@@ -42,6 +42,7 @@ class UserHomeBottomNavigation {
           fontSize: FONTSIZE.Text16,
           paddingVertical: 10,
           showLabel: false,
+          
           style: {
             position: 'absolute',
             bottom: 0,
@@ -51,7 +52,7 @@ class UserHomeBottomNavigation {
         sceneContainerStyle={{
           backgroundColor: '#FBFBFB',
           elevation: 5,
-          height: 100,
+          // height: 100,
           fontSize: FONTSIZE.Text16,
         }}
       >
@@ -60,9 +61,9 @@ class UserHomeBottomNavigation {
             unmountOnBlur: true,
             tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
-                <Home_Fill height={33} width={33} />
+                <Home_Fill height={25} width={32} />
               ) : (
-                  <Home_Outline height={33} width={33} />
+                  <Home_Outline height={25} width={32} />
                 );
             },
           }}
@@ -75,9 +76,9 @@ class UserHomeBottomNavigation {
             unmountOnBlur: true,
             tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
-                <Search_Outline height={33} width={33} />
+                <Search_Fill height={21} width={21} />
               ) : (
-                  <Search_Outline height={33} width={33} />
+                  <Search_Outline height={21} width={21} />
                 );
             },
           }}
@@ -91,9 +92,9 @@ class UserHomeBottomNavigation {
             // tabBarColor: 'red',
             tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
-                <Add_Outline height={33} width={33} />
+                <Add_Outline height={26} width={26} />
               ) : (
-                  <Add_Outline height={33} width={33} />
+                  <Add_Outline height={26} width={26} />
                 );
             },
             tabBarVisible: false,
@@ -107,9 +108,9 @@ class UserHomeBottomNavigation {
             unmountOnBlur: true,
             tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
-                <Bell_Outline height={33} width={33} />
+                <Bell_Outline height={22} width={19} />
               ) : (
-                  <Bell_Outline height={33} width={33} />
+                  <Bell_Outline height={22} width={19} />
                 );
             },
           }}
@@ -133,7 +134,7 @@ class UserHomeBottomNavigation {
                   rounded
                   source={{ uri: `${profileImage?.filePath}` }}
                   // source={Placeholder}
-                  style={{ resizeMode: 'contain', height: 33, width: 33 }}
+                  style={{ resizeMode: 'contain', height: 23, width: 23 }}
                 />
                 </View>
               ) : (
@@ -147,7 +148,7 @@ class UserHomeBottomNavigation {
                       rounded
                       // source={Placeholderr}
                       source={{ uri: `${profileImage?.filePath}` }}
-                      style={{ resizeMode: 'contain', height: 33, width: 33 }}
+                      style={{ resizeMode: 'contain', height: 23, width: 23 }}
                     />
                   </View>
                 );

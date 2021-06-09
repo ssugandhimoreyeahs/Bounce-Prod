@@ -194,13 +194,16 @@ function DJSignup(props) {
     }
     console.log("LANG_TEST - ", language.lang);
     return (
-        <Scaffold>
+        <Scaffold
+            statusBarStyle={{ backgroundColor: '#F4F4F4' }}>
             <Spinner visible={loader} color={'#1FAEF7'} />
-
             <View style={styles.container}>
-
-                <ScrollView keyboardShouldPersistTaps='always'
-                    ref={scrollRef} >
+                <ScrollView
+                    keyboardShouldPersistTaps='always'
+                    ref={scrollRef}
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    style={{ flex: 1 }}
+                >
                     <Header
                         back
                         headerTitle={"Edit Profile"}
@@ -212,7 +215,6 @@ function DJSignup(props) {
                             floatingLabel={"Business Name"}
                             onChange={(value) => setBusiness(value)}
                             value={business}
-
                         />
 
                         {picture == null ?
@@ -234,7 +236,10 @@ function DJSignup(props) {
                                             }} size={getHp(250)} rounded />
 
                                             <View style={styles.uploadCamera}>
-                                                <UploadBlue height={getHp(100)} width={getWp(120)} style={{ resizeMode: 'contain', alignSelf: 'center' }} />
+                                                <UploadBlue
+                                                    height={getHp(100)}
+                                                    width={getWp(120)}
+                                                    style={{ resizeMode: 'contain', alignSelf: 'center' }} />
                                             </View>
                                             {footer ?
                                                 <ImageFooter />
@@ -260,7 +265,7 @@ function DJSignup(props) {
                         />
 
                         <GooglePlacesInput
-                            floatingLabel={"City (or cities)"}
+                            floatingLabel={"City"}
                             onPress={(data) => {
                                 setCity(data.description)
 
@@ -370,11 +375,11 @@ function DJSignup(props) {
                                     onChange={(value) => setCuisines(value)}
                                     value={cuisines}
                                 />
-                                <FloatingInput
+                                {/* <FloatingInput
                                     floatingLabel={"Services"}
                                     onChange={(value) => setServices(value)}
                                     value={services}
-                                />
+                                /> */}
                             </>
                             :
                             null
@@ -383,12 +388,11 @@ function DJSignup(props) {
                             vendorCategoryName != "Security" &&
                             vendorCategoryName != "DJ" ?
                             <>
-                                <FloatingInput
+                                {/* <FloatingInput
                                     floatingLabel={"Services"}
-
                                     onChange={(value) => setServices(value)}
                                     value={services}
-                                />
+                                /> */}
                             </>
                             : null
                         }
@@ -401,17 +405,15 @@ function DJSignup(props) {
                                 </Text>
                             </TouchableOpacity>
                         }
-
                         <CustomButton
                             complete
                             onPress={handleSubmit}
                             ButtonTitle={"Continue"}
                         />
-                        <View style={{ marginVertical: 40 }} />
+                        <View style={{ marginBottom: 10 }} />
                     </View>
                 </ScrollView>
             </View>
-
         </Scaffold >
     )
 }
@@ -436,6 +438,7 @@ const styles = StyleSheet.create({
     },
     container: {
         backgroundColor: '#FBFBFB',
+        flex: 1
     },
     crossButton: {
         position: 'absolute',

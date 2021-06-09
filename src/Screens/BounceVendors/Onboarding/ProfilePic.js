@@ -128,8 +128,8 @@ export default function ProfilePic(props) {
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
         <KeyboardAwareScrollView
-          style={{flexGrow: 1}}
-          contentContainerStyle={{flex: 1}}>
+        style={{ flex: 1 ,backgroundColor:'#FBFBFB'}}
+        contentContainerStyle={{ flexGrow: 1 }}>
           <View style={styles.container}>
             <Text style={styles.HeadingStyle}>
               {'Add a 🔥🔥🔥 profile pic!'}
@@ -293,6 +293,7 @@ const styles = StyleSheet.create({
     top: -10,
   },
   shadowBox: {
+    
     shadowColor: 'rgba(0, 0, 0, 0.2)',
     shadowOpacity: 0.8,
     elevation: 6,

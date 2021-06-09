@@ -7,15 +7,13 @@ const { height, width } = Dimensions.get("screen")
 
 const styles = StyleSheet.create({
    cityAll: {
-      color: "#696969",
+      color: "#999999",
       fontSize: FONTSIZE.Text14,
-      fontFamily: "AvenirNext-Regular",
+      fontFamily: "AvenirNext-Medium",
    },
    buttonText: {
       fontSize: FONTSIZE.Text16,
-      // textAlign: 'center',
       fontFamily: 'AvenirNext-Medium',
-      // marginVertical: 10,
       color: '#ffffff',
    },
    boxShadow: {
@@ -34,10 +32,10 @@ const styles = StyleSheet.create({
       width: '100%'
    },
    dot: {
-      backgroundColor: '#696969',
+      backgroundColor: '#999999',
       borderRadius: 5,
-      padding: 4,
-      marginHorizontal: getWp(10)
+      padding: 2,
+      marginHorizontal: getWp(5)
    },
    flex: {
       flexDirection: 'row',
@@ -115,29 +113,25 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       marginTop: 10,
       paddingVertical: 25
-      // width: '40%',
-      // justifyContent: 'space-between'
    },
    container: {
-      // justifyContent:'center',
-      marginBottom:80,
       flex: 1,
       backgroundColor: '#FBFBFB',
    },
+   shadowStyle: {
+      shadowColor: '#000',
+      shadowOffset: { width: 1, height: 1 },
+      shadowRadius: 4,
+      shadowOpacity: 0.1,
+      elevation: 2,
+   },
    subContainer: {
-      // flexDirection: 'column',
-      // justifyContent: 'space-between',
       paddingHorizontal: 10,
       paddingVertical: 5,
-      // width:'90%'
-      // height: height/3
    },
    iconStyle: {
-      //   height:20,
-      //   width:20,
       paddingRight: 15,
       marginRight: 5
-
    },
    textStyle: {
       color: '#000',
@@ -195,9 +189,8 @@ const styles = StyleSheet.create({
    aboutText: {
       color: '#000',
       fontSize: FONTSIZE.Text16,
-      fontWeight: '600',
       lineHeight: 28,
-      fontFamily: 'AvenirNext-Regular'
+      fontFamily: 'AvenirNext-Medium'
    },
    Textarea: {
       height: 101,
@@ -207,7 +200,7 @@ const styles = StyleSheet.create({
       marginVertical: getHp(10),
       fontSize: FONTSIZE.Text16,
       borderRadius: getHp(15),
-      paddingLeft: 20, 
+      paddingLeft: 20,
    }
    ,
 

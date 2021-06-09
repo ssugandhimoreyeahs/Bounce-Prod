@@ -53,7 +53,8 @@ import {
     VendorCard,
     Tabview,
     EventTabview,
-    ThreeFooterButtons
+    ThreeFooterButtons,
+    SearchPageTab,
 } from './BreakedComponents'
 
 import DropDown from './CustomDropdown/DropDown'
@@ -64,6 +65,7 @@ import Scaffold from './Scaffold';
 import PublicPrivateButton from './PublicPrivateButton';
 
 export {
+    SearchPageTab,
     Scaffold,
     ThreeFooterButtons,
     EventTabview,

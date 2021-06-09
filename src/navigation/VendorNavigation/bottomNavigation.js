@@ -56,9 +56,9 @@ class VendorBottomNavigation {
             title: '',
             tabBarIcon: ({ tintColor, focused }) => {
               return !focused ? (
-                <Party_Outline height={40} width={40} />
+                <Party_Outline height={34} width={34} />
               ) : (
-                  <Party_Outline height={40} width={40} />
+                  <Party_Outline height={34} width={34} />
                 );
             },
           }}
@@ -71,9 +71,9 @@ class VendorBottomNavigation {
             title: '',
             tabBarIcon: ({ tintColor, focused }) => {
               return !focused ? (
-                <Bell_Outline height={33} width={33} />
+                <Bell_Outline height={30} width={23} />
               ) : (
-                  <Bell_Outline height={33} width={33} />
+                  <Bell_Outline height={30} width={23} />
                 );
             },
           }}
@@ -97,7 +97,7 @@ class VendorBottomNavigation {
                   <Avatar
                     rounded
                     source={{ uri: `${profileImage?.filePath}` }}
-                    style={{ resizeMode: 'contain', height: 30, width: 30 }}
+                    style={{ resizeMode: 'contain', height: 23, width: 23 }}
                   />
                 </View>
               ) : (
@@ -110,7 +110,7 @@ class VendorBottomNavigation {
                     <Avatar
                       rounded
                       source={{ uri: `${profileImage?.filePath}` }}
-                      style={{ resizeMode: 'contain', height: 30, width: 30 }}
+                      style={{ resizeMode: 'contain', height: 23, width: 23 }}
                     />
                   </View>
                 );

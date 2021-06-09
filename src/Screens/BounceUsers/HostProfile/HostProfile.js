@@ -248,7 +248,7 @@ export default function HostProfile(props) {
 
               <GooglePlacesInput
                 custom
-                floatingLabel={'City (or cities)'}
+                floatingLabel={'City'}
                 onPress={data => {
                   setCity(data.description);
                 }}
@@ -270,7 +270,7 @@ export default function HostProfile(props) {
             />
             {console.log('user.city', user.city)}
             <GooglePlacesInput
-              floatingLabel={'City (or cities)'}
+              floatingLabel={'City'}
               onPress={data => {
                 console.log('DATA_ON_SEL - ', data);
                 setCity(data.description);

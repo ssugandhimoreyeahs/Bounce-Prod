@@ -51,19 +51,20 @@ const FloatingInput = props => {
             }}
             isPassword={Password}
             labelStyles={{
-             
-              opacity:0.5,
+              paddingTop: 8,
+              opacity: 0.5,
               color: '#000',
               fontFamily: 'AvenirNext-Medium',
             }}
             numberOfLines={10}
             inputStyles={{
-              paddingBottom:-10,
+              paddingBottom: -10,
               fontFamily: 'AvenirNext-Medium',
               color: '#000',
               // fontWeight: 'bold',
               fontSize: FONTSIZE.Text17,
-              marginTop: 10,
+              marginTop: 22,
+              paddingLeft:5
             }}
             value={value}
             onChangeText={onChange}

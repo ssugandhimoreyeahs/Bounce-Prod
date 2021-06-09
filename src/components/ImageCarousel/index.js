@@ -26,12 +26,12 @@ export default function ImageCarousel(props) {
                 {
                     value === 'Instagram' ?
                         <View style={{}}>
-                            <View style={{ flexDirection: 'row',justifyContent:'space-evenly'}}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
                                 <Image source={item} style={styles.instaStyles} />
                                 <Image source={item} style={styles.instaStyles} />
                                 <Image source={item} style={styles.instaStyles} />
                             </View>
-                            <View style={{ flexDirection: 'row',justifyContent:'space-evenly'}}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
                                 <Image source={item} style={styles.instaStyles} />
                                 <Image source={item} style={styles.instaStyles} />
                                 <Image source={item} style={styles.instaStyles} />
@@ -102,7 +102,6 @@ export default function ImageCarousel(props) {
                                     value == 'Normal' ?
                                         <View style={{
                                             alignItems: 'center',
-                                            backgroundColor: 'red'
                                         }}>
                                             <Image source={item}
                                                 style={{ width: '100%', height: 400, }} />
@@ -158,18 +157,18 @@ export default function ImageCarousel(props) {
                 :
                 <Pagination
                     containerStyle={{ backgroundColor: 'rgba(52, 52, 52, 0)', marginVertical: -20 }}
-
                     dotsLength={imageArray.length}
                     activeDotIndex={state}
                     dotStyle={{
-
-                        width: 10,
-                        height: 10,
+                        width: 8,
+                        height: 8,
                         borderRadius: 5,
-                        marginHorizontal: -5,
+                        marginHorizontal: -10,
                         backgroundColor: '#1FAEF7',
                     }}
                     inactiveDotStyle={{
+                        width: 8,
+                        height: 8,
                         backgroundColor: '#696969'
                     }}
                     inactiveDotScale={0.6}

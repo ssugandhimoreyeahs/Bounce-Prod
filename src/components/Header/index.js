@@ -65,7 +65,7 @@ function Header(props) {
 
     return (
         <View>
-            <View style={[styles.container, headerBackColor ? headerBackColor : null]}>
+            <View style={[styles.container,styles.shadowStyle, headerBackColor ? headerBackColor : null]}>
 
                 {
                     back ?
@@ -228,6 +228,13 @@ const styles = StyleSheet.create({
         fontSize: FONTSIZE.Text22,
         fontWeight: 'bold',
     },
+    shadowStyle: {
+        shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowRadius: 1,
+        shadowOpacity: 0.1,
+        elevation: 2,
+     },
     container: {
         backgroundColor: '#F4F4F4',
         flexDirection: 'row',

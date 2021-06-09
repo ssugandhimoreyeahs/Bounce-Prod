@@ -181,7 +181,7 @@ export default function VendorMarketProfile(props) {
         {!loader && (
             <View style={styles.container}>
                 <ScrollView keyboardShouldPersistTaps='always'
-                    contentContainerStyle={{}}
+                    contentContainerStyle={{flexGrow:1}}
                     style={{ backgroundColor: '#fff', flex: 1 }} ref={scrollRef}  >
 
                     <Header
@@ -198,7 +198,7 @@ export default function VendorMarketProfile(props) {
                         />
 
                         <GooglePlacesInput
-                            floatingLabel={"City (or cities)"}
+                            floatingLabel={"City"}
                             onPress={(data) => {
                                 console.log('DATA_TESt - ', data);
                                 setCity(data.description)
@@ -343,8 +343,8 @@ export default function VendorMarketProfile(props) {
                         } */}
 
                     </View>
-                    <View style={{ height: 70 }}></View>
-                    <View style={{ position: 'absolute', bottom: 40, alignSelf: 'center', width: '95%', paddingBottom: getHp(10) }}>
+                    {/* <View style={{ height: 70 }}></View> */}
+                    <View style={{ position: 'absolute', bottom: 0, alignSelf: 'center', width: '95%', paddingBottom: getHp(10) }}>
                         <CustomButton
                             complete
                             onPress={handleSubmit}

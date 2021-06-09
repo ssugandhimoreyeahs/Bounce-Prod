@@ -21,7 +21,7 @@ class Endpoints extends Server {
   getGenre = '/genres';
   getCertification = '/genres/guardcertification';
   vendorCategory = '/Vendor/Category';
-  vendorList = '/Vendor'; 
+  vendorList = '/vendor'; 
   party = '/party';
 }
 

@@ -208,7 +208,7 @@ function CreateInvitation(props) {
                 } else {
                   Alert.alert(
                     'Alert !',
-                    'Are you sure you want to go back ?. All your changes will be lost!',
+                    'Are you sure you want to go back? All your changes will be lost!',
                     [
                       {
                         text: 'OK',

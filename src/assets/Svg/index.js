@@ -124,9 +124,11 @@ import Cantgo from './Cantgo.svg'
 import Linkedin from './Linkedin.svg'
 import Party_Outline from './Party_Outline.svg'
 import FavouriteMusic from './FavouriteMusic.svg'
+import ChangeBlue from './ChangeBlue.svg'
 
 
 export {
+    ChangeBlue,
     FavouriteMusic,
     Party_Outline,
     Linkedin,

@@ -124,8 +124,9 @@ const styles = StyleSheet.create({
     // marginVertical: 5,
   },
   Title2Style: {
+    marginTop:3,
     fontSize: FONTSIZE.Text14,
-    opacity: 0.8,
-    color: '#000',
+    fontFamily: 'AvenirNext-Medium',
+    color: '#999999',
   },
 });

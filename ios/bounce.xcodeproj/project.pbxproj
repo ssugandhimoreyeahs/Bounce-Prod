@@ -12,12 +12,6 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1B4F3EFE362A4A29A8EA6D0C /* AvenirNext-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 108557ABA86D4956B833F776 /* AvenirNext-Regular.ttf */; };
-		1CD3CCFF26651C37000D512D /* boost_context.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C67D42D2657C6F000923E58 /* boost_context.xcframework */; };
-		1CD3CD0026651C37000D512D /* boost_filesystem.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CAA81B3265B993E00C8AE3A /* boost_filesystem.xcframework */; };
-		1CD3CD0126651C37000D512D /* boost_program_options.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CAA81B5265B993E00C8AE3A /* boost_program_options.xcframework */; };
-		1CD3CD0226651C37000D512D /* boost_regex.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CAA81B7265B993E00C8AE3A /* boost_regex.xcframework */; };
-		1CD3CD0326651C37000D512D /* boost_system.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CAA81B9265B993E00C8AE3A /* boost_system.xcframework */; };
-		1CD3CD0426651C37000D512D /* boost_thread.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CAA81BB265B993E00C8AE3A /* boost_thread.xcframework */; };
 		47E04AB34D304AA1955BF9A5 /* AvenirNext-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63E6C445E7D041DBA6B123AE /* AvenirNext-Bold.ttf */; };
 		5532D0C9703F6C621A2BB6D8 /* libPods-bounce-bounceTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DD035E27FFA8BF5000D4CB /* libPods-bounce-bounceTests.a */; };
 		57C62FB5E5D7E55EF62EB7C8 /* libPods-bounce.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D94E5EED04775AECBFE58FD /* libPods-bounce.a */; };
@@ -144,12 +138,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CD3CCFF26651C37000D512D /* boost_context.xcframework in Frameworks */,
-				1CD3CD0026651C37000D512D /* boost_filesystem.xcframework in Frameworks */,
-				1CD3CD0126651C37000D512D /* boost_program_options.xcframework in Frameworks */,
-				1CD3CD0226651C37000D512D /* boost_regex.xcframework in Frameworks */,
-				1CD3CD0326651C37000D512D /* boost_system.xcframework in Frameworks */,
-				1CD3CD0426651C37000D512D /* boost_thread.xcframework in Frameworks */,
 				57C62FB5E5D7E55EF62EB7C8 /* libPods-bounce.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

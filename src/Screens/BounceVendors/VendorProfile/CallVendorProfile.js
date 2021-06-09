@@ -11,11 +11,12 @@ import { FlatList } from 'react-native';
 import VendorProfile from './index'
 import { fetchGet, getData, postData } from '../../../FetchServices'
 import { ApiClient } from '../../../app/services'
+import { observer } from 'mobx-react';
 
 const { width } = Dimensions.get("window");
 const height = width * 100 / 60;
 
-export default function CallVendorProfile(props) {
+function CallVendorProfile(props) {
     const [loader, setLoader] = useState(false)
     const [getState, setState] = useState(0)
     const [getMedia, setMedia] = useState(null)
@@ -27,9 +28,6 @@ export default function CallVendorProfile(props) {
         allVendorsProfiles = {}
     } = useSelector((state) => state.mainExpenseByCategory);
 
-    // console.log("allVendorsProfiles", allVendorsProfiles)
-    // const { fullName, city, about, vendorCategoryName, language, username, numberOfRatings, profileImage, vendor = {} } = allVendorsProfiles
-    // const { equipment, cuisines, hourlyRate, services, armed, website, genres, guardCertification } = vendor
 
     const onPressPrevious = () => {
         FooterRef.current.scrollToIndex({ animated: true, index: getIndex == 0 ? 0 : getIndex - 1 });
@@ -44,21 +42,32 @@ export default function CallVendorProfile(props) {
     useEffect(() => {
         fetchProfile()
     }, [])
-    // var LENGTH = 0
+
+
+
     const fetchProfile = async () => {
         setLoader(true)
-        let SERVER_RESPONSE = await ApiClient.instance.get(ApiClient.endPoints.vendorList);
-
+        // let SERVER_RESPONSE = await ApiClient.instance.get(ApiClient.endPoints.vendorList);
+        let SERVER_RESPONSE = await axios.get('http://3.12.168.164:3000/vendor', {
+            headers: {
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODMyLCJpYXQiOjE2MjMxNDYwMDksImV4cCI6MTYyMzIzMjQwOX0._rvlXQYotKbWZXRwL-FWao4LRxB4msZY_ZR845MQPTA'
+            }
+        })
+        console.log("SERVER_RESPONSE", SERVER_RESPONSE);
         if (!(SERVER_RESPONSE.statusCode == 401)) {
-            dispatch(fetchVendorData(["ALL_VENDORS_PROFILES", SERVER_RESPONSE]))
+            let tempData = []
+            tempData = Object.values(SERVER_RESPONSE.data)
+            dispatch(fetchVendorData(["ALL_VENDORS_PROFILES", tempData]))
             setLoader(false)
         }
         setLoader(false)
     }
+
+    console.log("allVendorsProfiles", allVendorsProfiles)
+
     const handleCarousel = (item) => {
-        // console.log(' fullArray.length :', fullArray)
-        // console.log("THIS IS LEGNTH", LENGTH);
-        return <VendorProfile
+        console.log('item per item' ,item)
+              return <VendorProfile
             ref={FooterRef}
             item={item}
             imageArray={getMedia == null ? [] : getMedia}
@@ -87,63 +96,5 @@ export default function CallVendorProfile(props) {
         </>
     );
 }
-const styles = StyleSheet.create({
-    friendsImage: {
-        width: getWp(100),
-        height: getHp(100),
-        margin: 2
-    },
-    friendsView: {
-        backgroundColor: '#fff',
-        borderRadius: 7,
-        alignItems: 'center',
-        elevation: 5,
-        marginVertical: 10
-    },
-    textImage: {
-        color: '#000',
-        fontSize: FONTSIZE.Text15,
-        fontWeight: 'bold',
-        paddingBottom: 10
-    },
-    fullInventoryTitleStyle: {
-        color: '#fff',
-        fontSize: 18,
-        opacity: 0.8,
-        marginRight: 0
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#000000',
-        paddingHorizontal: 0
-    },
-    flexDirectionStyle: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        backgroundColor: '#212121',
-        padding: 10
-    },
-    fourItems: {
-        backgroundColor: '#000000',
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    reviewsTitleStyle: {
-        color: '#fff',
-        fontSize: 20,
-    },
-    footerList: {
-        height: 70,
-        width: 100,
-        backgroundColor: '#1D1D1D',
-        borderRadius: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginRight: 5
-    },
-    selectedFooterItem: {
-        backgroundColor: "rgba(255, 46, 0, 0.24)",
-    }
-})
+CallVendorProfile.routeName = "/CallVendorProfile";
+export default observer(CallVendorProfile)

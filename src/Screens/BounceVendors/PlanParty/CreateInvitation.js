@@ -282,7 +282,6 @@ function CreateInvitation(props) {
               handleCarousel()
             )}
 
-<<<<<<< HEAD
 
           <View style={{ marginHorizontal: 10 }}>
 
@@ -322,45 +321,6 @@ function CreateInvitation(props) {
             />
 
             {/* {INTEREST.map((item) => {
-=======
-              <DatePick
-                placeholder={'Date / Time'}
-                handleChange={date => {
-                  console.log('DATE_ON_CHANGE - ', date);
-                  partyModel.party.set({date});
-                }}
-                value={partyModel.party.date}
-                pickerMode={'datetime'}
-                minimumDate={moment().toDate()}
-                maximumDate={moment().add(30, 'day').toDate()}
-                errorMessage={partyModel.party?.partyError?.date}
-              />
-              <FloatingInput
-                floatingLabel={'Address'}
-                value={partyModel.party.location?.addressStr?.toString()}
-                onChange={address => {
-                  partyModel.party.setAddress(address);
-                }}
-                errorMessage={partyModel.party?.partyError?.address}
-                styleProp={{
-                  shadowColor: 'rgba(0, 0, 0, 0.1)',
-                  shadowOpacity: 0.3,
-                  elevation: 2,
-                  shadowRadius: 15,
-                  shadowOffset: {width: 1, height: 13},
-                }}
-              />
-              <CustomTextinput
-                text={'Description...'}
-                multiline
-                value={partyModel.party.description?.toString()}
-                onChange={description => {
-                  partyModel.party.set({description: description});
-                }}
-                errorMessage={partyModel.party?.partyError?.description}
-              />
-              {/* {INTEREST.map((item) => {
->>>>>>> Shadow Fixed
                             return (
                                 <View style={{ marginVertical: 10 }}>
                                     <Text style={[styles.headerTitle, { fontSize: FONTSIZE.Text20, marginVertical: 0 }]}>

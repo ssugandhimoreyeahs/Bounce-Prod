@@ -62,6 +62,9 @@ const DATA = [
   },
 ];
 var imgTemp = [];
+
+
+
 function DjProfile(props) {
   let loader = false;
   const {

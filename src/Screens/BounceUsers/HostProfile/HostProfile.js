@@ -153,7 +153,7 @@ export default function HostProfile(props) {
       });
 
     console.log('SERVER_RESPONSE', SERVER_RESPONSE);
-    console.log('PROFILE_SERVER_RESPONSE', SERVER_RESPONSE);
+    // console.log('PROFILE_SERVER_RESPONSE', SERVER_RESPONSE);
     let StringifyData = await JSON.stringify(SERVER_RESPONSE.data);
     console.log('parsedData', JSON.parse(StringifyData));
 

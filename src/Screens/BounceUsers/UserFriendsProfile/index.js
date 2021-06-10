@@ -234,15 +234,15 @@ function UserFriendsProfile(props) {
     );
   };
 
-  useEffect(() => {
-    fetchProfile();
-  }, []);
+  // useEffect(() => {
+  //   fetchProfile();
+  // }, []);
 
-  const fetchProfile = async () => {
-    const SERVER_RESPONSE = await spotifyToken()
-    console.log("Spotify_all_playlist", SERVER_RESPONSE);
-    setSpotifyData(SERVER_RESPONSE)
-  };
+  // const fetchProfile = async () => {
+  //   const SERVER_RESPONSE = await postData()
+  //   console.log("Spotify_all_playlist", SERVER_RESPONSE);
+  //   setSpotifyData(SERVER_RESPONSE)
+  // };
 
   const handleImage = async () => {
     {

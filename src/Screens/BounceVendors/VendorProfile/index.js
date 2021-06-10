@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Image, ScrollView, Linking, TouchableOpacity } from 'react-native';
+import {
+    View,
+    Text,
+    Dimensions,
+    ScrollView,
+    Linking,
+    TouchableOpacity
+} from 'react-native';
 import {
     Header,
     ImageCarousel,
     IconTitle,
     Scaffold,
     ReviewCard,
-    CustomText
+    CustomText,
+    Footer
 } from '@components'
-import {
-    Message,
-    Favourite,
-} from '@assets'
-import { styles } from './indexCss';
+import { styles as PageStyle } from './indexCss';
+import Back from 'react-native-vector-icons/Ionicons';
 import {
     AddBlue,
-    TagPrice,
-    PlusWhiteCalender,
-    StarWhite,
     DollarOnlyWhite,
-    WebsiteBlack,
-    BlackMenubar,
     Certified,
     Armed,
     Multilingual,
@@ -31,42 +31,35 @@ import {
 } from '@svg'
 import Ratings from '../../../components/RatingStar/Ratings'
 import { Avatar } from 'react-native-elements'
-// import { handleImage } from '@components/ImageVideoPlaceholder'
-import ImagePicker from 'react-native-image-crop-picker';
-import { ImageStore } from 'react-native';
-import { FONTSIZE,getHp,getWp } from '@utils'
+import { FONTSIZE, getHp, getWp } from '@utils'
 import { connect, useSelector, useDispatch } from "react-redux";
-import { fetchVendorData } from "../../../reducer/mainexpensecategory";
 import Spinner from 'react-native-loading-spinner-overlay';
-import { pickDocument } from '@hooks'
-import { fetchGet, getData, postData } from '../../../FetchServices'
 import axios from 'axios';
 import { observer } from 'mobx-react';
+import { Searchbar } from 'react-native-paper';
+import MobxStore from '../../../mobx';
 
-const DATA = [
-    {
-        id: "0",
-        icon: Favourite,
-        messageName: "Favourite",
-    },
-    {
-        id: "1",
-        icon: Message,
-        messageName: "Message",
-    },
 
-];
+
 
 function VendorProfile(props) {
     let loader = false;
+    const {
+        uiStore,
+    } = MobxStore;
+    let styles = PageStyle(uiStore.theme);
     console.log("PROPS ON VENDOR PROFILE :", props);
     const dispatch = useDispatch()
-
     const { item, index = {} } = props?.item || props?.route?.params
     const { arrayLength, onPressPrevious, onPressNext } = props
     console.log("INSIDE ITEM", item);
 
-    const { fullName,
+    const { width } = Dimensions.get("window");
+
+    const {
+        isFavourite,
+        id,
+        fullName,
         city,
         about,
         gallery,
@@ -76,8 +69,8 @@ function VendorProfile(props) {
         numberOfRatings,
         profileImage,
         vendor = {},
-    } = item
-
+    } = item;
+    console.log("THIS IS VENDOR ID -->", id)
     const {
         equipment,
         cuisines,
@@ -90,6 +83,8 @@ function VendorProfile(props) {
         inventory,
     } = vendor
 
+    const [searchQuery, setSearchQuery] = React.useState('');
+    const onChangeSearch = query => setSearchQuery(query);
     const [getState, setState] = useState(0)
     const [getMedia, setMedia] = useState(null)
 
@@ -99,27 +94,46 @@ function VendorProfile(props) {
             onSnapToItem={(index) => setState(index)}
             state={getState}
         />
-    }
-
+    } 
     return (
-        <Scaffold
-            statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
-            <View style={styles.container}>
+        // <Scaffold
+        //     statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
+            <View style={[styles.container, {
+                width: Dimensions.get('window').width,
+                // height:Dimensions.get('window').height,
+            }]} >
                 <Spinner visible={loader} color={'#1FAEF7'} />
                 {!loader && (
-                    <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
+                    <ScrollView style={{ flex: 1 }}
+                        contentContainerStyle={{ flexGrow: 1 }}>
                         <View style={{ flex: 1 }}>
-                            {/* <Header
-                                leftDropdown={
-                                    username !== null ? `@${username !== null ? username : ''}` : ''
-                                }
-                                DropdownAccounts={DATA}
-                                share={<BlackMenubar height={25} width={25} />}
-                                onPress={() => {
-                                    props.navigation.openDrawer();
-                                }}
-                                headerBackColor={{ backgroundColor: '#FFFFFF' }}
-                            /> */}
+
+                            <View style={{
+                                flexDirection: 'row', height: 50,
+                                borderBottomWidth: 2,
+                                borderColor: '#F2F5F6',
+                                backgroundColor: '#fff',
+                                alignItems: 'center'
+                            }}>
+                                <TouchableOpacity
+                                    onPress={() => props.navigation.goBack()}>
+                                    <Back name="chevron-back" color={'#000'} style={{ marginRight: 20, marginLeft: 10 }} size={30} />
+                                </TouchableOpacity>
+
+                                <Searchbar
+                                    placeholder={"Search events"}
+                                    onChangeText={onChangeSearch}
+                                    value={searchQuery}
+                                    inputStyle={{
+                                        fontSize: FONTSIZE.Text14,
+                                        fontFamily: 'AvenirNext-Regular',
+                                    }}
+                                    style={styles.searchBarStyle}
+                                    iconColor={"#999999"}
+                                    placeholderTextColor={"#909090"}
+                                />
+                            </View>
+
 
                             <View style={styles.subContainer}>
                                 <View style={{ paddingHorizontal: 10 }}>
@@ -132,7 +146,7 @@ function VendorProfile(props) {
                                         {profileImage != null ? (
                                             <Avatar
                                                 source={{ uri: `${profileImage.filePath}` }}
-                                                size={getHp(80)}
+                                                size={getHp(60)}
                                                 rounded
                                             />
                                         ) : null}
@@ -159,7 +173,7 @@ function VendorProfile(props) {
                                                         {
                                                             opacity: 0.7,
                                                             fontFamily: 'AvenirNext-Regular',
-                                                            // color: uiStore.theme.colors.primaryText1,
+                                                            color: uiStore.theme.colors.primaryText1,
                                                             fontSize: FONTSIZE.Text14,
                                                             marginTop: 4,
                                                         },
@@ -216,8 +230,8 @@ function VendorProfile(props) {
                                                                     { color: '#696969', fontSize: FONTSIZE.Text14 },
                                                                 ]}>
                                                                 {' '}
-                                (Base Package)
-                              </Text>
+                                                                {"(Base Package)"}
+                                                            </Text>
                                                         </>
                                                     ) : (
                                                                 <Text style={styles.hourStyle}>
@@ -261,7 +275,7 @@ function VendorProfile(props) {
 
                                 {/* View Inventory Add Media Extra button START */}
 
-                                
+
                                 {/* View Inventory Add Media Extra button FINISH */}
 
                                 {!(
@@ -481,17 +495,20 @@ function VendorProfile(props) {
                             <ReviewCard />
                         </View>
                     </ScrollView>
+
                 )}
+                <Footer
+                    isFavourite={isFavourite}
+                    id={id}
+                    threeItems
+                    page={{ current: index + 1, total: arrayLength }}
+                    onPressNext={onPressNext}
+                    onPressPrevious={onPressPrevious}
+                />
             </View>
-        </Scaffold>
+        // </Scaffold>
     );
 }
 VendorProfile.routeName = "/VendorProfile";
 export default observer(VendorProfile)
 
-//     < Footer
-// threeItems
-// page = {{ current: index + 1, total: arrayLength }}
-// onPressNext = { onPressNext }
-// onPressPrevious = { onPressPrevious }
-//     />

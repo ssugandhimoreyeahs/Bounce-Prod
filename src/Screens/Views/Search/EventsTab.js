@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
-import { View, StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native';
+import { View, ScrollView,StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native';
 import { QRCodes, Scaffold, SearchPageTab } from '@components';
 import { FONTSIZE, getHp, getWp } from '@utils';
 import { ChangeBlue } from '@svg'
@@ -40,8 +40,8 @@ export default function EventsTab(props) {
             </TouchableOpacity>
         )
     }
-    return (
-        <View style={{ paddingHorizontal: 10 }}>
+    return (<ScrollView style={{flex:1}} contentContainerStyle={{}}>
+        <View style={{ paddingHorizontal: 10,backgroundColor:'#FBFBFB',flex:1 }}>
             <Text style={[styles.textStyle, { color: '#999999', paddingTop: 10, paddingBottom: 5 }]}> {"Find events in"}</Text>
 
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -107,6 +107,7 @@ export default function EventsTab(props) {
                 </TouchableOpacity>
             </LinearGradient>
         </View>
+        </ScrollView>
     )
 }
 const styles = StyleSheet.create({

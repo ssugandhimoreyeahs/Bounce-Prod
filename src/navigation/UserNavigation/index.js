@@ -14,6 +14,7 @@ import AboutUs from '../../Screens/Views/About/AboutUs';
 import CreateInvitationTemplate from '../../Screens/BounceVendors/PlanParty/CreateInvitationTemplate';
 import CallVendorProfile from '../../Screens/BounceVendors/VendorProfile/CallVendorProfile'
 import VendorProfile from '../../Screens/BounceVendors/VendorProfile'
+import ScrollCarousel from '../../Screens/BounceVendors/VendorProfile/ScrollCarousel'
 
 const UserRootStack = createStackNavigator();
 
@@ -36,6 +37,10 @@ class UserNavigation {
         <UserRootStack.Screen
           name={VendorProfile.routeName}
           component={VendorProfile}
+        />
+        <UserRootStack.Screen
+          name={ScrollCarousel.routeName}
+          component={ScrollCarousel}
         />
 
         <UserRootStack.Screen

@@ -8,7 +8,7 @@ import { LocalStorage } from '../../app/utils/localStorage';
 import MobxStore from '../../mobx';
 import AboutUs from '../Views/About/AboutUs';
 import { shareFunction } from '@components';
-import CallVendorProfile from '../BounceVendors/VendorProfile/CallVendorProfile'
+import ScrollCarousel from '../BounceVendors/VendorProfile/ScrollCarousel'
 
 export default function UserCustomDrawer(props) {
   const { authStore } = MobxStore;
@@ -37,7 +37,7 @@ export default function UserCustomDrawer(props) {
       icon: <Settings height={30} width={30} />,
       name: 'Vendor Profiles',
       onPress: () => {
-        props.navigation.navigate(CallVendorProfile.routeName)
+        props.navigation.navigate(ScrollCarousel.routeName)
       },
     },
     {
@@ -147,15 +147,16 @@ export default function UserCustomDrawer(props) {
   return (
     <View style={styles.container}>
       <View style={[styles.flex, { padding: 15 }]}>
-        <Text style={styles.heading}>Settings</Text>
-        <BlackClose
-          hitSlop={bigHitSlop}
+        <Text style={styles.heading}>{"Settings"}</Text>
+
+        <TouchableOpacity
           onPress={() => {
             props.navigation.closeDrawer();
           }}
-          height={20}
-          width={20}
-        />
+          hitSlop={bigHitSlop}>
+          <BlackClose height={20} width={20} />
+        </TouchableOpacity>
+
       </View>
       <FlatList
         data={SERVICES}

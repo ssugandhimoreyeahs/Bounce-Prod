@@ -1,17 +1,11 @@
 import React, { useState, useRef } from 'react'
-import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity, ScrollView, Dimensions, Alert } from 'react-native'
 import {
-    FooterRight,
-    FooterLeft,
-    AngleBlueLeft,
-    AngleBlueRight,
-    Favourited,
-    GreyHome,
-    WhiteNotifications,
-    GreyCalender,
-    Message,
-    Favourite,
-} from '@assets'
+    View,
+    Text,
+    StyleSheet,
+    FlatList,
+    TouchableOpacity,
+} from 'react-native'
 import {
     WhiteMessageOutline,
     FavouritedHeart,
@@ -24,21 +18,10 @@ import {
 import { shareFunction } from '@components'
 import { FONTSIZE, getHp, getWp, smallHitSlop } from '@utils';
 import { CustomButton } from '@components';
+import axios from 'axios'
+import MobxStore from '../../mobx'
 
-const { height, width } = Dimensions.get('screen')
-// const DATA = [
-//     {
-//         id: "0",
-//         icon: <FavouriteHeart height={30} width={30} />,
-//         messageName: "Favourite",
-//     },
-//     {
-//         id: "1",
-//         icon: <MessageBlack height={30} width={30} />,
-//         messageName: "Message",
-//     },
 
-// ];
 const Item = ({ item, onPress, style, selectedId }) => (
     <TouchableOpacity onPress={onPress} style={[styles.footerList,
     style.backgroundColor ? styles.selectedFooterItem
@@ -55,8 +38,11 @@ const Item = ({ item, onPress, style, selectedId }) => (
 );
 
 export default function Footer(props) {
-
+    const { userProfile: userinfo } = MobxStore.authStore;
+    const token = userinfo?.token;
     const {
+        id,
+        isFavourite = false,
         buttonStack = [],
         disable = false,
         text,
@@ -76,6 +62,9 @@ export default function Footer(props) {
     const [favourite, setFavourite] = useState(0)
     const [shared, setShared] = useState(0)
     // const [favourite,setFavourite]=useState(0)
+
+    console.log("ID CAME HERE-->", id)
+    console.log("isFavourite CAME HERE-->", isFavourite)
 
     const renderItem = ({ item, index }) => {
         if (selectedId == 0) {
@@ -105,6 +94,17 @@ export default function Footer(props) {
     //     FooterRef.current.scrollToIndex({ animated: true, index: getIndex == buttonStack.length - 1 ? buttonStack.length - 1 : getIndex + 1 });
     //     { getIndex != buttonStack.length - 1 ? setIndex(getIndex + 1) : null }
     // };
+
+    const handleColored = async () => {
+        console.log(id, ',,,,final id')
+        const MARKED_SERVER_RESPONSE = await axios.post('http://3.12.168.164:3000/vendor/addFavourite/' + `${id}`, {}, {
+            headers: {
+                'Authorization': `Bearer ` + `${token}`
+            },
+        })
+
+        console.log("MARKED_SERVER_RESPONSE", MARKED_SERVER_RESPONSE)
+    }
 
     return (
         <View>
@@ -161,16 +161,22 @@ export default function Footer(props) {
 
             }
             { threeItems ?
-                (<View style={styles.container} >
-                    <View style={styles.oneFooter}>
-                        <TouchableOpacity ref={FooterRef} onPress={() => onPressPrevious()}>
+                (<View style={[styles.container]} >
+                    <View style={[styles.oneFooter]}>
+                        <TouchableOpacity
+                            ref={FooterRef}
+                            onPress={() => onPressPrevious()}>
                             <LeftBlueArrow height={20} width={20} />
                         </TouchableOpacity>
                         {
                             page ?
                                 <Text style={{ fontWeight: 'bold', color: '#000', fontSize: FONTSIZE.Text16 }}>
                                     {page.current} /
-            <Text style={{ color: '#000', fontSize: FONTSIZE.Text16, fontWeight: 'normal' }}>
+            <Text style={{
+                                        color: '#000',
+                                        fontSize: FONTSIZE.Text16,
+                                        fontWeight: 'normal'
+                                    }}>
                                         {` ${page.total}`}
                                     </Text>
                                 </Text>
@@ -181,13 +187,19 @@ export default function Footer(props) {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={{ flexDirection: 'row', borderTopWidth: 0.5, borderColor: '#999999', justifyContent: 'space-around' }}>
-                        {console.log("THIS IS FAVOURITE", favourite)}
+                    <View style={styles.threeStyle}>
+
                         <TouchableOpacity
-                            onPress={() => setFavourite(favourite + 1)}
-                            style={[styles.footerList]}
+                            onPress={() => {
+                                console.log("THIS IS FAVOURITE")
+                                handleColored()
+                            }
+                            }
+                            style={isFavourite ? [styles.colored] : [styles.footerList]}
                         >
-                            {
+                            {isFavourite ?
+                                <FavouritedHeart height={21} width={21} />
+                                :
                                 <BlackOutlineHeart height={21} width={21} />
                             }
                             <Text style={styles.reviewsTitleStyle}>
@@ -196,8 +208,8 @@ export default function Footer(props) {
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                            onPress={onPress} style={[styles.footerList,
-                            ]} >
+                            onPress={() => console.log("THIS IS MESSAGE")}
+                            style={false ? [styles.colored] : [styles.footerList, { backgroundColor: 'rgba(31, 174, 247, 0.2)' }]}>
                             {
                                 <WhiteMessageOutline height={21} width={21} />
                             }
@@ -205,7 +217,7 @@ export default function Footer(props) {
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                            onPress={() => setShared(shared + 1)}
+                            onPress={() => console.log("THIS IS SHARE")}
                             style={[styles.footerList,]} >
                             {
                                 <BlackOutlineShare height={21} width={21} />
@@ -225,7 +237,27 @@ export default function Footer(props) {
 
 
 const styles = StyleSheet.create({
+    colored: {
+        backgroundColor: 'rgba(255, 46, 0, 0.2)',
+        marginVertical: 10,
+        borderRadius: 20,
+        width: getWp(100),
+        height: getHp(69),
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 2,
+    },
+    threeStyle: {
+        flexDirection: 'row',
+        borderTopWidth: 0.5,
+        borderColor: '#999999',
+        justifyContent: 'space-around',
+        height: getHp(105),
+        alignItems: 'center',
+    },
     oneFooter: {
+        height: getHp(50),
+        alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: '#fff',
@@ -249,38 +281,25 @@ const styles = StyleSheet.create({
 
     },
     container: {
-        // borderTopWidth:0.5,
-        // flex:1,
         borderTopColor: '#696969',
         backgroundColor: '#fff',
-        // alignItems: 'center',
-        // flexDirection: 'row',
-        // justifyContent: 'space-between',
-        paddingVertical: 0,
-        elevation: 10,
-        // width:'100%'
+        elevation: 2,
     },
     reviewsTitleStyle: {
+        fontFamily: 'AvenirNext-Regular',
         color: '#000',
         fontSize: FONTSIZE.Text12,
-        marginVertical: 2
+        marginTop: 5
     },
     footerList: {
-        // height: 80,
-        // width: width / 3, //100
         marginVertical: 10,
         backgroundColor: '#fff',
         borderRadius: 20,
-        // borderColor:'#fff',
-        paddingVertical: 15,
-        height: getHp(70),
         width: getWp(100),
         alignItems: 'center',
         justifyContent: 'center',
-        marginRight: 5,
-        elevation: 5,
-
-
+        elevation: 2,
+        height: getHp(69),
     },
     selectedFooterItem: {
         backgroundColor: "rgba(255, 46, 0, 0.24)",

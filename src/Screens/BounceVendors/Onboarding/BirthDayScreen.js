@@ -47,7 +47,9 @@ export default function BirthDayScreen(props) {
     }
     return (
         <Scaffold>
-            <KeyboardAwareScrollView style={{ flexGrow: 1 }} contentContainerStyle={{ flex: 1 }}>
+            <KeyboardAwareScrollView
+                style={{ flex: 1, backgroundColor: '#FBFBFB' }}
+                contentContainerStyle={{ flexGrow: 1 }}>
                 <View style={styles.container}>
                     <Text style={styles.HeadingStyle}>{"When’s your birthday? 🎂"}</Text>
 
@@ -60,7 +62,7 @@ export default function BirthDayScreen(props) {
                     </View>
 
                     <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
-                    <ProgressCircle currentProgress={3} containerStyle={{marginBottom: 20}}/>
+                        <ProgressCircle currentProgress={3} containerStyle={{ marginBottom: 20 }} />
                         <CustomButton
                             userContinue
                             onPress={handleSubmit}

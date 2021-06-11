@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert,ToastAndroid } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, ToastAndroid } from 'react-native'
 import { Header, Root, GooglePlacesInput, CustomDropdown, CustomButton, FloatingInput, ModalDropDownComponent } from '@components'
 import { Avatar } from 'react-native-elements'
 import { UploadBlue, BlackCircleCross } from '@svg';
@@ -11,7 +11,7 @@ import CustomTextinput from '../../../components/CustomTextinput';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { UserContext } from '../../../context/profiledataProvider';
 import MobxStore from '../../../mobx';
-import { observer } from 'mobx-react'; 
+import { observer } from 'mobx-react';
 import UploadInventory from '../../host/UploadInventory';
 // import { na } from '@react-navigation/native';
 import { Scaffold } from '@components'
@@ -25,26 +25,17 @@ function DJSignup(props) {
         languageReduxObject,
         genreReduxObject,
         certificationReduxObject,
-        originalLangObject,
-        originalGenreObject,
-        originalCertiObject
     } = useSelector((state) => state.currentStateData);
 
     const scrollRef = useRef();
-    //const { vendorType } = useSelector((state) => state.mainExpenseByCategory);
-    // const { token = {}, user = {} } = useSelector((state) => state.mainExpenseByCategory.vendorProfileData);
     const dispatch = useDispatch()
-
     const token = userinfo?.token
-    const user = userinfo?.user 
-
-
+    const user = userinfo?.user
     const [business, setBusiness] = useState(null)
     const [email, setEmail] = useState(null)
     const [phone, setPhone] = useState(null)
     const [picture, setPicture] = useState(null)
     const [loader, setLoader] = useState(false)
-
     const [city, setCity] = useState(null)
     const [price, setPrice] = useState(null)
     const [description, setDescription] = useState(null)
@@ -54,7 +45,6 @@ function DJSignup(props) {
     const [cuisines, setCuisines] = useState(null)
     const [armed, setArmed] = useState(null)
     const [footer, openFooter] = useState(false)
-
     const [language, setLanguage] = useState({ lang: [] })
     const [genre, setGenre] = useState({ countries: [] })
     const [certification, setCertification] = useState({ certi: [] });
@@ -64,9 +54,9 @@ function DJSignup(props) {
             handleFiller()
             fetchData()
         });
-    
+
         return unsubscribe;
-      }, [props.navigation, authStore.userProfile]);
+    }, [props.navigation, authStore.userProfile]);
     useEffect(() => {
         if (handleFiller) {
             handleFiller();
@@ -81,7 +71,7 @@ function DJSignup(props) {
     const { vendorCategoryName } = user
     let temp = []
     let genretemp = []
-    let guardtemp = [] 
+    let guardtemp = []
     const handleImage = () => {
         ImagePicker.openPicker({
             width: 300,
@@ -118,13 +108,13 @@ function DJSignup(props) {
             console.log('ERROR - ', error);
         };
     }
-    const handleFiller = async () => { 
+    const handleFiller = async () => {
         console.log("USER_LANG_TEST - ", JSON.stringify(user.language));
         setPicture(user.profileImage?.filePath != null ? user.profileImage?.filePath : null)
         let L = []
         user.language.map((item) => {
             L.push(item)
-        }) 
+        })
         setLanguage(() => ({ lang: L }));
 
 
@@ -146,286 +136,300 @@ function DJSignup(props) {
 
 
     const handleSubmit = async () => {
-        
+
         try {
             if (picture == null) {
-                return Alert.alert('Message','Please select profile picture!');
+                return Alert.alert('Message', 'Please select profile picture!');
             }
-        setLoader(true);
-        
-        let milliseconds = new Date().getTime();
-        let imgObj = {
-            uri: `${picture}`,
-            type: "image/jpeg",
-            name: `image-${milliseconds}.jpg`,
-        }
+            setLoader(true);
 
-        let formData = new FormData()
-        formData.append('email', email)
-        formData.append('phoneNumber', phone)
-        formData.append('fullName', business)
-        formData.append('city', city)
-        formData.append('about', description)
-        formData.append('website', website)
-        formData.append('language', JSON.stringify(language.lang))
-        formData.append('genres', JSON.stringify(genre.countries))
-        formData.append('services', services)
-        formData.append('guardCertification', JSON.stringify(certification.certi))
-        formData.append('armed', armed)
-        formData.append('cuisines', cuisines)
-        formData.append('equipment', equipment)
-        
-        if (userinfo?.user?.profileImage != picture) {
-            formData.append('profileImageFile', imgObj);
-        }else {
-            formData.append('profileImage', userinfo?.user?.profileImage?.id);
-        }  
-
-        formData.append('hourlyRate', price); 
-        const venderRegisterResponse = await axios.post('http://3.12.168.164:3000/vendor/updatevendor', formData, {
-            headers: {
-                'Authorization': 'bearer ' + `${token}`
+            let milliseconds = new Date().getTime();
+            let imgObj = {
+                uri: `${picture}`,
+                type: "image/jpeg",
+                name: `image-${milliseconds}.jpg`,
             }
-        })
-        setLoader(false);
-        if (venderRegisterResponse.status == 201 || venderRegisterResponse.status == 200) {
-            Toast("Profile Updated Successfully!")
-            authStore.async.reloadVendor();
-        }
 
-        }catch(error) {
+            let formData = new FormData()
+            formData.append('email', email)
+            formData.append('phoneNumber', phone)
+            formData.append('fullName', business)
+            formData.append('city', city)
+            formData.append('about', description)
+            formData.append('website', website)
+            formData.append('language', JSON.stringify(language.lang))
+            formData.append('genres', JSON.stringify(genre.countries))
+            formData.append('services', services)
+            formData.append('guardCertification', JSON.stringify(certification.certi))
+            formData.append('armed', armed)
+            formData.append('cuisines', cuisines)
+            formData.append('equipment', equipment)
+
+            if (userinfo?.user?.profileImage != picture) {
+                formData.append('profileImageFile', imgObj);
+            } else {
+                formData.append('profileImage', userinfo?.user?.profileImage?.id);
+            }
+
+            formData.append('hourlyRate', price);
+            const venderRegisterResponse = await axios.post('http://3.12.168.164:3000/vendor/updatevendor', formData, {
+                headers: {
+                    'Authorization': 'bearer ' + `${token}`
+                }
+            })
+            setLoader(false);
+            if (venderRegisterResponse.status == 201 || venderRegisterResponse.status == 200) {
+                Toast("Profile Updated Successfully!")
+                authStore.async.reloadVendor();
+            }
+
+        } catch (error) {
             console.log('EDIT_PROFILE_ERROR - ', error);
             setLoader(false);
-            setTimeout(()=>{
+            setTimeout(() => {
                 return Alert.alert('Message', 'Something went wrong');
-            },300);
+            }, 300);
         }
 
     }
     console.log("LANG_TEST - ", language.lang);
     return (
-        <Scaffold>
+        <Scaffold
+            statusBarStyle={{ backgroundColor: '#F4F4F4' }}>
             <Spinner visible={loader} color={'#1FAEF7'} />
-           
-                <View style={styles.container}>
+            <View style={styles.container}>
+                <ScrollView
+                    keyboardShouldPersistTaps='always'
+                    ref={scrollRef}
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    style={{ flex: 1 }}
+                >
+                    <Header
+                        back
+                        headerTitle={"Edit Profile"}
+                        onPress={() => props.navigation.goBack()}
+                    />
+                    <View style={{ paddingHorizontal: 10, paddingTop: 5 }}>
 
-                    <ScrollView keyboardShouldPersistTaps='always'
-                        ref={scrollRef} >
-                        <Header
-                            back
-                            headerTitle={"Edit Profile"}
-                            onPress={() => props.navigation.goBack()}
+                        <FloatingInput
+                            floatingLabel={"Business Name"}
+                            onChange={(value) => setBusiness(value)}
+                            value={business}
                         />
-                        <View style={{ paddingHorizontal: 10, paddingTop: 5 }}>
 
-                            <FloatingInput
-                                floatingLabel={"Business Name"}
-                                onChange={(value) => setBusiness(value)}
-                                value={business}
+                        {picture == null ?
+                            <TouchableOpacity onPress={handleImage} style={{ padding: 20, marginVertical: getHp(30), justifyContent: 'center', alignItems: 'center' }}>
+                                <View style={{ borderRadius: 100, elevation: 10, backgroundColor: '#fff', }}>
+                                    <UploadBlue height={getHp(100)} width={getHp(100)} />
+                                </View>
+                                <Text style={{
+                                    fontSize: FONTSIZE.Text19, color: '#000', marginTop: 10, fontFamily: 'AvenirNext-Regular',
+                                }}>{"Upload Profile Picture"}</Text>
+                            </TouchableOpacity>
+                            :
+                            <>
+                                <TouchableOpacity onPress={() => openFooter(true)}>
+                                    <View style={{ marginBottom: getHp(23), justifyContent: 'center', alignItems: 'center' }}>
+                                        <View style={{ marginVertical: 30 }}>
+                                            <Avatar source={{
+                                                uri: picture,
+                                            }} size={getHp(250)} rounded />
 
-                            />
-
-                            {picture == null ?
-                                <TouchableOpacity onPress={handleImage} style={{ padding: 20, marginVertical: getHp(30), justifyContent: 'center', alignItems: 'center' }}>
-                                    <View style={{ borderRadius: 100, elevation: 10, backgroundColor: '#fff', }}>
-                                        <UploadBlue height={getHp(100)} width={getHp(100)} />
-                                    </View>
-                                    <Text style={{
-                                        fontSize: FONTSIZE.Text19, color: '#000', marginTop: 10, fontFamily: 'AvenirNext-Regular',
-                                    }}>{"Upload Profile Picture"}</Text>
-                                </TouchableOpacity>
-                                :
-                                <>
-                                    <TouchableOpacity onPress={() => openFooter(true)}>
-                                        <View style={{ marginBottom: getHp(23), justifyContent: 'center', alignItems: 'center' }}>
-                                            <View style={{ marginVertical: 30 }}>
-                                                <Avatar source={{
-                                                    uri: picture,
-                                                }} size={getHp(250)} rounded />
-
-                                                <View style={{ borderRadius: 100, elevation: 10, backgroundColor: '#fff', }}>
-                                                    <UploadBlue height={getHp(80)} width={getWp(80)} style={{ position: 'absolute', bottom: -38, resizeMode: 'contain', alignSelf: 'center' }} />
-                                                </View>
-                                                {footer ?
-                                                    <ImageFooter />
-                                                    : null
-                                                }
+                                            <View style={styles.uploadCamera}>
+                                                <UploadBlue
+                                                    height={getHp(100)}
+                                                    width={getWp(120)}
+                                                    style={{ resizeMode: 'contain', alignSelf: 'center' }} />
                                             </View>
+                                            {footer ?
+                                                <ImageFooter />
+                                                : null
+                                            }
                                         </View>
-                                    </TouchableOpacity>
-                                </>
-                            }
-
-
-                            <FloatingInput
-                                floatingLabel={"Email"}
-                                value={email}
-                                onChange={(value) => setEmail(value)}
-                            />
-                            <FloatingInput
-                                keyboardType={'numeric'}
-                                floatingLabel={"Phone Number"}
-                                onChange={(value) => setPhone(value)}
-                                value={phone}
-                            />
-
-                            <GooglePlacesInput
-                                floatingLabel={"City (or cities)"}
-                                onPress={(data) => {
-                                    setCity(data.description)
-
-                                }}
-                                value={city}
-                            />
-
-                            <FloatingInput
-                                keyboardType={'numeric'}
-                                floatingLabel={"Starting Price"}
-                                onChange={(value) => setPrice(value)}
-                                value={`${price}`}
-                            />
-                            <FloatingInput
-                                floatingLabel={"Website"}
-                                onChange={(value) => setWebsite(value)}
-                                value={website}
-                            />
-                            <CustomTextinput
-                                text={"Description"}
-                                multiline
-                                onChange={(value) => setDescription(value)}
-                                value={description}
-                            />
-
-                            {languageReduxObject?.length > 0 ?
-                                <>
-                                    <ModalDropDownComponent
-                                        onDropDownPress={() => {
-                                             
-                                            scrollRef.current.scrollToEnd({animated: true});
-                                        }}
-                                        placeholder={'Please select language'}
-                                        onInitialValue={[...language.lang]}
-                                        options={languageReduxObject}
-                                        labelProp={'label'}
-                                        uniqueProp={'value'}
-                                        onSelectItems={item => {
-                                            setLanguage({ lang: item })
-                                        }
-                                        }
-                                    />
-
-                                </>
-                                : null
-                            }
-
-                            {vendorCategoryName == "DJ" ?
-                                <>
-                                    {genreReduxObject?.length > 0 ?
-                                        <>
-                                            <ModalDropDownComponent
-                                                placeholder={'Please select genre'}
-                                                onInitialValue={genre.countries}
-                                                options={genreReduxObject}
-                                                labelProp={'label'}
-                                                uniqueProp={'value'}
-                                                onSelectItems={item => {
-                                                    setGenre({ countries: item })
-                                                }
-                                                }
-                                            />
-                                        </>
-                                        : null}
-
-                                    <CustomTextinput
-                                        text={"Equipment"}
-                                        multiline
-                                        onChange={(value) => setEquipment(value)}
-                                        value={equipment}
-                                    />
-
-                                </>
-                                : null}
-
-                            {vendorCategoryName == "Security" ?
-                                <>
-                                    {certificationReduxObject?.length > 0 ?
-                                        <>
-
-                                            <ModalDropDownComponent
-                                                placeholder={'Please select certification'}
-                                                onInitialValue={certification.certi}
-                                                options={certificationReduxObject}
-                                                labelProp={'label'}
-                                                uniqueProp={'value'}
-                                                onSelectItems={item => {
-                                                    setCertification({ certi: item })
-                                                }
-                                                }
-                                            />
-                                        </>
-                                        : null}
-
-                                    <FloatingInput
-                                        floatingLabel={"Armed"}
-                                        onChange={(value) => setArmed(value)}
-                                        value={armed}
-                                    />
-                                </>
-                                : null}
-
-                            {vendorCategoryName == "Catering" ?
-                                <>
-                                    <FloatingInput
-                                        floatingLabel={"Cuisines"}
-                                        onChange={(value) => setCuisines(value)}
-                                        value={cuisines}
-                                    />
-                                    <FloatingInput
-                                        floatingLabel={"Services"}
-                                        onChange={(value) => setServices(value)}
-                                        value={services}
-                                    />
-                                </>
-                                :
-                                null
-                            }
-                            {vendorCategoryName != "Catering" &&
-                                vendorCategoryName != "Security" &&
-                                vendorCategoryName != "DJ" ?
-                                <>
-                                    <FloatingInput
-                                        floatingLabel={"Services"}
-
-                                        onChange={(value) => setServices(value)}
-                                        value={services}
-                                    />
-                                </>
-                                : null
-                            }
-                            {user?.vendorCategoryName == 'Event Rentals' &&
-                                <TouchableOpacity style={styles.colButtonStyle} onPress={() => props.navigation.navigate(UploadInventory.routeName, {
-                                    image: user?.vendor?.inventory
-                                })} >
-                                    <Text style={[styles.titleStyle]}>
-                                        {"Edit Inventory"}
-                                    </Text>
+                                    </View>
                                 </TouchableOpacity>
-                            }
-    
-                            <CustomButton
-                                complete
-                                onPress={handleSubmit}
-                                ButtonTitle={"Continue"}
-                            />
-                            <View style={{ marginVertical: 40 }} />
-                        </View>
-                    </ScrollView>
-                </View>
-    
+                            </>
+                        }
+
+
+                        <FloatingInput
+                            floatingLabel={"Email"}
+                            value={email}
+                            onChange={(value) => setEmail(value)}
+                        />
+                        <FloatingInput
+                            keyboardType={'numeric'}
+                            floatingLabel={"Phone Number"}
+                            onChange={(value) => setPhone(value)}
+                            value={phone}
+                        />
+
+                        <GooglePlacesInput
+                            floatingLabel={"City"}
+                            onPress={(data) => {
+                                setCity(data.description)
+
+                            }}
+                            value={city}
+                        />
+
+                        <FloatingInput
+                            keyboardType={'numeric'}
+                            floatingLabel={"Starting Price"}
+                            onChange={(value) => setPrice(value)}
+                            value={`${price}`}
+                        />
+                        <FloatingInput
+                            floatingLabel={"Website"}
+                            onChange={(value) => setWebsite(value)}
+                            value={website}
+                        />
+                        <CustomTextinput
+                            text={"Description"}
+                            multiline
+                            onChange={(value) => setDescription(value)}
+                            value={description}
+                        />
+
+                        {languageReduxObject?.length > 0 ?
+                            <>
+                                <ModalDropDownComponent
+                                    onDropDownPress={() => {
+
+                                        scrollRef.current.scrollToEnd({ animated: true });
+                                    }}
+                                    placeholder={'Please select language'}
+                                    onInitialValue={[...language.lang]}
+                                    options={languageReduxObject}
+                                    labelProp={'label'}
+                                    uniqueProp={'value'}
+                                    onSelectItems={item => {
+                                        setLanguage({ lang: item })
+                                    }
+                                    }
+                                />
+
+                            </>
+                            : null
+                        }
+
+                        {vendorCategoryName == "DJ" ?
+                            <>
+                                {genreReduxObject?.length > 0 ?
+                                    <>
+                                        <ModalDropDownComponent
+                                            placeholder={'Please select genre'}
+                                            onInitialValue={genre.countries}
+                                            options={genreReduxObject}
+                                            labelProp={'label'}
+                                            uniqueProp={'value'}
+                                            onSelectItems={item => {
+                                                setGenre({ countries: item })
+                                            }
+                                            }
+                                        />
+                                    </>
+                                    : null}
+
+                                <CustomTextinput
+                                    text={"Equipment"}
+                                    multiline
+                                    onChange={(value) => setEquipment(value)}
+                                    value={equipment}
+                                />
+
+                            </>
+                            : null}
+
+                        {vendorCategoryName == "Security" ?
+                            <>
+                                {certificationReduxObject?.length > 0 ?
+                                    <>
+
+                                        <ModalDropDownComponent
+                                            placeholder={'Please select certification'}
+                                            onInitialValue={certification.certi}
+                                            options={certificationReduxObject}
+                                            labelProp={'label'}
+                                            uniqueProp={'value'}
+                                            onSelectItems={item => {
+                                                setCertification({ certi: item })
+                                            }
+                                            }
+                                        />
+                                    </>
+                                    : null}
+
+                                <FloatingInput
+                                    floatingLabel={"Armed"}
+                                    onChange={(value) => setArmed(value)}
+                                    value={armed}
+                                />
+                            </>
+                            : null}
+
+                        {vendorCategoryName == "Catering" ?
+                            <>
+                                <FloatingInput
+                                    floatingLabel={"Cuisines"}
+                                    onChange={(value) => setCuisines(value)}
+                                    value={cuisines}
+                                />
+                                {/* <FloatingInput
+                                    floatingLabel={"Services"}
+                                    onChange={(value) => setServices(value)}
+                                    value={services}
+                                /> */}
+                            </>
+                            :
+                            null
+                        }
+                        {vendorCategoryName != "Catering" &&
+                            vendorCategoryName != "Security" &&
+                            vendorCategoryName != "DJ" ?
+                            <>
+                                {/* <FloatingInput
+                                    floatingLabel={"Services"}
+                                    onChange={(value) => setServices(value)}
+                                    value={services}
+                                /> */}
+                            </>
+                            : null
+                        }
+                        {user?.vendorCategoryName == 'Event Rentals' &&
+                            <TouchableOpacity style={styles.colButtonStyle} onPress={() => props.navigation.navigate(UploadInventory.routeName, {
+                                image: user?.vendor?.inventory
+                            })} >
+                                <Text style={[styles.titleStyle]}>
+                                    {"Edit Inventory"}
+                                </Text>
+                            </TouchableOpacity>
+                        }
+                        <CustomButton
+                            complete
+                            onPress={handleSubmit}
+                            ButtonTitle={"Continue"}
+                        />
+                        <View style={{ marginBottom: 10 }} />
+                    </View>
+                </ScrollView>
+            </View>
         </Scaffold >
     )
 }
 const styles = StyleSheet.create({
+    uploadCamera: {
+        alignSelf: 'center',
+        position: 'absolute',
+        bottom: -38,
+        borderRadius: 100,
+        elevation: 10,
+        height: getHp(90),
+        width: getHp(90),
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+    },
     titleStyle: {
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text20,
@@ -434,6 +438,7 @@ const styles = StyleSheet.create({
     },
     container: {
         backgroundColor: '#FBFBFB',
+        flex: 1
     },
     crossButton: {
         position: 'absolute',

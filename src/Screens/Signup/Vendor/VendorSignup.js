@@ -112,12 +112,14 @@ export default function VendorSignup(props) {
             setUsername(value)
         }
     }
-    return (<Scaffold>
+    return (<Scaffold
+        statusBarStyle={{ backgroundColor: '#F4F4F4' }}>
         <ScrollView
             keyboardShouldPersistTaps='always'
             contentContainerStyle={{ flexGrow: 1 }}
             style={{ backgroundColor: '#FBFBFB', flex: 1 }}>
             <Header
+                headerBackColor={{ paddingBottom: 20, backgroundColor: 'rgba(238, 238, 238, 0.5)' }}
                 back
                 headerTitle={`Create ${vendorType} Profile`}
                 onPress={() => props.navigation.goBack()}
@@ -129,7 +131,11 @@ export default function VendorSignup(props) {
                         <TouchableOpacity onPress={handleImage} style={{
                             alignItems: 'center'
                         }}>
-                            <View style={{ borderRadius: 100, elevation: 10, backgroundColor: '#fff', }}>
+                            <View style={{
+                                borderRadius: 100,
+                                elevation: 10,
+                                backgroundColor: '#fff',
+                            }}>
                                 <UploadBlue height={getHp(100)} width={getHp(100)} />
                             </View>
 
@@ -144,9 +150,17 @@ export default function VendorSignup(props) {
                             <TouchableOpacity onPress={() => openFooter(true)} style={{ marginVertical: 30 }}>
                                 <Avatar source={{
                                     uri: picture.path,
-                                }} size={getHp(224)} rounded />
-                                <View >
-                                    <UploadBlue height={50} width={50} style={{ position: 'absolute', bottom: -25, resizeMode: 'contain', alignSelf: 'center' }} />
+                                }} size={getHp(250)} rounded />
+                                <View style={{ alignItems: 'center' }}>
+                                    <UploadBlue
+                                        height={getHp(90)}
+                                        width={getWp(90)}
+                                        style={{
+                                            position: 'absolute',
+                                            bottom: -40,
+                                            resizeMode: 'contain',
+                                        }}
+                                    />
                                 </View>
                                 {footer ?
                                     <ImageFooter />

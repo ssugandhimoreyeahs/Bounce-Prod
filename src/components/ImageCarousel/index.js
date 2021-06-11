@@ -26,15 +26,15 @@ export default function ImageCarousel(props) {
                 {
                     value === 'Instagram' ?
                         <View style={{}}>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Image source={item} style={{ borderRadius: 7, width: '30%', height: getHp(125), margin: 2 }} />
-                                <Image source={item} style={{ borderRadius: 7, width: '30%', height: getHp(125), margin: 2 }} />
-                                <Image source={item} style={{ borderRadius: 7, width: '30%', height: getHp(125), margin: 2 }} />
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                                <Image source={item} style={styles.instaStyles} />
+                                <Image source={item} style={styles.instaStyles} />
+                                <Image source={item} style={styles.instaStyles} />
                             </View>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Image source={item} style={{ borderRadius: 7, width: '30%', height: getHp(125), margin: 2 }} />
-                                <Image source={item} style={{ borderRadius: 7, width: '30%', height: getHp(125), margin: 2 }} />
-                                <Image source={item} style={{ borderRadius: 7, width: '30%', height: getHp(125), margin: 2 }} />
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                                <Image source={item} style={styles.instaStyles} />
+                                <Image source={item} style={styles.instaStyles} />
+                                <Image source={item} style={styles.instaStyles} />
                             </View>
                         </View>
                         :
@@ -102,7 +102,6 @@ export default function ImageCarousel(props) {
                                     value == 'Normal' ?
                                         <View style={{
                                             alignItems: 'center',
-                                            backgroundColor: 'red'
                                         }}>
                                             <Image source={item}
                                                 style={{ width: '100%', height: 400, }} />
@@ -158,18 +157,18 @@ export default function ImageCarousel(props) {
                 :
                 <Pagination
                     containerStyle={{ backgroundColor: 'rgba(52, 52, 52, 0)', marginVertical: -20 }}
-
                     dotsLength={imageArray.length}
                     activeDotIndex={state}
                     dotStyle={{
-
-                        width: 10,
-                        height: 10,
+                        width: 8,
+                        height: 8,
                         borderRadius: 5,
-                        marginHorizontal: -5,
+                        marginHorizontal: -10,
                         backgroundColor: '#1FAEF7',
                     }}
                     inactiveDotStyle={{
+                        width: 8,
+                        height: 8,
                         backgroundColor: '#696969'
                     }}
                     inactiveDotScale={0.6}
@@ -181,6 +180,13 @@ export default function ImageCarousel(props) {
 
 
 const styles = StyleSheet.create({
+    instaStyles: {
+        borderRadius: 4,
+        // width: '32%',
+        height: getHp(118),
+        width: getWp(118),
+        margin: 2
+    },
     imageButton: {
         borderRadius: 100,
         elevation: 10,
@@ -188,7 +194,7 @@ const styles = StyleSheet.create({
         padding: 10,
         position: 'absolute',
         zIndex: 100,
-        bottom: 40,
+        bottom: 20,
         right: 20
     },
     friendsImage: {

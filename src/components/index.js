@@ -52,9 +52,9 @@ import {
     ChooseVendorCard,
     VendorCard,
     Tabview,
-    PrivacyBlock,
     EventTabview,
-    ThreeFooterButtons
+    ThreeFooterButtons,
+    SearchPageTab,
 } from './BreakedComponents'
 
 import DropDown from './CustomDropdown/DropDown'
@@ -62,12 +62,13 @@ import TagsCollapsible from './TagsCollapsible';
 import ProgressCircle from './ProgressCircle';
 import AppStatusBar from './AppStatusBar';
 import Scaffold from './Scaffold';
+import PublicPrivateButton from './PublicPrivateButton';
 
 export {
+    SearchPageTab,
     Scaffold,
     ThreeFooterButtons,
     EventTabview,
-    PrivacyBlock,
     TagsCollapsible,
     TicketComponent,
     Tabview,
@@ -122,5 +123,6 @@ export {
     ImageCarousel,
     ModalDropDownComponent,
     ProgressCircle,
-    AppStatusBar
+    AppStatusBar,
+    PublicPrivateButton
 }

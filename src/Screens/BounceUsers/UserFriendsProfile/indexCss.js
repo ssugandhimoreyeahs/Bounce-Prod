@@ -1,10 +1,21 @@
 import { StyleSheet } from 'react-native'
 import { Dimensions } from 'react-native'
 import { FONTSIZE } from '@utils'
+import { getWp, getHp } from '@utils'
 
 const { height, width } = Dimensions.get("screen")
 
 const styles = StyleSheet.create({
+   cityAll: {
+      color: "#999999",
+      fontSize: FONTSIZE.Text14,
+      fontFamily: "AvenirNext-Medium",
+   },
+   buttonText: {
+      fontSize: FONTSIZE.Text16,
+      fontFamily: 'AvenirNext-Medium',
+      color: '#ffffff',
+   },
    boxShadow: {
       shadowColor: '#EFEFEF',
       shadowOffset: { width: 0, height: 1 },
@@ -20,17 +31,26 @@ const styles = StyleSheet.create({
       color: '#000',
       width: '100%'
    },
+   dot: {
+      backgroundColor: '#999999',
+      borderRadius: 5,
+      padding: 2,
+      marginHorizontal: getWp(5)
+   },
    flex: {
       flexDirection: 'row',
       alignItems: 'center',
       // justifyContent: 'space-between'
    },
    editButtonStyle: {
+      flexDirection: 'row',
       elevation: 2,
       borderRadius: 7,
-      paddingHorizontal: 15,
-      paddingVertical: 5,
+      width: getWp(100),
+      height: getHp(26),
       backgroundColor: '#fff',
+      justifyContent: 'center',
+      alignItems: 'center'
    },
    socialButton: {
       width: '90%',
@@ -93,28 +113,25 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       marginTop: 10,
       paddingVertical: 25
-      // width: '40%',
-      // justifyContent: 'space-between'
    },
    container: {
-      // justifyContent:'center',
       flex: 1,
       backgroundColor: '#FBFBFB',
    },
+   shadowStyle: {
+      shadowColor: '#000',
+      shadowOffset: { width: 1, height: 1 },
+      shadowRadius: 4,
+      shadowOpacity: 0.1,
+      elevation: 2,
+   },
    subContainer: {
-      // flexDirection: 'column',
-      // justifyContent: 'space-between',
       paddingHorizontal: 10,
       paddingVertical: 5,
-      // width:'90%'
-      // height: height/3
    },
    iconStyle: {
-      //   height:20,
-      //   width:20,
       paddingRight: 15,
       marginRight: 5
-
    },
    textStyle: {
       color: '#000',
@@ -165,22 +182,24 @@ const styles = StyleSheet.create({
    InstaText: {
       color: '#000',
       fontSize: FONTSIZE.Text14,
+      fontWeight: "500",
       marginLeft: 10,
       fontFamily: 'AvenirNext-Bold'
    },
-
    aboutText: {
       color: '#000',
       fontSize: FONTSIZE.Text16,
-      fontFamily: 'AvenirNext-Regular'
+      lineHeight: 28,
+      fontFamily: 'AvenirNext-Medium'
    },
    Textarea: {
-      borderWidth: 1,
+      height: 101,
+      borderWidth: .5,
       borderColor: "#DDDDDD",
       backgroundColor: '#FFFFFF',
-      marginVertical: 10,
+      marginVertical: getHp(10),
       fontSize: FONTSIZE.Text16,
-      borderRadius: 15,
+      borderRadius: getHp(15),
       paddingLeft: 20,
    }
    ,

@@ -18,7 +18,7 @@ import { FONTSIZE } from '@utils'
 import { ScrollView } from 'react-native';
 import UserNameScreen from './UsernameScreen';
 import { Scaffold } from '@components'
-import { Toast } from '@constants'; 
+import { Toast } from '@constants';
 
 
 export default function NameScreen(props) {
@@ -40,21 +40,24 @@ export default function NameScreen(props) {
     }
     return (
         <Scaffold>
-            <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
+            <ScrollView
+                style={{ flex: 1 ,backgroundColor:'#FBFBFB'}}
+                contentContainerStyle={{ flexGrow: 1 }}>
                 <View style={styles.container}>
                     <Text style={styles.HeadingStyle}>
                         {"What’s your name? 👋"}
                     </Text>
-                    <View style={{ marginTop:100 }}>
+                    <View style={{ marginTop: 100 }}>
                         <TextInput
                             placeholder={"Name"}
+                            placeholderTextColor="#999"
                             style={styles.textInput}
                             onChangeText={(value) => setName(value)}
                             value={name}
                         />
                     </View>
                     <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
-                        <ProgressCircle containerStyle={{marginBottom: 20}}/>
+                        <ProgressCircle containerStyle={{ marginBottom: 20 }} />
                         <CustomButton
                             userContinue
                             onPress={handleSubmit}

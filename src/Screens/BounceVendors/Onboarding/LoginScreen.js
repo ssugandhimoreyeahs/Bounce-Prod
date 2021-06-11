@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   Text,
@@ -6,39 +6,37 @@ import {
   TextInput,
   Animated,
   BackHandler,
-  
 } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Scaffold } from '@components';
-import { Apple, Insta, Google, Bounce } from '@svg';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {Scaffold} from '@components';
+import {Apple, Insta, Google, Bounce} from '@svg';
 import LinearGradient from 'react-native-linear-gradient';
-import { TouchableOpacity } from 'react-native';
-import { FONTSIZE, getHp, getWp } from '@utils';
-import { connect, useSelector, useDispatch } from 'react-redux';
-import { Alert } from 'react-native';
+import {TouchableOpacity} from 'react-native';
+import {FONTSIZE, getHp, getWp} from '@utils';
+import {connect, useSelector, useDispatch} from 'react-redux';
+import {Alert} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 import MobxStore from '../../../mobx';
 import VendorCategory from '../../Signup/Vendor/VendorCategory';
 import NameScreen from './NameScreen';
-import { BounceProLogo, BounceSplash } from '@svg';
+import {BounceProLogo, BounceSplash} from '@svg';
 import HostView from '../../MyEvents/HostView';
-import { Toast } from '@constants';
-
+import {Toast} from '@constants';
 
 function LoginScreen(props) {
   const [animated, setAnimated] = useState({
     ballAnimation: new Animated.Value(-25),
   });
-  const { navigation } = props;
+  const {navigation} = props;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { vendorProfileData } = useSelector(state => state.mainExpenseByCategory);
+  const {vendorProfileData} = useSelector(state => state.mainExpenseByCategory);
   const [loader, setLoader] = useState(false);
   const isFocused = useIsFocused();
 
   const dispatch = useDispatch();
-  const { authStore } = MobxStore;
+  const {authStore} = MobxStore;
   const handleUserLogin = async () => {
     try {
       const loginResponse = await authStore.async.login(username, password);
@@ -55,7 +53,7 @@ function LoginScreen(props) {
   const animateBall = () => {
     Animated.timing(animated.ballAnimation, {
       toValue: 0,
-      duration: 1000,
+      duration: 500,
     }).start();
   };
   const ballAnimation = {
@@ -70,9 +68,9 @@ function LoginScreen(props) {
     <Scaffold>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
-        <KeyboardAwareScrollView style={{ flex: 1, backgroundColor: '#FBFBFB' }}>
+        <KeyboardAwareScrollView style={{flex: 1, backgroundColor: '#FBFBFB'}}>
           <View style={styles.container}>
-            <View style={{ alignItems: 'center', marginVertical: 50 }}>
+            <View style={{alignItems: 'center', marginVertical: 50}}>
               <BounceSplash
                 preserveAspectRatio="none"
                 height={170}
@@ -84,8 +82,12 @@ function LoginScreen(props) {
             <TextInput
               returnKeyType="done"
               placeholder="Username"
-              style={[styles.textInput, { paddingBottom: getHp(10) }]}
+              placeholderTextColor="#999"
+              style={[styles.textInput, {paddingBottom: getHp(10)}]}
               onChangeText={value => {
+                if (value.length == 0) {
+                  animated.ballAnimation.setValue(-25);
+                }
                 setUsername(value);
                 animateBall();
               }}
@@ -96,19 +98,19 @@ function LoginScreen(props) {
                 <TextInput
                   returnKeyType="done"
                   placeholder="Password"
-                  style={[styles.textInput, { paddingBottom: getHp(10) }]}
+                  style={[styles.textInput, {paddingBottom: getHp(10)}]}
                   // multiline={true}
                   onChangeText={value => setPassword(value)}
                   secureTextEntry
                 />
 
                 <LinearGradient
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 1 }}
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 1}}
                   colors={['#1FAEF7', '#1FAEF7', '#AEE4FF']}
                   style={[
                     styles.linearGradient,
-                    { marginTop: 30, marginBottom: 15, width: '100%' },
+                    {marginTop: 30, marginBottom: 15, width: '100%'},
                   ]}>
                   <TouchableOpacity onPress={handleUserLogin}>
                     <Text style={styles.buttonText}>{'Login'}</Text>
@@ -121,17 +123,17 @@ function LoginScreen(props) {
               <TouchableOpacity
                 onPress={() => props.navigation.navigate(HostView.routeName)}
                 style={[styles.Card, styles.boxShadow]}>
-                <Insta height={30} width={30} style={{ margin: 10 }} />
+                <Insta height={30} width={30} style={{margin: 10}} />
                 <Text style={styles.ThirdParty}>{'Instagram'}</Text>
               </TouchableOpacity>
 
               <View style={[styles.Card, styles.boxShadow]}>
-                <Apple height={30} width={30} style={{ margin: 10 }} />
+                <Apple height={30} width={30} style={{margin: 10}} />
                 <Text style={styles.ThirdParty}>{'Apple'}</Text>
               </View>
 
               <View style={[styles.Card, styles.boxShadow]}>
-                <Google height={30} width={30} style={{ margin: 10 }} />
+                <Google height={30} width={30} style={{margin: 10}} />
                 <Text style={styles.ThirdParty}>{'Google'}</Text>
               </View>
             </View>
@@ -150,9 +152,9 @@ function LoginScreen(props) {
             </View>
 
             <TouchableOpacity
-              style={[styles.linearGradient, styles.boxShadow, { marginTop: 20 }]}
+              style={[styles.linearGradient, styles.boxShadow, {marginTop: 20}]}
               onPress={() => navigation.navigate(NameScreen.routeName)}>
-              <Text style={[styles.buttonText, { color: '#1FAEF7' }]}>
+              <Text style={[styles.buttonText, {color: '#1FAEF7'}]}>
                 {'User Sign Up'}
               </Text>
             </TouchableOpacity>
@@ -162,26 +164,24 @@ function LoginScreen(props) {
               onPress={() =>
                 props.navigation.navigate(VendorCategory.routeName)
               }>
-              <Text style={[styles.buttonText, { color: '#F8A41E' }]}>
+              <Text style={[styles.buttonText, {color: '#F8A41E'}]}>
                 {'Vendor Sign Up'}
               </Text>
             </TouchableOpacity>
           </View>
         </KeyboardAwareScrollView>
       )}
-
     </Scaffold>
   );
 }
 LoginScreen.routeName = '/LoginScreen';
 export default LoginScreen;
 
-
 const styles = StyleSheet.create({
   boxShadow: {
-    shadowColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOpacity: 0.8,
-    elevation: 6,
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOpacity: 0.3,
+    elevation: 2,
     shadowRadius: 15 ,
     shadowOffset : { width: 1, height: 13},
   },
@@ -213,13 +213,12 @@ const styles = StyleSheet.create({
   linearGradient: {
     justifyContent: 'center',
     height: 50,
-    elevation: 2,
     backgroundColor: '#fff',
     marginVertical: 10,
     borderRadius: 20,
   },
   container: {
-    // backgroundColor:'#fff',
+    backgroundColor:'#FBFBFB',
     flex: 1,
     padding: 15,
     flexDirection: 'column',
@@ -235,7 +234,7 @@ const styles = StyleSheet.create({
   },
   signStyle: {
     marginLeft: '2%',
-    fontFamily: 'AvenirNext-DemiBold',
+    fontFamily: 'AvenirNext-Bold',
     letterSpacing: 1,
     color: '#000',
     fontSize: FONTSIZE.Text18,
@@ -246,7 +245,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     fontSize: FONTSIZE.Text16,
     marginTop: 20,
-    color: '#000'
+    color: '#000',
   },
 
   TitleStyle: {
@@ -265,6 +264,5 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // backgroundColor: 'red'
   },
 });

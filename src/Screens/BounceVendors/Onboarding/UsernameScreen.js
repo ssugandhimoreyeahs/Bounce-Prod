@@ -71,10 +71,10 @@ export default function UserNameScreen(props) {
 
             }
         } catch (error) {
- 
+
             Toast('User already exist');
             console.log(error);
- 
+
         }
     }
 
@@ -107,15 +107,18 @@ export default function UserNameScreen(props) {
     // }
 
 
-    return ( 
+    return (
         <Scaffold>
-            <KeyboardAwareScrollView style={{ flexGrow: 1 }} contentContainerStyle={{ flex: 1 }}>
+            <KeyboardAwareScrollView
+               style={{ flex: 1 ,backgroundColor:'#FBFBFB'}}
+               contentContainerStyle={{ flexGrow: 1 }}>
                 <View style={styles.container}>
                     <Text style={styles.HeadingStyle}>{"Pick a username! 😜"}</Text>
 
-                    <View style={{ marginTop:100 }}>
+                    <View style={{ marginTop: 100 }}>
                         <TextInput
                             placeholder="@Username"
+                            placeholderTextColor="#999"
                             style={styles.textInput}
                             onChangeText={(value) => setUsername(value)}
                         />
@@ -125,6 +128,7 @@ export default function UserNameScreen(props) {
                     <View style={{ marginVertical: 10 }}>
                         <TextInput
                             placeholder="Password"
+                            placeholderTextColor="#999"
                             style={styles.textInput}
                             secureTextEntry
                             onChangeText={(value) => setPassword(value)}
@@ -132,7 +136,7 @@ export default function UserNameScreen(props) {
                     </View>
 
                     <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
-                    <ProgressCircle currentProgress={2} containerStyle={{marginBottom: 20}}/>
+                        <ProgressCircle currentProgress={2} containerStyle={{ marginBottom: 20 }} />
                         <CustomButton
                             userContinue
                             onPress={handleSubmit}

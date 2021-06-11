@@ -1,56 +1,72 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet, TextInput, Keyboard} from 'react-native';
-import {View, Text} from 'react-native';
-import {FONTSIZE, getHp} from '@utils';
+import { TouchableOpacity, StyleSheet, TextInput, Keyboard } from 'react-native';
+import { View, Text } from 'react-native';
+import { FONTSIZE, getHp } from '@utils';
 
 export default CustomTextinput = props => {
-  const {text, multiline = true, onChange, value = ''} = props;
+  const { text, multiline = true, onChange, value = '', custom } = props;
   return (
-    <View style={styles.container}>
-      <Text
-        style={{
-          color: '#696969',
-          fontWeight: '400',
-          fontSize: FONTSIZE.Text15,
-        }}>
-        {text}
-      </Text>
-
-      <TextInput
-        multiline={multiline}
-        value={value}
-        onChangeText={onChange}
-        style={{
-          marginTop: getHp(3),
-          height: getHp(100),
-          textAlignVertical: 'top',
-          color: 'black',
-
-          fontFamily: 'AvenirNext-DemiBold',
-          fontWeight: 'bold',
-          fontSize: FONTSIZE.Text17,
-        }}
-      />
-      {/* <TextInput
-                placeholder={text}
-                placeholderTextColor={"#000"}
-                style={[styles.textStyle, { textAlignVertical: multiline ? 'top' : 'auto' }]}
+    <>
+      {
+        custom ?
+          (
+            <View style={styles.container1}>
+              <Text
+                style={{
+                  marginTop: 10,
+                  opacity: 0.5,
+                  color: '#000',
+                  fontSize: FONTSIZE.Text15,
+                  fontFamily: 'AvenirNext-Medium',
+                }}>
+                {text}
+              </Text>
+              <TextInput
                 multiline={multiline}
-                numberOfLines={multiline ? 9 : null}
-                editable={false}
-            />
-            <View style={{ position: 'absolute', top: 40, left: 10, right: 10, width: '90%', marginBottom: 10, borderRadius: 9.5 }}>
-                <TextInput
-                    onChangeText={onChange}
-                    value={value}
-                    placeholderTextColor={"#696969"}
-                    style={[styles.TextInputStyle, multiline && { height: getHp(40) },{backgroundColor: '#fff', textAlignVertical: multiline ? 'top' : 'auto' }]}
-                    multiline={multiline}
-                    numberOfLines={multiline ? 5 : null}
-                    
-                />
-            </View> */}
-    </View>
+                value={value}
+                onChangeText={onChange}
+                style={{
+                  marginTop: getHp(3),
+                  height: getHp(110),
+                  textAlignVertical: 'top',
+                  color: 'black',
+                  fontFamily: 'AvenirNext-Medium',
+
+                  fontSize: FONTSIZE.Text17,
+                }}
+              />
+            </View>
+          )
+          : (
+            <View style={styles.container}>
+              <Text
+                style={{
+                  color: '#000',
+                  fontWeight: '400',
+                  fontSize: FONTSIZE.Text15,
+                  marginTop: 10,
+                  fontFamily: 'AvenirNext-Regular',
+                }}>
+                {text}
+              </Text>
+              <TextInput
+                multiline={multiline}
+                value={value}
+                onChangeText={onChange}
+                style={{
+                  marginTop: getHp(3),
+                  height: getHp(110),
+                  textAlignVertical: 'top',
+                  color: 'black',
+                  fontFamily: 'AvenirNext-DemiBold',
+                  fontWeight: 'bold',
+                  fontSize: FONTSIZE.Text17,
+                }}
+              />
+            </View>
+          )
+      }
+    </>
   );
 };
 const styles = StyleSheet.create({
@@ -63,27 +79,38 @@ const styles = StyleSheet.create({
     fontFamily: 'AvenirNext-DemiBold',
   },
   container: {
-    padding: getHp(12),
-    width: '97%',
+    height: getHp(161),
+    paddingTop: 5,
+    paddingLeft: 18,
+    width: '100%',
     alignSelf: 'center',
     backgroundColor: '#fff',
-    borderRadius: 15,
+    borderRadius: 9.5,
     marginVertical: 10,
-    shadowColor: '#DCE4F9',
-    shadowOffset: {width: 0, height: 2},
-    shadowRadius: 10,
-    shadowOpacity: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    shadowRadius: 4,
+    shadowOpacity: 0.1,
     elevation: 2,
+  },
+  container1: {
+    height: getHp(161),
+    paddingTop: 5,
+    paddingLeft: 18,
+    width: '100%',
+    alignSelf: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 9.5,
+    marginVertical: 3,
+    borderWidth: 0.5,
+    borderColor: '#DDDDDD',
   },
   textStyle: {
     paddingLeft: 10,
-    // opacity: 0.9,
     color: '#000',
     fontSize: FONTSIZE.Text15,
-    // lineHeight: 20,
-    // letterSpacing: 0.5,
     backgroundColor: '#fff',
     fontFamily: 'AvenirNext-Regular',
-    borderRadius: 10,
+    borderRadius: 9.5,
   },
 });

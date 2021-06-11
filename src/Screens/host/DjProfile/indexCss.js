@@ -48,13 +48,13 @@ const styles = (theme) => {
       hourStyle: {
          fontFamily: 'AvenirNext-Regular',
          color: '#000',
-         fontSize: FONTSIZE.Text18,
+         fontSize: FONTSIZE.Text16,
          marginLeft: 5
       },
       fullName: {
          color: theme.colors.primaryText1,
-         fontSize: FONTSIZE.Text16,
-         fontWeight: '600'
+         fontSize: FONTSIZE.Text18,
+         fontFamily: 'AvenirNext-Medium'
       },
       addMediaButton: {
          elevation: 10,

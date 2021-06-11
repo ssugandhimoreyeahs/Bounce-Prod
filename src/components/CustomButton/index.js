@@ -79,7 +79,7 @@ export default function CustomButton(props) {
         <>
           <View style={styles.rowButton}>
             <TouchableOpacity
-              style={styles.DoubleButton}
+              style={[styles.DoubleButton, styles.shadowStyle]}
               onPress={onSaveDraftPress}>
               <Text
                 style={[
@@ -220,6 +220,66 @@ const styles = StyleSheet.create({
     borderRadius: 13,
   },
   titleStyle: {
+    fontSize: FONTSIZE.Text22,
+    color: '#fff',
+    fontFamily: 'AvenirNext-Medium',
+  },
+  shadowStyle: {
+    shadowColor: '#000',
+    shadowOffset: {width: 1, height: 1},
+    shadowRadius: 4,
+    shadowOpacity: 0.1,
+  },
+  linearGradient: {
+    borderRadius: 17,
+    height: 54,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 2,
+    marginVertical: 10,
+  },
+  colButtonStyle: {
+    width: '95%',
+    elevation: 5,
+    backgroundColor: '#fff',
+    borderRadius: 19,
+    alignItems: 'center',
+    height: getHp(54),
+    justifyContent: 'center',
+    marginVertical: getHp(5),
+  },
+  DoubleButton: {
+    height: getHp(50),
+    width: getWp(166),
+    elevation: 5,
+    backgroundColor: '#fff',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 19,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container: {
+    backgroundColor: '#fff',
+    borderRadius: 13,
+    marginTop: 10,
+    marginBottom: 5,
+  },
+  barStyle: {
+    height: getHp(5),
+    backgroundColor: '#FEFEFE',
+    marginBottom: getHp(5),
+    marginTop: getHp(10),
+    width: getWp(134),
+    alignSelf: 'center',
+    borderRadius: 100,
+  },
+  buttonStyle: {
+    backgroundColor: '#1FAEF7',
+    height: getHp(54),
+    borderRadius: 13,
+  },
+  titleStyle: {
     fontSize: FONTSIZE.Text21,
     color: '#fff',
     fontFamily: 'AvenirNext-Medium',
@@ -230,9 +290,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 10,
-    shadowColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOpacity: 0.8,
-    elevation: 6,
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOpacity: 0.3,
+    elevation: 2,
     shadowRadius: 15 ,
     shadowOffset : { width: 1, height: 13},
   },

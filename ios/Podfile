@@ -18,10 +18,12 @@ target 'bounce' do
 
   target 'bounceTests' do
     inherit! :complete
+    pod 'GoogleAPIClientForREST/Sheets', '~> 1.2.1'
+    pod 'GoogleSignIn', '~> 4.1.1'
     # Pods for testing
   end
 
-  # Enables Flipper.
+   # Enables Flipper.
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and
   # you should disable the next line.

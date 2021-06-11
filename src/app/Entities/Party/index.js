@@ -5,6 +5,9 @@ import {
   IsNotEmpty,
   ArrayNotEmpty,
   Min,
+  ValidateIf,
+  IsNumber,
+  Max,
 } from 'class-validator';
 import {ValidationTypes} from '../../Validations';
 import {ClassValidator as CV} from '../../Validations';
@@ -20,10 +23,10 @@ class Party {
   @IsNotEmpty({message: Strings.requiredFieldError('Date')})
   date;
 
-  // @D.ValidateObjecKey(
-  //   {key: 'addressStr', [ValidationTypes.REQUIRED]: true},
-  //   {message: Strings.requiredFieldError('Address')},
-  // )
+  @CV.validateNestedObj(
+    {key: 'addressStr', [ValidationTypes.required]: true},
+    {message: Strings.requiredFieldError('Address')},
+  )
   location = {
     lat: '1',
     lon: '1',
@@ -32,6 +35,7 @@ class Party {
 
   @CV.PartyAge('toAge', {message: 'Invalid Minimum Age'})
   fromAge;
+
   @CV.PartyAge('fromAge', {message: 'Invalid Maximum Age'})
   toAge;
 
@@ -39,6 +43,7 @@ class Party {
   galleryFiles = [];
 
   gallery = [];
+
   @ArrayNotEmpty({message: 'Add atleast 1 Ticket Type'})
   tickets = [];
   needBouncer = false;
@@ -66,6 +71,7 @@ class Party {
   };
   static toJSON = (fields, isEdit = false) => {
     try {
+      console.log('TO_JSON_EN_RECIEVE - ', JSON.stringify(fields));
       let newParty = new Party();
       Object.keys(fields).map(fKey => {
         if (Object.keys(newParty).includes(fKey)) {
@@ -73,10 +79,10 @@ class Party {
         }
       });
 
-      newParty.fromAge = parseInt(fields['fromAge']) || 0;
-      newParty.toAge = parseInt(fields['toAge']) || 0;
-      newParty.fee = parseInt(fields['fee']) || 0;
-      newParty.quantityAvailable = parseInt(fields['quantityAvailable']) || 0;
+      newParty.fromAge = Number(fields['fromAge']) || 0;
+      newParty.toAge = Number(fields['toAge']) || 0;
+      newParty.fee = Number(fields['fee']) || 0;
+      newParty.quantityAvailable = Number(fields['quantityAvailable']) || 0;
       if (newParty.fromAge > 0 && newParty.toAge > 0) {
         newParty.ageLimit = true;
       }

@@ -1,9 +1,9 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import UserHomeDrawerNavigator from './drawerNavigation';
 
-import UserQrScreen from '../../Screens/Views/QRcode'; 
+import UserQrScreen from '../../Screens/Views/QRcode';
 
 import CreateInvitation from '../../Screens/BounceVendors/PlanParty/CreateInvitation';
 
@@ -12,7 +12,9 @@ import AccountSetting from '../../Screens/Drawer/AccountSetting';
 import HostProfile from '../../Screens/BounceUsers/HostProfile/HostProfile';
 import AboutUs from '../../Screens/Views/About/AboutUs';
 import CreateInvitationTemplate from '../../Screens/BounceVendors/PlanParty/CreateInvitationTemplate';
-
+import CallVendorProfile from '../../Screens/BounceVendors/VendorProfile/CallVendorProfile'
+import VendorProfile from '../../Screens/BounceVendors/VendorProfile'
+import ScrollCarousel from '../../Screens/BounceVendors/VendorProfile/ScrollCarousel'
 
 const UserRootStack = createStackNavigator();
 
@@ -28,32 +30,46 @@ class UserNavigation {
           name={UserHomeDrawerNavigator.routeName}
           component={UserHomeDrawerNavigator.drawerHome}
         />
-         
-        <UserRootStack.Screen 
+        <UserRootStack.Screen
+          name={CallVendorProfile.routeName}
+          component={CallVendorProfile}
+        />
+        <UserRootStack.Screen
+          name={VendorProfile.routeName}
+          component={VendorProfile}
+        />
+        <UserRootStack.Screen
+          name={ScrollCarousel.routeName}
+          component={ScrollCarousel}
+        />
+
+        <UserRootStack.Screen
           name={UserQrScreen.routeName}
           component={UserQrScreen}
         />
-         <UserRootStack.Screen
+        <UserRootStack.Screen
           name={HostProfile.routeName}
           component={HostProfile}
         />
-        <UserRootStack.Screen 
+        <UserRootStack.Screen
           name={AccountSetting.routeName}
           component={AccountSetting}
         />
-        <UserRootStack.Screen 
+        <UserRootStack.Screen
           name={CreateInvitation.routeName}
           component={CreateInvitation}
         />
-        <UserRootStack.Screen 
+
+
+        <UserRootStack.Screen
           name={CreateInvitationTemplate.routeName}
           component={CreateInvitationTemplate}
         />
-        <UserRootStack.Screen 
+        <UserRootStack.Screen
           name={UploadMedia.routeName}
           component={UploadMedia}
         />
-        <UserRootStack.Screen 
+        <UserRootStack.Screen
           name={AboutUs.routeName}
           component={AboutUs}
         />

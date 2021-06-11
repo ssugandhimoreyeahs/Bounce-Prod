@@ -6,13 +6,23 @@ import { useTheme, Switch } from 'react-native-paper';
 import { AuthContext } from '../../context';
 import { LocalStorage } from '../../app/utils/localStorage';
 import MobxStore from '../../mobx';
-import AboutUs from '../Views/About/AboutUs'
-
-
+import AboutUs from '../Views/About/AboutUs';
+import { shareFunction } from '@components';
+import ScrollCarousel from '../BounceVendors/VendorProfile/ScrollCarousel'
 
 export default function UserCustomDrawer(props) {
   const { authStore } = MobxStore;
-  // const { toggleTheme } = React.useContext(AuthContext)
+  const userinfo = authStore.userProfile;
+  const {
+    username,
+    fullName,
+    city,
+    snapchatUsername,
+    instagramUsername,
+    about,
+    profileImage = {},
+  } = userinfo?.user;
+
   const { colors } = useTheme();
   const paperTheme = useTheme();
   const SERVICES = [
@@ -20,7 +30,14 @@ export default function UserCustomDrawer(props) {
       icon: <Settings height={30} width={30} />,
       name: 'Account Settings',
       onPress: () => {
-        props.navigation.navigate("AccountSetting")
+        props.navigation.navigate('AccountSetting');
+      },
+    },
+    {
+      icon: <Settings height={30} width={30} />,
+      name: 'Vendor Profiles',
+      onPress: () => {
+        props.navigation.navigate(ScrollCarousel.routeName)
       },
     },
     {
@@ -34,7 +51,7 @@ export default function UserCustomDrawer(props) {
       icon: <BlackOutlineShare height={30} width={30} />,
       name: 'Share Profile',
       onPress: () => {
-        //navigation.navigate("DjSignup")
+        shareFunction(userinfo?.user)
       },
     },
     {
@@ -55,7 +72,7 @@ export default function UserCustomDrawer(props) {
     // },
     {
       name: 'About',
-      onPress: () => props.navigation.navigate(AboutUs.routeName)
+      onPress: () => props.navigation.navigate(AboutUs.routeName),
     },
     {
       name: 'Log Out',
@@ -101,13 +118,12 @@ export default function UserCustomDrawer(props) {
                 }}
                 onPress={item.onPress}
                 key={index.toString()}>
-                {/* {item.name == "Dark / Light Mode" ?
-                                        <View pointerEvents="none">
-                                            {console.log("paperTheme.dark",paperTheme.dark)}
-                                            <Switch value={paperTheme.dark} />
-                                        </View>
-                                        : null
-                                    } */}
+                {/* {item.name == 'Dark / Light Mode' ? (
+                    <View pointerEvents="none">
+                      {console.log('paperTheme.dark', paperTheme.dark)}
+                      <Switch value={paperTheme.dark} />
+                    </View>
+                  ) : null} */}
 
                 <Text
                   style={[
@@ -131,15 +147,16 @@ export default function UserCustomDrawer(props) {
   return (
     <View style={styles.container}>
       <View style={[styles.flex, { padding: 15 }]}>
-        <Text style={styles.heading}>Settings</Text>
-        <BlackClose
-          hitSlop={bigHitSlop}
+        <Text style={styles.heading}>{"Settings"}</Text>
+
+        <TouchableOpacity
           onPress={() => {
             props.navigation.closeDrawer();
           }}
-          height={20}
-          width={20}
-        />
+          hitSlop={bigHitSlop}>
+          <BlackClose height={20} width={20} />
+        </TouchableOpacity>
+
       </View>
       <FlatList
         data={SERVICES}

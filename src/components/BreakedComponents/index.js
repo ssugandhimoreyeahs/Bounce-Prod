@@ -24,89 +24,127 @@ import Tab2 from '../../Screens/BounceUsers/UserFriendsProfile/Tab2.js';
 import Tab3 from '../../Screens/BounceUsers/UserFriendsProfile/Tab3.js';
 import { FONTSIZE, getHp, getWp } from '@utils'
 import MboxStore from '../../mobx';
-import { observer } from 'mobx-react';
-import EventPageTab1 from '../../Screens/MyEvents/EventTab1'
-import EventPageTab2 from '../../Screens/MyEvents/EventTab2'
+import {observer} from 'mobx-react';
+import EventPageTab1 from '../../Screens/MyEvents/EventTab1';
+import EventPageTab2 from '../../Screens/MyEvents/EventTab2';
 
-
-export const ThreeFooterButtons = ({ icon, ButtonTitle }) => {
-    return (
-        <TouchableOpacity style={styles.bottomContainer}>
-            {icon}
-            <Text style={[{ color: '#000', fontSize: FONTSIZE.Text12, fontFamily: 'AvenirNext-Medium',marginTop:5 }]}>
-                {ButtonTitle}
-            </Text>
-        </TouchableOpacity>
-    )
-}
+export const ThreeFooterButtons = ({icon, ButtonTitle}) => {
+  return (
+    <TouchableOpacity style={styles.bottomContainer}>
+      {icon}
+      <Text
+        style={[
+          {
+            color: '#000',
+            fontSize: FONTSIZE.Text12,
+            fontFamily: 'AvenirNext-Medium',
+            marginTop: 5,
+          },
+        ]}>
+        {ButtonTitle}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 
 export const PrivacyBlock = () => {
-    return (<View>
-        <Text style={styles.headerTitle}>{"Privacy Settings"}</Text>
-        <Text style={styles.headerTitle}>{"Choose what you want to share with friends. Only public events can be displayed on your profile."}</Text>
+  return (
+    <View>
+      <Text style={styles.headerTitle}>{'Privacy Settings'}</Text>
+      <Text style={styles.headerTitle}>
+        {
+          'Choose what you want to share with friends. Only public events can be displayed on your profile.'
+        }
+      </Text>
     </View>
-    )
-}
+  );
+};
 
-export const EventTabview = observer((props) => {
-    return (
-        <View style={{ borderBottomWidth: 1, borderColor: '#EEEEEE', }}>
-            <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
+export const EventTabview = observer(props => {
+  return (
+    <View style={{borderBottomWidth: 1, borderColor: '#EEEEEE'}}>
+      <Tabs tabBarUnderlineStyle={{backgroundColor: '#000000'}}>
+        <Tab
+          tabStyle={{backgroundColor: '#FBFBFB'}}
+          textStyle={{
+            color: '#999999',
+            fontFamily: 'AvenirNext-Medium',
+            fontSize: FONTSIZE.Text16,
+          }}
+          activeTabStyle={{backgroundColor: '#FBFBFB'}}
+          activeTextStyle={{
+            color: '#000',
+            fontFamily: 'AvenirNext-Bold',
+            fontSize: FONTSIZE.Text16,
+          }}
+          heading={'Attending'}>
+          <ScrollView
+            nestedScrollEnabled={true}
+            style={{
+              height: 300,
+            }}>
+            <EventPageTab1 partyStore={MboxStore.partyStore} {...props} />
+          </ScrollView>
+        </Tab>
 
-                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{ color: '#999999', fontFamily: 'AvenirNext-Medium',fontSize:FONTSIZE.Text16 }}
-                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Bold',fontSize:FONTSIZE.Text16 }} heading={"Attending"}>
-                    <ScrollView nestedScrollEnabled={true} style={{
-                        height: 300
-                    }}>
-                        <EventPageTab1 partyStore={MboxStore.partyStore} {...props} />
-                    </ScrollView>
-                </Tab >
-
-                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{color: '#999999', fontFamily: 'AvenirNext-Medium',fontSize:FONTSIZE.Text16 }}
-                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Bold',fontSize:FONTSIZE.Text16 }} heading="Featuring">
-                    <EventPageTab2 />
-                </Tab>
-            </Tabs>
-        </View>
-    );
+        <Tab
+          tabStyle={{backgroundColor: '#FBFBFB'}}
+          textStyle={{
+            color: '#999999',
+            fontFamily: 'AvenirNext-Medium',
+            fontSize: FONTSIZE.Text16,
+          }}
+          activeTabStyle={{backgroundColor: '#FBFBFB'}}
+          activeTextStyle={{
+            color: '#000',
+            fontFamily: 'AvenirNext-Bold',
+            fontSize: FONTSIZE.Text16,
+          }}
+          heading="Featuring">
+          <EventPageTab2 />
+        </Tab>
+      </Tabs>
+    </View>
+  );
 });
-export const Tabview = observer((props) => {
-    return (
-        <View style={{ marginVertical: 10, borderBottomWidth: 1, borderColor: '#EEEEEE' }}>
-            <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
+export const Tabview = observer(props => {
+  return (
+    <View
+      style={{
+        marginVertical: 10,
+        borderBottomWidth: 1,
+        borderColor: '#EEEEEE',
+      }}>
+      <Tabs tabBarUnderlineStyle={{backgroundColor: '#000000'}}>
+        <Tab
+          tabStyle={{backgroundColor: '#FBFBFB'}}
+          textStyle={{color: '#000', fontFamily: 'AvenirNext-Medium'}}
+          activeTabStyle={{backgroundColor: '#FBFBFB'}}
+          activeTextStyle={{color: '#000', fontFamily: 'AvenirNext-Medium'}}
+          heading={'Hosting'}>
+          <Tab1 partyStore={MboxStore.partyStore} {...props} />
+        </Tab>
 
-                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
-                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading={"Hosting"}>
-                    <ScrollView nestedScrollEnabled={true} style={{
-                        height: 300
-                    }}>
-                        <Tab1 partyStore={MboxStore.partyStore} {...props} />
-                    </ScrollView>
-                </Tab >
+        <Tab
+          tabStyle={{backgroundColor: '#FBFBFB'}}
+          textStyle={{color: '#000', fontFamily: 'AvenirNext-Medium'}}
+          activeTabStyle={{backgroundColor: '#FBFBFB'}}
+          activeTextStyle={{color: '#000', fontFamily: 'AvenirNext-Medium'}}
+          heading="Attending">
+          <Tab2 />
+        </Tab>
 
-                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
-                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="Attending">
-                    <Tab2 />
-                </Tab>
-
-                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
-                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
-                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="Interested">
-                    <Tab3 />
-                </Tab>
-
-            </Tabs>
-        </View>
-    );
+        <Tab
+          tabStyle={{backgroundColor: '#FBFBFB'}}
+          textStyle={{color: '#000', fontFamily: 'AvenirNext-Medium'}}
+          activeTabStyle={{backgroundColor: '#FBFBFB'}}
+          activeTextStyle={{color: '#000', fontFamily: 'AvenirNext-Medium'}}
+          heading="Interested">
+          <Tab3 />
+        </Tab>
+      </Tabs>
+    </View>
+  );
 });
 
 
@@ -296,7 +334,7 @@ export const PastGuestList = ({ PAST_LIST_ARRAY, heading, pen = false, onPressGu
     )
 }
 
-export const SwitchButton = (props) => { 
+export const SwitchButton = (props) => {
     const {
         value,
         onPrivatePress,
@@ -305,31 +343,69 @@ export const SwitchButton = (props) => {
     const {
     } = props
     const onValues = {
-        backgroundColor: '#fff',
-        height: getHp(46),
-        elevation: 10
+        backgroundColor: 'red',
     }
     const offValues = {
-        backgroundColor: '#EEEEEE',
-        height: getHp(38)
+        backgroundColor: 'orange',
+
     }
     return (
         <View style={styles.doubleButton}>
-            <View style={styles.doubleSubcontainer}>
+            <LinearGradient
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                colors={value ? ['#3CBDFF', '#6FD0FF'] : ['#F3F3F3', '#F3F3F3']}
+                style={[
+                    styles.linearGradient,
+                    value ? onValues : offValues, {
+                        borderTopLeftRadius: 13,
+                        borderBottomLeftRadius: 13
+                    }
+                ]}>
                 <TouchableOpacity
-                    style={[styles.private,
-                        value ? onValues : offValues]} onPress={() => onPrivatePress()}>
-                    <Text style={[styles.TitleStyle, value ? { color: '#1FAEF7', fontWeight: 'bold' } : { color: '#000', fontWeight: 'normal' }]}>{"Private"}</Text>
+                    style={[]}
+                    onPress={() => onPrivatePress()}>
+                    <Text style={[styles.TitleStyle, value ?
+                        {
+                            color: '#fff',
+                            fontFamily: 'AvenirNext-DemiBold',
+                            fontSize: FONTSIZE.Text18
+                        } :
+                        {
+                            color: '#000',
+                            fontFamily: 'AvenirNext-Regular',
+                            fontSize: FONTSIZE.Text16
+                        }]}>
+                        {"Private"}
+                    </Text>
                 </TouchableOpacity>
+            </LinearGradient>
 
-                <TouchableOpacity style={[styles.private, value ? offValues : onValues]} onPress={() => onPublicPress()}>
-                    <Text style={[styles.TitleStyle, !value ? { color: '#1FAEF7', fontWeight: 'bold' } : { color: '#000', fontWeight: 'normal' }]}>{"Public"}</Text>
+            <LinearGradient
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                colors={!value ? ['#3CBDFF', '#6FD0FF'] : ['#F3F3F3', '#F3F3F3']}
+                style={[
+                    styles.linearGradient,
+                    (!value ? onValues : offValues), {
+                        borderTopRightRadius: 13,
+                        borderBottomRightRadius: 13
+                    }
+                ]}>
+                <TouchableOpacity style={{}}
+                    onPress={() => onPublicPress()}>
+                    <Text style={[styles.TitleStyle, !value ? {
+                        color: '#fff',
+                        fontFamily: 'AvenirNext-DemiBold',
+                        fontSize: FONTSIZE.Text18
+                    } :
+                        {
+                            color: '#000',
+                            fontFamily: 'AvenirNext-Regular',
+                            fontSize: FONTSIZE.Text16
+                        }]}>{"Public"}</Text>
                 </TouchableOpacity>
-            </View>
-
-            <View style={{ position: 'absolute', right: -45 }}>
-                <Info height={25} width={25} />
-            </View>
+            </LinearGradient>
         </View>
     )
 }

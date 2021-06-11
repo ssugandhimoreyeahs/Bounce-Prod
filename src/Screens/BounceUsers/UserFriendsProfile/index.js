@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   Text,
@@ -8,7 +8,8 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
-} from "react-native";
+  Platform
+} from 'react-native';
 import {
   Header,
   ImageCarousel,
@@ -16,79 +17,89 @@ import {
   ReviewCard,
   Footer,
   CustomText,
-} from "@components";
-import { Message, Favourite, Girl, DJ, DJ1, DJ2 } from "@assets";
-import { styles } from "./indexCss";
-import { BlackMenubar, Scanner } from "@svg";
-import { Avatar } from "react-native-elements";
-import ImagePicker from "react-native-image-crop-picker";
-import { connect, useSelector, useDispatch } from "react-redux";
-import { fetchVendorData } from "../../../reducer/mainexpensecategory";
-import Spinner from "react-native-loading-spinner-overlay";
-import { pickDocument } from "@hooks";
-import { fetchGet, postData } from "../../../FetchServices";
-import { UserContext } from "../../../context/profiledataProvider";
+} from '@components';
+import {Message, Favourite, Girl, DJ, DJ1, DJ2} from '@assets';
+import {styles} from './indexCss';
+import {BlackMenubar, Scanner} from '@svg';
+import {Avatar} from 'react-native-elements';
+import ImagePicker from 'react-native-image-crop-picker';
+import {connect, useSelector, useDispatch} from 'react-redux';
+import {fetchVendorData} from '../../../reducer/mainexpensecategory';
+import Spinner from 'react-native-loading-spinner-overlay';
+import {pickDocument} from '@hooks';
+import {fetchGet, postData} from '../../../FetchServices';
+import {UserContext} from '../../../context/profiledataProvider';
 import MobxStore from '../../../mobx';
 import Drawer from '../../Drawer/UserCustomDrawer';
-import QRcode from "../../Views/QRcode";
+import QRcode from '../../Views/QRcode';
 import LinearGradient from 'react-native-linear-gradient';
 import {
-  WhitePerson
-  , UploadBlue,
+  WhitePerson,
+  UploadBlue,
   InstaNew,
   GreyCross,
+  FavouriteMusic,
   Spotify,
   Insta,
   Twitter,
   Tiktok,
-  Snapchat
-} from "@svg";
-import { BlackPerson } from "../../../assets/Svg";
-import { PartyService } from '../../../app/services';
-import CreateInvitation from '../../../Screens/BounceVendors/PlanParty/CreateInvitation'
-import { observer } from 'mobx-react';
-import axios from "axios";
-import { FONTSIZE, getHp, getWp } from '@utils'
-import { Scaffold } from '@components'
-import { Toast } from '@constants';
-import HostProfile from "../HostProfile/HostProfile";
+  Linkedin,
+  Snapchat,
+  BlackPerson,
+} from '@svg';
+import {PartyService, Calendar} from '../../../app/services';
+import CreateInvitation from '../../../Screens/BounceVendors/PlanParty/CreateInvitation';
+import {observer} from 'mobx-react';
+import axios from 'axios';
+import {FONTSIZE, getHp, getWp} from '@utils';
+import {Scaffold} from '@components';
+import {Toast} from '@constants';
+import HostProfile from '../HostProfile/HostProfile';
+import Right from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Entypo';
+import spotifyToken from '../../../app/SDK/Spotify/spotify_token';
 
+import RNCalendarEvents from 'react-native-calendar-events';
 
 const ACCOUNTS = [
   {
-    id: "0",
+    id: '0',
     icon: Girl,
-    messageName: "Favourite",
+    messageName: 'Favourite',
   },
   {
-    id: "1",
+    id: '1',
     icon: Girl,
-    messageName: "Message",
+    messageName: 'Message',
   },
 ];
 
-const DATA = [{
-  eventTitle: "Rich Little - Live in Las Vegas",
-  name: 'Laugh Factory',
-  icon: Girl,
-  time: "Dec 31, 8:00 PM",
-},
-{
-  eventTitle: "Rich Little - Live in Las Vegas",
-  name: 'Laugh Factory',
-  icon: Girl,
-  time: "Dec 31, 8:00 PM",
-}
-]
+const DATA = [
+  {
+    eventTitle: 'Rich Little - Live in Las Vegas',
+    name: 'Laugh Factory',
+    icon: Girl,
+    time: 'Dec 31, 8:00 PM',
+  },
+  {
+    eventTitle: 'Rich Little - Live in Las Vegas',
+    name: 'Laugh Factory',
+    icon: Girl,
+    time: 'Dec 31, 8:00 PM',
+  },
+];
 
-const STATIC_DATA = ["Create an event page", "Invite friends", "Hire vendors", "Promote your event"]
+const STATIC_DATA = [
+  'Create an event page',
+  'Invite friends',
+  'Hire vendors',
+  'Promote your event',
+];
 
 function UserFriendsProfile(props) {
   // const { loader, userinfo, fetchProfile } = useContext(UserContext);
-  const {
-    authStore
-  } = MobxStore;
-  const { navigation } = props;
+  const {authStore} = MobxStore;
+  const {navigation} = props;
   const userinfo = authStore.userProfile;
   const [showDrawer, setShowDrawer] = useState(false);
   const [getMedia, setMedia] = useState(null);
@@ -96,23 +107,18 @@ function UserFriendsProfile(props) {
   const dispatch = useDispatch();
   const imageArray = [DJ, DJ1, DJ2];
   const [state, setState] = useState(0);
-  const [getSpotify, setSpotifyData] = useState([])
+  const [getSpotify, setSpotifyData] = useState([]);
 
-  console.log("PROPS", props);
+  console.log('PROPS', props);
 
   //Social media states
-  const [snapchat, setSnapchat] = useState(null)
-  const [instagram, setInstagram] = useState(null)
-  const [picture, setPicture] = useState(null)
-  const [footer, openFooter] = useState(false)
-  const [twitter, setTwitter] = useState('')
-  const [tiktok, setTiktok] = useState('')
+  const [snapchat, setSnapchat] = useState(null);
+  const [instagram, setInstagram] = useState(null);
+  const [picture, setPicture] = useState(null);
+  const [footer, openFooter] = useState(false);
+  const [twitter, setTwitter] = useState('');
+  const [tiktok, setTiktok] = useState('');
   //Social media states end
-
-  // const { body = {} } = props.route.params;
-  // const { user = {} } = useSelector(
-  //   (state) => state.mainExpenseByCategory.userProfileData
-  // );
   const {
     username,
     fullName,
@@ -122,20 +128,56 @@ function UserFriendsProfile(props) {
     about,
     profileImage = {},
   } = userinfo?.user;
-  console.log("userinfo", userinfo)
+
+  console.log('userinfo', userinfo);
+
+  /* 
+    Update with your own Client Id and Api key 
+  */
+  // var CLIENT_ID =
+  //   '134657981675-fl066gbb2k5rrf97ku4vk310egbt3t6m.apps.googleusercontent.com';
+  // var API_KEY = 'AIzaSyCP8xA958flEdsdFnGZROsi1IKyc8y70WA';
+  // var DISCOVERY_DOCS = [
+  //   'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest',
+  // ];
+  // var DISCOVERY_DOCS = ['https://www.googleapis.com/calendar/v3'];
+  // var SCOPES = 'https://www.googleapis.com/auth/calendar.events';
+
+  // Calender Function start
+
+  const handleClick = async () => {
+    let permission = await Calendar.checkPermission();
+    if (permission != 'authorized') {
+      let req = await Calendar.requestPermission();
+      console.log(req);
+    }else{
+      let CalenderID = await Calendar.findCalendars();
+      console.log('Calendars ID --> ', CalenderID);
+      let CalenderData = {
+        calendarId: CalenderID,
+        startDate: '2021-06-11T00:00:00.000Z',
+        endDate: '2021-06-13T00:00:00.000Z',
+        location: 'Chicago, USA.',
+        description: 'All Data', //For Android Only
+        url: 'www.google.com', //For IOS Only
+      }
+      let CalenderTitle = "Bounce Event - 1"
+      let SavedData = await Calendar.SaveEvents(CalenderTitle,CalenderData);
+      console.log("Saved Event ID ----> ", SavedData);
+    }
+  };
 
   useEffect(() => {
-
     PartyService.getParty();
   }, []);
-  const handleCarousel = (value) => {
+  const handleCarousel = value => {
     return (
       <ImageCarousel
         imageArray={imageArray}
-        onSnapToItem={(index) => setState(index)}
+        onSnapToItem={index => setState(index)}
         state={state}
         value={value}
-        pagination={value == "Friends" ? false : true}
+        pagination={value == 'Friends' ? false : true}
       />
     );
   };
@@ -144,167 +186,252 @@ function UserFriendsProfile(props) {
   //   fetchProfile();
   // }, []);
 
-  const fetchProfile = async () => {
-    const SERVER_RESPONSE = await postData()
-    console.log("Spotify_all_playlist", SERVER_RESPONSE);
-    setSpotifyData(SERVER_RESPONSE)
-  };
+  // const fetchProfile = async () => {
+  //   const SERVER_RESPONSE = await postData()
+  //   console.log("Spotify_all_playlist", SERVER_RESPONSE);
+  //   setSpotifyData(SERVER_RESPONSE)
+  // };
 
   const handleImage = async () => {
     {
-      vendorType !== "Bartender" &&
-        vendorType !== "Catering" &&
-        vendorType !== "Event Rentals"
+      vendorType !== 'Bartender' &&
+      vendorType !== 'Catering' &&
+      vendorType !== 'Event Rentals'
         ? ImagePicker.openPicker({
-          width: 300,
-          height: 400,
-          cropping: true,
-          multiple: true,
-        }).then((images) => {
-          setMedia(
-            images.map((i) => {
-              return i.path;
-            })
-          );
-        })
+            width: 300,
+            height: 400,
+            cropping: true,
+            multiple: true,
+          }).then(images => {
+            setMedia(
+              images.map(i => {
+                return i.path;
+              }),
+            );
+          })
         : pickDocument();
     }
   };
 
-  const RenderSpotify = ({ items }) => {
-    console.log("PROPS OF SPOTIFY", items.track)
+  const RenderSpotify = ({items}) => {
+    console.log('PROPS OF SPOTIFY', items.track);
     return (
-      <View style={{ marginRight: 10, flexDirection: 'row', marginVertical: 10, paddingVertical: 10, flex: 1 }}>
-        <View style={{ alignItems: 'center' }}>
-          <Image source={{ uri: items.track.album.images[0].url }} style={{ borderRadius: 7, width: 150, height: 150, margin: 2 }} />
+      <View
+        style={{
+          marginRight: 10,
+          flexDirection: 'row',
+          marginVertical: 10,
+          paddingVertical: 10,
+          flex: 1,
+        }}>
+        <View style={{alignItems: 'center'}}>
+          <Image
+            source={{uri: items.track.album.images[0].url}}
+            style={{borderRadius: 7, width: 150, height: 150, margin: 2}}
+          />
 
-          <Text style={[styles.textImage, { marginVertical: 5, paddingBottom: 0, fontSize: FONTSIZE.Text16, fontFamily: 'AvenirNext-Medium' }]}>{items.track.name}</Text>
+          <Text
+            style={[
+              styles.textImage,
+              {
+                marginVertical: 5,
+                paddingBottom: 0,
+                fontSize: FONTSIZE.Text16,
+                fontFamily: 'AvenirNext-Medium',
+              },
+            ]}>
+            {items.track.name}
+          </Text>
 
-          <Text style={[styles.textImage, { marginVertical: 5, paddingBottom: 0, fontSize: FONTSIZE.Text13 }]}>{items.track.artists[0].name}</Text>
+          <Text
+            style={[
+              styles.textImage,
+              {marginVertical: 5, paddingBottom: 0, fontSize: FONTSIZE.Text13},
+            ]}>
+            {items.track.artists[0].name}
+          </Text>
 
-          <Text style={[styles.textImage, { color: '#696969', paddingBottom: 0, fontSize: FONTSIZE.Text12 }]}>{items.track.album.album_type}</Text>
+          <Text
+            style={[
+              styles.textImage,
+              {color: '#696969', paddingBottom: 0, fontSize: FONTSIZE.Text12},
+            ]}>
+            {items.track.album.album_type}
+          </Text>
         </View>
       </View>
-    )
-  }
+    );
+  };
 
-  return (<Scaffold
-    contentContainerStyle={{}}
-    statusBarStyle={{ backgroundColor: '#FFFFFF' }}
-  >
-    <View style={styles.container}>
-
-      <ScrollView keyboardShouldPersistTaps={"always"}>
-        <Spinner visible={loader} color={"#1FAEF7"} />
+  return (
+    <Scaffold statusBarStyle={{backgroundColor: '#FFFFFF'}}>
+      <ScrollView
+        keyboardShouldPersistTaps={'always'}
+        contentContainerStyle={{flexGrow: 1}}
+        style={{
+          backgroundColor: '#FBFBFB',
+        }}>
+        <Spinner visible={loader} color={'#1FAEF7'} />
         {!loader && (
-          <>
+          <View>
             <Header
               leftDropdown={
-                username !== null ? `@${username !== null ? username : ""}` : ""
+                username !== null ? `@${username !== null ? username : ''}` : ''
               }
               scanner={<Scanner height={25} width={25} />}
               share={<BlackMenubar height={25} width={25} />}
               onPressScanner={() => props.navigation.navigate(QRcode.routeName)}
               onPress={() => {
-                // console.log("TEST - ", authStore.isVendor);
-                // return false;
-                props.navigation.openDrawer()
+                props.navigation.openDrawer();
               }}
-              headerBackColor={{ backgroundColor: "#FFFFFF" }}
+              headerBackColor={{backgroundColor: '#FFFFFF'}}
             />
             <View style={styles.subContainer}>
               <View
                 style={{
-                  flexDirection: "row",
-                  alignItems: "center",
+                  flexDirection: 'row',
+                  alignItems: 'center',
                   paddingVertical: 5,
-                }}
-              >
+                }}>
                 <Avatar
-                  source={{ uri: `${profileImage?.filePath}` }}
+                  source={{uri: `${profileImage?.filePath}`}}
                   size="large"
                   rounded
                 />
-                <View style={{ paddingLeft: 15 }}>
+
+                <View style={{paddingLeft: 15}}>
                   <Text
                     style={{
-                      color: "#000",
+                      color: '#000',
                       fontSize: FONTSIZE.Text20,
-                      fontFamily: "AvenirNext-Regular",
-                    }}
-                  >
+                      fontFamily: 'AvenirNext-Medium',
+                      marginBottom: getHp(5),
+                    }}>
                     {fullName}
                   </Text>
-                  <Text
-                    style={{
-                      color: "#696969",
-                      fontSize: FONTSIZE.Text14,
-                      fontFamily: "AvenirNext-Regular",
-                    }}
-                  >
-                    {city}
-                  </Text>
+
+                  <View style={styles.flex}>
+                    <Text style={styles.cityAll}>{'19'}</Text>
+                    <View style={styles.dot} />
+                    <Text style={styles.cityAll}>{city}</Text>
+                    <View style={styles.dot} />
+                    <TouchableOpacity
+                      style={[
+                        styles.editButtonStyle,
+                        styles.shadowStyle,
+                        {
+                          width: getWp(45),
+                          paddingHorizontal: 2,
+                          marginLeft: 2,
+                        },
+                      ]}
+                      onPress={() =>
+                        props.navigation.navigate(HostProfile.routeName)
+                      }>
+                      <Icon name="plus" color={'#1FAEF7'} size={15} />
+                      <Text style={[styles.editButton]}>{'Job'}</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
 
-              <View style={[styles.flex, { width: "70%", marginVertical: 10, justifyContent: 'space-evenly' }]}>
+              <View
+                style={[
+                  styles.flex,
+                  {
+                    width: '90%',
+                    marginVertical: 10,
+                    justifyContent: 'space-between',
+                  },
+                ]}>
                 <TouchableOpacity
-                  style={[styles.editButtonStyle]}
-                  onPress={() => props.navigation.navigate(HostProfile.routeName)}
-                >
-                  <Text style={styles.editButton}>{"Edit Profile"}</Text>
+                  style={[styles.editButtonStyle, styles.shadowStyle]}
+                  onPress={() =>
+                    props.navigation.navigate(HostProfile.routeName)
+                  }>
+                  <Text style={styles.editButton}>{'Edit Profile'}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   onPress={() =>
                     Linking.openURL(
-                      `https://www.instagram.com/${instagramUsername}`
+                      `https://www.instagram.com/${instagramUsername}`,
                     )
-                  }
-                >
+                  }>
                   <Insta height={30} width={30} />
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   onPress={() =>
                     Linking.openURL(`https://twitter.com/narendramodi`)
-                  }
-                >
+                  }>
                   <Twitter height={30} width={30} />
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   onPress={() =>
                     Linking.openURL(
-                      `https://www.snapchat.com/add/${snapchatUsername}`
+                      `https://www.snapchat.com/add/${snapchatUsername}`,
                     )
-                  }
-                >
+                  }>
                   <Snapchat height={30} width={30} />
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   onPress={() =>
                     Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
-                  }
-                >
+                  }>
                   <Tiktok height={30} width={30} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
+                  }>
+                  <Linkedin height={32} width={32} />
                 </TouchableOpacity>
               </View>
 
-              <TextInput
+              <LinearGradient
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
+                colors={['#16B0FE', '#3FBEFF']}
+                style={[
+                  styles.linearGradient,
+                  {
+                    marginVertical: 20,
+                    width: '100%',
+                    height: getHp(38),
+                    borderRadius: 13,
+                  },
+                ]}>
+                <TouchableOpacity
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Text style={[styles.buttonText, {marginRight: 15}]}>
+                    {'Things to do with Friends'}
+                  </Text>
+                  <Right name="angle-right" color="#FFFFFF" size={25} />
+                </TouchableOpacity>
+              </LinearGradient>
+
+              {/* <TextInput
                 multiline
                 numberOfLines={5}
                 placeholder="I like to party..."
                 textAlignVertical="top"
                 style={styles.Textarea}
                 placeholderTextColor='#999999'
-              />
+              /> */}
+            </View>
+            {/* Subcontainer view end  */}
 
-              <Tabview
-                {...props}
-              />
-              <LinearGradient
+            <Tabview {...props} />
+
+            <View style={{paddingHorizontal: 10}}>
+              {/* <LinearGradient
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 colors={['#69CCFF', '#8CDDFF']}
@@ -315,15 +442,21 @@ function UserFriendsProfile(props) {
                   onPress={() => props.navigation.navigate(CreateInvitation.routeName)}>
                   <WhitePerson height={27} width={19} />
                   <Text style={[styles.textStyle, { marginLeft: 20, fontFamily: 'AvenirNext-Medium', color: '#FFFFFF' }]}>
-                    {'Create Invitation'}</Text>
+                    {'Add Friend'}</Text>
                 </TouchableOpacity>
-              </LinearGradient>
+              </LinearGradient> */}
 
-              <View style={{ backgroundColor: '#EEEEEE', height: 1, marginVertical: 10 }} />
+              <View
+                style={{
+                  backgroundColor: '#EEEEEE',
+                  height: 1,
+                  marginVertical: 10,
+                }}
+              />
 
               {/* Social Media Section Start */}
               {/* 1st */}
-              <View style={styles.flex}>
+              {/* <View style={styles.flex}>
                 <TouchableOpacity style={styles.socialButton}>
                   <View style={styles.flex}>
                     <Insta height={30} width={30} />
@@ -338,10 +471,10 @@ function UserFriendsProfile(props) {
                   <Text style={[styles.headerTitle, { color: '#1FAEF7', }]}>{"Connect"}</Text>
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
-              </View>
+              </View> */}
 
               {/* 2nd */}
-              <View style={styles.flex}>
+              {/* <View style={styles.flex}>
                 <TouchableOpacity style={styles.socialButton}>
                   <View style={styles.flex}>
                     <Spotify height={30} width={30} />
@@ -350,11 +483,10 @@ function UserFriendsProfile(props) {
                   <Text style={[styles.headerTitle, { color: '#1FAEF7', }]}>{"Connect"}</Text>
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
-              </View>
-
+              </View> */}
 
               {/* 3rd */}
-              <View style={[styles.flex, { marginTop: 15 }]}>
+              {/* <View style={[styles.flex, { marginTop: 15 }]}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
                   borderColor: '#DDDDDD',
@@ -372,9 +504,10 @@ function UserFriendsProfile(props) {
                   </View>
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
-              </View>
+              </View> */}
+
               {/* 4th */}
-              <View style={styles.flex}>
+              {/* <View style={styles.flex}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
                   borderColor: '#DDDDDD',
@@ -392,9 +525,10 @@ function UserFriendsProfile(props) {
                   </View>
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
-              </View>
+              </View> */}
+
               {/* 5th */}
-              <View style={styles.flex}>
+              {/* <View style={styles.flex}>
                 <TouchableOpacity style={[styles.socialButton, {
                   borderWidth: 1,
                   borderColor: '#DDDDDD',
@@ -413,41 +547,67 @@ function UserFriendsProfile(props) {
                   </View>
                 </TouchableOpacity>
                 <GreyCross height={15} width={15} style={{ marginLeft: 20 }} />
-              </View>
+              </View> */}
               {/* Social Media Section */}
 
-              <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} />
+              {/* <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} /> */}
               {/* First Gallery Block of Friends */}
-              <View style={{ marginVertical: 5, paddingVertical: 10 }}>
+              <View style={{marginVertical: 5, paddingVertical: 10}}>
                 <View style={[styles.flex]}>
                   <BlackPerson height={20} width={14} />
-                  <Text style={[styles.InstaText]}> {"240 friends"}</Text>
-                </View>
-                {handleCarousel("Friends")}
-                <TouchableOpacity style={styles.allFrnds}>
-                  <Text style={[styles.aboutText, { fontWeight: "bold" }]}>
-                    {"All Friends"}
+                  <Text style={[styles.InstaText]}>
+                    {' '}
+                    {'Friends '}
+                    <Text style={[styles.InstaText, {color: '#696969'}]}>
+                      {' 240'}
+                    </Text>
                   </Text>
+                </View>
+                {handleCarousel('Friends')}
+                <TouchableOpacity style={styles.allFrnds} onPress={handleClick}>
+                  <Text style={[styles.aboutText]}>{'See All Friends'}</Text>
                 </TouchableOpacity>
               </View>
               {/*END*** First Gallery Block of Friends */}
-              <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} />
+            </View>
 
-              {/*Start*** Second Gallery Block of Friends */}
-              <View style={[styles.flex, {
-                marginVertical: 10,
-              }]}>
-                <InstaNew height={20} width={14} />
-                <Text style={styles.InstaText} >
-                  {"Instagram"}
-                </Text>
-              </View>
-              {handleCarousel("Instagram")}
-              {/*END*** Second Gallery Block of Friends */}
+            <View
+              style={{
+                height: 1,
+                backgroundColor: '#EEEEEE',
+                marginTop: 10,
+                marginBottom: 25,
+              }}
+            />
 
-              <View>
-                <Text style={styles.InstaText}>{"Favorite Music"}</Text>
-                {/* <ScrollView horizontal >
+            {/*Start*** Second Gallery Block of Instagram */}
+            <View
+              style={[
+                styles.flex,
+                {
+                  margin: 10,
+                },
+              ]}>
+              <InstaNew height={20} width={14} />
+              <Text style={styles.InstaText}>{'Instagram'}</Text>
+            </View>
+            {handleCarousel('Instagram')}
+            {/*END*** Second Gallery Block of Instagram */}
+
+            <View
+              style={[
+                styles.flex,
+                {
+                  paddingHorizontal: 10,
+                  marginBottom: getHp(60),
+                },
+              ]}>
+              <FavouriteMusic height={17} width={10} />
+              <Text style={styles.InstaText}>{'Favourite Music'}</Text>
+            </View>
+            {/* <View> */}
+
+            {/* <ScrollView horizontal >
                   {getSpotify.length == 0 ?
                     null :
                     getSpotify.items.map((items) => {
@@ -456,17 +616,14 @@ function UserFriendsProfile(props) {
                     })
                   }
                 </ScrollView> */}
-              </View>
-
-            </View>
-          </>
+            {/* </View> */}
+          </View>
         )}
       </ScrollView>
-    </View >
-  </Scaffold>
+      {/* </View> */}
+    </Scaffold>
   );
 }
-UserFriendsProfile.routeName = "/UserFriendsProfile";
+UserFriendsProfile.routeName = '/UserFriendsProfile';
 
-
-export default observer(UserFriendsProfile)
+export default observer(UserFriendsProfile);

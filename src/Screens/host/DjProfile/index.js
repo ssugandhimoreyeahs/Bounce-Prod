@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   View,
   Text,
@@ -6,7 +6,7 @@ import {
   ScrollView,
   Linking,
   TouchableOpacity,
-  } from 'react-native';
+} from 'react-native';
 import {
   Header,
   ImageCarousel,
@@ -15,8 +15,8 @@ import {
   Footer,
   CustomText,
 } from '@components';
-import {Girl} from '@assets';
-import {styles as PageStyle} from './indexCss';
+import { Girl } from '@assets';
+import { styles as PageStyle } from './indexCss';
 import {
   AddBlueWhite,
   AddBlue,
@@ -32,18 +32,18 @@ import {
   Pdf,
 } from '@svg';
 import Ratings from '../../../components/RatingStar/Ratings';
-import {Avatar} from 'react-native-elements';
+import { Avatar } from 'react-native-elements';
 import ImagePicker from 'react-native-image-crop-picker';
-import {FONTSIZE, getHp, getWp} from '@utils';
-import {useSelector, useDispatch} from 'react-redux';
-import {fetchVendorData} from '../../../reducer/mainexpensecategory';
+import { FONTSIZE, getHp, getWp } from '@utils';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchVendorData } from '../../../reducer/mainexpensecategory';
 import Spinner from 'react-native-loading-spinner-overlay';
-import {pickDocument} from '@hooks';
+import { pickDocument } from '@hooks';
 import axios from 'axios';
-import {ApiClient} from '../../../app/services';
+import { ApiClient } from '../../../app/services';
 import DocumentPicker from 'react-native-document-picker';
 import MobxStore from '../../../mobx';
-import {observer} from 'mobx-react';
+import { observer } from 'mobx-react';
 import UploadInventoryScreen from '../UploadInventory';
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
@@ -62,10 +62,13 @@ const DATA = [
   },
 ];
 var imgTemp = [];
+
+
+
 function DjProfile(props) {
   let loader = false;
   const {
-    authStore: {userProfile, async: authStoreAsync},
+    authStore: { userProfile, async: authStoreAsync },
     uiStore,
   } = MobxStore;
   let styles = PageStyle(uiStore.theme);
@@ -76,7 +79,7 @@ function DjProfile(props) {
   const dispatch = useDispatch();
   const token = userProfile?.token;
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   if (userProfile?.user == undefined) {
     return null;
@@ -211,43 +214,43 @@ function DjProfile(props) {
     // console.log("called handle images");
     {
       vendorCategoryName !== 'Bartenders' &&
-      vendorCategoryName !== 'Catering' &&
-      vendorCategoryName !== 'Event Rentals'
+        vendorCategoryName !== 'Catering' &&
+        vendorCategoryName !== 'Event Rentals'
         ? ImagePicker.openPicker({
-            width: 300,
-            height: 300,
-            cropping: true,
-            multiple: true,
-          }).then(images => {
-            // console.log("REACHED IMAGES PICKING")
-            handleImagesArray(images);
-          })
+          width: 300,
+          height: 300,
+          cropping: true,
+          multiple: true,
+        }).then(images => {
+          // console.log("REACHED IMAGES PICKING")
+          handleImagesArray(images);
+        })
         : pickDocument().then(async res => {
-            // console.log("RESPONSE PDF", res);
-            let milliseconds = new Date().getTime();
-            let formData = new FormData();
-            let imgObj = {
-              uri: `${res.fileCopyUri}`,
-              type: 'application/pdf',
-              name: `pdf-${milliseconds}.pdf`,
-            };
-            console.log('TOKEN', token);
-            formData.append('pdf', imgObj); //Set method
-            axios
-              .post('http://3.12.168.164:3000/menu/addmenu', formData, {
-                headers: {
-                  Authorization: 'bearer ' + `${token}`,
-                },
-              })
-              .then(async SERVER_PDF => {
-                console.log(
-                  'SERVER_PDF',
-                  SERVER_PDF.data.userData.menu.filePath,
-                );
-                await authStoreAsync.reloadVendor();
-                setPdf(SERVER_PDF.data.userData.menu.filePath);
-              });
-          });
+          // console.log("RESPONSE PDF", res);
+          let milliseconds = new Date().getTime();
+          let formData = new FormData();
+          let imgObj = {
+            uri: `${res.fileCopyUri}`,
+            type: 'application/pdf',
+            name: `pdf-${milliseconds}.pdf`,
+          };
+          console.log('TOKEN', token);
+          formData.append('pdf', imgObj); //Set method
+          axios
+            .post('http://3.12.168.164:3000/menu/addmenu', formData, {
+              headers: {
+                Authorization: 'bearer ' + `${token}`,
+              },
+            })
+            .then(async SERVER_PDF => {
+              console.log(
+                'SERVER_PDF',
+                SERVER_PDF.data.userData.menu.filePath,
+              );
+              await authStoreAsync.reloadVendor();
+              setPdf(SERVER_PDF.data.userData.menu.filePath);
+            });
+        });
     }
   };
 
@@ -261,422 +264,430 @@ function DjProfile(props) {
   };
 
   return (
-    <Scaffold>
-    <View style={styles.container}>
-      <Spinner visible={loader} color={'#1FAEF7'} />
-      {!loader && (
-        <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
-          <View style={{flex: 1}}>
-            <Header
-              leftDropdown={
-                username !== null ? `@${username !== null ? username : ''}` : ''
-              }
-              DropdownAccounts={DATA}
-              share={<BlackMenubar height={25} width={25} />}
-              onPress={() => {
-                props.navigation.openDrawer();
-              }}
-              headerBackColor={{backgroundColor: '#FFFFFF'}}
-            />
+    <Scaffold
+      statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
+      <View style={styles.container}>
+        <Spinner visible={loader} color={'#1FAEF7'} />
+        {!loader && (
+          <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
+            <View style={{ flex: 1 }}>
+              <Header
+                leftDropdown={
+                  username !== null ? `@${username !== null ? username : ''}` : ''
+                }
+                DropdownAccounts={DATA}
+                share={<BlackMenubar height={25} width={25} />}
+                onPress={() => {
+                  props.navigation.openDrawer();
+                }}
+                headerBackColor={{ backgroundColor: '#FFFFFF' }}
+              />
 
-            <View style={styles.subContainer}>
-              <View style={{paddingHorizontal: 10}}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    paddingVertical: 5,
-                  }}>
-                  {profileImage != null ? (
-                    <Avatar
-                      source={{uri: `${profileImage.filePath}`}}
-                      size={getHp(80)}
-                      rounded
-                    />
+              <View style={styles.subContainer}>
+                <View style={{ paddingHorizontal: 10 }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      paddingVertical: 5,
+                    }}>
+                    {profileImage != null ? (
+                      <Avatar
+                        source={{ uri: `${profileImage.filePath}` }}
+                        size={getHp(80)}
+                        rounded
+                      />
+                    ) : null}
+
+                    <View
+                      style={{
+                        paddingLeft: 15,
+                        minWidth: '55%',
+                        maxWidth: '65%',
+                      }}>
+                      {fullName !== null ? (
+                        <Text style={[styles.fullName, { marginBottom: 4 }]}>
+                          {fullName}
+                        </Text>
+                      ) : null}
+                      {city !== null ? (
+                        <Text
+                          style={[
+                            styles.fullName,
+                            {opacity:0.7,
+                              fontFamily:'AvenirNext-Regular',
+                              color: uiStore.theme.colors.primaryText1,
+                              fontSize: FONTSIZE.Text14,
+                              marginTop: 4,
+                            },
+                          ]}>
+                          {city}
+                        </Text>
+                      ) : null}
+                    </View>
+                  </View>
+
+                  <View style={{ flexDirection: 'row', marginVertical: 15 }}>
+                    <Ratings rating={'N/A'} />
+
+                    {hourlyRate != null &&
+                      vendorCategoryName !== 'Event Rentals' ? (
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            paddingLeft: 15,
+                          }}>
+                          <View
+                            style={{
+                              backgroundColor: '#00E08F',
+                              borderRadius: 5,
+                              padding: 2,
+                            }}>
+                            <DollarOnlyWhite height={18} width={18} />
+                          </View>
+                          {vendorCategoryName == 'DJ' ? (
+                            <>
+                              <Text style={styles.hourStyle}>
+                                {hourlyRate} / hour
+                          </Text>
+
+                              <Text
+                                style={[
+                                  styles.hourStyle,
+                                  { color: '#696969', fontSize: FONTSIZE.Text14 },
+                                ]}>
+                                {' '}
+                            (Base Package)
+                          </Text>
+                            </>
+                          ) : vendorCategoryName == 'Catering' ? (
+                            <>
+                              <Text style={styles.hourStyle}>
+                                {hourlyRate} / guest
+                          </Text>
+
+                              <Text
+                                style={[
+                                  styles.hourStyle,
+                                  { color: '#696969', fontSize: FONTSIZE.Text14 },
+                                ]}>
+                                {' '}
+                            (Base Package)
+                          </Text>
+                            </>
+                          ) : (
+                                <Text style={styles.hourStyle}>
+                                  {hourlyRate} / hour
+                                </Text>
+                              )}
+                        </View>
+                      ) : null}
+                  </View>
+
+                  {website != null ? (
+                    <View style={styles.websiteView}>
+                      <Webpin height={getHp(21)} width={getWp(23)} />
+                      <Text
+                        onPress={() => Linking.openURL(`https://${website}`)}
+                        style={styles.webText}>
+                        {website}
+                      </Text>
+                    </View>
                   ) : null}
 
                   <View
-                    style={{
-                      paddingLeft: 15,
-                      minWidth: '55%',
-                      maxWidth: '65%',
-                    }}>
-                    {fullName !== null ? (
-                      <Text style={[styles.fullName, {marginBottom: 4}]}>
-                        {fullName}
-                      </Text>
-                    ) : null}
-                    {city !== null ? (
-                      <Text
-                        style={[
-                          styles.fullName,
-                          {
-                            color: uiStore.theme.colors.primaryText1,
-                            fontSize: FONTSIZE.Text14,
-                            marginTop: 4,
-                          },
-                        ]}>
-                        {city}
-                      </Text>
-                    ) : null}
-                  </View>
-                </View>
-
-                <View style={{flexDirection: 'row', marginVertical: 15}}>
-                  <Ratings rating={'N/A'} />
-
-                  {hourlyRate != null &&
-                  vendorCategoryName !== 'Event Rentals' ? (
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        paddingLeft: 15,
-                      }}>
-                      <View
-                        style={{
-                          backgroundColor: '#00E08F',
-                          borderRadius: 5,
-                          padding: 2,
-                        }}>
-                        <DollarOnlyWhite height={18} width={18} />
-                      </View>
-                      {vendorCategoryName == 'DJ' ? (
-                        <>
-                          <Text style={styles.hourStyle}>
-                            {hourlyRate} / hour
-                          </Text>
-
-                          <Text
-                            style={[
-                              styles.hourStyle,
-                              {color: '#696969', fontSize: FONTSIZE.Text14},
-                            ]}>
-                            {' '}
-                            (Base Package)
-                          </Text>
-                        </>
-                      ) : vendorCategoryName == 'Catering' ? (
-                        <>
-                          <Text style={styles.hourStyle}>
-                            {hourlyRate} / guest
-                          </Text>
-
-                          <Text
-                            style={[
-                              styles.hourStyle,
-                              {color: '#696969', fontSize: FONTSIZE.Text14},
-                            ]}>
-                            {' '}
-                            (Base Package)
-                          </Text>
-                        </>
-                      ) : (
-                        <Text style={styles.hourStyle}>
-                          {hourlyRate} / hour
-                        </Text>
-                      )}
-                    </View>
-                  ) : null}
-                </View>
-
-                {website != null ? (
-                  <View style={styles.websiteView}>
-                    <Webpin height={getHp(21)} width={getWp(23)} />
-                    <Text
-                      onPress={() => Linking.openURL(`https://${website}`)}
-                      style={styles.webText}>
-                      {website}
-                    </Text>
-                  </View>
-                ) : null}
-
-                {/* <View
-                  style={[styles.partition, {marginTop: 30, marginBottom: 0}]}
-                /> */}
-
-                {about != null ? (
-                  <CustomText
-                    TextData={about}
-                    styleProp={{
-                      color: '#000',
-                      fontSize: FONTSIZE.Text18,
-                      marginVertical: getHp(20),
-                    }}
+                    style={[styles.partition, { marginTop: 30, marginBottom: 0 }]}
                   />
-                ) : null}
 
-                <View style={[styles.partition, {marginBottom: 20}]} />
-              </View>
-              {/* View Inventory Add Media Extra button START */}
+                  {about != null ? (
+                    <CustomText
+                      TextData={about}
+                      styleProp={{
+                        color: '#000',
+                        fontFamily: 'AvenirNext-Medium',
+                        fontSize: FONTSIZE.Text14,
+                        marginTop: getHp(10),
+                      }}
+                    />
+                  ) : null}
 
-              {!(inventory.length == 0 || inventory == null) &&
-              vendorCategoryName == 'Event Rentals' ? (
-                <>
-                  <View style={styles.prView}>
-                    <Text
-                      style={[
-                        styles.mediaText,
-                        {fontSize: FONTSIZE.Text20, color: '#000'},
-                      ]}>
-                      {'Media'}
-                    </Text>
-                    {/* <TouchableOpacity onPress={onlyPartyRentalImage} >
+                  <View style={[styles.partition, { marginBottom: 20 }]} />
+                </View>
+                {/* View Inventory Add Media Extra button START */}
+
+                {!(inventory.length == 0 || inventory == null) &&
+                  vendorCategoryName == 'Event Rentals' ? (
+                    <>
+                      <View style={styles.prView}>
+                        <Text
+                          style={[
+                            styles.mediaText,
+                            { fontSize: FONTSIZE.Text16, fontFamily: 'AvenirNext-Medium', color: '#000', marginBottom: getHp(10) },
+                          ]}>
+                          {'Media'}
+                        </Text>
+                        {/* <TouchableOpacity onPress={onlyPartyRentalImage} >
                       <View style={styles.onlyFlex}>
                         <AddBlueWhite height={20} width={20} />
                         <Text style={styles.addButton}>{"Add"}</Text>
                       </View>
                     </TouchableOpacity> */}
-                  </View>
-                  {!(inventory.length == 0 || inventory == null)
-                    ? PRhandleCarousel()
-                    : null}
-                </>
-              ) : (
-                <>
-                  {(inventory.length == 0 || inventory == null) &&
-                    vendorCategoryName == 'Event Rentals' && (
-                      <View>
-                        <TouchableOpacity
-                          onPress={onlyPartyRentalImage}
-                          style={styles.addMediaButton}>
-                          <View style={styles.onlyFlex}>
-                            <AddBlue height={20} width={20} />
-                            <Text
-                              style={[
-                                styles.mediaText,
-                                {
-                                  marginLeft: 10,
-                                  fontWeight: 'bold',
-                                  marginVertical: 10,
-                                },
-                              ]}>
-                              {' '}
-                              {'Add Media'}{' '}
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
                       </View>
-                    )}
-                </>
-              )}
-              {/* View Inventory Add Media Extra button FINISH */}
+                      {!(inventory.length == 0 || inventory == null)
+                        ? PRhandleCarousel()
+                        : null}
+                    </>
+                  ) : (
+                    <>
+                      {(inventory.length == 0 || inventory == null) &&
+                        vendorCategoryName == 'Event Rentals' && (
+                          <View>
+                            <TouchableOpacity
+                              onPress={onlyPartyRentalImage}
+                              style={styles.addMediaButton}>
+                              <View style={styles.onlyFlex}>
+                                <AddBlue height={20} width={20} />
+                                <Text
+                                  style={[
+                                    styles.mediaText,
+                                    {
+                                      marginLeft: 10,
+                                      fontWeight: 'bold',
+                                      marginVertical: 10,
+                                    },
+                                  ]}>
+                                  {' '}
+                                  {'Add Media'}{' '}
+                                </Text>
+                              </View>
+                            </TouchableOpacity>
+                          </View>
+                        )}
+                    </>
+                  )}
+                {/* View Inventory Add Media Extra button FINISH */}
 
-              {!(
-                userProfile?.user?.gallery == null ||
-                userProfile?.user?.gallery.length == 0
-              ) && vendorCategoryName != 'Event Rentals' ? (
-                <>
-                  <View style={styles.prView}>
-                    <Text
-                      style={[
-                        styles.mediaText,
-                        {fontSize: FONTSIZE.Text20, color: '#000'},
-                      ]}>
-                      {'Media'}
-                    </Text>
-                    {/* <TouchableOpacity onPress={handleImage} >
+                {!(
+                  userProfile?.user?.gallery == null ||
+                  userProfile?.user?.gallery.length == 0
+                ) && vendorCategoryName != 'Event Rentals' ? (
+                    <>
+                      <View style={styles.prView}>
+                        <Text
+                          style={[
+                            styles.mediaText,
+                            {
+                              fontSize: FONTSIZE.Text16,
+                              fontFamily: 'AvenirNext-Medium',
+                              color: '#000',
+                              marginBottom: getHp(10)
+                            },
+                          ]}>
+                          {'Media'}
+                        </Text>
+                        {/* <TouchableOpacity onPress={handleImage} >
                       <View style={styles.onlyFlex}>
                         <AddBlueWhite height={20} width={20} />
                         <Text style={[styles.addButton, { marginLeft: 10 }]}>{"Add"}</Text>
                       </View>
                     </TouchableOpacity> */}
-                  </View>
-                  {!(
-                    userProfile?.user?.gallery == null ||
-                    userProfile?.user?.gallery.length == 0
-                  ) && vendorCategoryName != 'Event Rentals'
-                    ? handleCarousel()
-                    : null}
-                </>
-              ) : (
-                <View>
-                  {(userProfile?.user?.gallery == null ||
-                    userProfile?.user?.gallery.length == 0) &&
-                  vendorCategoryName != 'Event Rentals' ? (
-                    <TouchableOpacity
-                      onPress={() => {
-                        // console.log('TEST - ', uiStore.theme.serialize());
-                        // return;
-                        handleImage();
-                      }}
-                      style={styles.addMediaButton}>
-                      <View style={styles.onlyFlex}>
-                        <AddBlue height={20} width={20} />
-                        <Text
-                          style={[
-                            styles.mediaText,
-                            {fontWeight: 'bold', marginVertical: 10},
-                          ]}>
-                          {' '}
-                          {'Add Media'}{' '}
-                        </Text>
                       </View>
-                    </TouchableOpacity>
-                  ) : null}
-                </View>
-              )}
-              {/* {
+                      {!(
+                        userProfile?.user?.gallery == null ||
+                        userProfile?.user?.gallery.length == 0
+                      ) && vendorCategoryName != 'Event Rentals'
+                        ? handleCarousel()
+                        : null}
+                    </>
+                  ) : (
+                    <View>
+                      {(userProfile?.user?.gallery == null ||
+                        userProfile?.user?.gallery.length == 0) &&
+                        vendorCategoryName != 'Event Rentals' ? (
+                          <TouchableOpacity
+                            onPress={() => {
+                              // console.log('TEST - ', uiStore.theme.serialize());
+                              // return;
+                              handleImage();
+                            }}
+                            style={styles.addMediaButton}>
+                            <View style={styles.onlyFlex}>
+                              <AddBlue height={20} width={20} />
+                              <Text
+                                style={[
+                                  styles.mediaText,
+                                  { fontWeight: 'bold', marginVertical: 10 },
+                                ]}>
+                                {' '}
+                                {'Add Media'}{' '}
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                        ) : null}
+                    </View>
+                  )}
+                {/* {
                 !(gallery == null) ? handleCarousel() : null
               } */}
 
-              {/* pdf section */}
-              {
-                <>
-                  {(vendorCategoryName == 'Bartenders' ||
-                    vendorCategoryName == 'Catering' ||
-                    vendorCategoryName == 'Event Rentals') &&
-                  // (getPdf != null || getPdf.length != 0) ||
-                  menu != null ? (
-                    <>
-                      <TouchableOpacity
-                        onPress={handleUploadPdf}
-                        style={[styles.addMediaButton]}>
-                        <Text
-                          style={[
-                            styles.mediaText,
-                            {
-                              color: '#1FAEF7',
-                              fontSize: FONTSIZE.Text20,
-                              fontWeight: 'bold',
-                            },
-                          ]}>
-                          {vendorCategoryName == 'Event Rentals'
-                            ? 'View All Inventory'
-                            : 'View Menu'}
-                        </Text>
-                      </TouchableOpacity>
-                    </>
-                  ) : (vendorCategoryName == 'Bartenders' ||
+                {/* pdf section */}
+                {
+                  <>
+                    {(vendorCategoryName == 'Bartenders' ||
                       vendorCategoryName == 'Catering' ||
                       vendorCategoryName == 'Event Rentals') &&
-                    // (getPdf != null || getPdf.length != 0) ||
-                    menu == null ? (
-                    <TouchableOpacity
-                      onPress={handleImage}
-                      style={[styles.addMediaButton]}>
-                      <Text
-                        style={[
-                          styles.mediaText,
-                          {
-                            color: '#1FAEF7',
-                            fontSize: FONTSIZE.Text20,
-                            fontWeight: 'bold',
-                          },
-                        ]}>
-                        {vendorCategoryName == 'Event Rentals'
-                          ? 'Upload Inventory'
-                          : 'Upload Menu'}
-                      </Text>
-                    </TouchableOpacity>
-                  ) : null}
-                </>
-              }
-            </View>
+                      // (getPdf != null || getPdf.length != 0) ||
+                      menu != null ? (
+                        <>
+                          <TouchableOpacity
+                            onPress={handleUploadPdf}
+                            style={[styles.addMediaButton]}>
+                            <Text
+                              style={[
+                                styles.mediaText,
+                                {
+                                  color: '#1FAEF7',
+                                  fontSize: FONTSIZE.Text20,
+                                  fontWeight: 'bold',
+                                },
+                              ]}>
+                              {vendorCategoryName == 'Event Rentals'
+                                ? 'View All Inventory'
+                                : 'View Menu'}
+                            </Text>
+                          </TouchableOpacity>
+                        </>
+                      ) : (vendorCategoryName == 'Bartenders' ||
+                        vendorCategoryName == 'Catering' ||
+                        vendorCategoryName == 'Event Rentals') &&
+                        // (getPdf != null || getPdf.length != 0) ||
+                        menu == null ? (
+                          <TouchableOpacity
+                            onPress={handleImage}
+                            style={[styles.addMediaButton]}>
+                            <Text
+                              style={[
+                                styles.mediaText,
+                                {
+                                  color: '#1FAEF7',
+                                  fontSize: FONTSIZE.Text20,
+                                  fontWeight: 'bold',
+                                },
+                              ]}>
+                              {vendorCategoryName == 'Event Rentals'
+                                ? 'Upload Inventory'
+                                : 'Upload Menu'}
+                            </Text>
+                          </TouchableOpacity>
+                        ) : null}
+                  </>
+                }
+              </View>
 
-            <View style={{paddingVertical: 0}}>
-              <IconTitle
-                textStyle={styles.belowTextStyle}
-                text={
-                  vendorCategoryName == 'Security' ? (
-                    <>
-                      {guardCertification.map((item, i) => {
-                        let comma =
-                          guardCertification.length - 1 > i ? ', ' : '';
-                        return item.label + comma;
-                      })}
-                    </>
-                  ) : vendorCategoryName == 'DJ' ? (
-                    <>
-                      {genres.map(item => {
-                        return `${item.label}, `;
-                      })}
-                    </>
-                  ) : vendorCategoryName == 'Catering' ? (
-                    cuisines
-                  ) : null
-                }
-                icon={
-                  vendorCategoryName == 'Security' ? (
-                    <Certified height={60} width={60} />
-                  ) : vendorCategoryName == 'DJ' ? (
-                    <Certified height={60} width={60} />
-                  ) : vendorCategoryName == 'Catering' ? (
-                    <Cuisines height={60} width={60} />
-                  ) : (
-                    <Services height={60} width={60} />
-                  )
-                }
-                iconBelowText={
-                  vendorCategoryName == 'Security'
-                    ? 'Certified'
-                    : vendorCategoryName == 'DJ'
-                    ? 'Genres'
-                    : vendorCategoryName == 'Catering'
-                    ? 'Cuisines'
-                    : 'Services'
-                }
-              />
-
-              <IconTitle
-                textStyle={styles.belowTextStyle}
-                text={
-                  vendorCategoryName == 'Security'
-                    ? armed
-                    : vendorCategoryName == 'DJ'
-                    ? equipment
-                    : vendorCategoryName == 'Catering'
-                    ? services
-                    : services
-                }
-                icon={
-                  vendorCategoryName == 'Security' ? (
-                    <Armed height={50} width={50} />
-                  ) : vendorCategoryName == 'DJ' ? (
-                    <Equipments height={60} width={60} />
-                  ) : vendorCategoryName == 'Catering' ? (
-                    <Services height={48} width={48} />
-                  ) : (
-                    <Services height={48} width={48} />
-                  )
-                }
-                iconBelowText={
-                  vendorCategoryName == 'Security'
-                    ? 'Armed'
-                    : vendorCategoryName == 'DJ'
-                    ? 'Equipment'
-                    : vendorCategoryName == 'Catering'
-                    ? 'Services'
-                    : 'Services'
-                }
-              />
-              {language == null ||
-              (userProfile?.user?.language?.length == 1 &&
-                userProfile?.user?.language[0].label === 'English') ? null : (
+              <View style={{ paddingVertical: 0 }}>
                 <IconTitle
                   textStyle={styles.belowTextStyle}
                   text={
-                    language != null ? (
+                    vendorCategoryName == 'Security' ? (
                       <>
-                        {language.map((item, i) => {
-                          let comma = language.length - 1 > i ? ', ' : '';
+                        {guardCertification.map((item, i) => {
+                          let comma =
+                            guardCertification.length - 1 > i ? ', ' : '';
                           return item.label + comma;
                         })}
                       </>
+                    ) : vendorCategoryName == 'DJ' ? (
+                      <>
+                        {genres.map(item => {
+                          return `${item.label}, `;
+                        })}
+                      </>
+                    ) : vendorCategoryName == 'Catering' ? (
+                      cuisines
                     ) : null
                   }
-                  icon={<Multilingual height={42} width={42} />}
-                  iconBelowText={'Multilingual'}
+                  icon={
+                    vendorCategoryName == 'Security' ? (
+                      <Certified height={60} width={60} />
+                    ) : vendorCategoryName == 'DJ' ? (
+                      <Certified height={60} width={60} />
+                    ) : vendorCategoryName == 'Catering' ? (
+                      <Cuisines height={60} width={60} />
+                    ) : (
+                            <Services height={60} width={60} />
+                          )
+                  }
+                  iconBelowText={
+                    vendorCategoryName == 'Security'
+                      ? 'Certified'
+                      : vendorCategoryName == 'DJ'
+                        ? 'Genres'
+                        : vendorCategoryName == 'Catering'
+                          ? 'Cuisines'
+                          : 'Services'
+                  }
                 />
-              )}
+
+                <IconTitle
+                  textStyle={styles.belowTextStyle}
+                  text={
+                    vendorCategoryName == 'Security'
+                      ? armed
+                      : vendorCategoryName == 'DJ'
+                        ? equipment
+                        : vendorCategoryName == 'Catering'
+                          ? services
+                          : services
+                  }
+                  icon={
+                    vendorCategoryName == 'Security' ? (
+                      <Armed height={50} width={50} />
+                    ) : vendorCategoryName == 'DJ' ? (
+                      <Equipments height={60} width={60} />
+                    ) : vendorCategoryName == 'Catering' ? (
+                      <Services height={48} width={48} />
+                    ) : (
+                            <Services height={48} width={48} />
+                          )
+                  }
+                  iconBelowText={
+                    vendorCategoryName == 'Security'
+                      ? 'Armed'
+                      : vendorCategoryName == 'DJ'
+                        ? 'Equipment'
+                        : vendorCategoryName == 'Catering'
+                          ? 'Services'
+                          : 'Services'
+                  }
+                />
+                {language == null ||
+                  (userProfile?.user?.language?.length == 1 &&
+                    userProfile?.user?.language[0].label === 'English') ? null : (
+                    <IconTitle
+                      textStyle={styles.belowTextStyle}
+                      text={
+                        language != null ? (
+                          <>
+                            {language.map((item, i) => {
+                              let comma = language.length - 1 > i ? ', ' : '';
+                              return item.label + comma;
+                            })}
+                          </>
+                        ) : null
+                      }
+                      icon={<Multilingual height={42} width={42} />}
+                      iconBelowText={'Multilingual'}
+                    />
+                  )}
+              </View>
+              {/* <View style={{ position: 'absolute', bottom: 0, width: '100%' }}> */}
+              <ReviewCard  />
+              {/* </View> */}
             </View>
-            {/* <View style={{ position: 'absolute', bottom: 0, width: '100%' }}> */}
-            <ReviewCard styleProp={{backgroundColor: '#f0efed'}} />
-            {/* </View> */}
-          </View>
-        </ScrollView>
-      )}
-    </View>
+          </ScrollView>
+        )}
+      </View>
     </Scaffold>
   );
 }

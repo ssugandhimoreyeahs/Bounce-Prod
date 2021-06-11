@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
-import { View, Text, StyleSheet,  ScrollView, Alert } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native'
 import {
     Header, GooglePlacesInput, CustomDropdown, Root, CustomButton, FloatingInput,
     ModalDropDownComponent
@@ -175,16 +175,17 @@ export default function VendorMarketProfile(props) {
     }, [])
 
 
-    return (<Scaffold>
+    return (<Scaffold
+        statusBarStyle={{ backgroundColor: '#F4F4F4' }}>
         <Spinner visible={loader} color={"#1FAEF7"} />
         {!loader && (
             <View style={styles.container}>
-
                 <ScrollView keyboardShouldPersistTaps='always'
-                    contentContainerStyle={{}}
+                    contentContainerStyle={{flexGrow:1}}
                     style={{ backgroundColor: '#fff', flex: 1 }} ref={scrollRef}  >
 
                     <Header
+                      headerBackColor={{ paddingBottom: 20, backgroundColor: 'rgba(238, 238, 238, 0.5)' }}
                         back
                         headerTitle={`Create ${vendorType} Profile`}
                         onPress={() => props.navigation.goBack()}
@@ -197,7 +198,7 @@ export default function VendorMarketProfile(props) {
                         />
 
                         <GooglePlacesInput
-                            floatingLabel={"City (or cities)"}
+                            floatingLabel={"City"}
                             onPress={(data) => {
                                 console.log('DATA_TESt - ', data);
                                 setCity(data.description)
@@ -327,7 +328,7 @@ export default function VendorMarketProfile(props) {
                             :
                             null
                         }
-                        {vendorType != "Catering" &&
+                        {/* {vendorType != "Catering" &&
                             vendorType != "Security" &&
                             vendorType != "DJ" ?
                             <>
@@ -339,11 +340,11 @@ export default function VendorMarketProfile(props) {
                                 />
                             </>
                             : null
-                        }
+                        } */}
 
                     </View>
-                    <View style={{ height: 70 }}></View>
-                    <View style={{ position: 'absolute', bottom: 40, alignSelf: 'center', width: '95%', paddingBottom: getHp(10) }}>
+                    {/* <View style={{ height: 70 }}></View> */}
+                    <View style={{ position: 'absolute', bottom: 0, alignSelf: 'center', width: '95%', paddingBottom: getHp(10) }}>
                         <CustomButton
                             complete
                             onPress={handleSubmit}

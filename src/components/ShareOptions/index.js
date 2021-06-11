@@ -4,9 +4,14 @@ import Share from 'react-native-share';
 
 
 
-export const shareFunction = async () => {
+export const shareFunction = async (props) => {
+    console.log("Share options props", props)
+    const {
+        fullName
+    } = props
+
     const shareOptions = {
-        message: ` Hi *(vendor name)*, I’m interested in hiring you for my upcoming event, *(Event Title)* \n Date - Saturday, October 3rd \n Time - 9:00pm \n Location - 8990 Durango Dr., Las Vegas, NV, 89134 \n Click Here to view the event page- www.google.com`,
+        message: "Hi" +` ${fullName} I’m interested in hiring you for my upcoming event, *(Event Title)* \n Date - Saturday, October 3rd \n Time - 9:00pm \n Location - 8990 Durango Dr., Las Vegas, NV, 89134 \n Click Here to view the event page- www.google.com`
         // excludedActivityTypes:[
         //     {
         //         // FACEBOOK: NativeModules.RNShare.FACEBOOK || 'facebook',

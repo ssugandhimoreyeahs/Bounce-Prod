@@ -39,7 +39,7 @@ const TicketComponent = props => {
           onChangeText({title});
         }}
         placeholder="Ticket Title"
-        style={styles.textInput}
+        style={[styles.textInput,{marginBottom:getHp(20)}]}
       />
       <TextInput
         value={data?.description}
@@ -54,13 +54,13 @@ const TicketComponent = props => {
         <Text
           style={[
             styles.headerTitle,
-            {fontSize: FONTSIZE.Text20, marginRight: 5},
+            {fontSize: FONTSIZE.Text18, marginRight: 5},
           ]}>
           {'Price'}
         </Text>
         <TextInput
           keyboardType={'numeric'}
-          placeholderTextColor={'grey'}
+          placeholderTextColor={'#000'}
           placeholder={'$0'}
           onChangeText={price => {
             onChangeText({price});
@@ -81,13 +81,13 @@ const TicketComponent = props => {
         <Text
           style={[
             styles.headerTitle,
-            {fontSize: FONTSIZE.Text20, marginRight: 5},
+            {fontSize: FONTSIZE.Text18, marginRight: 5},
           ]}>
           {'Quantity Available'}
         </Text>
         <TextInput
           keyboardType={'numeric'}
-          placeholderTextColor={'grey'}
+          placeholderTextColor={'#000'}
           placeholder={'0'}
           value={data?.quantity?.toString()}
           onChangeText={quantity => {
@@ -109,16 +109,18 @@ const TicketComponent = props => {
 };
 const styles = StyleSheet.create({
   textInput: {
+    
     elevation: 0,
     borderWidth: 0.3,
-    borderColor: '#999999',
-    fontSize: FONTSIZE.Text14,
-    backgroundColor: '#fff',
+    borderColor: '#EEEEEE',
+    fontSize: FONTSIZE.Text12,
+    fontFamily:'AvenirNext-Regular',
+    backgroundColor: '#F7F7F7',
     paddingLeft: 10,
     marginVertical: 5,
     borderRadius: 9.5,
     color: '#000',
-     height: getHp(45),
+     height: getHp(32),
 
   },
   eventContainer: {

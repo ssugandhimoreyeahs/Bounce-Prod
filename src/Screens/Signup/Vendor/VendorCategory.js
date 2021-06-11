@@ -42,7 +42,6 @@ export default function VendorCategory(props) {
     }, [])
 
     const renderItem = ({ item, index }) => {
-        // console.log(item.categoryImage);
         return (<TouchableOpacity key={index}
             onPress={() => {
                 dispatch(fetchVendorData(["VENDOR_TYPE", item.vendorCategory]))
@@ -53,8 +52,8 @@ export default function VendorCategory(props) {
                 {
                     item.categoryImage != undefined &&
                     <SvgUri
-                        width="40"
-                        height="40"
+                        width={"40"}
+                        height={"40"}
                         uri={item.categoryImage}
                     />
                 }
@@ -69,13 +68,14 @@ export default function VendorCategory(props) {
         </TouchableOpacity>
         )
     }
-    return (<Scaffold>
+    return (<Scaffold
+        statusBarStyle={{ backgroundColor: '#F4F4F4' }}>
         <Spinner visible={loader} color={'#1FAEF7'} />
         { !loader &&
             < View style={styles.container}>
                 <ScrollView>
                     <Header
-                        headerBackColor={{ backgroundColor: 'rgba(238, 238, 238, 0.5)' }}
+                        headerBackColor={{ paddingBottom: 20, backgroundColor: 'rgba(238, 238, 238, 0.5)' }}
                         back
                         headerTitle={"Select Business"}
                         onPress={() => props.navigation.goBack()}

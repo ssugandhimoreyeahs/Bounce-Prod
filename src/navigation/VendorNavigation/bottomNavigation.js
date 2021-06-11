@@ -1,5 +1,6 @@
 import React from 'react';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { Button, TouchableOpacity, View } from 'react-native';
 import DjProfileScreen from '../../Screens/host/DjProfile';
 import BENotification from '../../Screens/BounceUsers/Notifications/Before/Notifications';
 import PartyRental from '../../Screens/BounceVendors/PartyRentals';
@@ -8,16 +9,16 @@ import {
   GreyParty,
   GreyPerson,
   BlackBell,
+  Party_Outline,
+  Bell_Outline,
   BlackPerson,
   BlackParty,
 } from '@svg';
 import MobxStore from '../../mobx';
 import { Avatar } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { FONTSIZE } from '../../app/utils';
+import { FONTSIZE, getHp, getWp } from '@utils';
 const VendorBottomTab = createBottomTabNavigator();
-
-// const VendorBottomTab = createMaterialBottomTabNavigator();
 
 class VendorBottomNavigation {
   static routeName = '/HomeBottom';
@@ -30,21 +31,35 @@ class VendorBottomNavigation {
     return (
       <VendorBottomTab.Navigator
         initialRouteName={DjProfileScreen.routeName}
-        // labeled={false}
-        // barStyle={{backgroundColor: '#FBFBFB', elevation: 5,height:65}}
-        // unmountOnBlur={true}
-        // keyboardHidesNavigationBar
-        // screenOptions={{unmountOnBlur: true}}
-        >
+        tabBarOptions={{
+          activeTintColor: '#000000',
+          inactiveTintColor: '#000000',
+          fontSize: FONTSIZE.Text16,
+          paddingVertical: 10,
+          showLabel: false,
+          style: {
+            position: 'absolute',
+            bottom: 0,
+            height: getHp(90)
+          }
+        }}
+        sceneContainerStyle={{
+          backgroundColor: '#FBFBFB',
+          elevation: 5,
+          height: 100,
+          fontSize: FONTSIZE.Text16,
+        }}
+      >
         <VendorBottomTab.Screen
           options={{
             unmountOnBlur: true,
-            tabBarIcon: ({tintColor, focused}) => {
+            title: '',
+            tabBarIcon: ({ tintColor, focused }) => {
               return !focused ? (
-                <GreyParty height={33} width={33} />
+                <Party_Outline height={34} width={34} />
               ) : (
-                <BlackParty height={33} width={33} />
-              );
+                  <Party_Outline height={34} width={34} />
+                );
             },
           }}
           name={PartyRental.routeName}
@@ -54,12 +69,12 @@ class VendorBottomNavigation {
         <VendorBottomTab.Screen
           options={{
             title: '',
-            tabBarIcon: ({tintColor, focused}) => {
+            tabBarIcon: ({ tintColor, focused }) => {
               return !focused ? (
-                <GreyBell height={33} width={33} />
+                <Bell_Outline height={30} width={23} />
               ) : (
-                <BlackBell height={33} width={33} />
-              );
+                  <Bell_Outline height={30} width={23} />
+                );
             },
           }}
           name={BENotification.routeName}
@@ -69,30 +84,41 @@ class VendorBottomNavigation {
         <VendorBottomTab.Screen
           options={{
             unmountOnBlur: true,
+            title: '',
             // tabBarColor: 'red',
-            tabBarIcon: ({tintColor, focused}) => {
+            tabBarIcon: ({ tintColor, focused }) => {
               return !focused ? (
-                // <GreyPerson height={33} width={33} />
-                <Avatar
-                rounded
-                source={{ uri: `${profileImage?.filePath}` }}
-                // source={Placeholder}
-                style={{ resizeMode: 'contain', height: 33, width: 33 }}
-              />
+                <View style={{
+                  borderWidth: 2,
+                  borderRadius: 50,
+                  padding: 2,
+                  borderColor: 'black'
+                }}>
+                  <Avatar
+                    rounded
+                    source={{ uri: `${profileImage?.filePath}` }}
+                    style={{ resizeMode: 'contain', height: 23, width: 23 }}
+                  />
+                </View>
               ) : (
-                // <BlackPerson height={33} width={33} />
-                <Avatar
-                rounded
-                source={{ uri: `${profileImage?.filePath}` }}
-                // source={Placeholder}
-                style={{ resizeMode: 'contain', height: 33, width: 33 }}
-              />
-              );
+                  <View style={{
+                    borderWidth: 2,
+                    borderRadius: 50,
+                    padding: 2,
+                    borderColor: 'black'
+                  }}>
+                    <Avatar
+                      rounded
+                      source={{ uri: `${profileImage?.filePath}` }}
+                      style={{ resizeMode: 'contain', height: 23, width: 23 }}
+                    />
+                  </View>
+                );
             },
           }}
           name={DjProfileScreen.routeName}
           component={DjProfileScreen}
-          // unmountOnBlur={true}
+        // unmountOnBlur={true}
         />
       </VendorBottomTab.Navigator>
     );

@@ -285,7 +285,7 @@
 
 
 //                             <GooglePlacesInput
-//                                 floatingLabel={"City (or cities)"}
+//                                 floatingLabel={"City"}
 //                                 onPress={(data) => {
 //                                     setCity(data.description)
 

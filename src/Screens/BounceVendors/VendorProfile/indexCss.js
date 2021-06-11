@@ -1,108 +1,110 @@
 import { StyleSheet } from 'react-native'
 import { Dimensions } from 'react-native'
-import { FONTSIZE } from '@utils'
+import { FONTSIZE, getHp } from '@utils'
 
 const { height, width } = Dimensions.get("screen")
 
-const styles = StyleSheet.create({
-   partition: {
-      width: '90%',
-      height: 0.1,
-      backgroundColor: '#ddd',
-      alignSelf: 'center'
-   },
-   addMediaButton: {
-      elevation: 5,
-      backgroundColor: '#fff',
-      width: '80%',
-      alignSelf: 'center',
-      borderRadius: 24,
-      alignItems: 'center',
-      paddingVertical: 10,
-      marginTop: 10,
-      marginBottom: 20
-   },
-   websiteView: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginTop: 10,
-      paddingVertical: 25
-      // width: '40%',
-      // justifyContent: 'space-between'
-   },
-   container: {
-      flex: 1,
-      backgroundColor: '#fff',
-   },
-   subContainer: {
-      // flexDirection: 'column',
-      // justifyContent: 'space-between',
-      paddingHorizontal: 10,
-      paddingVertical: 5,
-      // width:'90%'
-      // height: height/3
-   },
-   iconStyle: {
-      //   height:20,
-      //   width:20,
-      paddingRight: 15,
-      marginRight: 5
-
-   },
-   textStyle: {
-      color: '#000',
-      fontSize: 18,
-      opacity: 0.8,
-      fontFamily: 'AvenirNext-Regular',
-   },
-   belowTextStyle: {
-      color: '#000',
-      fontSize: FONTSIZE.Text18,
-      opacity: 0.8,
-      // fontFamily:'AvenirNext',
-   },
-   headerTitle: {
-      color: '#000',
-      fontSize: 18,
-      opacity: 0.5,
-      marginBottom: 5,
-      fontFamily: 'AvenirNext-Regular',
-   },
-   BasePackageTitle: {
-      color: '#000',
-      fontSize: 18,
-      opacity: 0.5,
-      marginBottom: 5,
-      fontFamily: 'AvenirNext-Regular',
-   },
-   websiteImageStyle: {
-      height: 80,
-      width: 150,
-      borderRadius: 15
-   },
-
-   websiteUrlStyle: {
-      alignSelf: 'center',
-      color: '#1FAEF7',
-      fontSize: 12,
-      fontFamily: 'AvenirNext-Regular',
-   },
-   hostDetail: {
-      color: '#000',
-      fontSize: 20,
-      opacity: 0.9,
-      fontFamily: 'AvenirNext-Regular',
-      textAlign: 'center',
-      marginVertical: 15
-
-   },
-   iconWithBelowTextStyle: {
-      height: 0,
-      width: 0,
-      // marginRight:15
-
-   },
-})
+const styles = (theme) => {
+   return StyleSheet.create({
+      searchBarStyle: {
+         elevation: 0,
+         borderRadius: 9,
+         backgroundColor: '#F2F5F6',
+         height: getHp(32),
+         fontSize: FONTSIZE.Text14,
+         width: '80%',
+         alignSelf: 'center'
+     },
+      partition: {
+         marginVertical: 10,
+         width: '100%',
+         height:0.8,
+         backgroundColor: '#EBEBEB',
+         alignSelf: 'center',
+ 
+     },
+      mediaText: {
+         color: '#1FAEF7',
+         fontSize: FONTSIZE.Text20,
+         marginLeft: 5,
+         fontFamily: 'AvenirNext-Regular',
+         marginVertical:getHp(5)
+      },
+      onlyFlex: {
+         flexDirection: 'row',
+         alignItems: 'center',
+         fontFamily: 'AvenirNext-Regular',
+      },
+      addButton: {
+         color: '#1FAEF7',
+         fontSize: FONTSIZE.Text20,
+         marginLeft: 10,
+         fontFamily: 'AvenirNext-Regular',
+      },
+      prView: {
+         flexDirection: 'row',
+         alignItems: 'center',
+         justifyContent: 'space-between',
+         paddingHorizontal: 10
+      },
+      webText: {
+         fontFamily: 'AvenirNext-Regular',
+         color: '#1FAEF7',
+         fontSize: FONTSIZE.Text16,
+         marginLeft: 10,
+         textDecorationLine: 'underline'
+      },
+      hourStyle: {
+         fontFamily: 'AvenirNext-Regular',
+         color: '#000',
+         fontSize: FONTSIZE.Text16,
+         marginLeft: 5
+      },
+      fullName: {
+         color: theme.colors.primaryText1,
+         fontSize: FONTSIZE.Text18,
+         fontFamily: 'AvenirNext-Medium'
+      },
+      addMediaButton: {
+         elevation: 10,
+         backgroundColor: '#fff',
+         width: '80%',
+         alignSelf: 'center',
+         borderRadius: 24,
+         alignItems: 'center',
+         paddingVertical: 5,
+         marginTop: 10,
+         marginBottom: 20
+      },
+      websiteView: {
+         flexDirection: 'row',
+         alignItems: 'center',
+         paddingTop: 10,
+         paddingBottom: 5
+      },
+      container: {
+         flex: 1,
+         backgroundColor: theme.colors.primaryBG1,
+      },
+      subContainer: {
+         paddingHorizontal: 0,
+         paddingVertical: 5,
+         backgroundColor:'#FBFBFB'
+      },
+      textStyle: {
+         color: '#000',
+         fontSize: 18,
+         opacity: 0.8,
+         fontFamily: 'AvenirNext-Regular',
+      },
+      belowTextStyle: {
+         color: '#000',
+         fontSize: FONTSIZE.Text18,
+         opacity: 0.8,
+         fontFamily: 'AvenirNext-Regular',
+      },
+   });
+}
 export {
    styles
 }

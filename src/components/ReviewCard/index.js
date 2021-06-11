@@ -7,17 +7,18 @@ import { Rating, AirbnbRating } from 'react-native-ratings';
 import TapRating from '../../components/RatingStar/TapRating'
 import { FONTSIZE } from '@utils';
 import LinearGradient from 'react-native-linear-gradient';
+import { getHp } from '../../app/utils';
 
 export default function ReviewCard(props) {
     const {
         styleProp,
     } = props
     return (
-        <LinearGradient
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        colors={['#EEEEEE', '#FFFFFF']}
-       >
+        //     <LinearGradient
+        //     start={{ x: 0, y: 0 }}
+        //     end={{ x: 1, y: 1 }}
+        //     colors={['#EEEEEE', '#FFFFFF']}
+        //    >
         <View style={[styles.container, styleProp]}>
             <View style={styles.reviewHeading}>
                 <Text style={styles.reviewsTitleStyle} >{"Reviews"}</Text>
@@ -55,13 +56,13 @@ export default function ReviewCard(props) {
                 />
             </View> */}
         </View>
-        </LinearGradient>
+        // </LinearGradient>
     )
 }
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#EEEEEE',
-        // marginVertical: 10,
+        backgroundColor: '#F2F5F6',
+        marginBottom:getHp(90),
         borderRadius: 8
     },
     secondContainer: {
@@ -84,8 +85,8 @@ const styles = StyleSheet.create({
     },
     reviewsTitleStyle: {
         color: '#000',
-        fontSize: FONTSIZE.Text22,
-        fontFamily: 'AvenirNext-Regular',
+        fontSize: FONTSIZE.Text18,
+        fontFamily: 'AvenirNext-Medium',
         // fontWeight:'bold'
     },
     viewAllStyle: {

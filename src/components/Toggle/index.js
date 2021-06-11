@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Switch, StyleSheet,Platform } from "react-native";
+import { View, Switch, StyleSheet, Platform } from "react-native";
 import ToggleSwitch from 'toggle-switch-react-native'
 
 export default function Toggle() {
@@ -8,18 +8,19 @@ export default function Toggle() {
 
     return (
         // <View style={styles.container}>
-            
-            <ToggleSwitch
-                isOn={false}
-                // trackColor={{ true: '#7ab8e1', false: Platform.OS=='android'?'#d3d3d3':'#fbfbfb'  }}
-                onColor="green"
-                // trackColor={{true: 'red', false: 'grey'}}
-                offColor="#000000"
-                // label="Example label"
-                // labelStyle={{ color: "black", fontWeight: "900" }}
-                size="large"
-                onToggle={isOn => console.log("changed to : ", isOn)}
-            />
+
+        <ToggleSwitch
+
+            isOn={0}
+            // trackColor={{ true: '#7ab8e1', false: Platform.OS=='android'?'#d3d3d3':'#fbfbfb'  }}
+            onColor="#20AEF7"
+            // trackColor={{true: 'red', false: 'grey'}}
+            offColor="#EFF2F3"
+            // label="Example label"
+            // labelStyle={{ color: "black", fontWeight: "900" }}
+            size='large'
+            onToggle={isOn => console.log("changed to : ", isOn)}
+        />
         // </View>
     );
 }

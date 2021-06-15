@@ -6,6 +6,7 @@ import { CustomButton, TextIconButton } from '@components'
 import {
     RequestSent,
     SendRequest,
+    CohostPurple,
     GreenTick,
     BlackArrowDown,
     CohostWhite,
@@ -40,22 +41,37 @@ export default function SearchBar(props) {
         return (
             <View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 }}>
-                    <TouchableOpacity onPress={parentState} style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
-                        <Avatar
-                            source={item.icon}
-                            size={getHp(40)}
-                            rounded
-                        />
-                        <View style={{ alignItems: 'center', marginLeft: 15 }}>
-                            <Text style={{ color: '#000', fontSize: FONTSIZE.Text16 }}>{"Alexis Sears"}</Text>
-                            {
-                                mutual ?
-                                    <Text style={{ color: '#696969', fontWeight: 'bold', fontSize: FONTSIZE.Text12, marginLeft: 0, letterSpacing: 0.2 }}>{"18 Mutual Friends"}</Text>
-                                    : null
-                            }
+                    <TouchableOpacity onPress={parentState} style={{
+                        flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
+                    }}>
+                        <View style={{
+                            flex: 1, flexDirection: 'row', alignItems: 'center',
+                        }}>
+                            <Avatar
+                                source={item.icon}
+                                size={getHp(40)}
+                                rounded
+                            />
+                            <View style={{ alignItems: 'center', marginLeft: 15 }}>
+                                <Text style={{
+                                    color: '#000',
+                                    fontSize: FONTSIZE.Text16,
+                                    fontFamily: 'AvenirNext-Medium'
+                                }}>{"Porter Robinson"}</Text>
+                                {
+                                    mutual ?
+                                        <Text style={{ color: '#999999', fontSize: FONTSIZE.Text12, letterSpacing: 0.2 }}>{"18 Mutual Friends"}</Text>
+                                        : null
+                                }
+                            </View>
                         </View>
+
+                        <CohostPurple height={24} width={30} />
+
                     </TouchableOpacity>
-                    {requestIcon ?
+
+
+                    {requestIcon &&
                         <View>
                             {heading == 'Contacts'
                                 ?
@@ -70,17 +86,19 @@ export default function SearchBar(props) {
                                 // <RequestSent height={45} width={50} />
                             }
                         </View>
-                        : null}
+                    }
+
                 </View>
-                {!noUnderline ?
+
+                {!noUnderline &&
                     <>
                         {dataList.length - 1 == index ?
                             null
                             :
-                            < View style={{ borderBottomWidth: 0.5, backgroundColor: '#BBBBBB' }} />
+                            < View style={{ borderBottomWidth: 0.2, backgroundColor: '#EEEEEE' }} />
                         }
                     </>
-                    : null
+
                 }
 
             </View>
@@ -90,11 +108,11 @@ export default function SearchBar(props) {
     const renderSmallButton = ({ item, index }) => {
         console.log("item", item);
         return (
-            <TouchableOpacity onPress={parentState} style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+            <TouchableOpacity onPress={parentState} style={{ flexDirection: 'row', backgroundColor: '#fff', flex: 1, alignItems: 'center', marginVertical: 15 }}>
                 <LinearGradient
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
-                    colors={['#1FAEF7', '#1FAEF7']}
+                    colors={['#5EC7FC', '#90DAFF']}
                     style={[styles.linearGradient, { marginRight: 5, paddingHorizontal: 10, paddingVertical: 5 }]}>
                     <Text style={styles.allTitleStyle}>{item}</Text>
                 </LinearGradient>
@@ -102,8 +120,8 @@ export default function SearchBar(props) {
         )
     }
 
-    return (<View >
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 10 }}>
+    return (<View style={{ backgroundColor: '#FBFBFB', paddingHorizontal: 10 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#fff' }}>
             <Text style={styles.reviewsTitleStyle}>
                 {heading}
             </Text>
@@ -131,29 +149,43 @@ export default function SearchBar(props) {
             }
 
 
-
+            {
+                filterSmallButtons ?
+                    <FlatList
+                        data={filterSmallButtons}
+                        renderItem={renderSmallButton}
+                        keyExtractor={(index) => index}
+                        horizontal
+                    />
+                    : null
+            }
 
         </View>
-        {!noSearchbar ?
+
+
+
+        {!noSearchbar &&
+
             <Searchbar
                 placeholder={placeholder}
                 onChangeText={onChangeSearch}
                 value={searchQuery}
-                style={{ borderRadius: 24, backgroundColor: '#fff', marginTop: 5, marginBottom: 20 }}
-                iconColor={"#000"}
-                placeholderTextColor={"#808080"}
+                inputStyle={{fontSize:FONTSIZE.Text18}}
+                style={{
+                    height:getHp(50),
+                    elevation: 1,
+                    borderRadius: 9,
+                    backgroundColor: '#fff',
+                    marginVertical: 15,
+                    fontFamily: 'AvenirNext-Regular'
+                }}
+                iconColor={"#999999"}
+                placeholderTextColor={"#909090"}
             />
-            : null}
-        {
-            filterSmallButtons ?
-                <FlatList
-                    data={filterSmallButtons}
-                    renderItem={renderSmallButton}
-                    keyExtractor={(index) => index}
-                    horizontal
-                />
-                : null
+
+
         }
+
 
         {dataList.length > 4 && more.hide && (heading == 'Contacts' || heading == 'Friends') ?
             <>
@@ -224,7 +256,9 @@ const styles = StyleSheet.create({
         // paddingVertical: 5
     },
     allTitleStyle: {
-        fontSize: 15,
-        color: '#000'
+        fontSize: FONTSIZE.Text14,
+        fontFamily: 'AvenirNext-DemiBold',
+        color: '#fff',
+        letterSpacing: 0.5
     },
 })

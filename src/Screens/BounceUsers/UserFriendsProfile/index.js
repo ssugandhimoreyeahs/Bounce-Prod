@@ -58,6 +58,12 @@ import Right from 'react-native-vector-icons/FontAwesome'
 import Icon from 'react-native-vector-icons/Entypo'
 import spotifyToken from '../../../app/SDK/Spotify/spotify_token'
 
+Text.defaultProps = {
+  allowFontScaling: false,
+  fontScale: 1
+}
+
+
 const ACCOUNTS = [
   {
     id: "0",
@@ -116,15 +122,17 @@ function UserFriendsProfile(props) {
     username,
     fullName,
     city,
+    about,
+    profession,
     snapchatUsername,
     instagramUsername,
-    about,
     profileImage = {},
+    age,
   } = userinfo?.user;
   console.log("userinfo", userinfo)
-  
+
   var gapi = window
-  console.log("WINDOW ",gapi)
+  console.log("WINDOW ", gapi)
   /* 
     Update with your own Client Id and Api key 
   */
@@ -286,6 +294,7 @@ function UserFriendsProfile(props) {
     statusBarStyle={{ backgroundColor: '#FFFFFF' }}
   >
     <ScrollView
+      showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps={"always"}
       contentContainerStyle={{ flexGrow: 1 }}
       style={{
@@ -332,31 +341,51 @@ function UserFriendsProfile(props) {
                   {fullName}
                 </Text>
 
-                <View style={styles.flex}>
-                  <Text style={styles.cityAll}>
-                    {'19'}
-                  </Text>
-                  <View style={styles.dot} />
-                  <Text style={styles.cityAll}>
-                    {city}
-                  </Text>
-                  <View style={styles.dot} />
-                  <TouchableOpacity
-                    style={[styles.editButtonStyle, styles.shadowStyle, { width: getWp(45), paddingHorizontal: 2, marginLeft: 2 }]}
-                    onPress={() => props.navigation.navigate(HostProfile.routeName)}
-                  >
-                    <Icon name="plus" color={'#1FAEF7'} size={15} />
-                    <Text style={[styles.editButton]}>
-                      {"Job"}
+                <View style={[styles.flex]}>
+                  {
+                    <>
+                      <Text style={styles.cityAll}>
+                        {age}
+                      </Text>
+                      <View style={styles.dot} />
+                    </>
+                  }
+
+
+                  {
+                    city != null &&
+                    <>
+                      <Text style={styles.cityAll}>
+                        {city.split(",", 1)}
+                        {/* {city} */}
+                      </Text>
+                      <View style={styles.dot} />
+                    </>
+                  }
+
+
+                  {(profession != null || profession == '') ?
+                    <Text style={styles.cityAll}>
+                      {profession}
                     </Text>
-                  </TouchableOpacity>
+                    : <TouchableOpacity
+                      style={[styles.editButtonStyle, styles.shadowStyle, { width: getWp(45), paddingHorizontal: 2, marginLeft: 2 }]}
+                      onPress={() => props.navigation.navigate(HostProfile.routeName)}
+                    >
+                      <Icon name="plus" color={'#1FAEF7'} size={15} />
+                      <Text style={[styles.editButton]}>
+                        {"Job"}
+                      </Text>
+                    </TouchableOpacity>
+                  }
                 </View>
+
               </View>
             </View>
 
-            <View style={[styles.flex, { width: "90%", marginVertical: 10, justifyContent: 'space-between' }]}>
+            <View style={[styles.flex, { width: "90%", marginVertical: 10, justifyContent: 'space-between', alignItems: 'center' }]}>
               <TouchableOpacity
-                style={[styles.editButtonStyle, styles.shadowStyle]}
+                style={[styles.editButtonStyle, styles.shadowStyle, { paddingVertical: 5 }]}
                 onPress={() => props.navigation.navigate(HostProfile.routeName)}
               >
                 <Text style={styles.editButton}>{"Edit Profile"}</Text>
@@ -406,15 +435,36 @@ function UserFriendsProfile(props) {
               </TouchableOpacity>
             </View>
 
+
+            {about !== null && <Text style={[styles.textStyle, {
+              marginTop: getHp(15),
+              marginBottom: 5,
+              lineHeight: 22,
+              fontSize: FONTSIZE.Text16,
+
+            }]}>
+              {about}
+            </Text>}
+
             <LinearGradient
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               colors={['#16B0FE', '#3FBEFF']}
               style={[
                 styles.linearGradient,
-                { marginVertical: 20, width: '100%', height: getHp(38), borderRadius: 13 },
+                {
+                  width: '100%',
+                  height: getHp(38),
+                  borderRadius: 13,
+                  marginTop: 5,
+                  marginBottom: 10
+                },
               ]}>
-              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} >
+              <TouchableOpacity style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }} >
                 <Text style={[styles.buttonText, { marginRight: 15 }]}>{'Things to do with Friends'}</Text>
                 <Right name="angle-right" color='#FFFFFF' size={25} />
               </TouchableOpacity>
@@ -591,6 +641,10 @@ function UserFriendsProfile(props) {
           </View>
           {handleCarousel("Instagram")}
           {/*END*** Second Gallery Block of Instagram */}
+          <View style={{
+            height: 1, backgroundColor: '#EEEEEE', marginTop: 10,
+            marginBottom: 25
+          }} />
 
           <View style={[styles.flex, {
             paddingHorizontal: 10,
@@ -601,6 +655,9 @@ function UserFriendsProfile(props) {
               {"Favourite Music"}
             </Text>
           </View>
+
+          <View style={{ paddingVertical: 10 }} />
+
           {/* <View> */}
 
           {/* <ScrollView horizontal >

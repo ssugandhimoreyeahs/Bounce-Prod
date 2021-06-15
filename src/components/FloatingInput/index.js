@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Keyboard } from 'react-native';
+import { View, Text, StyleSheet, Keyboard, Dimensions } from 'react-native';
 import { FloatingLabelInput } from 'react-native-floating-label-input';
 import { FONTSIZE, getHp, getWp } from '@utils';
 import { BlueEye, GreyEye } from '@svg';
 
+const { width, height } = Dimensions.get('screen')
+
+
 const FloatingInput = props => {
   const {
     floatingLabel,
+    createEvent = false,
     value,
     onChange = () => { },
     Password = false,
-    multiline = false,
-    onFocus = false,
-    onBlur = false,
     isFocused = false,
-    key = false,
     blurOnSubmit = false,
-    placeholder = false,
     custom = false,
-    onSubmitEditing = () => { },
     keyboardType = '',
     errorMessage = '',
   } = props;
@@ -28,12 +26,7 @@ const FloatingInput = props => {
         <View
           style={{
             flex: 1,
-            marginVertical: 10,
-            shadowColor: '#000',
-            shadowOffset: { width: 1, height: 1 },
-            shadowRadius: 4,
-            shadowOpacity: 0.1,
-            elevation: 1,
+            marginVertical: getHp(10),
           }}>
           <FloatingLabelInput
             returnKeyType="done"
@@ -44,36 +37,33 @@ const FloatingInput = props => {
             customHidePasswordComponent={<BlueEye height={25} width={33} />}
             label={floatingLabel}
             customLabelStyles={{
-              colorFocused: '#000',
+              colorFocused: '#999999',
               fontSizeBlurred: FONTSIZE.Text15,
               fontSizeFocused: FONTSIZE.Text15,
-              colorBlurred: '#000',
+              colorBlurred: '#999999',
             }}
             isPassword={Password}
             labelStyles={{
-              paddingTop: 8,
-              opacity: 0.5,
-              color: '#000',
+              paddingTop: getHp(8),
               fontFamily: 'AvenirNext-Medium',
             }}
             numberOfLines={10}
             inputStyles={{
-              paddingBottom: -10,
+              paddingLeft: 7,
               fontFamily: 'AvenirNext-Medium',
               color: '#000',
-              // fontWeight: 'bold',
               fontSize: FONTSIZE.Text17,
-              marginTop: 22,
-              paddingLeft:5
+              paddingBottom: getHp(-10),
+              marginTop: getHp(12),
             }}
             value={value}
             onChangeText={onChange}
             containerStyles={{
               fontFamily: 'AvenirNext-Regular',
-              paddingHorizontal: 10,
+              paddingHorizontal: getHp(10),
               borderWidth: 0.5,
               borderColor: '#DDDDDD',
-              height: getHp(65),
+              height: getHp(60),
               backgroundColor: '#fff',
               borderRadius: 9.5,
             }}
@@ -87,16 +77,17 @@ const FloatingInput = props => {
             </View>
           )}
         </View>
-      ) : (
+      ) :
+        createEvent ? (
           <View
             style={{
               flex: 1,
-              marginVertical: 10,
+              marginVertical: getHp(3),
               shadowColor: '#000',
               shadowOffset: { width: 1, height: 1 },
               shadowRadius: 4,
               shadowOpacity: 0.1,
-              elevation: 1,
+              elevation: 2,
             }}>
             <FloatingLabelInput
               returnKeyType="done"
@@ -107,10 +98,10 @@ const FloatingInput = props => {
               customHidePasswordComponent={<BlueEye height={25} width={33} />}
               label={floatingLabel}
               customLabelStyles={{
-                colorFocused: '#000',
+                colorFocused: '#696969',
                 fontSizeBlurred: FONTSIZE.Text15,
                 fontSizeFocused: FONTSIZE.Text15,
-                colorBlurred: '#000',
+                colorBlurred: '#696969',
               }}
               isPassword={Password}
               labelStyles={{
@@ -123,17 +114,20 @@ const FloatingInput = props => {
                 color: '#000',
                 fontWeight: 'bold',
                 fontSize: FONTSIZE.Text17,
-                marginTop: 10,
+                // marginTop: 10,
+                paddingBottom: getHp(-0),
+                marginTop: getHp(15),
+                paddingLeft: 7,
               }}
               value={value}
               onChangeText={onChange}
               containerStyles={{
                 fontFamily: 'AvenirNext-Regular',
-                paddingHorizontal: 10,
+                paddingHorizontal: getHp(10),
                 elevation: 2,
-                height: getHp(65),
+                height: getHp(60),
                 backgroundColor: '#fff',
-                borderRadius: 9.5,
+                borderRadius: 13,
               }}
               onSubmitEditing={() => {
                 Keyboard.dismiss();
@@ -145,7 +139,70 @@ const FloatingInput = props => {
               </View>
             )}
           </View>
-        )}
+        )
+          :
+          (
+            <View
+              style={{
+                flex: 1,
+                marginVertical: getHp(10),
+                shadowColor: '#000',
+                shadowOffset: { width: 1, height: 1 },
+                shadowRadius: 4,
+                shadowOpacity: 0.1,
+                elevation: 2,
+              }}>
+              <FloatingLabelInput
+                returnKeyType="done"
+                blurOnSubmit={blurOnSubmit}
+                keyboardType={keyboardType}
+                isFocused={isFocused}
+                customShowPasswordComponent={<GreyEye height={25} width={33} />}
+                customHidePasswordComponent={<BlueEye height={25} width={33} />}
+                label={floatingLabel}
+                customLabelStyles={{
+                  colorFocused: '#000',
+                  fontSizeBlurred: FONTSIZE.Text15,
+                  fontSizeFocused: FONTSIZE.Text15,
+                  colorBlurred: '#000',
+                }}
+                isPassword={Password}
+                labelStyles={{
+                  color: '#000',
+                  fontFamily: 'AvenirNext-Regular',
+                }}
+                numberOfLines={10}
+                inputStyles={{
+                  fontFamily: 'AvenirNext-DemiBold',
+                  color: '#000',
+                  fontWeight: 'bold',
+                  fontSize: FONTSIZE.Text17,
+                  // marginTop: 10,
+                  paddingBottom: getHp(-0),
+                  marginTop: getHp(15),
+                  paddingLeft: 7,
+                }}
+                value={value}
+                onChangeText={onChange}
+                containerStyles={{
+                  fontFamily: 'AvenirNext-Regular',
+                  paddingHorizontal: getHp(10),
+                  elevation: 2,
+                  height: getHp(60),
+                  backgroundColor: '#fff',
+                  borderRadius:  9.5,
+                }}
+                onSubmitEditing={() => {
+                  Keyboard.dismiss();
+                }}
+              />
+              {errorMessage.length > 0 && (
+                <View style={styles.errorContainer}>
+                  <Text style={styles.errorText}>{errorMessage}</Text>
+                </View>
+              )}
+            </View>
+          )}
     </View>
   );
 };

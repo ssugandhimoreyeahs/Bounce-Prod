@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     borderRadius: THUMB_RADIUS,
     shadowColor: '#000',
     shadowOffset: { width: 1, height: 1 },
-    shadowRadius: 2,
+    shadowRadius: 5,
     shadowOpacity: 0.1,
     elevation: 2,
     backgroundColor: '#ffffff',

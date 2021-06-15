@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Button } from 'react-native-elements';
 import { FONTSIZE, getHp, getWp } from '@utils'
 import LinearGradient from 'react-native-linear-gradient';
-import RadialGradient from 'react-native-radial-gradient';
+
 
 
 export default function CustomButton(props) {
@@ -26,7 +26,11 @@ export default function CustomButton(props) {
         <View >
             {
                 userContinue &&
-                <TouchableOpacity style={[styles.linearGradient, { backgroundColor: '#FFFFFF' }]} onPress={onPress}>
+                <TouchableOpacity
+                    style={[styles.linearGradient,
+                    styles.shadowStyle,
+                    { backgroundColor: '#FFFFFF' }]}
+                    onPress={onPress}>
                     <Text style={[styles.titleStyle, {
                         letterSpacing: 0.6,
                         color: '#1FAEF7',
@@ -48,11 +52,7 @@ export default function CustomButton(props) {
                                     {ButtonTitle ? ButtonTitle : "Continue"}</Text>
                             </LinearGradient>
                         </TouchableOpacity>
-                        {
-                            bar ?
-                                <View style={[styles.barStyle, theme ? { backgroundColor: theme } : null]}
-                                />
-                                : null}
+
                     </>
                     :
                     null
@@ -66,50 +66,79 @@ export default function CustomButton(props) {
                         titleStyle={styles.titleStyle}
                         onPress={onPress}
                     />
-                    {
-                        bar ?
-                            <View style={[styles.barStyle, theme ? { backgroundColor: theme } : null]}
-                            />
 
-                            : null}
                 </View>
                 : null
             }
             {  rowDoubleButton ?
                 <>
                     <View style={styles.rowButton}>
-                        <TouchableOpacity style={[styles.DoubleButton,styles.shadowStyle]} onPress={onSaveDraftPress}>
-                            <Text style={[styles.titleStyle, { color: '#1FAEF7', fontSize: FONTSIZE.Text20, letterSpacing: 0.2 }]}>
+                        <TouchableOpacity style={[styles.DoubleButton, styles.shadowStyle]} onPress={onSaveDraftPress}>
+                            <Text style={[styles.titleStyle, {
+                                fontFamily: 'AvenirNext-DemiBold',
+                                color: '#1FAEF7', fontSize: FONTSIZE.Text20, letterSpacing: 0.2
+                            }]}>
                                 {ButtonTitle}
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.DoubleButton, { backgroundColor: '#1FAEF7', }]} onPress={onContinuePress}>
-                            <Text style={[styles.titleStyle, { color: '#fff', fontSize: FONTSIZE.Text20, letterSpacing: 0.2 }]}>
-                                {ButtonTitle2}
-                            </Text>
-                        </TouchableOpacity>
+                        <LinearGradient
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 1, y: 1 }}
+                            colors={['#3CBDFF', '#6FD0FF']}
+                            style={[
+                                styles.DoubleButton,
+                                {
+
+                                }]}>
+                            <TouchableOpacity onPress={onContinuePress}>
+                                <Text style={[styles.titleStyle, {
+                                    fontFamily: 'AvenirNext-DemiBold', color: '#fff', fontSize: FONTSIZE.Text20, letterSpacing: 0.2
+                                }]}>
+                                    {ButtonTitle2}
+                                </Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
                     </View>
-                    {  bar ?
-                        <View style={[styles.barStyle, theme ? { backgroundColor: theme } : null]} /> : null}
+
                 </>
                 : null}
             {  colDoubleButton ?
                 <>
-                    <View style={{ alignItems: 'center', marginVertical: getHp(0), borderTopWidth: 0.5, borderColor: '#CCCCCC', paddingTop: 10 }}>
+                    <View style={[styles.shadowStyle, {
+                        alignItems: 'center',
+                        marginVertical: getHp(0),
+                        backgroundColor: 'rgba(255, 255, 255, 0.66)', paddingTop: 10
+                    }]}>
 
-                        <TouchableOpacity style={styles.colButtonStyle} onPress={onPress1}>
-                            <Text style={[styles.titleStyle, { color: '#1FAEF7', fontSize: FONTSIZE.Text20, fontWeight: 'bold', letterSpacing: 0.2 }]}>
+                        <TouchableOpacity style={[styles.colButtonStyle, styles.shadowStyle]} onPress={onPress1}>
+                            <Text style={[{
+                                color: '#1FAEF7',
+                                fontSize: FONTSIZE.Text20,
+                                fontFamily: 'AvenirNext-Medium',
+
+                            }]}>
                                 {ButtonTitle}
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.colButtonStyle, { backgroundColor: '#1FAEF7', }]} onPress={onPress}>
-                            <Text style={[styles.titleStyle, { color: '#fff', fontSize: FONTSIZE.Text20, fontWeight: 'bold', letterSpacing: 0.2 }]}>
-                                {ButtonTitle2}
-                            </Text>
-                        </TouchableOpacity>
+
+                        <LinearGradient
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 1, y: 1 }}
+                            colors={['#3CBDFF', '#73D1FF']}
+                            style={[
+                                styles.colButtonStyle,
+                            ]}>
+                            <TouchableOpacity onPress={onPress}>
+                                <Text style={[styles.titleStyle, {
+                                    color: '#fff',
+                                    fontSize: FONTSIZE.Text20,
+                                    fontFamily: 'AvenirNext-DemiBold', letterSpacing: 0.2
+                                }]}>
+                                    {ButtonTitle2}
+                                </Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
                     </View>
-                    {  bar ?
-                        <View style={[styles.barStyle, theme ? { backgroundColor: theme } : null]} /> : null}
                 </>
                 : null}
 
@@ -124,16 +153,17 @@ const styles = StyleSheet.create({
         marginVertical: getHp(0),
         borderTopWidth: 0.5,
         borderColor: '#CCCCCC',
+        marginVertical: getHp(10),
         paddingTop: 10
     },
 
     colButtonStyle: {
+        height: getHp(50),
         width: '95%',
         elevation: 5,
         backgroundColor: '#fff',
         borderRadius: 19,
         alignItems: 'center',
-        height: getHp(54),
         justifyContent: 'center',
         marginVertical: getHp(5)
     },
@@ -165,7 +195,7 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         backgroundColor: '#1FAEF7',
-        height: getHp(54),
+        // height: getHp(54),
         borderRadius: 13,
     },
     titleStyle: {
@@ -178,7 +208,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 1, height: 1 },
         shadowRadius: 4,
         shadowOpacity: 0.1,
-      },
+    },
     linearGradient: {
         borderRadius: 17,
         height: 54,

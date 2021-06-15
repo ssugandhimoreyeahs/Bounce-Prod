@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { View, Text, StyleSheet, Animated, TouchableOpacity } from 'react-native'
-import Back from 'react-native-vector-icons/Ionicons';
+import Back from 'react-native-vector-icons/AntDesign';
 import Share from 'react-native-vector-icons/Entypo';
 import { shareFunction } from '@components'
 import { FONTSIZE, getHp, getWp } from '@utils'
@@ -29,11 +29,9 @@ function Header(props) {
         onPressRightTitle = () => { },
         rightTitleStyle = null,
         rightTitleContainer = null,
-        leftTitleContainer = null,
         leftDropdown = null,
         scanner = false,
         onPressScanner = () => { },
-        DropdownAccounts = [],
         theme = false,
     } = props;
 
@@ -65,12 +63,12 @@ function Header(props) {
 
     return (
         <View>
-            <View style={[styles.container,styles.shadowStyle, headerBackColor ? headerBackColor : null]}>
+            <View style={[styles.container, styles.shadowStyle, headerBackColor ? headerBackColor : null]}>
 
                 {
                     back ?
                         <TouchableOpacity onPress={onPress}>
-                            <Back name="chevron-back" color={theme ? theme : '#000'} size={30} />
+                            <Back name="left" color={theme ? theme : '#000'} size={25} />
                         </TouchableOpacity>
                         : null
                 }
@@ -79,7 +77,7 @@ function Header(props) {
                         <TouchableOpacity onPress={() => setShow(!showDropdown)} >
                             <View style={styles.headerDropdown}>
                                 <Text style={[styles.leftTitleStyle, rightTitleStyle, { marginRight: getWp(5) }]}>
-                                    {`${leftDropdown}`}
+                                    {`${leftDropdown} `}
                                 </Text>
                                 <Icon name="angle-down" size={getHp(30)} color="#000" style={{ marginHorizontal: 5 }} />
                             </View>
@@ -100,7 +98,7 @@ function Header(props) {
                         </TouchableOpacity>
                         : null
                 }
-                <Text style={[styles.headerTitleStyle, headerStyleProp, { fontFamily: 'AvenirNext-DemiBold' }]}>
+                <Text style={[styles.headerTitleStyle, headerStyleProp]}>
                     {headerTitle}
                 </Text>
                 <View >
@@ -179,7 +177,7 @@ function Header(props) {
                         </>
                     )
                 }
-                <TouchableOpacity style={{ elevation: 5, backgroundColor: '#F2F5F6', borderRadius: 18, paddingVertical: 10, alignItems: 'center', marginVertical: 8 }}>
+                <TouchableOpacity style={{backgroundColor: '#F2F5F6', borderRadius: 17, paddingVertical: 10,borderWidth:1,borderColor:'#E4EEF1', alignItems: 'center', marginVertical: 8 }}>
                     <Text style={{ color: '#000000', fontSize: FONTSIZE.Text16, fontFamily: 'AvenirNext-Bold' }}>
                         {"New Account"}
                     </Text>
@@ -213,11 +211,10 @@ const styles = StyleSheet.create({
 
     },
     headerTitleStyle: {
-        fontFamily: 'AvenirNext-UltraLight',
+        fontFamily: 'AvenirNext-Medium',
         color: "#000",
         fontSize: FONTSIZE.Text22,
-        letterSpacing: 0.1,
-        fontWeight: 'bold'
+        letterSpacing: 0.3,
     },
     rightTitleStyle: {
         color: "#1FAEF7",
@@ -234,7 +231,7 @@ const styles = StyleSheet.create({
         shadowRadius: 1,
         shadowOpacity: 0.1,
         elevation: 2,
-     },
+    },
     container: {
         backgroundColor: '#F4F4F4',
         flexDirection: 'row',

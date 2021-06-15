@@ -59,7 +59,6 @@ export default function EventsTab(props) {
                 renderItem={renderItem}
                 keyExtractor={(index) => index}
                 horizontal
-                showsHorizontalScrollIndicator={false}
                 style={{ marginVertical: 20 }}
             />
 

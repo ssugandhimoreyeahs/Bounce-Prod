@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { BlackClose, More, BlackOutlineShare, LockBlack, Settings } from '@svg';
-import { FONTSIZE, bigHitSlop, smallHitSlop } from '@utils';
+import { BlackClose, More, BlackOutlineShare, LockBlack, Settings,
+  Account_Outline } from '@svg';
+import { FONTSIZE, bigHitSlop, smallHitSlop,getHp ,getWp} from '@utils';
 import { useTheme, Switch } from 'react-native-paper';
 import { AuthContext } from '../../context';
 import { LocalStorage } from '../../app/utils/localStorage';
@@ -9,6 +10,14 @@ import MobxStore from '../../mobx';
 import AboutUs from '../Views/About/AboutUs';
 import { shareFunction } from '@components';
 import ScrollCarousel from '../BounceVendors/VendorProfile/ScrollCarousel'
+import AccountSetting from './AccountSetting';
+import Back from 'react-native-vector-icons/AntDesign';
+import PurchaseTickets from '../BounceUsers/EventPage/Public/PurchaseTickets';
+import HostView from '../MyEvents/HostView';
+import FeaturingPage from '../BounceUsers/EventPage/Public/Featuring';
+import PartyRental from '../BounceVendors/PartyRentals'
+
+
 
 export default function UserCustomDrawer(props) {
   const { authStore } = MobxStore;
@@ -27,26 +36,20 @@ export default function UserCustomDrawer(props) {
   const paperTheme = useTheme();
   const SERVICES = [
     {
-      icon: <Settings height={30} width={30} />,
-      name: 'Account Settings',
+      icon: <Account_Outline height={30} width={30} />,
+      name: 'My Account',
       onPress: () => {
-        props.navigation.navigate('AccountSetting');
+        props.navigation.navigate(AccountSetting.routeName);
       },
     },
-    {
-      icon: <Settings height={30} width={30} />,
-      name: 'Vendor Profiles',
-      onPress: () => {
-        props.navigation.navigate(ScrollCarousel.routeName)
-      },
-    },
-    {
-      icon: <LockBlack height={30} width={30} />,
-      name: 'Privacy Settings',
-      onPress: () => {
-        //navigation.navigate("VendorEditProfile")
-      },
-    },
+   
+    // {
+    //   icon: <LockBlack height={30} width={30} />,
+    //   name: 'Privacy Settings',
+    //   onPress: () => {
+    //     //navigation.navigate("VendorEditProfile")
+    //   },
+    // },
     {
       icon: <BlackOutlineShare height={30} width={30} />,
       name: 'Share Profile',
@@ -58,6 +61,41 @@ export default function UserCustomDrawer(props) {
       icon: <More height={30} width={30} />,
       name: 'More',
       onPress: () => { },
+    },
+    {
+      // icon: <Settings height={30} width={30} />,
+      name: 'Vendor Profiles 1',
+      onPress: () => {
+        props.navigation.navigate(ScrollCarousel.routeName)
+      },
+    },
+    {
+      // icon: <Settings height={30} width={30} />,
+      name: 'Purchase Tickets 2',
+      onPress: () => {
+        props.navigation.navigate(PurchaseTickets.routeName)
+      },
+    },
+    {
+      // icon: <Settings height={30} width={30} />,
+      name: 'Host View 3',
+      onPress: () => {
+        props.navigation.navigate(HostView.routeName)
+      },
+    },
+    {
+      // icon: <Settings height={30} width={30} />,
+      name: 'Featuring Page 4',
+      onPress: () => {
+        props.navigation.navigate(FeaturingPage.routeName)
+      },
+    },
+    {
+      // icon: <Settings height={30} width={30} />,
+      name: 'PartyRental 5',
+      onPress: () => {
+        props.navigation.navigate(PartyRental.routeName)
+      },
     },
   ];
 
@@ -105,6 +143,11 @@ export default function UserCustomDrawer(props) {
             ]}>
             {item.name}
           </Text>
+          {item.name === 'More' &&
+            <TouchableOpacity >
+              <Back name="right" color={'#000'} size={18} style={{ marginLeft: getWp(140) }} />
+            </TouchableOpacity>
+          }
         </TouchableOpacity>
         {item.name === 'More'
           ? MORE.map(item => {
@@ -137,6 +180,7 @@ export default function UserCustomDrawer(props) {
                   ]}>
                   {item.name}
                 </Text>
+
               </TouchableOpacity>
             );
           })
@@ -145,8 +189,8 @@ export default function UserCustomDrawer(props) {
     );
   };
   return (
-    <View style={styles.container}>
-      <View style={[styles.flex, { padding: 15 }]}>
+    <View style={styles.container} >
+      <View style={[styles.flex, { padding: 15, marginTop: 20 }]}>
         <Text style={styles.heading}>{"Settings"}</Text>
 
         <TouchableOpacity

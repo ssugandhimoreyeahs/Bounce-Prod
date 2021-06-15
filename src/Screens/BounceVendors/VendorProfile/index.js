@@ -108,31 +108,7 @@ function VendorProfile(props) {
                         contentContainerStyle={{ flexGrow: 1 }}>
                         <View style={{ flex: 1 }}>
 
-                            <View style={{
-                                flexDirection: 'row', height: 50,
-                                borderBottomWidth: 2,
-                                borderColor: '#F2F5F6',
-                                backgroundColor: '#fff',
-                                alignItems: 'center'
-                            }}>
-                                <TouchableOpacity
-                                    onPress={() => props.navigation.goBack()}>
-                                    <Back name="chevron-back" color={'#000'} style={{ marginRight: 20, marginLeft: 10 }} size={30} />
-                                </TouchableOpacity>
-
-                                <Searchbar
-                                    placeholder={"Search events"}
-                                    onChangeText={onChangeSearch}
-                                    value={searchQuery}
-                                    inputStyle={{
-                                        fontSize: FONTSIZE.Text14,
-                                        fontFamily: 'AvenirNext-Regular',
-                                    }}
-                                    style={styles.searchBarStyle}
-                                    iconColor={"#999999"}
-                                    placeholderTextColor={"#909090"}
-                                />
-                            </View>
+                            
 
 
                             <View style={styles.subContainer}>

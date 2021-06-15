@@ -14,15 +14,11 @@ export default function ReviewCard(props) {
         styleProp,
     } = props
     return (
-        //     <LinearGradient
-        //     start={{ x: 0, y: 0 }}
-        //     end={{ x: 1, y: 1 }}
-        //     colors={['#EEEEEE', '#FFFFFF']}
-        //    >
+
         <View style={[styles.container, styleProp]}>
             <View style={styles.reviewHeading}>
                 <Text style={styles.reviewsTitleStyle} >{"Reviews"}</Text>
-                {/* <Text style={styles.viewAllStyle} >{"view all"}</Text> */}
+
             </View>
             <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center', marginVertical: 40 }}>
                 <Text style={{ fontSize: FONTSIZE.Text16, color: '#696969' }} >{"No review's available."}</Text>
@@ -56,13 +52,12 @@ export default function ReviewCard(props) {
                 />
             </View> */}
         </View>
-        // </LinearGradient>
     )
 }
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#F2F5F6',
-        marginBottom:getHp(90),
+        marginBottom: getHp(90),
         borderRadius: 8
     },
     secondContainer: {
@@ -84,6 +79,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     reviewsTitleStyle: {
+        letterSpacing: 0.5,
         color: '#000',
         fontSize: FONTSIZE.Text18,
         fontFamily: 'AvenirNext-Medium',

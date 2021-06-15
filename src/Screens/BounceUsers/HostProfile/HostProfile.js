@@ -43,30 +43,27 @@ import { Toast } from '@constants';
 
 
 export default function HostProfile(props) {
-  //   const {userinfo, fetchProfile} = useContext(UserContext);
+
   const { userProfile: userinfo } = MobxStore.authStore;
   const [loader, setLoader] = useState(false);
   const [fullName, setFullname] = useState('');
   const [getBirthday, setBirthday] = useState('');
   const [city, setCity] = useState('');
+  const [profession, setProfession] = useState('');
   const [bio, setBio] = useState('');
 
   const [snapchat, setSnapchat] = useState('');
   const [instagram, setInstagram] = useState('');
-
   const [picture, setPicture] = useState(null);
   const [footer, openFooter] = useState(false);
   const [twitter, setTwitter] = useState('');
   const [tiktok, setTiktok] = useState('');
   const dispatch = useDispatch();
 
-  // const {
-  //     token = {},
-  //     user = {}
-  // } = useSelector((state) => state.mainExpenseByCategory.userProfileData);
-  // console.log("USER BLOCK ON HOST PROFILE", user);
+
   const token = userinfo?.token;
   const user = userinfo?.user;
+
   if (!user) {
     return null;
   }
@@ -80,6 +77,7 @@ export default function HostProfile(props) {
       setPicture(image.path);
     });
   };
+
   const ImageFooter = () => {
     return (
       <TouchableOpacity
@@ -89,6 +87,7 @@ export default function HostProfile(props) {
       </TouchableOpacity>
     );
   };
+
   useEffect(() => {
     // fetchProfile();
     MobxStore.authStore.async.reloadUser();
@@ -97,10 +96,10 @@ export default function HostProfile(props) {
 
   const setData = async () => {
     setLoader(true);
-
     setPicture(user?.profileImage?.filePath);
     setFullname(user?.fullName);
     setBio(user?.about);
+    setProfession(user?.profession);
     setCity(user?.city);
     setBirthday(user.birthday);
     setInstagram(user.instagramUsername);
@@ -113,28 +112,30 @@ export default function HostProfile(props) {
     setLoader(true);
 
     let milliseconds = new Date().getTime();
-
     let imgObj = {
       uri: `${picture}`,
       type: 'image/jpeg',
       name: `image-${milliseconds}.jpg`,
     };
 
-    console.log('PICTURE', picture);
-    console.log('THIS IS FULL NAME', fullName);
-    console.log('THIS IS FULL city', city);
-    console.log('THIS IS FULL getBirthday', getBirthday);
-    console.log('THIS IS FULL bio', bio);
-    console.log('THIS IS FULL snapchat', snapchat);
-    console.log('THIS IS FULL instagram', instagram);
+    // console.log('PICTURE', picture);
+    // console.log('THIS IS FULL NAME', fullName);
+    // console.log('THIS IS FULL city', city);
+    // console.log('THIS IS FULL getBirthday', getBirthday);
+    // console.log('THIS IS FULL bio', bio);
+    // console.log('THIS IS FULL snapchat', snapchat);
+    // console.log('THIS IS FULL instagram', instagram);
+
+    console.log('THIS IS FULL Profession', profession);
 
     let formData = new FormData();
     formData.append('fullName', fullName);
     formData.append('city', city);
     formData.append('birthday', getBirthday);
     formData.append('about', bio);
-    formData.append('snapchatUsername', snapchat);
-    formData.append('instagramUsername', instagram);
+    formData.append('profession', profession);
+    // formData.append('snapchatUsername', snapchat);
+    // formData.append('instagramUsername', instagram);
     formData.append('profileImageFile', imgObj);
 
     console.log('TOKEN', token);
@@ -162,9 +163,9 @@ export default function HostProfile(props) {
 
     if (SERVER_RESPONSE.status == 201 || SERVER_RESPONSE.status == 200) {
       props.navigation.goBack();
-      setTimeout(() => {
-        Toast('Profile Updated Successfully!');
-      }, 200);
+      // setTimeout(() => {
+      Toast('Profile Updated Successfully!');
+      // }, 100);
     }
     setLoader(false);
   };
@@ -193,7 +194,7 @@ export default function HostProfile(props) {
                   fontSize: FONTSIZE.Text19,
                   color: '#000',
                   marginTop: 10,
-                  fontFamily: 'AvenirNext',
+                  fontFamily: 'AvenirNext-Medium',
                 }}>
                 {"Upload Profile Picture"}
               </Text>
@@ -258,8 +259,8 @@ export default function HostProfile(props) {
               <FloatingInput
                 custom
                 floatingLabel={'Profession'}
-                value={'Real Estate Developer'}
-                onChange={value => setFullname(value)}
+                value={profession == '' ? '' : profession}
+                onChange={value => setProfession(value)}
               />
 
               {/* <FloatingInput
@@ -267,17 +268,16 @@ export default function HostProfile(props) {
               floatingLabel={'Birthday'}
               onChange={value => setBirthday(value)}
               value={getBirthday == null ? user.birthday : getBirthday}
-            />
-            {console.log('user.city', user.city)}
-            <GooglePlacesInput
+            /> */}
+              {/* {console.log('user.city', user.city)} */}
+              {/* <GooglePlacesInput
               floatingLabel={'City'}
               onPress={data => {
                 console.log('DATA_ON_SEL - ', data);
                 setCity(data.description);
               }}
               value={city == null ? user.city : city}
-            />
-
+            /> */}
 
               <CustomTextinput
                 custom
@@ -286,10 +286,12 @@ export default function HostProfile(props) {
                 value={bio == '' ? '' : bio}
                 onChange={value => setBio(value)}
               />
-            </View>
-            <View style={{ backgroundColor: '#F2F5F6', height: getHp(8), marginVertical: getHp(30) }} />
 
-            <View style={{ paddingHorizontal: getWp(10) }}>
+              {/* </View> */}
+
+              <View style={{ backgroundColor: '#F2F5F6', height: getHp(8), marginVertical: getHp(30) }} />
+
+              {/* <View style={{ paddingHorizontal: getWp(10) }}> */}
               <Text
                 style={[
                   styles.headerTitle,
@@ -297,21 +299,21 @@ export default function HostProfile(props) {
                     fontSize: FONTSIZE.Text18,
                     marginBottom: getHp(15),
                     color: '#000',
-                    fontFamily: 'AvenirNext-Bold'
+                    fontFamily: 'AvenirNext-Medium'
                   },
                 ]}>
                 {'App Sync'}
               </Text>
 
               {/* First Insta */}
-              <TouchableOpacity style={styles.socialButton}>
+              <TouchableOpacity style={[styles.socialButton, styles.shadowStyle]}>
                 <View style={styles.flex}>
-                  <Insta height={30} width={30} />
+                  <Insta height={getHp(30)} width={getHp(30)} />
                   <TextInput
                     placeholder={`Instagram `}
                     placeholderTextColor={'#000'}
-                    value={instagram == '' ? '' : instagram}
-                    onChangeText={value => setInstagram(value)}
+                    // value={instagram == '' ? '' : instagram}
+                    // onChangeText={value => setInstagram(value)}
                     style={[
                       styles.headerTitle,
                       { marginLeft: 10, fontFamily: 'AvenirNext-Medium' },
@@ -321,7 +323,7 @@ export default function HostProfile(props) {
                 <Text
                   style={[
                     styles.headerTitle,
-                    { color: '#1FAEF7', fontFamily: 'AvenirNext-Medium', marginRight: getWp(20) },
+                    { color: '#1FAEF7', fontFamily: 'AvenirNext-Medium', marginRight: getWp(10) },
                   ]}>
                   {'Connect'}
                 </Text>
@@ -329,9 +331,9 @@ export default function HostProfile(props) {
 
 
               {/* Second Spotify */}
-              <TouchableOpacity style={styles.socialButton}>
+              <TouchableOpacity style={[styles.socialButton, styles.shadowStyle]}>
                 <View style={styles.flex}>
-                  <Spotify height={30} width={30} />
+                  <Spotify height={getHp(30)} width={getHp(30)} />
                   <Text
                     style={[
                       styles.headerTitle,
@@ -346,7 +348,7 @@ export default function HostProfile(props) {
                     {
                       color: '#1FAEF7',
                       fontFamily: 'AvenirNext-Medium',
-                      marginRight: getWp(20)
+                      marginRight: getWp(10)
                     },
                   ]}>
                   {'Connect'}
@@ -354,9 +356,9 @@ export default function HostProfile(props) {
               </TouchableOpacity>
 
               {/* Third Apple Music */}
-              <TouchableOpacity style={[styles.socialButton, { marginVertical: getHp(30) }]}>
+              <TouchableOpacity style={[styles.socialButton, styles.shadowStyle, { marginVertical: getHp(30) }]}>
                 <View style={styles.flex}>
-                  <AppleMusic height={30} width={30} />
+                  <AppleMusic height={getHp(30)} width={getHp(30)} />
                   <Text
                     style={[
                       styles.headerTitle,
@@ -371,7 +373,7 @@ export default function HostProfile(props) {
                     {
                       color: '#1FAEF7',
                       fontFamily: 'AvenirNext-Medium',
-                      marginRight: getWp(20)
+                      marginRight: getWp(10)
                     },
                   ]}>
                   {'Connect'}
@@ -387,7 +389,7 @@ export default function HostProfile(props) {
 
               <TouchableOpacity style={styles.socialButton2}>
                 <View style={styles.flex}>
-                  <Tiktok height={30} width={30} />
+                  <Tiktok height={getHp(30)} width={getHp(30)} />
                   <TextInput
                     placeholder={`@tiktok`}
                     placeholderTextColor={'#999999'}
@@ -400,20 +402,20 @@ export default function HostProfile(props) {
 
               <TouchableOpacity style={styles.socialButton2}>
                 <View style={styles.flex}>
-                  <Snapchat height={30} width={30} />
+                  <Snapchat height={getHp(30)} width={getHp(30)} />
                   <TextInput
                     placeholder={`@snapchat`}
                     placeholderTextColor={'#999999'}
-                    onChangeText={value => setSnapchat(value)}
+                    // onChangeText={value => setSnapchat(value)}
                     style={[styles.headerTitle, styles.Tiktok]}
-                    value={snapchat == '' ? '' : snapchat}
+                  // value={snapchat == '' ? '' : snapchat}
                   />
                 </View>
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.socialButton2}>
                 <View style={styles.flex}>
-                  <Twitter height={30} width={30} />
+                  <Twitter height={getHp(30)} width={getHp(30)} />
                   <TextInput
                     placeholder={`@twitter`}
                     placeholderTextColor={'#999999'}
@@ -426,7 +428,7 @@ export default function HostProfile(props) {
 
               <TouchableOpacity style={styles.socialButton2}>
                 <View style={styles.flex}>
-                  <Linkedin height={30} width={30} />
+                  <Linkedin height={getHp(30)} width={getHp(30)} />
                   <TextInput
                     placeholder={`@linkedin`}
                     placeholderTextColor={'#999999'}
@@ -463,7 +465,6 @@ export default function HostProfile(props) {
               marginVertical: getHp(30),
               height: getHp(60),
               backgroundColor: '#FFFFFF',
-              paddingHorizontal: getWp(10),
               borderBottomWidth: 0.5,
               borderTopWidth: 0.5,
               borderColor: '#EEEEEE'
@@ -563,7 +564,7 @@ const styles = StyleSheet.create({
     fontFamily: 'AvenirNext-Regular',
   },
   addInterest: {
-    elevation: 5,
+    elevation: 2,
     backgroundColor: '#fff',
     height: getHp(130),
     width: getHp(150),
@@ -576,16 +577,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between'
   },
+  shadowStyle: {
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    shadowRadius: 5,
+    shadowOpacity: 0.1,
+    elevation: 1,
+  },
   socialButton: {
     height: getHp(50),
-    elevation: 2,
+    elevation: 0,
     borderRadius: 13,
     paddingHorizontal: getWp(10),
     backgroundColor: '#fff',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical: 7,
+    marginVertical: 4,
   },
   socialButton2: {
     height: getHp(50),
@@ -597,7 +605,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical: 7,
+    marginVertical: 4,
   },
   container: {
     backgroundColor: '#fff',
@@ -618,7 +626,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20
   },
   crossButton: {
-    elevation: 10,
+    elevation: 2,
     backgroundColor: '#fff',
     borderRadius: 50,
     padding: 10,

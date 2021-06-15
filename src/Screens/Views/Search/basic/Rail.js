@@ -14,6 +14,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 10,
     borderRadius: 2,
-    backgroundColor: 'rgba(31, 174, 247, 0.24)',
+    backgroundColor: '#F2F5F6',
   },
 });

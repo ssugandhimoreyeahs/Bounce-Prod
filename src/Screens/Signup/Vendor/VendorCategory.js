@@ -75,7 +75,7 @@ export default function VendorCategory(props) {
             < View style={styles.container}>
                 <ScrollView>
                     <Header
-                        headerBackColor={{ paddingBottom: 20, backgroundColor: 'rgba(238, 238, 238, 0.5)' }}
+                        headerBackColor={{ paddingBottom: 20, backgroundColor: '#F4F4F4' }}
                         back
                         headerTitle={"Select Business"}
                         onPress={() => props.navigation.goBack()}

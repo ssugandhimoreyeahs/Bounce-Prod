@@ -18,7 +18,7 @@ export default function Toggle() {
             offColor="#EFF2F3"
             // label="Example label"
             // labelStyle={{ color: "black", fontWeight: "900" }}
-            size='large'
+            size='medium'
             onToggle={isOn => console.log("changed to : ", isOn)}
         />
         // </View>

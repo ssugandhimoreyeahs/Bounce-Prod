@@ -1,51 +1,90 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, Alert, Text, TouchableOpacity, SafeAreaView } from 'react-native';
-import { QRCodes, Header, CustomButton } from '@components';
+import { QRCodes, Header, Scaffold } from '@components';
 import { FONTSIZE, getHp, getWp } from '@utils';
 import { UploadBlue } from '@svg'
 
-export default function AboutUs() {
-    return (<SafeAreaView style={styles.container}>
-        <Header headerTitle={"About Bounce"}
-            back
-            onPress={() => navigation.goBack()}
-        />
-        <View style={styles.subContainer}>
+export default function AboutUs(props) {
+    return (<Scaffold>
+        <SafeAreaView style={styles.container}>
 
-            <Text style={[styles.textStyle, { alignSelf: 'center', marginTop: 20,marginBottom:10 }]} >
-                {"With your support, we’ll keep working to bring you closer to the places and people you love."}
-            </Text>
+            <Header headerTitle={"About Bounce"}
+                headerStyleProp={{
+                    fontFamily: 'AvenirNext-DemiBold',
+                    fontSize: FONTSIZE.Text24,
+                    fontWeight: 'normal'
+                }}
+                headerBackColor={{ backgroundColor: '#FBFBFB', }}
+                back
+                onPress={() => props.navigation.goBack()}
+            />
 
-            <TouchableOpacity style={[styles.allFrnds,{marginVertical:20}]}>
-                <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text15, fontFamily: 'AvenirNext-Bold', color: '#1FAEF7' }]}>
-                    {"Help spread the love"}
+            <View style={styles.subContainer}>
+
+                <Text style={[styles.textStyle, {
+                    fontFamily: 'AvenirNext-Regular',
+                    fontSize: FONTSIZE.Text15,
+                    alignSelf: 'center',
+                    marginTop: 20,
+                    marginBottom: 10,
+                    marginHorizontal: 10,
+                    lineHeight: 20
+                }]} >
+                    {"With your support, we’ll keep working to bring you closer to the places and people you love."}
                 </Text>
-            </TouchableOpacity>
 
-            <TouchableOpacity style={[styles.allFrnds,{elevation:1,marginTop:20,alignItems:'flex-start',height:68}]}>
-                <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text18, fontFamily: 'AvenirNext-Medium',marginLeft:20 }]}>
-                    {"User Agreement"}
-                </Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={[styles.allFrnds,
+                styles.shadowStyle,
+                {
+                    shadowRadius: 5,
+                    width: '90%',
+                    borderRadius: 15,
+                    marginVertical: 20,
 
-            <TouchableOpacity style={[styles.allFrnds,{elevation:1,marginTop:10,alignItems:'flex-start',height:68}]}>
-                <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text18, fontFamily: 'AvenirNext-Medium',marginLeft:20 }]}>
-                    {"Privacy Policy"}
-                </Text>
-            </TouchableOpacity>
+                }]}>
+                    <Text style={[styles.textStyle, {
+                        fontSize: FONTSIZE.Text16,
+                        color: '#1FAEF7'
+                    }]}>
+                        {"Help spread the love"}
+                    </Text>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={[styles.allFrnds,{elevation:1,marginTop:10,alignItems:'flex-start',height:68}]}>
-                <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text18, fontFamily: 'AvenirNext-Medium',marginLeft:20 }]}>
-                    {"End User Licence Agreement"}
-                </Text>
-            </TouchableOpacity>
 
-        </View>
-    </SafeAreaView>
+
+                <TouchableOpacity style={[styles.allFrnds, styles.shadowStyle, { elevation: 1, marginTop: 20, alignItems: 'flex-start', height: 68 }]}>
+                    <Text style={[styles.textStyle, { marginLeft: 20 }]}>
+                        {"User Agreement"}
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[styles.allFrnds, styles.shadowStyle, { elevation: 1, marginTop: 5, alignItems: 'flex-start', height: 68 }]}>
+                    <Text style={[styles.textStyle, { marginLeft: 20 }]}>
+                        {"Privacy Policy"}
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[styles.allFrnds, styles.shadowStyle, { elevation: 1, marginTop: 5, alignItems: 'flex-start', height: 68 }]}>
+                    <Text style={[styles.textStyle, { marginLeft: 20 }]}>
+                        {"End User Licence Agreement"}
+                    </Text>
+                </TouchableOpacity>
+
+            </View>
+        </SafeAreaView>
+    </Scaffold>
     )
 }
 AboutUs.routeName = "/AboutUs";
 const styles = StyleSheet.create({
+    shadowStyle: {
+        shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowRadius: 2,
+        shadowOpacity: 0.1,
+        elevation: 2,
+        // width: '95%'
+    },
     QRcontainer: {
         elevation: 5,
         padding: 30,
@@ -65,13 +104,12 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         color: '#000',
-        fontSize: FONTSIZE.Text15,
-        lineHeight: 20
-
+        fontSize: FONTSIZE.Text18,
+        letterSpacing: 0.3,
+        fontFamily: 'AvenirNext-Medium',
     },
     allFrnds: {
         width: '100%',
-        borderRadius: 9,
         alignItems: 'center',
         justifyContent: 'center',
         padding: 5,

@@ -38,7 +38,7 @@ import {Scaffold} from '../../components';
 const DATA = [DJ, DJ, DJ];
 const filterSmallButtons = ['⛺ Outdoors', '⛺ Outdoors', '⛺ Outdoors'];
 
-export default function HostView() {
+export default function HostView(props) {
   const [getImageState, setImageState] = useState(0);
   const handleCarousel = () => {
     return (
@@ -86,7 +86,7 @@ export default function HostView() {
               <ThreeBlackDots height={25} width={25} style={{marginRight: 5}} />
             }
             back
-            headerTitle={'sdfsdf School Gala'}
+            headerTitle={'Adelson School Gala'}
             onPress={() => {
               props.navigation.goBack();
             }}

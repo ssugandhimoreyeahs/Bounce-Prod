@@ -29,11 +29,54 @@ import EventPageTab1 from '../../Screens/MyEvents/EventTab1'
 import EventPageTab2 from '../../Screens/MyEvents/EventTab2'
 import Events from '../../Screens/Views/Search/EventsTab'
 import People from '../../Screens/Views/Search/PeopleTab'
+import AttendingTab from '../../Screens/BounceUsers/EventPage/Public/featuringTabs/AttendingTab'
+
+export const FeaturingPageTab = observer((props) => {
+    return (
+        <View style={{ flex: 1 }}>
+            <Tabs tabBarUnderlineStyle={[{ backgroundColor: '#fff' }]}>
 
 
+
+                <Tab tabStyle={{ backgroundColor: '#fff' }}
+                    textStyle={{
+                        color: '#999999',
+                        fontFamily: 'AvenirNext-Medium'
+                    }}
+                    activeTabStyle={[styles.shadowStyle, { backgroundColor: '#fff' }]}
+                    activeTextStyle={{
+                        letterSpacing: 0.5,
+                        color: '#1FAEF7',
+                        fontWeight: 'bold',
+                        fontFamily: 'AvenirNext-Regular',
+                    }}
+                    heading="Attending">
+                    <AttendingTab />
+                </Tab>
+
+                <Tab tabStyle={{ backgroundColor: '#fff' }}
+                    textStyle={{
+                        color: '#999999',
+                        fontFamily: 'AvenirNext-Medium'
+                    }}
+                    activeTabStyle={[styles.shadowStyle, { backgroundColor: '#fff' }]}
+                    activeTextStyle={{
+                        letterSpacing: 0.5,
+                        color: '#F8A41E',
+                        fontWeight: 'bold',
+                        fontFamily: 'AvenirNext-Regular',
+                    }}
+                    heading="Featuring">
+                    <EventPageTab2 />
+                </Tab>
+
+            </Tabs>
+        </View>
+    );
+});
 export const SearchPageTab = observer((props) => {
     return (
-        <View style={{flex:1}}>
+        <View style={{ flex: 1 }}>
             <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
 
                 <Tab tabStyle={{ backgroundColor: '#fff' }}
@@ -106,21 +149,21 @@ export const Tabview = observer((props) => {
             <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
+                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Regular' }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
                     activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading={"Hosting"}>
                     <Tab1 partyStore={MboxStore.partyStore} {...props} />
                 </Tab >
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
+                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Regular' }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
                     activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="Attending">
                     <Tab2 />
                 </Tab>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
-                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
+                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Regular' }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
                     activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="Interested">
                     <Tab3 />
@@ -333,20 +376,21 @@ export const SwitchButton = (props) => {
 
     }
     return (
-        <View style={styles.doubleButton}>
+        <View style={[styles.doubleButton, { flex: 1 }]}>
             <LinearGradient
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 colors={value ? ['#3CBDFF', '#6FD0FF'] : ['#F3F3F3', '#F3F3F3']}
                 style={[
                     styles.linearGradient,
+
                     value ? onValues : offValues, {
                         borderTopLeftRadius: 13,
                         borderBottomLeftRadius: 13
                     }
                 ]}>
                 <TouchableOpacity
-                    style={[]}
+                    style={[{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }]}
                     onPress={() => onPrivatePress()}>
                     <Text style={[styles.TitleStyle, value ?
                         {
@@ -375,7 +419,7 @@ export const SwitchButton = (props) => {
                         borderBottomRightRadius: 13
                     }
                 ]}>
-                <TouchableOpacity style={{}}
+                <TouchableOpacity style={[{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }]}
                     onPress={() => onPublicPress()}>
                     <Text style={[styles.TitleStyle, !value ? {
                         color: '#fff',

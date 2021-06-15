@@ -75,14 +75,18 @@ function UploadMedia(props) {
             paddingHorizontal: getWp(20),
           }}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Text style={[styles.number, {marginRight: getWp(30)}]}>
+            <Text style={[styles.number, {
+              color:'#000',
+              fontSize: FONTSIZE.Text20,
+              fontFamily:'AvenirNext-Regular',
+              marginRight: getWp(30)}]}>
               {index + 1}
             </Text>
 
             <View>
               {index == 0 ? (
                 <Text style={[styles.number, {marginVertical: getHp(10)}]}>
-                  Cover Photo
+                 {"Cover Photo"}
                 </Text>
               ) : null}
               <View>
@@ -138,7 +142,7 @@ function UploadMedia(props) {
             headerTitle={'Upload Media'}
             back
             onPress={() => props.navigation.goBack()}
-            headerBackColor={{backgroundColor: '#fff'}}
+            headerBackColor={{backgroundColor: '#FBFBFB'}}
           />
 
           <FlatList
@@ -174,15 +178,16 @@ function UploadMedia(props) {
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: '#FBFBFB',
     flex: 1,
     height: '100%',
     width: '100%',
   },
   number: {
-    fontWeight: 'bold',
-    color: '#000',
-    fontSize: FONTSIZE.Text20,
+    // fontWeight: 'bold',
+    color: 'rgba(0, 0, 0, 0.6)',
+    fontSize: FONTSIZE.Text16,
+    fontFamily:'AvenirNext-Regular'
   },
 });
 UploadMedia.routeName = '/UploadMedia';

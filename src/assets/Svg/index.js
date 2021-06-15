@@ -125,9 +125,17 @@ import Linkedin from './Linkedin.svg'
 import Party_Outline from './Party_Outline.svg'
 import FavouriteMusic from './FavouriteMusic.svg'
 import ChangeBlue from './ChangeBlue.svg'
+import BlueTick from './BlueTick.svg'
+import CohostPurple from './CohostPurple.svg'
+import Account_Outline from './Account_Outline.svg'
+
 
 
 export {
+
+    Account_Outline,
+    CohostPurple,
+    BlueTick,
     ChangeBlue,
     FavouriteMusic,
     Party_Outline,

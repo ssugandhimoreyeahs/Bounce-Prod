@@ -21,6 +21,7 @@ import moment from 'moment';
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
 
+var AGE
 export default function BirthDayScreen(props) {
     const {
         navigation
@@ -28,6 +29,7 @@ export default function BirthDayScreen(props) {
     const { name, username, password } = props.route?.params
     console.log("BIRTHDAY PROPS -->", props.route.params)
     const [birthday, setBirthday] = useState('')
+    const [age, setAge] = useState(0)
     const [putFocus, setFocus] = useState(false)
     const dispatch = useDispatch()
     const reducerData = useSelector((state) => state.login);
@@ -39,11 +41,25 @@ export default function BirthDayScreen(props) {
                 birthday: birthday,
                 username: username,
                 password: password,
+                age: AGE,
                 name
             })
         } else {
             Toast("Please select birthday!")
         }
+    }
+    const getAge = (birthday) => {
+        var today = new Date();
+        var birthDate = new Date(birthday);
+        AGE = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            AGE--;
+        }
+        console.log("THIS IS AGE RETURNED", AGE)
+        
+        // setAge(age)
+        // return age;
     }
     return (
         <Scaffold>
@@ -51,7 +67,11 @@ export default function BirthDayScreen(props) {
                 style={{ flex: 1, backgroundColor: '#FBFBFB' }}
                 contentContainerStyle={{ flexGrow: 1 }}>
                 <View style={styles.container}>
-                    <Text style={styles.HeadingStyle}>{"When’s your birthday? 🎂"}</Text>
+                    <Text style={styles.HeadingStyle}>
+                        {"When’s your birthday? 🎂"}
+                        </Text>
+
+                    {birthday !== '' && console.log('age: ' + getAge(birthday))}
 
                     <View style={{ marginTop: 100 }}>
                         <DatePicker

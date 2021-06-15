@@ -20,6 +20,7 @@ export default DatePicker = props => {
     minimumDate,
     placeholder = '',
     errorMessage = '',
+    createEvent = false,
   } = props;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const showDatePicker = () => {
@@ -68,17 +69,53 @@ export default DatePicker = props => {
 
   return (
     <View style={styles.shadowStyle}>
+
       <TouchableOpacity onPress={showDatePicker}>
-        <TextInput
-          pointerEvents="none"
-          placeholderTextColor={'#000'}
-          placeholder={placeholder}
-          style={[
-            styles.textInput,
-            errorMessage.length > 0 && { borderColor: 'red' },
-          ]}
-          value={getValue()}
-          editable={false}></TextInput>
+        {createEvent ?
+          <>
+            <Text style={{
+              color: '#696969',
+              fontSize: FONTSIZE.Text14,
+              fontFamily: 'AvenirNext-Regular',
+              position: 'absolute',
+              left: 15,
+              zIndex: 1,
+              top: 5,
+              borderRadius: 9.5
+            }}>{placeholder}</Text>
+            <TextInput
+              pointerEvents="none"
+              textAlignVertical='bottom'
+              
+              style={[
+                styles.textInput, {
+                  
+                  elevation:0,
+                  marginTop: 5,
+                  backgroundColor: '#fff',
+                  fontFamily: 'AvenirNext-DemiBold',
+                },
+                errorMessage.length > 0 && {
+                  borderColor: 'red',
+                },
+              ]}
+              value={getValue()}
+              editable={false} />
+          </>
+          :
+          <TextInput
+            pointerEvents="none"
+            placeholderTextColor={'#000'}
+            placeholder={placeholder}
+            style={[
+              styles.textInput,
+              errorMessage.length > 0 && { borderColor: 'red' },
+            ]}
+            value={getValue()}
+            editable={false} />
+        }
+
+
         {errorMessage?.length > 0 && (
           <View style={styles.errorContainer}>
             <Text style={styles.errorTextStyle}>{errorMessage}</Text>
@@ -99,28 +136,30 @@ export default DatePicker = props => {
   );
 };
 const styles = StyleSheet.create({
-  shadowStyle:{
+  shadowStyle: {
     shadowColor: '#000',
     shadowOffset: { width: 1, height: 1 },
     shadowRadius: 4,
     shadowOpacity: 0.1,
+    elevation: 2,
+    backgroundColor: '#fff',
+    borderRadius: 13,
+    marginVertical: 8
   },
   textInput: {
-    // elevation: 2,
-    height: getHp(65),
+    height: getHp(60), //orginal 60
     backgroundColor: '#fff',
     borderRadius: 9.5,
-    fontFamily:'AvenirNext-Regular',
-    // borderWidth: 1,
+    fontFamily: 'AvenirNext-Regular',
     paddingLeft: 15,
+    fontWeight: 'bold',
     fontSize: FONTSIZE.Text15,
-    marginTop: 10,
     color: '#000',
     shadowColor: 'rgba(0, 0, 0, 0.2)',
     shadowOpacity: 0.2,
-    elevation: 6,
+    elevation: 2,
     shadowRadius: 15,
-    shadowOffset: {width: 1, height: 13},
+    shadowOffset: { width: 1, height: 13 },
   },
   errorContainer: {
     marginTop: 5,

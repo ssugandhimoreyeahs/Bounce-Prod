@@ -69,6 +69,7 @@ const TicketComponent = props => {
           style={[
             styles.textInput,
             {
+              height:getHp(50),
               width: '35%',
               textAlign: 'center',
               fontSize: FONTSIZE.Text18,
@@ -96,6 +97,7 @@ const TicketComponent = props => {
           style={[
             styles.textInput,
             {
+              height:getHp(50),
               width: '35%',
               textAlign: 'center',
               fontSize: FONTSIZE.Text18,
@@ -120,7 +122,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderRadius: 9.5,
     color: '#000',
-     height: getHp(32),
+     height: getHp(45),
 
   },
   eventContainer: {

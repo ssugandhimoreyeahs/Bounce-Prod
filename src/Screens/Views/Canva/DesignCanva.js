@@ -42,28 +42,29 @@ export default function DesignCanva(props) {
 
 
 
-    return (<Scaffold>
-        <View style={{ height: 50, borderBottomWidth: 2, borderColor: '#F2F5F6' }}>
-            <TouchableOpacity style={{ flexDirection: 'row', }}>
-                <Back name="chevron-back" color={'#000'} style={{ marginRight: 20, marginLeft: 10 }} size={30} />
-                <Searchbar
-                    placeholder={"Search events"}
-                    onChangeText={onChangeSearch}
-                    value={searchQuery}
-                    inputStyle={{
-                        fontSize: FONTSIZE.Text14,
-                        fontFamily: 'AvenirNext-Regular',
-                    }}
-                    style={styles.searchBarStyle}
-                    iconColor={"#999999"}
-                    placeholderTextColor={"#909090"}
-                />
+    return (<Scaffold statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
+        <View style={{ marginVertical: getHp(15), flexDirection: 'row', alignItems: 'center' }}>
+            <TouchableOpacity style={{}}>
+                <Back name="chevron-back" color={'#000'}
+                    style={{ marginRight: 20, marginLeft: 10 }}
+                    size={30} />
             </TouchableOpacity>
+            <Searchbar
+                placeholder={"Search events"}
+                onChangeText={onChangeSearch}
+                value={searchQuery}
+                
+                inputStyle={{
+                    fontSize: FONTSIZE.Text16,
+                    fontFamily: 'AvenirNext-Regular',
+                    
+                }}
+                style={styles.searchBarStyle}
+                iconColor={"#999999"}
+                placeholderTextColor={"#909090"}
+            />
         </View>
-
         <SearchPageTab {...props} />
-
-      
     </Scaffold>
     )
 }
@@ -72,10 +73,11 @@ const styles = StyleSheet.create({
         elevation: 0,
         borderRadius: 9,
         backgroundColor: '#F2F5F6',
-        height: getHp(32),
-        fontSize: FONTSIZE.Text14,
+        height: getHp(50),
+        // fontSize: FONTSIZE.Text14,
         width: '80%',
-        alignSelf: 'center'
+        // alignItems: 'center',
+        // alignSelf: 'center'
     },
     sliderStyle: {
         marginVertical: 20

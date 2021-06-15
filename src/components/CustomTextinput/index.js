@@ -4,7 +4,14 @@ import { View, Text } from 'react-native';
 import { FONTSIZE, getHp } from '@utils';
 
 export default CustomTextinput = props => {
-  const { text, multiline = true, onChange, value = '', custom } = props;
+  const {
+    text,
+    multiline = true,
+    onChange,
+    value = '',
+    custom,
+    createEvent = false
+  } = props;
   return (
     <>
       {
@@ -16,36 +23,9 @@ export default CustomTextinput = props => {
                   marginTop: 10,
                   opacity: 0.5,
                   color: '#000',
-                  fontSize: FONTSIZE.Text15,
-                  fontFamily: 'AvenirNext-Medium',
-                }}>
-                {text}
-              </Text>
-              <TextInput
-                multiline={multiline}
-                value={value}
-                onChangeText={onChange}
-                style={{
-                  marginTop: getHp(3),
-                  height: getHp(110),
-                  textAlignVertical: 'top',
-                  color: 'black',
-                  fontFamily: 'AvenirNext-Medium',
 
-                  fontSize: FONTSIZE.Text17,
-                }}
-              />
-            </View>
-          )
-          : (
-            <View style={styles.container}>
-              <Text
-                style={{
-                  color: '#000',
-                  fontWeight: '400',
                   fontSize: FONTSIZE.Text15,
-                  marginTop: 10,
-                  fontFamily: 'AvenirNext-Regular',
+                  fontFamily: 'AvenirNext-Medium',
                 }}>
                 {text}
               </Text>
@@ -58,13 +38,73 @@ export default CustomTextinput = props => {
                   height: getHp(110),
                   textAlignVertical: 'top',
                   color: 'black',
-                  fontFamily: 'AvenirNext-DemiBold',
-                  fontWeight: 'bold',
+                  paddingRight: 8,
+                  fontFamily: 'AvenirNext-Medium',
                   fontSize: FONTSIZE.Text17,
                 }}
               />
             </View>
           )
+          :
+          createEvent ?
+            (
+              <View style={[styles.container,{height:getHp(110),borderRadius:13}]}>
+                <Text
+                  style={{
+                    color: '#696969',
+                    fontWeight: '400',
+                    fontSize: FONTSIZE.Text15,
+                    marginTop: 10,
+                    fontFamily: 'AvenirNext-Regular',
+                  }}>
+                  {text}
+                </Text>
+                <TextInput
+                  placeholderTextColor={"#696969"}
+                  multiline={multiline}
+                  value={value}
+                  onChangeText={onChange}
+                  style={{
+                    marginTop: getHp(3),
+                    height: getHp(110),
+                    textAlignVertical: 'top',
+                    color: 'black',
+                    fontFamily: 'AvenirNext-DemiBold',
+                    fontWeight: 'bold',
+                    fontSize: FONTSIZE.Text17,
+                  }}
+                />
+              </View>
+            )
+            :
+            (
+              <View style={styles.container}>
+                <Text
+                  style={{
+                    color: '#000',
+                    fontWeight: '400',
+                    fontSize: FONTSIZE.Text15,
+                    marginTop: 10,
+                    fontFamily: 'AvenirNext-Regular',
+                  }}>
+                  {text}
+                </Text>
+                <TextInput
+                  multiline={multiline}
+                  value={value}
+                  onChangeText={onChange}
+                  style={{
+                    marginTop: getHp(3),
+                    height: getHp(110),
+                    textAlignVertical: 'top',
+                    color: 'black',
+                    fontFamily: 'AvenirNext-DemiBold',
+                    fontWeight: 'bold',
+                    fontSize: FONTSIZE.Text17,
+                  }}
+                />
+              </View>
+            )
       }
     </>
   );

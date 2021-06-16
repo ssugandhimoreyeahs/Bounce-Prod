@@ -61,7 +61,7 @@ export default function EventTab2() {
                 keyExtractor={(index) => index}
 
             />
-            <TouchableOpacity style={styles.allFrnds}>
+            <TouchableOpacity style={[styles.allFrnds,{}]}>
                 <Text style={[styles.aboutText, { fontWeight: "bold" }]}>
                     {"All Vendors"}
                 </Text>

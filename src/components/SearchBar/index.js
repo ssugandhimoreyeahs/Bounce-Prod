@@ -39,7 +39,7 @@ export default function SearchBar(props) {
     const RenderItem = ({ item, index }) => {
         // console.log(index)
         return (
-            <View>
+            <View style={{}}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 }}>
                     <TouchableOpacity onPress={parentState} style={{
                         flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
@@ -52,7 +52,7 @@ export default function SearchBar(props) {
                                 size={getHp(40)}
                                 rounded
                             />
-                            <View style={{ alignItems: 'center', marginLeft: 15 }}>
+                            <View style={{ marginLeft: 15 }}>
                                 <Text style={{
                                     color: '#000',
                                     fontSize: FONTSIZE.Text16,
@@ -120,7 +120,7 @@ export default function SearchBar(props) {
         )
     }
 
-    return (<View style={{ backgroundColor: '#FBFBFB', paddingHorizontal: 10 }}>
+    return (<View style={{ backgroundColor: '#FBFBFB', paddingHorizontal: 10, }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#fff' }}>
             <Text style={styles.reviewsTitleStyle}>
                 {heading}
@@ -170,9 +170,9 @@ export default function SearchBar(props) {
                 placeholder={placeholder}
                 onChangeText={onChangeSearch}
                 value={searchQuery}
-                inputStyle={{fontSize:FONTSIZE.Text18}}
+                inputStyle={{ fontSize: FONTSIZE.Text18 }}
                 style={{
-                    height:getHp(50),
+                    height: getHp(50),
                     elevation: 1,
                     borderRadius: 9,
                     backgroundColor: '#fff',

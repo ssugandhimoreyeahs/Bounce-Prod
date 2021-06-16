@@ -397,7 +397,7 @@ function DjProfile(props) {
               ) : null}
 
               <View
-                style={[styles.partition, { marginTop: 30, marginBottom: 0 }]}
+                style={[styles.partition, { marginTop: 20, marginBottom: 0 }]}
               />
 
               {about != null ? (

@@ -44,6 +44,18 @@ class PartyService {
       return Promise.reject(error);
     }
   };
+
+  getTags = async () => {
+    try{
+      const Tags = await ApiClient.authInstance.get(
+        ApiClient.endPoints.tags,
+        ApiClient.applicationJSONHeader(false)
+      );
+      return Promise.resolve(Tags.data)
+    }catch(error){
+      return Promise.reject(error)
+    }
+  }
 }
 
 const planParty = new PartyService();

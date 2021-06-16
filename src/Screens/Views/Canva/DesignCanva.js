@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
-import { View, StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native';
-import { QRCodes, Scaffold, SearchPageTab } from '@components';
-import { FONTSIZE, getHp, getWp } from '@utils';
-import { ChangeBlue } from '@svg'
+import React, {useState, useEffect, useCallback, useContext} from 'react';
+import {View, StyleSheet, FlatList, Text, TouchableOpacity} from 'react-native';
+import {QRCodes, Scaffold, SearchPageTab} from '@components';
+import {FONTSIZE, getHp, getWp} from '@utils';
+import {ChangeBlue} from '@svg';
 import Back from 'react-native-vector-icons/Ionicons';
 import { Searchbar } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
@@ -66,8 +66,8 @@ export default function DesignCanva(props) {
         </View>
         <SearchPageTab {...props} />
     </Scaffold>
-    )
-}
+  );
+};
 const styles = StyleSheet.create({
     searchBarStyle: {
         elevation: 0,
@@ -134,13 +134,15 @@ const styles = StyleSheet.create({
     },
 });
 
-DesignCanva.routeName = '/DesignCanva'
+DesignCanva.routeName = '/DesignCanva';
 
-
-{/* <Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10, fontFamily: 'AvenirNext-Bold', fontSize: FONTSIZE.Text22 }]} >
+{
+  /* <Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10, fontFamily: 'AvenirNext-Bold', fontSize: FONTSIZE.Text22 }]} >
             {"Under Development"}
-        </Text> */}
-{/* <Header headerTitle={"Custom Invitation"}
+        </Text> */
+}
+{
+  /* <Header headerTitle={"Custom Invitation"}
             back
             onPress={() => navigation.goBack()}
         />
@@ -166,4 +168,5 @@ DesignCanva.routeName = '/DesignCanva'
                     {"Design with Canva"}
                 </Text>
             </TouchableOpacity>
-        </View> */}
+        </View> */
+}

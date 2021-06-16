@@ -6,7 +6,7 @@ import {ReactModel} from '../../core';
 import {ClassValidator} from '../../Validations';
 
 @ReactModel()
-class CreatePartyDTO extends CreatePartyEntity { 
+class CreatePartyDTO extends CreatePartyEntity {
   partyError = {};
 
   set = fields => {
@@ -88,6 +88,67 @@ class CreatePartyDTO extends CreatePartyEntity {
   onTicketDelete = index => {
     this.tickets = [...this.tickets.filter((_, i) => i != index)];
     this.notifyListeners();
+  };
+
+  addTags = ({tag, subTags}) => {
+    try {
+      let newTag = [...this.partyTags];
+      let {tagIndex, tagExist, subTagIndex, subTagExist} = this.isSubTagExist(
+        tag,
+        subTags,
+      );
+      console.log(
+        'SUB_TAG_EVAL - ',
+        JSON.stringify({tagIndex, tagExist, subTagIndex, subTagExist}),
+      );
+      if (tagExist && subTagExist) {
+        if (newTag[tagIndex].subTags.length == 1) {
+          newTag = newTag.filter(i => i.id != tag.id);
+        } else {
+          newTag[tagIndex].subTags = newTag[tagIndex].subTags.filter(
+            sT => sT.id != subTags.id,
+          );
+        }
+      } else if (!tagExist && !subTagExist) {
+        let newTagData = {
+          ...tag,
+          subTags: [subTags],
+        };
+        newTag.push(newTagData);
+      } else if (!subTagExist) {
+        newTag[tagIndex].subTags.push(subTags);
+      }
+
+      this.partyTags = newTag;
+      this.notifyListeners();
+    } catch (error) {
+      console.log('ADD_TAGS_ERROR - ', error);
+    }
+  };
+
+  isSubTagExist = (tag, subTag) => {
+    // don't do any side effect to be call in declarative code
+    let result = {
+      tagIndex: -1,
+      tagExist: false,
+      subTagIndex: -1,
+      subTagExist: false,
+    };
+    let tagIndex = this.partyTags.findIndex(t => tag.id == t.id);
+    if (tagIndex == -1) {
+      return result;
+    }
+    result.tagIndex = tagIndex;
+    result.tagExist = true;
+    let subTagIndex = this.partyTags[tagIndex].subTags.findIndex(
+      sT => sT.id == subTag.id,
+    );
+    if (subTagIndex == -1) {
+      return result;
+    }
+    result.subTagIndex = subTagIndex;
+    result.subTagExist = true;
+    return result;
   };
 }
 

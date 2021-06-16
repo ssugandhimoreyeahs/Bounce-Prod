@@ -40,7 +40,11 @@ export default function ImageCarousel(props) {
                         :
                         value === 'Friends' ?
                             <View style={{ width: '95%' }}>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <View style={styles.singleImage}>
+                                    <View style={styles.friendsView}>
+                                        <Image source={item} style={styles.friendsImage} />
+                                        <Text style={styles.textImage}>{'Eli Rahim'}</Text>
+                                    </View>
                                     <View style={styles.friendsView}>
                                         <Image source={item} style={styles.friendsImage} />
                                         <Text style={styles.textImage}>{'Eli Rahim'}</Text>
@@ -55,6 +59,10 @@ export default function ImageCarousel(props) {
                                     </View>
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <View style={styles.friendsView}>
+                                        <Image source={item} style={styles.friendsImage} />
+                                        <Text style={styles.textImage}>{'Eli Rahim'}</Text>
+                                    </View>
                                     <View style={styles.friendsView}>
                                         <Image source={item} style={styles.friendsImage} />
                                         <Text style={styles.textImage}>{'Eli Rahim'}</Text>
@@ -96,7 +104,7 @@ export default function ImageCarousel(props) {
                                         <Image source={{
                                             uri: item
                                         }}
-                                            style={{ marginLeft: -20, width: '90%', height: 400, }} />
+                                            style={{ width: '100%', height: 375, }} />
                                     </View>
                                     :
                                     value == 'Normal' ?
@@ -182,7 +190,6 @@ export default function ImageCarousel(props) {
 const styles = StyleSheet.create({
     instaStyles: {
         borderRadius: 4,
-        // width: '32%',
         height: getHp(118),
         width: getWp(118),
         margin: 2
@@ -198,23 +205,37 @@ const styles = StyleSheet.create({
         right: 20
     },
     friendsImage: {
-        width: getWp(100),
-        height: getHp(100),
-        margin: 2
+        borderTopRightRadius: 7,
+        borderTopLeftRadius: 7,
+        width: getWp(80),
+        height: getHp(80),
+        margin: 0
+    },
+    singleImage: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        //   borderBottomLeftRadius:7,
+        //   borderBottomEndRadius:7
     },
     friendsView: {
+        justifyContent: 'center',
+        height: getHp(104),
         backgroundColor: '#fff',
         borderRadius: 7,
         alignItems: 'center',
-        elevation: 5,
-        marginVertical: 10
+        marginVertical: 10,
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowRadius: 4,
+        shadowOpacity: 0.1,
     },
     textImage: {
-        fontFamily: 'AvenirNext-Regular',
+        paddingTop: 3,
+        fontFamily: 'AvenirNext-Medium',
         color: '#000',
-        fontSize: FONTSIZE.Text15,
-        fontWeight: 'bold',
-        paddingBottom: 10
+        fontSize: FONTSIZE.Text12,
+
     },
     fullInventoryTitleStyle: {
         fontFamily: 'AvenirNext-Regular',

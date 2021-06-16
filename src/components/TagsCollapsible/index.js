@@ -7,26 +7,44 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 AntDesign.loadFont();
 
 const TagsCollapsible = props => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   const RenderItems = (item, index) => {
+    let tagObj = Object.assign({}, props.Data);
+    delete tagObj.subTags;
+    let isPartySelected = props.isOnSelect({tagObj, item});
     return (
-      <View style={styles.itemView}>
-        <Text style={styles.itemTextStyle}>{item}</Text>
-      </View>
+      <TouchableOpacity
+        key={index}
+        onPress={() => {
+          props.onAdd({
+            tag: tagObj,
+            subTags: item,
+          });
+        }}>
+        <View
+          style={[
+            styles.itemView,
+            isPartySelected && {backgroundColor: 'rgba(0, 224, 143, 0.24)'},
+          ]}>
+          <Text style={styles.itemTextStyle}>
+            {item.emoji + ' ' + item.name}
+          </Text>
+        </View>
+      </TouchableOpacity>
     );
   };
   return (
-    <View style={styles.container}>
+    <View key={props.Data.id} style={styles.container}>
       <TouchableOpacity
         style={styles.heading}
         onPress={() => setIsVisible(s => !s)}>
         <AntDesign name={'down'} color={'#000'} size={15} />
-        <Text style={styles.headingTextStyle}>{props.name}</Text>
+        <Text style={styles.headingTextStyle}>{props.Data.name}</Text>
       </TouchableOpacity>
       <Collapsible collapsed={isVisible}>
         <View style={styles.collapsedContainer}>
-          {props.item.map(RenderItems)}
+          {props.Data.subTags?.map(RenderItems)}
         </View>
       </Collapsible>
     </View>
@@ -36,8 +54,8 @@ const styles = StyleSheet.create({
   container: {
     width: '90%',
     alignSelf: 'center',
-    backgroundColor: 'white',
-    marginBottom:10
+    backgroundColor: '#fff',
+    marginBottom: 10,
   },
   heading: {
     alignItems: 'center',
@@ -55,7 +73,6 @@ const styles = StyleSheet.create({
   collapsedContainer: {
     marginTop: 12,
     flexDirection: 'row',
-    justifyContent: 'space-between',
     flexWrap: 'wrap',
   },
   itemView: {
@@ -64,10 +81,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: getHp(15),
     borderRadius: 100,
+    marginHorizontal: 5,
+    marginVertical: 5,
   },
   itemTextStyle: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '500',
+    lineHeight: 28,
+    color: '#000',
   },
 });
 export default TagsCollapsible;

@@ -55,7 +55,11 @@ import {
     EventTabview,
     ThreeFooterButtons,
     SearchPageTab,
+    FeaturingPageTab,
 } from './BreakedComponents'
+import {
+    BlueCheck
+} from './BreakedComponents/smallui'
 
 import DropDown from './CustomDropdown/DropDown'
 import TagsCollapsible from './TagsCollapsible';
@@ -65,6 +69,8 @@ import Scaffold from './Scaffold';
 import PublicPrivateButton from './PublicPrivateButton';
 
 export {
+    FeaturingPageTab,
+    BlueCheck,
     SearchPageTab,
     Scaffold,
     ThreeFooterButtons,

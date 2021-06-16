@@ -62,10 +62,11 @@ import Cancel from './Cross.png'
 import David from './David.png'
 import Placeholderr from './Placeholderr.png'
 import Placeholder from './Placeholder.jpeg'
-
+import CoverPhoto from './CoverPhoto.png'
 
 
 export {
+    CoverPhoto,
     Placeholder,
     Placeholderr,
     David,

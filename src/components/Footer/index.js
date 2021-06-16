@@ -237,16 +237,7 @@ export default function Footer(props) {
 
 
 const styles = StyleSheet.create({
-    colored: {
-        backgroundColor: 'rgba(255, 46, 0, 0.2)',
-        marginVertical: 10,
-        borderRadius: 20,
-        width: getWp(100),
-        height: getHp(69),
-        alignItems: 'center',
-        justifyContent: 'center',
-        elevation: 2,
-    },
+  
     threeStyle: {
         flexDirection: 'row',
         borderTopWidth: 0.5,
@@ -298,8 +289,18 @@ const styles = StyleSheet.create({
         width: getWp(100),
         alignItems: 'center',
         justifyContent: 'center',
-        elevation: 2,
+        // elevation: 2,
         height: getHp(69),
+    },
+    colored: {
+        backgroundColor: 'rgba(255, 46, 0, 0.2)',
+        marginVertical: 10,
+        borderRadius: 20,
+        width: getWp(100),
+        height: getHp(69),
+        alignItems: 'center',
+        justifyContent: 'center',
+        // elevation: 2,
     },
     selectedFooterItem: {
         backgroundColor: "rgba(255, 46, 0, 0.24)",

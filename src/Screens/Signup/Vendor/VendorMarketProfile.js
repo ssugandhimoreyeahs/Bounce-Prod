@@ -185,7 +185,7 @@ export default function VendorMarketProfile(props) {
                     style={{ backgroundColor: '#fff', flex: 1 }} ref={scrollRef}  >
 
                     <Header
-                      headerBackColor={{ paddingBottom: 20, backgroundColor: 'rgba(238, 238, 238, 0.5)' }}
+                      headerBackColor={{ paddingBottom: 20, backgroundColor: '#F4F4F4' }}
                         back
                         headerTitle={`Create ${vendorType} Profile`}
                         onPress={() => props.navigation.goBack()}

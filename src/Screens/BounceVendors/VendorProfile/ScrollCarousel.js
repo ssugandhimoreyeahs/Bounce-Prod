@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { View, Text, Image, Dimensions, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Dimensions, StyleSheet, ScrollView } from 'react-native';
 import { DollarWhite, Food, Security, Video, Drinks } from '@assets';
 import { FONTSIZE, getHp, getWp } from '@utils'
 import { fetchVendorData } from "../../../reducer/mainexpensecategory";
@@ -11,10 +11,11 @@ import { observer } from 'mobx-react';
 import MobxStore from '../../../mobx'
 import { Scaffold } from '@components'
 import { Container, Header as NativeHeader, Content, Tab, Tabs } from 'native-base';
+import { Searchbar } from 'react-native-paper';
+import Back from 'react-native-vector-icons/Ionicons';
 
 
 const { width } = Dimensions.get("window");
-const height = width * 100 / 60;
 
 function ScrollCarousel(props) {
 
@@ -25,6 +26,8 @@ function ScrollCarousel(props) {
     const [getMedia, setMedia] = useState(null)
     const [selectedId, setSelectedId] = useState(null);
     const [getIndex, setIndex] = useState(0)
+    const [searchQuery, setSearchQuery] = React.useState('');
+    const onChangeSearch = query => setSearchQuery(query);
     const dispatch = useDispatch()
     const FooterRef = useRef([])
     const [allVendorsProfiles, setAllVendorsProfile] = useState([]);
@@ -91,6 +94,33 @@ function ScrollCarousel(props) {
 
     return (<Scaffold
         statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
+        <View style={{
+            flexDirection: 'row',
+            // height: 50,
+            paddingVertical:getHp(10),
+            borderBottomWidth: 2,
+            borderColor: '#F2F5F6',
+            backgroundColor: '#fff',
+            alignItems: 'center'
+        }}>
+            <TouchableOpacity
+                onPress={() => props.navigation.goBack()}>
+                <Back name="chevron-back" color={'#000'} style={{ marginRight: 20, marginLeft: 10 }} size={30} />
+            </TouchableOpacity>
+
+            <Searchbar
+                placeholder={"Search events"}
+                onChangeText={onChangeSearch}
+                value={searchQuery}
+                inputStyle={{
+                    fontSize: FONTSIZE.Text14,
+                    fontFamily: 'AvenirNext-Regular',
+                }}
+                style={styles.searchBarStyle}
+                iconColor={"#999999"}
+                placeholderTextColor={"#909090"}
+            />
+        </View>
         <Tabs
             onScroll={(event) => {
                 console.log("JSONEVE_checl - " + JSON.stringify(event));
@@ -98,11 +128,11 @@ function ScrollCarousel(props) {
                 if (!isTrue) {
                     return;
                 }
-               setTimeout(()=>{
-                setPage((i) => {
-                    return parseInt(JSON.stringify(event))
-                });
-               }, 100);
+                setTimeout(() => {
+                    setPage((i) => {
+                        return parseInt(JSON.stringify(event))
+                    });
+                }, 100);
             }}
             page={page}
             tabBarUnderlineStyle={{ height: 0 }}
@@ -139,7 +169,18 @@ function ScrollCarousel(props) {
     </Scaffold>
     );
 }
-
+const styles = StyleSheet.create({
+    searchBarStyle: {
+        elevation: 0,
+        // lineHeight: -41,
+        borderRadius: 9,
+        backgroundColor: '#F2F5F6',
+        height: getHp(50),
+        fontSize: FONTSIZE.Text16,
+        width: '80%',
+        alignSelf: 'center'
+    },
+})
 
 ScrollCarousel.routeName = "/ScrollCarousel";
 export default observer(ScrollCarousel)

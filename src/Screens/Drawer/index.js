@@ -147,6 +147,8 @@ function CustomDrawer({ navigation }) {
                     {
                       marginLeft: 40,
                       fontSize: FONTSIZE.Text18,
+                      fontFamily:'AvenirNext-Regular',
+                      opacity:0.8,
                       fontWeight: "normal",
                       color: "#696969",
                       color: uiStore.theme.colors.primaryText1
@@ -164,14 +166,16 @@ function CustomDrawer({ navigation }) {
   };
   return (
     <View style={styles.container}>
-      <View style={[styles.flex, { padding: 15 }]}>
-        <Text style={{ ...styles.heading, color: uiStore.theme.colors.primaryText1 }}>Settings</Text>
-        <BlackClose
-          hitSlop={bigHitSlop}
-          onPress={() => navigation.closeDrawer()}
-          height={20}
-          width={20}
-        />
+      <View style={[styles.flex, {padding: 15, marginTop: 20 }]}>
+        <Text style={{ ...styles.heading, color: uiStore.theme.colors.primaryText1 }}>{"Settings"}</Text>
+        <TouchableOpacity
+          onPress={() => {
+           navigation.closeDrawer();
+          }}
+          hitSlop={bigHitSlop}>
+          <BlackClose height={20} width={20} />
+        </TouchableOpacity>
+       
       </View>
       <FlatList
         data={SERVICES}

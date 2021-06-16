@@ -51,7 +51,6 @@ export default function Notifications() {
     return (
         <Root>
             <View style={styles.container}>
-
             <Text style={[styles.headingStyle,{color:'#999999'}]}>{"No notification's available."}</Text>
                 {/* <ModalPopup 
                 customModel

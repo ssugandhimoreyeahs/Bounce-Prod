@@ -27,10 +27,10 @@ export default function ProfilePic(props) {
   const dispatch = useDispatch();
   const [loader, setLoader] = useState(false);
 
-  const {name, username, password, birthday} = props.route.params;
+  const {name, username, password, birthday,age} = props.route.params;
   console.log('ProfilePic PROPS -->', props.route.params);
 
-  console.log(name, username, password, birthday);
+  console.log(name, username, password, birthday,age);
 
   const handleSubmit = async () => {
     try {
@@ -49,7 +49,8 @@ export default function ProfilePic(props) {
         formData.append('fullName', name);
         formData.append('username', username);
         formData.append('password', password);
-        // formData.append('birthday', birthday);
+        formData.append('birthday', birthday);
+        formData.append('age', age);
         formData.append('profileImageFile', imgObj);
         formData.append('vendorType', 2);
 
@@ -82,7 +83,7 @@ export default function ProfilePic(props) {
           maxWidth: 300,
           maxHeight: 300,
           mediaType: 'photo',
-          //cropping: true,
+          cropping: true,
         },
         image => {
           console.log(image);

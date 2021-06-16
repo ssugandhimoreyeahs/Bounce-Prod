@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
-import { View, StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native';
-import { QRCodes, Scaffold, SearchPageTab } from '@components';
-import { FONTSIZE, getHp, getWp } from '@utils';
-import { ChangeBlue } from '@svg'
+import React, {useState, useEffect, useCallback, useContext} from 'react';
+import {View, StyleSheet, FlatList, Text, TouchableOpacity} from 'react-native';
+import {QRCodes, Scaffold, SearchPageTab} from '@components';
+import {FONTSIZE, getHp, getWp} from '@utils';
+import {ChangeBlue} from '@svg';
 import Back from 'react-native-vector-icons/Ionicons';
 import { Searchbar } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
@@ -42,40 +42,42 @@ export default function DesignCanva(props) {
 
 
 
-    return (<Scaffold>
-        <View style={{ height: 50, borderBottomWidth: 2, borderColor: '#F2F5F6' }}>
-            <TouchableOpacity style={{ flexDirection: 'row', }}>
-                <Back name="chevron-back" color={'#000'} style={{ marginRight: 20, marginLeft: 10 }} size={30} />
-                <Searchbar
-                    placeholder={"Search events"}
-                    onChangeText={onChangeSearch}
-                    value={searchQuery}
-                    inputStyle={{
-                        fontSize: FONTSIZE.Text14,
-                        fontFamily: 'AvenirNext-Regular',
-                    }}
-                    style={styles.searchBarStyle}
-                    iconColor={"#999999"}
-                    placeholderTextColor={"#909090"}
-                />
+    return (<Scaffold statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
+        <View style={{ marginVertical: getHp(15), flexDirection: 'row', alignItems: 'center' }}>
+            <TouchableOpacity style={{}}>
+                <Back name="chevron-back" color={'#000'}
+                    style={{ marginRight: 20, marginLeft: 10 }}
+                    size={30} />
             </TouchableOpacity>
+            <Searchbar
+                placeholder={"Search events"}
+                onChangeText={onChangeSearch}
+                value={searchQuery}
+                
+                inputStyle={{
+                    fontSize: FONTSIZE.Text16,
+                    fontFamily: 'AvenirNext-Regular',
+                    
+                }}
+                style={styles.searchBarStyle}
+                iconColor={"#999999"}
+                placeholderTextColor={"#909090"}
+            />
         </View>
-
         <SearchPageTab {...props} />
-
-      
     </Scaffold>
-    )
-}
+  );
+};
 const styles = StyleSheet.create({
     searchBarStyle: {
         elevation: 0,
         borderRadius: 9,
         backgroundColor: '#F2F5F6',
-        height: getHp(32),
-        fontSize: FONTSIZE.Text14,
+        height: getHp(50),
+        // fontSize: FONTSIZE.Text14,
         width: '80%',
-        alignSelf: 'center'
+        // alignItems: 'center',
+        // alignSelf: 'center'
     },
     sliderStyle: {
         marginVertical: 20
@@ -132,13 +134,15 @@ const styles = StyleSheet.create({
     },
 });
 
-DesignCanva.routeName = '/DesignCanva'
+DesignCanva.routeName = '/DesignCanva';
 
-
-{/* <Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10, fontFamily: 'AvenirNext-Bold', fontSize: FONTSIZE.Text22 }]} >
+{
+  /* <Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10, fontFamily: 'AvenirNext-Bold', fontSize: FONTSIZE.Text22 }]} >
             {"Under Development"}
-        </Text> */}
-{/* <Header headerTitle={"Custom Invitation"}
+        </Text> */
+}
+{
+  /* <Header headerTitle={"Custom Invitation"}
             back
             onPress={() => navigation.goBack()}
         />
@@ -164,4 +168,5 @@ DesignCanva.routeName = '/DesignCanva'
                     {"Design with Canva"}
                 </Text>
             </TouchableOpacity>
-        </View> */}
+        </View> */
+}

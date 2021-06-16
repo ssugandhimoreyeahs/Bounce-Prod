@@ -15,15 +15,16 @@ const ModalDropDownComponent = (props) => {
         uniqueProp,
         onSelectItems = () => { },
         readOnly = false,
-        onDropDownPress = () => {  }
+        onDropDownPress = () => { },
+        custom = false
     } = props;
-    
+
     let [selectedItems, setselectedItems] = useState([...onInitialValue]);
     useEffect(() => {
         if (readOnly) {
             return;
-        } 
-        setselectedItems(() => ([...onInitialValue])); 
+        }
+        setselectedItems(() => ([...onInitialValue]));
     }, [onInitialValue]);
     const dropDownRef = useRef();
     const styles = ModalStyle();
@@ -48,17 +49,25 @@ const ModalDropDownComponent = (props) => {
         selectedValue = selectedValue + i[labelProp] + ', ';
     });
     selectedValue = selectedValue.slice(0, selectedValue.length - 2);
-    // console.log("IMP_1 - ", selectedItems);
+    // console.elev("IMP_1 - ", selectedItems);
     return (
-        <View style={{
-            elevation: 2,
-            backgroundColor: '#fff',
-            borderRadius: 9.5,
-            marginVertical: 10,
-            justifyContent:'center',
-            height: getHp(65),
-            marginBottom: 10
-        }}>
+        <View style={[
+            custom ?
+                {
+                    borderWidth: 0.5,
+                    borderColor: '#DDDDDD',
+                }
+                :
+                styles.shadowStyle,
+            {
+                // elevation: 2,
+                backgroundColor: '#fff',
+                borderRadius: 9.5,
+                marginVertical: 10,
+                justifyContent: 'center',
+                height: getHp(60),
+                marginBottom: 10
+            }]}>
             <ModalDropdown
                 ref={dropDownRef}
                 textStyle={styles.textStyle}
@@ -112,8 +121,8 @@ const ModalDropDownComponent = (props) => {
                 }}>
                 <Text style={{
                     color: '#000',
-                    marginLeft:12,
-                    opacity:0.8,
+                    marginLeft: 12,
+                    opacity: 0.8,
                     alignSelf: 'center',
                     fontSize: FONTSIZE.Text15
                 }}>

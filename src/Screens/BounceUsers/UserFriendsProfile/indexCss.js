@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
    buttonText: {
       fontSize: FONTSIZE.Text16,
       fontFamily: 'AvenirNext-Medium',
-      color: '#ffffff',
+      color: '#fff',
    },
    boxShadow: {
       shadowColor: '#EFEFEF',
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
       elevation: 2,
       borderRadius: 7,
       width: getWp(100),
-      height: getHp(26),
+      // height: getHp(26),
       backgroundColor: '#fff',
       justifyContent: 'center',
       alignItems: 'center'
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
       height: 56,
       elevation: 2,
       backgroundColor: '#fff',
-      marginVertical: 10,
+      // marginVertical:15 ,
       borderRadius: 20,
    },
    allFrnds: {
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
    },
    textStyle: {
       color: '#000',
-      fontSize: 18,
+      fontSize: FONTSIZE.Text18,
       fontFamily: 'AvenirNext-Regular',
    },
    belowTextStyle: {
@@ -213,8 +213,8 @@ const styles = StyleSheet.create({
    editButton: {
       color: '#1FAEF7',
       fontSize: FONTSIZE.Text14,
-      fontWeight: 'bold',
-      fontFamily: 'AvenirNext-Regular'
+      // fontWeight: 'bold',
+      fontFamily: 'AvenirNext-Medium'
    }
 })
 export {

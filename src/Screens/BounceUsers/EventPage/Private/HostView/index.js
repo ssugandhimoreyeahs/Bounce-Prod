@@ -36,6 +36,7 @@ import { styles } from './indexCss';
 import { FlatList } from 'react-native';
 import { render } from 'react-dom';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Scaffold } from '@components';
 
 
 const SIMILARDATA = [
@@ -98,7 +99,7 @@ export default function DjProfile(props) {
         )
     }
     return (
-        <Root>
+        <Scaffold  statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
             <KeyboardAwareScrollView>
                 <View style={styles.container}>
                     <ScrollView>
@@ -187,6 +188,6 @@ export default function DjProfile(props) {
 
                 </View>
             </KeyboardAwareScrollView>
-        </Root>
+        </Scaffold>
     )
 }

@@ -17,7 +17,11 @@ function GooglePlacesInput(props) {
       {
         custom ? (
           <TouchableOpacity style={[styles.ButtonStyle1]}>
-            <Text style={[styles.Title2Style]}>{floatingLabel}</Text>
+            <Text style={[styles.Title2Style, {
+
+            }]}>
+              {floatingLabel}
+            </Text>
             <GooglePlacesAutocomplete
               textInputProps={{ placeholderTextColor: '#000' }}
               placeholder={value}
@@ -32,9 +36,7 @@ function GooglePlacesInput(props) {
               istViewDisplayed={false}
               styles={{
                 textInputContainer: {
-                  backgroundColor: '#fff',
                   borderRadius: 17,
-
                 },
                 textInput: styles.text1,
                 predefinedPlacesDescription: {
@@ -44,14 +46,18 @@ function GooglePlacesInput(props) {
               query={{
                 key: 'AIzaSyC94iMpGS05cUQVCXQQt5PbSZapY597dPE',
                 language: 'en',
+                types: ['(cities)'],
               }}
             />
           </TouchableOpacity>
         )
           :
           (
-            <TouchableOpacity style={[styles.ButtonStyle]}>
-              <Text style={[styles.Title2Style]}>{floatingLabel}</Text>
+            <TouchableOpacity style={[styles.ButtonStyle,styles.shadowStyle]}>
+              <Text style={[styles.Title2Style,{
+                color:'#000',
+                fontFamily:'AvenirNext-Regular'
+              }]}>{floatingLabel}</Text>
               <GooglePlacesAutocomplete
                 textInputProps={{ placeholderTextColor: '#000' }}
                 placeholder={value}
@@ -123,8 +129,15 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     // marginVertical: 5,
   },
+  shadowStyle: {
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    shadowRadius: 5,
+    shadowOpacity: 0.1,
+    elevation:2,
+    },
   Title2Style: {
-    marginTop:3,
+    marginTop: 3,
     fontSize: FONTSIZE.Text14,
     fontFamily: 'AvenirNext-Medium',
     color: '#999999',

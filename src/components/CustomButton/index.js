@@ -3,7 +3,6 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Button} from 'react-native-elements';
 import {FONTSIZE, getHp, getWp} from '@utils';
 import LinearGradient from 'react-native-linear-gradient';
-import RadialGradient from 'react-native-radial-gradient';
 
 export default function CustomButton(props) {
   const {
@@ -293,7 +292,7 @@ const styles = StyleSheet.create({
     shadowColor: 'rgba(0, 0, 0, 0.1)',
     shadowOpacity: 0.3,
     elevation: 2,
-    shadowRadius: 15 ,
-    shadowOffset : { width: 1, height: 13},
+    shadowRadius: 15,
+    shadowOffset: {width: 1, height: 13},
   },
 });

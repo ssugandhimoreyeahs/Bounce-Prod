@@ -68,12 +68,19 @@ export default function VendorSignup(props) {
                 console.log("values res of pass", validateP);
                 Toast("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !");
 
-            } else
+            }
+            else if (picture == null) {
+                console.log("pciture null");
+                Toast("Please select the profile picture!");
+            }
+            else if (!(phone.length > 9)) {
+                console.log("Phone number");
+                Toast("Please Enter valid number!");
+            }
+            else
                 if (username.length > 0 &&
                     password.length > 0 &&
-                    email.length > 0 &&
-                    phone.length > 0 &&
-                    picture != null
+                    email.length > 0
                 ) {
                     console.log("1 st blockk");
                     setLoader(true)
@@ -88,8 +95,6 @@ export default function VendorSignup(props) {
                         console.log("1.2 blockk");
                         setLoader(false)
                         Toast(res.message);
-                        // Alert.alert(res.message)
-
                     }
                 } else {
                     console.log("2 blockk");
@@ -119,7 +124,7 @@ export default function VendorSignup(props) {
             contentContainerStyle={{ flexGrow: 1 }}
             style={{ backgroundColor: '#FBFBFB', flex: 1 }}>
             <Header
-                headerBackColor={{ paddingBottom: 20, backgroundColor: 'rgba(238, 238, 238, 0.5)' }}
+                headerBackColor={{ paddingBottom: 20, backgroundColor: '#F4F4F4' }}
                 back
                 headerTitle={`Create ${vendorType} Profile`}
                 onPress={() => props.navigation.goBack()}
@@ -128,9 +133,9 @@ export default function VendorSignup(props) {
 
                 {picture == null ?
                     <View style={{ padding: 0, marginVertical: getHp(60), justifyContent: 'center', alignItems: 'center' }}>
-                        <TouchableOpacity onPress={handleImage} style={{
+                        <TouchableOpacity onPress={handleImage} style={[styles.shadowStyle, {
                             alignItems: 'center'
-                        }}>
+                        }]}>
                             <View style={{
                                 borderRadius: 100,
                                 elevation: 10,
@@ -219,6 +224,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: -10,
         top: -10
+    },
+    shadowStyle: {
+        shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowRadius: 5,
+        shadowOpacity: 0.1,
+        elevation: 2,
     },
 
 })

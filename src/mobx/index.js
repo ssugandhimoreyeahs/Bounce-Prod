@@ -4,6 +4,7 @@ import AuthStore from './Stores/AuthStore';
 import AppStore from './Stores/AppStore';
 import UIStore from './Stores/UiStore';
 import PartyStore from './Stores/PartyStore';
+import TagStore from './Stores/TagStore';
 
 class MobxStore {
 
@@ -13,6 +14,7 @@ class MobxStore {
         this.appStore = new AppStore(this);
         this.uiStore = new UIStore(this);
         this.partyStore = new PartyStore(this);
+        this.tagStore = new TagStore(this);
     }
 }
 export default new MobxStore();

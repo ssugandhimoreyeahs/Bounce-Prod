@@ -180,6 +180,7 @@ function DJSignup(props) {
             setLoader(false);
             if (venderRegisterResponse.status == 201 || venderRegisterResponse.status == 200) {
                 Toast("Profile Updated Successfully!")
+                props.navigation.goBack()
                 authStore.async.reloadVendor();
             }
 
@@ -212,6 +213,7 @@ function DJSignup(props) {
                     <View style={{ paddingHorizontal: 10, paddingTop: 5 }}>
 
                         <FloatingInput
+                            custom
                             floatingLabel={"Business Name"}
                             onChange={(value) => setBusiness(value)}
                             value={business}
@@ -253,11 +255,13 @@ function DJSignup(props) {
 
 
                         <FloatingInput
+                            custom
                             floatingLabel={"Email"}
                             value={email}
                             onChange={(value) => setEmail(value)}
                         />
                         <FloatingInput
+                            custom
                             keyboardType={'numeric'}
                             floatingLabel={"Phone Number"}
                             onChange={(value) => setPhone(value)}
@@ -265,6 +269,7 @@ function DJSignup(props) {
                         />
 
                         <GooglePlacesInput
+                            custom
                             floatingLabel={"City"}
                             onPress={(data) => {
                                 setCity(data.description)
@@ -274,17 +279,20 @@ function DJSignup(props) {
                         />
 
                         <FloatingInput
+                            custom
                             keyboardType={'numeric'}
                             floatingLabel={"Starting Price"}
                             onChange={(value) => setPrice(value)}
                             value={`${price}`}
                         />
                         <FloatingInput
+                            custom
                             floatingLabel={"Website"}
                             onChange={(value) => setWebsite(value)}
                             value={website}
                         />
                         <CustomTextinput
+                            custom
                             text={"Description"}
                             multiline
                             onChange={(value) => setDescription(value)}
@@ -294,6 +302,7 @@ function DJSignup(props) {
                         {languageReduxObject?.length > 0 ?
                             <>
                                 <ModalDropDownComponent
+                                    custom
                                     onDropDownPress={() => {
 
                                         scrollRef.current.scrollToEnd({ animated: true });
@@ -361,6 +370,7 @@ function DJSignup(props) {
                                     : null}
 
                                 <FloatingInput
+                                    custom
                                     floatingLabel={"Armed"}
                                     onChange={(value) => setArmed(value)}
                                     value={armed}
@@ -371,6 +381,7 @@ function DJSignup(props) {
                         {vendorCategoryName == "Catering" ?
                             <>
                                 <FloatingInput
+                                    custom
                                     floatingLabel={"Cuisines"}
                                     onChange={(value) => setCuisines(value)}
                                     value={cuisines}

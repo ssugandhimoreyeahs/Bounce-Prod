@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { View, Text, StyleSheet,  ScrollView } from 'react-native'
-import { Header, Root, Checkbox, SignupDoubleButton, CustomButton, FloatingInput } from '@components'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import { Header, Root, Checkbox, Scaffold, CustomButton, FloatingInput } from '@components'
 import { Interested, Going, Arrived, CantGo, UploadCamera, DJ2 } from '@assets';
 import { Avatar } from 'react-native-elements'
 import axios from "axios";
@@ -27,58 +27,67 @@ export default function AccountSetting(props) {
             setUsername(value)
         }
     }
-    return (<Root>
+    return (<Scaffold
+        statusBarStyle={{ backgroundColor: '#FBFBFB' }}>
         <ScrollView
             keyboardShouldPersistTaps='always'
-            style={{ backgroundColor: '#fff' }}>
+            style={{ backgroundColor: '#FBFBFB' }}>
 
             <Header
+                headerBackColor={{ backgroundColor: '#FBFBFB', elevation: 0 }}
                 back
-                headerTitle={"Account Settings"}
+                headerStyleProp={{
+                    letterSpacing: 0.3,
+                    fontSize: FONTSIZE.Text24,
+                }}
+                headerTitle={"My Account"}
                 onPress={() => props.navigation.goBack()}
             />
 
             <View style={styles.container}>
                 <FloatingInput
+                    custom
                     floatingLabel={"Username"}
                     onChange={handleSpace}
                     value={username}
                 />
                 <FloatingInput
+                    custom
                     floatingLabel={"Phone Number"}
                     onChange={(value) => setPhone(value)}
                     value={phone}
                 />
                 <FloatingInput
+                    custom
                     floatingLabel={"Email"}
                     value={email}
                     onChange={(value) => setEmail(value)}
                 />
-                <View style={{ width: '70%', paddingVertical: getHp(20) }}>
+                {/* <View style={{ width: '70%', paddingVertical: getHp(20) }}>
                     <Text style={{
-                        fontSize: FONTSIZE.Text20, fontWeight:'bold', color: '#000', marginVertical: 10, fontFamily: 'AvenirNext-Regular',
+                        fontSize: FONTSIZE.Text20, fontWeight: 'bold', color: '#000', marginVertical: 10, fontFamily: 'AvenirNext-Regular',
                     }}>Invitaiton Notifications</Text>
                     <Text style={{
                         fontSize: FONTSIZE.Text17, color: '#696969', marginVertical: 0, fontFamily: 'AvenirNext-Regular', lineHeight: 24
-                    }}>How would you like to recieve event invitations? </Text>
+                    }}>{"How would you like to recieve event invitations? "}</Text>
                 </View>
                 <Checkbox
                     title={"Email"}
                 />
                 <Checkbox
                     title={"Text Message"}
-                />
+                /> */}
 
 
             </View>
         </ScrollView>
-    </Root>
+    </Scaffold>
     )
 }
 AccountSetting.routeName = "/AccountSetting";
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fff',
+        backgroundColor: '#FBFBFB',
         flex: 1,
         paddingHorizontal: 10
     },

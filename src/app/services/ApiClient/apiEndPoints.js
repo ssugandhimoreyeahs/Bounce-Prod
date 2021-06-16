@@ -23,6 +23,7 @@ class Endpoints extends Server {
   vendorCategory = '/Vendor/Category';
   vendorList = '/vendor'; 
   party = '/party';
+  tags = '/tags';
 }
 
 export default Object.freeze(new Endpoints());

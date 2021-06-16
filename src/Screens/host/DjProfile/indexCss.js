@@ -6,20 +6,27 @@ const { height, width } = Dimensions.get("screen")
 
 const styles = (theme) => {
    return StyleSheet.create({
+      shadowStyle: {
+         shadowColor: '#000',
+         shadowOffset: { width: 1, height: 1 },
+         shadowRadius: 5,
+         shadowOpacity: 0.1,
+         elevation: 2,
+      },
       partition: {
          marginVertical: 10,
          width: '100%',
-         height:0.8,
+         height: 0.8,
          backgroundColor: '#EBEBEB',
          alignSelf: 'center',
- 
-     },
+
+      },
       mediaText: {
          color: '#1FAEF7',
          fontSize: FONTSIZE.Text20,
          marginLeft: 5,
-         fontFamily: 'AvenirNext-Regular',
-         marginVertical:getHp(5)
+         fontFamily: 'AvenirNext-Medium',
+         marginVertical: getHp(5)
       },
       onlyFlex: {
          flexDirection: 'row',
@@ -80,7 +87,7 @@ const styles = (theme) => {
       subContainer: {
          paddingHorizontal: 0,
          paddingVertical: 5,
-         backgroundColor:'#FBFBFB'
+         backgroundColor: '#FBFBFB'
       },
       textStyle: {
          color: '#000',

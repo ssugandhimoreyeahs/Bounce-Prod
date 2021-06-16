@@ -15,7 +15,10 @@ import CreateInvitationTemplate from '../../Screens/BounceVendors/PlanParty/Crea
 import CallVendorProfile from '../../Screens/BounceVendors/VendorProfile/CallVendorProfile'
 import VendorProfile from '../../Screens/BounceVendors/VendorProfile'
 import ScrollCarousel from '../../Screens/BounceVendors/VendorProfile/ScrollCarousel'
-
+import PurchaseTickets from '../../Screens/BounceUsers/EventPage/Public/PurchaseTickets';
+import HostView from '../../Screens/MyEvents/HostView';
+import Featuring from '../../Screens/BounceUsers/EventPage/Public/Featuring'
+import PartyRental from '../../Screens/BounceVendors/PartyRentals'
 const UserRootStack = createStackNavigator();
 
 class UserNavigation {
@@ -54,6 +57,22 @@ class UserNavigation {
         <UserRootStack.Screen
           name={AccountSetting.routeName}
           component={AccountSetting}
+        />
+        <UserRootStack.Screen
+          name={PurchaseTickets.routeName}
+          component={PurchaseTickets}
+        />
+        <UserRootStack.Screen
+          name={HostView.routeName}
+          component={HostView}
+        />
+        <UserRootStack.Screen
+          name={Featuring.routeName}
+          component={Featuring}
+        />
+        <UserRootStack.Screen
+          name={PartyRental.routeName}
+          component={PartyRental}
         />
         <UserRootStack.Screen
           name={CreateInvitation.routeName}

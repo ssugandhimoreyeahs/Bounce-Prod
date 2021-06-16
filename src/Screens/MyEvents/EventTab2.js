@@ -36,7 +36,7 @@ export default function EventTab2() {
                         <Avatar source={item.image} size={40} rounded />
                         <View style={{ marginLeft: 20 }}>
                             <Text style={{ color: '#000', fontFamily: 'AvenirNext-Medium', fontSize: FONTSIZE.Text16 }}>{item.name}</Text>
-                            <Text style={{ color: '#999999', fontFamily: 'AvenirNext-Medium', fontSize: FONTSIZE.Text16 }}>{item.name}</Text>
+                            <Text style={{ color: '#999999', fontFamily: 'AvenirNext-Medium', fontSize: FONTSIZE.Text14 }}>{item.name}</Text>
                         </View>
                     </View>
 

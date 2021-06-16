@@ -8,6 +8,8 @@ import {
     WhiteDownload,
     WhiteParty,
 } from '@assets'
+import { FONTSIZE } from '@utils'
+
 const MESSAGESTACK = [{
     icon: Girl,
     name: "David Poura",
@@ -37,30 +39,35 @@ const REVIEWSTACK = [{
 ]
 export default function Notifications() {
     return (
-        <Root>
-            <View style={styles.container}>
-                <ScrollView>
-                    <Header
-                        headerTitle={"Notifications"}
-                    />
-                    <Text style={styles.headingStyle}>Messages</Text>
-                    <BlueCard
-                        MESSAGESTACK={MESSAGESTACK}
+        <View style={styles.container}>
+            <Text style={[styles.headingStyle, { color: '#000' }]}>
+                {"No notification's available."}
+            </Text>
+        </View>
+        // <Root>
+        //     <View style={styles.container}>
+        //         <ScrollView>
+        //             <Header
+        //                 headerTitle={"Notifications"}
+        //             />
+        //             <Text style={styles.headingStyle}>Messages</Text>
+        //             <BlueCard
+        //                 MESSAGESTACK={MESSAGESTACK}
 
-                    />
-                    <Text style={styles.headingStyle}>Reviews</Text>
-                    <BlackCard
-                        REVIEWSTACK={REVIEWSTACK}
+        //             />
+        //             <Text style={styles.headingStyle}>Reviews</Text>
+        //             <BlackCard
+        //                 REVIEWSTACK={REVIEWSTACK}
 
-                    />
-                   
+        //             />
 
-                </ScrollView>
-                {/* <Footer
-                    notification
-                /> */}
-            </View>
-        </Root>
+
+        //         </ScrollView>
+        //         {/* <Footer
+        //             notification
+        //         /> */}
+        //     </View>
+        // </Root>
     )
 }
 
@@ -68,10 +75,11 @@ Notifications.routeName = "/BENotification";
 const styles = StyleSheet.create({
     headingStyle: {
         color: '#000',
-        fontSize: 20,
-        fontWeight: 'bold',
-        paddingLeft: 20,
-        paddingTop: 8
+        fontSize: FONTSIZE.Text20,
+        fontFamily: 'AvenirNext-Regular'
+        // fontWeight: 'bold',
+        // paddingLeft: 20,
+        // paddingTop: 8
     },
 
     blueNotificationCard: {
@@ -97,8 +105,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     container: {
+        justifyContent: 'center',
+        alignItems: 'center',
         flex: 1,
-        backgroundColor: '#ECF1F4'
+        backgroundColor: '#FBFBFB'
     },
     name: {
         color: "#FFFFFF",

@@ -59,34 +59,57 @@ function Tab1(props) {
             avatarStyle={{ borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }}
           />
 
-          <View style={[
-            styles.textStyle,
-            {
-              position: 'absolute',
-              bottom: 0,
-              backgroundColor: item.isPrivate ? '#F8A41E' : '#1FAEF7',
-              borderBottomLeftRadius: 10,
-              borderTopRightRadius: 3,
-              padding: 5,
-            },
-          ]}>
-            {item.isDraft ? (
-              <Text style={{
-                color: '#fff',
-                fontFamily: 'AvenirNext-Medium',
-                fontSize: FONTSIZE.Text13
-              }}>{'Draft'}</Text>
-            )
+
+          {
+            item.isDraft ?
+              <View style={[
+                styles.textStyle,
+                {
+                  position: 'absolute',
+                  bottom: 0,
+                  backgroundColor: '#F8A41E',
+                  borderBottomLeftRadius: 10,
+                  borderTopRightRadius: 3,
+                  paddingHorizontal: 5,
+                  paddingVertical: 2
+                },
+              ]}>
+                {item.isDraft && (
+                  <Text style={{
+                    color: '#fff',
+                    fontFamily: 'AvenirNext-Medium',
+                    fontSize: FONTSIZE.Text13
+                  }}>{'Draft'}</Text>
+                )
+                }
+              </View>
               :
-              (
-                <Text style={{
-                  color: '#fff',
-                  fontFamily: 'AvenirNext-Medium',
-                  fontSize: FONTSIZE.Text13
-                }}>{'Private'}</Text>
-              )
-            }
-          </View>
+              (item.isPrivate && <View style={[
+                styles.textStyle,
+                {
+                  position: 'absolute',
+                  bottom: 0,
+                  backgroundColor: '#1FAEF7',
+                  borderBottomLeftRadius: 10,
+                  borderTopRightRadius: 3,
+                  paddingHorizontal: 5,
+                  paddingVertical: 2
+                },
+              ]}>
+                {item.isPrivate &&
+                  (
+                    <Text style={{
+                      color: '#fff',
+                      fontFamily: 'AvenirNext-Medium',
+                      fontSize: FONTSIZE.Text13
+                    }}>{'Private'}</Text>
+                  )
+                }
+              </View>)
+
+
+          }
+
 
           <View style={{ marginLeft: 10, flex: 1, paddingVertical: 5 }}>
             <Text
@@ -172,21 +195,21 @@ function Tab1(props) {
             keyExtractor={index => index}
           />
           {partyData.length > 2 && (
-            <View style={{ backgroundColor: '#FBFBFB' }}>
+            <View style={{ backgroundColor: '#FBFBFB', paddingBottom: 10 }}>
               <Button
                 onPress={() => {
                   setShowMore(i => !i);
                 }}
                 full
                 light
-                style={styles.showMoreButtonContainer}>
-                <Text style={styles.showMoreTextStyle}>
+                style={[styles.showMoreButtonContainer, { elevation: 0 }]}>
+                <Text style={[styles.showMoreTextStyle, { fontFamily: 'AvenirNext-Medium', letterSpacing: 0.2 }]}>
                   {!showMore ? `${partyData.length - 2} More` : `Hide`}
                 </Text>
                 <View style={{ marginStart: getHp(10) }}>
                   <AntDesign
                     color={'black'}
-                    size={getHp(15)}
+                    size={getHp(16)}
                     name={!showMore ? 'down' : 'up'}
                   />
                 </View>
@@ -220,6 +243,7 @@ function Tab1(props) {
 }
 const styles = StyleSheet.create({
   showMoreButtonContainer: {
+    // alignItems:'center',
     marginHorizontal: 10,
     flexDirection: 'row',
     marginTop: getHp(16),
@@ -231,7 +255,6 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: getHp(10),
   },
   showMoreTextStyle: {
-    fontWeight: '500',
     fontFamily: 'AvenirNext-Regular',
     fontSize: FONTSIZE.Text16,
     lineHeight: getHp(22),

@@ -350,20 +350,21 @@ export const SwitchButton = (props) => {
 
     }
     return (
-        <View style={styles.doubleButton}>
+        <View style={[styles.doubleButton, { flex: 1 }]}>
             <LinearGradient
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 colors={value ? ['#3CBDFF', '#6FD0FF'] : ['#F3F3F3', '#F3F3F3']}
                 style={[
                     styles.linearGradient,
+
                     value ? onValues : offValues, {
                         borderTopLeftRadius: 13,
                         borderBottomLeftRadius: 13
                     }
                 ]}>
                 <TouchableOpacity
-                    style={[]}
+                    style={[{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }]}
                     onPress={() => onPrivatePress()}>
                     <Text style={[styles.TitleStyle, value ?
                         {
@@ -392,7 +393,7 @@ export const SwitchButton = (props) => {
                         borderBottomRightRadius: 13
                     }
                 ]}>
-                <TouchableOpacity style={{}}
+                <TouchableOpacity style={[{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }]}
                     onPress={() => onPublicPress()}>
                     <Text style={[styles.TitleStyle, !value ? {
                         color: '#fff',

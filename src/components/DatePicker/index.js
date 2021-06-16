@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, TextInput, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {FONTSIZE} from '@utils';
+import { FONTSIZE } from '@utils';
 import moment from 'moment';
 
-export default DatePicker = ({birthday, setBirthday, tillToday}) => {
+export default DatePicker = ({ birthday, setBirthday, tillToday }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -19,6 +19,9 @@ export default DatePicker = ({birthday, setBirthday, tillToday}) => {
     hideDatePicker();
   };
 
+  
+  
+
   return (
     <View>
       <TouchableOpacity onPress={showDatePicker}>
@@ -31,7 +34,7 @@ export default DatePicker = ({birthday, setBirthday, tillToday}) => {
           value={`${birthday}`}
         />
       </TouchableOpacity>
-      {/* {showDatePicker} */}
+   
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
@@ -43,11 +46,11 @@ export default DatePicker = ({birthday, setBirthday, tillToday}) => {
   );
 };
 const styles = StyleSheet.create({
-    textInput: {
-        borderBottomColor: '#EEEEEE',
-        borderBottomWidth: 2,
-        fontSize: FONTSIZE.Text22,
-        fontFamily: 'AvenirNext-Medium',
-        color: '#000'
-    },
+  textInput: {
+    borderBottomColor: '#EEEEEE',
+    borderBottomWidth: 2,
+    fontSize: FONTSIZE.Text22,
+    fontFamily: 'AvenirNext-Medium',
+    color: '#000'
+  },
 })

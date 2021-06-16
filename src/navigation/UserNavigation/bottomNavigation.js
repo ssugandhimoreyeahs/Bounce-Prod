@@ -22,6 +22,8 @@ import CreateInvitation from '../../Screens/BounceVendors/PlanParty/CreateInvita
 import MobxStore from '../../mobx';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FONTSIZE, getHp } from '../../app/utils';
+import BENotification from '../../Screens/BounceUsers/Notifications/Before/Notifications';
+import HostProfile from '../../Screens/BounceUsers/HostProfile/HostProfile';
 
 const UserHomeBottomTab = createBottomTabNavigator();
 
@@ -114,8 +116,8 @@ class UserHomeBottomNavigation {
                 );
             },
           }}
-          name={'Home'}
-          component={() => { return null; }}
+          name={BENotification.routeName}
+          component={BENotification}
         />
 
         {/* User profile image will come here */}
@@ -154,8 +156,8 @@ class UserHomeBottomNavigation {
                 );
             },
           }}
-          name={'Temp'}
-          component={() => { return null; }}
+          name={HostProfile.routeName}
+          component={HostProfile}
         />
       </UserHomeBottomTab.Navigator>
     );

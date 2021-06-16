@@ -5,9 +5,9 @@ export const styles = StyleSheet.create({
     shadowStyle: {
         shadowColor: '#000',
         shadowOffset: { width: 1, height: 1 },
-        shadowRadius: 2,
+        shadowRadius: 5,
         shadowOpacity: 0.1,
-        elevation:2,
+    
         },
     bottomContainer: {
         height: getHp(62),

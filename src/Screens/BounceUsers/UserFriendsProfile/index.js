@@ -61,6 +61,12 @@ import spotifyToken from '../../../app/SDK/Spotify/spotify_token';
 
 import RNCalendarEvents from 'react-native-calendar-events';
 
+Text.defaultProps = {
+  allowFontScaling: false,
+  fontScale: 1
+}
+
+
 const ACCOUNTS = [
   {
     id: '0',
@@ -123,10 +129,12 @@ function UserFriendsProfile(props) {
     username,
     fullName,
     city,
+    about,
+    profession,
     snapchatUsername,
     instagramUsername,
-    about,
     profileImage = {},
+    age,
   } = userinfo?.user;
 
   console.log('userinfo', userinfo);
@@ -333,6 +341,7 @@ function UserFriendsProfile(props) {
                     </TouchableOpacity>
                   </View>
                 </View>
+
               </View>
 
               <View

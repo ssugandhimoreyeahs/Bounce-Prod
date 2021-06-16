@@ -81,9 +81,9 @@ export default function PartyRental() {
                         </View>
                     </View>
 
-                    <View style={[styles.mapStyle, styles.shadowStyle, { alignItems: 'center', marginVertical: 10, justifyContent: 'space-between', flexDirection: 'row' }]}>
+                    <View style={[styles.mapStyle, styles.shadowStyle, { alignItems: 'center', marginVertical: 10, justifyContent: 'center', flexDirection: 'row' }]}>
                         <DirectionBlue height={getHp(24)} width={getWp(24)} />
-                        <Text style={[styles.mapText, { marginLeft: 25, textDecorationLine: 'underline' }]}>{item.location}</Text>
+                        <Text style={[styles.mapText, { marginLeft: 15, textDecorationLine: 'underline' }]}>{item.location}</Text>
                     </View>
 
                     <View style={[styles.mapStyle, styles.shadowStyle, { alignItems: 'center', justifyContent: 'center', marginVertical: 5 }]}>

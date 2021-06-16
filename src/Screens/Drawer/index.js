@@ -26,6 +26,7 @@ import Themes from '../../app/themes';
 import { shareFunction } from '@components'
 import EditVendorProfile from '../BounceVendors/EditProfile';
 import { useTheme } from '@hooks';
+import AboutUs from '../Views/About/AboutUs';
 
 function CustomDrawer({ navigation }) {
   const theme = useTheme();
@@ -89,7 +90,7 @@ function CustomDrawer({ navigation }) {
     // },
     {
       name: "About",
-      // onPress: () => navigation.navigate("LoginScreen")
+      onPress: () => navigation.navigate(AboutUs.routeName),
     },
     {
       name: "Log Out",

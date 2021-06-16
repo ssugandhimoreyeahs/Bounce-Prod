@@ -14,6 +14,7 @@ import {
   CustomButton,
   Root,
   GooglePlacesInput,
+  Header
 } from '@components';
 import { Avatar } from 'react-native-elements';
 import {
@@ -43,7 +44,7 @@ import { Toast } from '@constants';
 
 
 export default function HostProfile(props) {
-
+  console.log("PROPS -> ", props);
   const { userProfile: userinfo } = MobxStore.authStore;
   const [loader, setLoader] = useState(false);
   const [fullName, setFullname] = useState('');
@@ -140,45 +141,49 @@ export default function HostProfile(props) {
 
     console.log('TOKEN', token);
 
-    const SERVER_RESPONSE = await ApiClient.authInstance
+    await ApiClient.authInstance
       .post(ApiClient.endPoints.postUser, formData)
       .then(async i => {
         //await fetchProfile();
         MobxStore.authStore.async.reloadUser();
         console.log(i);
-        setLoader(false);
+        if (i.status == 201 || i.status == 200) {
+          setLoader(false);
+          setTimeout(() => {
+            Toast('Profile Updated Successfully!');
+            props.navigation.goBack();
+          }, 100);
+        }
+
       })
       .catch(e => {
         console.log(e);
         setLoader(false);
       });
 
-    console.log('SERVER_RESPONSE', SERVER_RESPONSE);
-    // console.log('PROFILE_SERVER_RESPONSE', SERVER_RESPONSE);
-    let StringifyData = await JSON.stringify(SERVER_RESPONSE.data);
-    console.log('parsedData', JSON.parse(StringifyData));
 
-    let ParsedData = await JSON.parse(StringifyData);
-    console.log('PROFILE_ACCESS_TOKEN', ParsedData.accessToken);
 
-    if (SERVER_RESPONSE.status == 201 || SERVER_RESPONSE.status == 200) {
-      props.navigation.goBack();
-      // setTimeout(() => {
-      Toast('Profile Updated Successfully!');
-      // }, 100);
-    }
+
     setLoader(false);
   };
 
   return (
     <Scaffold
-      statusBarStyle={{ backgroundColor: '#FBFBFB' }}>
+      statusBarStyle={{ backgroundColor: '#fff' }}>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
         <ScrollView
           // keyboardShouldPersistTaps='always'
           style={{ backgroundColor: '#FBFBFB', flex: 1 }}
           contentContainerStyle={{ flexGrow: 1 }}>
+          <Header
+            back
+            headerTitle={"Host Profile"}
+            onPress={() => {
+              props.navigation.goBack();
+            }}
+            headerBackColor={{ backgroundColor: '#fff' }}
+          />
           {picture == null ? (
             <TouchableOpacity
               onPress={handleImage}
@@ -532,7 +537,7 @@ export default function HostProfile(props) {
 
 
 
-          <View style={{ paddingHorizontal: getWp(10) }}>
+          <View style={{ paddingHorizontal: getWp(10), paddingBottom: 50 }}>
             <CustomButton
               complete
               bar

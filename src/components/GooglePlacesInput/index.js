@@ -29,6 +29,7 @@ function GooglePlacesInput(props) {
                 'locality',
                 'administrative_area_level_3',
               ]}
+              
               onPress={onPress}
               minLength={2}
               renderDescription={row => row.description}
@@ -37,6 +38,7 @@ function GooglePlacesInput(props) {
               styles={{
                 textInputContainer: {
                   borderRadius: 17,
+                  
                 },
                 textInput: styles.text1,
                 predefinedPlacesDescription: {

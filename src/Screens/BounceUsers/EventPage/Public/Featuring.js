@@ -5,7 +5,8 @@ import {
     FlatList,
     Text,
     TouchableOpacity,
-    SafeAreaView
+    SafeAreaView,
+    ScrollView
 } from 'react-native';
 import {
     BlueCheck,
@@ -75,21 +76,20 @@ export default function Featuring(props) {
     }
     return (<Scaffold
         statusBarStyle={{ backgroundColor: '#fff' }}>
+        <ScrollView style={{ backgroundColor: '#FBFBFB', flex: 1 }}>
 
-        <Header headerTitle={"Adelson School Gala"}
-            headerStyleProp={{
-                fontFamily: 'AvenirNext-DemiBold',
-                fontSize: FONTSIZE.Text24,
+            <Header headerTitle={"Adelson School Gala"}
+                headerStyleProp={{
+                    fontFamily: 'AvenirNext-DemiBold',
+                    fontSize: FONTSIZE.Text24,
 
-            }}
-            headerBackColor={{ backgroundColor: '#FFFFFF' }}
-            back
-            onPress={() => props.navigation.goBack()}
-        />
-
-        <FeaturingPageTab />
-
-
+                }}
+                headerBackColor={{ backgroundColor: '#FFFFFF' }}
+                back
+                onPress={() => props.navigation.goBack()}
+            />
+            <FeaturingPageTab />
+        </ScrollView>
     </Scaffold>
     )
 }

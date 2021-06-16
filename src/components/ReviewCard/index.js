@@ -18,9 +18,9 @@ export default function ReviewCard(props) {
         <View style={[styles.container, styleProp]}>
             <View style={styles.reviewHeading}>
                 <Text style={styles.reviewsTitleStyle} >{"Reviews"}</Text>
-
             </View>
-            <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center', marginVertical: 40 }}>
+
+            <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center', height:200 }}>
                 <Text style={{ fontSize: FONTSIZE.Text16, color: '#696969' }} >{"No review's available."}</Text>
             </View>
 

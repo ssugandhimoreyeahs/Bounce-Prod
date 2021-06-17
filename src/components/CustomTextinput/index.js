@@ -48,7 +48,7 @@ export default CustomTextinput = props => {
           :
           createEvent ?
             (
-              <View style={[styles.container,{height:getHp(110),borderRadius:13}]}>
+              <View style={[styles.container,{height:getHp(140),borderRadius:13}]}>
                 <Text
                   style={{
                     color: '#696969',
@@ -66,9 +66,11 @@ export default CustomTextinput = props => {
                   onChangeText={onChange}
                   style={{
                     marginTop: getHp(3),
-                    height: getHp(110),
+                    height: getHp(90),
                     textAlignVertical: 'top',
                     color: 'black',
+                    backgroundColor:'#fff',
+                    borderRadius:13,
                     fontFamily: 'AvenirNext-DemiBold',
                     fontWeight: 'bold',
                     fontSize: FONTSIZE.Text17,

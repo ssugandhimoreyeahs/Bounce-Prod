@@ -184,8 +184,9 @@ export default function ProfilePic(props) {
                           width={getHp(69)}
                           style={{
                             position: 'absolute',
+                            alignSelf:'center',
                             bottom: -30,
-                            left: 75,
+                            // left: 75,
                             resizeMode: 'contain',
                           }}
                         />

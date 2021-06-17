@@ -37,18 +37,21 @@ function LoginScreen(props) {
 
   const dispatch = useDispatch();
   const { authStore } = MobxStore;
+
+
   const handleUserLogin = async () => {
     try {
+
       const loginResponse = await authStore.async.login(username, password);
     } catch (error) {
-      console.log('ERROR_Login - ', error);
-      let errorMsg = 'Something went wrong!';
-      if (error.message) {
-        errorMsg = error.message;
-      }
-      return Alert.alert('Message', errorMsg);
+      console.log('ERROR_Login - ', error.response.data);
+
+      let errorMsg = error?.response?.data?.message ?? 'Something went wrong!';
+      Toast(errorMsg)
+      // return Alert.alert('Message', errorMsg);
     }
   };
+
 
   const animateBall = () => {
     Animated.timing(animated.ballAnimation, {
@@ -68,7 +71,9 @@ function LoginScreen(props) {
     <Scaffold>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
-        <KeyboardAwareScrollView style={{ flex: 1, backgroundColor: '#FBFBFB' }}>
+        <KeyboardAwareScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ flex: 1, backgroundColor: '#FBFBFB' }}>
           <View style={styles.container}>
             <View style={{ alignItems: 'center', marginVertical: 50 }}>
               <BounceSplash
@@ -79,33 +84,39 @@ function LoginScreen(props) {
             </View>
 
             <Text style={styles.signStyle}>{'Sign In'}</Text>
-            <TextInput
-              returnKeyType="done"
-              placeholder="Username"
-              placeholderTextColor="#999"
-              style={[styles.textInput, {paddingBottom: getHp(10)}]}
-              onChangeText={value => {
-                if (value.length == 0) {
-                  animated.ballAnimation.setValue(-25);
-                }
-                setUsername(value);
-                animateBall();
-              }}
-            />
+            <View style={[styles.textInput, { justifyContent: 'space-between' }]}>
+              <TextInput
+                returnKeyType="done"
+                placeholderTextColor={"#999999"}
+                placeholder="Username"
+                style={{ fontSize: FONTSIZE.Text16, letterSpacing: 0.1, width: '60%' }}
+                onChangeText={value => {
+                  if (value.length == 0) {
+                    animated.ballAnimation.setValue(-25);
+                  }
+                  setUsername(value);
+                  animateBall();
+                }}
+              />
+              <Text style={[{ fontSize: FONTSIZE.Text12, marginRight: 10, fontFamily: 'AvenirNext-Regular', color: '#1FAEF7' }]}>
+                {'Forgot Username'}
+              </Text>
+            </View>
+
 
             {username.length >= 1 ? (
               <Animated.View style={[ballAnimation]}>
-                <View style={[styles.textInput,{justifyContent:'space-between'}]}>
+                <View style={[styles.textInput, { justifyContent: 'space-between' }]}>
                   <TextInput
                     placeholderTextColor={"#999999"}
                     returnKeyType="done"
                     placeholder="Password"
-                    style={{ width: '70%', fontSize: FONTSIZE.Text16, letterSpacing: 0.1 }}
+                    style={{ width: '70%',fontFamily: 'AvenirNext-Regular', fontSize: FONTSIZE.Text16,  width: '60%' }}
                     // multiline={true}
                     onChangeText={value => setPassword(value)}
                     secureTextEntry
                   />
-                  <Text style={[{ fontSize: FONTSIZE.Text12,marginRight:10,  fontFamily: 'AvenirNext-Regular', color: '#1FAEF7' }]}>
+                  <Text style={[{ fontSize: FONTSIZE.Text12, marginRight: 10, fontFamily: 'AvenirNext-Regular', color: '#1FAEF7' }]}>
                     {'Forgot Password'}
                   </Text>
                 </View>
@@ -127,21 +138,20 @@ function LoginScreen(props) {
 
             <View style={styles.CardContainer}>
               <TouchableOpacity
-                onPress={() => props.navigation.navigate(HostView.routeName)}
                 style={[styles.Card, styles.boxShadow]}>
                 <Insta height={30} width={30} style={{ margin: 10 }} />
                 <Text style={styles.ThirdParty}>{'Instagram'}</Text>
               </TouchableOpacity>
 
-              <View style={[styles.Card, styles.boxShadow]}>
+              <TouchableOpacity style={[styles.Card, styles.boxShadow]}>
                 <Apple height={30} width={30} style={{ margin: 10 }} />
                 <Text style={styles.ThirdParty}>{'Apple'}</Text>
-              </View>
+              </TouchableOpacity>
 
-              <View style={[styles.Card, styles.boxShadow]}>
+              <TouchableOpacity style={[styles.Card, styles.boxShadow]}>
                 <Google height={30} width={30} style={{ margin: 10 }} />
                 <Text style={styles.ThirdParty}>{'Google'}</Text>
-              </View>
+              </TouchableOpacity>
             </View>
 
             <View
@@ -185,11 +195,11 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   boxShadow: {
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
-    shadowOpacity: 0.3,
-    elevation: 2,
-    shadowRadius: 15 ,
-    shadowOffset : { width: 1, height: 13},
+    shadowColor: '#EFEFEF',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 5,
+    shadowRadius: 10,
+    elevation: 1,
   },
   Line: {
     flex: 1,
@@ -219,12 +229,13 @@ const styles = StyleSheet.create({
   linearGradient: {
     justifyContent: 'center',
     height: 50,
+    elevation: 1,
     backgroundColor: '#fff',
     marginVertical: 10,
     borderRadius: 20,
   },
   container: {
-    backgroundColor:'#FBFBFB',
+    // backgroundColor:'#fff',
     flex: 1,
     padding: 15,
     flexDirection: 'column',

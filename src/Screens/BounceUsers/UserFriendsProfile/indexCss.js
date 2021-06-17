@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
    textImage: {
       color: '#000',
    },
-   Tiktok: {
-      marginLeft: 10,
-      fontFamily: 'AvenirNext-Bold',
-      color: '#000',
-      width: '100%'
+   TiktokStyle: {
+      marginLeft: 5,
+      fontFamily: 'AvenirNext-DemiBold',
+      // color: '#000',
+   // height:getHp(36)
    },
    dot: {
       backgroundColor: '#999999',
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
    },
    socialButton: {
       width: '90%',
-      height: 50,
-      elevation: 1,
+      height: getHp(50),
+      // elevation: 1,
       borderRadius: 13,
       paddingHorizontal: 10,
       backgroundColor: '#fff',
@@ -146,10 +146,14 @@ const styles = StyleSheet.create({
    },
    headerTitle: {
       color: '#000',
-      fontSize: 18,
-      // opacity: 0.5,
-      // marginBottom: 5,
+      fontSize: FONTSIZE.Text18,
       fontFamily: 'AvenirNext-Medium',
+   },
+   socialText: {
+      color: '#000',
+      marginLeft: 10,
+      fontFamily: 'AvenirNext-Medium',
+      fontSize: FONTSIZE.Text16
    },
    BasePackageTitle: {
       color: '#000',

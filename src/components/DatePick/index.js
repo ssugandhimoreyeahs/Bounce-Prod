@@ -71,16 +71,51 @@ export default DatePicker = props => {
     <View style={styles.shadowStyle}>
 
       <TouchableOpacity onPress={showDatePicker}>
-        <TextInput
-          pointerEvents="none"
-          placeholder={placeholder}
-          placeholderTextColor="#999999"
-          style={[
-            styles.textInput,
-            errorMessage.length > 0 && {borderColor: 'red'},
-          ]}
-          value={getValue()}
-          editable={false}></TextInput>
+        {createEvent ?
+          <>
+            <Text style={{
+              color: '#696969',
+              fontSize: FONTSIZE.Text14,
+              fontFamily: 'AvenirNext-Regular',
+              position: 'absolute',
+              left: 15,
+              zIndex: 1,
+              top: 5,
+              borderRadius: 9.5
+            }}>{placeholder}</Text>
+            <TextInput
+              pointerEvents="none"
+              textAlignVertical='bottom'
+              
+              style={[
+                styles.textInput, {
+                  
+                  elevation:0,
+                  marginTop: 5,
+                  backgroundColor: '#fff',
+                  fontFamily: 'AvenirNext-DemiBold',
+                },
+                errorMessage.length > 0 && {
+                  borderColor: 'red',
+                },
+              ]}
+              value={getValue()}
+              editable={false} />
+          </>
+          :
+          <TextInput
+            pointerEvents="none"
+            placeholderTextColor={'#000'}
+            placeholder={placeholder}
+            style={[
+              styles.textInput,
+              errorMessage.length > 0 && { borderColor: 'red' },
+            ]}
+            value={getValue()}
+            editable={false} />
+        }
+
+
         {errorMessage?.length > 0 && (
           <View style={styles.errorContainer}>
             <Text style={styles.errorTextStyle}>{errorMessage}</Text>
@@ -120,7 +155,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: FONTSIZE.Text15,
     color: '#000',
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowColor: 'rgba(0, 0, 0, 0.2)',
     shadowOpacity: 0.2,
     elevation: 2,
     shadowRadius: 15,

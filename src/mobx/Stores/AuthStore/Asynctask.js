@@ -13,21 +13,26 @@ class Asynctask {
   fetchProfile = async () => {
     try {
       const data = await LocalStorage.getToken();
+      console.log("TOKEN_HERE_BEFORE_FP - ", data);
       const body = data != undefined && data !== null && JSON.parse(data);
       let userLoginResponse = await ApiClient.instance.post(
         ApiClient.endPoints.postUserLogin,
         body,
       );
+      console.log("RESP_REC_HERE - ", userLoginResponse.data);
       runInAction(() => {
-        this.authStore.userProfile = userLoginResponse;
+        this.authStore.userProfile = userLoginResponse.data;
         this.authStore.isAuthenticated = true;
       });
-      return Promise.resolve(userLoginResponse);
+      return Promise.resolve(userLoginResponse.data);
     } catch (error) {
       return Promise.reject(error);
     }
   };
+
+
   login = async (username, password, showLoader = true) => {
+  
     try {
       showLoader && this.rootStore.appStore.toogleLoader(true);
       let body = {
@@ -38,7 +43,7 @@ class Asynctask {
         ApiClient.endPoints.postUserLogin,
         body,
       ); 
-      const userLoginResponse = userLoginReq.data;
+       const userLoginResponse = userLoginReq.data;
       showLoader && this.rootStore.appStore.toogleLoader(false);
       if (userLoginResponse.success == true) { 
         await LocalStorage.storeToken(JSON.stringify(body));
@@ -59,6 +64,9 @@ class Asynctask {
       return Promise.reject(error);
     }
   };
+
+
+  
   fetchVendor = async (token = undefined) => {
     try {
       let tok = token;

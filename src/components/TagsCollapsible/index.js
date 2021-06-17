@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Collapsible from 'react-native-collapsible';
-import {getHp, getWp} from '../../app/utils';
+import { FONTSIZE, getHp, getWp } from '../../app/utils';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { BackBlack } from '@svg'
 
 AntDesign.loadFont();
 
@@ -12,7 +13,7 @@ const TagsCollapsible = props => {
   const RenderItems = (item, index) => {
     let tagObj = Object.assign({}, props.Data);
     delete tagObj.subTags;
-    let isPartySelected = props.isOnSelect({tagObj, item});
+    let isPartySelected = props.isOnSelect({ tagObj, item });
     return (
       <TouchableOpacity
         key={index}
@@ -25,7 +26,7 @@ const TagsCollapsible = props => {
         <View
           style={[
             styles.itemView,
-            isPartySelected && {backgroundColor: 'rgba(0, 224, 143, 0.24)'},
+            isPartySelected && { backgroundColor: 'rgba(0, 224, 143, 0.24)' },
           ]}>
           <Text style={styles.itemTextStyle}>
             {item.emoji + ' ' + item.name}
@@ -39,7 +40,7 @@ const TagsCollapsible = props => {
       <TouchableOpacity
         style={styles.heading}
         onPress={() => setIsVisible(s => !s)}>
-        <AntDesign name={'down'} color={'#000'} size={15} />
+        <BackBlack height={13} width={6} />
         <Text style={styles.headingTextStyle}>{props.Data.name}</Text>
       </TouchableOpacity>
       <Collapsible collapsed={isVisible}>
@@ -52,22 +53,23 @@ const TagsCollapsible = props => {
 };
 const styles = StyleSheet.create({
   container: {
-    width: '90%',
+    width: '100%',
     alignSelf: 'center',
     backgroundColor: '#fff',
-    marginBottom: 10,
+    marginBottom: 2,
   },
   heading: {
     alignItems: 'center',
     paddingVertical: getHp(12),
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderBottomColor: '#DDDDDD',
     flexDirection: 'row',
+    paddingLeft: 20
   },
   headingTextStyle: {
-    fontSize: 15,
+    fontSize: FONTSIZE.Text15,
     color: '#000',
-    fontWeight: '400',
+    fontFamily: 'AvenirNext-Regular',
     marginLeft: getWp(10),
   },
   collapsedContainer: {

@@ -126,24 +126,24 @@ export default function ImageCarousel(props) {
                                                 alignItems: 'center',
                                                 backgroundColor: '#fff'
                                             }}>
-
+                                                {
+                                                    imageBottomLeftText &&
+                                                        <View style={[styles.flexDirectionStyle, { width: '100%', backgroundColor: '#F2F5F6', }]}>
+                                                            <Text style={[styles.fullInventoryTitleStyle]}>{item.itemName}</Text>
+                                                            <View style={[styles.flexDirectionStyle,]}>
+                                                                <BlackDollar height={getHp(26)} width={getWp(26)} />
+                                                                <Text style={[styles.reviewsTitleStyle, { marginLeft: 5, fontSize: FONTSIZE.Text20 }]}>{item.itemCost}</Text>
+                                                            </View>
+                                                        </View>
+                                                     
+                                                }
                                                 <Image
                                                     source={{
                                                         uri: item?.filePath ?
                                                             item.filePath : `${item.itemImage}`
                                                     }}
                                                     style={{ width: '100%', height: 400, }} />
-                                                {
-                                                    imageBottomLeftText ?
-                                                        <View style={[styles.flexDirectionStyle, { width: '100%', backgroundColor: '#DDDDDD', }]}>
-                                                            <Text style={[styles.fullInventoryTitleStyle]}>{item.itemName}</Text>
-                                                            <View style={[styles.flexDirectionStyle,]}>
-                                                                <BlackDollar height={26} width={26} />
-                                                                <Text style={[styles.reviewsTitleStyle, { marginLeft: 10, fontSize: FONTSIZE.Text20 }]}>{item.itemCost}</Text>
-                                                            </View>
-                                                        </View>
-                                                        : null
-                                                }
+
                                             </View>
                                         </View>
                 }
@@ -250,8 +250,9 @@ const styles = StyleSheet.create({
     flexDirectionStyle: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-evenly',
-        paddingVertical: 10
+        justifyContent: 'space-between',
+        paddingVertical: 10,
+        paddingHorizontal:10
     },
     fourItems: {
         backgroundColor: '#000000',
@@ -260,10 +261,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     reviewsTitleStyle: {
-        fontFamily: 'AvenirNext-DemiBold',
+        fontFamily: 'AvenirNext-Medium',
         color: '#000',
-        fontSize: 20,
-    },
+      },
     footerList: {
         height: 70,
         width: 100,

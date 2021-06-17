@@ -110,7 +110,7 @@ class UserHomeBottomNavigation {
             unmountOnBlur: true,
             tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
-                <Bell_Outline height={22} width={19} />
+                <Bell_Fill height={22} width={19} />
               ) : (
                   <Bell_Outline height={22} width={19} />
                 );

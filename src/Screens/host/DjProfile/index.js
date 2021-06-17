@@ -108,6 +108,8 @@ function DjProfile(props) {
     hourlyRate,
     inventory,
   } = vendor;
+  console.log("hourlyRate",hourlyRate)
+  console.log("vendorCategoryName",vendorCategoryName)
 
   const handleCarousel = () => {
     return (
@@ -305,7 +307,7 @@ function DjProfile(props) {
                     maxWidth: '65%',
                   }}>
                   {fullName !== null ? (
-                    <Text style={[styles.fullName, { marginBottom: 4 }]}>
+                    <Text style={[styles.fullName, { marginBottom: 0 }]}>
                       {fullName}
                     </Text>
                   ) : null}
@@ -346,7 +348,8 @@ function DjProfile(props) {
                         }}>
                         <DollarOnlyWhite height={18} width={18} />
                       </View>
-                      {vendorCategoryName == 'DJ' ? (
+                      {vendorCategoryName == 'DJ' || 
+                      vendorCategoryName == 'Videographer' ? (
                         <>
                           <Text style={styles.hourStyle}>
                             {hourlyRate} / hour
@@ -414,8 +417,9 @@ function DjProfile(props) {
 
               <View style={[styles.partition, { marginBottom: 20 }]} />
             </View>
-            {/* View Inventory Add Media Extra button START */}
 
+            
+            {/* View Inventory Add Media Extra button START */}
             {!(inventory.length == 0 || inventory == null) &&
               vendorCategoryName == 'Event Rentals' ? (
                 <>

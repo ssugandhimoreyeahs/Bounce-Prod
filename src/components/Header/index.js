@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Animated, TouchableOpacity } from 'react-native
 import Back from 'react-native-vector-icons/AntDesign';
 import Share from 'react-native-vector-icons/Entypo';
 import { shareFunction } from '@components'
-import { FONTSIZE, getHp, getWp } from '@utils'
+import { FONTSIZE, getHp, getWp,smallHitSlop } from '@utils'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Dimensions } from 'react-native';
 import { Avatar } from 'react-native-elements'
@@ -67,7 +67,7 @@ function Header(props) {
 
                 {
                     back ?
-                        <TouchableOpacity onPress={onPress}>
+                        <TouchableOpacity onPress={onPress} hitSlop={smallHitSlop}>
                             <Back name="left" color={theme ? theme : '#000'} size={25} />
                         </TouchableOpacity>
                         : null

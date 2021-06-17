@@ -128,11 +128,12 @@ import ChangeBlue from './ChangeBlue.svg'
 import BlueTick from './BlueTick.svg'
 import CohostPurple from './CohostPurple.svg'
 import Account_Outline from './Account_Outline.svg'
+import BackBlack from './BackBlack.svg'
 
 
 
 export {
-
+    BackBlack,
     Account_Outline,
     CohostPurple,
     BlueTick,

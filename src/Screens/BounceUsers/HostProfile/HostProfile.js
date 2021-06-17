@@ -173,6 +173,7 @@ export default function HostProfile(props) {
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
         <ScrollView
+        showsVerticalScrollIndicator={false}
           // keyboardShouldPersistTaps='always'
           style={{ backgroundColor: '#FBFBFB', flex: 1 }}
           contentContainerStyle={{ flexGrow: 1 }}>
@@ -361,7 +362,7 @@ export default function HostProfile(props) {
               </TouchableOpacity>
 
               {/* Third Apple Music */}
-              <TouchableOpacity style={[styles.socialButton, styles.shadowStyle, { marginVertical: getHp(30) }]}>
+              <TouchableOpacity style={[styles.socialButton, styles.shadowStyle, { marginTop: getHp(5),marginBottom:getHp(30) }]}>
                 <View style={styles.flex}>
                   <AppleMusic height={getHp(30)} width={getHp(30)} />
                   <Text
@@ -537,7 +538,7 @@ export default function HostProfile(props) {
 
 
 
-          <View style={{ paddingHorizontal: getWp(10), paddingBottom: 50 }}>
+          <View style={{ paddingHorizontal: getWp(10), paddingBottom: 80 }}>
             <CustomButton
               complete
               bar

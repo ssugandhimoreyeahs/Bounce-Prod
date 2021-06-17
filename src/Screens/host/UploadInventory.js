@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     Alert
 } from "react-native";
-import { Header, Root, CustomButton, FloatingInput } from "@components";
+import { Header, Scaffold, CustomButton, FloatingInput } from "@components";
 import { GreyHamburger, BlackClose } from "@svg";
 import DocumentPicker from 'react-native-document-picker';
 import { FONTSIZE, getHp, getWp } from "@utils";
@@ -19,12 +19,15 @@ import axios from 'axios'
 import Spinner from "react-native-loading-spinner-overlay";
 import MobxStore from '../../mobx';
 import { Toast } from '@constants';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
+
 export default function UploadInventory(props) {
     // const { userinfo, fetchProfile, } = useContext(UserContext)
     const {
         userProfile,
         async: {
-            fetchProfile
+            reloadVendor
         }
     } = MobxStore.authStore;
     const [loader, setLoader] = useState(true);
@@ -41,7 +44,7 @@ export default function UploadInventory(props) {
     }
     console.log('CURRENT_TOKEN - ', token);
     let [getCloneMedia, setCloneMedia] = useState([]);
-
+    console.log("GET_MEDIA_ ", JSON.stringify(getMedia));
     const handleSubmit = async () => {
         try {
             console.log("handle called");
@@ -82,10 +85,10 @@ export default function UploadInventory(props) {
             let addInventoryResponse = await d.json();
             console.log('ADD_INVENTORY_RESPONSE - ', addInventoryResponse);
             if (addInventoryResponse.success == true) {
-                await fillImages();
                 props.navigation.setParams({
                     propsImages: [],
                 });
+                await fillImages();
                 setLoader(false);
                 // props.navigation.navigate("btmstack", {
                 //     screen: "DjProfileScreen",
@@ -128,12 +131,21 @@ export default function UploadInventory(props) {
         return false;
     };
     async function fillImages() {
-        const fP = await fetchProfile();
-        let newMedia = fP?.user?.vendor?.inventory.map(o => ({ ...o, uploaded: true }));
-        newMedia.push(...propsImages);
-        setMedia(() => newMedia);
-        setCloneMedia(() => newMedia);
-        setLoader(false)
+        try {
+            const vendorResponse = await reloadVendor();
+            console.log("VENDOR_RESPONSE_NEWCHECK_3 - ", JSON.stringify(vendorResponse));
+            let newMedia = vendorResponse?.vendor?.inventory.map(o => ({ ...o, uploaded: true })) ?? [];
+            console.log("NEW_MEDIA_RES - ", newMedia);
+            console.log("vendorResponse -> ", vendorResponse);
+
+            newMedia.push(...propsImages);
+            setMedia(() => newMedia);
+            setCloneMedia(() => newMedia);
+            setLoader(false)
+        } catch (error) {
+            console.log("FILL_IMAGE_ERROR - ", error);
+
+        }
     };
 
 
@@ -243,11 +255,12 @@ export default function UploadInventory(props) {
         return false;
     }
     const renderItem = (item) => {
+        console.log("ITEM - ", item);
         return (
             <Fragment>
                 <View>
                     <View key={item.index} style={{
-                        marginVertical: getHp(10),
+                        marginVertical: getHp(20),
                         justifyContent: "space-between",
                         flexDirection: "row",
                         alignItems: "center",
@@ -292,13 +305,13 @@ export default function UploadInventory(props) {
                             >
                                 <FloatingInput
                                     floatingLabel={"Name"}
-                                    custom
+                                    uploadInventory
                                     onChange={(value) => handleName("itemName", value, item?.item)}
                                     value={item?.item?.itemName}
                                 />
                                 <FloatingInput
                                     keyboardType={"numeric"}
-                                    custom
+                                    uploadInventory
                                     floatingLabel={"Price"}
                                     onChange={(value) => handleName("itemCost", value, item?.item)}
                                     value={item?.item?.itemCost}
@@ -343,16 +356,17 @@ export default function UploadInventory(props) {
     };
 
     return (
-        <Root>
+        <Scaffold statusBarStyle={{ backgroundColor: '#FBFBFB' }}>
             <Spinner visible={loader} color={"#1FAEF7"} />
             {!loader && (
                 <View style={styles.container}>
-                    <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={{ flex: 1 }}>
+                    <KeyboardAwareScrollView contentContainerStyle={{ flexGrow: 1 }} style={{ flex: 1 }}>
                         <Header
                             headerTitle={"Upload Media"}
                             back
+                            headerStyleProp={{ fontFamily: 'Comfortaa-Bold' }}
                             onPress={() => props.navigation.goBack()}
-                            headerBackColor={{ backgroundColor: "#fff" }}
+                            headerBackColor={{ backgroundColor: "#FBFBFB", elevation: 0 }}
                         />
 
                         <LinearGradient
@@ -360,22 +374,24 @@ export default function UploadInventory(props) {
                             style={[
                                 styles.linearGradient,
                                 {
-                                    marginTop: 0,
-                                    marginBottom: 15,
+                                    marginVertical: getHp(10),
                                     width: "60%",
                                     alignSelf: "center",
                                 },
                             ]}
                         >
                             <TouchableOpacity onPress={handleImage}>
-                                <Text style={styles.buttonText}>{"Add More Images"}</Text>
+                                <Text style={styles.buttonText}>
+                                    {"Add More Images"}
+                                </Text>
                             </TouchableOpacity>
                         </LinearGradient>
                         <Text
                             style={[
                                 styles.number,
                                 {
-                                    marginVertical: getHp(10),
+                                    fontFamily: 'Roboto-Regular',
+                                    marginTop: getHp(10),
                                     fontWeight: "normal",
                                     marginLeft: "10%",
                                 },
@@ -392,15 +408,16 @@ export default function UploadInventory(props) {
                             }}
                         >
                             <CustomButton
+                                buttonTextStyle={{ fontFamily: 'AvenirNext-DemiBold' }}
                                 complete
-                                ButtonTitle={"Continue"}
+                                ButtonTitle={"Post"}
                                 onPress={handleSubmit}
                             />
                         </View>
-                    </ScrollView>
+                    </KeyboardAwareScrollView>
                 </View>
             )}
-        </Root>
+        </Scaffold>
     );
 }
 
@@ -409,11 +426,11 @@ UploadInventory.routeName = "/UploadInventory";
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#fff",
+        backgroundColor: "#FBFBFB",
         flex: 1,
     },
     number: {
-        fontWeight: "bold",
+        fontFamily: 'AvenirNext-Regular',
         color: "#000",
         fontSize: FONTSIZE.Text20,
     },
@@ -424,8 +441,9 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: FONTSIZE.Text18,
         textAlign: "center",
-        fontWeight: "bold",
-        margin: 10,
+        fontFamily: 'AvenirNext-DemiBold',
+        letterSpacing: 0.4,
+        margin: getHp(10),
         color: "#ffffff",
     },
 });

@@ -24,7 +24,6 @@ const styles = (theme) => {
       mediaText: {
          color: '#1FAEF7',
          fontSize: FONTSIZE.Text20,
-         marginLeft: 5,
          fontFamily: 'AvenirNext-Medium',
          marginVertical: getHp(5)
       },

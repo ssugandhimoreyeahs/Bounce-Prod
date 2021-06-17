@@ -408,7 +408,7 @@ function DJSignup(props) {
                             : null
                         }
                         {user?.vendorCategoryName == 'Event Rentals' &&
-                            <TouchableOpacity style={styles.colButtonStyle} onPress={() => props.navigation.navigate(UploadInventory.routeName, {
+                            <TouchableOpacity style={[styles.colButtonStyle,styles.shadowStyle]} onPress={() => props.navigation.navigate(UploadInventory.routeName, {
                                 image: user?.vendor?.inventory
                             })} >
                                 <Text style={[styles.titleStyle]}>
@@ -442,9 +442,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     titleStyle: {
+        fontFamily: 'AvenirNext-Regular',
         color: '#1FAEF7',
         fontSize: FONTSIZE.Text20,
-        fontWeight: 'bold',
         letterSpacing: 0.2
     },
     container: {
@@ -456,10 +456,17 @@ const styles = StyleSheet.create({
         right: 0,
         top: 0
     },
+    shadowStyle: {
+        shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowRadius: 5,
+        shadowOpacity: 0.1,
+    
+        },
     colButtonStyle: {
         alignSelf: 'center',
         width: '95%',
-        elevation: 5,
+        elevation: 2,
         backgroundColor: '#fff',
         borderRadius: 19,
         alignItems: 'center',

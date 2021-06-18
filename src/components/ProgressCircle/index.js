@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const ProgressCircle = props => {
-  const {progress = 4, currentProgress = 1, containerStyle = {}} = props;
+  const { progress = 4, currentProgress = 1, containerStyle = {} } = props;
 
   const RenderProgress = (_, i) => {
     return (
@@ -24,19 +24,24 @@ const ProgressCircle = props => {
 
 const style = StyleSheet.create({
   container: {
+    justifyContent:'center',
     flexDirection: 'row',
+    alignItems:'center',
     alignSelf: 'center',
   },
   progressContainer: {
-    height: 10,
-    width: 10,
+
     borderRadius: 100,
     marginHorizontal: 2,
   },
   progressActive: {
+    height: 8,
+    width: 8,
     backgroundColor: '#1FAEF7',
   },
   progressInActive: {
+    height: 6,
+    width: 6,
     backgroundColor: '#AAAAAA',
   },
 });

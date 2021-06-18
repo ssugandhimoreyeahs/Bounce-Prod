@@ -174,6 +174,7 @@ export default function ImageCarousel(props) {
                         marginHorizontal: -10,
                         backgroundColor: '#1FAEF7',
                     }}
+                    
                     inactiveDotStyle={{
                         width: 8,
                         height: 8,

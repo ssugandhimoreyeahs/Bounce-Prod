@@ -11,6 +11,7 @@ import VendorMarketProfile from '../../Screens/Signup/Vendor/VendorMarketProfile
 
 //User Signup screens
 import NameScreen from '../../Screens/BounceVendors/Onboarding/NameScreen';
+import ForgotPassword from '../../Screens/BounceVendors/Onboarding/ForgotPassword';
 import UserNameScreen from '../../Screens/BounceVendors/Onboarding/UsernameScreen';
 import BirthDayScreen from '../../Screens/BounceVendors/Onboarding/BirthDayScreen';
 import ProfilePic from '../../Screens/BounceVendors/Onboarding/ProfilePic';
@@ -59,6 +60,10 @@ class AuthStackNavigator {
         <AuthStack.Screen
           name={NameScreen.routeName}
           component={NameScreen}
+        />
+        <AuthStack.Screen
+          name={ForgotPassword.routeName}
+          component={ForgotPassword}
         />
         <AuthStack.Screen
           name={UserNameScreen.routeName}

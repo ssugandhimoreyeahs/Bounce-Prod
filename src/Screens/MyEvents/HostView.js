@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   View,
   Text,
@@ -15,7 +15,7 @@ import {
   Footer,
   IconTitle,
 } from '@components';
-import {styles} from './indexCss';
+import { styles } from './indexCss';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {
   ThreeBlackDots,
@@ -31,9 +31,10 @@ import {
   BlackSolidShare,
   BlackSolidStar,
 } from '@svg';
-import {FONTSIZE} from '@utils';
-import {DJ} from '../../assets';
-import {Scaffold} from '../../components';
+import { FONTSIZE } from '@utils';
+import { DJ } from '../../assets';
+import { Scaffold } from '../../components';
+import PurchaseTickets from '../BounceUsers/EventPage/Public/PurchaseTickets';
 
 const DATA = [DJ, DJ, DJ];
 const filterSmallButtons = ['⛺ Outdoors', '⛺ Outdoors', '⛺ Outdoors'];
@@ -52,7 +53,7 @@ export default function HostView(props) {
     );
   };
 
-  const renderSmallButton = ({item, index}) => {
+  const renderSmallButton = ({ item, index }) => {
     console.log('item', item);
     return (
       <TouchableOpacity
@@ -83,28 +84,28 @@ export default function HostView(props) {
         <ScrollView keyboardShouldPersistTaps={'always'}>
           <Header
             share={
-              <ThreeBlackDots height={25} width={25} style={{marginRight: 5}} />
+              <ThreeBlackDots height={25} width={25} style={{ marginRight: 5 }} />
             }
             back
             headerTitle={'Adelson School Gala'}
             onPress={() => {
               props.navigation.goBack();
             }}
-            headerBackColor={{backgroundColor: '#FFFFFF'}}
+            headerBackColor={{ backgroundColor: '#FFFFFF' }}
           />
           {handleCarousel()}
 
-          <View style={{marginHorizontal: 10, marginBottom: 10}}>
+          <View style={{ marginHorizontal: 10, marginBottom: 10 }}>
             <View style={styles.flex}>
-              <View style={[styles.tagStyle, {width: '55%'}]}>
+              <View style={[styles.tagStyle, { width: '55%' }]}>
                 <BlackOutlineCalender height={23} width={20} />
-                <Text style={[styles.tagTextStyle, {marginLeft: 10}]}>
+                <Text style={[styles.tagTextStyle, { marginLeft: 10 }]}>
                   {'Dec 31, 8:00 PM'}
                 </Text>
               </View>
-              <View style={[styles.tagStyle, {width: '35%'}]}>
+              <View style={[styles.tagStyle, { width: '35%' }]}>
                 <TagPrice height={29} width={31} />
-                <Text style={[styles.tagTextStyle, {marginLeft: 10}]}>
+                <Text style={[styles.tagTextStyle, { marginLeft: 10 }]}>
                   {'$40'}
                 </Text>
               </View>
@@ -140,7 +141,7 @@ export default function HostView(props) {
             }
           </Text>
 
-          <View style={{alignSelf: 'center', marginBottom: 30}}>
+          <View style={{ alignSelf: 'center', marginBottom: 30 }}>
             <FlatList
               data={filterSmallButtons}
               renderItem={renderSmallButton}
@@ -171,31 +172,41 @@ export default function HostView(props) {
               icon={<BlackSolidPeoples height={27} width={30} />}
               ButtonTitle={'Invite'}
             />
-            <ThreeFooterButtons
-              icon={<BlackSolidStar height={24} width={24} />}
-              ButtonTitle={'Hire'}
-            />
+            
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate(PurchaseTickets.routeName)}>
+              <ThreeFooterButtons
+                icon={<BlackSolidStar height={24} width={24} />}
+                ButtonTitle={'Hire'}
+              />
+            </TouchableOpacity>
+
             <ThreeFooterButtons
               icon={<BlackSolidShare height={25} width={27} />}
               ButtonTitle={'Promote'}
             />
           </View>
         ) : (
-          <View style={styles.bottomContainer}>
-            <ThreeFooterButtons
-              icon={<BlackSolidPeoples height={25} width={30} />}
-              ButtonTitle={'Invite'}
-            />
-            <ThreeFooterButtons
-              icon={<BlackSolidStar height={24} width={24} />}
-              ButtonTitle={'Hire'}
-            />
-            <ThreeFooterButtons
-              icon={<BlackSolidShare height={25} width={27} />}
-              ButtonTitle={'Promote'}
-            />
-          </View>
-        )}
+              <View style={styles.bottomContainer}>
+                <ThreeFooterButtons
+                  icon={<BlackSolidPeoples height={25} width={30} />}
+                  ButtonTitle={'Invite'}
+                />
+
+                <TouchableOpacity
+                  onPress={() => props.navigation.navigate(PurchaseTickets.routeName)}>
+                  <ThreeFooterButtons
+                    icon={<BlackSolidStar height={24} width={24} />}
+                    ButtonTitle={'Hire'}
+                  />
+                </TouchableOpacity>
+
+                <ThreeFooterButtons
+                  icon={<BlackSolidShare height={25} width={27} />}
+                  ButtonTitle={'Promote'}
+                />
+              </View>
+            )}
       </View>
     </Scaffold>
   );

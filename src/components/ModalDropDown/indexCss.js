@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { FONTSIZE, getHp } from '../../app/utils';
 
 const Style = () => {
     return StyleSheet.create({
@@ -7,15 +8,15 @@ const Style = () => {
             shadowOffset: { width: 1, height: 1 },
             shadowRadius: 5,
             shadowOpacity: 0.1,
-            elevation:2,
-            },
+            elevation: 2,
+        },
         textStyle: {
-            fontSize: 20,
+            fontSize: FONTSIZE.Text20,
             color: 'black',
             marginLeft: 10,
         },
         dropDownStyle: {
-            height: 50
+            height: getHp(50)
         }
     });
 }

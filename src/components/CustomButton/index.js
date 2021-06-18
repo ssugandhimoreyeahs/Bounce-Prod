@@ -13,7 +13,8 @@ export default function CustomButton(props) {
         ButtonTitle = false,
         ButtonTitle2 = false,
         bar = false,
-        buttonTextStyle=false,
+        containerStyleProp=false,
+        buttonTextStyle = false,
         complete = false,
         onPress = () => { },
         linear = false,
@@ -62,9 +63,9 @@ export default function CustomButton(props) {
                 <View style={{ backgroundColor: '#FEFEFE', }}>
                     <Button
                         title={ButtonTitle ? ButtonTitle : "Continue"}
-                        containerStyle={[styles.container, {}]}
+                        containerStyle={[styles.container, containerStyleProp]}
                         buttonStyle={styles.buttonStyle}
-                        titleStyle={[styles.titleStyle,buttonTextStyle]}
+                        titleStyle={[styles.titleStyle, buttonTextStyle]}
                         onPress={onPress}
                     />
 
@@ -77,7 +78,9 @@ export default function CustomButton(props) {
                         <TouchableOpacity style={[styles.DoubleButton, styles.shadowStyle]} onPress={onSaveDraftPress}>
                             <Text style={[styles.titleStyle, {
                                 fontFamily: 'AvenirNext-DemiBold',
-                                color: '#1FAEF7', fontSize: FONTSIZE.Text20, letterSpacing: 0.2
+                                color: '#1FAEF7',
+                                fontSize: FONTSIZE.Text20,
+                                letterSpacing: 0.2
                             }]}>
                                 {ButtonTitle}
                             </Text>
@@ -93,7 +96,8 @@ export default function CustomButton(props) {
                                 }]}>
                             <TouchableOpacity onPress={onContinuePress}>
                                 <Text style={[styles.titleStyle, {
-                                    fontFamily: 'AvenirNext-DemiBold', color: '#fff', fontSize: FONTSIZE.Text20, letterSpacing: 0.2
+                                    fontFamily: 'AvenirNext-DemiBold', color: '#fff',
+                                    fontSize: FONTSIZE.Text20, letterSpacing: 0.2
                                 }]}>
                                     {ButtonTitle2}
                                 </Text>
@@ -111,7 +115,10 @@ export default function CustomButton(props) {
                         backgroundColor: 'rgba(255, 255, 255, 0.66)', paddingTop: 10
                     }]}>
 
-                        <TouchableOpacity style={[styles.colButtonStyle, styles.shadowStyle]} onPress={onPress1}>
+                        <TouchableOpacity
+                            style={[styles.colButtonStyle,
+                            styles.shadowStyle]}
+                            onPress={onPress1}>
                             <Text style={[{
                                 color: '#1FAEF7',
                                 fontSize: FONTSIZE.Text20,
@@ -129,8 +136,10 @@ export default function CustomButton(props) {
                             style={[
                                 styles.colButtonStyle,
                             ]}>
-                            <TouchableOpacity onPress={onPress}>
+                            <TouchableOpacity onPress={onPress}
+                                style={styles.fullTouch}>
                                 <Text style={[styles.titleStyle, {
+
                                     color: '#fff',
                                     fontSize: FONTSIZE.Text20,
                                     fontFamily: 'AvenirNext-DemiBold', letterSpacing: 0.2
@@ -170,12 +179,12 @@ const styles = StyleSheet.create({
     },
     DoubleButton: {
         height: getHp(50),
-        width: getWp(166),
+      width:'46%',
         elevation: 5,
         backgroundColor: '#fff',
         paddingHorizontal: 10,
         paddingVertical: 5,
-        borderRadius: 19,
+        borderRadius: 17,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -202,7 +211,13 @@ const styles = StyleSheet.create({
     titleStyle: {
         fontSize: FONTSIZE.Text22,
         color: '#fff',
-        fontFamily: 'AvenirNext-Medium'
+        fontFamily: 'AvenirNext-DemiBold'
+    },
+    fullTouch: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%'
     },
     shadowStyle: {
         shadowColor: '#000',

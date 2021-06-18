@@ -1,21 +1,21 @@
 import React from 'react';
-import {StyleSheet, View, Text, TextInput, TouchableOpacity} from 'react-native';
-import {FONTSIZE, getWp, getHp} from '@utils';
-import AntDesign from 'react-native-vector-icons/AntDesign'; 
+import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { FONTSIZE, getWp, getHp } from '@utils';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 AntDesign.loadFont();
 const TicketComponent = props => {
-  const {data = {}, onChangeText = () => {}, onTicketDelete = () => { }} = props;
+  const { data = {}, onChangeText = () => { }, onTicketDelete = () => { } } = props;
   return (
     <View
       style={{
         paddingHorizontal: 10,
-        marginTop: 3,
+        marginTop: getHp(10),
         backgroundColor: '#fff',
         justifyContent: 'center',
         paddingVertical: 20,
       }}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Text
           style={[
             styles.headerTitle,
@@ -29,32 +29,34 @@ const TicketComponent = props => {
           {'Tickets'}
         </Text>
         <TouchableOpacity onPress={onTicketDelete}>
-            <AntDesign color={'black'} size={20} name={'close'} />
+          <AntDesign color={'black'} size={20} name={'close'} />
         </TouchableOpacity>
       </View>
 
       <TextInput
         value={data?.title}
         onChangeText={title => {
-          onChangeText({title});
+          onChangeText({ title });
         }}
         placeholder="Ticket Title"
-        style={[styles.textInput,{marginBottom:getHp(20)}]}
+        placeholderTextColor={"#999999"}
+        style={[styles.textInput, { marginBottom: getHp(20) }]}
       />
       <TextInput
         value={data?.description}
         onChangeText={description => {
-          onChangeText({description});
+          onChangeText({ description });
         }}
+        placeholderTextColor={"#999999"}
         placeholder="Description"
         style={styles.textInput}
       />
 
-      <View style={[styles.eventContainer, {justifyContent: 'space-between'}]}>
+      <View style={[styles.eventContainer, { justifyContent: 'space-between' }]}>
         <Text
           style={[
             styles.headerTitle,
-            {fontSize: FONTSIZE.Text18, marginRight: 5},
+            { fontSize: FONTSIZE.Text18, marginRight: 5 },
           ]}>
           {'Price'}
         </Text>
@@ -63,13 +65,13 @@ const TicketComponent = props => {
           placeholderTextColor={'#000'}
           placeholder={'$0'}
           onChangeText={price => {
-            onChangeText({price});
+            onChangeText({ price });
           }}
           value={data?.price?.toString()}
           style={[
             styles.textInput,
             {
-              height:getHp(50),
+              height: getHp(50),
               width: '35%',
               textAlign: 'center',
               fontSize: FONTSIZE.Text18,
@@ -78,11 +80,11 @@ const TicketComponent = props => {
           ]}
         />
       </View>
-      <View style={[styles.eventContainer, {justifyContent: 'space-between'}]}>
+      <View style={[styles.eventContainer, { justifyContent: 'space-between' }]}>
         <Text
           style={[
             styles.headerTitle,
-            {fontSize: FONTSIZE.Text18, marginRight: 5},
+            { fontSize: FONTSIZE.Text18, marginRight: 5 },
           ]}>
           {'Quantity Available'}
         </Text>
@@ -92,12 +94,12 @@ const TicketComponent = props => {
           placeholder={'0'}
           value={data?.quantity?.toString()}
           onChangeText={quantity => {
-            onChangeText({quantity});
+            onChangeText({ quantity });
           }}
           style={[
             styles.textInput,
             {
-              height:getHp(50),
+              height: getHp(50),
               width: '35%',
               textAlign: 'center',
               fontSize: FONTSIZE.Text18,
@@ -111,18 +113,18 @@ const TicketComponent = props => {
 };
 const styles = StyleSheet.create({
   textInput: {
-    
+
     elevation: 0,
     borderWidth: 0.3,
     borderColor: '#EEEEEE',
     fontSize: FONTSIZE.Text12,
-    fontFamily:'AvenirNext-Regular',
-    backgroundColor: '#F7F7F7',
+    fontFamily: 'AvenirNext-Medium',
+    backgroundColor: 'rgba(238, 238, 238, 0.5)',
     paddingLeft: 10,
     marginVertical: 5,
     borderRadius: 9.5,
     color: '#000',
-     height: getHp(45),
+    height: getHp(45),
 
   },
   eventContainer: {

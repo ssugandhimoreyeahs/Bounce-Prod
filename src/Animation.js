@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     HeadingStyle: {
-        fontFamily: 'Comfortaa',
+        fontFamily: 'AvenirNext-Regular',
         letterSpacing: 1.6,
         color: '#000',
         fontSize: FONTSIZE.Text28,

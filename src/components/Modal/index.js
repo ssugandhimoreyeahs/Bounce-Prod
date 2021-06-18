@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
 
 
     bodyText: {
-        fontFamily: 'Comfortaa',
+        fontFamily: 'AvenirNext-Regular',
         letterSpacing: 0.8,
         lineHeight: 32,
         color: '#000',
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
         marginVertical: 15
     },
     bbText: {
-        fontFamily: 'Comfortaa',
+        fontFamily: 'AvenirNext-Regular',
         letterSpacing: 1.6,
         color: '#000',
         fontSize: 22,

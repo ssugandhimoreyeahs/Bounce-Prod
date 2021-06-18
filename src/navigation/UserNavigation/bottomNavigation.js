@@ -23,7 +23,7 @@ import MobxStore from '../../mobx';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FONTSIZE, getHp } from '../../app/utils';
 import BENotification from '../../Screens/BounceUsers/Notifications/Before/Notifications';
-import HostProfile from '../../Screens/BounceUsers/HostProfile/HostProfile';
+// import HostProfile from '../../Screens/BounceUsers/HostProfile/HostProfile';
 
 const UserHomeBottomTab = createBottomTabNavigator();
 
@@ -44,11 +44,11 @@ class UserHomeBottomNavigation {
           fontSize: FONTSIZE.Text16,
           paddingVertical: 10,
           showLabel: false,
-          
+
           style: {
             position: 'absolute',
             bottom: 0,
-            height: getHp(80), 
+            height: getHp(80),
           }
         }}
         sceneContainerStyle={{
@@ -132,12 +132,12 @@ class UserHomeBottomNavigation {
                   padding: 2,
                   borderColor: 'black'
                 }}>
-                <Avatar
-                  rounded
-                  source={{ uri: `${profileImage?.filePath}` }}
-                  // source={Placeholder}
-                  style={{ resizeMode: 'contain', height: 23, width: 23 }}
-                />
+                  <Avatar
+                    rounded
+                    source={{ uri: `${profileImage?.filePath}` }}
+                    // source={Placeholder}
+                    style={{ resizeMode: 'contain', height: 23, width: 23 }}
+                  />
                 </View>
               ) : (
                   <View style={{
@@ -156,8 +156,10 @@ class UserHomeBottomNavigation {
                 );
             },
           }}
-          name={HostProfile.routeName}
-          component={HostProfile}
+          name={"Temp"}
+          component={() => {
+            return null;
+          }}
         />
       </UserHomeBottomTab.Navigator>
     );

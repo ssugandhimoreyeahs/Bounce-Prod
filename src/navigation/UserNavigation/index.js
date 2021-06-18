@@ -19,6 +19,8 @@ import PurchaseTickets from '../../Screens/BounceUsers/EventPage/Public/Purchase
 import HostView from '../../Screens/MyEvents/HostView';
 import Featuring from '../../Screens/BounceUsers/EventPage/Public/Featuring'
 import PartyRental from '../../Screens/BounceVendors/PartyRentals'
+
+
 const UserRootStack = createStackNavigator();
 
 class UserNavigation {

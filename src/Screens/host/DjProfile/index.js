@@ -108,8 +108,8 @@ function DjProfile(props) {
     hourlyRate,
     inventory,
   } = vendor;
-  console.log("hourlyRate",hourlyRate)
-  console.log("vendorCategoryName",vendorCategoryName)
+  console.log("hourlyRate", hourlyRate)
+  console.log("vendorCategoryName", vendorCategoryName)
 
   const handleCarousel = () => {
     return (
@@ -266,7 +266,8 @@ function DjProfile(props) {
   };
 
   return (
-    <Scaffold statusBarStyle={{ backgroundColor: '#fff' }}>
+    <Scaffold
+    statusBarStyle={{ backgroundColor: '#fff' }}>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
         <ScrollView style={[styles.container]}
@@ -323,7 +324,7 @@ function DjProfile(props) {
                           marginTop: 4,
                         },
                       ]}>
-                      {city.split(",",1)}
+                      {city.split(",", 1)}
                     </Text>
                   ) : null}
                 </View>
@@ -348,38 +349,38 @@ function DjProfile(props) {
                         }}>
                         <DollarOnlyWhite height={18} width={18} />
                       </View>
-                      {vendorCategoryName == 'DJ' || 
-                      vendorCategoryName == 'Videographer' ? (
-                        <>
-                          <Text style={styles.hourStyle}>
-                            {hourlyRate} / hour
+                      {vendorCategoryName == 'DJ' ||
+                        vendorCategoryName == 'Videographer' ? (
+                          <>
+                            <Text style={styles.hourStyle}>
+                              {hourlyRate} / hour
                           </Text>
 
-                          <Text
-                            style={[
-                              styles.hourStyle,
-                              { color: '#696969', fontSize: FONTSIZE.Text14 },
-                            ]}>
-                            {' '}
+                            <Text
+                              style={[
+                                styles.hourStyle,
+                                { color: '#696969', fontSize: FONTSIZE.Text14 },
+                              ]}>
+                              {' '}
                             (Base Package)
                           </Text>
-                        </>
-                      ) : vendorCategoryName == 'Catering' ? (
-                        <>
-                          <Text style={styles.hourStyle}>
-                            {hourlyRate} / guest
+                          </>
+                        ) : vendorCategoryName == 'Catering' ? (
+                          <>
+                            <Text style={styles.hourStyle}>
+                              {hourlyRate} / guest
                           </Text>
 
-                          <Text
-                            style={[
-                              styles.hourStyle,
-                              { color: '#696969', fontSize: FONTSIZE.Text14 },
-                            ]}>
-                            {' '}
+                            <Text
+                              style={[
+                                styles.hourStyle,
+                                { color: '#696969', fontSize: FONTSIZE.Text14 },
+                              ]}>
+                              {' '}
                             (Base Package)
                           </Text>
-                        </>
-                      ) : (
+                          </>
+                        ) : (
                             <Text style={styles.hourStyle}>
                               {hourlyRate} / hour
                             </Text>
@@ -418,7 +419,7 @@ function DjProfile(props) {
               <View style={[styles.partition, { marginBottom: 20 }]} />
             </View>
 
-            
+
             {/* View Inventory Add Media Extra button START */}
             {!(inventory.length == 0 || inventory == null) &&
               vendorCategoryName == 'Event Rentals' ? (
@@ -522,7 +523,7 @@ function DjProfile(props) {
                           <Text
                             style={[
                               styles.mediaText,
-                              {
+                              {  marginLeft: 10,
                                 letterSpacing: 0.3,
                                 fontFamily: 'AvenirNext-Medium',
                                 marginVertical: 10
@@ -620,13 +621,13 @@ function DjProfile(props) {
               }
               icon={
                 vendorCategoryName == 'Security' ? (
-                  <Certified height={60} width={60} />
+                  <Certified height={getHp(60)} width={getWp(60)} />
                 ) : vendorCategoryName == 'DJ' ? (
-                  <Certified height={60} width={60} />
+                  <Certified height={getHp(60)} width={getWp(60)} />
                 ) : vendorCategoryName == 'Catering' ? (
-                  <Cuisines height={60} width={60} />
+                  <Cuisines height={getHp(60)} width={getWp(60)} />
                 ) : (
-                        <Services height={60} width={60} />
+                        <Services height={getHp(60)} width={getWp(60)} />
                       )
               }
               iconBelowText={
@@ -653,13 +654,13 @@ function DjProfile(props) {
               }
               icon={
                 vendorCategoryName == 'Security' ? (
-                  <Armed height={50} width={50} />
+                  <Armed height={getHp(50)} width={getWp(50)} />
                 ) : vendorCategoryName == 'DJ' ? (
-                  <Equipments height={60} width={60} />
+                  <Equipments height={getHp(60)} width={getWp(60)} />
                 ) : vendorCategoryName == 'Catering' ? (
-                  <Services height={48} width={48} />
+                  <Services height={getHp(48)} width={getWp(48)} />
                 ) : (
-                        <Services height={48} width={48} />
+                        <Services height={getHp(48)} width={getWp(48)} />
                       )
               }
               iconBelowText={
@@ -687,7 +688,7 @@ function DjProfile(props) {
                       </>
                     ) : null
                   }
-                  icon={<Multilingual height={42} width={42} />}
+                  icon={<Multilingual height={getHp(42)} width={getWp(42)} />}
                   iconBelowText={'Multilingual'}
                 />
               )}
@@ -695,7 +696,7 @@ function DjProfile(props) {
           <ReviewCard />
         </ScrollView>
       )}
-    
+
 
     </Scaffold>
   );

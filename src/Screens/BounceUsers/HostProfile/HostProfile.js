@@ -119,15 +119,6 @@ export default function HostProfile(props) {
       name: `image-${milliseconds}.jpg`,
     };
 
-    // console.log('PICTURE', picture);
-    // console.log('THIS IS FULL NAME', fullName);
-    // console.log('THIS IS FULL city', city);
-    // console.log('THIS IS FULL getBirthday', getBirthday);
-    // console.log('THIS IS FULL bio', bio);
-    // console.log('THIS IS FULL snapchat', snapchat);
-    // console.log('THIS IS FULL instagram', instagram);
-
-    console.log('THIS IS FULL Profession', profession);
 
     let formData = new FormData();
     formData.append('fullName', fullName);
@@ -161,20 +152,19 @@ export default function HostProfile(props) {
         setLoader(false);
       });
 
-
-
-
     setLoader(false);
   };
 
+  console.log('profession', profession)
+  console.log('bio', bio)
   return (
     <Scaffold
       statusBarStyle={{ backgroundColor: '#fff' }}>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
         <ScrollView
-        showsVerticalScrollIndicator={false}
-          // keyboardShouldPersistTaps='always'
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps='always'
           style={{ backgroundColor: '#FBFBFB', flex: 1 }}
           contentContainerStyle={{ flexGrow: 1 }}>
           <Header
@@ -197,10 +187,10 @@ export default function HostProfile(props) {
               <UploadBlue height={getHp(90)} width={getHp(90)} />
               <Text
                 style={{
-                  fontSize: FONTSIZE.Text19,
+                  fontSize: FONTSIZE.Text16,
                   color: '#000',
                   marginTop: 10,
-                  fontFamily: 'AvenirNext-Medium',
+                  fontFamily: 'AvenirNext-Regular',
                 }}>
                 {"Upload Profile Picture"}
               </Text>
@@ -259,37 +249,21 @@ export default function HostProfile(props) {
                 onPress={data => {
                   setCity(data.description);
                 }}
-                value={city == '' ? '' : city}
+                value={city === null ? '' : city}
               />
 
               <FloatingInput
                 custom
                 floatingLabel={'Profession'}
-                value={profession == '' ? '' : profession}
+                value={profession == 'null' ? '' : profession}
                 onChange={value => setProfession(value)}
               />
-
-              {/* <FloatingInput
-              custom
-              floatingLabel={'Birthday'}
-              onChange={value => setBirthday(value)}
-              value={getBirthday == null ? user.birthday : getBirthday}
-            /> */}
-              {/* {console.log('user.city', user.city)} */}
-              {/* <GooglePlacesInput
-              floatingLabel={'City'}
-              onPress={data => {
-                console.log('DATA_ON_SEL - ', data);
-                setCity(data.description);
-              }}
-              value={city == null ? user.city : city}
-            /> */}
 
               <CustomTextinput
                 custom
                 text={'Bio'}
                 multiline
-                value={bio == '' ? '' : bio}
+                value={bio == 'null' ? '' : bio}
                 onChange={value => setBio(value)}
               />
 
@@ -362,7 +336,7 @@ export default function HostProfile(props) {
               </TouchableOpacity>
 
               {/* Third Apple Music */}
-              <TouchableOpacity style={[styles.socialButton, styles.shadowStyle, { marginTop: getHp(5),marginBottom:getHp(30) }]}>
+              <TouchableOpacity style={[styles.socialButton, styles.shadowStyle, { marginTop: getHp(5), marginBottom: getHp(30) }]}>
                 <View style={styles.flex}>
                   <AppleMusic height={getHp(30)} width={getHp(30)} />
                   <Text

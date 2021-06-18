@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
       color: '#1FAEF7',
       fontSize: FONTSIZE.Text14,
       // fontWeight: 'bold',
-      fontFamily: 'AvenirNext-Medium'
+      fontFamily: 'AvenirNext-DemiBold'
    }
 })
 export {

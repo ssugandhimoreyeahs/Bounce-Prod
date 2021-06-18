@@ -1,8 +1,8 @@
 import React, { useState, useRef, createRef } from 'react';
-import { Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TextInput } from 'react-native';
 import { FONTSIZE, Hp } from '@utils';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { getHp } from '../../app/utils';
+import { getHp, getWp } from '../../app/utils';
 
 function GooglePlacesInput(props) {
   const { floatingLabel, onPress, value = '', custom } = props;
@@ -16,10 +16,8 @@ function GooglePlacesInput(props) {
     <>
       {
         custom ? (
-          <TouchableOpacity style={[styles.ButtonStyle1]}>
-            <Text style={[styles.Title2Style, {
-
-            }]}>
+          <View style={[styles.ButtonStyle1]}>
+            <Text style={[styles.Title2Style,]}>
               {floatingLabel}
             </Text>
             <GooglePlacesAutocomplete
@@ -29,16 +27,15 @@ function GooglePlacesInput(props) {
                 'locality',
                 'administrative_area_level_3',
               ]}
-              
+
               onPress={onPress}
-              minLength={2}
+              minLength={1}
               renderDescription={row => row.description}
               fetchDetails
               istViewDisplayed={false}
               styles={{
                 textInputContainer: {
-                  borderRadius: 17,
-                  
+                  borderRadius: 9.5,
                 },
                 textInput: styles.text1,
                 predefinedPlacesDescription: {
@@ -51,14 +48,16 @@ function GooglePlacesInput(props) {
                 types: ['(cities)'],
               }}
             />
-          </TouchableOpacity>
+          </View>
         )
           :
           (
-            <TouchableOpacity style={[styles.ButtonStyle,styles.shadowStyle]}>
-              <Text style={[styles.Title2Style,{
-                color:'#000',
-                fontFamily:'AvenirNext-Regular'
+            <View style={[styles.ButtonStyle, styles.shadowStyle]}>
+              <Text style={[styles.Title2Style, {
+                color: '#000',
+                fontFamily: 'AvenirNext-Regular',
+                backgroundColor: '#fff',
+
               }]}>{floatingLabel}</Text>
               <GooglePlacesAutocomplete
                 textInputProps={{ placeholderTextColor: '#000' }}
@@ -67,15 +66,16 @@ function GooglePlacesInput(props) {
                   'locality',
                   'administrative_area_level_3',
                 ]}
+
                 onPress={onPress}
-                minLength={2}
+                minLength={1}
                 renderDescription={row => row.description}
                 fetchDetails
                 istViewDisplayed={false}
                 styles={{
                   textInputContainer: {
                     backgroundColor: '#fff',
-                    borderRadius: 17,
+                    borderRadius: 9.5,
                   },
                   textInput: styles.text,
                   predefinedPlacesDescription: {
@@ -87,7 +87,7 @@ function GooglePlacesInput(props) {
                   language: 'en',
                 }}
               />
-            </TouchableOpacity>
+            </View>
           )
       }
     </>
@@ -99,26 +99,31 @@ const styles = StyleSheet.create({
   text: {
     backgroundColor: '#fff',
     color: '#000',
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     fontSize: FONTSIZE.Text17,
-    fontFamily: 'AvenirNext-Regular',
-    marginLeft: -10,
+    fontFamily: 'AvenirNext-Medium',
+    marginLeft: getWp(-10),
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    height: getHp(35)
   },
   text1: {
+    backgroundColor: '#fff',
     color: '#000',
     opacity: 0.8,
     fontSize: FONTSIZE.Text17,
     fontFamily: 'AvenirNext-Medium',
-    marginLeft: -10,
+    marginLeft: getWp(-10),
+    height: getHp(35)
   },
   ButtonStyle: {
     elevation: 2,
     backgroundColor: '#fff',
     borderRadius: 10,
     justifyContent: 'flex-start',
-    paddingLeft: 15,
-    paddingTop: 5,
-    marginVertical: 5,
+    paddingLeft: getWp(15),
+    paddingTop: getHp(5),
+    marginVertical: getHp(5),
   },
   ButtonStyle1: {
     borderWidth: 0.5,
@@ -127,8 +132,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 10,
     justifyContent: 'flex-start',
-    paddingLeft: 15,
-    paddingTop: 5,
+    paddingLeft: getWp(15),
+    paddingTop: getHp(5),
     // marginVertical: 5,
   },
   shadowStyle: {
@@ -136,11 +141,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
     shadowRadius: 5,
     shadowOpacity: 0.1,
-    elevation:2,
-    },
+    elevation: 2,
+  },
   Title2Style: {
-    marginTop: 3,
-    fontSize: FONTSIZE.Text14,
+    marginTop: getHp(3),
+    fontSize: FONTSIZE.Text15,
     fontFamily: 'AvenirNext-Medium',
     color: '#999999',
   },

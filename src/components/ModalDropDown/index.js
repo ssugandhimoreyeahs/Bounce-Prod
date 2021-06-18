@@ -16,7 +16,8 @@ const ModalDropDownComponent = (props) => {
         onSelectItems = () => { },
         readOnly = false,
         onDropDownPress = () => { },
-        custom = false
+        custom = false,
+        createEvent = false
     } = props;
 
     let [selectedItems, setselectedItems] = useState([...onInitialValue]);
@@ -73,7 +74,7 @@ const ModalDropDownComponent = (props) => {
                 textStyle={styles.textStyle}
                 style={styles.dropDownStyle}
                 multipleSelect={true}
-                defaultValue={'Select Languages...'}
+                // defaultValue={'Select'}
                 options={[...options]}
                 renderRowComponent={(data) => {
                     return <TouchableOpacity
@@ -119,17 +120,59 @@ const ModalDropDownComponent = (props) => {
                     paddingHorizontal: 10,
                     flexWrap: 'wrap'
                 }}>
-                <Text style={{
-                    color: '#000',
-                    marginLeft: 12,
-                    opacity: 0.8,
-                    alignSelf: 'center',
-                    fontSize: FONTSIZE.Text15
-                }}>
-                    {
-                        selectedValue.length > 0 ? selectedValue : placeholder
-                    }
-                </Text>
+
+                {/* { This can craete Json 0 error , if found-
+                     fontWeight: (selectedValue.length > 0 ? 'bold' : 'normal'),
+                     fontSize: (selectedValue.length > 0) ?
+                         FONTSIZE.Text17 : FONTSIZE.Text15,
+                }     */}
+                {
+                    custom ?
+                        <Text style={{
+                            color: (selectedValue.length > 0) ? '#000' : '#999999',
+                            fontFamily: (selectedValue.length > 0) ? 'AvenirNext-Medium' : 'AvenirNext-Regular',
+                            fontSize: FONTSIZE.Text17,
+                            marginLeft: 12,
+                            // opacity: 0.8,
+                            alignSelf: 'center',
+                        }}>
+                            {
+                                selectedValue.length > 0 ? selectedValue : placeholder
+                            }
+                        </Text>
+                        :
+                        createEvent ?
+                            <Text style={{
+                                color: '#000',
+                                fontFamily: (selectedValue.length > 0) ? 'AvenirNext-Medium' : 'AvenirNext-Regular',
+                                fontWeight: (selectedValue.length > 0 ? 'bold' : 'normal'),
+                                fontSize: (selectedValue.length > 0) ?
+                                    FONTSIZE.Text17 : FONTSIZE.Text15,
+                                marginLeft: 12,
+                                // opacity: 0.8,
+                                alignSelf: 'center',
+                            }}>
+                                {
+                                    selectedValue.length > 0 ? selectedValue : placeholder
+                                }
+                            </Text>
+                            :
+                            <Text style={{
+                                color: (selectedValue.length > 0) ? '#000' : '#000',
+                                fontFamily: (selectedValue.length > 0) ? 'AvenirNext-Medium' : 'AvenirNext-Regular',
+                                fontWeight: (selectedValue.length > 0 ? 'normal' : 'normal'),
+                                fontSize: (selectedValue.length > 0) ?
+                                    FONTSIZE.Text17 : FONTSIZE.Text15,
+                                marginLeft: 12,
+                                // opacity: 0.8,
+                                alignSelf: 'center',
+                            }}>
+                                {
+                                    selectedValue.length > 0 ? selectedValue : placeholder
+                                }
+                            </Text>
+                }
+
             </TouchableOpacity>
         </View>
     );

@@ -80,9 +80,9 @@ function CustomDrawer({ navigation }) {
   const MORE = [
     {
       name: "Dark / Light Mode",
-      onPress: () => {
-        uiStore.toggleTheme();
-      }
+      // onPress: () => {
+      //   uiStore.toggleTheme();
+      // }
     },
     // {
     //   name: "Subscription",
@@ -133,8 +133,8 @@ function CustomDrawer({ navigation }) {
             return (
               <TouchableOpacity
                 style={{
-                  paddingLeft: 20,
-                  paddingTop: 20,
+                  paddingLeft: 30,
+                  paddingTop: 30,
                   flexDirection: "row",
                   alignItems: "center",
                 }}
@@ -146,7 +146,7 @@ function CustomDrawer({ navigation }) {
                   style={[
                     styles.heading,
                     {
-                      marginLeft: 40,
+                      marginLeft: 15,
                       fontSize: FONTSIZE.Text18,
                       fontFamily:'AvenirNext-Regular',
                       opacity:0.8,
@@ -208,7 +208,8 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: FONTSIZE.Text27,
     color: "#000",
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily:'AvenirNext-DemiBold'
   },
 });
 

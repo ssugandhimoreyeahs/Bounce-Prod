@@ -150,31 +150,31 @@ export default function UserNameScreen(props) {
 UserNameScreen.routeName = '/UserNameScreen';
 
 const styles = StyleSheet.create({
-  infoText: {
-    fontSize: FONTSIZE.Text16,
-    color: '#999999',
-    fontFamily: 'AvenirNext-Medium',
-    letterSpacing: 0.1,
-    marginTop: 10,
-  },
-  container: {
-    flex: 1,
-    padding: 15,
-    flexDirection: 'column',
-  },
-  HeadingStyle: {
-    marginTop: 40,
-    fontFamily: 'AvenirNext-Medium',
-    letterSpacing: 0.2,
-    color: '#1FAEF7',
-    fontSize: FONTSIZE.Text26,
-  },
-  textInput: {
-    borderBottomColor: '#EEEEEE',
-    borderBottomWidth: 2,
-    fontSize: FONTSIZE.Text22,
-    fontFamily: 'AvenirNext-Medium',
-    marginTop: 10,
-    color: '#000000',
-  },
-});
+    infoText: {
+        fontSize: FONTSIZE.Text16,
+        color: '#999999',
+        fontFamily: 'AvenirNext-Medium',
+        letterSpacing: 0.1,
+        marginTop: 10
+    },
+    container: {
+        flex: 1,
+        padding: 15,
+        flexDirection: 'column',
+    },
+    HeadingStyle: {
+        marginTop: 40,
+        fontFamily: 'AvenirNext-Medium',
+        letterSpacing: 0.2,
+        color: '#1FAEF7',
+        fontSize: FONTSIZE.Text26,
+    },
+    textInput: {
+        borderBottomColor: '#EEEEEE',
+        borderBottomWidth: 2,
+        fontSize: FONTSIZE.Text22,
+        fontFamily: 'AvenirNext-Medium',
+        marginTop: 10,
+        color: '#000'
+    },
+})

@@ -36,7 +36,7 @@ export default function UserCustomDrawer(props) {
   const paperTheme = useTheme();
   const SERVICES = [
     {
-      icon: <Account_Outline height={30} width={30} />,
+      icon: <Account_Outline height={getHp(32)} width={getWp(30)} />,
       name: 'My Account',
       onPress: () => {
         props.navigation.navigate(AccountSetting.routeName);
@@ -51,52 +51,52 @@ export default function UserCustomDrawer(props) {
     //   },
     // },
     {
-      icon: <BlackOutlineShare height={30} width={30} />,
+      icon: <BlackOutlineShare height={getHp(31)} width={getWp(28)} />,
       name: 'Share Profile',
       onPress: () => {
         shareFunction(userinfo?.user)
       },
     },
     {
-      icon: <More height={30} width={30} />,
+      icon: <More height={getHp(30)} width={getWp(30)} />,
       name: 'More',
       onPress: () => { },
     },
-    {
-      // icon: <Settings height={30} width={30} />,
-      name: 'Vendor Profiles 1',
-      onPress: () => {
-        props.navigation.navigate(ScrollCarousel.routeName)
-      },
-    },
-    {
-      // icon: <Settings height={30} width={30} />,
-      name: 'Purchase Tickets 2',
-      onPress: () => {
-        props.navigation.navigate(PurchaseTickets.routeName)
-      },
-    },
-    {
-      // icon: <Settings height={30} width={30} />,
-      name: 'Host View 3',
-      onPress: () => {
-        props.navigation.navigate(HostView.routeName)
-      },
-    },
-    {
-      // icon: <Settings height={30} width={30} />,
-      name: 'Featuring Page 4',
-      onPress: () => {
-        props.navigation.navigate(FeaturingPage.routeName)
-      },
-    },
-    {
-      // icon: <Settings height={30} width={30} />,
-      name: 'PartyRental 5',
-      onPress: () => {
-        props.navigation.navigate(PartyRental.routeName)
-      },
-    },
+    // {
+    //   icon: <Settings height={30} width={30} />,
+    //   name: 'Vendor Profiles',
+    //   onPress: () => {
+    //     props.navigation.navigate(ScrollCarousel.routeName)
+    //   },
+    // },
+    // {
+    //   icon: <Settings height={30} width={30} />,
+    //   name: 'Purchase Tickets',
+    //   onPress: () => {
+    //     props.navigation.navigate(PurchaseTickets.routeName)
+    //   },
+    // },
+    // {
+    //   // icon: <Settings height={30} width={30} />,
+    //   name: 'Host View 3',
+    //   onPress: () => {
+    //     props.navigation.navigate(HostView.routeName)
+    //   },
+    // },
+    // {
+    //   // icon: <Settings height={30} width={30} />,
+    //   name: 'Featuring Page 4',
+    //   onPress: () => {
+    //     props.navigation.navigate(FeaturingPage.routeName)
+    //   },
+    // },
+    // {
+    //   // icon: <Settings height={30} width={30} />,
+    //   name: 'PartyRental 5',
+    //   onPress: () => {
+    //     props.navigation.navigate(PartyRental.routeName)
+    //   },
+    // },
   ];
 
   const MORE = [
@@ -154,8 +154,8 @@ export default function UserCustomDrawer(props) {
             return (
               <TouchableOpacity
                 style={{
-                  paddingLeft: 20,
-                  paddingTop: 15,
+                  paddingLeft: 30,
+                  paddingTop: 30,
                   flexDirection: 'row',
                   alignItems: 'center',
                 }}
@@ -230,6 +230,6 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: FONTSIZE.Text27,
     color: '#000',
-    fontWeight: 'bold',
+    fontFamily:'AvenirNext-DemiBold'
   },
 });

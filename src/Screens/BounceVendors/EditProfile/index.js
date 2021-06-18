@@ -69,9 +69,7 @@ function DJSignup(props) {
         return null;
     }
     const { vendorCategoryName } = user
-    let temp = []
-    let genretemp = []
-    let guardtemp = []
+
     const handleImage = () => {
         ImagePicker.openPicker({
             width: 300,
@@ -186,9 +184,10 @@ function DJSignup(props) {
 
         } catch (error) {
             console.log('EDIT_PROFILE_ERROR - ', error);
+
             setLoader(false);
             setTimeout(() => {
-                return Alert.alert('Message', 'Something went wrong');
+                return Alert.alert('Message', error.message);
             }, 300);
         }
 
@@ -220,13 +219,28 @@ function DJSignup(props) {
                         />
 
                         {picture == null ?
-                            <TouchableOpacity onPress={handleImage} style={{ padding: 20, marginVertical: getHp(30), justifyContent: 'center', alignItems: 'center' }}>
-                                <View style={{ borderRadius: 100, elevation: 10, backgroundColor: '#fff', }}>
+                            <TouchableOpacity
+                                onPress={handleImage}
+                                style={{
+                                    padding: 20,
+                                    marginVertical: getHp(30), justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>
+                                <View style={[styles.shadowStyle, {
+                                    borderRadius: 100,
+                                    elevation: 10,
+                                    backgroundColor: '#fff',
+                                }]}>
                                     <UploadBlue height={getHp(100)} width={getHp(100)} />
                                 </View>
                                 <Text style={{
-                                    fontSize: FONTSIZE.Text19, color: '#000', marginTop: 10, fontFamily: 'AvenirNext-Regular',
-                                }}>{"Upload Profile Picture"}</Text>
+                                    fontSize: FONTSIZE.Text16,
+                                    color: '#000',
+                                    marginTop: 20,
+                                    fontFamily: 'AvenirNext-Regular',
+                                }}>
+                                    {"Upload Profile Picture"}
+                                </Text>
                             </TouchableOpacity>
                             :
                             <>
@@ -327,6 +341,7 @@ function DJSignup(props) {
                                 {genreReduxObject?.length > 0 ?
                                     <>
                                         <ModalDropDownComponent
+                                            custom
                                             placeholder={'Please select genre'}
                                             onInitialValue={genre.countries}
                                             options={genreReduxObject}
@@ -356,6 +371,7 @@ function DJSignup(props) {
                                     <>
 
                                         <ModalDropDownComponent
+                                            custom
                                             placeholder={'Please select certification'}
                                             onInitialValue={certification.certi}
                                             options={certificationReduxObject}
@@ -408,7 +424,7 @@ function DJSignup(props) {
                             : null
                         }
                         {user?.vendorCategoryName == 'Event Rentals' &&
-                            <TouchableOpacity style={[styles.colButtonStyle,styles.shadowStyle]} onPress={() => props.navigation.navigate(UploadInventory.routeName, {
+                            <TouchableOpacity style={[styles.colButtonStyle, styles.shadowStyle]} onPress={() => props.navigation.navigate(UploadInventory.routeName, {
                                 image: user?.vendor?.inventory
                             })} >
                                 <Text style={[styles.titleStyle]}>
@@ -461,8 +477,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 1, height: 1 },
         shadowRadius: 5,
         shadowOpacity: 0.1,
-    
-        },
+
+    },
     colButtonStyle: {
         alignSelf: 'center',
         width: '95%',

@@ -126,6 +126,7 @@ export default function VendorSignup(props) {
             <Header
                 headerBackColor={{ paddingBottom: 20, backgroundColor: '#F4F4F4' }}
                 back
+                headerStyleProp={{ fontFamily: 'AvenirNext-DemiBold', }}
                 headerTitle={`Create ${vendorType} Profile`}
                 onPress={() => props.navigation.goBack()}
             />
@@ -205,6 +206,7 @@ export default function VendorSignup(props) {
             </View>
             <View style={{ position: 'absolute', bottom: 0, alignSelf: 'center', width: '95%', paddingBottom: getHp(10) }}>
                 <CustomButton
+                 
                     complete
                     onPress={handleData}
                 />

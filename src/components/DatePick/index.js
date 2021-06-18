@@ -86,14 +86,13 @@ export default DatePicker = props => {
             <TextInput
               pointerEvents="none"
               textAlignVertical='bottom'
-              
+
               style={[
                 styles.textInput, {
-                  
-                  elevation:0,
+                  elevation: 0,
                   marginTop: 5,
                   backgroundColor: '#fff',
-                  fontFamily: 'AvenirNext-DemiBold',
+                  // fontFamily: 'AvenirNext-Regular',
                 },
                 errorMessage.length > 0 && {
                   borderColor: 'red',
@@ -150,10 +149,10 @@ const styles = StyleSheet.create({
     height: getHp(60), //orginal 60
     backgroundColor: '#fff',
     borderRadius: 9.5,
-    fontFamily: 'AvenirNext-Regular',
+    fontFamily: 'AvenirNext-Medium',
     paddingLeft: 15,
-    fontWeight: 'bold',
-    fontSize: FONTSIZE.Text15,
+    // fontWeight: 'bold',
+    fontSize: FONTSIZE.Text17,
     color: '#000',
     shadowColor: 'rgba(0, 0, 0, 0.2)',
     shadowOpacity: 0.2,

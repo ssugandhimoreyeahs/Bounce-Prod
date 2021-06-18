@@ -34,8 +34,8 @@ const FloatingInput = props => {
             blurOnSubmit={blurOnSubmit}
             keyboardType={keyboardType}
             isFocused={isFocused}
-            customShowPasswordComponent={<GreyEye height={25} width={33} />}
-            customHidePasswordComponent={<BlueEye height={25} width={33} />}
+            customShowPasswordComponent={<GreyEye height={getHp(25)} width={getWp(33)} />}
+            customHidePasswordComponent={<BlueEye height={getHp(25)} width={getWp(33)} />}
             label={floatingLabel}
             customLabelStyles={{
               colorFocused: '#999999',
@@ -95,8 +95,8 @@ const FloatingInput = props => {
               blurOnSubmit={blurOnSubmit}
               keyboardType={keyboardType}
               isFocused={isFocused}
-              customShowPasswordComponent={<GreyEye height={25} width={33} />}
-              customHidePasswordComponent={<BlueEye height={25} width={33} />}
+              customShowPasswordComponent={<GreyEye height={getHp(25)} width={getWp(33)} />}
+              customHidePasswordComponent={<BlueEye height={getHp(25)} width={getWp(33)} />}
               label={floatingLabel}
               customLabelStyles={{
                 colorFocused: '#696969',
@@ -111,9 +111,9 @@ const FloatingInput = props => {
               }}
               numberOfLines={10}
               inputStyles={{
-                fontFamily: 'AvenirNext-DemiBold',
+                fontFamily: 'AvenirNext-Medium',
                 color: '#000',
-                fontWeight: 'bold',
+                // fontWeight: 'bold',
                 fontSize: FONTSIZE.Text17,
                 // marginTop: 10,
                 paddingBottom: getHp(-0),
@@ -158,8 +158,8 @@ const FloatingInput = props => {
                 blurOnSubmit={blurOnSubmit}
                 keyboardType={keyboardType}
                 isFocused={isFocused}
-                customShowPasswordComponent={<GreyEye height={25} width={33} />}
-                customHidePasswordComponent={<BlueEye height={25} width={33} />}
+                customShowPasswordComponent={<GreyEye height={getHp(25)} width={getWp(33)} />}
+                customHidePasswordComponent={<BlueEye height={getHp(25)} width={getWp(33)} />}
                 label={floatingLabel}
                 customLabelStyles={{
                   colorFocused: '#696969',
@@ -218,8 +218,8 @@ const FloatingInput = props => {
                   blurOnSubmit={blurOnSubmit}
                   keyboardType={keyboardType}
                   isFocused={isFocused}
-                  customShowPasswordComponent={<GreyEye height={25} width={33} />}
-                  customHidePasswordComponent={<BlueEye height={25} width={33} />}
+                  customShowPasswordComponent={<GreyEye height={getHp(25)} width={getWp(33)} />}
+                  customHidePasswordComponent={<BlueEye height={getHp(25)} width={getWp(33)} />}
                   label={floatingLabel}
                   customLabelStyles={{
                     colorFocused: '#000',
@@ -234,9 +234,9 @@ const FloatingInput = props => {
                   }}
                   numberOfLines={10}
                   inputStyles={{
-                    fontFamily: 'AvenirNext-DemiBold',
+                    fontFamily: 'AvenirNext-Medium',
                     color: '#000',
-                    fontWeight: 'bold',
+                    // fontWeight: 'bold',
                     fontSize: FONTSIZE.Text17,
                     // marginTop: 10,
                     paddingBottom: getHp(-0),

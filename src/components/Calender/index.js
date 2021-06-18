@@ -43,7 +43,7 @@ export default class Calender extends Component {
                 </View>
                 <Text style={{ color: '#fff', fontSize: 16, letterSpacing: 1.6, lineHeight: 23, width: '70%', alignSelf: 'center' }}>Promote, and expand your reach by up to 50%</Text>
                 <CalendarPicker
-                    textStyle={{ color: '#fff', fontSize: 18, fontFamily: 'Comfortaa' }}
+                    textStyle={{ color: '#fff', fontSize: 18, fontFamily: 'AvenirNext-Regular' }}
                     previousComponent
                     nextComponent
                     headerWrapperStyle={{ justifyContent: 'flex-start', padding: 15 }}
@@ -53,7 +53,7 @@ export default class Calender extends Component {
 
                     // headerWrapperStyle={{ backgroundColor: 'red' }}
                     // customDayHeaderStyles={ }
-                    previousTitleStyle={{ fontSize: 22, fontFamily: 'Comfortaa' }}
+                    previousTitleStyle={{ fontSize: 22, fontFamily: 'AvenirNext-Regular' }}
                     todayTextStyle={{fontWeight:'bold',color:'#000'}}
                     todayBackgroundColor={'#1FAEF7'}
                     allowRangeSelection
@@ -90,7 +90,7 @@ export default class Calender extends Component {
 
 const styles = StyleSheet.create({
     bbText: {
-        fontFamily: 'Comfortaa',
+        fontFamily: 'AvenirNext-Regular',
         letterSpacing: 1.6,
         color: '#fff',
         fontSize: 22,

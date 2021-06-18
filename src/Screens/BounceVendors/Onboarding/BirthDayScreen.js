@@ -82,7 +82,7 @@ export default function BirthDayScreen(props) {
                     </View>
 
                     <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
-                        <ProgressCircle currentProgress={3} containerStyle={{ marginBottom: 20 }} />
+                        <ProgressCircle currentProgress={3} containerStyle={{ marginBottom: 5 }} />
                         <CustomButton
                             userContinue
                             onPress={handleSubmit}

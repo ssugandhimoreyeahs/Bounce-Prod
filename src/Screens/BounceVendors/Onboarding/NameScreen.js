@@ -57,7 +57,7 @@ export default function NameScreen(props) {
                         />
                     </View>
                     <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
-                        <ProgressCircle containerStyle={{ marginBottom: 20 }} />
+                        <ProgressCircle containerStyle={{ marginBottom: 5 }} />
                         <CustomButton
                             userContinue
                             onPress={handleSubmit}

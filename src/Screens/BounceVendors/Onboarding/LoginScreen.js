@@ -89,7 +89,13 @@ function LoginScreen(props) {
                 returnKeyType="done"
                 placeholderTextColor={"#999999"}
                 placeholder="Username"
-                style={{ fontSize: FONTSIZE.Text16, letterSpacing: 0.1, width: '60%' }}
+                style={{
+                  fontSize: FONTSIZE.Text16,
+                  fontFamily: 'AvenirNext-Regular',
+                  letterSpacing: 0.1,
+                  width: '60%',
+                  color: '#000'
+                }}
                 onChangeText={value => {
                   if (value.length == 0) {
                     animated.ballAnimation.setValue(-25);
@@ -111,7 +117,13 @@ function LoginScreen(props) {
                     placeholderTextColor={"#999999"}
                     returnKeyType="done"
                     placeholder="Password"
-                    style={{ width: '70%',fontFamily: 'AvenirNext-Regular', fontSize: FONTSIZE.Text16,  width: '60%' }}
+                    style={{
+                      fontSize: FONTSIZE.Text16,
+                      fontFamily: 'AvenirNext-Regular',
+                      letterSpacing: 0.1,
+                      width: '60%',
+                      color: '#000'
+                    }}
                     // multiline={true}
                     onChangeText={value => setPassword(value)}
                     secureTextEntry
@@ -139,17 +151,17 @@ function LoginScreen(props) {
             <View style={styles.CardContainer}>
               <TouchableOpacity
                 style={[styles.Card, styles.boxShadow]}>
-                <Insta height={30} width={30} style={{ margin: 10 }} />
+                <Insta height={getHp(30)} width={getWp(30)} />
                 <Text style={styles.ThirdParty}>{'Instagram'}</Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={[styles.Card, styles.boxShadow]}>
-                <Apple height={30} width={30} style={{ margin: 10 }} />
+                <Apple height={getHp(30)} width={getWp(30)} />
                 <Text style={styles.ThirdParty}>{'Apple'}</Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={[styles.Card, styles.boxShadow]}>
-                <Google height={30} width={30} style={{ margin: 10 }} />
+                <Google height={getHp(26)} width={getWp(26)} />
                 <Text style={styles.ThirdParty}>{'Google'}</Text>
               </TouchableOpacity>
             </View>
@@ -170,7 +182,7 @@ function LoginScreen(props) {
             <TouchableOpacity
               style={[styles.linearGradient, styles.boxShadow, { marginTop: 20 }]}
               onPress={() => navigation.navigate(NameScreen.routeName)}>
-              <Text style={[styles.buttonText, { color: '#1FAEF7' }]}>
+              <Text style={[styles.buttonText, {letterSpacing:0.5, color: '#1FAEF7' }]}>
                 {'User Sign Up'}
               </Text>
             </TouchableOpacity>
@@ -180,7 +192,7 @@ function LoginScreen(props) {
               onPress={() =>
                 props.navigation.navigate(VendorCategory.routeName)
               }>
-              <Text style={[styles.buttonText, { color: '#F8A41E' }]}>
+              <Text style={[styles.buttonText, {letterSpacing:0.5, color: '#F8A41E' }]}>
                 {'Vendor Sign Up'}
               </Text>
             </TouchableOpacity>
@@ -216,22 +228,23 @@ const styles = StyleSheet.create({
   ThirdParty: {
     color: '#000',
     fontSize: FONTSIZE.Text16,
+    fontFamily: 'AvenirNext-Medium',
   },
   buttonText: {
     fontSize: FONTSIZE.Text14,
     // fontFamily: 'Gill Sans',
     textAlign: 'center',
     fontWeight: 'bold',
-    marginVertical: 10,
+    marginVertical: getHp(10),
     color: '#ffffff',
     // backgroundColor: 'transparent',
   },
   linearGradient: {
     justifyContent: 'center',
-    height: 50,
+    height: getHp(50),
     elevation: 1,
     backgroundColor: '#fff',
-    marginVertical: 10,
+    marginVertical: getHp(10),
     borderRadius: 20,
   },
   container: {
@@ -242,7 +255,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   HeadingStyle: {
-    // fontFamily: 'Comfortaa',
+    // fontFamily: 'AvenirNext-Regular',
     letterSpacing: 1.6,
     color: '#000',
     fontSize: FONTSIZE.Text28,
@@ -274,9 +287,10 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
   },
   Card: {
+    flexDirection: 'column',
     backgroundColor: '#fff',
     borderRadius: 20,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     width: '28%',
     height: 100,

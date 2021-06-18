@@ -364,7 +364,7 @@ export default function UploadInventory(props) {
                         <Header
                             headerTitle={"Upload Media"}
                             back
-                            headerStyleProp={{ fontFamily: 'Comfortaa-Bold' }}
+                            headerStyleProp={{ fontFamily: 'AvenirNext-DemiBold' }}
                             onPress={() => props.navigation.goBack()}
                             headerBackColor={{ backgroundColor: "#FBFBFB", elevation: 0 }}
                         />
@@ -390,7 +390,7 @@ export default function UploadInventory(props) {
                             style={[
                                 styles.number,
                                 {
-                                    fontFamily: 'Roboto-Regular',
+                                    fontFamily: 'AvenirNext-Regular',
                                     marginTop: getHp(10),
                                     fontWeight: "normal",
                                     marginLeft: "10%",
@@ -408,7 +408,7 @@ export default function UploadInventory(props) {
                             }}
                         >
                             <CustomButton
-                                buttonTextStyle={{ fontFamily: 'AvenirNext-DemiBold' }}
+                              containerStyleProp={{borderRadius:20}}
                                 complete
                                 ButtonTitle={"Post"}
                                 onPress={handleSubmit}

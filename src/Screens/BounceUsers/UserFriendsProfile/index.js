@@ -375,11 +375,11 @@ function UserFriendsProfile(props) {
                       {profession}
                     </Text>
                     : <TouchableOpacity
-                      style={[styles.editButtonStyle, styles.shadowStyle, { width: getWp(45), paddingHorizontal: 2, marginLeft: 2 }]}
+                      style={[styles.editButtonStyle, styles.shadowStyle, { width: getWp(48), paddingHorizontal: getWp(0), paddingVertical: 1, marginLeft: 2 }]}
                       onPress={() => props.navigation.navigate(HostProfile.routeName)}
                     >
                       <Icon name="plus" color={'#1FAEF7'} size={15} />
-                      <Text style={[styles.editButton]}>
+                      <Text style={[styles.editButton, {}]}>
                         {"Job"}
                       </Text>
                     </TouchableOpacity>
@@ -398,59 +398,65 @@ function UserFriendsProfile(props) {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() =>
-                  Linking.openURL(
-                    `https://www.instagram.com/${instagramUsername}`
-                  )
-                }
+              // onPress={() =>
+              //   Linking.openURL(
+              //     `https://www.instagram.com/${instagramUsername}`
+              //   )
+              // }
               >
                 <Insta height={getHp(30)} width={getWp(30)} />
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() =>
-                  Linking.openURL(`https://twitter.com/narendramodi`)
-                }
+              // onPress={() =>
+              //   Linking.openURL(`https://twitter.com/narendramodi`)
+              // }
               >
                 <Twitter height={getHp(30)} width={getWp(30)} />
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() =>
-                  Linking.openURL(
-                    `https://www.snapchat.com/add/${snapchatUsername}`
-                  )
-                }
+              // onPress={() =>
+              //   Linking.openURL(
+              //     `https://www.snapchat.com/add/${snapchatUsername}`
+              //   )
+              // }
               >
                 <Snapchat height={getHp(30)} width={getWp(30)} />
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() =>
-                  Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
-                }
+              // onPress={() =>
+              //   Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
+              // }
               >
                 <Tiktok height={getHp(30)} width={getWp(30)} />
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() =>
-                  Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
-                }
+              // onPress={() =>
+              //   Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
+              // }
               >
                 <Linkedin height={getHp(32)} width={getWp(32)} />
               </TouchableOpacity>
             </View>
 
+            {
+              about !== null ?
+                (about !== '' && about !== 'null' &&
+                  <>
+                    <Text style={[styles.textStyle, {
+                      marginTop: getHp(15),
+                      marginBottom: 10,
+                      lineHeight: 22,
+                      fontSize: FONTSIZE.Text16,
 
-            {about !== null && <Text style={[styles.textStyle, {
-              marginTop: getHp(15),
-              marginBottom: 10,
-              lineHeight: 22,
-              fontSize: FONTSIZE.Text16,
-
-            }]}>
-              {about}
-            </Text>}
+                    }]}>
+                      {about}
+                    </Text>
+                  </>)
+                : null
+            }
 
             <LinearGradient
               start={{ x: 0, y: 0 }}
@@ -678,7 +684,7 @@ function UserFriendsProfile(props) {
               </TouchableOpacity>
               <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
             </View>
-           
+
             {/* Social Media Section */}
 
             {/* <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} /> */}

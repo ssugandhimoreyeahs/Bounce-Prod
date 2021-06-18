@@ -213,6 +213,7 @@ function CreateInvitation(props) {
           <Header
             headerBackColor={{ backgroundColor: '#FBFBFB', elevation: 0 }}
             back
+            headerStyleProp={{ fontFamily: 'AvenirNext-DemiBold' }}
             headerTitle={"Create Event"}
             // rightTitle={'Save as Draft'}
             onPressRightTitle={() => handleOnPress(true)}
@@ -281,7 +282,7 @@ function CreateInvitation(props) {
                 <Text
                   style={{
                     fontSize: FONTSIZE.Text14,
-                    color: '#000',
+                    color: '#696969',
                     marginTop: 10,
                     fontFamily: 'AvenirNext-Regular',
                   }}>
@@ -398,18 +399,7 @@ function CreateInvitation(props) {
               errorMessage={partyModel.party?.partyError?.fromAge}
               style={[
                 styles.textInput,
-                {
-                  width: getWp(168),
-                  height: getHp(46),
-                  backgroundColor: 'rgba(238, 238, 238, 0.5)',
-                  fontSize: FONTSIZE.Text18,
-                  color: 'black',
-                  height: 45,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  alignSelf: 'center',
-                  minHeight: 0,
-                },
+
               ]}
             />
             <TextInput
@@ -423,18 +413,7 @@ function CreateInvitation(props) {
               placeholderTextColor={"#999999"}
               style={[
                 styles.textInput,
-                {
-                  width: getWp(168),
-                  height: getHp(46),
-                  backgroundColor: 'rgba(238, 238, 238, 0.5)',
-                  fontSize: FONTSIZE.Text18,
-                  color: 'black',
-                  height: 45,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  alignSelf: 'center',
-                  minHeight: 0,
-                },
+
               ]}
             />
           </View>
@@ -472,17 +451,19 @@ function CreateInvitation(props) {
               backgroundColor: '#FFFFFF',
               borderRadius: 13,
               width: '95%',
-              elevation: 2,
+              elevation: 1,
               marginVertical: getHp(20)
             }]}>
             <Text
               style={[
                 styles.headerTitle,
                 {
+                  fontFamily:'AvenirNext-DemiBold',
                   fontSize: FONTSIZE.Text18,
                   color: '#1FAEF7',
                   paddingVertical: 10,
                   textAlign: 'center',
+                  letterSpacing:0.5
                 },
               ]}>
               {'Add Ticket Type'}
@@ -552,15 +533,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
   },
   textInput: {
+    height: getHp(46),
+    backgroundColor: 'rgba(238, 238, 238, 0.5)',
+    fontSize: FONTSIZE.Text16,
+    fontFamily: 'AvenirNext-Medium',
+    color: 'black',
+    width: '48%',
     elevation: 0,
     borderWidth: 0.3,
     borderColor: '#EEEEEE',
-    fontSize: FONTSIZE.Text16,
-    backgroundColor: '#fff',
     paddingLeft: 10,
     marginVertical: 5,
-    borderRadius: 9.5,
-    color: '#999999',
+    borderRadius: 10,
     alignSelf: 'center',
   },
   eventContainer: {

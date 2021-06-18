@@ -75,8 +75,9 @@ export default function VendorCategory(props) {
             < View style={styles.container}>
                 <ScrollView>
                     <Header
-                        headerBackColor={{ paddingBottom: 20, backgroundColor: '#F4F4F4' }}
+                        headerBackColor={{ paddingBottom: getHp(20), backgroundColor: '#F4F4F4' }}
                         back
+                        headerStyleProp={{ fontFamily: 'AvenirNext-DemiBold', }}
                         headerTitle={"Select Business"}
                         onPress={() => props.navigation.goBack()}
                     />
@@ -95,14 +96,14 @@ const styles = StyleSheet.create({
     categoryStyle: {
         color: '#000',
         fontSize: FONTSIZE.Text18,
-        marginLeft: 40,
+        marginLeft: getHp(40),
         fontFamily: 'AvenirNext-Regular',
         marginVertical: getHp(20)
     },
     iconStyle: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: 20,
+        paddingHorizontal: getHp(20),
         paddingVertical: 5,
         backgroundColor: '#FBFBFB',
         marginVertical: 1

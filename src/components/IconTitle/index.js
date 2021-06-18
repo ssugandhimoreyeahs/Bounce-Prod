@@ -22,7 +22,7 @@ export default function IconTitle(props) {
                                 <View style={{ alignItems: 'center', width: '29%', backgroundColor: '#FBFBFB' }}>
                                     {icon}
                                     <Text style={[styles.belowHeading, textStyle, {
-                                        fontSize: FONTSIZE.Text12, opacity: 1, fontFamily: 'AvenirNext-Regular', marginTop: 8,
+                                        fontSize: FONTSIZE.Text12, fontFamily: 'AvenirNext-Regular', marginTop: 8,
                                         fontWeight: 'bold',
                                         letterSpacing: 0.4
                                     }]}>
@@ -31,7 +31,11 @@ export default function IconTitle(props) {
                                 </View>
 
                                 <View style={{ width: '65%', marginTop: 0, backgroundColor: '#FBFBFB' }}>
-                                    <Text style={[styles.belowHeading, { fontWeight: 'normal', color: '#000', letterSpacing: 0.2 }]}>
+                                    <Text style={[styles.belowHeading, {
+                                        fontWeight: 'normal',
+                                        color: '#000',
+                                        letterSpacing: 0.2
+                                    }]}>
                                         {text}
                                     </Text>
                                 </View>

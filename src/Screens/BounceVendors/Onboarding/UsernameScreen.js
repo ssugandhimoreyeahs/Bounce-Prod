@@ -136,7 +136,7 @@ export default function UserNameScreen(props) {
                     </View>
 
                     <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
-                        <ProgressCircle currentProgress={2} containerStyle={{ marginBottom: 20 }} />
+                        <ProgressCircle currentProgress={2} containerStyle={{ marginBottom: 5 }} />
                         <CustomButton
                             userContinue
                             onPress={handleSubmit}
@@ -177,6 +177,6 @@ const styles = StyleSheet.create({
         fontSize: FONTSIZE.Text22,
         fontFamily: 'AvenirNext-Medium',
         marginTop: 10,
-        color: '#000000'
+        color: '#000'
     },
 })

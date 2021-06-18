@@ -1,44 +1,64 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, Alert} from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {Root, CustomButton, ProgressCircle} from '@components';
+import {CustomButton} from '@components';
 import {connect, useSelector, useDispatch} from 'react-redux';
-import {fetchVendorData} from '../../../reducer/mainexpensecategory';
 import {FONTSIZE} from '@utils';
 import {ScrollView} from 'react-native';
-import UserNameScreen from './UsernameScreen';
 import {Scaffold} from '@components';
 import {Toast} from '@constants';
+import {ApiClient} from '@bounceServices';
 import {useKeyboardStatus} from '@hooks';
 
-export default function NameScreen(props) {
+export default function ForgotPassword(props) {
   const {navigation} = props;
-  const [name, setName] = useState('');
+  const [username, setUserName] = useState('');
   const dispatch = useDispatch();
   const isKeyboardOpen = useKeyboardStatus();
+
   const handleSubmit = async () => {
-    if (name.length > 0) {
-      navigation.navigate(UserNameScreen.routeName, {
-        name: name,
-      });
-    } else {
-      Toast('Please enter your name!');
+    let forgotPasswordResponse;
+    try {
+      const body = {
+        username: username,
+      };
+      forgotPasswordResponse = await ApiClient.instance.post(
+        ApiClient.endPoints.forgotPassword,
+        body,
+      );
+      Promise.resolve(forgotPasswordResponse);
+      console.log('forgot password response --> ', forgotPasswordResponse.data);
+      Alert.alert('Message', forgotPasswordResponse.data.message, [
+        {
+          text: 'Ok',
+          onPress: () => navigation.goBack(),
+        },
+      ]);
+    } catch (error) {
+      Promise.reject(error);
+      console.log('error --> ', error.response?.data);
+      Alert.alert('Oops..', error.response?.data.message, [
+        {
+          text: 'Ok',
+          onPress: () => navigation.goBack(),
+        },
+      ]);
     }
   };
+
   return (
     <Scaffold>
       <ScrollView
         style={{flex: 1, backgroundColor: '#FBFBFB'}}
         contentContainerStyle={{flexGrow: 1}}>
         <View style={styles.container}>
-          <Text style={styles.HeadingStyle}>{'What’s your name? 👋'}</Text>
+          <Text style={styles.HeadingStyle}>{'Forgot your password..?'}</Text>
           <View style={{marginTop: 100}}>
             <TextInput
-              placeholder={'Name'}
+              placeholder={'Enter Username'}
               placeholderTextColor="#999"
               style={styles.textInput}
-              onChangeText={value => setName(value)}
-              value={name}
+              onChangeText={value => setUserName(value)}
+              value={username}
             />
           </View>
           {!isKeyboardOpen && (
@@ -49,8 +69,11 @@ export default function NameScreen(props) {
                 width: '100%',
                 alignSelf: 'center',
               }}>
-              <ProgressCircle containerStyle={{marginBottom: 20}} />
-              <CustomButton userContinue onPress={handleSubmit} />
+              <CustomButton
+                linear
+                ButtonTitle={'Submit'}
+                onPress={handleSubmit}
+              />
             </View>
           )}
         </View>
@@ -58,7 +81,7 @@ export default function NameScreen(props) {
     </Scaffold>
   );
 }
-NameScreen.routeName = '/NameScreen';
+ForgotPassword.routeName = '/ForgotPassword';
 
 const styles = StyleSheet.create({
   infoText: {

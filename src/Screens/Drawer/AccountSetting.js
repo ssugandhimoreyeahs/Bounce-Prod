@@ -1,91 +1,194 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
-import { Header, Root, Checkbox, Scaffold, CustomButton, FloatingInput } from '@components'
-import { Interested, Going, Arrived, CantGo, UploadCamera, DJ2 } from '@assets';
-import { Avatar } from 'react-native-elements'
-import axios from "axios";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
+import {
+    Header,
+    PhoneNumber,
+    ModalDropDownComponent,
+    Scaffold,
+    CustomButton,
+    FloatingInput
+} from '@components'
 import { FONTSIZE, getHp, getWp } from '@utils'
-import { connect, useSelector, useDispatch } from "react-redux";
-// import { fetchVendorData } from "../../../reducer/mainexpensecategory";
-import { useFirebaseUpload } from '@hooks'
-// import CustomTextinput from '../../../components/CustomTextinput';
-import { useLoader } from '@hooks'
-import David from '@assets/David.png'
-import { Alert } from 'react-native';
-import { KeyboardAvoidingView } from 'react-native';
 import { Toast } from '@constants';
+import MobxStore from '../../mobx';
+import { ApiClient } from '../../app/services';
+
+
+
 export default function AccountSetting(props) {
+    const { userProfile: userinfo } = MobxStore.authStore;
+
+    const token = userinfo?.token;
+    const user = userinfo?.user;
+    const scrollRef = useRef();
+    const [loader, setLoader] = useState(false);
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
-    const handleSpace = (value) => {
-        let regSpace = new RegExp(/\s/);
-        if (regSpace.test(value)) {
-            setUsername(value.trim())
-            Toast("Username cannot contain space !")
-        } else {
-            setUsername(value)
-        }
-    }
+    const [countryCode, setCountryCode] = useState({ codes: [] })
+
+    useEffect(() => {
+        MobxStore.authStore.async.reloadUser();
+        setData();
+    }, []);
+
+    const setData = async () => {
+
+        setLoader(true);
+        const Country_Code = await ApiClient.authInstance
+            .get(ApiClient.endPoints.countryCode)
+        console.log("countryCODES-->", JSON.stringify(Country_Code));
+
+        setCountryCode(Country_Code.data)
+        setUsername(user?.username);
+        setPhone(user?.phoneNumber);
+        setEmail(user?.email);
+        setLoader(false);
+    };
+
+
+    const handleSubmit = async () => {
+        setLoader(true);
+
+        let formData = new FormData();
+        formData.append('username', username);
+        formData.append('phoneNumber', phone);
+        formData.append('email', email);
+
+        // console.log('username', username);
+        // console.log('phoneNumber', phone);
+        // console.log('email', email);
+        // console.log('TOKEN', token);
+
+        await ApiClient.authInstance
+            .post(ApiClient.endPoints.postUser, formData)
+            .then(async i => {
+                MobxStore.authStore.async.reloadUser();
+                console.log(i);
+                if (i.status == 201 || i.status == 200) {
+                    setLoader(false);
+                    setTimeout(() => {
+                        Toast('Profile Updated Successfully!');
+                        props.navigation.goBack();
+                    }, 100);
+                }
+            })
+            .catch(e => {
+                console.log(e);
+                setLoader(false);
+            });
+        setLoader(false);
+    };
+
     return (<Scaffold
         statusBarStyle={{ backgroundColor: '#FBFBFB' }}>
-        <ScrollView
-            keyboardShouldPersistTaps='always'
-            style={{ backgroundColor: '#FBFBFB' }}>
+        {!loader && (
+            <ScrollView
+                keyboardShouldPersistTaps='always'
+                style={{ backgroundColor: '#FBFBFB' }}
+                ref={scrollRef} >
 
-            <Header
-                headerBackColor={{ backgroundColor: '#FBFBFB', elevation: 0 }}
-                back
-                headerStyleProp={{
-                    letterSpacing: 0.3,
-                    fontSize: FONTSIZE.Text24,
-                }}
-                headerTitle={"My Account"}
-                onPress={() => props.navigation.goBack()}
-            />
+                <Header
+                    headerBackColor={{
+                        backgroundColor: '#FBFBFB',
+                        elevation: 0
+                    }}
+                    back
+                    headerStyleProp={{
+                        letterSpacing: 0.3,
+                        fontSize: FONTSIZE.Text24,
+                    }}
+                    headerTitle={"My Account"}
+                    onPress={() => props.navigation.goBack()}
+                />
 
-            <View style={styles.container}>
-                <FloatingInput
-                    custom
-                    floatingLabel={"Username"}
-                    onChange={handleSpace}
-                    value={username}
-                />
-                <FloatingInput
-                    custom
-                    floatingLabel={"Phone Number"}
-                    onChange={(value) => setPhone(value)}
-                    value={phone}
-                />
-                <FloatingInput
-                    custom
-                    floatingLabel={"Email"}
-                    value={email}
-                    onChange={(value) => setEmail(value)}
-                />
-                {/* <View style={{ width: '70%', paddingVertical: getHp(20) }}>
-                    <Text style={{
-                        fontSize: FONTSIZE.Text20, fontWeight: 'bold', color: '#000', marginVertical: 10, fontFamily: 'AvenirNext-Regular',
-                    }}>Invitaiton Notifications</Text>
-                    <Text style={{
-                        fontSize: FONTSIZE.Text17, color: '#696969', marginVertical: 0, fontFamily: 'AvenirNext-Regular', lineHeight: 24
-                    }}>{"How would you like to recieve event invitations? "}</Text>
+                <View style={styles.container}>
+
+                    <FloatingInput
+                        editable={false}
+                        custom
+                        floatingLabel={"Username"}
+                        onChange={value => setUsername(value)}
+                        value={username == 'null' ? '' : username}
+                    />
+                    <Text style={styles.alertText}>{"Username cannot be changed!"}</Text>
+
+                    {/* {countryCode?.length !== 0 &&
+                        <View style={{ width: '25%' }}>
+                            <ScrollView style={{ height: 150 }}
+                                contentContainerStyle={{}}>
+                                {
+                                    countryCode.map((item) => {
+                                        return (
+                                            <TouchableOpacity>
+                                                <Text>{item.flag} {item.dial_code}</Text>
+                                            </TouchableOpacity>
+
+                                        )
+                                    })
+                                }
+                            </ScrollView>
+                        </View>
+                    } */}
+
+               
+                    {/* <ModalDropDownComponent
+                            readOnly
+                            onDropDownPress={() => {
+                                scrollRef.current.scrollToEnd({ animated: true });
+                            }}
+                            placeholder={"Code"}
+                            options={countryCode}
+                            labelProp={'name'}
+                            uniqueProp={'id'}
+                            onSelectItems={item => {
+                                setCountryCode({ codes: item })
+                            }}
+                        /> */}
+             
+
+                    
+                            <FloatingInput
+                                custom
+                                floatingLabel={"Phone Number"}
+                                onChange={value => setPhone(value)}
+                                value={phone == 'null' ? '' : phone}
+                            />
+                     
+
+
+
+                    <FloatingInput
+                        custom
+                        floatingLabel={"Email"}
+                        onChange={(value) => setEmail(value)}
+                        value={email == 'null' ? '' : email}
+                    />
+                    {/* <PhoneNumber /> */}
                 </View>
-                <Checkbox
-                    title={"Email"}
-                />
-                <Checkbox
-                    title={"Text Message"}
-                /> */}
 
 
-            </View>
-        </ScrollView>
+                <View style={{ paddingHorizontal: getWp(10), paddingBottom: 80 }}>
+                    <CustomButton
+                        complete
+                        bar
+                        onPress={handleSubmit}
+                        ButtonTitle={'Save Changes'}
+                    />
+                </View>
+            </ScrollView>
+        )}
     </Scaffold>
     )
 }
 AccountSetting.routeName = "/AccountSetting";
 const styles = StyleSheet.create({
+    alertText: {
+        fontFamily: 'AvenirNext-Italic',
+        fontSize: FONTSIZE.Text11,
+        marginLeft: getWp(5),
+        marginTop: getHp(-8)
+    },
     container: {
         backgroundColor: '#FBFBFB',
         flex: 1,
@@ -106,9 +209,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
     TitleStyle: {
-        fontFamily: 'AvenirNext-Regular',
-        fontSize: 16,
-        paddingVertical: 5
+
     },
     crossButton: {
         elevation: 10,

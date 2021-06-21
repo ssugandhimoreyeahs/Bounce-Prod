@@ -9,6 +9,7 @@ const { width, height } = Dimensions.get('screen')
 
 const FloatingInput = props => {
   const {
+    editable = true,
     floatingLabel,
     createEvent = false,
     value,
@@ -30,6 +31,7 @@ const FloatingInput = props => {
             marginVertical: getHp(10),
           }}>
           <FloatingLabelInput
+            editable={editable}
             returnKeyType="done"
             blurOnSubmit={blurOnSubmit}
             keyboardType={keyboardType}

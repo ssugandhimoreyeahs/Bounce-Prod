@@ -1,20 +1,21 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, ToastAndroid} from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {Root, CustomButton, ProgressCircle} from '@components';
-import {FONTSIZE, validateEmail, validatePass} from '@utils';
-import {postData} from '../../../FetchServices';
-import {useSelector, useDispatch} from 'react-redux';
-import {fetchVendorData} from '../../../reducer/mainexpensecategory';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, ToastAndroid } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Root, CustomButton, ProgressCircle } from '@components';
+import { FONTSIZE, validateEmail, validatePass } from '@utils';
+import { postData } from '../../../FetchServices';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchVendorData } from '../../../reducer/mainexpensecategory';
 import BirthDayScreen from './BirthDayScreen';
-import {ApiClient} from '../../../app/services';
-import {Scaffold} from '@components';
-import {Toast} from '@constants';
-import {useKeyboardStatus} from '@hooks';
+import EmailScreen from './EmailScreen.js';
+import { ApiClient } from '../../../app/services';
+import { Scaffold } from '@components';
+import { Toast } from '@constants';
+import { useKeyboardStatus } from '@hooks';
 
 export default function UserNameScreen(props) {
-  const {navigation} = props;
-  const {name} = props.route.params;
+  const { navigation } = props;
+  const { name } = props.route.params;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loader, setLoader] = useState(false);
@@ -36,13 +37,14 @@ export default function UserNameScreen(props) {
         password: password,
       };
 
-      let validateP = await validatePass(password);
-      if (!validateP) {
-        console.log('values res of pass', validateP);
-        Toast(
-          'Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !',
-        );
-      } else if (username.length > 0 && password.length > 0) {
+      // let validateP = await validatePass(password);
+      // if (!validateP) {
+      //   console.log('values res of pass', validateP);
+      //   Toast(
+      //     'Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !',
+      //   );
+      // } else
+      if (username.length > 0 && password.length > 0) {
         setLoader(true);
         const res = await ApiClient.instance.post(
           ApiClient.endPoints.validateVendor,
@@ -52,7 +54,7 @@ export default function UserNameScreen(props) {
         if (res.statusCode !== 404) {
           dispatch(fetchVendorData(['FIRST_PAGE', body]));
           setLoader(false);
-          props.navigation.navigate(BirthDayScreen.routeName, {
+          navigation.navigate(EmailScreen.routeName, {
             username: username,
             password: password,
             name,
@@ -100,12 +102,12 @@ export default function UserNameScreen(props) {
   return (
     <Scaffold>
       <KeyboardAwareScrollView
-        style={{flex: 1, backgroundColor: '#FBFBFB'}}
-        contentContainerStyle={{flexGrow: 1}}>
+        style={{ flex: 1, backgroundColor: '#FBFBFB' }}
+        contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.container}>
           <Text style={styles.HeadingStyle}>{'Pick a username! 😜'}</Text>
 
-          <View style={{marginTop: 100}}>
+          <View style={{ marginTop: 100 }}>
             <TextInput
               placeholder="@Username"
               placeholderTextColor="#999"
@@ -117,7 +119,7 @@ export default function UserNameScreen(props) {
             </Text>
           </View>
 
-          <View style={{marginVertical: 10}}>
+          <View style={{ marginVertical: 10 }}>
             <TextInput
               placeholder="Password"
               placeholderTextColor="#999"
@@ -137,7 +139,7 @@ export default function UserNameScreen(props) {
               }}>
               <ProgressCircle
                 currentProgress={2}
-                containerStyle={{marginBottom: 20}}
+                containerStyle={{ marginBottom: 20 }}
               />
               <CustomButton userContinue onPress={handleSubmit} />
             </View>
@@ -150,31 +152,31 @@ export default function UserNameScreen(props) {
 UserNameScreen.routeName = '/UserNameScreen';
 
 const styles = StyleSheet.create({
-    infoText: {
-        fontSize: FONTSIZE.Text16,
-        color: '#999999',
-        fontFamily: 'AvenirNext-Medium',
-        letterSpacing: 0.1,
-        marginTop: 10
-    },
-    container: {
-        flex: 1,
-        padding: 15,
-        flexDirection: 'column',
-    },
-    HeadingStyle: {
-        marginTop: 40,
-        fontFamily: 'AvenirNext-Medium',
-        letterSpacing: 0.2,
-        color: '#1FAEF7',
-        fontSize: FONTSIZE.Text26,
-    },
-    textInput: {
-        borderBottomColor: '#EEEEEE',
-        borderBottomWidth: 2,
-        fontSize: FONTSIZE.Text22,
-        fontFamily: 'AvenirNext-Medium',
-        marginTop: 10,
-        color: '#000'
-    },
+  infoText: {
+    fontSize: FONTSIZE.Text16,
+    color: '#999999',
+    fontFamily: 'AvenirNext-Medium',
+    letterSpacing: 0.1,
+    marginTop: 10
+  },
+  container: {
+    flex: 1,
+    padding: 15,
+    flexDirection: 'column',
+  },
+  HeadingStyle: {
+    marginTop: 40,
+    fontFamily: 'AvenirNext-Medium',
+    letterSpacing: 0.2,
+    color: '#1FAEF7',
+    fontSize: FONTSIZE.Text26,
+  },
+  textInput: {
+    borderBottomColor: '#EEEEEE',
+    borderBottomWidth: 2,
+    fontSize: FONTSIZE.Text22,
+    fontFamily: 'AvenirNext-Medium',
+    marginTop: 10,
+    color: '#000'
+  },
 })

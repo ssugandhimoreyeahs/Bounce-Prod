@@ -43,6 +43,10 @@ import ModalDropDownComponent from './ModalDropDown';
 import TicketComponent from './TicketComponent';
 
 import {
+    PhoneNumber
+} from './SmallComponents/PhoneNumber'
+
+import {
     AgeField,
     SwitchButton,
     DollarField,
@@ -69,6 +73,8 @@ import Scaffold from './Scaffold';
 import PublicPrivateButton from './PublicPrivateButton';
 
 export {
+    PhoneNumber,
+    
     FeaturingPageTab,
     BlueCheck,
     SearchPageTab,

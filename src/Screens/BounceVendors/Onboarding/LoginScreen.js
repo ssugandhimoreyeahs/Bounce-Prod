@@ -176,7 +176,7 @@ function LoginScreen(props) {
             <View style={styles.CardContainer}>
               <TouchableOpacity
                 onPress={() => {
-                  //this.instagramLogin.show();
+                  this.instagramLogin.show();
                   console.log('insta click');
                 }}
                 style={[styles.Card, styles.boxShadow]}>

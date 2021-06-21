@@ -19,7 +19,7 @@ import PurchaseTickets from '../../Screens/BounceUsers/EventPage/Public/Purchase
 import HostView from '../../Screens/MyEvents/HostView';
 import Featuring from '../../Screens/BounceUsers/EventPage/Public/Featuring'
 import PartyRental from '../../Screens/BounceVendors/PartyRentals'
-
+import EmailScreen from '../../Screens/BounceVendors/Onboarding/EmailScreen'
 
 const UserRootStack = createStackNavigator();
 
@@ -47,7 +47,6 @@ class UserNavigation {
           name={ScrollCarousel.routeName}
           component={ScrollCarousel}
         />
-
         <UserRootStack.Screen
           name={UserQrScreen.routeName}
           component={UserQrScreen}
@@ -72,6 +71,7 @@ class UserNavigation {
           name={Featuring.routeName}
           component={Featuring}
         />
+
         <UserRootStack.Screen
           name={PartyRental.routeName}
           component={PartyRental}

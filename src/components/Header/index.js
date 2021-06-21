@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Animated, TouchableOpacity } from 'react-native
 import Back from 'react-native-vector-icons/AntDesign';
 import Share from 'react-native-vector-icons/Entypo';
 import { shareFunction } from '@components'
-import { FONTSIZE, getHp, getWp,smallHitSlop } from '@utils'
+import { FONTSIZE, getHp, getWp, smallHitSlop } from '@utils'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Dimensions } from 'react-native';
 import { Avatar } from 'react-native-elements'
@@ -12,6 +12,10 @@ import { FlatList } from 'react-native';
 import { UserContext } from "../../context/profiledataProvider";
 import MobxStore from '../../mobx';
 import { observer } from 'mobx-react';
+import { LocalStorage } from '../../app/utils/localStorage';
+import NameScreen from '../../Screens/BounceVendors/Onboarding/NameScreen';
+
+
 
 const { height, width } = Dimensions.get('screen')
 
@@ -177,17 +181,30 @@ function Header(props) {
                         </>
                     )
                 }
-                <TouchableOpacity style={{backgroundColor: '#F2F5F6', borderRadius: 17, paddingVertical: 10,borderWidth:1,borderColor:'#E4EEF1', alignItems: 'center', marginVertical: 8 }}>
+                <TouchableOpacity
+                    style={styles.newAccountButton}
+                    onPress={() => props.navigation.navigate(NameScreen.routeName)}
+                >
                     <Text style={{ color: '#000000', fontSize: FONTSIZE.Text16, fontFamily: 'AvenirNext-Bold' }}>
                         {"New Account"}
                     </Text>
                 </TouchableOpacity>
-            </View>}
+            </View>
+            }
 
         </View>
     )
 }
 const styles = StyleSheet.create({
+    newAccountButton: {
+        backgroundColor: '#F2F5F6',
+        borderRadius: 17,
+        paddingVertical: 10,
+        borderWidth: 1,
+        borderColor: '#E4EEF1',
+        alignItems: 'center',
+        marginVertical: 8
+    },
     dropdownContainer: {
         backgroundColor: 'red',
         borderBottomLeftRadius: 24,
@@ -223,7 +240,8 @@ const styles = StyleSheet.create({
     leftTitleStyle: {
         color: "#000",
         fontSize: FONTSIZE.Text22,
-        fontWeight: 'bold',
+        fontFamily: 'AvenirNext-DemiBold',
+        letterSpacing: 0.2
     },
     shadowStyle: {
         shadowColor: '#000',

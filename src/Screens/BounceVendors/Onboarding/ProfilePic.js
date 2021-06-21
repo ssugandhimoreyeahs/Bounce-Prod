@@ -27,10 +27,10 @@ export default function ProfilePic(props) {
   const dispatch = useDispatch();
   const [loader, setLoader] = useState(false);
 
-  const {name, username, password, birthday,age} = props.route.params;
+  const {name, username, password, birthday,age,email} = props.route.params;
   console.log('ProfilePic PROPS -->', props.route.params);
 
-  console.log(name, username, password, birthday,age);
+  console.log(name, username, password, birthday,age,email);
 
   const handleSubmit = async () => {
     try {
@@ -53,6 +53,7 @@ export default function ProfilePic(props) {
         formData.append('age', age);
         formData.append('profileImageFile', imgObj);
         formData.append('vendorType', 2);
+        formData.append('email',email);
 
         const response = await ApiClient.instance.post(
           ApiClient.endPoints.userRegister,
@@ -206,7 +207,7 @@ export default function ProfilePic(props) {
                 alignSelf: 'center',
               }}>
               <ProgressCircle
-                currentProgress={4}
+                currentProgress={5}
                 containerStyle={{marginBottom: 20}}
               />
 

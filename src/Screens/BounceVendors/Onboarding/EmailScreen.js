@@ -11,6 +11,7 @@ import { Scaffold } from '@components';
 import { Toast } from '@constants';
 import { useKeyboardStatus } from '@hooks';
 import BirthDayScreen from './BirthDayScreen';
+import { ApiClient } from '../../../app/services';
 
 export default function EmailScreen(props) {
     const { navigation } = props;
@@ -18,20 +19,61 @@ export default function EmailScreen(props) {
     const [email, setEmail] = useState('');
     const dispatch = useDispatch();
     const isKeyboardOpen = useKeyboardStatus();
+    const [loader, setLoader] = useState(false);
+    // const handleSubmit = async () => {
+    //     if (email.length > 0) {
+    //         navigation.navigate(BirthDayScreen.routeName, {
+    //             email: email,
+    //             name,
+    //             username,
+    //             password,
+    //         });
+    //     } else {
+    //         Toast('Please enter your email!');
+    //     }
+    // };
 
     const handleSubmit = async () => {
-        if (email.length > 0) {
-            navigation.navigate(BirthDayScreen.routeName, {
+        try {
+            if (email.length == 0) {
+                return Toast('Email is required!');
+            }
+
+            let body = {
+                vendorType: '2',
                 email: email,
-                name,
-                username,
-                password,
-            });
-        } else {
-            Toast('Please enter your email!');
+            };
+
+            if (email.length > 0) {
+                setLoader(true);
+                const res = await ApiClient.instance.post(
+                    ApiClient.endPoints.validateVendor,
+                    body,
+                );
+
+                if (res.statusCode !== 404) {
+                    console.log("res",res)
+                    console.log("res.sattuss",res.status)
+                    setLoader(false);
+                    navigation.navigate(BirthDayScreen.routeName, {
+                        email: email,
+                        name,
+                        username,
+                        password,
+                    });
+                } else if (res.statusCode == 404) {
+                    setLoader(false);
+                    Toast(res.message);
+                }
+            } else {
+                setLoader(false);
+                Toast("Please enter valid data !");
+            }
+        } catch (error) {
+            Toast('Email already exist!');
+            console.log(error);
         }
     };
-
 
     return (
         <Scaffold>
@@ -57,9 +99,9 @@ export default function EmailScreen(props) {
                                 width: '100%',
                                 alignSelf: 'center',
                             }}>
-                            <ProgressCircle    
-                            currentProgress={3} 
-                            containerStyle={{ marginBottom: 20 }} />
+                            <ProgressCircle
+                                currentProgress={3}
+                                containerStyle={{ marginBottom: 20 }} />
                             <CustomButton userContinue onPress={handleSubmit} />
                         </View>
                     )}

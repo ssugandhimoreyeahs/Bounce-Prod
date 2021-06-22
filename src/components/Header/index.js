@@ -15,11 +15,10 @@ import { observer } from 'mobx-react';
 import { LocalStorage } from '../../app/utils/localStorage';
 import NameScreen from '../../Screens/BounceVendors/Onboarding/NameScreen';
 
-
-
 const { height, width } = Dimensions.get('screen')
 
 function Header(props) {
+    const {navigation} = props;
     const {
         headerStyleProp,
         ACCOUNTS = {},
@@ -183,7 +182,7 @@ function Header(props) {
                 }
                 <TouchableOpacity
                     style={styles.newAccountButton}
-                    onPress={() => props.navigation.navigate(NameScreen.routeName)}
+                    // onPress={() => props.navigation.navigate(NameScreen.routeName)}
                 >
                     <Text style={{ color: '#000000', fontSize: FONTSIZE.Text16, fontFamily: 'AvenirNext-Bold' }}>
                         {"New Account"}

@@ -318,6 +318,7 @@ function UserFriendsProfile(props) {
               props.navigation.openDrawer()
             }}
             headerBackColor={{ backgroundColor: "#FFFFFF" }}
+            {...props}
           />
           <View style={styles.subContainer}>
             <View
@@ -477,7 +478,7 @@ function UserFriendsProfile(props) {
                 justifyContent: 'center',
                 alignItems: 'center'
               }} >
-                <Text style={[styles.buttonText, { marginRight: 15 }]}>{'Things to do with Friends'}</Text>
+                <Text style={[styles.buttonText, { marginRight: 15 }]}>{'Bounce with Friends'}</Text>
                 <Right name="angle-right" color='#FFFFFF' size={25} />
               </TouchableOpacity>
             </LinearGradient>
@@ -509,18 +510,19 @@ function UserFriendsProfile(props) {
             <LinearGradient
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
-              colors={['#69CCFF', '#8CDDFF']}
+              colors={['#16B0FE', '#3FBEFF']}
               style={[
                 styles.linearGradient, {
-                  height: getHp(56),
+                  height: getHp(38),
+                  borderRadius: 13,
                   justifyContent: 'center'
                 }
               ]}>
               <TouchableOpacity style={{ flexDirection: "row", justifyContent: 'center', alignItems: 'center' }}
                 onPress={() => props.navigation.navigate(CreateInvitation.routeName)}>
                 <WhitePerson height={25} width={19} style={{ marginBottom: -5 }} />
-                <Text style={[styles.textStyle, { marginLeft: 20, fontFamily: 'AvenirNext-Medium', color: '#FFFFFF' }]}>
-                  {'Add Friends'}</Text>
+                <Text style={[styles.buttonText, { marginLeft: 20, fontFamily: 'AvenirNext-Medium', color: '#FFFFFF' }]}>
+                  {'Find Friends'}</Text>
               </TouchableOpacity>
             </LinearGradient>
 

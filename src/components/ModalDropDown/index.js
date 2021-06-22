@@ -164,7 +164,6 @@ const ModalDropDownComponent = (props) => {
                                 fontSize: (selectedValue.length > 0) ?
                                     FONTSIZE.Text17 : FONTSIZE.Text15,
                                 marginLeft: 12,
-                                // opacity: 0.8,
                                 alignSelf: 'center',
                             }}>
                                 {

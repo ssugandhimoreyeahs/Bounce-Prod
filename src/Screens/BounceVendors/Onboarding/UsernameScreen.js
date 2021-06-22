@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, ToastAndroid } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Root, CustomButton, ProgressCircle } from '@components';
-import { FONTSIZE, validateEmail, validatePass } from '@utils';
+import { FONTSIZE, getHp, getWp, validateEmail, validatePass, smallHitSlop } from '@utils';
 import { postData } from '../../../FetchServices';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchVendorData } from '../../../reducer/mainexpensecategory';
@@ -12,6 +12,8 @@ import { ApiClient } from '../../../app/services';
 import { Scaffold } from '@components';
 import { Toast } from '@constants';
 import { useKeyboardStatus } from '@hooks';
+import { BlueEye, GreyEye } from '@svg';
+
 
 export default function UserNameScreen(props) {
   const { navigation } = props;
@@ -19,6 +21,7 @@ export default function UserNameScreen(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loader, setLoader] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const dispatch = useDispatch();
   const isKeyboardOpen = useKeyboardStatus();
 
@@ -119,14 +122,29 @@ export default function UserNameScreen(props) {
             </Text>
           </View>
 
-          <View style={{ marginVertical: 10 }}>
+          <View style={[styles.textInput, { marginVertical: 10, flexDirection: 'row', alignItems: 'center' }]}>
             <TextInput
               placeholder="Password"
               placeholderTextColor="#999"
-              style={styles.textInput}
-              secureTextEntry
+              style={[{
+                fontSize: FONTSIZE.Text22,
+                fontFamily: 'AvenirNext-Medium',
+                marginTop: 10,
+                color: '#000', width: '90%'
+              }]}
+              secureTextEntry={!passwordVisible}
               onChangeText={value => setPassword(value)}
             />
+            {passwordVisible ?
+              <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)} hitSlop={smallHitSlop} >
+                <BlueEye height={getHp(20)} width={getWp(20)} style={{ marginRight: getWp(15) }} />
+              </TouchableOpacity>
+              :
+              <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)} hitSlop={smallHitSlop} >
+                <GreyEye height={getHp(20)} width={getWp(20)} style={{ marginRight: getWp(15) }} />
+              </TouchableOpacity>
+
+            }
           </View>
 
           {!isKeyboardOpen && (

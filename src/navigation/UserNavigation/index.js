@@ -20,6 +20,8 @@ import HostView from '../../Screens/MyEvents/HostView';
 import Featuring from '../../Screens/BounceUsers/EventPage/Public/Featuring'
 import PartyRental from '../../Screens/BounceVendors/PartyRentals'
 import EmailScreen from '../../Screens/BounceVendors/Onboarding/EmailScreen'
+import NameScreen from '../../Screens/BounceVendors/Onboarding/NameScreen'
+
 
 const UserRootStack = createStackNavigator();
 
@@ -54,6 +56,10 @@ class UserNavigation {
         <UserRootStack.Screen
           name={HostProfile.routeName}
           component={HostProfile}
+        />
+        <UserRootStack.Screen
+          name={NameScreen.routeName}
+          component={NameScreen}
         />
         <UserRootStack.Screen
           name={AccountSetting.routeName}

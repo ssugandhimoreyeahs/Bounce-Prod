@@ -1,5 +1,6 @@
-import {Toast as NToast} from 'native-base';
-import {StyleSheet} from 'react-native';
+import { Toast as NToast } from 'native-base';
+import { StyleSheet } from 'react-native';
+import { getWp } from '../utils';
 
 const ToastUtil = (text = '', prop = {}) => {
   return NToast.show({
@@ -12,6 +13,12 @@ const ToastUtil = (text = '', prop = {}) => {
 };
 
 const style = StyleSheet.create({
-  toastStyle: {width: '80%', alignSelf: 'center', bottom: 80},
+  toastStyle: {
+    width: '85%',
+    justifyContent:'center',
+    alignSelf: 'center',
+    bottom: 80,
+    borderRadius: 25,
+  },
 });
 export default ToastUtil;

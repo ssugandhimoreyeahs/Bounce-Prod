@@ -1,49 +1,49 @@
-import React, {useState, useContext} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {Root, CustomButton, ProgressCircle} from '@components';
-import {UploadBlue, BlackClose, Google} from '@svg';
-import {connect, useSelector, useDispatch} from 'react-redux';
-import {FONTSIZE, getHp, getWp} from '@utils';
-import {Avatar} from 'react-native-elements';
+import React, { useState, useContext } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Root, CustomButton, ProgressCircle } from '@components';
+import { UploadBlue, BlackClose, Google } from '@svg';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { FONTSIZE, getHp, getWp } from '@utils';
+import { Avatar } from 'react-native-elements';
 import ImagePicker from 'react-native-image-crop-picker';
-import {launchImageLibrary} from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 import UserNavigation from '../../../navigation/UserNavigation';
 import UserHomeDrawerNavigator from '../../../navigation/UserNavigation/drawerNavigation';
 import axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
-import {LocalStorage} from '../../../app/utils/localStorage';
-import {UserContext} from '../../../context/profiledataProvider';
+import { LocalStorage } from '../../../app/utils/localStorage';
+import { UserContext } from '../../../context/profiledataProvider';
 import MobxStore from '../../../mobx';
 import moment from 'moment';
-import {ApiClient} from '../../../app/services';
-import {Scaffold} from '@components';
-import {Toast} from '@constants';
+import { ApiClient } from '../../../app/services';
+import { Scaffold } from '@components';
+import { Toast } from '@constants';
 
 export default function ProfilePic(props) {
-  const {authStore} = MobxStore;
-  const {navigation} = props;
+  const { authStore } = MobxStore;
+  const { navigation } = props;
   const [picture, setPicture] = useState(null);
   const [footer, openFooter] = useState(false);
   const dispatch = useDispatch();
   const [loader, setLoader] = useState(false);
 
-  const {name, username, password, birthday,age,email} = props.route.params;
-  console.log('ProfilePic PROPS -->', props.route.params);
+  const { name, username, password, birthday, age, email } = props.route.params;
+  // console.log('ProfilePic PROPS -->', props.route.params);
 
-  console.log(name, username, password, birthday,age,email);
+  // console.log(name, username, password, birthday,age,email);
 
   const handleSubmit = async () => {
     try {
       setLoader(true);
       if (picture != null) {
-        let birthday = moment(birthday).format('YYYY-MM-DD') + ' 00:00:00';
-
+        let birthday = moment(props.route.params.birthday).format('YYYY-MM-DD') + ' 00:00:00';
+        console.log("BIRTHDAY Final---->", birthday);
         let milliseconds = new Date().getTime();
-        console.log('PICTURE', picture);
+        // console.log('PICTURE', picture);
         let imgObj = {
-          uri: `${picture.uri}`,
+          uri: `${picture.path}`,
           type: 'image/jpeg',
           name: `image-${milliseconds}.jpg`,
         };
@@ -55,7 +55,7 @@ export default function ProfilePic(props) {
         formData.append('age', age);
         formData.append('profileImageFile', imgObj);
         formData.append('vendorType', 2);
-        formData.append('email',email);
+        formData.append('email', email);
 
         const response = await ApiClient.instance.post(
           ApiClient.endPoints.userRegister,
@@ -84,22 +84,38 @@ export default function ProfilePic(props) {
 
   const handleImage = () => {
     try {
-      launchImageLibrary(
-        {
-          maxWidth: 300,
-          maxHeight: 300,
-          mediaType: 'photo',
-          cropping: true,
-        },
-        image => {
-          console.log(image);
-          console.log('PICTURE FIXED IN PICTURE');
-          setPicture(image);
-        },
-      );
+      ImagePicker.openPicker({
+        width: 300,
+        height: 300,
+        cropping: true
+      }).then(image => {
+        setPicture(image);
+      });
     } catch (error) {
       console.log('IMAGE_PICKER_ERROR - ', error);
     }
+  }
+
+  // const handleImage = () => {
+  //   try {
+  //     launchImageLibrary(
+  //       {
+  //         maxWidth: 300,
+  //         maxHeight: 300,
+  //         mediaType: 'photo',
+  //         // cropping: true,
+  //       },
+  //       image => {
+  //         // console.log(image);
+  //         // console.log('PICTURE FIXED IN PICTURE');
+  //         setPicture(image);
+  //       },
+  //     );
+  //   } catch (error) {
+  //     console.log('IMAGE_PICKER_ERROR - ', error);
+  //   }
+
+
     // openFooter(fa)
     // launchImageLibrary({}, (response) => {
     //     console.log('Respuesta =', response);
@@ -119,7 +135,9 @@ export default function ProfilePic(props) {
     //         setPicture(response.uri)
     //     }
     // });
-  };
+
+
+  // };
 
   const ImageFooter = () => {
     return (
@@ -135,14 +153,14 @@ export default function ProfilePic(props) {
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
         <KeyboardAwareScrollView
-        style={{ flex: 1 ,backgroundColor:'#FBFBFB'}}
-        contentContainerStyle={{ flexGrow: 1 }}>
+          style={{ flex: 1, backgroundColor: '#FBFBFB' }}
+          contentContainerStyle={{ flexGrow: 1 }}>
           <View style={styles.container}>
             <Text style={styles.HeadingStyle}>
               {'Add a 🔥🔥🔥 profile pic!'}
             </Text>
 
-            <View style={{marginVertical: 40}}>
+            <View style={{ marginVertical: 40 }}>
               {picture == null ? (
                 <TouchableOpacity
                   onPress={handleImage}
@@ -160,7 +178,7 @@ export default function ProfilePic(props) {
                       shadowOpacity: 0.3,
                       elevation: 2,
                       shadowRadius: 15,
-                      shadowOffset: {width: 1, height: 13},
+                      shadowOffset: { width: 1, height: 13 },
                     }}>
                     <UploadBlue height={getHp(100)} width={getHp(100)} />
                   </View>
@@ -169,39 +187,39 @@ export default function ProfilePic(props) {
                   </Text>
                 </TouchableOpacity>
               ) : (
-                <>
-                  <View
-                    style={[
-                      styles.shadowBox,
-                      {justifyContent: 'center', alignItems: 'center'},
-                    ]}>
-                    <TouchableOpacity
-                      onPress={() => openFooter(true)}
-                      style={{marginVertical: 30}}>
-                      <Avatar
-                        source={{uri: picture.uri}}
-                        size={getHp(224)}
-                        rounded
-                      />
-
-                      <View style={styles.shadowBox}>
-                        <UploadBlue
-                          height={getHp(69)}
-                          width={getHp(69)}
-                          style={{
-                            position: 'absolute',
-                            alignSelf:'center',
-                            bottom: -30,
-                            // left: 75,
-                            resizeMode: 'contain',
-                          }}
+                  <>
+                    <View
+                      style={[
+                        styles.shadowBox,
+                        { justifyContent: 'center', alignItems: 'center' },
+                      ]}>
+                      <TouchableOpacity
+                        onPress={() => openFooter(true)}
+                        style={{ marginVertical: 30 }}>
+                        <Avatar
+                          source={{ uri: picture.path }}
+                          size={getHp(224)}
+                          rounded
                         />
-                      </View>
-                      {picture == null ? null : <ImageFooter />}
-                    </TouchableOpacity>
-                  </View>
-                </>
-              )}
+
+                        <View style={styles.shadowBox}>
+                          <UploadBlue
+                            height={getHp(69)}
+                            width={getHp(69)}
+                            style={{
+                              position: 'absolute',
+                              alignSelf: 'center',
+                              bottom: -30,
+                              // left: 75,
+                              resizeMode: 'contain',
+                            }}
+                          />
+                        </View>
+                        {picture == null ? null : <ImageFooter />}
+                      </TouchableOpacity>
+                    </View>
+                  </>
+                )}
             </View>
 
             <View
@@ -213,7 +231,7 @@ export default function ProfilePic(props) {
               }}>
               <ProgressCircle
                 currentProgress={5}
-                containerStyle={{marginBottom: 20}}
+                containerStyle={{ marginBottom: 20 }}
               />
 
               <CustomButton userContinue onPress={handleSubmit} />
@@ -305,6 +323,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     elevation: 2,
     shadowRadius: 15,
-    shadowOffset: {width: 1, height: 13},
+    shadowOffset: { width: 1, height: 13 },
   },
 });

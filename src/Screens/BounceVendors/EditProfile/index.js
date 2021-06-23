@@ -57,6 +57,8 @@ function DJSignup(props) {
 
         return unsubscribe;
     }, [props.navigation, authStore.userProfile]);
+
+
     useEffect(() => {
         if (handleFiller) {
             handleFiller();
@@ -65,6 +67,8 @@ function DJSignup(props) {
             fetchData()
         }
     }, [authStore.userProfile])
+
+
     if (!user) {
         return null;
     }
@@ -140,6 +144,11 @@ function DJSignup(props) {
                 return Alert.alert('Message', 'Please select profile picture!');
             }
             setLoader(true);
+
+            if (!(phone.length < 11)) {
+                setLoader(false);
+                return Toast('Please enter valid phone number !');
+            }
 
             let milliseconds = new Date().getTime();
             let imgObj = {

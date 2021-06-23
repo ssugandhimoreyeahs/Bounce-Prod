@@ -55,14 +55,6 @@ import { useBackHandler } from '@react-native-community/hooks';
 import UserHomeScreen from '../../BounceUsers/UserFriendsProfile';
 
 
-const TAGS = [
-  {
-    name: 'Entertainment',
-    visible: false,
-    item: ['Comedy', 'Gaming', 'Gaming'],
-  },
-];
-
 function CreateInvitation(props) {
   let party = {};
   let isEditParty = false;
@@ -203,8 +195,9 @@ function CreateInvitation(props) {
           onPress={() => {
             handleImage();
           }}
-          style={{ position: 'absolute', bottom: 50, right: 25 }}>
-          <AddBlue height={33} width={33} />
+          style={styles.imageButton}
+        >
+          <AddBlue height={20} width={20} />
         </TouchableOpacity>
       </View>
     );
@@ -217,8 +210,8 @@ function CreateInvitation(props) {
     JSON.stringify(partyModel.party.partyTags),
   );
 
+  console.log("props.route?.params?.isEditParty", props.route?.params?.isEditParty);
 
-  
   return (
     <Scaffold>
       {/* <Root> */}
@@ -239,10 +232,10 @@ function CreateInvitation(props) {
                 partyModel?.party?.title === ''
               ) {
                 props.navigation.goBack();
-              } else {
+              } else if (!isEditParty) {
                 Alert.alert(
                   'Alert !',
-                  'Are you sure you want to go back? All your changes will be lost!',
+                  'Are you sure you want to go back? All changes will be lost!',
                   [
                     {
                       text: 'OK',
@@ -255,8 +248,10 @@ function CreateInvitation(props) {
                   { cancelable: true },
                 );
               }
+              else {
+                props.navigation.goBack();
+              }
 
-              // Alert.alert("All changes will be lost! Are you sure ? ")
             }}
           />
 
@@ -391,7 +386,10 @@ function CreateInvitation(props) {
             <SwitchButton
               value={partyModel.party.isPrivate}
               onPrivatePress={() => partyModel.party.setIsPrivate(true)}
-              onPublicPress={() => partyModel.party.setIsPrivate(false)}
+              onPublicPress={() => {
+                partyModel.party.setIsPrivate(false)
+                Toast("Your event is now public!", { duration: 3000 })
+              }}
             />
           </View>
 
@@ -439,21 +437,25 @@ function CreateInvitation(props) {
           </Text>
           <View style={{ marginBottom: 5, }}>
             {tagStore.partyTags?.map(t => {
+              // console.log()
               return (
                 <TagsCollapsible
                   Data={t}
                   isOnSelect={({ tagObj, item }) => {
+                    // console.log("1 tagObj", tagObj)
+                    // console.log("2 partyModel.party.isSubTagExist",partyModel.party.isSubTagExist)
+                  
                     let isPartySelected = partyModel.party.isSubTagExist(
                       tagObj,
                       item,
                     );
+                    // console.log("3 isPartySelected.tagExist && isPartySelected.subTagExist",isPartySelected.tagExist && isPartySelected.subTagExist);
                     return (
                       isPartySelected.tagExist && isPartySelected.subTagExist
                     );
                   }}
                   onAdd={tag => partyModel.party.addTags(tag)}
                 />
-
               );
             })}
           </View>
@@ -474,12 +476,12 @@ function CreateInvitation(props) {
               style={[
                 styles.headerTitle,
                 {
-                  fontFamily:'AvenirNext-DemiBold',
+                  fontFamily: 'AvenirNext-DemiBold',
                   fontSize: FONTSIZE.Text18,
                   color: '#1FAEF7',
                   paddingVertical: 10,
                   textAlign: 'center',
-                  letterSpacing:0.5
+                  letterSpacing: 0.5
                 },
               ]}>
               {'Add Ticket Type'}
@@ -531,6 +533,17 @@ function CreateInvitation(props) {
 }
 
 const styles = StyleSheet.create({
+  imageButton: {
+    position: 'absolute',
+    bottom: 50,
+    right: 25,
+    borderRadius: 100,
+    elevation: 10,
+    backgroundColor: '#fff',
+    padding: 10,
+    zIndex: 100,
+
+  },
   flex: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -43,7 +43,7 @@ export default function AccountSetting(props) {
 
     const setData = async () => {
 
-              const Country_Code = await ApiClient.authInstance
+        const Country_Code = await ApiClient.authInstance
             .get(ApiClient.endPoints.countryCode)
         // console.log("countryCODES-->", JSON.stringify(Country_Code));
 
@@ -60,6 +60,11 @@ export default function AccountSetting(props) {
 
     const handleSubmit = async () => {
         setLoader(true);
+
+        if (!(phone.length < 11)) {
+            setLoader(false);
+            return Toast('Please enter valid phone number !');
+        }
 
         let formData = new FormData();
         formData.append('username', username);
@@ -176,10 +181,10 @@ export default function AccountSetting(props) {
                             onPress={() => setModalVisible(!isModalVisible)}
                         >
                             <Text style={[code ? { color: '#000000' } : { color: '#999999' }, { fontFamily: 'AvenirNext-Medium', fontSize: FONTSIZE.Text17 }]}>
-                                {code == ''  ? "Code" : code?.dial_code}
+                                {code == '' ? "Code" : code?.dial_code}
                             </Text>
                         </TouchableOpacity>
-                      
+
                         <View style={{ width: '77%' }}>
                             <FloatingInput
                                 keyboardType={"numeric"}

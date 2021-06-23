@@ -15,6 +15,7 @@ import ForgotPassword from '../../Screens/BounceVendors/Onboarding/ForgotPasswor
 import UserNameScreen from '../../Screens/BounceVendors/Onboarding/UsernameScreen';
 import BirthDayScreen from '../../Screens/BounceVendors/Onboarding/BirthDayScreen';
 import ProfilePic from '../../Screens/BounceVendors/Onboarding/ProfilePic';
+import EmailScreen from '../../Screens/BounceVendors/Onboarding/EmailScreen'
 //User Signup screens
 
 //Testing screen
@@ -40,7 +41,7 @@ class AuthStackNavigator {
           name={HostView.routeName}
           component={HostView}
         />
-
+   
         {/* Vendor Signup Screens */}
         <AuthStack.Screen
           name={VendorCategory.routeName}
@@ -76,6 +77,10 @@ class AuthStackNavigator {
         <AuthStack.Screen
           name={ProfilePic.routeName}
           component={ProfilePic}
+        />
+        <AuthStack.Screen
+          name={EmailScreen.routeName}
+          component={EmailScreen}
         />
         {/* User Signup Screens */}
       </AuthStack.Navigator>

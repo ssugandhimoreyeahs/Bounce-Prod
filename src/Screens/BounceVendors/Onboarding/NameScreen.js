@@ -16,6 +16,8 @@ export default function NameScreen(props) {
   const [name, setName] = useState('');
   const dispatch = useDispatch();
   const isKeyboardOpen = useKeyboardStatus();
+
+
   const handleSubmit = async () => {
     if (name.length > 0) {
       navigation.navigate(UserNameScreen.routeName, {
@@ -25,6 +27,8 @@ export default function NameScreen(props) {
       Toast('Please enter your name!');
     }
   };
+
+  
   return (
     <Scaffold>
       <ScrollView

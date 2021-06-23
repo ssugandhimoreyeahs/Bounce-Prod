@@ -33,8 +33,6 @@ import { FONTSIZE } from '@utils';
 import { useSelector, useDispatch } from 'react-redux';
 import { getHp, getWp } from '@utils';
 import Spinner from 'react-native-loading-spinner-overlay';
-import axios from 'axios';
-import { UserContext } from '../../../context/profiledataProvider';
 import { ApiClient } from '../../../app/services';
 import { PrivacyBlock, Toggle } from '@components';
 import MobxStore from '../../../mobx';
@@ -52,7 +50,6 @@ export default function HostProfile(props) {
   const [city, setCity] = useState('');
   const [profession, setProfession] = useState('');
   const [bio, setBio] = useState('');
-
   const [snapchat, setSnapchat] = useState('');
   const [instagram, setInstagram] = useState('');
   const [picture, setPicture] = useState(null);
@@ -90,7 +87,6 @@ export default function HostProfile(props) {
   };
 
   useEffect(() => {
-    // fetchProfile();
     MobxStore.authStore.async.reloadUser();
     setData();
   }, []);
@@ -109,7 +105,6 @@ export default function HostProfile(props) {
   };
 
   const handleSubmit = async () => {
-    // console.log("HANDLE SUBMIT CALLED");
     setLoader(true);
 
     let milliseconds = new Date().getTime();
@@ -126,8 +121,6 @@ export default function HostProfile(props) {
     formData.append('birthday', getBirthday);
     formData.append('about', bio);
     formData.append('profession', profession);
-    // formData.append('snapchatUsername', snapchat);
-    // formData.append('instagramUsername', instagram);
     formData.append('profileImageFile', imgObj);
 
     console.log('TOKEN', token);

@@ -25,6 +25,7 @@ class Endpoints extends Server {
   party = '/party';
   tags = '/tags';
   forgotPassword = '/auth/forgotpassword';
+  countryCode = '/language/countrycode'
 }
 
 export default Object.freeze(new Endpoints());

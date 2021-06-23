@@ -58,17 +58,18 @@ export default function VendorSignup(props) {
             }
 
             let validateE = await validateEmail(email)
-            let validateP = await validatePass(password)
+            // let validateP = await validatePass(password)
 
             if (!validateE) {
                 console.log("values res of email", validateE);
                 Toast("Please enter valid email !");
 
-            } else if (!validateP) {
-                console.log("values res of pass", validateP);
-                Toast("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !");
+            } 
+            // else if (!validateP) {
+            //     console.log("values res of pass", validateP);
+            //     Toast("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !");
 
-            }
+            // }
             else if (picture == null) {
                 console.log("pciture null");
                 Toast("Please select the profile picture!");

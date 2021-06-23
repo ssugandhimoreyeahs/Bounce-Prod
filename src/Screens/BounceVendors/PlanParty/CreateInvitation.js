@@ -98,6 +98,8 @@ function CreateInvitation(props) {
     props.navigation.navigate(UserHomeScreen.routeName);
     return false;
   });
+
+
   const handleOnPress = async isDraftMode => {
     try {
       console.log('DFMD - ', isDraftMode);
@@ -136,6 +138,9 @@ function CreateInvitation(props) {
       props.navigation.goBack()
     }
   };
+
+
+
   const handleImage = async () => {
     return props.navigation.navigate(UploadMedia.routeName, {
       goBack: true,
@@ -149,6 +154,9 @@ function CreateInvitation(props) {
       partyModel.party.addGallery(images.map(i => i.path));
     });
   };
+
+
+
   // const ImageFooter = () => {
   //   return (
   //     <TouchableOpacity
@@ -168,6 +176,9 @@ function CreateInvitation(props) {
   // };
 
   // console.log("partyModel.party",partyModel?.party?.galleryFiles);
+
+
+
   const handleCarousel = () => {
     let img = [];
     if (partyModel?.party?.galleryFiles?.length > 0) {
@@ -199,10 +210,15 @@ function CreateInvitation(props) {
     );
   };
 
+
+
   console.log(
     'TAGS_SELECTED_DATA - ',
     JSON.stringify(partyModel.party.partyTags),
   );
+
+
+  
   return (
     <Scaffold>
       {/* <Root> */}

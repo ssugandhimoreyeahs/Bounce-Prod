@@ -181,11 +181,11 @@ export default function VendorMarketProfile(props) {
         {!loader && (
             <View style={styles.container}>
                 <ScrollView keyboardShouldPersistTaps='always'
-                    contentContainerStyle={{flexGrow:1}}
+                    contentContainerStyle={{ flexGrow: 1 }}
                     style={{ backgroundColor: '#fff', flex: 1 }} ref={scrollRef}  >
 
                     <Header
-                      headerBackColor={{ paddingBottom: 20, backgroundColor: '#F4F4F4' }}
+                        headerBackColor={{ paddingBottom: 20, backgroundColor: '#F4F4F4' }}
                         back
                         headerTitle={`Create ${vendorType} Profile`}
                         onPress={() => props.navigation.goBack()}
@@ -247,7 +247,7 @@ export default function VendorMarketProfile(props) {
                             : null
                         }
 
-                        {vendorType == "DJ" ?
+                        {vendorType == "Music" ?
                             <>
                                 {genreReduxObject.length > 0 ?
                                     <>
@@ -310,7 +310,7 @@ export default function VendorMarketProfile(props) {
                             </>
                             : null}
 
-                        {vendorType == "Catering" ?
+                        {vendorType == "Food" ?
                             <>
                                 <FloatingInput
                                     floatingLabel={"Cuisines"}
@@ -328,19 +328,18 @@ export default function VendorMarketProfile(props) {
                             :
                             null
                         }
-                        {/* {vendorType != "Catering" &&
+                        {vendorType != "Food" &&
                             vendorType != "Security" &&
-                            vendorType != "DJ" ?
+                            vendorType != "Music" ?
                             <>
                                 <FloatingInput
                                     floatingLabel={"Services"}
-
                                     onChange={(value) => setServices(value)}
                                     value={services}
                                 />
                             </>
                             : null
-                        } */}
+                        }
 
                     </View>
                     {/* <View style={{ height: 70 }}></View> */}

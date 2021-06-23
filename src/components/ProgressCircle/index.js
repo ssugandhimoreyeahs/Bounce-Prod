@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 const ProgressCircle = props => {
-  const { progress = 4, currentProgress = 1, containerStyle = {} } = props;
+  const { progress = 5, currentProgress = 1, containerStyle = {} } = props;
 
   const RenderProgress = (_, i) => {
     return (

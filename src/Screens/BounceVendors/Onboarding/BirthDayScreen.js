@@ -26,7 +26,7 @@ export default function BirthDayScreen(props) {
     const {
         navigation
     } = props
-    const { name, username, password } = props.route?.params
+    const { name, username, password, email } = props.route?.params
     console.log("BIRTHDAY PROPS -->", props.route.params)
     const [birthday, setBirthday] = useState('')
     const [age, setAge] = useState(0)
@@ -41,6 +41,7 @@ export default function BirthDayScreen(props) {
                 birthday: birthday,
                 username: username,
                 password: password,
+                email,
                 age: AGE,
                 name
             })
@@ -57,7 +58,7 @@ export default function BirthDayScreen(props) {
             AGE--;
         }
         console.log("THIS IS AGE RETURNED", AGE)
-        
+
         // setAge(age)
         // return age;
     }
@@ -69,7 +70,7 @@ export default function BirthDayScreen(props) {
                 <View style={styles.container}>
                     <Text style={styles.HeadingStyle}>
                         {"When’s your birthday? 🎂"}
-                        </Text>
+                    </Text>
 
                     {birthday !== '' && console.log('age: ' + getAge(birthday))}
 
@@ -82,7 +83,7 @@ export default function BirthDayScreen(props) {
                     </View>
 
                     <View style={{ position: 'absolute', bottom: 0, width: '100%', alignSelf: 'center' }}>
-                        <ProgressCircle currentProgress={3} containerStyle={{ marginBottom: 5 }} />
+                        <ProgressCircle currentProgress={4} containerStyle={{ marginBottom: 5 }} />
                         <CustomButton
                             userContinue
                             onPress={handleSubmit}

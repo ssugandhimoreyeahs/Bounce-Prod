@@ -371,7 +371,7 @@ function UserFriendsProfile(props) {
                   }
 
 
-                  {(profession != null || profession == '') ?
+                  {!(profession == null || profession == '' || profession == 'null') ?
                     <Text style={styles.cityAll}>
                       {profession}
                     </Text>
@@ -413,7 +413,7 @@ function UserFriendsProfile(props) {
               //   Linking.openURL(`https://twitter.com/narendramodi`)
               // }
               >
-                <Twitter height={getHp(30)} width={getWp(30)} />
+                <Twitter height={getHp(29)} width={getWp(29)} />
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -423,7 +423,7 @@ function UserFriendsProfile(props) {
               //   )
               // }
               >
-                <Snapchat height={getHp(30)} width={getWp(30)} />
+                <Snapchat height={getHp(31)} width={getWp(31)} />
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -431,14 +431,14 @@ function UserFriendsProfile(props) {
               //   Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
               // }
               >
-                <Tiktok height={getHp(30)} width={getWp(30)} />
+                <Tiktok height={getHp(28)} width={getWp(28)} />
               </TouchableOpacity>
               <TouchableOpacity
               // onPress={() =>
               //   Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
               // }
               >
-                <Linkedin height={getHp(32)} width={getWp(32)} />
+                <Linkedin height={getHp(31)} width={getWp(30)} />
               </TouchableOpacity>
             </View>
 

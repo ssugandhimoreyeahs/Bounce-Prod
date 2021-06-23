@@ -31,6 +31,7 @@ export default function VendorSignup(props) {
         ImagePicker.openPicker({
             width: 300,
             height: 300,
+            cropping: true
         }).then(image => {
             setPicture(image)
         });
@@ -64,24 +65,29 @@ export default function VendorSignup(props) {
                 console.log("values res of email", validateE);
                 Toast("Please enter valid email !");
 
-            } 
+            }
+            else if (password.length < 7) {
+                return Toast('Password should be 8 characters long !');
+            }
             // else if (!validateP) {
             //     console.log("values res of pass", validateP);
             //     Toast("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !");
 
             // }
             else if (picture == null) {
-                console.log("pciture null");
+                // console.log("pciture null");
                 Toast("Please select the profile picture!");
             }
-            else if (!(phone.length > 9)) {
-                console.log("Phone number");
+            else if ((phone.length >
+                10)) {
+                // console.log("Phone number");
                 Toast("Please Enter valid number!");
             }
             else
                 if (username.length > 0 &&
                     password.length > 0 &&
-                    email.length > 0
+                    email.length > 0 &&
+                    phone.length > 0
                 ) {
                     console.log("1 st blockk");
                     setLoader(true)
@@ -207,7 +213,7 @@ export default function VendorSignup(props) {
             </View>
             <View style={{ position: 'absolute', bottom: 0, alignSelf: 'center', width: '95%', paddingBottom: getHp(10) }}>
                 <CustomButton
-                 
+
                     complete
                     onPress={handleData}
                 />

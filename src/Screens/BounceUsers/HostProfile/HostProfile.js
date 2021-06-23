@@ -114,7 +114,6 @@ export default function HostProfile(props) {
       name: `image-${milliseconds}.jpg`,
     };
 
-
     let formData = new FormData();
     formData.append('fullName', fullName);
     formData.append('city', city);
@@ -242,7 +241,7 @@ export default function HostProfile(props) {
                 onPress={data => {
                   setCity(data.description);
                 }}
-                value={city === null ? '' : city}
+                value={city === 'null' ? '' : city}
               />
 
               <FloatingInput

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -16,16 +16,16 @@ import {
   CustomText,
   Scaffold,
 } from '@components';
-import {GreyHamburger, BlackCircleCross} from '@svg';
+import { GreyHamburger, BlackCircleCross } from '@svg';
 // import { handleImage } from '@components/ImageVideoPlaceholder'
 import ImagePicker from 'react-native-image-crop-picker';
-import {ImageStore} from 'react-native';
-import {FONTSIZE, getHp, getWp} from '@utils';
-import {Avatar} from 'react-native-elements';
+import { ImageStore } from 'react-native';
+import { FONTSIZE, getHp, getWp } from '@utils';
+import { Avatar } from 'react-native-elements';
 import Modal from 'react-native-modal';
-import {Observer, observer} from 'mobx-react';
+import { Observer, observer } from 'mobx-react';
 import PlanPartyModel from './PlanPartyModel';
-import {Toast} from '../../../app/constants';
+import { Toast } from '../../../app/constants';
 
 function UploadMedia(props) {
   let goBack = false;
@@ -45,7 +45,7 @@ function UploadMedia(props) {
   const handleImage = () => {
     ImagePicker.openPicker({
       width: 300,
-      height: 400,
+      height: 300,
       cropping: true,
       multiple: true,
     })
@@ -59,7 +59,7 @@ function UploadMedia(props) {
   const deleteImage = (action, path) => {
     partyModel.party.removeGallery(action, path);
   };
-  const renderItem = ({item, index}) => {
+  const renderItem = ({ item, index }) => {
     if (item == undefined) {
       return false;
     }
@@ -74,25 +74,26 @@ function UploadMedia(props) {
             alignItems: 'center',
             paddingHorizontal: getWp(20),
           }}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={[styles.number, {
-              color:'#000',
+              color: '#000',
               fontSize: FONTSIZE.Text20,
-              fontFamily:'AvenirNext-Regular',
-              marginRight: getWp(30)}]}>
+              fontFamily: 'AvenirNext-Regular',
+              marginRight: getWp(30)
+            }]}>
               {index + 1}
             </Text>
 
             <View>
               {index == 0 ? (
-                <Text style={[styles.number, {marginVertical: getHp(10)}]}>
-                 {"Cover Photo"}
+                <Text style={[styles.number, { marginVertical: getHp(10) }]}>
+                  {"Cover Photo"}
                 </Text>
               ) : null}
               <View>
                 <Avatar
-                  source={{uri: item.path || item.filePath}}
-                  avatarStyle={{borderRadius: 13}}
+                  source={{ uri: item.path || item.filePath }}
+                  avatarStyle={{ borderRadius: 13 }}
                   size={125}
                 />
                 <TouchableOpacity
@@ -137,12 +138,12 @@ function UploadMedia(props) {
   return (
     <Scaffold>
       <View style={styles.container}>
-        <ScrollView contentContainerStyle={{flexGrow: 1}} style={{flex: 1}}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={{ flex: 1 }}>
           <Header
             headerTitle={'Upload Media'}
             back
             onPress={() => props.navigation.goBack()}
-            headerBackColor={{backgroundColor: '#FBFBFB'}}
+            headerBackColor={{ backgroundColor: '#FBFBFB' }}
           />
 
           <FlatList
@@ -187,7 +188,7 @@ const styles = StyleSheet.create({
     // fontWeight: 'bold',
     color: 'rgba(0, 0, 0, 0.6)',
     fontSize: FONTSIZE.Text16,
-    fontFamily:'AvenirNext-Regular'
+    fontFamily: 'AvenirNext-Regular'
   },
 });
 UploadMedia.routeName = '/UploadMedia';

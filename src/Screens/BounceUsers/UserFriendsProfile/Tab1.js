@@ -225,17 +225,25 @@ function Tab1(props) {
               renderItem={renderStatic}
               keyExtractor={index => index}
             />
+            <TouchableOpacity  onPress={() =>
+          props.navigation.navigate(CreateInvitation.routeName, {
+            // party: item,
+            isEditParty: false,
+          })
+        }>
             <Text
               style={[
                 styles.numberTextStyle,
                 {
                   fontSize: FONTSIZE.Text16,
-                  fontWeight: '600',
+                  // fontWeight: '600',
                   marginVertical: 15,
+                  color:'#1FAEF7'
                 },
               ]}>
               {'Click “+” to get started!'}
             </Text>
+            </TouchableOpacity>
           </View>
         )}
     </View>

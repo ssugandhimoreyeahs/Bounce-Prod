@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { BlackClose, More, BlackOutlineShare, LockBlack, Settings,
-  Account_Outline } from '@svg';
-import { FONTSIZE, bigHitSlop, smallHitSlop,getHp ,getWp} from '@utils';
+import {
+  BlackClose, More, BlackOutlineShare, LockBlack, Settings,
+  Account_Outline
+} from '@svg';
+import { FONTSIZE, bigHitSlop, smallHitSlop, getHp, getWp } from '@utils';
 import { useTheme, Switch } from 'react-native-paper';
 import { AuthContext } from '../../context';
 import { LocalStorage } from '../../app/utils/localStorage';
@@ -16,6 +18,8 @@ import PurchaseTickets from '../BounceUsers/EventPage/Public/PurchaseTickets';
 import HostView from '../MyEvents/HostView';
 import FeaturingPage from '../BounceUsers/EventPage/Public/Featuring';
 import PartyRental from '../BounceVendors/PartyRentals'
+import InviteFriends from '../BounceVendors/PlanParty/InviteFriends';
+import FriendsPage from '../BounceUsers/Profile/FriendsPage';
 
 
 
@@ -42,7 +46,7 @@ export default function UserCustomDrawer(props) {
         props.navigation.navigate(AccountSetting.routeName);
       },
     },
-   
+
     // {
     //   icon: <LockBlack height={30} width={30} />,
     //   name: 'Privacy Settings',
@@ -62,6 +66,20 @@ export default function UserCustomDrawer(props) {
       name: 'More',
       onPress: () => { },
     },
+    // {
+    //   icon: <Settings height={30} width={30} />,
+    //   name: 'Invite friends',
+    //   onPress: () => {
+    //     props.navigation.navigate(InviteFriends.routeName)
+    //   },
+    // },
+    // {
+    //   icon: <Settings height={30} width={30} />,
+    //   name: 'FriendsPage',
+    //   onPress: () => {
+    //     props.navigation.navigate(FriendsPage.routeName)
+    //   },
+    // },
     // {
     //   icon: <Settings height={30} width={30} />,
     //   name: 'Vendor Profiles',
@@ -230,6 +248,6 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: FONTSIZE.Text27,
     color: '#000',
-    fontFamily:'AvenirNext-DemiBold'
+    fontFamily: 'AvenirNext-DemiBold'
   },
 });

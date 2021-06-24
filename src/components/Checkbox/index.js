@@ -6,19 +6,19 @@ import { FONTSIZE, getHp, getWp } from '@utils'
 import { CheckBox } from 'react-native-elements'
 
 
-export default Checkbox = ({ title }) => {
+export default Checkbox = ({ onCheck, isChecked }) => {
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
-    const [isSelected, setSelection] = useState(false);
+    // const [isSelected, setSelection] = useState(false);
     return (
         <View style={styles.checkboxContainer}>
             <CheckBox
-                value={isSelected}
-                onValueChange={setSelection}
+                onPress={onCheck}
                 style={styles.checkbox}
                 uncheckedColor={'#999999'}
+                checkedColor={'#1FAEF7'}
                 size={24}
+                checked={isChecked}
             />
-            {/* <Text style={styles.label}>{title}</Text> */}
         </View>
     );
 };
@@ -30,11 +30,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     checkboxContainer: {
-        // flexDirection: "row",
-        // marginVertical: 10,
     },
     checkbox: {
-        // alignSelf: "center",
     },
     label: {
         marginLeft: getWp(10),

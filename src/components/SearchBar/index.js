@@ -182,8 +182,6 @@ export default function SearchBar(props) {
                 iconColor={"#999999"}
                 placeholderTextColor={"#909090"}
             />
-
-
         }
 
 

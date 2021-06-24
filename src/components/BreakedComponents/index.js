@@ -31,6 +31,30 @@ import Events from '../../Screens/Views/Search/EventsTab'
 import People from '../../Screens/Views/Search/PeopleTab'
 import AttendingTab from '../../Screens/BounceUsers/EventPage/Public/featuringTabs/AttendingTab'
 
+export const GuestTabview = observer((props) => {
+    return (
+        <View style={{ borderBottomWidth: 1, borderColor: '#EEEEEE', }}>
+            <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
+
+            <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
+                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Regular' }}
+                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading={"Attending"}>
+                    <Tab1 partyStore={MboxStore.partyStore} {...props} />
+                </Tab >
+
+                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
+                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Regular' }}
+                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="Interested">
+                    <Tab2 />
+                </Tab>
+            </Tabs>
+        </View>
+    );
+});
+
+
 export const FeaturingPageTab = observer((props) => {
     return (
         <View style={{ flex: 1 }}>

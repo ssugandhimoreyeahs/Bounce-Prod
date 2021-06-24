@@ -61,6 +61,7 @@ import HostProfile from "../HostProfile/HostProfile";
 import Right from 'react-native-vector-icons/FontAwesome'
 import Icon from 'react-native-vector-icons/Entypo'
 import spotifyToken from '../../../app/SDK/Spotify/spotify_token'
+import FriendsPage from "../Profile/FriendsPage";
 
 Text.defaultProps = {
   allowFontScaling: false,
@@ -410,6 +411,14 @@ function UserFriendsProfile(props) {
 
               <TouchableOpacity
               // onPress={() =>
+              //   Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
+              // }
+              >
+                <Tiktok height={getHp(28)} width={getWp(28)} />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+              // onPress={() =>
               //   Linking.openURL(`https://twitter.com/narendramodi`)
               // }
               >
@@ -426,13 +435,7 @@ function UserFriendsProfile(props) {
                 <Snapchat height={getHp(31)} width={getWp(31)} />
               </TouchableOpacity>
 
-              <TouchableOpacity
-              // onPress={() =>
-              //   Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
-              // }
-              >
-                <Tiktok height={getHp(28)} width={getWp(28)} />
-              </TouchableOpacity>
+             
               <TouchableOpacity
               // onPress={() =>
               //   Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
@@ -473,11 +476,11 @@ function UserFriendsProfile(props) {
                   marginBottom: 10
                 },
               ]}>
-              <TouchableOpacity style={{
+              <TouchableOpacity style={[styles.fullTouch,{
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center'
-              }} >
+              }]} >
                 <Text style={[styles.buttonText, { marginRight: 15 }]}>{'Bounce with Friends'}</Text>
                 <Right name="angle-right" color='#FFFFFF' size={25} />
               </TouchableOpacity>
@@ -515,12 +518,13 @@ function UserFriendsProfile(props) {
                 styles.linearGradient, {
                   height: getHp(38),
                   borderRadius: 13,
-                  justifyContent: 'center'
+                 
                 }
               ]}>
-              <TouchableOpacity style={{ flexDirection: "row", justifyContent: 'center', alignItems: 'center' }}
-                onPress={() => props.navigation.navigate(CreateInvitation.routeName)}>
-                <WhitePerson height={25} width={19} style={{ marginBottom: -5 }} />
+              <TouchableOpacity style={[styles.fullTouch,{ flexDirection: "row"}]}
+                onPress={() => props.navigation.navigate(FriendsPage.routeName)}>
+                <WhitePerson height={25} width={19}
+                 style={{ marginBottom: -5 }} />
                 <Text style={[styles.buttonText, { marginLeft: 20, fontFamily: 'AvenirNext-Medium', color: '#FFFFFF' }]}>
                   {'Find Friends'}</Text>
               </TouchableOpacity>

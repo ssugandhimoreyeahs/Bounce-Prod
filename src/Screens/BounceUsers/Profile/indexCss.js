@@ -6,6 +6,22 @@ import { getWp, getHp } from '@utils'
 const { height, width } = Dimensions.get("screen")
 
 const styles = StyleSheet.create({
+   searchBarStyle: {
+      elevation: 0,
+      // lineHeight: -41,
+      borderRadius: 9,
+      backgroundColor: '#F2F5F6',
+      height: getHp(50),
+      fontSize: FONTSIZE.Text16,
+      width: '80%',
+      alignSelf: 'center'
+  },
+   headerFlex: {
+      flexDirection: 'row',
+      paddingVertical: getHp(10),
+      backgroundColor: '#fff',
+      alignItems: 'center'
+  },
    cityAll: {
       color: "#999999",
       fontSize: FONTSIZE.Text14,
@@ -29,7 +45,7 @@ const styles = StyleSheet.create({
       marginLeft: 5,
       fontFamily: 'AvenirNext-DemiBold',
       // color: '#000',
-   // height:getHp(36)
+      // height:getHp(36)
    },
    dot: {
       backgroundColor: '#999999',
@@ -42,19 +58,11 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       // justifyContent: 'space-between'
    },
-   fullTouch: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: '100%',
-      height: '100%'
-  },
    editButtonStyle: {
       flexDirection: 'row',
       elevation: 2,
       borderRadius: 7,
       width: getWp(100),
-      // height: getHp(26),
-      backgroundColor: '#fff',
       justifyContent: 'center',
       alignItems: 'center'
    },
@@ -221,11 +229,11 @@ const styles = StyleSheet.create({
 
    },
    editButton: {
-      color: '#1FAEF7',
+      color: '#fff',
       fontSize: FONTSIZE.Text14,
-      // fontWeight: 'bold',
       fontFamily: 'AvenirNext-DemiBold',
-      // fontFamily: 'Comfortaa-Bold'
+      letterSpacing: 0.2,
+     
    }
 })
 export {

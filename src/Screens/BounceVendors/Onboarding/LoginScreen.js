@@ -12,7 +12,7 @@ import { Scaffold } from '@components';
 import { Apple, Insta, Google, Bounce } from '@svg';
 import LinearGradient from 'react-native-linear-gradient';
 import { TouchableOpacity } from 'react-native';
-import { FONTSIZE, getHp, getWp,smallHitSlop } from '@utils';
+import { FONTSIZE, getHp, getWp, smallHitSlop } from '@utils';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { Alert } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -114,17 +114,6 @@ function LoginScreen(props) {
                   animateBall();
                 }}
               />
-              {/* <Text
-                style={[
-                  {
-                    fontSize: FONTSIZE.Text12,
-                    marginRight: 10,
-                    fontFamily: 'AvenirNext-Regular',
-                    color: '#1FAEF7',
-                  },
-                ]}>
-                {'Forgot Username'}
-              </Text> */}
             </View>
 
             {username.length >= 1 ? (
@@ -148,15 +137,15 @@ function LoginScreen(props) {
                     secureTextEntry={!passwordVisible}
                   />
                   {passwordVisible ?
-                    <TouchableOpacity 
-                    hitSlop={smallHitSlop}
-                     onPress={() => setPasswordVisible(!passwordVisible)} >
+                    <TouchableOpacity
+                      hitSlop={smallHitSlop}
+                      onPress={() => setPasswordVisible(!passwordVisible)} >
                       <BlueEye height={getHp(20)} width={getWp(20)} style={{ marginRight: getWp(15) }} />
                     </TouchableOpacity>
                     :
-                    <TouchableOpacity 
-                    hitSlop={smallHitSlop}
-                    onPress={() => setPasswordVisible(!passwordVisible)} >
+                    <TouchableOpacity
+                      hitSlop={smallHitSlop}
+                      onPress={() => setPasswordVisible(!passwordVisible)} >
                       <GreyEye height={getHp(20)} width={getWp(20)} style={{ marginRight: getWp(15) }} />
                     </TouchableOpacity>
 

@@ -36,7 +36,7 @@ export const GuestTabview = observer((props) => {
         <View style={{ borderBottomWidth: 1, borderColor: '#EEEEEE', }}>
             <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
 
-            <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
+                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
                     textStyle={{ color: '#000', fontFamily: 'AvenirNext-Regular' }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
                     activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading={"Attending"}>
@@ -100,10 +100,12 @@ export const FeaturingPageTab = observer((props) => {
 });
 export const SearchPageTab = observer((props) => {
     return (
-        <View style={{ flex: 1 }}>
-            <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
+        <View style={{ flex: 1, }}>
+            <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}
+            >
 
-                <Tab tabStyle={{ backgroundColor: '#fff' }}
+                <Tab tabStyle={{ backgroundColor: '#fff'}}
+
                     textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
                     activeTabStyle={{ backgroundColor: '#fff' }}
                     activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading={"Events"}>

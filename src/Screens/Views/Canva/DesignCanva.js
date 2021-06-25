@@ -72,39 +72,6 @@ export default function DesignCanva(props) {
         </View>
         <SearchPageTab {...props} />
 
-        <View style={{ marginTop: -400 }}>
-            <RangeSlider
-                style={styles.sliderStyle}
-                min={0}
-                max={100}
-                step={1}
-                floatingLabel
-                renderThumb={renderThumb}
-                renderRail={renderRail}
-                renderRailSelected={renderRailSelected}
-                renderLabel={renderLabel}
-                renderNotch={renderNotch}
-                onValueChanged={handleValueChange}
-
-            />
-
-            <LinearGradient
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                colors={['#4EC3FF', '#55C6FF', '#83D9FF']}
-                style={[
-                    styles.linearGradient,
-                    { width: '100%', height: getHp(38), borderRadius: 13 },
-                ]}>
-                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} >
-                    <Text style={[{
-                        color: '#fff',
-                        fontSize: FONTSIZE.Text16,
-                        fontFamily: 'AvenirNext-Medium'
-                    }]}>{'Apply'}</Text>
-                </TouchableOpacity>
-            </LinearGradient>
-        </View>
     </Scaffold>
     );
 };
@@ -114,14 +81,10 @@ const styles = StyleSheet.create({
         borderRadius: 9,
         backgroundColor: '#F2F5F6',
         height: getHp(50),
-        // fontSize: FONTSIZE.Text14,
         width: '80%',
-        // alignItems: 'center',
-        // alignSelf: 'center'
     },
     sliderStyle: {
         marginVertical: 20,
-        // marginTop: -200
     },
     tagsStyle: {
         backgroundColor: '#F2F5F6',

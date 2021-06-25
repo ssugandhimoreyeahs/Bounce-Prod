@@ -66,6 +66,7 @@ function CreateInvitation(props) {
   const partyModel = PlanPartyModel.getInstance();
   const [state, setState] = useState({});
   const [getImageState, setImageState] = useState(0);
+  const [footerOpen, setFooterOpen] = useState(false);
 
   useEffect(async () => {
     const Tags = await PartyService.getTags();
@@ -251,7 +252,7 @@ function CreateInvitation(props) {
           {!partyModel.isEditMode ? (
             partyModel?.party?.galleryFiles?.length == 0 ? (
               <TouchableOpacity
-                onPress={handleImage}
+                onPress={() => setFooterOpen(!footerOpen)}
                 style={{
                   marginVertical: getHp(40),
                   justifyContent: 'center',
@@ -295,7 +296,7 @@ function CreateInvitation(props) {
               value={partyModel.party.date}
               pickerMode={'datetime'}
               minimumDate={moment().toDate()}
-              maximumDate={moment().add(30, 'day').toDate()}
+              // maximumDate={moment().add(30, 'day').toDate()}
               errorMessage={partyModel.party?.partyError?.date}
             />
 
@@ -471,14 +472,103 @@ function CreateInvitation(props) {
 
         </ScrollView>
       </View>
-      <View style={{ backgroundColor: 'red', width: '100%', height: 100, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
 
-      </View>
+      {/* Footer Picture selector */}
+
+      {footerOpen &&
+        <View style={[styles.footerPicture]}>
+
+          <TouchableOpacity onPress={() => {
+            setFooterOpen(!footerOpen)
+            handleImage()
+          }} style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', marginVertical: getHp(20), paddingHorizontal: getWp(10) }}>
+            <Text
+              style={styles.footerText}>
+              {'Take Photo or Video'}
+            </Text>
+            <BlueCamera height={getHp(20)} width={getHp(20)} />
+          </TouchableOpacity>
+
+          <View style={{
+            height: 1, backgroundColor: '#EEEEEE',
+          }} />
+
+          <TouchableOpacity onPress={() => {
+            setFooterOpen(!footerOpen)
+            handleImage()
+          }} style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', marginVertical: getHp(20), paddingHorizontal: getWp(10) }}>
+            <Text
+              style={styles.footerText}>
+              {'Photo Library'}
+            </Text>
+            <BlueCamera height={getHp(20)} width={getHp(20)} />
+          </TouchableOpacity>
+
+          <View style={{
+            height: 1, backgroundColor: '#EEEEEE',
+          }} />
+
+
+          <TouchableOpacity onPress={() => {
+            setFooterOpen(!footerOpen)
+            handleImage()
+          }} style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', marginVertical: getHp(20), paddingHorizontal: getWp(10) }}>
+            <Text
+              style={styles.footerText}>
+              {'Browse'}
+            </Text>
+            <BlueCamera height={getHp(20)} width={getHp(20)} />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => setFooterOpen(!footerOpen)}
+            style={[styles.shadowStyle, {
+              alignSelf: 'center',
+              backgroundColor: '#FFFFFF',
+              borderRadius: 13,
+              width: '95%',
+              elevation: 1,
+
+            }]}>
+            <Text
+              style={[
+                styles.headerTitle,
+                {
+                  fontFamily: 'AvenirNext-DemiBold',
+                  fontSize: FONTSIZE.Text18,
+                  color: '#1FAEF7',
+                  paddingVertical: 10,
+                  textAlign: 'center',
+                  letterSpacing: 0.5
+                },
+              ]}>
+              {'Cancel'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      }
+      {/*END Footer Picture selector */}
+
     </Scaffold>
   );
 }
 
 const styles = StyleSheet.create({
+  footerText: {
+    fontFamily: 'AvenirNext-Medium',
+    fontSize: FONTSIZE.Text15,
+    color: '#000',
+  },
+  footerPicture: {
+    backgroundColor: '#fff',
+    width: '100%',
+    height: '30%',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderWidth: 0.3,
+    borderColor: '#999999',
+    borderBottomWidth: 0
+  },
   imageButton: {
     position: 'absolute',
     bottom: 50,

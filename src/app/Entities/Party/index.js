@@ -17,7 +17,7 @@ import {Strings} from '../../constants';
 class Party {
   @IsNotEmpty({message: Strings.requiredFieldError('Title')})
   title;
-  @IsNotEmpty({message: Strings.requiredFieldError('Description')})
+  // @IsNotEmpty({message: Strings.requiredFieldError('Description')})
   description;
 
   @IsNotEmpty({message: Strings.requiredFieldError('Date')})
@@ -33,10 +33,10 @@ class Party {
     addressStr: '',
   };
 
-  @CV.PartyAge('toAge', {message: 'Invalid Minimum Age'})
+  // @CV.PartyAge('toAge', {message: 'Invalid Minimum Age'})
   fromAge;
 
-  @CV.PartyAge('fromAge', {message: 'Invalid Maximum Age'})
+  // @CV.PartyAge('fromAge', {message: 'Invalid Maximum Age'})
   toAge;
 
   @ArrayNotEmpty({message: Strings.requiredFieldError('Event Media')})
@@ -47,7 +47,7 @@ class Party {
   @ArrayNotEmpty({message: 'Add atleast 1 tag'})
   partyTags = [];
 
-  @ArrayNotEmpty({message: 'Add atleast 1 Ticket Type'})
+  // @ArrayNotEmpty({message: 'Add atleast 1 Ticket Type'})
   tickets = [];
   needBouncer = false;
   needDJ = false;

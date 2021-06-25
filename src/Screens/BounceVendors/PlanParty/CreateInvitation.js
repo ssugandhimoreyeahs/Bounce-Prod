@@ -125,9 +125,9 @@ function CreateInvitation(props) {
       console.log('CREATE_PARTY_RES - ', savePartyResponse);
     } catch (error) {
       console.log('ERROR - ', error);
-      // Toast('Something went wrong!');
-      Toast('Party Created Successfully');
-      props.navigation.goBack()
+      Toast('Something went wrong!');
+      // Toast('Party Created Successfully');
+      // props.navigation.goBack()
     }
   };
 
@@ -146,29 +146,6 @@ function CreateInvitation(props) {
       partyModel.party.addGallery(images.map(i => i.path));
     });
   };
-
-
-
-  // const ImageFooter = () => {
-  //   return (
-  //     <TouchableOpacity
-  //       onPress={() => setPicture(null)}
-  //       style={styles.crossButton}>
-  //       <BlackClose height={15} width={15} />
-  //     </TouchableOpacity>
-  //   );
-  // };
-  // const SmallButton = ({ item }) => {
-  //   console.log('ase', item);
-  //   return (
-  //     <TouchableOpacity style={styles.smallButtonStyle}>
-  //       <Text style={[styles.headerTitle]}>{item}</Text>
-  //     </TouchableOpacity>
-  //   );
-  // };
-
-  // console.log("partyModel.party",partyModel?.party?.galleryFiles);
-
 
 
   const handleCarousel = () => {
@@ -203,14 +180,12 @@ function CreateInvitation(props) {
     );
   };
 
+  // console.log(
+  //   'TAGS_SELECTED_DATA - ',
+  //   JSON.stringify(partyModel.party.partyTags),
+  // );
 
-
-  console.log(
-    'TAGS_SELECTED_DATA - ',
-    JSON.stringify(partyModel.party.partyTags),
-  );
-
-  console.log("props.route?.params?.isEditParty", props.route?.params?.isEditParty);
+  // console.log("props.route?.params?.isEditParty", props.route?.params?.isEditParty);
 
   return (
     <Scaffold>
@@ -344,27 +319,7 @@ function CreateInvitation(props) {
               }}
               errorMessage={partyModel.party?.partyError?.description}
             />
-
-            {/* {INTEREST.map((item) => {
-                            return (
-                                <View style={{ marginVertical: 10 }}>
-                                    <Text style={[styles.headerTitle, { fontSize: FONTSIZE.Text20, marginVertical: 0 }]}>
-                                        {item.categoryHeading}
-                                    </Text>
-
-                                    <View style={{ flexDirection: 'row', marginVertical: 5, flexWrap: 'wrap' }}>
-                                        {
-                                            item.categoryList.map((item) => <SmallButton item={item} />
-                                            )
-                                        }
-                                    </View>
-
-                                </View>
-                            )
-                        })} */}
           </View>
-
-
 
 
           <View style={[styles.flex, { paddingHorizontal: 15 }]}>
@@ -444,7 +399,7 @@ function CreateInvitation(props) {
                   isOnSelect={({ tagObj, item }) => {
                     // console.log("1 tagObj", tagObj)
                     // console.log("2 partyModel.party.isSubTagExist",partyModel.party.isSubTagExist)
-                  
+
                     let isPartySelected = partyModel.party.isSubTagExist(
                       tagObj,
                       item,
@@ -459,6 +414,20 @@ function CreateInvitation(props) {
               );
             })}
           </View>
+
+          {partyModel.party.tickets?.map((t, index) => {
+            return (
+              <TicketComponent
+                data={t}
+                onChangeText={data => {
+                  partyModel.party.onTicketChangeText(data, index);
+                }}
+                onTicketDelete={() => {
+                  partyModel.party.onTicketDelete(index);
+                }}
+              />
+            );
+          })}
 
           <TouchableOpacity
             onPress={() => {
@@ -489,19 +458,6 @@ function CreateInvitation(props) {
           </TouchableOpacity>
 
 
-          {partyModel.party.tickets?.map((t, index) => {
-            return (
-              <TicketComponent
-                data={t}
-                onChangeText={data => {
-                  partyModel.party.onTicketChangeText(data, index);
-                }}
-                onTicketDelete={() => {
-                  partyModel.party.onTicketDelete(index);
-                }}
-              />
-            );
-          })}
 
 
           <CustomButton
@@ -513,21 +469,11 @@ function CreateInvitation(props) {
             onContinuePress={() => handleOnPress(false)}
           />
 
-          {/* <View style={styles.bottomContainer}>
-                            <TouchableButton
-                                icon={<Peoples height={30} width={30} />}
-                                ButtonTitle={"Invite Friends"}
-                                ButtonStyle={styles.bottomButton}
-                            />
-                            <TouchableButton
-                                icon={<HirePeople height={20} width={20} />}
-                                ButtonTitle={"Hire Vendors"}
-                                ButtonStyle={styles.bottomButton}
-                            />
-                        </View> */}
         </ScrollView>
       </View>
-      {/* </Root> */}
+      <View style={{ backgroundColor: 'red', width: '100%', height: 100, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
+
+      </View>
     </Scaffold>
   );
 }

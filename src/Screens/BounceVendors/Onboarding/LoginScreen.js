@@ -6,6 +6,7 @@ import {
   TextInput,
   Animated,
   BackHandler,
+  Platform
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Scaffold } from '@components';
@@ -26,6 +27,7 @@ import HostView from '../../MyEvents/HostView';
 import { Toast } from '@constants';
 import InstagramLogin from 'react-native-instagram-login';
 import { BlueEye, GreyEye } from '@svg';
+import Modal from 'react-native-modal';
 
 function LoginScreen(props) {
   const [animated, setAnimated] = useState({
@@ -37,7 +39,7 @@ function LoginScreen(props) {
   const [IGToken, setIGToken] = useState('');
   const [InstaLogin, setInstaLogin] = useState(true);
   const [passwordVisible, setPasswordVisible] = useState(false);
-
+  const [isModalVisible, setModalVisible] = useState(false);
   const { vendorProfileData } = useSelector(state => state.mainExpenseByCategory);
   const [loader, setLoader] = useState(false);
   const isFocused = useIsFocused();
@@ -150,23 +152,10 @@ function LoginScreen(props) {
                     </TouchableOpacity>
 
                   }
-                  {/* <TouchableOpacity onPress={()=> navigation.navigate(ForgotPassword.routeName)} >
-                    <Text
-                      style={[
-                        {
-                          fontSize: FONTSIZE.Text12,
-                          marginRight: 10,
-                          fontFamily: 'AvenirNext-Regular',
-                          color: '#1FAEF7',
-                        },
-                      ]}>
-                      {'Forgot Password'}
-                    </Text>
-                  </TouchableOpacity> */}
                 </View>
 
                 {
-                  <TouchableOpacity onPress={() => navigation.navigate(ForgotPassword.routeName)} >
+                  <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)} >
                     <Text
                       style={[
                         {
@@ -198,19 +187,22 @@ function LoginScreen(props) {
 
             <View style={styles.CardContainer}>
               <TouchableOpacity
-                onPress={() => {
-                  this.instagramLogin.show();
-                  console.log('insta click');
-                }}
+                // onPress={() => {
+                //   this.instagramLogin.show();
+                //   console.log('insta click');
+                // }}
                 style={[styles.Card, styles.boxShadow]}>
                 <Insta height={getHp(30)} width={getWp(30)} />
                 <Text style={styles.ThirdParty}>{'Instagram'}</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={[styles.Card, styles.boxShadow]}>
-                <Apple height={getHp(30)} width={getWp(30)} />
-                <Text style={styles.ThirdParty}>{'Apple'}</Text>
-              </TouchableOpacity>
+              {
+                Platform.OS == 'ios' &&
+                <TouchableOpacity style={[styles.Card, styles.boxShadow]}>
+                  <Apple height={getHp(30)} width={getWp(30)} />
+                  <Text style={styles.ThirdParty}>{'Apple'}</Text>
+                </TouchableOpacity>
+              }
 
               <TouchableOpacity style={[styles.Card, styles.boxShadow]}>
                 <Google height={getHp(26)} width={getWp(26)} />
@@ -249,6 +241,17 @@ function LoginScreen(props) {
               </Text>
             </TouchableOpacity>
           </View>
+
+          <Modal isVisible={isModalVisible}
+            style={{ backgroundColor: '#fff', }}
+            presentationStyle={'formSheet'}
+            // animationIn={'bounceInLeft'}
+          >
+            <ForgotPassword
+              onBackPress={() => setModalVisible(!isModalVisible)}
+              {...props}
+            />
+          </Modal>
 
         </KeyboardAwareScrollView>
       )}

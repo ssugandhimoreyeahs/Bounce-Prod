@@ -82,7 +82,7 @@ export default CustomTextinput = props => {
                 <Text
                   style={{
                     // backgroundColor:'red',
-                    color: '#000',
+                    color: '#999999',
                     fontWeight: '400',
                     fontSize: FONTSIZE.Text15,
                     marginTop: getHp(5),

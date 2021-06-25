@@ -38,7 +38,7 @@ import { PrivacyBlock, Toggle } from '@components';
 import MobxStore from '../../../mobx';
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
 export default function HostProfile(props) {
@@ -147,18 +147,20 @@ export default function HostProfile(props) {
     setLoader(false);
   };
 
-  console.log('profession', profession)
-  console.log('bio', bio)
+  // console.log('profession', profession)
+  // console.log('bio', bio)
   return (
     <Scaffold
       statusBarStyle={{ backgroundColor: '#fff' }}>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps='always'
-          style={{ backgroundColor: '#FBFBFB', flex: 1 }}
-          contentContainerStyle={{ flexGrow: 1 }}>
+        // <ScrollView
+        //   showsVerticalScrollIndicator={false}
+        //   keyboardShouldPersistTaps='always'
+        //   style={{ backgroundColor: '#FBFBFB', flex: 1 }}
+        //   contentContainerStyle={{ flexGrow: 1 }}>
+        <KeyboardAwareScrollView
+          keyboardShouldPersistTaps={"handled"}>
           <Header
             back
             headerTitle={"Host Profile"}
@@ -496,15 +498,10 @@ export default function HostProfile(props) {
               </Text>
               <Toggle />
             </View>
-
-
-
           </View>
           {/*Endd Privacy Block */}
 
-
-
-          <View style={{ paddingHorizontal: getWp(10), paddingBottom: 80 }}>
+          <View style={{ paddingHorizontal: getWp(10), paddingBottom: 10 }}>
             <CustomButton
               complete
               bar
@@ -512,7 +509,7 @@ export default function HostProfile(props) {
               ButtonTitle={'Save Changes'}
             />
           </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
       )}
     </Scaffold>
   );

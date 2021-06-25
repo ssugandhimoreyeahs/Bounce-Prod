@@ -79,10 +79,16 @@ function Header(props) {
                     leftDropdown ?
                         <TouchableOpacity onPress={() => setShow(!showDropdown)} >
                             <View style={styles.headerDropdown}>
+                            {
+                                   showDropdown ?
+                                   <Icon name="angle-down" size={getHp(30)} color="#000" style={{ marginHorizontal: 5 }} />
+                                   :
+                                   <Icon name="angle-right" size={getHp(30)} color="#000" style={{ marginHorizontal: 5 }} />
+                               }
                                 <Text style={[styles.leftTitleStyle, rightTitleStyle, { marginRight: getWp(5) }]}>
-                                    {`${leftDropdown} `}
+                                    {` ${leftDropdown}`}
                                 </Text>
-                                <Icon name="angle-down" size={getHp(30)} color="#000" style={{ marginHorizontal: 5 }} />
+                              
                             </View>
                         </TouchableOpacity>
                         : null

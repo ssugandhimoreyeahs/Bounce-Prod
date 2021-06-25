@@ -224,10 +224,10 @@ const FloatingInput = props => {
                   customHidePasswordComponent={<BlueEye height={getHp(25)} width={getWp(33)} />}
                   label={floatingLabel}
                   customLabelStyles={{
-                    colorFocused: '#000',
+                    colorFocused: '#999999',
                     fontSizeBlurred: FONTSIZE.Text15,
                     fontSizeFocused: FONTSIZE.Text15,
-                    colorBlurred: '#000',
+                    colorBlurred: '#999999',
                   }}
                   isPassword={Password}
                   labelStyles={{

@@ -453,7 +453,9 @@ function GuestProfile(props) {
                                 justifyContent: 'center',
                                 alignItems: 'center'
                             }} >
-                                <Text style={[styles.buttonText, { marginRight: 15 }]}>{'Things to do with David'}</Text>
+                                <Text style={[styles.buttonText, { marginRight: 15 }]}>
+                                    {'Bounce with David'}
+                                    </Text>
                                 <Right name="angle-right" color='#FFFFFF' size={25} />
                             </TouchableOpacity>
                         </LinearGradient>
@@ -467,13 +469,13 @@ function GuestProfile(props) {
                         {...props}
                     />
 
-                    <View style={{
+                    {/* <View style={{
                         height: 1, backgroundColor: '#EEEEEE', marginTop: 10,
                         marginBottom: 15
-                    }} />
+                    }} /> */}
 
                     <View style={{ paddingHorizontal: 10 }} >
-                        <LinearGradient
+                        {/* <LinearGradient
                             start={{ x: 0, y: 0 }}
                             end={{ x: 1, y: 1 }}
                             colors={['#16B0FE', '#3FBEFF']}
@@ -490,14 +492,14 @@ function GuestProfile(props) {
                                 <Text style={[styles.buttonText, { marginLeft: 20, fontFamily: 'AvenirNext-Medium', color: '#FFFFFF' }]}>
                                     {'Find Friends'}</Text>
                             </TouchableOpacity>
-                        </LinearGradient>
+                        </LinearGradient> */}
 
-                        <View style={{ backgroundColor: '#EEEEEE', height: 1, marginVertical: 15 }} />
+                        {/* <View style={{ backgroundColor: '#EEEEEE', height: 1, marginVertical: 15 }} /> */}
 
 
                         {/* Social Media Section Start */}
                         {/* 1st */}
-                        <View style={styles.flex}>
+                        {/* <View style={styles.flex}>
                             <TouchableOpacity style={[styles.socialButton, styles.shadowStyle]}>
                                 <View style={styles.flex}>
                                     <Insta height={getHp(30)} width={getHp(30)} />
@@ -515,10 +517,10 @@ function GuestProfile(props) {
                                 </Text>
                             </TouchableOpacity>
                             <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
-                        </View>
+                        </View> */}
 
                         {/* 2nd */}
-                        <View style={styles.flex}>
+                        {/* <View style={styles.flex}>
                             <TouchableOpacity style={[styles.socialButton, styles.shadowStyle]}>
                                 <View style={styles.flex}>
                                     <Spotify height={getHp(30)} width={getHp(30)} />
@@ -540,11 +542,11 @@ function GuestProfile(props) {
                                 </Text>
                             </TouchableOpacity>
                             <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
-                        </View>
+                        </View> */}
 
 
                         {/* 3rd */}
-                        <View style={[styles.flex, { marginBottom: getHp(30) }]}>
+                        {/* <View style={[styles.flex, { marginBottom: getHp(30) }]}>
                             <TouchableOpacity style={[styles.socialButton, styles.shadowStyle,]}>
                                 <View style={styles.flex}>
                                     <AppleMusic height={getHp(30)} width={getHp(30)} />
@@ -566,10 +568,10 @@ function GuestProfile(props) {
                                 </Text>
                             </TouchableOpacity>
                             <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
-                        </View>
+                        </View> */}
 
                         {/* 4th */}
-                        <View style={styles.flex}>
+                        {/* <View style={styles.flex}>
                             <TouchableOpacity style={[styles.socialButton, {
                                 borderWidth: 1,
                                 borderColor: '#DDDDDD',
@@ -587,10 +589,10 @@ function GuestProfile(props) {
                                 </View>
                             </TouchableOpacity>
                             <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
-                        </View>
+                        </View> */}
 
                         {/* 5th */}
-                        <View style={styles.flex}>
+                        {/* <View style={styles.flex}>
                             <TouchableOpacity style={[styles.socialButton, {
                                 borderWidth: 1,
                                 borderColor: '#DDDDDD',
@@ -608,11 +610,11 @@ function GuestProfile(props) {
                                 </View>
                             </TouchableOpacity>
                             <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
-                        </View>
+                        </View> */}
 
 
                         {/* 6th */}
-                        <View style={styles.flex}>
+                        {/* <View style={styles.flex}>
                             <TouchableOpacity style={[styles.socialButton, {
                                 borderWidth: 1,
                                 borderColor: '#DDDDDD',
@@ -630,10 +632,10 @@ function GuestProfile(props) {
                                 </View>
                             </TouchableOpacity>
                             <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
-                        </View>
+                        </View> */}
 
                         {/* 7th */}
-                        <View style={styles.flex}>
+                        {/* <View style={styles.flex}>
                             <TouchableOpacity style={[styles.socialButton, {
                                 borderWidth: 1,
                                 borderColor: '#DDDDDD',
@@ -651,7 +653,7 @@ function GuestProfile(props) {
                                 </View>
                             </TouchableOpacity>
                             <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
-                        </View>
+                        </View> */}
 
                     </View>
                     <View style={[styles.flex, {

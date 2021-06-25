@@ -11,6 +11,7 @@ import { Scaffold } from '@components';
 import { Toast } from '@constants';
 import { useKeyboardStatus } from '@hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 export default function NameScreen(props) {
   const { navigation } = props;
@@ -18,16 +19,13 @@ export default function NameScreen(props) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const dispatch = useDispatch();
-
-
   const isKeyboardOpen = useKeyboardStatus();
-
 
   const handleSubmit = async () => {
     // console.log("FULL NAME-->",(`${firstName} `+`${lastName}`))
     if (firstName.length > 0 && lastName.length > 0) {
       navigation.navigate(UserNameScreen.routeName, {
-        name: (`${firstName} `+`${lastName}`),
+        name: (`${firstName} ` + `${lastName}`),
       });
     } else {
       Toast('Please enter your full name!');
@@ -61,31 +59,7 @@ export default function NameScreen(props) {
               value={lastName}
             />
           </View>
-
-
-          <View style={[styles.checkBoxStyle]}>
-            <Checkbox
-              onCheck={() => setOlder(!older)}
-              isChecked={older}
-            />
-            <View>
-              <Text style={[styles.textStyle]}>
-                {'I am 13 years or older'}
-              </Text>
-            </View>
-          </View>
-
-
-          {/* <Text style={styles.HeadingStyle}>{'What’s your name? 👋'}</Text>
-          <View style={{marginTop: 100}}>
-            <TextInput
-              placeholder={'Name'}
-              placeholderTextColor="#999"
-              style={styles.textInput}
-              onChangeText={value => setName(value)}
-              value={name}
-            />
-          </View> */}
+     
           {!isKeyboardOpen && (
             <View
               style={{
@@ -94,30 +68,11 @@ export default function NameScreen(props) {
                 width: '100%',
                 alignSelf: 'center',
               }}>
-              {/* <CustomButton userContinue onPress={handleSubmit} /> */}
-
-
-              <TouchableOpacity
-                onPress={handleSubmit}
-                style={{ backgroundColor: '#1A93FE', borderRadius: 20, paddingVertical: getHp(10), justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={[styles.textStyle, {
-                  color: '#fff',
-                  fontFamily: 'AvenirNext-DemiBold'
-                }]}>
-                  {'Sync contacts and continue'}
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={handleSubmit}
-                style={{ paddingVertical: getHp(15), justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={[styles.textStyle, {
-                  fontSize: FONTSIZE.Text14,
-                }]}>
-                  {'Continue without syncing contacts'}
-                </Text>
-              </TouchableOpacity>
-
+              <ProgressCircle
+                currentProgress={1}
+                containerStyle={{ marginBottom: 20 }}
+              />
+              <CustomButton userContinue onPress={handleSubmit} />
             </View>
           )}
         </View>

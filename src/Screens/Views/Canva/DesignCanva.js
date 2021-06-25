@@ -1,17 +1,23 @@
-import React, {useState, useEffect, useCallback, useContext} from 'react';
-import {View, StyleSheet, FlatList, Text, TouchableOpacity} from 'react-native';
-import {QRCodes, Scaffold, SearchPageTab} from '@components';
-import {FONTSIZE, getHp, getWp} from '@utils';
-import {ChangeBlue} from '@svg';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
+import { View, StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native';
+import { QRCodes, Scaffold, SearchPageTab } from '@components';
+import { FONTSIZE, getHp, getWp } from '@utils';
+import { ChangeBlue } from '@svg';
 import Back from 'react-native-vector-icons/Ionicons';
 import { Searchbar } from 'react-native-paper';
-import LinearGradient from 'react-native-linear-gradient';
-import RangeSlider from 'rn-range-slider';
+
 import Thumb from '../Search/basic/Thumb'
 import Rail from '../Search/basic/Rail'
 import RailSelected from '../Search/basic/RailSelected'
 import Label from '../Search/basic/Label'
 import Notch from '../Search/basic/Notch'
+import LinearGradient from 'react-native-linear-gradient';
+import RangeSlider from 'rn-range-slider';
+// import Thumb from './basic/Thumb'
+// import Rail from './basic/Rail'
+// import RailSelected from './basic/RailSelected'
+// import Label from './basic/Label'
+// import Notch from './basic/Notch'
 
 export default function DesignCanva(props) {
     const [searchQuery, setSearchQuery] = React.useState('');
@@ -53,11 +59,11 @@ export default function DesignCanva(props) {
                 placeholder={"Search events"}
                 onChangeText={onChangeSearch}
                 value={searchQuery}
-                
+
                 inputStyle={{
                     fontSize: FONTSIZE.Text16,
                     fontFamily: 'AvenirNext-Regular',
-                    
+
                 }}
                 style={styles.searchBarStyle}
                 iconColor={"#999999"}
@@ -65,8 +71,42 @@ export default function DesignCanva(props) {
             />
         </View>
         <SearchPageTab {...props} />
+
+        <View style={{ marginTop: -400 }}>
+            <RangeSlider
+                style={styles.sliderStyle}
+                min={0}
+                max={100}
+                step={1}
+                floatingLabel
+                renderThumb={renderThumb}
+                renderRail={renderRail}
+                renderRailSelected={renderRailSelected}
+                renderLabel={renderLabel}
+                renderNotch={renderNotch}
+                onValueChanged={handleValueChange}
+
+            />
+
+            <LinearGradient
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                colors={['#4EC3FF', '#55C6FF', '#83D9FF']}
+                style={[
+                    styles.linearGradient,
+                    { width: '100%', height: getHp(38), borderRadius: 13 },
+                ]}>
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} >
+                    <Text style={[{
+                        color: '#fff',
+                        fontSize: FONTSIZE.Text16,
+                        fontFamily: 'AvenirNext-Medium'
+                    }]}>{'Apply'}</Text>
+                </TouchableOpacity>
+            </LinearGradient>
+        </View>
     </Scaffold>
-  );
+    );
 };
 const styles = StyleSheet.create({
     searchBarStyle: {
@@ -80,7 +120,8 @@ const styles = StyleSheet.create({
         // alignSelf: 'center'
     },
     sliderStyle: {
-        marginVertical: 20
+        marginVertical: 20,
+        // marginTop: -200
     },
     tagsStyle: {
         backgroundColor: '#F2F5F6',
@@ -137,36 +178,36 @@ const styles = StyleSheet.create({
 DesignCanva.routeName = '/DesignCanva';
 
 {
-  /* <Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10, fontFamily: 'AvenirNext-Bold', fontSize: FONTSIZE.Text22 }]} >
-            {"Under Development"}
-        </Text> */
+    /* <Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10, fontFamily: 'AvenirNext-Bold', fontSize: FONTSIZE.Text22 }]} >
+              {"Under Development"}
+          </Text> */
 }
 {
-  /* <Header headerTitle={"Custom Invitation"}
-            back
-            onPress={() => navigation.goBack()}
-        />
-        <View style={styles.subContainer}>
-
-            <Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10, fontFamily: 'AvenirNext-Bold', fontSize: FONTSIZE.Text22 }]} >
-                {"Adelson School Gala"}
-            </Text>
-            <Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10 }]} >
-                {"Dec 31, 8:00 PM"}
-            </Text>
-
-            <Text style={[styles.textStyle, { textDecorationLine: 'underline', fontSize: FONTSIZE.Text14, fontFamily: 'AvenirNext-Medium', color: '#1FAEF7' }]}>
-                {"8440 W. Lake Mead Blvd., Las Vegas,... "}
-            </Text>
-
-        </View>
-
-
-        <View style={{ position: 'absolute', bottom: 0, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-            <TouchableOpacity style={[{ height: 56, borderRadius: 10, justifyContent: 'center', elevation: 2, backgroundColor: '#7B41E4', width: '80%' }]}>
-                <Text style={[{ fontSize: FONTSIZE.Text22, color: '#FDFCFD', alignSelf: 'center' }]} >
-                    {"Design with Canva"}
-                </Text>
-            </TouchableOpacity>
-        </View> */
+    /* <Header headerTitle={"Custom Invitation"}
+              back
+              onPress={() => navigation.goBack()}
+          />
+          <View style={styles.subContainer}>
+  
+              <Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10, fontFamily: 'AvenirNext-Bold', fontSize: FONTSIZE.Text22 }]} >
+                  {"Adelson School Gala"}
+              </Text>
+              <Text style={[styles.textStyle, { alignSelf: 'center', marginBottom: 10 }]} >
+                  {"Dec 31, 8:00 PM"}
+              </Text>
+  
+              <Text style={[styles.textStyle, { textDecorationLine: 'underline', fontSize: FONTSIZE.Text14, fontFamily: 'AvenirNext-Medium', color: '#1FAEF7' }]}>
+                  {"8440 W. Lake Mead Blvd., Las Vegas,... "}
+              </Text>
+  
+          </View>
+  
+  
+          <View style={{ position: 'absolute', bottom: 0, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+              <TouchableOpacity style={[{ height: 56, borderRadius: 10, justifyContent: 'center', elevation: 2, backgroundColor: '#7B41E4', width: '80%' }]}>
+                  <Text style={[{ fontSize: FONTSIZE.Text22, color: '#FDFCFD', alignSelf: 'center' }]} >
+                      {"Design with Canva"}
+                  </Text>
+              </TouchableOpacity>
+          </View> */
 }

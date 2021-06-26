@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Alert, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Alert, ScrollView, TouchableOpacity, } from 'react-native'
 import { Header, FloatingInput, CustomButton, Root } from '@components'
 import { Avatar } from 'react-native-elements'
 import { UploadBlue, BlackClose } from '@svg';
 import ImagePicker from 'react-native-image-crop-picker';
+import Spinner from 'react-native-loading-spinner-overlay';
 import { FONTSIZE, validateEmail, validatePass } from '@utils'
 import { useSelector, useDispatch } from "react-redux";
 import { fetchVendorData } from "../../../reducer/mainexpensecategory";
@@ -13,8 +14,8 @@ import VendorMarketProfile from './VendorMarketProfile';
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
 
+
 export default function VendorSignup(props) {
-    console.log("REACHED AT VENDOR SIGNUP SCREEN 2 -->")
     const { login, vendorType
     } = useSelector((state) => state.mainExpenseByCategory);
     const [username, setUsername] = useState('')
@@ -120,6 +121,7 @@ export default function VendorSignup(props) {
     }
     return (<Scaffold
         statusBarStyle={{ backgroundColor: '#F4F4F4' }}>
+        <Spinner visible={loader} color={'#1FAEF7'} />
         <ScrollView
             keyboardShouldPersistTaps='always'
             contentContainerStyle={{ flexGrow: 1 }}

@@ -50,10 +50,9 @@ import {
   Snapchat,
   BlackPerson,
 } from "@svg";
-import { PartyService } from '../../../app/services';
+import { AccountService, PartyService } from '../../../app/services';
 import CreateInvitation from '../../../Screens/BounceVendors/PlanParty/CreateInvitation'
 import { observer } from 'mobx-react';
-import axios from "axios";
 import { FONTSIZE, getHp, getWp } from '@utils'
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
@@ -133,8 +132,8 @@ function UserFriendsProfile(props) {
     profileImage = {},
     age,
   } = userinfo?.user;
-  console.log("userinfo", userinfo)
-
+  //console.log("userinfo ----> ", authStore.userProfile)
+  
   var gapi = window
   console.log("WINDOW ", gapi)
   /* 
@@ -231,9 +230,14 @@ function UserFriendsProfile(props) {
 
 
   useEffect(() => {
-
     PartyService.getParty();
-  }, []);
+    setAccounts();
+  }, [authStore.userProfile]);
+
+  const setAccounts = async () =>{
+    await authStore.setAllAccounts();
+  }
+  
   const handleCarousel = (value) => {
     return (
       <ImageCarousel
@@ -246,9 +250,9 @@ function UserFriendsProfile(props) {
     );
   };
 
-  // useEffect(() => {
-  //   fetchProfile();
-  // }, []);
+  useEffect(() => {
+    //fetchProfile();
+  }, []);
 
   // const fetchProfile = async () => {
   //   const SERVER_RESPONSE = await postData()
@@ -308,6 +312,7 @@ function UserFriendsProfile(props) {
       {!loader && (
         <View>
           <Header
+            AllAccounts = {authStore.AllAccounts}
             leftDropdown={
               username !== null ? `@${username !== null ? username : ""}` : ""
             }
@@ -319,6 +324,7 @@ function UserFriendsProfile(props) {
             }}
             headerBackColor={{ backgroundColor: "#FFFFFF" }}
             {...props}
+            
           />
           <View style={styles.subContainer}>
             <View

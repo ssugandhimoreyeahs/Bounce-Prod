@@ -14,7 +14,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import { TouchableOpacity } from 'react-native';
 import { FONTSIZE, getHp, getWp,smallHitSlop } from '@utils';
 import { connect, useSelector, useDispatch } from 'react-redux';
-import { Alert } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { useIsFocused } from '@react-navigation/native';
 import MobxStore from '../../../mobx';
@@ -26,6 +25,9 @@ import HostView from '../../MyEvents/HostView';
 import { Toast } from '@constants';
 import InstagramLogin from 'react-native-instagram-login';
 import { BlueEye, GreyEye } from '@svg';
+import UserHomeBottomNavigation from '../../../navigation/UserNavigation/bottomNavigation';
+import UserNavigation from '../../../navigation/UserNavigation';
+import VendorHomeDrawerNavigator from '../../../navigation/VendorNavigation/drawerNavigation';
 
 function LoginScreen(props) {
   const [animated, setAnimated] = useState({
@@ -48,6 +50,13 @@ function LoginScreen(props) {
   const handleUserLogin = async () => {
     try {
       const loginResponse = await authStore.async.login(username, password);
+      if(authStore.isAuthenticated && loginResponse.success){
+        if(authStore.userProfile.user.vendorType == 2){
+          navigation.navigate(UserHomeBottomNavigation.routeName)
+        }else{
+          navigation.navigate(VendorHomeDrawerNavigator.routeName)
+        }
+      }
     } catch (error) {
       console.log('ERROR_Login - ', error.response.data);
 
@@ -58,7 +67,7 @@ function LoginScreen(props) {
   };
 
   const setIgToken = data => {
-    console.log('data', data);
+    console.log('Instagram Response --> ', data);
     setIGToken(data.access_token);
     setInstaLogin(false);
   };
@@ -263,7 +272,7 @@ function LoginScreen(props) {
 
         </KeyboardAwareScrollView>
       )}
-      {/* <InstagramLogin
+      <InstagramLogin
         ref={ref => (this.instagramLogin = ref)}
         appId="315364603524733"
         appSecret="f2bd03e5cfeb924622557378e282b384"
@@ -271,7 +280,7 @@ function LoginScreen(props) {
         scopes={['user_profile', 'user_media']}
         onLoginSuccess={data => setIgToken(data)}
         onLoginFailure={data => console.log(data)}
-      /> */}
+      />
     </Scaffold>
   );
 }

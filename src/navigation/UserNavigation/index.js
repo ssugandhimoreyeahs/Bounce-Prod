@@ -21,6 +21,7 @@ import Featuring from '../../Screens/BounceUsers/EventPage/Public/Featuring'
 import PartyRental from '../../Screens/BounceVendors/PartyRentals'
 import EmailScreen from '../../Screens/BounceVendors/Onboarding/EmailScreen'
 import NameScreen from '../../Screens/BounceVendors/Onboarding/NameScreen'
+import AuthNavigation from '../AuthNavigation';
 
 
 const UserRootStack = createStackNavigator();
@@ -33,6 +34,10 @@ class UserNavigation {
       <UserRootStack.Navigator
         headerMode={'none'}
         initialRouteName={UserHomeDrawerNavigator.routeName}>
+        <UserRootStack.Screen 
+          component={AuthNavigation.Stack}
+          name={AuthNavigation.routeName}
+        />
         <UserRootStack.Screen
           name={UserHomeDrawerNavigator.routeName}
           component={UserHomeDrawerNavigator.drawerHome}

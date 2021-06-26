@@ -79,7 +79,13 @@ function DjProfile(props) {
   const dispatch = useDispatch();
   const token = userProfile?.token;
 
-  useEffect(() => { }, []);
+  useEffect(() => {
+    setAccounts();
+  }, [MobxStore.authStore.AllAccounts]);
+
+  const setAccounts = async () =>{
+    await MobxStore.authStore.setAllAccounts();
+  }
 
   if (userProfile?.user == undefined) {
     return null;
@@ -108,8 +114,6 @@ function DjProfile(props) {
     hourlyRate,
     inventory,
   } = vendor;
-  console.log("hourlyRate", hourlyRate)
-  console.log("vendorCategoryName", vendorCategoryName)
 
   const handleCarousel = () => {
     return (
@@ -273,6 +277,7 @@ function DjProfile(props) {
         <ScrollView style={[styles.container]}
           contentContainerStyle={{ flexGrow: 1 }}>
           <Header
+            AllAccounts = {MobxStore.authStore.AllAccounts}
             leftDropdown={
               username !== null ? `@${username !== null ? username : ''}` : ''
             }

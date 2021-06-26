@@ -9,6 +9,8 @@ import {Avatar} from 'react-native-elements';
 import ImagePicker from 'react-native-image-crop-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
 
+import UserNavigation from '../../../navigation/UserNavigation';
+import UserHomeDrawerNavigator from '../../../navigation/UserNavigation/drawerNavigation';
 import axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {LocalStorage} from '../../../app/utils/localStorage';
@@ -65,6 +67,9 @@ export default function ProfilePic(props) {
           console.log('NEW_USER_REGISTRATION ', result);
           authStore.onUserRegistration(response.data);
           setLoader(false);
+          if(authStore.isAuthenticated){
+            navigation.navigate(UserHomeDrawerNavigator.routeName)
+          }
         }
       } else {
         setLoader(false);

@@ -113,9 +113,8 @@ export default function VendorMarketProfile(props) {
                         await LocalStorage.onSignUp(response.data.accessToken, JSON.stringify(response.data.user));
                         authStore.onVendorRegistration({ token: response.data.accessToken, user: response.data.user });
                         setLoader(false);
-
                     } else {
-                        setLoader(false)
+                        setLoader(false);
                     }
 
                 } catch (e) {

@@ -2,7 +2,7 @@ import {LocalStorage} from '../../../app/utils/localStorage';
 import {postData, BaseURL} from '../../../FetchServices';
 import {runInAction} from 'mobx';
 import axios from 'axios';
-import {ApiClient} from '../../../app/services';
+import {ApiClient, AccountService} from '../../../app/services';
 class Asynctask {
   authStore;
   rootStore;
@@ -22,6 +22,7 @@ class Asynctask {
       console.log("RESP_REC_HERE - ", userLoginResponse.data);
       runInAction(() => {
         this.authStore.userProfile = userLoginResponse.data;
+        this.authStore.allUserProfile.push(userLoginResponse.data);
         this.authStore.isAuthenticated = true;
       });
       return Promise.resolve(userLoginResponse.data);
@@ -32,7 +33,6 @@ class Asynctask {
 
 
   login = async (username, password, showLoader = true) => {
-  
     try {
       showLoader && this.rootStore.appStore.toogleLoader(true);
       let body = {
@@ -51,6 +51,7 @@ class Asynctask {
           userLoginResponse.token,
           JSON.stringify(userLoginResponse.user),
         );
+        await AccountService.addNewAccount(userLoginResponse)
         runInAction(() => {
           this.authStore.userProfile = userLoginResponse;
           this.authStore.isAuthenticated = true;

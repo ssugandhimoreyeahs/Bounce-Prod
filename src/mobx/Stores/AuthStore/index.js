@@ -7,8 +7,11 @@ import {
 } from 'mobx';
 import Asynctask from './Asynctask';
 import {LocalStorage} from '../../../app/utils/localStorage';
+import {AccountService} from '../../../app/services';
+
 class AuthStore {
   @observable userProfile = {};
+  @observable AllAccounts = [];
   @observable isAuthenticated = false;
   @observable isAutoLoginDone = false;
   async;
@@ -18,23 +21,24 @@ class AuthStore {
     this.rootStore = rootStore;
     this.async = new Asynctask(this, rootStore);
   }
-  onVendorRegistration = userProfile => { 
+  onVendorRegistration = userProfile => {
       this.isAuthenticated = true;
-      this.userProfile = Object.assign({}, userProfile); 
+      this.userProfile = Object.assign({}, userProfile);
+      AccountService.addNewAccount(Object.assign({}, userProfile));
   };
   logout = () => { 
       this.isAuthenticated = false;
       this.userProfile = {}; 
   };
-  onAutoLogin = userProfile => { 
+  onAutoLogin = userProfile => {
       this.userProfile = userProfile;
       this.isAuthenticated = true;
-      this.isAutoLoginDone = true; 
+      this.isAutoLoginDone = true;
   };
-  onReloadVendor = user => { 
+  onReloadVendor = user => {
       let nextUserProfile = Object.assign({}, this.userProfile);
       nextUserProfile.user = user;
-      this.userProfile = nextUserProfile; 
+      this.userProfile = nextUserProfile;
   };
   onUserRegistration = body => {
     let userDetailsObj = {
@@ -45,8 +49,17 @@ class AuthStore {
     this.userProfile = userDetailsObj;
     this.isAuthenticated = true;
     LocalStorage.onSignUp(body.accessToken, JSON.stringify(body.user));
+    AccountService.addNewAccount(userDetailsObj);
   };
 
+  setAllAccounts = async () => {
+    this.AllAccounts = await AccountService.getAllAccounts();
+  }
+
+  setUserProfile = data => {
+    this.userProfile = data
+  }
+ 
   @computed
   get token() {
     return this.userProfile.token;

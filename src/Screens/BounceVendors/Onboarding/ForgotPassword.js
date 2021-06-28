@@ -14,7 +14,7 @@ import { ApiClient } from '@bounceServices';
 import { useKeyboardStatus } from '@hooks';
 
 export default function ForgotPassword(props) {
-  const { navigation } = props;
+  const { navigation ,onBackPress} = props;
   const [username, setUserName] = useState('');
   const [checkUsername, setCheckUsername] = useState(false);
   const [checkPassword, setCheckPassword] = useState(false);
@@ -52,7 +52,7 @@ export default function ForgotPassword(props) {
   };
 
   return (
-    <Scaffold>
+    // <Scaffold>
       <ScrollView
         style={{ flex: 1, backgroundColor: '#FBFBFB' }}
         contentContainerStyle={{ flexGrow: 1 }}>
@@ -61,7 +61,7 @@ export default function ForgotPassword(props) {
           back
           headerStyleProp={{ fontFamily: 'AvenirNext-DemiBold', }}
           headerTitle={"Forgot Something?"}
-          onPress={() => props.navigation.goBack()}
+          onPress={onBackPress}
         />
         <View style={styles.container}>
 
@@ -138,7 +138,7 @@ export default function ForgotPassword(props) {
 
         </View>
       </ScrollView>
-    </Scaffold>
+    // </Scaffold>
   );
 }
 ForgotPassword.routeName = '/ForgotPassword';

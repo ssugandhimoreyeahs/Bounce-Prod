@@ -40,6 +40,7 @@ class AuthStore {
       nextUserProfile.user = user;
       this.userProfile = nextUserProfile;
   };
+  @action
   onUserRegistration = body => {
     let userDetailsObj = {
       success: true,

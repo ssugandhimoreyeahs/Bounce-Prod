@@ -67,9 +67,7 @@ const TicketComponent = props => {
           onChangeText={price => {
             onChangeText({ price: price });
           }}
-          value={data?.price?.toString().length > 0 ?
-            `$` + data?.price?.toString() : ''
-          }
+          value={data?.price?.toString()}
           style={[
             styles.textInput,
             {

@@ -40,8 +40,8 @@ export default function EventsTab(props) {
             </TouchableOpacity>
         )
     }
-    return (<ScrollView style={{flex:1}} contentContainerStyle={{}}>
-        <View style={{ paddingHorizontal: 10,backgroundColor:'#FBFBFB',flex:1 }}>
+    return (<ScrollView style={{}} contentContainerStyle={{height:200}}>
+        <View style={{ paddingHorizontal: 10,backgroundColor:'#FBFBFB',}}>
             <Text style={[styles.textStyle, { color: '#999999', paddingTop: 10, paddingBottom: 5 }]}> {"Find events in"}</Text>
 
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -76,37 +76,7 @@ export default function EventsTab(props) {
                 color: '#999999'
             }]}> {"$0 - $500+"}</Text>
 
-            <RangeSlider
-                style={styles.sliderStyle}
-                min={0}
-                max={100}
-                step={1}
-                floatingLabel
-                renderThumb={renderThumb}
-                renderRail={renderRail}
-                renderRailSelected={renderRailSelected}
-                renderLabel={renderLabel}
-                renderNotch={renderNotch}
-                onValueChanged={handleValueChange}
-
-            />
-
-            <LinearGradient
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                colors={['#4EC3FF', '#55C6FF', '#83D9FF']}
-                style={[
-                    styles.linearGradient,
-                    { width: '100%', height: getHp(38), borderRadius: 13 },
-                ]}>
-                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} >
-                    <Text style={[{
-                        color: '#fff',
-                        fontSize: FONTSIZE.Text16,
-                        fontFamily: 'AvenirNext-Medium'
-                    }]}>{'Apply'}</Text>
-                </TouchableOpacity>
-            </LinearGradient>
+            
         </View>
         </ScrollView>
     )

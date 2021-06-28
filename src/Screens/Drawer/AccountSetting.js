@@ -30,11 +30,6 @@ export default function AccountSetting(props) {
     const [code, setCode] = useState('')
     const [isModalVisible, setModalVisible] = useState(false);
 
-    const toggleModal = () => {
-        setModalVisible(!isModalVisible);
-    };
-
-
 
     useEffect(() => {
         MobxStore.authStore.async.reloadUser();

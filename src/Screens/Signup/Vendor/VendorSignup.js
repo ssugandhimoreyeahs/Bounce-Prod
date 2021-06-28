@@ -13,6 +13,7 @@ import { ApiClient } from '../../../app/services';
 import VendorMarketProfile from './VendorMarketProfile';
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
 export default function VendorSignup(props) {
@@ -135,11 +136,12 @@ export default function VendorSignup(props) {
     }
     return (<Scaffold
         statusBarStyle={{ backgroundColor: '#F4F4F4' }}>
-        <Spinner visible={loader} color={'#1FAEF7'} />
-        <ScrollView
+             <Spinner visible={loader} color={'#1FAEF7'} />
+        <KeyboardAwareScrollView >
+            {/* <ScrollView
             keyboardShouldPersistTaps='always'
             contentContainerStyle={{ flexGrow: 1 }}
-            style={{ backgroundColor: '#FBFBFB', flex: 1 }}>
+            style={{ backgroundColor: '#FBFBFB', flex: 1 }}> */}
             <Header
                 headerBackColor={{ paddingBottom: 20, backgroundColor: '#F4F4F4' }}
                 back
@@ -147,7 +149,7 @@ export default function VendorSignup(props) {
                 headerTitle={`Create ${vendorType} Profile`}
                 onPress={() => props.navigation.goBack()}
             />
-            <View style={{ paddingBottom: getHp(80), paddingHorizontal: getWp(10), backgroundColor: '#FBFBFB' }}>
+            <View style={{ paddingBottom: getHp(0), paddingHorizontal: getWp(10), backgroundColor: '#FBFBFB' }}>
 
                 {picture == null ?
                     <View style={{ padding: 0, marginVertical: getHp(60), justifyContent: 'center', alignItems: 'center' }}>
@@ -195,7 +197,7 @@ export default function VendorSignup(props) {
                 }
                 <FloatingInput
                     floatingLabel={"Username"}
-                    onChangeText={value => handleSpace(value, 'Username')}
+                    onChange={value => handleSpace(value, 'Username')}
                     value={username}
                 />
                 <FloatingInput
@@ -212,23 +214,20 @@ export default function VendorSignup(props) {
 
                 <FloatingInput
                     floatingLabel={"Password"}
-                    onChangeText={value => handleSpace(value, 'Password')}
+                    onChange={value => handleSpace(value, 'Password')}
                     Password
                     value={password}
                 />
                 <View style={{ marginVertical: getHp(10) }} />
-
-
-
             </View>
-            <View style={{ position: 'absolute', bottom: 0, alignSelf: 'center', width: '95%', paddingBottom: getHp(10) }}>
+            <View style={{ alignSelf: 'center', width: '95%' }}>
                 <CustomButton
-
                     complete
                     onPress={handleData}
                 />
             </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
+
     </Scaffold>
     )
 }

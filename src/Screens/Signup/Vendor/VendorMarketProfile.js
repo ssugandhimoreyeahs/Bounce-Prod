@@ -17,6 +17,8 @@ import MobxStore from '../../../mobx';
 import { ApiClient } from '../../../app/services';
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 export default function VendorMarketProfile(props) {
     console.log("REACHED AT VENDOR MARKETPLACE SCREEN 3 -->")
@@ -179,9 +181,12 @@ export default function VendorMarketProfile(props) {
         <Spinner visible={loader} color={"#1FAEF7"} />
         {!loader && (
             <View style={styles.container}>
-                <ScrollView keyboardShouldPersistTaps='always'
+                {/* <ScrollView
+                    keyboardShouldPersistTaps='always'
                     contentContainerStyle={{ flexGrow: 1 }}
-                    style={{ backgroundColor: '#fff', flex: 1 }} ref={scrollRef}  >
+                    style={{ backgroundColor: '#fff', flex: 1 }}
+                    ref={scrollRef}  > */}
+                <KeyboardAwareScrollView keyboardShouldPersistTaps={"handled"} ref={scrollRef} >
 
                     <Header
                         headerBackColor={{ paddingBottom: 20, backgroundColor: '#F4F4F4' }}
@@ -189,7 +194,7 @@ export default function VendorMarketProfile(props) {
                         headerTitle={`Create ${vendorType} Profile`}
                         onPress={() => props.navigation.goBack()}
                     />
-                    <View style={{ paddingHorizontal: 10, paddingBottom: 70, paddingTop: 5 }}>
+                    <View style={{ paddingHorizontal: 10, paddingBottom: 20, paddingTop: 5 }}>
                         <FloatingInput
                             floatingLabel={"Business Name"}
                             onChange={(value) => setBusiness(value)}
@@ -342,13 +347,13 @@ export default function VendorMarketProfile(props) {
 
                     </View>
                     {/* <View style={{ height: 70 }}></View> */}
-                    <View style={{ position: 'absolute', bottom: 0, alignSelf: 'center', width: '95%', paddingBottom: getHp(10) }}>
+                    <View style={{ alignSelf: 'center', width: '95%', }}>
                         <CustomButton
                             complete
                             onPress={handleSubmit}
                         />
                     </View>
-                </ScrollView>
+                </KeyboardAwareScrollView>
             </View>
         )}
     </Scaffold>

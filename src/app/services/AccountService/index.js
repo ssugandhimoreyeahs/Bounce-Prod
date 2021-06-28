@@ -58,6 +58,7 @@ class AccountService {
 
   getAllAccounts = async () => {
     let allAccounts = await AsyncStorage.getItem(LOCAL_STORAGE_TOKEN.USERS);
+    console.log('Set All Accounts ----> ', allAccounts);
     return JSON.parse(allAccounts);
   };
 

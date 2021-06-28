@@ -15,7 +15,6 @@ import { Scaffold } from '@components'
 import { Toast } from '@constants';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-
 export default function VendorSignup(props) {
     const { login, vendorType
     } = useSelector((state) => state.mainExpenseByCategory);
@@ -136,7 +135,7 @@ export default function VendorSignup(props) {
     }
     return (<Scaffold
         statusBarStyle={{ backgroundColor: '#F4F4F4' }}>
-             <Spinner visible={loader} color={'#1FAEF7'} />
+            <Spinner visible={loader} color={'#1FAEF7'} />
         <KeyboardAwareScrollView >
             {/* <ScrollView
             keyboardShouldPersistTaps='always'

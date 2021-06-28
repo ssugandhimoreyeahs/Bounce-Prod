@@ -12,8 +12,6 @@ class AccountService {
     try {
       let isAvailable = await this.isAdded(userDetail?.user.id);
       let oldUsers = await AsyncStorage.getItem(LOCAL_STORAGE_TOKEN.USERS);
-      Promise.resolve(oldUsers);
-      Promise.resolve(isAvailable);
       if (!isAvailable) {
         if (oldUsers == null || oldUsers == undefined) {
           users = [];
@@ -40,7 +38,6 @@ class AccountService {
     try {
       let Added = false;
       let UserLocal = await AsyncStorage.getItem(LOCAL_STORAGE_TOKEN.USERS);
-      Promise.resolve(UserLocal);
       let userLocal = JSON.parse(UserLocal);
       if (userLocal && userLocal.length > 0) {
         userLocal.map(singleUser => {
@@ -61,14 +58,39 @@ class AccountService {
 
   getAllAccounts = async () => {
     let allAccounts = await AsyncStorage.getItem(LOCAL_STORAGE_TOKEN.USERS);
+    console.log('Set All Accounts ----> ', allAccounts);
     return JSON.parse(allAccounts);
+  };
+
+  updateAccount = async userData => {
+    try {
+      let newData = [];
+      let UserLocal = await AsyncStorage.getItem(LOCAL_STORAGE_TOKEN.USERS);
+      Promise.resolve(UserLocal);
+      let userLocal = JSON.parse(UserLocal);
+      if (userLocal) {
+        userLocal.map(singleUser => {
+          if (singleUser.user.id == userData.user.id) {
+            newData.push(userData);
+          }else{
+            newData.push(singleUser);
+          }
+        });
+        await AsyncStorage.setItem(
+          LOCAL_STORAGE_TOKEN.USERS,
+          JSON.stringify(newData),
+        );
+      }
+    } catch (error) {
+      console.log('error in account service Code - AC1010 -> ', error);
+      return Promise.reject(error);
+    }
   };
 
   removeAccount = async ID => {
     try {
       let newData = [];
       let UserLocal = await AsyncStorage.getItem(LOCAL_STORAGE_TOKEN.USERS);
-      Promise.resolve(UserLocal);
       let userLocal = JSON.parse(UserLocal);
       if (userLocal && userLocal.length > 1) {
         userLocal.map(singleUser => {
@@ -81,7 +103,6 @@ class AccountService {
           LOCAL_STORAGE_TOKEN.USERS,
           JSON.stringify(newData),
         );
-        
       } else {
         await AsyncStorage.clear();
         authStore.logout();

@@ -228,8 +228,6 @@ function UserFriendsProfile(props) {
 
   // Calender Function end
 
-
-
   useEffect(() => {
     PartyService.getParty();
     setAccounts();
@@ -313,7 +311,7 @@ function UserFriendsProfile(props) {
       {!loader && (
         <View>
           <Header
-            AllAccounts = {authStore.AllAccounts}
+            AllAccounts = {authStore.AllAccounts || []}
             leftDropdown={
               username !== null ? `@${username !== null ? username : ""}` : ""
             }
@@ -325,7 +323,6 @@ function UserFriendsProfile(props) {
             }}
             headerBackColor={{ backgroundColor: "#FFFFFF" }}
             {...props}
-            
           />
           <View style={styles.subContainer}>
             <View

@@ -37,10 +37,7 @@ class UserNavigation {
       <UserRootStack.Navigator
         headerMode={'none'}
         initialRouteName={UserHomeDrawerNavigator.routeName}>
-        <UserRootStack.Screen 
-          component={AuthNavigation.Stack}
-          name={AuthNavigation.routeName}
-        />
+        
         <UserRootStack.Screen
           name={UserHomeDrawerNavigator.routeName}
           component={UserHomeDrawerNavigator.drawerHome}
@@ -65,10 +62,10 @@ class UserNavigation {
           name={HostProfile.routeName}
           component={HostProfile}
         />
-        <UserRootStack.Screen
+        {/* <UserRootStack.Screen
           name={NameScreen.routeName}
           component={NameScreen}
-        />
+        /> */}
         <UserRootStack.Screen
           name={AccountSetting.routeName}
           component={AccountSetting}
@@ -119,6 +116,10 @@ class UserNavigation {
         <UserRootStack.Screen
           name={AboutUs.routeName}
           component={AboutUs}
+        />
+        <UserRootStack.Screen 
+          component={AuthNavigation.Stack}
+          name={AuthNavigation.routeName}
         />
       </UserRootStack.Navigator>
     );

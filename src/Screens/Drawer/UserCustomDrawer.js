@@ -21,7 +21,6 @@ import Back from 'react-native-vector-icons/AntDesign';
 import PurchaseTickets from '../BounceUsers/EventPage/Public/PurchaseTickets';
 import HostView from '../MyEvents/HostView';
 import FeaturingPage from '../BounceUsers/EventPage/Public/Featuring';
-import PartyRental from '../BounceVendors/PartyRentals';
 import { AccountService } from '../../app/services';
 import PartyRental from '../BounceVendors/PartyRentals'
 import InviteFriends from '../BounceVendors/PlanParty/InviteFriends';
@@ -137,7 +136,7 @@ export default function UserCustomDrawer(props) {
       onPress: () => props.navigation.navigate(AboutUs.routeName),
     },
     {
-      name: 'Log Out1',
+      name: 'Log Out',
       onPress: async () => {
         await AccountService.removeAccount(authStore.userProfile.user.id)
       },

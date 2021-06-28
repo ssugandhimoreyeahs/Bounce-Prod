@@ -33,6 +33,9 @@ export default function AccountSetting(props) {
 
     useEffect(() => {
         MobxStore.authStore.async.reloadUser();
+    }, [MobxStore.authStore.userProfile]);
+
+    useEffect(() => {
         setData();
     }, []);
 

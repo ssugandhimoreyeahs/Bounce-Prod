@@ -22,7 +22,6 @@ class Asynctask {
       console.log("RESP_REC_HERE - ", userLoginResponse.data);
       runInAction(() => {
         this.authStore.userProfile = userLoginResponse.data;
-        this.authStore.allUserProfile.push(userLoginResponse.data);
         this.authStore.isAuthenticated = true;
       });
       return Promise.resolve(userLoginResponse.data);
@@ -66,8 +65,6 @@ class Asynctask {
     }
   };
 
-
-  
   fetchVendor = async (token = undefined) => {
     try {
       let tok = token;

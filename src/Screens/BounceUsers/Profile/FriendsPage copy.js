@@ -8,13 +8,12 @@ import { connect, useSelector, useDispatch } from "react-redux";
 import axios from 'axios';
 import { observer } from 'mobx-react';
 import MobxStore from '../../../mobx'
-import { Scaffold, Header } from '@components'
+import { Scaffold } from '@components'
 import { Container, Header as NativeHeader, Content, Tab, Tabs } from 'native-base';
 import { Searchbar } from 'react-native-paper';
 import Back from 'react-native-vector-icons/Ionicons';
 import { ContactList } from '../../../components';
-import { Button } from 'native-base';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+
 
 
 const DATA = [
@@ -60,19 +59,33 @@ export default function FriendsPage(props) {
     const {
         age = false
     } = props
-    const [showMore, setShowMore] = useState(false);
     const [searchQuery, setSearchQuery] = React.useState('');
     const onChangeSearch = query => setSearchQuery(query);
     return (
         <Scaffold statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
-            <Header
-                back
-                headerBackColor={{ backgroundColor: '#fff', elevation: 0 }}
-                headerTitle={"My Friends"}
-                onPress={() => {
-                    props.navigation.goBack()
-                }}
-            />
+            <View style={styles.headerFlex}>
+                <TouchableOpacity
+                    onPress={() => props.navigation.goBack()}>
+                    <Back name="chevron-back"
+                        color={'#000'}
+                        style={{ marginRight: 20, marginLeft: 10 }}
+                        size={30}
+                    />
+                </TouchableOpacity>
+
+                <Searchbar
+                    placeholder={"Search"}
+                    onChangeText={onChangeSearch}
+                    value={searchQuery}
+                    inputStyle={{
+                        fontSize: FONTSIZE.Text14,
+                        fontFamily: 'AvenirNext-Regular',
+                    }}
+                    style={styles.searchBarStyle}
+                    iconColor={"#999999"}
+                    placeholderTextColor={"#909090"}
+                />
+            </View>
 
             <ScrollView
                 contentContainerStyle={{ flexGrow: 1 }}
@@ -81,30 +94,18 @@ export default function FriendsPage(props) {
             >
 
                 <View style={styles.container}>
-                    <Searchbar
-                        placeholder={"Search"}
-                        onChangeText={onChangeSearch}
-                        value={searchQuery}
-                        inputStyle={{
-                            fontSize: FONTSIZE.Text14,
-                            fontFamily: 'AvenirNext-Regular',
-                        }}
-                        style={styles.searchBarStyle}
-                        iconColor={"#999999"}
-                        placeholderTextColor={"#909090"}
-                    />
                     {/* <ContactList
                         heading={"Mutual Friends"}
                         dataList={DATA}
                         {...props}
                     /> */}
                     <ContactList
-                        heading={"People You Might Know"}
+                        heading={"Friends"}
                         dataList={DATA}
                         {...props}
                     />
-                   
                 </View>
+
             </ScrollView>
         </Scaffold>
     )
@@ -118,7 +119,6 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     searchBarStyle: {
-        marginTop: getHp(10),
         elevation: 0,
         // lineHeight: -41,
         borderRadius: 9,

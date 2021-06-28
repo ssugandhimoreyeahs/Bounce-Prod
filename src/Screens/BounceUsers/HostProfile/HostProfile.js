@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+  import React, { useState, useEffect, useContext } from 'react';
 import {
   View,
   Text,
@@ -39,7 +39,7 @@ import MobxStore from '../../../mobx';
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
+import { styles } from './indexCss.js'
 
 export default function HostProfile(props) {
   console.log("PROPS -> ", props);
@@ -54,6 +54,11 @@ export default function HostProfile(props) {
   const [instagram, setInstagram] = useState('');
   const [picture, setPicture] = useState(null);
   const [footer, openFooter] = useState(false);
+  const [friendCount, setFriendCount] = useState(false);
+  const [hosting, setHosting] = useState(false);
+  const [attending, setAttending] = useState(false);
+  const [interested, setInterested] = useState(false);
+
   const [twitter, setTwitter] = useState('');
   const [tiktok, setTiktok] = useState('');
   const dispatch = useDispatch();
@@ -62,9 +67,17 @@ export default function HostProfile(props) {
   const token = userinfo?.token;
   const user = userinfo?.user;
 
+  console.log('snapchatUsername--', user.snapchatUsername)
+  console.log('instagramUsername--', user.instagramUsername)
+
+
+
+
   if (!user) {
     return null;
   }
+
+
   const handleImage = () => {
     ImagePicker.openPicker({
       width: 300,
@@ -100,7 +113,11 @@ export default function HostProfile(props) {
     setCity(user?.city);
     setBirthday(user.birthday);
     setInstagram(user.instagramUsername);
-    setSnapchat(user.snapchatUsername);
+    setSnapchat(user?.snapchatUsername);
+    setFriendCount(user?.friendCount);
+    setHosting(user?.hosting);
+    setAttending(user?.attending);
+    setInterested(user?.intrested);
     setLoader(false);
   };
 
@@ -121,6 +138,11 @@ export default function HostProfile(props) {
     formData.append('about', bio);
     formData.append('profession', profession);
     formData.append('profileImageFile', imgObj);
+    formData.append('friendCount', friendCount);
+    formData.append('hosting', hosting);
+    formData.append('attending', attending);
+    formData.append('intrested', interested);
+    formData.append('snapchatUsername', snapchat);
 
     console.log('TOKEN', token);
 
@@ -147,18 +169,12 @@ export default function HostProfile(props) {
     setLoader(false);
   };
 
-  // console.log('profession', profession)
-  // console.log('bio', bio)
   return (
     <Scaffold
       statusBarStyle={{ backgroundColor: '#fff' }}>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
-        // <ScrollView
-        //   showsVerticalScrollIndicator={false}
-        //   keyboardShouldPersistTaps='always'
-        //   style={{ backgroundColor: '#FBFBFB', flex: 1 }}
-        //   contentContainerStyle={{ flexGrow: 1 }}>
+
         <KeyboardAwareScrollView
           keyboardShouldPersistTaps={"handled"}>
           <Header
@@ -380,9 +396,9 @@ export default function HostProfile(props) {
                   <TextInput
                     placeholder={`@snapchat`}
                     placeholderTextColor={'#999999'}
-                    // onChangeText={value => setSnapchat(value)}
+                    onChangeText={value => setSnapchat(value)}
                     style={[styles.headerTitle, styles.Tiktok]}
-                  // value={snapchat == '' ? '' : snapchat}
+                    value={snapchat == '' ? '' : snapchat}
                   />
                 </View>
               </TouchableOpacity>
@@ -446,7 +462,10 @@ export default function HostProfile(props) {
               <Text style={[styles.privacyTitle, { fontSize: FONTSIZE.Text16 }]}>
                 {"Friend Count"}
               </Text>
-              <Toggle />
+              <Toggle
+                switchOn={friendCount}
+                onChange={() => setFriendCount(!friendCount)}
+              />
             </View>
 
             <Text style={{
@@ -470,7 +489,10 @@ export default function HostProfile(props) {
               <Text style={[styles.privacyTitle, { fontSize: FONTSIZE.Text16 }]}>
                 {"Hosting"}
               </Text>
-              <Toggle />
+              <Toggle
+                switchOn={hosting}
+                onChange={() => setHosting(!hosting)}
+              />
             </View>
 
             <View style={[styles.flex, {
@@ -483,7 +505,10 @@ export default function HostProfile(props) {
               <Text style={[styles.privacyTitle, { fontSize: FONTSIZE.Text16 }]}>
                 {"Attending"}
               </Text>
-              <Toggle />
+              <Toggle
+                switchOn={attending}
+                onChange={() => setAttending(!attending)}
+              />
             </View>
 
             <View style={[styles.flex, {
@@ -496,7 +521,10 @@ export default function HostProfile(props) {
               <Text style={[styles.privacyTitle, { fontSize: FONTSIZE.Text16 }]}>
                 {"Interested"}
               </Text>
-              <Toggle />
+              <Toggle
+                switchOn={interested}
+                onChange={() => setInterested(!interested)}
+              />
             </View>
           </View>
           {/*Endd Privacy Block */}
@@ -515,93 +543,4 @@ export default function HostProfile(props) {
   );
 }
 HostProfile.routeName = '/HostProfile';
-const styles = StyleSheet.create({
-  privacyTitle: {
-    fontFamily: 'AvenirNext-Medium',
-    color: '#000',
-    fontSize: FONTSIZE.Text18,
-  },
-  Tiktok: {
-    marginLeft: 10,
-    fontFamily: 'AvenirNext-Medium',
-    color: '#000',
-    width: '100%'
-  },
-  headerTitle: {
-    color: '#000',
-    fontSize: FONTSIZE.Text16,
-    fontFamily: 'AvenirNext-Regular',
-  },
-  addInterest: {
-    elevation: 2,
-    backgroundColor: '#fff',
-    height: getHp(130),
-    width: getHp(150),
-    borderRadius: 24,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  flex: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  shadowStyle: {
-    shadowColor: '#000',
-    shadowOffset: { width: 1, height: 1 },
-    shadowRadius: 5,
-    shadowOpacity: 0.1,
-    elevation: 1,
-  },
-  socialButton: {
-    height: getHp(50),
-    elevation: 0,
-    borderRadius: 13,
-    paddingHorizontal: getWp(10),
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginVertical: 4,
-  },
-  socialButton2: {
-    height: getHp(50),
-    borderWidth: 0.5,
-    borderColor: '#DDDDDD',
-    borderRadius: 13,
-    paddingHorizontal: getWp(10),
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginVertical: 4,
-  },
-  container: {
-    backgroundColor: '#fff',
-    flex: 1
-  },
-  linearGradient: {
-    flex: 1,
-    borderRadius: 20,
-  },
-  ContainerStyle: {
-    width: '100%',
-    marginVertical: 4,
-  },
-  ButtonStyle: {
-    backgroundColor: '#212121',
-    borderRadius: 10,
-    justifyContent: 'flex-start',
-    paddingLeft: 20
-  },
-  crossButton: {
-    elevation: 2,
-    backgroundColor: '#fff',
-    borderRadius: 50,
-    padding: 10,
-    position: 'absolute',
-    right: -10,
-    top: -10
-  },
 
-})

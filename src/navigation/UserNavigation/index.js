@@ -26,6 +26,7 @@ import AuthNavigation from '../AuthNavigation';
 import InviteFriends from '../../Screens/BounceVendors/PlanParty/InviteFriends'
 import FriendsPage from '../../Screens/BounceUsers/Profile/FriendsPage'
 import GuestProfile from '../../Screens/BounceUsers/Profile/GuestProfile';
+import AddInterest from '../../Screens/BounceUsers/NewsFeed/AddInterest';
 
 const UserRootStack = createStackNavigator();
 
@@ -37,7 +38,7 @@ class UserNavigation {
       <UserRootStack.Navigator
         headerMode={'none'}
         initialRouteName={UserHomeDrawerNavigator.routeName}>
-        <UserRootStack.Screen 
+        <UserRootStack.Screen
           component={AuthNavigation.Stack}
           name={AuthNavigation.routeName}
         />
@@ -106,7 +107,10 @@ class UserNavigation {
           name={GuestProfile.routeName}
           component={GuestProfile}
         />
-
+        <UserRootStack.Screen
+          name={AddInterest.routeName}
+          component={AddInterest}
+        />
 
         <UserRootStack.Screen
           name={CreateInvitationTemplate.routeName}

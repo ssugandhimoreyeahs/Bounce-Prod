@@ -8762,6 +8762,13 @@ react-native-screens@^2.17.1:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.18.1.tgz#47b9991c6f762d00d0ed3233e5283d523e859885"
   integrity sha512-r5WZLpmx2hHjC1RgMdPq5YpSU9tEhBpUaZ5M1SUtNIONyiLqQVxabhRCINdebIk4depJiIl7yw2Q85zJyeX6fw==
 
+react-native-search-box@^0.0.20:
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/react-native-search-box/-/react-native-search-box-0.0.20.tgz#25eedda46a1c69ab1875ea37c43762b69fb2c22a"
+  integrity sha512-ynyqX2wXynzgzt9wshBm6aE+/1EDOzCv49QcyGzoIsed3pgirzW4ealHLjFEkFos3Eb7RP5PriUGnjhyH1plLQ==
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-share@^5.1.1:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-5.3.0.tgz#e501f974f2c0e12f8c78aa744dfc5bdf6bc54978"

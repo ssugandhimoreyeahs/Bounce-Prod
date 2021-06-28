@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     sliderStyle: {
-        marginVertical: 20
+        marginVertical: 20,
     },
     tagsStyle: {
         backgroundColor: '#F2F5F6',

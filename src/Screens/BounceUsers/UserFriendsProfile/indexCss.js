@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
       fontFamily: "AvenirNext-Medium",
    },
    buttonText: {
-      fontSize: FONTSIZE.Text16,
+      fontSize: FONTSIZE.Text18,
       fontFamily: 'AvenirNext-Medium',
       color: '#fff',
    },
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
       marginLeft: 5,
       fontFamily: 'AvenirNext-DemiBold',
       // color: '#000',
-   // height:getHp(36)
+      // height:getHp(36)
    },
    dot: {
       backgroundColor: '#999999',
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       width: '100%',
       height: '100%'
-  },
+   },
    editButtonStyle: {
       flexDirection: 'row',
       elevation: 2,
@@ -154,6 +154,14 @@ const styles = StyleSheet.create({
       color: '#000',
       fontSize: FONTSIZE.Text18,
       fontFamily: 'AvenirNext-Medium',
+   },
+   connectStyle: {
+      color: '#1FAEF7',
+      fontFamily: 'AvenirNext-DemiBold',
+      marginRight: getWp(10),
+      fontSize: FONTSIZE.Text16,
+      letterSpacing: 0.4
+
    },
    socialText: {
       color: '#000',

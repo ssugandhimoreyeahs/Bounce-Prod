@@ -23,6 +23,7 @@ import MobxStore from '../../mobx';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FONTSIZE, getHp } from '../../app/utils';
 import BENotification from '../../Screens/BounceUsers/Notifications/Before/Notifications';
+import NewsFeed from '../../Screens/BounceUsers/NewsFeed';
 // import HostProfile from '../../Screens/BounceUsers/HostProfile/HostProfile';
 
 const UserHomeBottomTab = createBottomTabNavigator();
@@ -69,8 +70,8 @@ class UserHomeBottomNavigation {
                 );
             },
           }}
-          name={UserHomeScreen.routeName}
-          component={UserHomeScreen}
+          name={NewsFeed.routeName}
+          component={NewsFeed}
         />
 
         <UserHomeBottomTab.Screen
@@ -156,10 +157,12 @@ class UserHomeBottomNavigation {
                 );
             },
           }}
-          name={"Temp"}
-          component={() => {
-            return null;
-          }}
+          // name={"Temp"}
+          // component={() => {
+          //   return null;
+          // }}
+          name={UserHomeScreen.routeName}
+          component={UserHomeScreen}
         />
       </UserHomeBottomTab.Navigator>
     );

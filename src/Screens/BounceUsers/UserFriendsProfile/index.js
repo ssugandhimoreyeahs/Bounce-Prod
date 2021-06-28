@@ -61,44 +61,15 @@ import Right from 'react-native-vector-icons/FontAwesome'
 import Icon from 'react-native-vector-icons/Entypo'
 import spotifyToken from '../../../app/SDK/Spotify/spotify_token'
 import FriendsPage from "../Profile/FriendsPage";
+import NewsFeed from "../NewsFeed";
 
 Text.defaultProps = {
   allowFontScaling: false,
   fontScale: 1
 }
 
-
-const ACCOUNTS = [
-  {
-    id: "0",
-    icon: Girl,
-    messageName: "Favourite",
-  },
-  {
-    id: "1",
-    icon: Girl,
-    messageName: "Message",
-  },
-];
-
-const DATA = [{
-  eventTitle: "Rich Little - Live in Las Vegas",
-  name: 'Laugh Factory',
-  icon: Girl,
-  time: "Dec 31, 8:00 PM",
-},
-{
-  eventTitle: "Rich Little - Live in Las Vegas",
-  name: 'Laugh Factory',
-  icon: Girl,
-  time: "Dec 31, 8:00 PM",
-}
-]
-
-const STATIC_DATA = ["Create an event page", "Invite friends", "Hire vendors", "Promote your event"]
-
 function UserFriendsProfile(props) {
-  // const { loader, userinfo, fetchProfile } = useContext(UserContext);
+
   const {
     authStore
   } = MobxStore;
@@ -134,9 +105,9 @@ function UserFriendsProfile(props) {
     age,
   } = userinfo?.user;
   //console.log("userinfo ----> ", authStore.userProfile)
-  
+
   var gapi = window
-  console.log("WINDOW ", gapi)
+  // console.log("WINDOW ", gapi)
   /* 
     Update with your own Client Id and Api key 
   */
@@ -235,10 +206,10 @@ function UserFriendsProfile(props) {
     setAccounts();
   }, [authStore.userProfile]);
 
-  const setAccounts = async () =>{
+  const setAccounts = async () => {
     await authStore.setAllAccounts();
   }
-  
+
   const handleCarousel = (value) => {
     return (
       <ImageCarousel
@@ -313,7 +284,7 @@ function UserFriendsProfile(props) {
       {!loader && (
         <View>
           <Header
-            AllAccounts = {authStore.AllAccounts}
+            AllAccounts={authStore.AllAccounts}
             leftDropdown={
               username !== null ? `@${username !== null ? username : ""}` : ""
             }
@@ -325,7 +296,7 @@ function UserFriendsProfile(props) {
             }}
             headerBackColor={{ backgroundColor: "#FFFFFF" }}
             {...props}
-            
+
           />
           <View style={styles.subContainer}>
             <View
@@ -397,58 +368,67 @@ function UserFriendsProfile(props) {
               </View>
             </View>
 
-            <View style={[styles.flex, { width: "80%", marginVertical: 10, justifyContent: 'space-between', alignItems: 'center' }]}>
+            <View style={[styles.flex, { width: "80%", marginVertical: 10, justifyContent: 'flex-start', alignItems: 'center' }]}>
               <TouchableOpacity
-                style={[styles.editButtonStyle, styles.shadowStyle, { paddingVertical: 5 }]}
+                style={[styles.editButtonStyle, styles.shadowStyle, { paddingVertical: 5, marginRight: getWp(10) }]}
                 onPress={() => props.navigation.navigate(HostProfile.routeName)}
               >
                 <Text style={styles.editButton}>{"Edit Profile"}</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity
-              // onPress={() =>
-              //   Linking.openURL(
-              //     `https://www.instagram.com/${instagramUsername}`
-              //   )
-              // }
-              >
-                <Insta height={getHp(30)} width={getWp(30)} />
-              </TouchableOpacity>
+              {instagramUsername != null &&
+                <TouchableOpacity
+                  onPress={() =>
+                    Linking.openURL(
+                      `https://www.instagram.com/${instagramUsername}`
+                    )
+                  }
+                >
+                  <Insta height={getHp(30)} width={getWp(30)} />
+                </TouchableOpacity>}
 
-              <TouchableOpacity
-              // onPress={() =>
-              //   Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
-              // }
-              >
-                <Tiktok height={getHp(28)} width={getWp(28)} />
-              </TouchableOpacity>
+              {null != null &&
+                <TouchableOpacity
+                  onPress={() =>
+                    Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
+                  }
+                >
+                  <Tiktok height={getHp(28)} width={getWp(28)} />
+                </TouchableOpacity>
+              }
 
-              <TouchableOpacity
-              // onPress={() =>
-              //   Linking.openURL(`https://twitter.com/narendramodi`)
-              // }
-              >
-                <Twitter height={getHp(29)} width={getWp(29)} />
-              </TouchableOpacity>
+              {null != null &&
+                <TouchableOpacity
+                  onPress={() =>
+                    Linking.openURL(`https://twitter.com/narendramodi`)
+                  }
+                >
+                  <Twitter height={getHp(29)} width={getWp(29)} />
+                </TouchableOpacity>
+              }
 
-              <TouchableOpacity
-              // onPress={() =>
-              //   Linking.openURL(
-              //     `https://www.snapchat.com/add/${snapchatUsername}`
-              //   )
-              // }
-              >
-                <Snapchat height={getHp(31)} width={getWp(31)} />
-              </TouchableOpacity>
+              {!(snapchatUsername == null ||
+                snapchatUsername == '') &&
+                <TouchableOpacity
+                  onPress={() =>
+                    Linking.openURL(
+                      `https://www.snapchat.com/add/${snapchatUsername}`
+                    )
+                  }
+                >
+                  <Snapchat height={getHp(31)} width={getWp(31)} />
+                </TouchableOpacity>}
 
-             
-              <TouchableOpacity
-              // onPress={() =>
-              //   Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
-              // }
-              >
-                <Linkedin height={getHp(31)} width={getWp(30)} />
-              </TouchableOpacity>
+              {null != null &&
+                <TouchableOpacity
+                  onPress={() =>
+                    Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
+                  }
+                >
+                  <Linkedin height={getHp(31)} width={getWp(30)} />
+                </TouchableOpacity>
+              }
+
             </View>
 
             {
@@ -482,12 +462,18 @@ function UserFriendsProfile(props) {
                   marginBottom: 10
                 },
               ]}>
-              <TouchableOpacity style={[styles.fullTouch,{
+              <TouchableOpacity style={[styles.fullTouch, {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center'
-              }]} >
-                <Text style={[styles.buttonText, { marginRight: 15 }]}>{'Bounce with Friends'}</Text>
+              }]}
+              onPress={()=>props.navigation.navigate(NewsFeed.routeName)} >
+                <Text style={[styles.buttonText,
+                {
+                  marginRight: 15,
+                  fontSize: FONTSIZE.Text16,
+                }]}>
+                  {'Bounce with Friends'}</Text>
                 <Right name="angle-right" color='#FFFFFF' size={25} />
               </TouchableOpacity>
             </LinearGradient>
@@ -522,16 +508,16 @@ function UserFriendsProfile(props) {
               colors={['#16B0FE', '#3FBEFF']}
               style={[
                 styles.linearGradient, {
-                  height: getHp(38),
+                  height: getHp(50),
                   borderRadius: 13,
-                 
+
                 }
               ]}>
-              <TouchableOpacity style={[styles.fullTouch,{ flexDirection: "row"}]}
+              <TouchableOpacity style={[styles.fullTouch, { flexDirection: "row" }]}
                 onPress={() => props.navigation.navigate(FriendsPage.routeName)}>
                 <WhitePerson height={25} width={19}
-                 style={{ marginBottom: -5 }} />
-                <Text style={[styles.buttonText, { marginLeft: 20, fontFamily: 'AvenirNext-Medium', color: '#FFFFFF' }]}>
+                  style={{ marginBottom: -5 }} />
+                <Text style={[styles.buttonText, { marginLeft: 20, fontFamily: 'AvenirNext-DemiBold', color: '#FFFFFF' }]}>
                   {'Find Friends'}</Text>
               </TouchableOpacity>
             </LinearGradient>
@@ -553,7 +539,7 @@ function UserFriendsProfile(props) {
                 <Text
                   style={[
                     styles.headerTitle,
-                    { color: '#1FAEF7', fontFamily: 'AvenirNext-Medium', marginRight: getWp(10) },
+                    styles.connectStyle
                   ]}>
                   {'Connect'}
                 </Text>
@@ -574,11 +560,7 @@ function UserFriendsProfile(props) {
                 <Text
                   style={[
                     styles.headerTitle,
-                    {
-                      color: '#1FAEF7',
-                      fontFamily: 'AvenirNext-Medium',
-                      marginRight: getWp(10)
-                    },
+                    styles.connectStyle
                   ]}>
                   {'Connect'}
                 </Text>
@@ -600,11 +582,7 @@ function UserFriendsProfile(props) {
                 <Text
                   style={[
                     styles.headerTitle,
-                    {
-                      color: '#1FAEF7',
-                      fontFamily: 'AvenirNext-Medium',
-                      marginRight: getWp(10)
-                    },
+                    styles.connectStyle
                   ]}>
                   {'Connect'}
                 </Text>
@@ -773,6 +751,4 @@ function UserFriendsProfile(props) {
   );
 }
 UserFriendsProfile.routeName = "/UserFriendsProfile";
-
-
 export default observer(UserFriendsProfile)

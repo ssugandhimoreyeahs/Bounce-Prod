@@ -68,63 +68,63 @@ function Header(props) {
   //   console.log('All Accounts ----> ', AllAccounts);
 
   return (
-    <View>
-      <View
-        style={[
-          styles.container,
-          styles.shadowStyle,
-          headerBackColor ? headerBackColor : null,
-        ]}>
-        {back ? (
-          <TouchableOpacity onPress={onPress} hitSlop={smallHitSlop}>
-            <Back name="left" color={theme ? theme : '#000'} size={25} />
-          </TouchableOpacity>
-        ) : null}
-        {leftDropdown ? (
-          <TouchableOpacity onPress={() => setShow(!showDropdown)}>
-            <View style={styles.headerDropdown}>
-              <Text
-                style={[
-                  styles.leftTitleStyle,
-                  rightTitleStyle,
-                  { marginRight: getWp(5) },
-                ]}>
-                {`${leftDropdown} `}
-              </Text>
-              <Icon
-                name="angle-down"
-                size={getHp(30)}
-                color="#000"
-                style={{ marginHorizontal: 5 }}
-              />
-            </View>
-          </TouchableOpacity>
-        ) : null}
+    // <View>
+    //   <View
+    //     style={[
+    //       styles.container,
+    //       styles.shadowStyle,
+    //       headerBackColor ? headerBackColor : null,
+    //     ]}>
+    //     {back ? (
+    //       <TouchableOpacity onPress={onPress} hitSlop={smallHitSlop}>
+    //         <Back name="left" color={theme ? theme : '#000'} size={25} />
+    //       </TouchableOpacity>
+    //     ) : null}
+    //     {leftDropdown ? (
+    //       <TouchableOpacity onPress={() => setShow(!showDropdown)}>
+    //         <View style={styles.headerDropdown}>
+    //           <Text
+    //             style={[
+    //               styles.leftTitleStyle,
+    //               rightTitleStyle,
+    //               { marginRight: getWp(5) },
+    //             ]}>
+    //             {`${leftDropdown} `}
+    //           </Text>
+    //           <Icon
+    //             name="angle-down"
+    //             size={getHp(30)}
+    //             color="#000"
+    //             style={{ marginHorizontal: 5 }}
+    //           />
+    //         </View>
+    //       </TouchableOpacity>
+    //     ) : null}
 
-        {dropdown ? (
-          <TouchableOpacity
-            style={[{ flexDirection: 'row', alignItems: 'center' }]}
-          // onPress={animateBall}
-          >
-            <Text
-              style={[
-                styles.leftTitleStyle,
-                { marginRight: 5 },
-                rightTitleStyle,
-              ]}>
-              {`${dropdown}`}
-            </Text>
-            <Icon
-              name="angle-down"
-              size={25}
-              color={'#000'}
-              style={{ marginTop: 2 }}
-            />
-          </TouchableOpacity>
-        ) : null}
-        <Text style={[styles.headerTitleStyle, headerStyleProp]}>
-          {headerTitle}
-        </Text>
+    //     {dropdown ? (
+    //       <TouchableOpacity
+    //         style={[{ flexDirection: 'row', alignItems: 'center' }]}
+    //       // onPress={animateBall}
+    //       >
+    //         <Text
+    //           style={[
+    //             styles.leftTitleStyle,
+    //             { marginRight: 5 },
+    //             rightTitleStyle,
+    //           ]}>
+    //           {`${dropdown}`}
+    //         </Text>
+    //         <Icon
+    //           name="angle-down"
+    //           size={25}
+    //           color={'#000'}
+    //           style={{ marginTop: 2 }}
+    //         />
+    //       </TouchableOpacity>
+    //     ) : null}
+    //     <Text style={[styles.headerTitleStyle, headerStyleProp]}>
+    //       {headerTitle}
+    //     </Text>
         <View>
           <View style={[styles.container, styles.shadowStyle, headerBackColor ? headerBackColor : null]}>
 
@@ -191,7 +191,9 @@ function Header(props) {
                   : null}
             </View>
 
-            {showDropdown && (
+            
+          </View>
+          {showDropdown && (
               <View style={styles.dropdownContainer}>
                 {showDropdown && (
                   <>
@@ -249,10 +251,9 @@ function Header(props) {
                 </TouchableOpacity>
               </View>
             )}
-          </View>
         </View>
-      </View>
-    </View>
+    //   </View>
+    // </View>
   );
 }
 const styles = StyleSheet.create({

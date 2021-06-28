@@ -101,21 +101,35 @@ export const FeaturingPageTab = observer((props) => {
 export const SearchPageTab = observer((props) => {
     return (
         <View style={{ flex: 1, }}>
-            <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}
-            >
+            <Tabs locked 
+            tabContainerStyle={{}}
+            tabBarUnderlineStyle={{ backgroundColor: '#000' }} >
 
-                <Tab tabStyle={{ backgroundColor: '#fff'}}
-
-                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
+                <Tab tabStyle={{ backgroundColor: '#fff' }}
+                    textStyle={{
+                        color: '#000',
+                        fontFamily: 'AvenirNext-Medium'
+                    }}
                     activeTabStyle={{ backgroundColor: '#fff' }}
-                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading={"Events"}>
+                    activeTextStyle={{
+                        color: '#000',
+                        fontFamily: 'AvenirNext-Medium'
+                    }}
+                    heading={"Events"}>
                     <Events />
                 </Tab >
 
                 <Tab tabStyle={{ backgroundColor: '#fff' }}
-                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
+                    textStyle={{
+                        color: '#000',
+                        fontFamily: 'AvenirNext-Medium'
+                    }}
                     activeTabStyle={{ backgroundColor: '#fff' }}
-                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="People">
+                    activeTextStyle={{
+                        color: '#000',
+                        fontFamily: 'AvenirNext-Medium'
+                    }}
+                    heading="People">
                     <People />
                 </Tab>
 
@@ -185,7 +199,7 @@ export const Tabview = observer((props) => {
                     textStyle={{ color: '#000', fontFamily: 'AvenirNext-Regular' }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
                     activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="Attending">
-                    <Tab2 />
+                    <Tab2 partyStore={MboxStore.partyStore} {...props} />
                 </Tab>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}

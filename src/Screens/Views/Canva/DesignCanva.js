@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { View, StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native';
-import { QRCodes, Scaffold, SearchPageTab } from '@components';
+import { CustomSearchbar, Scaffold, SearchPageTab } from '@components';
 import { FONTSIZE, getHp, getWp } from '@utils';
 import { ChangeBlue } from '@svg';
 import Back from 'react-native-vector-icons/Ionicons';
@@ -18,6 +18,8 @@ import RangeSlider from 'rn-range-slider';
 // import RailSelected from './basic/RailSelected'
 // import Label from './basic/Label'
 // import Notch from './basic/Notch'
+
+
 
 export default function DesignCanva(props) {
     const [searchQuery, setSearchQuery] = React.useState('');
@@ -55,20 +57,23 @@ export default function DesignCanva(props) {
                     style={{ marginRight: 20, marginLeft: 10 }}
                     size={30} />
             </TouchableOpacity>
+
+
             <Searchbar
                 placeholder={"Search events"}
                 onChangeText={onChangeSearch}
                 value={searchQuery}
-
                 inputStyle={{
                     fontSize: FONTSIZE.Text16,
                     fontFamily: 'AvenirNext-Regular',
-
+                    alignSelf: 'center'
                 }}
                 style={styles.searchBarStyle}
                 iconColor={"#999999"}
+                
                 placeholderTextColor={"#909090"}
             />
+
         </View>
         <SearchPageTab {...props} />
 
@@ -80,7 +85,7 @@ const styles = StyleSheet.create({
         elevation: 0,
         borderRadius: 9,
         backgroundColor: '#F2F5F6',
-        height: getHp(50),
+        height: getHp(32),
         width: '80%',
     },
     sliderStyle: {

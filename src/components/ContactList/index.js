@@ -15,6 +15,8 @@ import {
 import { FONTSIZE, getHp, getWp } from '@utils'
 import LinearGradient from 'react-native-linear-gradient';
 import GuestProfile from '../../Screens/BounceUsers/Profile/GuestProfile';
+import { Button } from 'native-base';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export default function ContactList(props) {
     const {
@@ -23,15 +25,17 @@ export default function ContactList(props) {
         requestIcon = false,
         dataList = [],
     } = props
+    const [showMore, setShowMore] = useState(false);
+
 
     const RenderItem = ({ item }) => {
         console.log("item", item)
         return (
             <View style={{ paddingHorizontal: 10 }}>
                 <View style={styles.RenderItemViewStyle}>
-                    <TouchableOpacity 
-                    onPress={()=>props.navigation.navigate(GuestProfile.routeName)}
-                    style={styles.contactRow}>
+                    <TouchableOpacity
+                        onPress={() => props.navigation.navigate(GuestProfile.routeName)}
+                        style={styles.contactRow}>
                         <View style={{
                             flex: 1, flexDirection: 'row', alignItems: 'center',
                         }}>
@@ -60,9 +64,10 @@ export default function ContactList(props) {
 
                         <View style={{ width: '7%' }}>
                             {heading == 'Friends' ?
-                                <SendRequest height={27} width={25} style={{ marginRight: getWp(0) }} />
-                                :
                                 <BlueTick height={12} width={16} style={{ marginRight: getWp(0) }} />
+                                :
+                                <SendRequest height={27} width={25} style={{ marginRight: getWp(0) }} />
+
                             }
                         </View>
                     </TouchableOpacity>
@@ -76,6 +81,7 @@ export default function ContactList(props) {
                     }} />
                 }
 
+
             </View>
         )
     }
@@ -86,16 +92,52 @@ export default function ContactList(props) {
         </Text>
 
         <FlatList
-            data={dataList}
+            data={!showMore ? dataList.slice(0, 2) : dataList}
             renderItem={(item) => <RenderItem item={item} />}
             keyExtractor={index => index}
         />
-
+        {dataList.length > 2 && (
+            <View style={{ backgroundColor: '#FBFBFB', paddingBottom: 10 }}>
+                <Button
+                    onPress={() => {
+                        setShowMore(i => !i);
+                    }}
+                    full
+                    light
+                    style={[styles.showMoreButtonContainer]}>
+                    <Text style={[styles.showMoreTextStyle, { fontFamily: 'AvenirNext-Medium', letterSpacing: 0.2 }]}>
+                        {!showMore ? `${dataList.length - 2} More` : `Hide`}
+                    </Text>
+                    <View style={{ marginStart: getHp(10) }}>
+                        <AntDesign
+                            color={'black'}
+                            size={getHp(16)}
+                            name={!showMore ? 'down' : 'up'}
+                        />
+                    </View>
+                </Button>
+            </View>
+        )}
     </View>
-
     )
 }
 const styles = StyleSheet.create({
+    showMoreButtonContainer: {
+        marginHorizontal: 10,
+        flexDirection: 'row',
+        marginTop: getHp(16),
+        backgroundColor: '#F2F5F6',
+        borderWidth: 1,
+        borderColor: '#E4EEF1',
+        borderRadius: getHp(10),
+        borderBottomLeftRadius: getHp(10),
+        borderBottomRightRadius: getHp(10),
+    },
+    showMoreTextStyle: {
+        fontFamily: 'AvenirNext-Regular',
+        fontSize: FONTSIZE.Text16,
+        lineHeight: getHp(22),
+    },
     NameStyle: {
         color: '#000',
         fontSize: FONTSIZE.Text18,

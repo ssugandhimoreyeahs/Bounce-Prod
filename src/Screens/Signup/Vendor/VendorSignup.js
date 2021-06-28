@@ -116,13 +116,21 @@ export default function VendorSignup(props) {
         }
     }
 
-    const handleSpace = (value) => {
+    const handleSpace = (value, type = 'Username') => {
         let regSpace = new RegExp(/\s/);
         if (regSpace.test(value)) {
-            setUsername(value.trim())
-            Toast("Username cannot contain space !");
+            if (type == 'Password') {
+                setPassword(value.trim())
+            } else {
+                setUsername(value.trim())
+            }
+            Toast(`${type} ` + "cannot contain space !");
         } else {
-            setUsername(value)
+            if (type == 'Password') {
+                setPassword(value)
+            } else {
+                setUsername(value)
+            }
         }
     }
     return (<Scaffold
@@ -187,7 +195,7 @@ export default function VendorSignup(props) {
                 }
                 <FloatingInput
                     floatingLabel={"Username"}
-                    onChange={handleSpace}
+                    onChangeText={value => handleSpace(value, 'Username')}
                     value={username}
                 />
                 <FloatingInput
@@ -204,7 +212,7 @@ export default function VendorSignup(props) {
 
                 <FloatingInput
                     floatingLabel={"Password"}
-                    onChange={(value) => setPassword(value)}
+                    onChangeText={value => handleSpace(value, 'Password')}
                     Password
                     value={password}
                 />

@@ -23,6 +23,11 @@ import HostView from '../MyEvents/HostView';
 import FeaturingPage from '../BounceUsers/EventPage/Public/Featuring';
 import PartyRental from '../BounceVendors/PartyRentals';
 import { AccountService } from '../../app/services';
+import PartyRental from '../BounceVendors/PartyRentals'
+import InviteFriends from '../BounceVendors/PlanParty/InviteFriends';
+import FriendsPage from '../BounceUsers/Profile/FriendsPage';
+
+
 
 export default function UserCustomDrawer(props) {
   const {authStore} = MobxStore;
@@ -67,6 +72,20 @@ export default function UserCustomDrawer(props) {
       name: 'More',
       onPress: () => {},
     },
+    // {
+    //   icon: <Settings height={30} width={30} />,
+    //   name: 'Invite friends',
+    //   onPress: () => {
+    //     props.navigation.navigate(InviteFriends.routeName)
+    //   },
+    // },
+    // {
+    //   icon: <Settings height={30} width={30} />,
+    //   name: 'FriendsPage',
+    //   onPress: () => {
+    //     props.navigation.navigate(FriendsPage.routeName)
+    //   },
+    // },
     // {
     //   icon: <Settings height={30} width={30} />,
     //   name: 'Vendor Profiles',
@@ -237,6 +256,6 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: FONTSIZE.Text27,
     color: '#000',
-    fontFamily: 'AvenirNext-DemiBold',
+    fontFamily: 'AvenirNext-DemiBold'
   },
 });

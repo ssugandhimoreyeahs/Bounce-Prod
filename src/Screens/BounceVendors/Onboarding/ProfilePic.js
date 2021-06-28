@@ -13,8 +13,6 @@ import UserNavigation from '../../../navigation/UserNavigation';
 import UserHomeDrawerNavigator from '../../../navigation/UserNavigation/drawerNavigation';
 import axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { LocalStorage } from '../../../app/utils/localStorage';
-import { UserContext } from '../../../context/profiledataProvider';
 import MobxStore from '../../../mobx';
 import moment from 'moment';
 import { ApiClient } from '../../../app/services';
@@ -29,10 +27,13 @@ export default function ProfilePic(props) {
   const dispatch = useDispatch();
   const [loader, setLoader] = useState(false);
 
-  const { name, username, password, birthday, age, email } = props.route.params;
-  // console.log('ProfilePic PROPS -->', props.route.params);
-
-  // console.log(name, username, password, birthday,age,email);
+  const { name,
+    username,
+    password,
+    birthday,
+    age,
+    email
+  } = props.route.params;
 
   const handleSubmit = async () => {
     try {
@@ -41,8 +42,7 @@ export default function ProfilePic(props) {
         let birthday = moment(props.route.params.birthday).format('YYYY-MM-DD') + ' 00:00:00';
         console.log("BIRTHDAY Final---->", birthday);
         let milliseconds = new Date().getTime();
-        // console.log('PICTURE', picture);
-        let imgObj = {
+         let imgObj = {
           uri: `${picture.path}`,
           type: 'image/jpeg',
           name: `image-${milliseconds}.jpg`,
@@ -61,7 +61,8 @@ export default function ProfilePic(props) {
           ApiClient.endPoints.userRegister,
           formData,
         );
-        axios.post('auth/host/register', formData);
+        console.log("RESPONSE ", response);
+        // axios.post('auth/host/register', formData);
         if (response.status == 201 || response.status == 200) {
           const result = await JSON.stringify(response.data);
           console.log('NEW_USER_REGISTRATION ', result);
@@ -116,25 +117,25 @@ export default function ProfilePic(props) {
   //   }
 
 
-    // openFooter(fa)
-    // launchImageLibrary({}, (response) => {
-    //     console.log('Respuesta =', response);
-    //     // setPhotoURI(response.uri);
-    //     if (response.didCancel) {
-    //         alert('Subida cancelada');
-    //     } else if (response.error) {
-    //         alert('Error encontrado: ', error);
-    //     } else {
-    //         console.log("IMAGE RESPONSE", response);
-    //         // let img = {
-    //         //     uri: response.uri,
-    //         //     type: response.type,
-    //         //     name: response.fileName ||
-    //         //         response.uri.substr(response.uri.lastIndexOf('/') + 1)
-    //         // }
-    //         setPicture(response.uri)
-    //     }
-    // });
+  // openFooter(fa)
+  // launchImageLibrary({}, (response) => {
+  //     console.log('Respuesta =', response);
+  //     // setPhotoURI(response.uri);
+  //     if (response.didCancel) {
+  //         alert('Subida cancelada');
+  //     } else if (response.error) {
+  //         alert('Error encontrado: ', error);
+  //     } else {
+  //         console.log("IMAGE RESPONSE", response);
+  //         // let img = {
+  //         //     uri: response.uri,
+  //         //     type: response.type,
+  //         //     name: response.fileName ||
+  //         //         response.uri.substr(response.uri.lastIndexOf('/') + 1)
+  //         // }
+  //         setPicture(response.uri)
+  //     }
+  // });
 
 
   // };

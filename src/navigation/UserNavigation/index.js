@@ -23,6 +23,9 @@ import EmailScreen from '../../Screens/BounceVendors/Onboarding/EmailScreen'
 import NameScreen from '../../Screens/BounceVendors/Onboarding/NameScreen'
 import AuthNavigation from '../AuthNavigation';
 
+import InviteFriends from '../../Screens/BounceVendors/PlanParty/InviteFriends'
+import FriendsPage from '../../Screens/BounceUsers/Profile/FriendsPage'
+import GuestProfile from '../../Screens/BounceUsers/Profile/GuestProfile';
 
 const UserRootStack = createStackNavigator();
 
@@ -90,6 +93,18 @@ class UserNavigation {
         <UserRootStack.Screen
           name={CreateInvitation.routeName}
           component={CreateInvitation}
+        />
+        <UserRootStack.Screen
+          name={InviteFriends.routeName}
+          component={InviteFriends}
+        />
+        <UserRootStack.Screen
+          name={FriendsPage.routeName}
+          component={FriendsPage}
+        />
+        <UserRootStack.Screen
+          name={GuestProfile.routeName}
+          component={GuestProfile}
         />
 
 

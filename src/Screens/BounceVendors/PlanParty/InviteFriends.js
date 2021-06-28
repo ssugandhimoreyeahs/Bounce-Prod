@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native'
-import { Header, SearchBar, Footer, CustomButton, Toggle, Calender, ModalPopup, Root, PastGuestList, CustomSearchbar } from '@components'
+import { Header, SearchBar, Footer, CustomButton, Toggle, Calender, ModalPopup, Root, PastGuestList, Scaffold } from '@components'
 import { Girl } from '@assets';
 import {
     Info,
@@ -61,7 +61,7 @@ export default function InviteFriends(props) {
         age = false
     } = props
     return (
-        <Root>
+        <Scaffold>
             <View style={styles.container}>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={{ overflow: 'visible', flex: 1 }}>
                     <Header
@@ -115,9 +115,10 @@ export default function InviteFriends(props) {
                     ButtonTitle={"Continue"}
                 />
             </View>
-        </Root>
+        </Scaffold>
     )
 }
+InviteFriends.routeName = '/InviteFriends';
 const styles = StyleSheet.create({
     past: {
         marginVertical: 10,

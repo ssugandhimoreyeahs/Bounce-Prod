@@ -41,6 +41,7 @@ import Checkbox from './Checkbox'
 import DatePicker from './DatePicker'
 import ModalDropDownComponent from './ModalDropDown';
 import TicketComponent from './TicketComponent';
+import ContactList from './ContactList'
 
 import {
     PhoneNumber
@@ -60,6 +61,7 @@ import {
     ThreeFooterButtons,
     SearchPageTab,
     FeaturingPageTab,
+    GuestTabview,
 } from './BreakedComponents'
 import {
     BlueCheck
@@ -73,8 +75,9 @@ import Scaffold from './Scaffold';
 import PublicPrivateButton from './PublicPrivateButton';
 
 export {
+    GuestTabview,
     PhoneNumber,
-    
+    ContactList,
     FeaturingPageTab,
     BlueCheck,
     SearchPageTab,

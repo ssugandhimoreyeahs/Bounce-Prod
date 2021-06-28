@@ -22,23 +22,24 @@ class AuthStore {
     this.async = new Asynctask(this, rootStore);
   }
   onVendorRegistration = userProfile => {
-      this.isAuthenticated = true;
-      this.userProfile = Object.assign({}, userProfile);
-      AccountService.addNewAccount(Object.assign({}, userProfile));
+    this.isAuthenticated = true;
+    this.userProfile = Object.assign({}, userProfile);
+    this.addAccount(userProfile);
   };
-  logout = () => { 
-      this.isAuthenticated = false;
-      this.userProfile = {}; 
+  logout = () => {
+    this.isAuthenticated = false;
+    this.userProfile = {};
   };
   onAutoLogin = userProfile => {
-      this.userProfile = userProfile;
-      this.isAuthenticated = true;
-      this.isAutoLoginDone = true;
+    this.userProfile = userProfile;
+    this.isAuthenticated = true;
+    this.isAutoLoginDone = true;
   };
   onReloadVendor = user => {
-      let nextUserProfile = Object.assign({}, this.userProfile);
-      nextUserProfile.user = user;
-      this.userProfile = nextUserProfile;
+    let nextUserProfile = Object.assign({}, this.userProfile);
+    nextUserProfile.user = user;
+    this.userProfile = nextUserProfile;
+    this.addAccount(nextUserProfile);
   };
   @action
   onUserRegistration = body => {
@@ -50,17 +51,24 @@ class AuthStore {
     this.userProfile = userDetailsObj;
     this.isAuthenticated = true;
     LocalStorage.onSignUp(body.accessToken, JSON.stringify(body.user));
-    AccountService.addNewAccount(userDetailsObj);
+    this.addAccount(userDetailsObj);
   };
 
-  setAllAccounts = async () => {
+  @action
+  addAccount = async (user) => {
+    await AccountService.addNewAccount(user);
     this.AllAccounts = await AccountService.getAllAccounts();
   }
 
+  @action
+  setAllAccounts = async () => {
+    this.AllAccounts = await AccountService.getAllAccounts();
+  };
+
   setUserProfile = data => {
-    this.userProfile = data
-  }
- 
+    this.userProfile = data;
+  };
+
   @computed
   get token() {
     return this.userProfile.token;

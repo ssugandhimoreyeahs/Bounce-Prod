@@ -108,6 +108,9 @@ export default function HostProfile(props) {
 
   useEffect(() => {
     MobxStore.authStore.async.reloadUser();
+  }, [MobxStore.authStore.userProfile]);
+
+  useEffect(() => {
     setData();
   }, []);
 

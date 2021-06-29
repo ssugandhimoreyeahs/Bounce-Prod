@@ -1,53 +1,32 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
-import { Scaffold, ImageCarousel, Media, Header, Footer, CustomText } from '@components'
+import { Scaffold, TagsCollapsible, Media, Header, Footer, CustomText } from '@components'
 import { FONTSIZE, getHp, getWp } from '@utils'
 import { observer } from 'mobx-react';
 import {
     Spotify,
     AppleMusic,
 } from '@svg';
+import { CreateFormData, PartyService } from '../../../app/services';
+import MobxStore from '../../../mobx';
+import PlanPartyModel from '../../BounceVendors/PlanParty/PlanPartyModel';
+import NewsFeed from './NewsFeed';
 
-
-const INTEREST = [
-    {
-        categoryHeading: 'Entertainment',
-        categoryList:
-            ['Concerts', 'Broadway', 'Comedy', 'Gaming']
-
-    },
-    {
-        categoryHeading: 'Sports',
-        categoryList:
-            ['⛳️ Golf', 'Basketball', 'Soccer', 'Hockey']
-
-    },
-    {
-        categoryHeading: 'Life',
-        categoryList:
-            ['Dating', 'Traveling', 'Support', 'Gaming']
-
-    }
-]
-function AdInterest(props) {
+function AddInterest(props) {
     const [state, setState] = useState(0)
+    const { tagStore } = MobxStore;
+    const partyModel = PlanPartyModel.getInstance();
 
-    const SmallButton = ({ item }) => {
-        return (
-            <TouchableOpacity style={[
-                styles.itemView,
-                item.index == 2 && { backgroundColor: 'rgba(0, 224, 143, 0.24)' },
-            ]}>
-                <Text style={[styles.headerTitle, {
-                    fontSize: FONTSIZE.Text12,
-                    letterSpacing: 0.4,
-                    fontFamily: 'AvenirNext-Medium'
-                }]}>
-                    {item}
-                </Text>
-            </TouchableOpacity>
-        )
+    useEffect(async () => {
+        const Tags = await PartyService.getTags();
+        tagStore.setTags(Tags);
+    }, []);
+
+    const handleSubmit = () => {
+        props.navigation.navigate(NewsFeed.routeName)
     }
+
+
     return (
         <Scaffold statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
             <Header
@@ -60,13 +39,36 @@ function AdInterest(props) {
                 headerBackColor={{ backgroundColor: '#fff', elevation: 0 }}
             />
 
+
             <ScrollView style={styles.container}
                 contentContainerStyle={{ flexGrow: 1 }}>
+
+
+                {true && (
+                    <View>
+                        <Text style={[styles.headerTitle, {
+                            fontSize: FONTSIZE.Text22,
+                            marginTop: getHp(15)
+                        }]}>
+                            {"Add Interests"}
+                        </Text>
+                        <Text style={[styles.headerTitle, {
+                            fontSize: FONTSIZE.Text14,
+                            fontFamily: 'AvenirNext-Regular',
+                            letterSpacing: 0.2,
+                            marginBottom: getHp(15)
+                        }]}>
+                            {"Personalize your feed of events!"}
+                        </Text>
+                    </View>
+                )
+                }
+
+
 
                 <Text style={[styles.headerTitle, { marginVertical: getHp(15) }]}>
                     {"Music"}
                 </Text>
-
                 {/* First Spotify */}
                 <TouchableOpacity style={[styles.socialButton, styles.shadowStyle]}>
                     <View style={styles.flex}>
@@ -118,30 +120,33 @@ function AdInterest(props) {
                         {'Connect'}
                     </Text>
                 </TouchableOpacity>
-                {/* <Text
-              style={[
-                styles.headerTitle,
-                { color: '#999999', fontFamily:'AvenirNext-Medium', marginBottom: 8 },
-              ]}>
-              {'Tap to Refresh'}
-            </Text> */}
 
-                {INTEREST.map((item) => {
+
+
+                {tagStore.partyTags?.map(t => {
                     return (
-                        <View style={{ marginVertical: 10 }}>
-                            <Text style={[styles.headerTitle, {}]}>
-                                {item.categoryHeading}
-                            </Text>
-                            <View style={{ flexDirection: 'row', padding: 5, marginTop: 5, flexWrap: 'wrap' }}>
-                                {
-                                    item.categoryList.map((item) => <SmallButton item={item} />
-                                    )
-                                }
-                            </View>
-                        </View>
-                    )
+                        <TagsCollapsible
+                            MyInterest={true}
+                            Data={t}
+                            isOnSelect={({ tagObj, item }) => {
+                                let isPartySelected = partyModel.party.isSubTagExist(
+                                    tagObj,
+                                    item,
+                                );
+                                return (
+                                    isPartySelected.tagExist && isPartySelected.subTagExist
+                                );
+                            }}
+                            onAdd={tag => partyModel.party.addTags(tag)}
+                        />
+                    );
                 })}
-                <TouchableOpacity style={[styles.shadowStyle, styles.SaveButton]}>
+
+
+
+                <TouchableOpacity
+                    onPress={handleSubmit}
+                    style={[styles.shadowStyle, styles.SaveButton]}>
                     <Text style={{
                         color: '#000',
                         fontFamily: 'AvenirNext-DemiBold', fontSize: FONTSIZE.Text21
@@ -150,12 +155,14 @@ function AdInterest(props) {
                     </Text>
                 </TouchableOpacity>
 
+
+
             </ScrollView>
         </Scaffold>
     )
 }
-AdInterest.routeName = "/AdInterest";
-export default observer(AdInterest)
+AddInterest.routeName = "/AddInterest";
+export default observer(AddInterest)
 
 
 const styles = StyleSheet.create({
@@ -166,8 +173,8 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#fff',
         borderRadius: 17,
-        position: 'absolute',
-        bottom: 10,
+        marginTop: getHp(15),
+        marginBottom: getHp(60)
     },
     smallButtonStyle: {
         paddingVertical: 5,

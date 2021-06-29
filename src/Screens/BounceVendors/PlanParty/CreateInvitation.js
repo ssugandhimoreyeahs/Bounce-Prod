@@ -398,14 +398,10 @@ function CreateInvitation(props) {
                 <TagsCollapsible
                   Data={t}
                   isOnSelect={({ tagObj, item }) => {
-                    // console.log("1 tagObj", tagObj)
-                    // console.log("2 partyModel.party.isSubTagExist",partyModel.party.isSubTagExist)
-
                     let isPartySelected = partyModel.party.isSubTagExist(
                       tagObj,
                       item,
                     );
-                    // console.log("3 isPartySelected.tagExist && isPartySelected.subTagExist",isPartySelected.tagExist && isPartySelected.subTagExist);
                     return (
                       isPartySelected.tagExist && isPartySelected.subTagExist
                     );
@@ -565,8 +561,8 @@ const styles = StyleSheet.create({
     height: '30%',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    borderWidth: 0.3,
-    borderColor: '#999999',
+    borderWidth: 2,
+    borderColor: '#F2F5F6',
     borderBottomWidth: 0
   },
   imageButton: {

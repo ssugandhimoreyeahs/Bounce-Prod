@@ -8491,9 +8491,10 @@ react-native-calendar-picker@^7.0.9:
     prop-types "^15.6.0"
     recyclerlistview "^3.0.0"
 
-"react-native-camera@git+https://git@github.com/react-native-community/react-native-camera.git":
+react-native-camera@^3.44.1:
   version "3.44.1"
-  resolved "git+https://git@github.com/react-native-community/react-native-camera.git#0c63324ff53d547d3260ec073008c57252621cde"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-3.44.1.tgz#60e7d60fe778c1fc59d0579b64c63c3c1a59865a"
+  integrity sha512-B95RL3laK2v8R7L/37v28MYcEcwsM/mS94h6EZuRMLH5HFolkAwh7zJo+UAn7FG9eFtAdBwIM6s9OqYudTVO4Q==
   dependencies:
     prop-types "^15.6.2"
 

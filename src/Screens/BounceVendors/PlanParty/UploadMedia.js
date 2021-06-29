@@ -34,7 +34,10 @@ function UploadMedia(props) {
   }
   let partyModel = PlanPartyModel.getInstance();
   const [state, setState] = useState({});
+
+
   useEffect(() => {
+    handleImage()
     const listener = partyModel.party?.subscribe(() => {
       setState(() => ({}));
     });
@@ -42,6 +45,8 @@ function UploadMedia(props) {
       listener.unsubscribe();
     };
   }, []);
+
+
   const handleImage = () => {
     ImagePicker.openPicker({
       width: 300,

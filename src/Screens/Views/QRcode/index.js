@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, Alert, Text, TouchableOpacity } from 'react-native';
-import { QRCodes, Header, CustomButton, Scaffold } from '@components';
+import { QRCodes, Header, CustomButton, Scaffold, } from '@components';
 import { UserContext } from '../../../context/profiledataProvider';
 import { FONTSIZE, getHp, getWp } from '@utils';
 import { ApiClient } from '../../../app/services';
 import { Girl } from '../../../assets';
 import { UploadBlue } from '@svg'
 import mobxStore from '../../../mobx'
-
+import { openCameraWithPermission } from '../../../components/Camera'
 
 export default function QRcode({ navigation }) {
   const { authStore } = mobxStore
@@ -43,51 +43,54 @@ export default function QRcode({ navigation }) {
       backgroundColor: '#000',
       barStyle: 'light-content'
     }}
-    contentContainerStyle={{
-      backgroundColor: '#000'
-    }}
+      contentContainerStyle={{
+        backgroundColor: '#000'
+      }}
     >
-    <View style={styles.container}>
-      <Header
-        headerStyleProp={{ color: '#1FAEF7' }}
-        headerTitle={"Bounce Code"}
-        back
-        onPress={() => navigation.goBack()}
-        theme={'#fff'}
-        headerBackColor={{ backgroundColor: '#000' }}
-      />
+      <View style={styles.container}>
+        <Header
+          headerStyleProp={{ color: '#1FAEF7' }}
+          headerTitle={"Bounce Code"}
+          back
+          onPress={() => navigation.goBack()}
+          theme={'#fff'}
+          headerBackColor={{ backgroundColor: '#000' }}
+        />
 
 
-      <View style={styles.subContainer}>
-        <Text
-          style={[styles.textStyle, { alignSelf: 'center', marginTop: 20 }]}
-        >
-          {"Scan into events and add friends"}
-        </Text>
+        <View style={styles.subContainer}>
+          <Text
+            style={[styles.textStyle, { alignSelf: 'center', marginTop: 20 }]}
+          >
+            {"Scan into events and add friends"}
+          </Text>
 
-        {userQR && (
-          <View style={styles.QRcontainer}>
-            <QRCodes size={200} qrValue={userQR} qrUserPic={profileImage?.filePath} />
-          </View>
-        )}
-
-        <View style={{ marginBottom: 10, justifyContent: 'center', alignItems: 'center' }}>
-          <TouchableOpacity style={{
-            alignItems: 'center'
-          }}>
-            <View style={{ borderRadius: 100, elevation: 10, backgroundColor: '#fff', }}>
-              <UploadBlue height={getHp(100)} width={getHp(100)} />
+          {userQR && (
+            <View style={styles.QRcontainer}>
+              <QRCodes size={200} qrValue={userQR} qrUserPic={profileImage?.filePath} />
             </View>
-            <Text style={{
-              fontSize: FONTSIZE.Text16, color: '#1FAEF7', marginTop: 15, fontFamily: 'AvenirNext-Bold',
-            }}>{"Camera"}</Text>
-          </TouchableOpacity>
+          )}
+
+          <View style={{ marginBottom: 10, justifyContent: 'center', alignItems: 'center' }}>
+            <TouchableOpacity
+              onPress={() => openCameraWithPermission()}
+              style={{
+                alignItems: 'center'
+              }}>
+              <View style={{ borderRadius: 100, elevation: 10, backgroundColor: '#fff', }}>
+                <UploadBlue height={getHp(100)} width={getHp(100)} />
+              </View>
+              <Text style={{
+                fontSize: FONTSIZE.Text16, color: '#1FAEF7', marginTop: 15, fontFamily: 'AvenirNext-Bold',
+              }}>{"Camera"}</Text>
+            </TouchableOpacity>
+          </View>
+
+
+
         </View>
-
-
+        {/* <View style={[styles.barStyle]} /> */}
       </View>
-      {/* <View style={[styles.barStyle]} /> */}
-    </View>
     </Scaffold>
   );
 }

@@ -1,4 +1,4 @@
-  import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   View,
   Text,
@@ -50,8 +50,13 @@ export default function HostProfile(props) {
   const [city, setCity] = useState('');
   const [profession, setProfession] = useState('');
   const [bio, setBio] = useState('');
-  const [snapchat, setSnapchat] = useState('');
+
   const [instagram, setInstagram] = useState('');
+  const [snapchat, setSnapchat] = useState('');
+  const [tiktok, setTiktok] = useState('');
+  const [twitter, setTwitter] = useState('');
+  const [linkedIn, setLinkedIn] = useState('');
+
   const [picture, setPicture] = useState(null);
   const [footer, openFooter] = useState(false);
   const [friendCount, setFriendCount] = useState(false);
@@ -59,8 +64,6 @@ export default function HostProfile(props) {
   const [attending, setAttending] = useState(false);
   const [interested, setInterested] = useState(false);
 
-  const [twitter, setTwitter] = useState('');
-  const [tiktok, setTiktok] = useState('');
   const dispatch = useDispatch();
 
 
@@ -99,6 +102,8 @@ export default function HostProfile(props) {
     );
   };
 
+  
+
   useEffect(() => {
     MobxStore.authStore.async.reloadUser();
     setData();
@@ -112,8 +117,12 @@ export default function HostProfile(props) {
     setProfession(user?.profession);
     setCity(user?.city);
     setBirthday(user.birthday);
-    setInstagram(user.instagramUsername);
+
     setSnapchat(user?.snapchatUsername);
+    setTiktok(user?.tiktokUsername);
+    setTwitter(user?.twitterUsername);
+    setLinkedIn(user?.linkedInUsername);
+
     setFriendCount(user?.friendCount);
     setHosting(user?.hosting);
     setAttending(user?.attending);
@@ -142,8 +151,13 @@ export default function HostProfile(props) {
     formData.append('hosting', hosting);
     formData.append('attending', attending);
     formData.append('intrested', interested);
-    formData.append('snapchatUsername', snapchat);
 
+    formData.append('snapchatUsername', snapchat);
+    formData.append('tiktokUsername', tiktok);
+    formData.append('twitterUsername', twitter);
+    formData.append('linkedInUsername', linkedIn);
+
+  
     console.log('TOKEN', token);
 
     await ApiClient.authInstance
@@ -385,7 +399,7 @@ export default function HostProfile(props) {
                     placeholderTextColor={'#999999'}
                     onChangeText={value => setTiktok(value)}
                     style={[styles.headerTitle, styles.Tiktok]}
-                    value={tiktok}
+                    value={tiktok == '' ? '' : tiktok}
                   />
                 </View>
               </TouchableOpacity>
@@ -397,8 +411,8 @@ export default function HostProfile(props) {
                     placeholder={`@snapchat`}
                     placeholderTextColor={'#999999'}
                     onChangeText={value => setSnapchat(value)}
-                    style={[styles.headerTitle, styles.Tiktok]}
                     value={snapchat == '' ? '' : snapchat}
+                    style={[styles.headerTitle, styles.Tiktok]}
                   />
                 </View>
               </TouchableOpacity>
@@ -411,7 +425,7 @@ export default function HostProfile(props) {
                     placeholderTextColor={'#999999'}
                     onChangeText={value => setTwitter(value)}
                     style={[styles.headerTitle, styles.Tiktok]}
-                    value={twitter}
+                    value={twitter == '' ? '' : twitter}
                   />
                 </View>
               </TouchableOpacity>
@@ -422,9 +436,9 @@ export default function HostProfile(props) {
                   <TextInput
                     placeholder={`@linkedin`}
                     placeholderTextColor={'#999999'}
-                    onChangeText={value => setTwitter(value)}
+                    onChangeText={value => setLinkedIn(value)}
                     style={[styles.headerTitle, styles.Tiktok]}
-                    value={twitter}
+                    value={linkedIn == '' ? '' : linkedIn}
                   />
                 </View>
               </TouchableOpacity>

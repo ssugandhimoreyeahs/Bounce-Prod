@@ -186,7 +186,7 @@ function Tab2(props) {
 
   return (
     <View style={{}}>
-      {partyData.length > 0 ? (
+      {/* {partyData.length > 0 ? (
         <Fragment >
           <FlatList
             scrollEnabled={false}
@@ -218,50 +218,43 @@ function Tab2(props) {
             </View>
           )}
         </Fragment>
-      ) : (
-          <View style={{ padding: 10 }}>
-            <FlatList
-              data={STATIC_DATA}
-              showsHorizontalScrollIndicator={false}
-              renderItem={renderStatic}
-              keyExtractor={index => index}
-            />
-            <TouchableOpacity onPress={() =>
-              props.navigation.navigate(CreateInvitation.routeName, {
-                // party: item,
-                isEditParty: false,
-              })
-            }>
+      ) : ( */}
+      <View style={{ padding: 10 }}>
+        <FlatList
+          data={STATIC_DATA}
+          showsHorizontalScrollIndicator={false}
+          renderItem={renderStatic}
+          keyExtractor={index => index}
+        />
 
-              <View style={{ backgroundColor: '#EEEEEE', height: 1, marginVertical: 5 }} />
-              <LinearGradient
-                start={{ x: 1, y: 1 }}
-                end={{ x: 0, y: 0 }}
-                colors={['#27F4AA', '#0BEEB7']}
-                style={[
-                  styles.linearGradient,
-                  {
-                    width: '100%',
-                    height: getHp(38),
-                    borderRadius: 13,
-                    marginTop: 10,
-                    //   marginBottom: 10
-                  },
-                ]}>
-                <TouchableOpacity
-                  onPress={() => props.navigation.navigate(AddInterest.routeName)}
-                  style={[styles.fullTouch, {
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  }]} >
-                  <Text style={[styles.buttonText, { marginRight: 15 }]}>{'Add Interests'}</Text>
+        <View style={{ backgroundColor: '#EEEEEE', height: 1, marginVertical: 5 }} />
+        <LinearGradient
+          start={{ x: 1, y: 1 }}
+          end={{ x: 0, y: 0 }}
+          colors={['#27F4AA', '#0BEEB7']}
+          style={[
+            styles.linearGradient,
+            {
+              width: '100%',
+              height: getHp(38),
+              borderRadius: 13,
+              marginTop: 10,
+              //   marginBottom: 10
+            },
+          ]}>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate(AddInterest.routeName)}
+            style={[styles.fullTouch, {
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }]} >
+            <Text style={[styles.buttonText, { marginRight: 15 }]}>{'Add Interests'}</Text>
 
-                </TouchableOpacity>
-              </LinearGradient>
-            </TouchableOpacity>
-          </View>
-        )}
+          </TouchableOpacity>
+        </LinearGradient>
+      </View>
+      {/* )} */}
     </View>
   );
 }

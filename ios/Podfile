@@ -16,6 +16,8 @@ target 'bounce' do
 
   # pod 'RNExitApp', :path => '../node_modules/react-native-exit-app'
 
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
   target 'bounceTests' do
     inherit! :complete
     pod 'GoogleAPIClientForREST/Sheets', '~> 1.2.1'

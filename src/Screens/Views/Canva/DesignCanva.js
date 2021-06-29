@@ -51,14 +51,16 @@ export default function DesignCanva(props) {
 
 
     return (<Scaffold statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
-        <View style={{ marginVertical: getHp(15), flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{
+            marginVertical: getHp(15),
+            flexDirection: 'row',
+            alignItems: 'center'
+        }}>
             <TouchableOpacity style={{}}>
                 <Back name="chevron-back" color={'#000'}
                     style={{ marginRight: 20, marginLeft: 10 }}
                     size={30} />
             </TouchableOpacity>
-
-
             <Searchbar
                 placeholder={"Search events"}
                 onChangeText={onChangeSearch}
@@ -70,13 +72,10 @@ export default function DesignCanva(props) {
                 }}
                 style={styles.searchBarStyle}
                 iconColor={"#999999"}
-                
                 placeholderTextColor={"#909090"}
             />
-
         </View>
         <SearchPageTab {...props} />
-
     </Scaffold>
     );
 };

@@ -36,18 +36,33 @@ const TagsCollapsible = props => {
     );
   };
   return (
-    <View key={props.Data.id} style={styles.container}>
-      <TouchableOpacity
-        style={styles.heading}
-        onPress={() => setIsVisible(s => !s)}>
-        <BackBlack height={13} width={6} />
-        <Text style={styles.headingTextStyle}>{props.Data.name}</Text>
-      </TouchableOpacity>
-      <Collapsible collapsed={isVisible}>
-        <View style={styles.collapsedContainer}>
-          {props.Data.subTags?.map(RenderItems)}
+    <View>
+      { !props?.MyInterest ?
+        <View key={props.Data.id} style={styles.container}>
+          <TouchableOpacity
+            style={styles.heading}
+            onPress={() => setIsVisible(s => !s)}>
+            <BackBlack height={13} width={6} />
+            <Text style={styles.headingTextStyle}>{props.Data.name}</Text>
+          </TouchableOpacity>
+          <Collapsible collapsed={isVisible}>
+            <View style={styles.collapsedContainer}>
+              {props.Data.subTags?.map(RenderItems)}
+            </View>
+          </Collapsible>
         </View>
-      </Collapsible>
+        :
+
+        <View key={props.Data.id} style={[styles.container, { backgroundColor: '#FBFBFB', marginVertical: getHp(15) }]}>
+          <Text style={[styles.headerTitle, { marginLeft: getWp(10) }]}>
+            {props.Data.name}
+          </Text>
+          <View style={{ flexDirection: 'row', padding: 5, marginTop: 5, flexWrap: 'wrap' }}>
+            {props.Data.subTags?.map(RenderItems)}
+          </View>
+        </View>
+
+      }
     </View>
   );
 };
@@ -76,6 +91,11 @@ const styles = StyleSheet.create({
     marginTop: 12,
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+  headerTitle: {
+    color: '#000',
+    fontSize: FONTSIZE.Text16,
+    fontFamily: 'AvenirNext-DemiBold',
   },
   itemView: {
     height: 35,

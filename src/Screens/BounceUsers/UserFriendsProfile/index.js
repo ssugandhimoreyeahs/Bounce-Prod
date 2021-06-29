@@ -61,7 +61,7 @@ import Right from 'react-native-vector-icons/FontAwesome'
 import Icon from 'react-native-vector-icons/Entypo'
 import spotifyToken from '../../../app/SDK/Spotify/spotify_token'
 import FriendsPage from "../Profile/FriendsPage";
-import NewsFeed from "../NewsFeed";
+// import CommonInterestNewsFeed from "../NewsFeed/CommonInterestNewsFeed";
 
 Text.defaultProps = {
   allowFontScaling: false,
@@ -75,7 +75,6 @@ function UserFriendsProfile(props) {
   } = MobxStore;
   const { navigation } = props;
   const userinfo = authStore.userProfile;
-  const [showDrawer, setShowDrawer] = useState(false);
   const [getMedia, setMedia] = useState(null);
   const [loader, setLoader] = useState(false);
   const dispatch = useDispatch();
@@ -85,14 +84,6 @@ function UserFriendsProfile(props) {
 
   console.log("PROPS", props);
 
-  //Social media states
-  const [snapchat, setSnapchat] = useState(null)
-  const [instagram, setInstagram] = useState(null)
-  const [picture, setPicture] = useState(null)
-  const [footer, openFooter] = useState(false)
-  const [twitter, setTwitter] = useState('')
-  const [tiktok, setTiktok] = useState('')
-  //Social media states end
   const {
     username,
     fullName,
@@ -101,6 +92,9 @@ function UserFriendsProfile(props) {
     profession,
     snapchatUsername,
     instagramUsername,
+    tiktokUsername,
+    twitterUsername,
+    linkedInUsername,
     profileImage = {},
     age,
   } = userinfo?.user;
@@ -368,9 +362,9 @@ function UserFriendsProfile(props) {
               </View>
             </View>
 
-            <View style={[styles.flex, { width: "80%", marginVertical: 10, justifyContent: 'flex-start', alignItems: 'center' }]}>
+            <View style={[styles.flex, { width: "80%", marginVertical: 10, alignItems: 'center' }]}>
               <TouchableOpacity
-                style={[styles.editButtonStyle, styles.shadowStyle, { paddingVertical: 5, marginRight: getWp(10) }]}
+                style={[styles.editButtonStyle, styles.shadowStyle, { paddingVertical: 5, marginRight: getWp(15) }]}
                 onPress={() => props.navigation.navigate(HostProfile.routeName)}
               >
                 <Text style={styles.editButton}>{"Edit Profile"}</Text>
@@ -378,6 +372,7 @@ function UserFriendsProfile(props) {
 
               {instagramUsername != null &&
                 <TouchableOpacity
+                  style={{ marginRight: getWp(15) }}
                   onPress={() =>
                     Linking.openURL(
                       `https://www.instagram.com/${instagramUsername}`
@@ -387,8 +382,10 @@ function UserFriendsProfile(props) {
                   <Insta height={getHp(30)} width={getWp(30)} />
                 </TouchableOpacity>}
 
-              {null != null &&
+              {!(tiktokUsername == null ||
+                tiktokUsername == '') &&
                 <TouchableOpacity
+                  style={{ marginRight: getWp(15) }}
                   onPress={() =>
                     Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
                   }
@@ -397,8 +394,10 @@ function UserFriendsProfile(props) {
                 </TouchableOpacity>
               }
 
-              {null != null &&
+              {!(twitterUsername == null ||
+                twitterUsername == '') &&
                 <TouchableOpacity
+                  style={{ marginRight: getWp(15) }}
                   onPress={() =>
                     Linking.openURL(`https://twitter.com/narendramodi`)
                   }
@@ -410,6 +409,7 @@ function UserFriendsProfile(props) {
               {!(snapchatUsername == null ||
                 snapchatUsername == '') &&
                 <TouchableOpacity
+                  style={{ marginRight: getWp(15) }}
                   onPress={() =>
                     Linking.openURL(
                       `https://www.snapchat.com/add/${snapchatUsername}`
@@ -417,10 +417,13 @@ function UserFriendsProfile(props) {
                   }
                 >
                   <Snapchat height={getHp(31)} width={getWp(31)} />
-                </TouchableOpacity>}
+                </TouchableOpacity>
+              }
 
-              {null != null &&
+              {!(linkedInUsername == null ||
+                linkedInUsername == '') &&
                 <TouchableOpacity
+                  style={{ marginRight: getWp(15) }}
                   onPress={() =>
                     Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
                   }
@@ -467,7 +470,8 @@ function UserFriendsProfile(props) {
                 justifyContent: 'center',
                 alignItems: 'center'
               }]}
-              onPress={()=>props.navigation.navigate(NewsFeed.routeName)} >
+                // onPress={() => props.navigation.navigate(CommonInterestNewsFeed.routeName)}
+                 >
                 <Text style={[styles.buttonText,
                 {
                   marginRight: 15,
@@ -502,25 +506,18 @@ function UserFriendsProfile(props) {
           }} />
 
           <View style={{ paddingHorizontal: 10 }} >
-            <LinearGradient
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              colors={['#16B0FE', '#3FBEFF']}
-              style={[
-                styles.linearGradient, {
-                  height: getHp(50),
-                  borderRadius: 13,
 
-                }
-              ]}>
-              <TouchableOpacity style={[styles.fullTouch, { flexDirection: "row" }]}
-                onPress={() => props.navigation.navigate(FriendsPage.routeName)}>
-                <WhitePerson height={25} width={19}
-                  style={{ marginBottom: -5 }} />
-                <Text style={[styles.buttonText, { marginLeft: 20, fontFamily: 'AvenirNext-DemiBold', color: '#FFFFFF' }]}>
-                  {'Find Friends'}</Text>
-              </TouchableOpacity>
-            </LinearGradient>
+            <TouchableOpacity style={[styles.fullTouch, styles.linearGradient, styles.shadowStyle, {
+              height: getHp(50),
+              borderRadius: 13, flexDirection: "row"
+            }]}
+              onPress={() => props.navigation.navigate(FriendsPage.routeName,{'contactTitle' : 'Find Friends'})}>
+              <WhitePerson height={25} width={19}
+                style={{ marginBottom: -5 }} />
+              <Text style={[styles.buttonText, { marginLeft: 20, fontFamily: 'AvenirNext-DemiBold', color: '#1FAEF7' }]}>
+                {'Find Friends'}
+              </Text>
+            </TouchableOpacity>
 
             <View style={{ backgroundColor: '#EEEEEE', height: 1, marginVertical: 15 }} />
 
@@ -591,89 +588,99 @@ function UserFriendsProfile(props) {
             </View>
 
             {/* 4th */}
-            <View style={styles.flex}>
-              <TouchableOpacity style={[styles.socialButton, {
-                borderWidth: 1,
-                borderColor: '#DDDDDD',
-                elevation: 0
-              }]}>
-                <View style={styles.flex}>
-                  <Tiktok height={getHp(30)} width={getHp(30)} />
-                  <TextInput
-                    placeholder={`@tiktok`}
-                    placeholderTextColor={'#999999'}
-                    onChangeText={value => setTiktok(value)}
-                    style={[styles.socialText, styles.TiktokStyle]}
-                    value={tiktok}
-                  />
-                </View>
-              </TouchableOpacity>
-              <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
-            </View>
+            {(tiktokUsername == null ||
+              tiktokUsername == '') &&
+              <View style={styles.flex}>
+                <TouchableOpacity style={[styles.socialButton, {
+                  borderWidth: 1,
+                  borderColor: '#DDDDDD',
+                  elevation: 0
+                }]}>
+                  <View style={styles.flex}>
+                    <Tiktok height={getHp(30)} width={getHp(30)} />
+                    <TextInput
+                      placeholder={`@tiktok`}
+                      placeholderTextColor={'#999999'}
+                      // onChangeText={value => setTiktok(value)}
+                      style={[styles.socialText, styles.TiktokStyle]}
+                    // value={tiktok}
+                    />
+                  </View>
+                </TouchableOpacity>
+                <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
+              </View>}
 
             {/* 5th */}
-            <View style={styles.flex}>
-              <TouchableOpacity style={[styles.socialButton, {
-                borderWidth: 1,
-                borderColor: '#DDDDDD',
-                elevation: 0
-              }]}>
-                <View style={styles.flex}>
-                  <Snapchat height={getHp(30)} width={getHp(30)} />
-                  <TextInput
-                    placeholder={`@snapchat`}
-                    placeholderTextColor={'#999999'}
-                    // onChangeText={value => setSnapchat(value)}
-                    style={[styles.socialText, styles.TiktokStyle]}
-                  // value={snapchat == '' ? '' : snapchat}
-                  />
-                </View>
-              </TouchableOpacity>
-              <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
-            </View>
+            {(snapchatUsername == null ||
+              snapchatUsername == '') &&
+              <View style={styles.flex}>
+                <TouchableOpacity style={[styles.socialButton, {
+                  borderWidth: 1,
+                  borderColor: '#DDDDDD',
+                  elevation: 0
+                }]}>
+                  <View style={styles.flex}>
+                    <Snapchat height={getHp(30)} width={getHp(30)} />
+                    <TextInput
+                      placeholder={`@snapchat`}
+                      placeholderTextColor={'#999999'}
+                      // onChangeText={value => setSnapchat(value)}
+                      style={[styles.socialText, styles.TiktokStyle]}
+                    // value={snapchat == '' ? '' : snapchat}
+                    />
+                  </View>
+                </TouchableOpacity>
+                <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
+              </View>}
 
 
             {/* 6th */}
-            <View style={styles.flex}>
-              <TouchableOpacity style={[styles.socialButton, {
-                borderWidth: 1,
-                borderColor: '#DDDDDD',
-                elevation: 0
-              }]}>
-                <View style={styles.flex}>
-                  <Twitter height={getHp(30)} width={getHp(30)} />
-                  <TextInput
-                    placeholder={`@twitter`}
-                    placeholderTextColor={'#999999'}
-                    onChangeText={value => setTwitter(value)}
-                    style={[styles.socialText, styles.TiktokStyle]}
-                    value={twitter}
-                  />
-                </View>
-              </TouchableOpacity>
-              <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
-            </View>
+            {(twitterUsername == null ||
+              twitterUsername == '') &&
+              <View style={styles.flex}>
+                <TouchableOpacity style={[styles.socialButton, {
+                  borderWidth: 1,
+                  borderColor: '#DDDDDD',
+                  elevation: 0
+                }]}>
+                  <View style={styles.flex}>
+                    <Twitter height={getHp(30)} width={getHp(30)} />
+                    <TextInput
+                      placeholder={`@twitter`}
+                      placeholderTextColor={'#999999'}
+                      // onChangeText={value => setTwitter(value)}
+                      style={[styles.socialText, styles.TiktokStyle]}
+                    // value={twitter}
+                    />
+                  </View>
+                </TouchableOpacity>
+                <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
+              </View>
+            }
 
             {/* 7th */}
-            <View style={styles.flex}>
-              <TouchableOpacity style={[styles.socialButton, {
-                borderWidth: 1,
-                borderColor: '#DDDDDD',
-                elevation: 0
-              }]}>
-                <View style={styles.flex}>
-                  <Linkedin height={getHp(30)} width={getHp(30)} />
-                  <TextInput
-                    placeholder={`@linkedin `}
-                    placeholderTextColor={'#999999'}
-                    onChangeText={value => setTwitter(value)}
-                    style={[styles.socialText, styles.TiktokStyle]}
-                    value={twitter}
-                  />
-                </View>
-              </TouchableOpacity>
-              <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
-            </View>
+            {(linkedInUsername == null ||
+              linkedInUsername == '') &&
+              <View style={styles.flex}>
+                <TouchableOpacity style={[styles.socialButton, {
+                  borderWidth: 1,
+                  borderColor: '#DDDDDD',
+                  elevation: 0
+                }]}>
+                  <View style={styles.flex}>
+                    <Linkedin height={getHp(30)} width={getHp(30)} />
+                    <TextInput
+                      placeholder={`@linkedin `}
+                      placeholderTextColor={'#999999'}
+                      // onChangeText={value => setTwitter(value)}
+                      style={[styles.socialText, styles.TiktokStyle]}
+                    // value={twitter}
+                    />
+                  </View>
+                </TouchableOpacity>
+                <GreyCross height={getHp(15)} width={getWp(15)} style={{ marginLeft: 20 }} />
+              </View>
+            }
 
             {/* Social Media Section */}
 

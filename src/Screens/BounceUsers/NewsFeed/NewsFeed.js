@@ -9,9 +9,8 @@ import {
     DJ1,
     DJ2,
 } from '@assets'
-import { BlackOutlineShare, Saved } from '@svg'
+import { BlackOutlineShare, Saved,BounceText } from '@svg'
 import { observer } from 'mobx-react';
-import Back from 'react-native-vector-icons/AntDesign';
 import { getWp } from '../../../app/utils';
 
 const { height, width } = Dimensions.get("screen")
@@ -108,61 +107,31 @@ function NewsFeed(props) {
                     onPress={() => props.navigation.goBack()}
                     hitSlop={smallHitSlop}
                 >
-                    <Back name="left" color={'#000'} size={25} />
+                    <BounceText height={24} width={107} />
                 </TouchableOpacity>
-                <Text style={styles.headerTitle}>
-                    {"You and David both like:"}
+
+                <TouchableOpacity style={[
+                styles.itemView,
+                { backgroundColor: 'rgba(0, 224, 143, 0.12)',borderRadius:7 },
+            ]}>
+                <Text style={[styles.headerTitle, {
+                    fontSize: FONTSIZE.Text15,
+                    letterSpacing: 0.4,
+                    color: '#00E08F',
+                    fontFamily: 'AvenirNext-DemiBold'
+                }]}>
+                   {'My Interest'}
                 </Text>
+            </TouchableOpacity>
             </View>
 
 
-
             <ScrollView style={{ flex: 1 }}>
-                {INTEREST.map((item) => {
-                    return (
-                        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                            <View style={{ flexDirection: 'row', }}>
-                                {
-                                    item.categoryList.map((item) => <SmallButton item={item} />
-                                    )
-                                }
-                            </View>
-                        </ScrollView>
-                    )
-                })}
-
-                {INTEREST.map((item) => {
-                    return (
-                        <ScrollView horizontal showsHorizontalScrollIndicator={false} >
-                            <View style={{ flexDirection: 'row', }}>
-                                {
-                                    item.categoryList.map((item) => <SmallButton item={item} />
-                                    )
-                                }
-                            </View>
-                        </ScrollView>
-                    )
-                })}
-
-
-                <TouchableOpacity style={[styles.SaveButton]}>
-                    <Text style={{
-                        color: '#1FAEF7',
-                        fontFamily: 'AvenirNext-DemiBold',
-                        fontSize: FONTSIZE.Text16,
-                        letterSpacing: 0.6
-                    }}>
-                        {'Bounce with more friends'}
-                    </Text>
-                </TouchableOpacity>
-
-                <FlatList
+               <FlatList
                     data={NEWSFEED}
                     renderItem={flatlist}
                 />
-
                 <View style={{ marginBottom: 30 }} />
-
             </ScrollView>
         </Scaffold>
     )
@@ -229,7 +198,9 @@ const styles = StyleSheet.create({
     header: {
         padding: 10,
         flexDirection: 'row',
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        justifyContent:'space-between',
+        alignItems:'center'
     },
     headerTitle: {
         alignSelf: 'center',

@@ -57,22 +57,45 @@ const DATA = [
 ];
 
 export default function FriendsPage(props) {
-    const {
-        age = false
-    } = props
+    const { contactTitle } = props.route.params
+    console.log("contactTitle", props.route.params.contactTitle)
+    console.log("props friends page", props);
+    
     const [showMore, setShowMore] = useState(false);
     const [searchQuery, setSearchQuery] = React.useState('');
     const onChangeSearch = query => setSearchQuery(query);
     return (
         <Scaffold statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
-            <Header
-                back
-                headerBackColor={{ backgroundColor: '#fff', elevation: 0 }}
-                headerTitle={"My Friends"}
-                onPress={() => {
+
+            {/* Header Section start */}
+            <View style={{
+                marginVertical: getHp(15),
+                flexDirection: 'row',
+                alignItems: 'center'
+            }}>
+                <TouchableOpacity onPress={() => {
                     props.navigation.goBack()
-                }}
-            />
+                }}>
+                    <Back name="chevron-back" color={'#000'}
+                        style={{ marginRight: 20, marginLeft: 10 }}
+                        size={30} />
+                </TouchableOpacity>
+                <Searchbar
+                    placeholder={"Search events"}
+                    onChangeText={onChangeSearch}
+                    value={searchQuery}
+                    inputStyle={{
+                        fontSize: FONTSIZE.Text16,
+                        fontFamily: 'AvenirNext-Regular',
+                        alignSelf: 'center'
+                    }}
+                    style={styles.searchBarStyle}
+                    iconColor={"#999999"}
+                    placeholderTextColor={"#909090"}
+                />
+            </View>
+            {/* Header Section end */}
+
 
             <ScrollView
                 contentContainerStyle={{ flexGrow: 1 }}
@@ -81,29 +104,44 @@ export default function FriendsPage(props) {
             >
 
                 <View style={styles.container}>
-                    <Searchbar
-                        placeholder={"Search"}
-                        onChangeText={onChangeSearch}
-                        value={searchQuery}
-                        inputStyle={{
-                            fontSize: FONTSIZE.Text14,
-                            fontFamily: 'AvenirNext-Regular',
-                        }}
-                        style={styles.searchBarStyle}
-                        iconColor={"#999999"}
-                        placeholderTextColor={"#909090"}
-                    />
-                    {/* <ContactList
-                        heading={"Mutual Friends"}
-                        dataList={DATA}
-                        {...props}
-                    /> */}
-                    <ContactList
-                        heading={"People You Might Know"}
-                        dataList={DATA}
-                        {...props}
-                    />
-                   
+                    {
+                        contactTitle == 'Find Friends' ?
+                            <ContactList
+                                heading={'Find Friends'}
+                                dataList={DATA}
+                                {...props}
+                            // full={full}
+                            />
+                            :
+                            contactTitle == 'People You Might Know + My Friends' ?
+                                <>
+                                    <ContactList
+                                        heading={"People You Might Know"}
+                                        dataList={DATA}
+                                        {...props}
+                                    />
+                                    <ContactList
+                                        heading={"My Friends"}
+                                        dataList={DATA}
+                                        {...props}
+                                    />
+                                </>
+                                :
+                                contactTitle == 'Mutual Friends + All' ?
+                                    <>
+                                        <ContactList
+                                            heading={"Mutual Friends"}
+                                            dataList={DATA}
+                                            {...props}
+                                        />
+                                        <ContactList
+                                            heading={"All"}
+                                            dataList={DATA}
+                                            {...props}
+                                        />
+                                    </>
+                                    : null
+                    }
                 </View>
             </ScrollView>
         </Scaffold>
@@ -118,9 +156,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     searchBarStyle: {
-        marginTop: getHp(10),
         elevation: 0,
-        // lineHeight: -41,
         borderRadius: 9,
         backgroundColor: '#F2F5F6',
         height: getHp(50),

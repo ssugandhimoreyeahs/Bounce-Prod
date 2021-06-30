@@ -89,7 +89,7 @@ function CustomDrawer({navigation}) {
       onPress: () => navigation.navigate(AboutUs.routeName),
     },
     {
-      name: 'Log Out2',
+      name: 'Log Out',
       onPress: async () => {
         await AccountService.removeAccount(authStore.userProfile.user.id);
       },

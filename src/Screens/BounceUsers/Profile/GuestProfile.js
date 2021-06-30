@@ -242,6 +242,7 @@ function GuestProfile(props) {
         statusBarStyle={{ backgroundColor: '#FFFFFF' }}
     >
         <ScrollView
+              pointerEvents={"none"}
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps={"always"}
             contentContainerStyle={{ flexGrow: 1 }}
@@ -298,16 +299,14 @@ function GuestProfile(props) {
                                         marginBottom: getHp(5)
                                     }}
                                 >
-                                    {/* {fullName} */}
-                                    {"Porter Robinson"}
+                                    {fullName}
                                 </Text>
 
                                 <View style={[styles.flex]}>
                                     {
                                         <>
                                             <Text style={styles.cityAll}>
-                                                {/* {age} */}
-                                                {"20"}
+                                                {age}
                                             </Text>
                                             <View style={styles.dot} />
                                         </>
@@ -315,19 +314,16 @@ function GuestProfile(props) {
 
 
                                     {
-                                        city !== null ?
-                                            (city !== '' && city !== 'null' &&
-                                                <>
-                                                    <Text style={styles.cityAll}>
-                                                        {/* {city.split(",", 1)} */}
-                                                        {'Los Angeles'}
-                                                    </Text>
-                                                    {/* <View style={styles.dot} /> */}
-                                                </>)
-                                            : null
+
+                                        (!(city == '' || city == 'null' || city == null) &&
+                                            <>
+                                                <Text style={styles.cityAll}>
+                                                    {city.split(",", 1)}
+                                                    {/* {city} */}
+                                                </Text>
+                                                <View style={styles.dot} />
+                                            </>)
                                     }
-
-
                                     {!(profession == null || profession == '' || profession == 'null') ?
                                         <Text style={styles.cityAll}>
                                             {/* {profession} */}
@@ -455,7 +451,7 @@ function GuestProfile(props) {
                             }} >
                                 <Text style={[styles.buttonText, { marginRight: 15 }]}>
                                     {'Bounce with David'}
-                                    </Text>
+                                </Text>
                                 <Right name="angle-right" color='#FFFFFF' size={25} />
                             </TouchableOpacity>
                         </LinearGradient>

@@ -24,17 +24,19 @@ export default function ContactList(props) {
         mutual = true,
         requestIcon = false,
         dataList = [],
+        full = true
     } = props
     const [showMore, setShowMore] = useState(false);
 
 
     const RenderItem = ({ item }) => {
-        console.log("item", item)
+        console.log("friends list ", item.index)
         return (
-            <View style={{ paddingHorizontal: 10 }}>
+            <View style={{ paddingHorizontal: 10 }} key={item.index}>
                 <View style={styles.RenderItemViewStyle}>
                     <TouchableOpacity
                         onPress={() => props.navigation.navigate(GuestProfile.routeName)}
+                        // onPress={() =>console.log("Clicked Index",item.index)}
                         style={styles.contactRow}>
                         <View style={{
                             flex: 1, flexDirection: 'row', alignItems: 'center',
@@ -54,23 +56,27 @@ export default function ContactList(props) {
                                     {"Porter Robinson"}
                                 </Text>
                                 {
-                                    mutual ?
-                                        <Text style={styles.mutualGreyText}>{"20, Los Angeles"}</Text>
-                                        : null
+                                    mutual &&
+                                    <Text style={styles.mutualGreyText}>{"20, Los Angeles"}</Text>
                                 }
                             </View>
 
                         </View>
-
-                        <View style={{ width: '7%' }}>
-                            {heading == 'Friends' ?
-                                <BlueTick height={12} width={16} style={{ marginRight: getWp(0) }} />
-                                :
-                                <SendRequest height={27} width={25} style={{ marginRight: getWp(0) }} />
-
-                            }
-                        </View>
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        // onPress={} 
+                        style={{ width: '7%' }}>
+                        {!(heading == 'Find Friends' ||
+                         heading == 'People You Might Know' ||
+                         heading == 'All')
+                         ?
+                            <BlueTick height={12} width={16} style={{ marginRight: getWp(0) }} />
+                            :
+                            <SendRequest height={27} width={25} style={{ marginRight: getWp(0) }} />
+
+                        }
+                    </TouchableOpacity>
+                    {/* </TouchableOpacity> */}
                 </View>
 
                 {/* {console.log('item.index', item.index)} */}
@@ -91,33 +97,43 @@ export default function ContactList(props) {
             {heading}
         </Text>
 
-        <FlatList
-            data={!showMore ? dataList.slice(0, 2) : dataList}
-            renderItem={(item) => <RenderItem item={item} />}
-            keyExtractor={index => index}
-        />
-        {dataList.length > 2 && (
-            <View style={{ backgroundColor: '#FBFBFB', paddingBottom: 10 }}>
-                <Button
-                    onPress={() => {
-                        setShowMore(i => !i);
-                    }}
-                    full
-                    light
-                    style={[styles.showMoreButtonContainer]}>
-                    <Text style={[styles.showMoreTextStyle, { fontFamily: 'AvenirNext-Medium', letterSpacing: 0.2 }]}>
-                        {!showMore ? `${dataList.length - 2} More` : `Hide`}
-                    </Text>
-                    <View style={{ marginStart: getHp(10) }}>
-                        <AntDesign
-                            color={'black'}
-                            size={getHp(16)}
-                            name={!showMore ? 'down' : 'up'}
-                        />
+        {full ?
+            <FlatList
+                data={dataList}
+                renderItem={(item) => <RenderItem item={item} />}
+                keyExtractor={index => index}
+            />
+            :
+            <>
+                <FlatList
+                    data={!showMore ? dataList.slice(0, 2) : dataList}
+                    renderItem={(item) => <RenderItem item={item} />}
+                    keyExtractor={index => index}
+                />
+                {dataList.length > 2 && (
+                    <View style={{ backgroundColor: '#FBFBFB', paddingBottom: 10 }}>
+                        <Button
+                            onPress={() => {
+                                setShowMore(i => !i);
+                            }}
+                            full
+                            light
+                            style={[styles.showMoreButtonContainer]}>
+                            <Text style={[styles.showMoreTextStyle, { fontFamily: 'AvenirNext-Medium', letterSpacing: 0.2 }]}>
+                                {!showMore ? `${dataList.length - 2} More` : `Hide`}
+                            </Text>
+                            <View style={{ marginStart: getHp(10) }}>
+                                <AntDesign
+                                    color={'black'}
+                                    size={getHp(16)}
+                                    name={!showMore ? 'down' : 'up'}
+                                />
+                            </View>
+                        </Button>
                     </View>
-                </Button>
-            </View>
-        )}
+                )}
+            </>
+        }
     </View>
     )
 }

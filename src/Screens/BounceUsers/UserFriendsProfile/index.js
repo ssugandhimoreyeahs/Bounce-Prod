@@ -85,6 +85,7 @@ function UserFriendsProfile(props) {
   console.log("PROPS", props);
 
   const {
+    friends,
     username,
     fullName,
     city,
@@ -99,7 +100,7 @@ function UserFriendsProfile(props) {
     age,
   } = userinfo?.user;
   //console.log("userinfo ----> ", authStore.userProfile)
-
+  console.log("friends.length", friends?.length);
   var gapi = window
   // console.log("WINDOW ", gapi)
   /* 
@@ -268,6 +269,7 @@ function UserFriendsProfile(props) {
     statusBarStyle={{ backgroundColor: '#FFFFFF' }}
   >
     <ScrollView
+
       showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps={"always"}
       contentContainerStyle={{ flexGrow: 1 }}
@@ -330,16 +332,16 @@ function UserFriendsProfile(props) {
 
 
                   {
-                    city !== null ?
-                      (city !== '' && city !== 'null' &&
-                        <>
-                          <Text style={styles.cityAll}>
-                            {city.split(",", 1)}
-                            {/* {city} */}
-                          </Text>
-                          <View style={styles.dot} />
-                        </>)
-                      : null
+
+                    (!(city == '' || city == 'null' || city == null) &&
+                      <>
+                        <Text style={styles.cityAll}>
+                          {city.split(",", 1)}
+                          {/* {city} */}
+                        </Text>
+                        <View style={styles.dot} />
+                      </>)
+
                   }
 
 
@@ -383,11 +385,11 @@ function UserFriendsProfile(props) {
                 </TouchableOpacity>}
 
               {!(tiktokUsername == null ||
-                tiktokUsername == '') &&
+                tiktokUsername == '' || tiktokUsername == 'null') &&
                 <TouchableOpacity
                   style={{ marginRight: getWp(15) }}
                   onPress={() =>
-                    Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
+                    Linking.openURL(`https://www.tiktok.com/${tiktokUsername}`)
                   }
                 >
                   <Tiktok height={getHp(28)} width={getWp(28)} />
@@ -395,11 +397,11 @@ function UserFriendsProfile(props) {
               }
 
               {!(twitterUsername == null ||
-                twitterUsername == '') &&
+                twitterUsername == '' || twitterUsername == 'null') &&
                 <TouchableOpacity
                   style={{ marginRight: getWp(15) }}
                   onPress={() =>
-                    Linking.openURL(`https://twitter.com/narendramodi`)
+                    Linking.openURL(`https://twitter.com/${twitterUsername}`)
                   }
                 >
                   <Twitter height={getHp(29)} width={getWp(29)} />
@@ -407,7 +409,7 @@ function UserFriendsProfile(props) {
               }
 
               {!(snapchatUsername == null ||
-                snapchatUsername == '') &&
+                snapchatUsername == '' || snapchatUsername == 'null') &&
                 <TouchableOpacity
                   style={{ marginRight: getWp(15) }}
                   onPress={() =>
@@ -421,11 +423,11 @@ function UserFriendsProfile(props) {
               }
 
               {!(linkedInUsername == null ||
-                linkedInUsername == '') &&
+                linkedInUsername == '' || linkedInUsername == 'null') &&
                 <TouchableOpacity
                   style={{ marginRight: getWp(15) }}
                   onPress={() =>
-                    Linking.openURL(`https://www.tiktok.com/@davidwarner31`)
+                    Linking.openURL(`${linkedInUsername}`)
                   }
                 >
                   <Linkedin height={getHp(31)} width={getWp(30)} />
@@ -435,20 +437,19 @@ function UserFriendsProfile(props) {
             </View>
 
             {
-              about !== null ?
-                (about !== '' && about !== 'null' &&
-                  <>
-                    <Text style={[styles.textStyle, {
-                      marginTop: getHp(15),
-                      marginBottom: 10,
-                      lineHeight: 22,
-                      fontSize: FONTSIZE.Text16,
+              (!(about == '' || about == 'null' || about == null) &&
+                <>
+                  <Text style={[styles.textStyle, {
+                    marginTop: getHp(15),
+                    marginBottom: 10,
+                    lineHeight: 22,
+                    fontSize: FONTSIZE.Text16,
 
-                    }]}>
-                      {about}
-                    </Text>
-                  </>)
-                : null
+                  }]}>
+                    {about}
+                  </Text>
+                </>)
+
             }
 
             <LinearGradient
@@ -470,8 +471,8 @@ function UserFriendsProfile(props) {
                 justifyContent: 'center',
                 alignItems: 'center'
               }]}
-                // onPress={() => props.navigation.navigate(CommonInterestNewsFeed.routeName)}
-                 >
+              // onPress={() => props.navigation.navigate(CommonInterestNewsFeed.routeName)}
+              >
                 <Text style={[styles.buttonText,
                 {
                   marginRight: 15,
@@ -507,17 +508,36 @@ function UserFriendsProfile(props) {
 
           <View style={{ paddingHorizontal: 10 }} >
 
-            <TouchableOpacity style={[styles.fullTouch, styles.linearGradient, styles.shadowStyle, {
-              height: getHp(50),
-              borderRadius: 13, flexDirection: "row"
-            }]}
-              onPress={() => props.navigation.navigate(FriendsPage.routeName,{'contactTitle' : 'Find Friends'})}>
-              <WhitePerson height={25} width={19}
-                style={{ marginBottom: -5 }} />
-              <Text style={[styles.buttonText, { marginLeft: 20, fontFamily: 'AvenirNext-DemiBold', color: '#1FAEF7' }]}>
-                {'Find Friends'}
-              </Text>
-            </TouchableOpacity>
+            {/* First Gallery Block of Friends */}
+            {friends?.length == 0 ?
+              <TouchableOpacity style={[styles.fullTouch, styles.linearGradient, styles.shadowStyle, {
+                height: getHp(50),
+                borderRadius: 13, flexDirection: "row"
+              }]}
+                onPress={() => props.navigation.navigate(FriendsPage.routeName, { 'contactTitle': 'Find Friends' })}>
+                <WhitePerson height={25} width={19}
+                  style={{ marginBottom: -5 }} />
+                <Text style={[styles.buttonText, { marginLeft: 20, fontFamily: 'AvenirNext-DemiBold', color: '#1FAEF7' }]}>
+                  {'Find Friends'}
+                </Text>
+              </TouchableOpacity>
+              :
+              <View style={{ marginVertical: 5, paddingVertical: 10 }}>
+                <View style={[styles.flex]}>
+                  <BlackPerson height={20} width={14} />
+                  <Text style={[styles.InstaText]}> {"Friends "}
+                    <Text style={[styles.InstaText, { color: '#696969' }]}>{` ${friends?.length}`}</Text>
+                  </Text>
+                </View>
+                {handleCarousel("Friends")}
+                <TouchableOpacity style={styles.allFrnds} >
+                  <Text style={[styles.aboutText]}>
+                    {"See All Friends"}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            }
+            {/*END*** First Gallery Block of Friends */}
 
             <View style={{ backgroundColor: '#EEEEEE', height: 1, marginVertical: 15 }} />
 
@@ -686,22 +706,7 @@ function UserFriendsProfile(props) {
 
             {/* <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} /> */}
 
-            {/* First Gallery Block of Friends */}
-            {/* <View style={{ marginVertical: 5, paddingVertical: 10 }}>
-              <View style={[styles.flex]}>
-                <BlackPerson height={20} width={14} />
-                <Text style={[styles.InstaText]}> {"Friends "}
-                  <Text style={[styles.InstaText, { color: '#696969' }]}>{" 240"}</Text>
-                </Text>
-              </View>
-              {handleCarousel("Friends")}
-              <TouchableOpacity style={styles.allFrnds} >
-                <Text style={[styles.aboutText]}>
-                  {"See All Friends"}
-                </Text>
-              </TouchableOpacity>
-            </View> */}
-            {/*END*** First Gallery Block of Friends */}
+
           </View>
           {/* <View style={{
             height: 1, backgroundColor: '#EEEEEE', marginTop: 10,

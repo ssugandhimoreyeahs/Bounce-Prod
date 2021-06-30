@@ -52,10 +52,10 @@ function LoginScreen(props) {
   const handleUserLogin = async () => {
     try {
       const loginResponse = await authStore.async.login(username, password);
-      if(authStore.isAuthenticated && loginResponse.success){
-        if(authStore.userProfile.user.vendorType == 2){
+      if (authStore.isAuthenticated && loginResponse.success) {
+        if (authStore.userProfile.user.vendorType == 2) {
           navigation.navigate(UserHomeBottomNavigation.routeName)
-        }else{
+        } else {
           navigation.navigate(VendorHomeDrawerNavigator.routeName)
         }
       }
@@ -188,7 +188,7 @@ function LoginScreen(props) {
                     { marginTop: 30, marginBottom: 15, width: '100%' },
                   ]}>
                   <TouchableOpacity onPress={handleUserLogin}>
-                    <Text style={styles.buttonText}>{'Login'}</Text>
+                    <Text style={[styles.buttonText, { fontSize: FONTSIZE.Text16 }]}>{'Login'}</Text>
                   </TouchableOpacity>
                 </LinearGradient>
               </Animated.View>
@@ -254,7 +254,7 @@ function LoginScreen(props) {
           <Modal isVisible={isModalVisible}
             style={{ backgroundColor: '#fff', }}
             presentationStyle={'formSheet'}
-            // animationIn={'bounceInLeft'}
+          // animationIn={'bounceInLeft'}
           >
             <ForgotPassword
               onBackPress={() => setModalVisible(!isModalVisible)}
@@ -264,7 +264,7 @@ function LoginScreen(props) {
 
         </KeyboardAwareScrollView>
       )}
-      <InstagramLogin
+      {/* <InstagramLogin
         ref={ref => (this.instagramLogin = ref)}
         appId="315364603524733"
         appSecret="f2bd03e5cfeb924622557378e282b384"
@@ -272,7 +272,7 @@ function LoginScreen(props) {
         scopes={['user_profile', 'user_media']}
         onLoginSuccess={data => setIgToken(data)}
         onLoginFailure={data => console.log(data)}
-      />
+      /> */}
     </Scaffold>
   );
 }

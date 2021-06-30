@@ -323,7 +323,7 @@ function CreateInvitation(props) {
           </View>
 
 
-          <View style={[styles.flex, { paddingHorizontal: 15 }]}>
+          {/* <View style={[styles.flex, { paddingHorizontal: 15 }]}>
             <View style={{ flexDirection: 'row', alignItems: 'center', }}>
               <Text style={[{
                 fontFamily: 'AvenirNext-Regular',
@@ -335,7 +335,7 @@ function CreateInvitation(props) {
               <Info height={20} width={20} />
             </View>
             <Toggle />
-          </View>
+          </View> */}
 
 
           <View style={{ marginVertical: 5, paddingHorizontal: 10, }}>

@@ -18,8 +18,6 @@ export default DatePicker = ({ birthday, setBirthday, tillToday }) => {
     setBirthday(date);
     hideDatePicker();
   };
-
-  
   
 
   return (

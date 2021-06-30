@@ -9,9 +9,10 @@ import {
     DJ1,
     DJ2,
 } from '@assets'
-import { BlackOutlineShare, Saved,BounceText } from '@svg'
+import { BlackOutlineShare, Saved, BounceText } from '@svg'
 import { observer } from 'mobx-react';
 import { getWp } from '../../../app/utils';
+import AddInterest from './AddInterest';
 
 const { height, width } = Dimensions.get("screen")
 
@@ -110,24 +111,26 @@ function NewsFeed(props) {
                     <BounceText height={24} width={107} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={[
-                styles.itemView,
-                { backgroundColor: 'rgba(0, 224, 143, 0.12)',borderRadius:7 },
-            ]}>
-                <Text style={[styles.headerTitle, {
-                    fontSize: FONTSIZE.Text15,
-                    letterSpacing: 0.4,
-                    color: '#00E08F',
-                    fontFamily: 'AvenirNext-DemiBold'
-                }]}>
-                   {'My Interest'}
-                </Text>
-            </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => props.navigation.navigate(AddInterest.routeName)}
+                    style={[
+                        styles.itemView,
+                        { backgroundColor: 'rgba(0, 224, 143, 0.12)', borderRadius: 7 },
+                    ]}>
+                    <Text style={[styles.headerTitle, {
+                        fontSize: FONTSIZE.Text15,
+                        letterSpacing: 0.4,
+                        color: '#00E08F',
+                        fontFamily: 'AvenirNext-DemiBold'
+                    }]}>
+                        {'My Interest'}
+                    </Text>
+                </TouchableOpacity>
             </View>
 
 
             <ScrollView style={{ flex: 1 }}>
-               <FlatList
+                <FlatList
                     data={NEWSFEED}
                     renderItem={flatlist}
                 />
@@ -199,8 +202,8 @@ const styles = StyleSheet.create({
         padding: 10,
         flexDirection: 'row',
         backgroundColor: '#fff',
-        justifyContent:'space-between',
-        alignItems:'center'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     headerTitle: {
         alignSelf: 'center',

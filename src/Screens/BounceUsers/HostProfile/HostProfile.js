@@ -12,8 +12,10 @@ import {
   CustomTextinput,
   FloatingInput,
   CustomButton,
-  Root,
+  ConnectSocialMedia,
+  InputSocialMedia,
   GooglePlacesInput,
+  HostToggleButton,
   Header
 } from '@components';
 import { Avatar } from 'react-native-elements';
@@ -102,7 +104,7 @@ export default function HostProfile(props) {
     );
   };
 
-  
+
 
   useEffect(() => {
     MobxStore.authStore.async.reloadUser();
@@ -126,7 +128,7 @@ export default function HostProfile(props) {
     setFriendCount(user?.friendCount);
     setHosting(user?.hosting);
     setAttending(user?.attending);
-    setInterested(user?.intrested);
+    setInterested(user?.interested);
     setLoader(false);
   };
 
@@ -150,14 +152,14 @@ export default function HostProfile(props) {
     formData.append('friendCount', friendCount);
     formData.append('hosting', hosting);
     formData.append('attending', attending);
-    formData.append('intrested', interested);
+    formData.append('interested', interested);
 
     formData.append('snapchatUsername', snapchat);
     formData.append('tiktokUsername', tiktok);
     formData.append('twitterUsername', twitter);
     formData.append('linkedInUsername', linkedIn);
 
-  
+
     console.log('TOKEN', token);
 
     await ApiClient.authInstance
@@ -190,6 +192,7 @@ export default function HostProfile(props) {
       {!loader && (
 
         <KeyboardAwareScrollView
+          showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps={"handled"}>
           <Header
             back
@@ -310,138 +313,50 @@ export default function HostProfile(props) {
               </Text>
 
               {/* First Insta */}
-              <TouchableOpacity style={[styles.socialButton, styles.shadowStyle]}>
-                <View style={styles.flex}>
-                  <Insta height={getHp(30)} width={getHp(30)} />
-                  <TextInput
-                    placeholder={`Instagram `}
-                    placeholderTextColor={'#000'}
-                    // value={instagram == '' ? '' : instagram}
-                    // onChangeText={value => setInstagram(value)}
-                    style={[
-                      styles.headerTitle,
-                      { marginLeft: 10, fontFamily: 'AvenirNext-Medium' },
-                    ]}
-                  />
-                </View>
-                <Text
-                  style={[
-                    styles.headerTitle,
-                    { color: '#1FAEF7', fontFamily: 'AvenirNext-Medium', marginRight: getWp(10) },
-                  ]}>
-                  {'Connect'}
-                </Text>
-              </TouchableOpacity>
-
+              <ConnectSocialMedia
+                icon={<Insta height={getHp(30)} width={getHp(30)} />}
+                placeholder={`Instagram `}
+              />
 
               {/* Second Spotify */}
-              <TouchableOpacity style={[styles.socialButton, styles.shadowStyle]}>
-                <View style={styles.flex}>
-                  <Spotify height={getHp(30)} width={getHp(30)} />
-                  <Text
-                    style={[
-                      styles.headerTitle,
-                      { fontFamily: 'AvenirNext-Medium', marginLeft: 13 },
-                    ]}>
-                    {'Spotify'}
-                  </Text>
-                </View>
-                <Text
-                  style={[
-                    styles.headerTitle,
-                    {
-                      color: '#1FAEF7',
-                      fontFamily: 'AvenirNext-Medium',
-                      marginRight: getWp(10)
-                    },
-                  ]}>
-                  {'Connect'}
-                </Text>
-              </TouchableOpacity>
+              <ConnectSocialMedia
+                icon={<Spotify height={getHp(30)} width={getHp(30)} />}
+                placeholder={`Spotify `}
+              />
+
 
               {/* Third Apple Music */}
-              <TouchableOpacity style={[styles.socialButton, styles.shadowStyle, { marginTop: getHp(5), marginBottom: getHp(30) }]}>
-                <View style={styles.flex}>
-                  <AppleMusic height={getHp(30)} width={getHp(30)} />
-                  <Text
-                    style={[
-                      styles.headerTitle,
-                      { fontFamily: 'AvenirNext-Medium', marginLeft: 13 },
-                    ]}>
-                    {'Apple Music'}
-                  </Text>
-                </View>
-                <Text
-                  style={[
-                    styles.headerTitle,
-                    {
-                      color: '#1FAEF7',
-                      fontFamily: 'AvenirNext-Medium',
-                      marginRight: getWp(10)
-                    },
-                  ]}>
-                  {'Connect'}
-                </Text>
-              </TouchableOpacity>
-              {/* <Text
-              style={[
-                styles.headerTitle,
-                { color: '#999999', fontFamily:'AvenirNext-Medium', marginBottom: 8 },
-              ]}>
-              {'Tap to Refresh'}
-            </Text> */}
+              <ConnectSocialMedia
+                icon={<AppleMusic height={getHp(30)} width={getHp(30)} />}
+                placeholder={`Apple Music `}
+                containerStyle={{ marginTop: getHp(5), marginBottom: getHp(30) }}
+              />
 
-              <TouchableOpacity style={styles.socialButton2}>
-                <View style={styles.flex}>
-                  <Tiktok height={getHp(30)} width={getHp(30)} />
-                  <TextInput
-                    placeholder={`@tiktok`}
-                    placeholderTextColor={'#999999'}
-                    onChangeText={value => setTiktok(value)}
-                    style={[styles.headerTitle, styles.Tiktok]}
-                    value={tiktok == '' ? '' : tiktok}
-                  />
-                </View>
-              </TouchableOpacity>
 
-              <TouchableOpacity style={styles.socialButton2}>
-                <View style={styles.flex}>
-                  <Snapchat height={getHp(30)} width={getHp(30)} />
-                  <TextInput
-                    placeholder={`@snapchat`}
-                    placeholderTextColor={'#999999'}
-                    onChangeText={value => setSnapchat(value)}
-                    value={snapchat == '' ? '' : snapchat}
-                    style={[styles.headerTitle, styles.Tiktok]}
-                  />
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.socialButton2}>
-                <View style={styles.flex}>
-                  <Twitter height={getHp(30)} width={getHp(30)} />
-                  <TextInput
-                    placeholder={`@twitter`}
-                    placeholderTextColor={'#999999'}
-                    onChangeText={value => setTwitter(value)}
-                    style={[styles.headerTitle, styles.Tiktok]}
-                    value={twitter == '' ? '' : twitter}
-                  />
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.socialButton2}>
-                <View style={styles.flex}>
-                  <Linkedin height={getHp(30)} width={getHp(30)} />
-                  <TextInput
-                    placeholder={`@linkedin`}
-                    placeholderTextColor={'#999999'}
-                    onChangeText={value => setLinkedIn(value)}
-                    style={[styles.headerTitle, styles.Tiktok]}
-                    value={linkedIn == '' ? '' : linkedIn}
-                  />
-                </View>
-              </TouchableOpacity>
+              <InputSocialMedia
+                icon={<Tiktok height={getHp(28)} width={getWp(28)} />}
+                placeholder={`@tiktok`}
+                onChangeText={value => setTiktok(value)}
+                value={tiktok == 'null' ? '' : tiktok}
+              />
+              <InputSocialMedia
+                icon={<Snapchat height={getHp(31)} width={getHp(31)} />}
+                placeholder={`@snapchat`}
+                onChangeText={value => setSnapchat(value)}
+                value={snapchat == 'null' ? '' : snapchat}
+              />
+              <InputSocialMedia
+                icon={<Twitter height={getHp(29)} width={getWp(29)} />}
+                placeholder={`@twitter`}
+                onChangeText={value => setTwitter(value)}
+                value={twitter == 'null' ? '' : twitter}
+              />
+              <InputSocialMedia
+                icon={<Linkedin height={getHp(31)} width={getHp(30)} />}
+                placeholder={`@linkedin`}
+                onChangeText={value => setLinkedIn(value)}
+                value={linkedIn == 'null' ? '' : linkedIn}
+              />
 
             </View>
 
@@ -463,24 +378,17 @@ export default function HostProfile(props) {
               </Text>
             </View>
 
-
-            <View style={[styles.flex, {
-              paddingHorizontal: getWp(10),
-              marginVertical: getHp(30),
-              height: getHp(60),
-              backgroundColor: '#FFFFFF',
-              borderBottomWidth: 0.5,
-              borderTopWidth: 0.5,
-              borderColor: '#EEEEEE'
-            }]}>
-              <Text style={[styles.privacyTitle, { fontSize: FONTSIZE.Text16 }]}>
-                {"Friend Count"}
-              </Text>
-              <Toggle
-                switchOn={friendCount}
-                onChange={() => setFriendCount(!friendCount)}
-              />
-            </View>
+            <HostToggleButton
+              placeholder={"Friend Count"}
+              switchOn={friendCount}
+              onChange={() => setFriendCount(!friendCount)}
+              containerStyle={{
+                paddingHorizontal: getWp(10),
+                marginVertical: getHp(20),
+                borderBottomWidth: 0.5,
+                borderTopWidth: 0.5,
+              }}
+            />
 
             <Text style={{
               fontFamily: 'AvenirNext-Regular',
@@ -489,57 +397,25 @@ export default function HostProfile(props) {
               marginBottom: getHp(10),
               paddingHorizontal: getWp(10),
             }}>
-              {"Private events will not be shared."}
+              {"Only public events from the news feed are shared."}
             </Text>
 
-            <View style={[styles.flex, {
-              height: getHp(60),
-              backgroundColor: '#FFFFFF',
-              paddingHorizontal: getWp(10),
-              borderBottomWidth: 0.5,
-              borderTopWidth: 0.5,
-              borderColor: '#EEEEEE'
-            }]}>
-              <Text style={[styles.privacyTitle, { fontSize: FONTSIZE.Text16 }]}>
-                {"Hosting"}
-              </Text>
-              <Toggle
-                switchOn={hosting}
-                onChange={() => setHosting(!hosting)}
-              />
-            </View>
+            <HostToggleButton
+              placeholder={"Hosting"}
+              switchOn={hosting}
+              onChange={() => setHosting(!hosting)}
+            />
+            <HostToggleButton
+              placeholder={"Attending"}
+              switchOn={attending}
+              onChange={() => setAttending(!attending)}
+            />
+            <HostToggleButton
+              placeholder={"Interested"}
+              switchOn={interested}
+              onChange={() => setInterested(!interested)}
+            />
 
-            <View style={[styles.flex, {
-              height: getHp(60),
-              backgroundColor: '#FFFFFF',
-              paddingHorizontal: getWp(10),
-              borderBottomWidth: 0.5,
-              borderColor: '#EEEEEE'
-            }]}>
-              <Text style={[styles.privacyTitle, { fontSize: FONTSIZE.Text16 }]}>
-                {"Attending"}
-              </Text>
-              <Toggle
-                switchOn={attending}
-                onChange={() => setAttending(!attending)}
-              />
-            </View>
-
-            <View style={[styles.flex, {
-              height: getHp(60),
-              backgroundColor: '#FFFFFF',
-              paddingHorizontal: getWp(10),
-              borderBottomWidth: 0.5,
-              borderColor: '#EEEEEE'
-            }]}>
-              <Text style={[styles.privacyTitle, { fontSize: FONTSIZE.Text16 }]}>
-                {"Interested"}
-              </Text>
-              <Toggle
-                switchOn={interested}
-                onChange={() => setInterested(!interested)}
-              />
-            </View>
           </View>
           {/*Endd Privacy Block */}
 

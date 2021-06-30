@@ -160,7 +160,7 @@ const ModalDropDownComponent = (props) => {
                             <Text style={{
                                 color: (selectedValue.length > 0) ? '#000' : '#999999',
                                 fontFamily: (selectedValue.length > 0) ? 'AvenirNext-Medium' : 'AvenirNext-Regular',
-                                fontWeight: (selectedValue.length > 0 ? 'normal' : 'normal'),
+                                // fontWeight: (selectedValue.length > 0 ? 'normal' : 'normal'),
                                 fontSize: (selectedValue.length > 0) ?
                                     FONTSIZE.Text17 : FONTSIZE.Text15,
                                 marginLeft: 12,

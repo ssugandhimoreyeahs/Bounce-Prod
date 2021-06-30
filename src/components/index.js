@@ -64,7 +64,10 @@ import {
     GuestTabview,
 } from './BreakedComponents'
 import {
-    BlueCheck
+    BlueCheck,
+    ConnectSocialMedia,
+    InputSocialMedia,
+    HostToggleButton
 } from './BreakedComponents/smallui'
 
 import DropDown from './CustomDropdown/DropDown'
@@ -74,7 +77,13 @@ import AppStatusBar from './AppStatusBar';
 import Scaffold from './Scaffold';
 import PublicPrivateButton from './PublicPrivateButton';
 
+
+
+
 export {
+    HostToggleButton,
+    InputSocialMedia,
+    ConnectSocialMedia,
     GuestTabview,
     PhoneNumber,
     ContactList,

@@ -67,8 +67,8 @@ export default function VendorMarketProfile(props) {
                 city.length > 0 &&
                 price.length &&
                 website.length > 0 &&
-                description.length > 0 &&
-                language.lang.length > 0
+                description.length > 0
+                // && language.lang.length > 0
             ) {
 
                 try {
@@ -186,7 +186,9 @@ export default function VendorMarketProfile(props) {
                     contentContainerStyle={{ flexGrow: 1 }}
                     style={{ backgroundColor: '#fff', flex: 1 }}
                     ref={scrollRef}  > */}
-                <KeyboardAwareScrollView keyboardShouldPersistTaps={"handled"} ref={scrollRef} >
+                <KeyboardAwareScrollView
+                    keyboardShouldPersistTaps={"handled"}
+                    ref={scrollRef} >
 
                     <Header
                         headerBackColor={{ paddingBottom: 20, backgroundColor: '#F4F4F4' }}

@@ -60,7 +60,7 @@ export default function FriendsPage(props) {
     const { contactTitle } = props.route.params
     console.log("contactTitle", props.route.params.contactTitle)
     console.log("props friends page", props);
-    
+
     const [showMore, setShowMore] = useState(false);
     const [searchQuery, setSearchQuery] = React.useState('');
     const onChangeSearch = query => setSearchQuery(query);
@@ -110,7 +110,7 @@ export default function FriendsPage(props) {
                                 heading={'Find Friends'}
                                 dataList={DATA}
                                 {...props}
-                            // full={full}
+                                full={true}
                             />
                             :
                             contactTitle == 'People You Might Know + My Friends' ?

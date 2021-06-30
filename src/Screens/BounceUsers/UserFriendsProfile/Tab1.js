@@ -218,19 +218,19 @@ function Tab1(props) {
           )}
         </Fragment>
       ) : (
-          <View style={{ padding: 10, backgroundColor: '#FBFBFB' }}>
+          <View style={[styles.shadowStyle,{ padding: 10, backgroundColor: '#fff' }]}>
             <FlatList
               data={STATIC_DATA}
               showsHorizontalScrollIndicator={false}
               renderItem={renderStatic}
               keyExtractor={index => index}
             />
-            <TouchableOpacity  onPress={() =>
+            {/* <TouchableOpacity  onPress={() =>
           props.navigation.navigate(CreateInvitation.routeName, {
             // party: item,
             isEditParty: false,
           })
-        }>
+        }> */}
             {/* <Text
               style={[
                 styles.numberTextStyle,
@@ -262,12 +262,19 @@ function Tab1(props) {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center'
-              }]} >
+              }]} 
+              onPress={() =>
+                props.navigation.navigate(CreateInvitation.routeName, {
+                  // party: item,
+                  isEditParty: false,
+                })
+              }
+              >
                 <Text style={[styles.buttonText, { marginRight: 15 }]}>{'Plan an Event'}</Text>
               
               </TouchableOpacity>
             </LinearGradient>
-            </TouchableOpacity>
+            {/* </TouchableOpacity> */}
           </View>
         )}
     </View>

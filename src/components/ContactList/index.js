@@ -17,8 +17,14 @@ import LinearGradient from 'react-native-linear-gradient';
 import GuestProfile from '../../Screens/BounceUsers/Profile/GuestProfile';
 import { Button } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { Placeholder } from '@assets'
+import Spinner from 'react-native-loading-spinner-overlay';
+import { ApiClient } from '../../app/services';
+import MobxStore from '../../mobx';
 
 export default function ContactList(props) {
+    const { authStore } = MobxStore;
+    const { token, userinfo } = authStore.userProfile;
     const {
         heading = '',
         mutual = true,
@@ -27,15 +33,50 @@ export default function ContactList(props) {
         full = true
     } = props
     const [showMore, setShowMore] = useState(false);
+    const [loader, setLoader] = useState(false);
+    const [allUser, setAllUser] = useState([]);
 
+    useEffect(() => {
+        bringAllUser()
+    }, [])
 
+    console.log("token", token);
+
+    const bringAllUser = async () => {
+        setLoader(true);
+
+        await ApiClient.authInstance
+            .get(ApiClient.endPoints.getAllUser, {
+                params: {
+                    'Authorization': `bearer ` + `${token}`
+                }
+            })
+            .then(async i => {
+                MobxStore.authStore.async.reloadUser();
+                console.log("Data of all user:", i.data);
+                if (i.status == 201 || i.status == 200) {
+                    setAllUser(i)
+                    setLoader(false);
+                }
+            })
+            .catch(e => {
+                console.log(e);
+                setLoader(false);
+            });
+
+        setLoader(false);
+    }
     const RenderItem = ({ item }) => {
         console.log("friends list ", item.index)
+        console.log("item friends list ", item.item.email)
+        const { city, age, fullName } = item?.item
+
+
         return (
             <View style={{ paddingHorizontal: 10 }} key={item.index}>
                 <View style={styles.RenderItemViewStyle}>
                     <TouchableOpacity
-                        onPress={() => props.navigation.navigate(GuestProfile.routeName)}
+                        onPress={() => props.navigation.navigate(GuestProfile.routeName, { "UserData": dataList[item.index] })}
                         // onPress={() =>console.log("Clicked Index",item.index)}
                         style={styles.contactRow}>
                         <View style={{
@@ -44,7 +85,10 @@ export default function ContactList(props) {
 
                             <View style={{ width: '10%' }}>
                                 <Avatar
-                                    source={item.item.icon}
+                                    // source={{ uri: item?.item?.profileImage?.filePath }}
+                                    source={item?.item?.profileImage == null ?
+                                        Placeholder
+                                        : { uri: item?.item?.profileImage?.filePath }}
                                     size={getHp(42)}
                                     rounded
                                 />
@@ -53,11 +97,11 @@ export default function ContactList(props) {
 
                             <View style={{ marginLeft: 15, width: '80%' }}>
                                 <Text style={styles.NameStyle}>
-                                    {"Porter Robinson"}
+                                    {fullName}
                                 </Text>
                                 {
                                     mutual &&
-                                    <Text style={styles.mutualGreyText}>{"20, Los Angeles"}</Text>
+                                    <Text style={styles.mutualGreyText}>{city}</Text>
                                 }
                             </View>
 
@@ -67,9 +111,9 @@ export default function ContactList(props) {
                         // onPress={} 
                         style={{ width: '7%' }}>
                         {!(heading == 'Find Friends' ||
-                         heading == 'People You Might Know' ||
-                         heading == 'All')
-                         ?
+                            heading == 'People You Might Know' ||
+                            heading == 'All')
+                            ?
                             <BlueTick height={12} width={16} style={{ marginRight: getWp(0) }} />
                             :
                             <SendRequest height={27} width={25} style={{ marginRight: getWp(0) }} />
@@ -92,49 +136,56 @@ export default function ContactList(props) {
         )
     }
 
-    return (<View style={{ marginVertical: getHp(10) }}>
-        <Text style={styles.reviewsTitleStyle}>
-            {heading}
-        </Text>
+    return (<Scaffold
+        statusBarStyle={{ backgroundColor: '#fff' }}>
+        <Spinner visible={loader} color={'#1FAEF7'} />
+        {!loader && (
 
-        {full ?
-            <FlatList
-                data={dataList}
-                renderItem={(item) => <RenderItem item={item} />}
-                keyExtractor={index => index}
-            />
-            :
-            <>
-                <FlatList
-                    data={!showMore ? dataList.slice(0, 2) : dataList}
-                    renderItem={(item) => <RenderItem item={item} />}
-                    keyExtractor={index => index}
-                />
-                {dataList.length > 2 && (
-                    <View style={{ backgroundColor: '#FBFBFB', paddingBottom: 10 }}>
-                        <Button
-                            onPress={() => {
-                                setShowMore(i => !i);
-                            }}
-                            full
-                            light
-                            style={[styles.showMoreButtonContainer]}>
-                            <Text style={[styles.showMoreTextStyle, { fontFamily: 'AvenirNext-Medium', letterSpacing: 0.2 }]}>
-                                {!showMore ? `${dataList.length - 2} More` : `Hide`}
-                            </Text>
-                            <View style={{ marginStart: getHp(10) }}>
-                                <AntDesign
-                                    color={'black'}
-                                    size={getHp(16)}
-                                    name={!showMore ? 'down' : 'up'}
-                                />
+            <View style={{ marginVertical: getHp(10) }}>
+                <Text style={styles.reviewsTitleStyle}>
+                    {heading}
+                </Text>
+
+                {full ?
+                    <FlatList
+                        data={dataList}
+                        renderItem={(item) => <RenderItem item={item} />}
+                        keyExtractor={index => index}
+                    />
+                    :
+                    <>
+                        <FlatList
+                            data={!showMore ? dataList.slice(0, 3) : dataList}
+                            renderItem={(item) => <RenderItem item={item} />}
+                            keyExtractor={index => index}
+                        />
+                        {dataList.length > 3 && (
+                            <View style={{ backgroundColor: '#FBFBFB', paddingBottom: 10 }}>
+                                <Button
+                                    onPress={() => {
+                                        setShowMore(i => !i);
+                                    }}
+                                    full
+                                    light
+                                    style={[styles.showMoreButtonContainer]}>
+                                    <Text style={[styles.showMoreTextStyle, { fontFamily: 'AvenirNext-Medium', letterSpacing: 0.2 }]}>
+                                        {!showMore ? `${dataList.length - 2} More` : `Hide`}
+                                    </Text>
+                                    <View style={{ marginStart: getHp(10) }}>
+                                        <AntDesign
+                                            color={'black'}
+                                            size={getHp(16)}
+                                            name={!showMore ? 'down' : 'up'}
+                                        />
+                                    </View>
+                                </Button>
                             </View>
-                        </Button>
-                    </View>
-                )}
-            </>
-        }
-    </View>
+                        )}
+                    </>
+                }
+            </View>
+        )}
+    </Scaffold>
     )
 }
 const styles = StyleSheet.create({

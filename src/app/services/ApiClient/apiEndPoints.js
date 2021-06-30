@@ -6,7 +6,10 @@ class Server {
 
 class Endpoints extends Server {
   getQR = '/user/getqr';
+  getAllUser = '/user/all'
   postUser = '/user'; 
+  sendRequest = '/user/addFriendRequest'
+  acceptRequest = '/user/approveFriendRequest'
   getCategory = '/Vendor/Category';
   postUserLogin = '/user/userlogin';
   getVendor = '/vendor/getvendor';

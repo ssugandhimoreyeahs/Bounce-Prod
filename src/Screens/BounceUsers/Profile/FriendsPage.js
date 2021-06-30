@@ -15,7 +15,8 @@ import Back from 'react-native-vector-icons/Ionicons';
 import { ContactList } from '../../../components';
 import { Button } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import { ApiClient } from '../../../app/services';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const DATA = [
     {
@@ -57,92 +58,142 @@ const DATA = [
 ];
 
 export default function FriendsPage(props) {
-    const { contactTitle } = props.route.params
+    const { authStore } = MobxStore;
+    const { token, userinfo } = authStore.userProfile;
+    const { contactTitle, FriendsList } = props.route.params
+
     console.log("contactTitle", props.route.params.contactTitle)
     console.log("props friends page", props);
 
     const [showMore, setShowMore] = useState(false);
-    const [searchQuery, setSearchQuery] = React.useState('');
+    const [searchQuery, setSearchQuery] = useState('');
     const onChangeSearch = query => setSearchQuery(query);
+    const [loader, setLoader] = useState(false);
+    const [allUser, setAllUser] = useState([]);
+
+    useEffect(() => {
+        bringAllUser()
+    }, [])
+
+    console.log("token", token);
+
+    const bringAllUser = async () => {
+        setLoader(true);
+
+        await ApiClient.authInstance
+            .get(ApiClient.endPoints.getAllUser, {
+                params: {
+                    'Authorization': `bearer ` + `${token}`
+                }
+            })
+            .then(async i => {
+                MobxStore.authStore.async.reloadUser();
+                console.log("Data of all user:", i.data);
+                if (i.status == 201 || i.status == 200) {
+                    setAllUser(i.data)
+                    setLoader(false);
+                }
+            })
+            .catch(e => {
+                console.log(e);
+                setLoader(false);
+            });
+
+        setLoader(false);
+    }
+
     return (
         <Scaffold statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
-
-            {/* Header Section start */}
-            <View style={{
-                marginVertical: getHp(15),
-                flexDirection: 'row',
-                alignItems: 'center'
-            }}>
-                <TouchableOpacity onPress={() => {
-                    props.navigation.goBack()
-                }}>
-                    <Back name="chevron-back" color={'#000'}
-                        style={{ marginRight: 20, marginLeft: 10 }}
-                        size={30} />
-                </TouchableOpacity>
-                <Searchbar
-                    placeholder={"Search events"}
-                    onChangeText={onChangeSearch}
-                    value={searchQuery}
-                    inputStyle={{
-                        fontSize: FONTSIZE.Text16,
-                        fontFamily: 'AvenirNext-Regular',
-                        alignSelf: 'center'
-                    }}
-                    style={styles.searchBarStyle}
-                    iconColor={"#999999"}
-                    placeholderTextColor={"#909090"}
-                />
-            </View>
-            {/* Header Section end */}
-
-
             <ScrollView
-                contentContainerStyle={{ flexGrow: 1 }}
-                style={{ overflow: 'visible', flex: 1 }}
                 showsVerticalScrollIndicator={false}
-            >
-
-                <View style={styles.container}>
-                    {
-                        contactTitle == 'Find Friends' ?
-                            <ContactList
-                                heading={'Find Friends'}
-                                dataList={DATA}
-                                {...props}
-                                full={true}
+                keyboardShouldPersistTaps={"always"}
+                contentContainerStyle={{ flexGrow: 1 }}
+                style={{
+                    backgroundColor: '#FBFBFB',
+                }}>
+                <Spinner visible={loader} color={'#1FAEF7'} />
+                {!loader && (
+                    <View>
+                        {/* Header Section start */}
+                        <View style={{
+                            marginVertical: getHp(15),
+                            flexDirection: 'row',
+                            alignItems: 'center'
+                        }}>
+                            <TouchableOpacity onPress={() => {
+                                props.navigation.goBack()
+                            }}>
+                                <Back name="chevron-back" color={'#000'}
+                                    style={{ marginRight: 20, marginLeft: 10 }}
+                                    size={30} />
+                            </TouchableOpacity>
+                            <Searchbar
+                                placeholder={"Search events"}
+                                onChangeText={onChangeSearch}
+                                value={searchQuery}
+                                inputStyle={{
+                                    fontSize: FONTSIZE.Text16,
+                                    fontFamily: 'AvenirNext-Regular',
+                                    alignSelf: 'center'
+                                }}
+                                style={styles.searchBarStyle}
+                                iconColor={"#999999"}
+                                placeholderTextColor={"#909090"}
                             />
-                            :
-                            contactTitle == 'People You Might Know + My Friends' ?
-                                <>
-                                    <ContactList
-                                        heading={"People You Might Know"}
-                                        dataList={DATA}
-                                        {...props}
-                                    />
-                                    <ContactList
-                                        heading={"My Friends"}
-                                        dataList={DATA}
-                                        {...props}
-                                    />
-                                </>
-                                :
-                                contactTitle == 'Mutual Friends + All' ?
-                                    <>
+                        </View>
+                        {/* Header Section end */}
+
+
+                        <ScrollView
+                            contentContainerStyle={{ flexGrow: 1 }}
+                            style={{ overflow: 'visible', flex: 1 }}
+                            showsVerticalScrollIndicator={false}
+                        >
+
+                            <View style={styles.container}>
+                                {
+                                    contactTitle == 'Find Friends' ?
                                         <ContactList
-                                            heading={"Mutual Friends"}
-                                            dataList={DATA}
+                                            heading={'Find Friends'}
+                                            dataList={allUser}
                                             {...props}
+                                            full={true}
                                         />
-                                        <ContactList
-                                            heading={"All"}
-                                            dataList={DATA}
-                                            {...props}
-                                        />
-                                    </>
-                                    : null
-                    }
-                </View>
+                                        :
+                                        contactTitle == 'See All Friends' ?
+                                            <>
+                                                <ContactList
+                                                    heading={"People You Might Know"}
+                                                    dataList={FriendsList}
+                                                    {...props}
+                                                    full={false}
+                                                />
+                                                <ContactList
+                                                    heading={"My Friends"}
+                                                    dataList={FriendsList}
+                                                    {...props}
+                                                />
+                                            </>
+                                            :
+                                            contactTitle == 'Mutual Friends + All' ?
+                                                <>
+                                                    <ContactList
+                                                        heading={"Mutual Friends"}
+                                                        dataList={DATA}
+                                                        {...props}
+                                                    />
+                                                    <ContactList
+                                                        heading={"All"}
+                                                        dataList={DATA}
+                                                        {...props}
+                                                    />
+                                                </>
+                                                : null
+                                }
+                            </View>
+                        </ScrollView>
+                    </View>
+                )}
             </ScrollView>
         </Scaffold>
     )

@@ -67,7 +67,8 @@ import {
     BlueCheck,
     ConnectSocialMedia,
     InputSocialMedia,
-    HostToggleButton
+    HostToggleButton,
+    FriendsListRender
 } from './BreakedComponents/smallui'
 
 import DropDown from './CustomDropdown/DropDown'
@@ -81,6 +82,7 @@ import PublicPrivateButton from './PublicPrivateButton';
 
 
 export {
+    FriendsListRender,
     HostToggleButton,
     InputSocialMedia,
     ConnectSocialMedia,

@@ -28,7 +28,7 @@ import FriendsPage from '../../Screens/BounceUsers/Profile/FriendsPage'
 import GuestProfile from '../../Screens/BounceUsers/Profile/GuestProfile';
 import AddInterest from '../../Screens/BounceUsers/NewsFeed/AddInterest';
 import NewsFeed from '../../Screens/BounceUsers/NewsFeed/NewsFeed';
-
+import CommonInterestNewsFeed from '../../Screens/BounceUsers/NewsFeed/CommonInterestNewsFeed'
 
 const UserRootStack = createStackNavigator();
 
@@ -118,6 +118,10 @@ class UserNavigation {
         <UserRootStack.Screen
           name={AddInterest.routeName}
           component={AddInterest}
+        />
+        <UserRootStack.Screen
+          name={CommonInterestNewsFeed.routeName}
+          component={CommonInterestNewsFeed}
         />
 
         <UserRootStack.Screen

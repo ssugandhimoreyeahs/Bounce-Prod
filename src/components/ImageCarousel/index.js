@@ -20,7 +20,7 @@ export default function ImageCarousel(props) {
         onPress = () => { }
     } = props;
     const renderItem = ({ item, index }) => {
-
+        // console.log("ITEM IN CAROUSEL->", item?.profileImage);
         return (
             <View style={{}}>
                 {
@@ -39,44 +39,15 @@ export default function ImageCarousel(props) {
                         </View>
                         :
                         value === 'Friends' ?
-                            <View style={{ width: '95%' }}>
+                            // <View style={{ width: '95%' }}>
                                 <View style={styles.singleImage}>
                                     <View style={styles.friendsView}>
-                                        <Image source={item} style={styles.friendsImage} />
-                                        <Text style={styles.textImage}>{'Eli Rahim'}</Text>
+                                        <Image source={{ uri: item?.profileImage?.filePath }} style={styles.friendsImage} />
+                                        <Text style={styles.textImage}>{item?.fullName}</Text>
                                     </View>
-                                    <View style={styles.friendsView}>
-                                        <Image source={item} style={styles.friendsImage} />
-                                        <Text style={styles.textImage}>{'Eli Rahim'}</Text>
-                                    </View>
-                                    <View style={styles.friendsView}>
-                                        <Image source={item} style={styles.friendsImage} />
-                                        <Text style={styles.textImage}>{'Eli Rahim'}</Text>
-                                    </View>
-                                    <View style={styles.friendsView}>
-                                        <Image source={item} style={styles.friendsImage} />
-                                        <Text style={styles.textImage}>{'Eli Rahim'}</Text>
-                                    </View>
+
                                 </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <View style={styles.friendsView}>
-                                        <Image source={item} style={styles.friendsImage} />
-                                        <Text style={styles.textImage}>{'Eli Rahim'}</Text>
-                                    </View>
-                                    <View style={styles.friendsView}>
-                                        <Image source={item} style={styles.friendsImage} />
-                                        <Text style={styles.textImage}>{'Eli Rahim'}</Text>
-                                    </View>
-                                    <View style={styles.friendsView}>
-                                        <Image source={item} style={styles.friendsImage} />
-                                        <Text style={styles.textImage}>{'Eli Rahim'}</Text>
-                                    </View>
-                                    <View style={styles.friendsView}>
-                                        <Image source={item} style={styles.friendsImage} />
-                                        <Text style={styles.textImage}>{'Eli Rahim'}</Text>
-                                    </View>
-                                </View>
-                            </View>
+                            // </View>
                             :
                             value == 'Music' ?
                                 <View style={{ flexDirection: 'row', marginVertical: 10, paddingVertical: 10, flex: 1 }}>
@@ -128,14 +99,14 @@ export default function ImageCarousel(props) {
                                             }}>
                                                 {
                                                     imageBottomLeftText &&
-                                                        <View style={[styles.flexDirectionStyle, { width: '100%', backgroundColor: '#F2F5F6', }]}>
-                                                            <Text style={[styles.fullInventoryTitleStyle]}>{item.itemName}</Text>
-                                                            <View style={[styles.flexDirectionStyle,]}>
-                                                                <BlackDollar height={getHp(26)} width={getWp(26)} />
-                                                                <Text style={[styles.reviewsTitleStyle, { marginLeft: 5, fontSize: FONTSIZE.Text20 }]}>{item.itemCost}</Text>
-                                                            </View>
+                                                    <View style={[styles.flexDirectionStyle, { width: '100%', backgroundColor: '#F2F5F6', }]}>
+                                                        <Text style={[styles.fullInventoryTitleStyle]}>{item.itemName}</Text>
+                                                        <View style={[styles.flexDirectionStyle,]}>
+                                                            <BlackDollar height={getHp(26)} width={getWp(26)} />
+                                                            <Text style={[styles.reviewsTitleStyle, { marginLeft: 5, fontSize: FONTSIZE.Text20 }]}>{item.itemCost}</Text>
                                                         </View>
-                                                     
+                                                    </View>
+
                                                 }
                                                 <Image
                                                     source={{
@@ -174,7 +145,7 @@ export default function ImageCarousel(props) {
                         marginHorizontal: -10,
                         backgroundColor: '#1FAEF7',
                     }}
-                    
+
                     inactiveDotStyle={{
                         width: 8,
                         height: 8,
@@ -219,7 +190,7 @@ const styles = StyleSheet.create({
         //   borderBottomEndRadius:7
     },
     friendsView: {
-        justifyContent: 'center',
+        // justifyContent: 'center',
         height: getHp(104),
         backgroundColor: '#fff',
         borderRadius: 7,
@@ -236,7 +207,8 @@ const styles = StyleSheet.create({
         fontFamily: 'AvenirNext-Medium',
         color: '#000',
         fontSize: FONTSIZE.Text12,
-
+        width: '50%',
+        textAlign: 'center'
     },
     fullInventoryTitleStyle: {
         fontFamily: 'AvenirNext-Regular',
@@ -253,7 +225,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingVertical: 10,
-        paddingHorizontal:10
+        paddingHorizontal: 10
     },
     fourItems: {
         backgroundColor: '#000000',
@@ -264,7 +236,7 @@ const styles = StyleSheet.create({
     reviewsTitleStyle: {
         fontFamily: 'AvenirNext-Medium',
         color: '#000',
-      },
+    },
     footerList: {
         height: 70,
         width: 100,

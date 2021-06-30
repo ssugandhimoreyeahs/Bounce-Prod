@@ -13,7 +13,7 @@ import {
   Header,
   ImageCarousel,
   Tabview,
-  ReviewCard,
+  FriendsListRender,
   Footer,
   CustomText,
 } from "@components";
@@ -61,7 +61,7 @@ import Right from 'react-native-vector-icons/FontAwesome'
 import Icon from 'react-native-vector-icons/Entypo'
 import spotifyToken from '../../../app/SDK/Spotify/spotify_token'
 import FriendsPage from "../Profile/FriendsPage";
-// import CommonInterestNewsFeed from "../NewsFeed/CommonInterestNewsFeed";
+import CommonInterestNewsFeed from "../NewsFeed/CommonInterestNewsFeed";
 
 Text.defaultProps = {
   allowFontScaling: false,
@@ -100,7 +100,7 @@ function UserFriendsProfile(props) {
     age,
   } = userinfo?.user;
   //console.log("userinfo ----> ", authStore.userProfile)
-  console.log("friends.length", friends?.length);
+
   var gapi = window
   // console.log("WINDOW ", gapi)
   /* 
@@ -205,16 +205,26 @@ function UserFriendsProfile(props) {
     await authStore.setAllAccounts();
   }
 
-  const handleCarousel = (value) => {
-    return (
-      <ImageCarousel
-        imageArray={imageArray}
-        onSnapToItem={(index) => setState(index)}
-        state={state}
-        value={value}
-        pagination={value == "Friends" ? false : true}
+
+  const handleCarousel = () => {
+
+    return (<View style={{
+      // flexDirection: 'row',
+      // flexWrap: 'wrap',
+      // width: '100%'
+    }}>
+      <FlatList
+        data={friends}
+        renderItem={(item) => {
+          return <FriendsListRender item={item} />
+        }}
+        keyExtractor={index => index}
+        // horizontal
+        // style={{flexWrap: 'wrap',}}
+        contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap', }}
       />
-    );
+    </View>
+    )
   };
 
   useEffect(() => {
@@ -269,7 +279,6 @@ function UserFriendsProfile(props) {
     statusBarStyle={{ backgroundColor: '#FFFFFF' }}
   >
     <ScrollView
-
       showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps={"always"}
       contentContainerStyle={{ flexGrow: 1 }}
@@ -471,7 +480,7 @@ function UserFriendsProfile(props) {
                 justifyContent: 'center',
                 alignItems: 'center'
               }]}
-              // onPress={() => props.navigation.navigate(CommonInterestNewsFeed.routeName)}
+              onPress={() => props.navigation.navigate(CommonInterestNewsFeed.routeName)}
               >
                 <Text style={[styles.buttonText,
                 {
@@ -509,7 +518,7 @@ function UserFriendsProfile(props) {
           <View style={{ paddingHorizontal: 10 }} >
 
             {/* First Gallery Block of Friends */}
-            {friends?.length == 0 ?
+            {(friends?.length == 0 || friends?.length == undefined) ?
               <TouchableOpacity style={[styles.fullTouch, styles.linearGradient, styles.shadowStyle, {
                 height: getHp(50),
                 borderRadius: 13, flexDirection: "row"
@@ -526,11 +535,15 @@ function UserFriendsProfile(props) {
                 <View style={[styles.flex]}>
                   <BlackPerson height={20} width={14} />
                   <Text style={[styles.InstaText]}> {"Friends "}
-                    <Text style={[styles.InstaText, { color: '#696969' }]}>{` ${friends?.length}`}</Text>
+                    <Text style={[styles.InstaText, { color: '#696969' }]}>{friends?.length}</Text>
                   </Text>
                 </View>
-                {handleCarousel("Friends")}
-                <TouchableOpacity style={styles.allFrnds} >
+
+                {handleCarousel()}
+
+                <TouchableOpacity
+                  onPress={() => props.navigation.navigate(FriendsPage.routeName, { 'contactTitle': 'See All Friends', 'FriendsList': friends })}
+                  style={styles.allFrnds} >
                   <Text style={[styles.aboutText]}>
                     {"See All Friends"}
                   </Text>

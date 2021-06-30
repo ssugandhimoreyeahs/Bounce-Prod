@@ -192,6 +192,7 @@ export default function HostProfile(props) {
       {!loader && (
 
         <KeyboardAwareScrollView
+          enableResetScrollToCoords={false}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps={"handled"}>
           <Header

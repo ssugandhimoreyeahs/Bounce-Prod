@@ -1,10 +1,11 @@
 import React, { useState, Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native'
-import { Toggle} from '@components'
+import { View, Image, Text, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native'
+import { Toggle } from '@components'
 import {
     BlueTick,
 } from '@svg'
 import { FONTSIZE, getHp, getWp } from '@utils';
+import { Placeholder } from '@assets'
 
 export const BlueCheck = () => {
     return (
@@ -22,7 +23,7 @@ export const ConnectSocialMedia = ({
     containerStyle,
 }) => {
     return (
-        <TouchableOpacity style={[styles.socialButton, styles.shadowStyle,containerStyle]}>
+        <TouchableOpacity style={[styles.socialButton, styles.shadowStyle, containerStyle]}>
             <View style={styles.flex}>
                 {icon}
                 <TextInput
@@ -63,17 +64,17 @@ export const InputSocialMedia = ({
 }) => {
     return (
         <TouchableOpacity style={styles.socialButton2}>
-        <View style={styles.flex}>
-          {icon}
-          <TextInput
-            placeholder={placeholder}
-            placeholderTextColor={'#999999'}
-            onChangeText={onChangeText}
-            value={value}
-            style={[styles.headerTitle, styles.Tiktok]}
-          />
-        </View>
-      </TouchableOpacity>
+            <View style={styles.flex}>
+                {icon}
+                <TextInput
+                    placeholder={placeholder}
+                    placeholderTextColor={'#999999'}
+                    onChangeText={onChangeText}
+                    value={value}
+                    style={[styles.headerTitle, styles.Tiktok]}
+                />
+            </View>
+        </TouchableOpacity>
     )
 }
 export const HostToggleButton = ({
@@ -84,20 +85,66 @@ export const HostToggleButton = ({
     containerStyle,
 }) => {
     return (
-        <View style={[styles.flex, styles.toggleView,containerStyle]}>
-        <Text style={[styles.privacyTitle, { fontSize: FONTSIZE.Text16 }]}>
-          {placeholder}
-        </Text>
-        <Toggle
-          switchOn={switchOn}
-          onChange={onChange}
-        />
-      </View>
+        <View style={[styles.flex, styles.toggleView, containerStyle]}>
+            <Text style={[styles.privacyTitle, { fontSize: FONTSIZE.Text16 }]}>
+                {placeholder}
+            </Text>
+            <Toggle
+                switchOn={switchOn}
+                onChange={onChange}
+            />
+        </View>
+    )
+}
+export const FriendsListRender = ({ item }) => {
+
+    return (
+        <View style={styles.singleImage}>
+            <View style={styles.friendsView}>
+                <Image source={item?.item?.profileImage == null ?
+                    Placeholder
+                    : { uri: item?.item?.profileImage?.filePath }}
+                    style={styles.friendsImage} />
+                <Text style={styles.textImage}>{item?.item?.fullName}</Text>
+            </View>
+        </View>
     )
 }
 
 
 const styles = StyleSheet.create({
+    friendsImage: {
+        borderTopRightRadius: 7,
+        borderTopLeftRadius: 7,
+        width: getWp(80),
+        height: getHp(80),
+        margin: 0
+    },
+    singleImage: {
+
+        marginRight: 20
+    },
+    friendsView: {
+        justifyContent: 'space-between',
+        height: getHp(104),
+        backgroundColor: '#fff',
+        borderRadius: 7,
+        alignItems: 'center',
+        marginVertical: 10,
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowRadius: 4,
+        shadowOpacity: 0.1,
+    },
+    textImage: {
+        paddingTop: 3,
+        fontFamily: 'AvenirNext-Medium',
+        color: '#000',
+        fontSize: FONTSIZE.Text12,
+        width: '100%',
+        textAlign: 'center'
+    },
     privacyTitle: {
         fontFamily: 'AvenirNext-Medium',
         color: '#000',
@@ -185,17 +232,18 @@ const styles = StyleSheet.create({
         right: -10,
         top: -10
     },
-    toggleView:{
+    toggleView: {
+        
         height: getHp(60),
         backgroundColor: '#FFFFFF',
         paddingHorizontal: getWp(10),
         borderBottomWidth: 0.5,
         borderColor: '#EEEEEE'
-      },
-        privacyTitle: {
-          fontFamily: 'AvenirNext-Medium',
-          color: '#000',
-          fontSize: FONTSIZE.Text18,
-        },
+    },
+    privacyTitle: {
+        fontFamily: 'AvenirNext-Medium',
+        color: '#000',
+        fontSize: FONTSIZE.Text18,
+    },
 
 })

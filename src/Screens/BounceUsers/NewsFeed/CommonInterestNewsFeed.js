@@ -43,6 +43,9 @@ function CommonInterestNewsFeed(props) {
     const [state, setState] = useState(0)
     const imageArray = [DJ, DJ1, DJ2]
 
+    const {
+        fullName
+    } = props.route.params
 
     const handleCarousel = () => {
         return <ImageCarousel
@@ -111,7 +114,7 @@ function CommonInterestNewsFeed(props) {
                     <Back name="left" color={'#000'} size={25} />
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>
-                    {"You and David both like:"}
+                    {`You and ${fullName} both like:`}
                 </Text>
             </View>
 

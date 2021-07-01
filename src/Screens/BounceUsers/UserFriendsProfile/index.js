@@ -23,6 +23,7 @@ import {
   BlackMenubar,
   Scanner,
   AppleMusic,
+  BluePerson
 } from "@svg";
 import { Avatar } from "react-native-elements";
 import ImagePicker from "react-native-image-crop-picker";
@@ -81,8 +82,8 @@ function UserFriendsProfile(props) {
   const imageArray = [DJ, DJ1, DJ2];
   const [state, setState] = useState(0);
   const [getSpotify, setSpotifyData] = useState([])
-
-  console.log("PROPS", props);
+  console.log("After Login Data of USER -->", JSON.stringify(userinfo))
+  // console.log("PROPS", props);
 
   const {
     friends,
@@ -116,7 +117,7 @@ function UserFriendsProfile(props) {
 
   const handleClick = () => {
     gapi.load('client:auth2', () => {
-      console.log('loaded client')
+      // console.log('loaded client')
 
       gapi.client.init({
         apiKey: API_KEY,
@@ -259,7 +260,7 @@ function UserFriendsProfile(props) {
   };
 
   const RenderSpotify = ({ items }) => {
-    console.log("PROPS OF SPOTIFY", items.track)
+    // console.log("PROPS OF SPOTIFY", items.track)
     return (
       <View style={{ marginRight: 10, flexDirection: 'row', marginVertical: 10, paddingVertical: 10, flex: 1 }}>
         <View style={{ alignItems: 'center' }}>
@@ -480,7 +481,7 @@ function UserFriendsProfile(props) {
                 justifyContent: 'center',
                 alignItems: 'center'
               }]}
-              onPress={() => props.navigation.navigate(CommonInterestNewsFeed.routeName)}
+              // onPress={() => props.navigation.navigate(CommonInterestNewsFeed.routeName)}
               >
                 <Text style={[styles.buttonText,
                 {
@@ -524,8 +525,9 @@ function UserFriendsProfile(props) {
                 borderRadius: 13, flexDirection: "row"
               }]}
                 onPress={() => props.navigation.navigate(FriendsPage.routeName, { 'contactTitle': 'Find Friends' })}>
-                <WhitePerson height={25} width={19}
-                  style={{ marginBottom: -5 }} />
+                <  BluePerson
+                  height={25} width={19}
+                  style={{}} />
                 <Text style={[styles.buttonText, { marginLeft: 20, fontFamily: 'AvenirNext-DemiBold', color: '#1FAEF7' }]}>
                   {'Find Friends'}
                 </Text>

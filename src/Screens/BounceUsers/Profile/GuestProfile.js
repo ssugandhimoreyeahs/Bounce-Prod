@@ -67,6 +67,7 @@ import { Searchbar } from 'react-native-paper';
 import Back from 'react-native-vector-icons/Ionicons';
 import { Placeholder } from '@assets'
 import { ApiClient } from '../../../app/services';
+import CommonInterestNewsFeed from "../NewsFeed/CommonInterestNewsFeed"
 
 Text.defaultProps = {
     allowFontScaling: false,
@@ -81,10 +82,11 @@ function GuestProfile(props) {
 
     const { navigation } = props;
     const [getMedia, setMedia] = useState(null);
-    const [loader, setLoader] = useState(false);
+    const [loader, setLoader] = useState(true);
     const [sendRequest, setSendRequest] = useState(false);
     const [searchQuery, setSearchQuery] = React.useState('');
     const onChangeSearch = query => setSearchQuery(query);
+    const [getInitalRelation, setInitialRelation] = useState([])
 
     const {
         id,
@@ -99,7 +101,7 @@ function GuestProfile(props) {
         age,
     } = UserData;
 
-    console.log("userinfo", userinfo)
+    console.log("UserData on Guest profile:--->", JSON.stringify(UserData))
     console.log("id of specific user:", id);
     console.log("token", token);
 
@@ -146,7 +148,7 @@ function GuestProfile(props) {
         setLoader(false);
     };
 
-
+    console.log("value of relation friends---", getInitalRelation.friendRequestStatus)
 
     const handleClick = () => {
         gapi.load('client:auth2', () => {
@@ -207,8 +209,34 @@ function GuestProfile(props) {
         })
     }
 
+    const findInitialRelation = async () => {
+
+        await ApiClient.authInstance
+            .get(ApiClient.endPoints.relationWithUser + `/${id}`, {
+                params: {
+                    'Authorization': `bearer ` + `${token}`
+                }
+            })
+            .then(async i => {
+                MobxStore.authStore.async.reloadUser();
+                console.log("Console response :", i);
+                if (i.status == 201 || i.status == 200) {
+                    console.log("data of user 5", i.data)
+                    setInitialRelation(i.data)
+                    setLoader(false);
+
+                }
+            })
+            .catch(e => {
+                console.log(e);
+                setLoader(false);
+            });
+
+        setLoader(false);
+    }
     useEffect(() => {
-        PartyService.getParty();
+        findInitialRelation()
+        // PartyService.getParty();
     }, []);
 
 
@@ -376,6 +404,8 @@ function GuestProfile(props) {
                             </View>
 
                             <View style={[styles.flex, { width: "80%", marginVertical: 10, justifyContent: 'space-between', alignItems: 'center' }]}>
+
+
                                 <LinearGradient
                                     pointerEvents={sendRequest && 'none'}
                                     start={{ x: 1, y: 1 }}
@@ -391,10 +421,26 @@ function GuestProfile(props) {
                                         onPress={handleSubmit}
                                     >
                                         <Text style={styles.editButton}>
-                                            {sendRequest ? "Pending" : "Add Friend"}
+                                            {
+                                                getInitalRelation.friendRequestStatus == 'FriendRequestApproved' ? "Friends"
+                                                    :
+                                                    getInitalRelation.friendRequestStatus == 'NoFriendRequest' ?
+                                                        "Add Friend"
+                                                        :
+                                                        getInitalRelation.friendRequestStatus == 'FriendRequestSent' ?
+                                                            "Pending"
+                                                            :
+                                                            getInitalRelation.friendRequestStatus == 'FriendRequestDenied' ?
+                                                                "Denied"
+                                                                :
+                                                                "FriendRequestPendingApproval"
+
+                                            }
                                         </Text>
                                     </TouchableOpacity>
                                 </LinearGradient>
+
+
 
 
 
@@ -476,9 +522,11 @@ function GuestProfile(props) {
                                     flexDirection: 'row',
                                     justifyContent: 'center',
                                     alignItems: 'center'
-                                }} >
+                                }}
+                                    onPress={() => props.navigation.navigate(CommonInterestNewsFeed.routeName, { "fullName": fullName })}
+                                >
                                     <Text style={[styles.buttonText, { marginRight: 15 }]}>
-                                        {'Bounce with David'}
+                                        {`Bounce with ${fullName}`}
                                     </Text>
                                     <Right name="angle-right" color='#FFFFFF' size={25} />
                                 </TouchableOpacity>
@@ -491,6 +539,7 @@ function GuestProfile(props) {
 
                         <GuestTabview
                             {...props}
+
                         />
 
                         {/* First Gallery Block of Friends */}

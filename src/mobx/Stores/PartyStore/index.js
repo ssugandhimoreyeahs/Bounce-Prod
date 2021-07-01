@@ -4,6 +4,8 @@ import {filterArrOnDate} from '../../../app/utils';
 class PartyStore {
   @observable isLoading = false;
   @observable _party = [];
+//interested parties =[]
+
 
   constructor() {
     makeAutoObservable(this);

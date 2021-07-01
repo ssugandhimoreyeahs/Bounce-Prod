@@ -24,7 +24,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FONTSIZE, getHp } from '../../app/utils';
 import BENotification from '../../Screens/BounceUsers/Notifications/Before/Notifications';
 import NewsFeed from '../../Screens/BounceUsers/NewsFeed/NewsFeed';
-
+import AddInterest from '../../Screens/BounceUsers/NewsFeed/AddInterest';
 const UserHomeBottomTab = createBottomTabNavigator();
 
 
@@ -70,8 +70,10 @@ class UserHomeBottomNavigation {
                 );
             },
           }}
-          name={NewsFeed.routeName}
-          component={NewsFeed}
+          // name={NewsFeed.routeName}
+          // component={NewsFeed}
+          name={AddInterest.routeName}
+          component={AddInterest}
         />
 
         <UserHomeBottomTab.Screen

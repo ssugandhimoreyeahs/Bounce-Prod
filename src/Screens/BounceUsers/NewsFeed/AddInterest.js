@@ -13,9 +13,9 @@ import PlanPartyModel from '../../BounceVendors/PlanParty/PlanPartyModel';
 import NewsFeed from './NewsFeed';
 
 function AddInterest(props) {
-    const [state, setState] = useState(0)
+    const [selectedTags, setSelectedTags] = useState([]);
     const { tagStore } = MobxStore;
-    const partyModel = PlanPartyModel.getInstance();
+
 
     useEffect(async () => {
         const Tags = await PartyService.getTags();
@@ -26,7 +26,64 @@ function AddInterest(props) {
         props.navigation.navigate(NewsFeed.routeName)
     }
 
+    const isTagsExist = (tag, subTags) => {
+        let result = {
+            tagIndex: -1,
+            tagExist: false,
+            subTagIndex: -1,
+            subTagExist: false,
+        };
+        let tagIndex = selectedTags.findIndex(t => tag.id == t.id);
+        if (tagIndex == -1) {
+            return result;
+        }
+        result.tagIndex = tagIndex;
+        result.tagExist = true;
+        let subTagIndex = selectedTags[tagIndex].subTags.findIndex(
+            sT => sT.id == subTags.id,
+        );
+        if (subTagIndex == -1) {
+            return result;
+        }
+        result.subTagIndex = subTagIndex;
+        result.subTagExist = true;
+        return result;
+    }
+    const onSelectTags = ({ tag, subTags }) => {
 
+        let categoryIndex = selectedTags.findIndex(t => t.id == tag.id);
+        if (categoryIndex == -1) {
+            tag = { ...tag, subTags: [] };
+            tag.subTags.push(subTags);
+
+            setSelectedTags(i => ([
+                ...i, tag
+            ]));
+        } else {
+            let isTagExist = isTagsExist(tag, subTags);
+            if (isTagExist.subTagExist) {
+                setSelectedTags(i => {
+                    let newData = [...i];
+                    newData[isTagExist.tagIndex].subTags = newData[isTagExist.tagIndex].subTags.filter((_, i) => {
+                        return i != isTagExist.subTagIndex;
+                    });
+
+                    if (newData[isTagExist.tagIndex].subTags.length == 0) {
+                        newData = newData.filter((_, i) => i != isTagExist.tagIndex);
+                    }
+                    return newData;
+                });
+            } else {
+                setSelectedTags(i => {
+                    let newData = [...i];
+                    newData[isTagExist.tagIndex].subTags.push(subTags);
+                    return newData;
+                });
+            }
+        }
+
+    };
+    console.log("TAG_CAT_STATTE - ", JSON.stringify(selectedTags));
     return (
         <Scaffold statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
             <Header
@@ -123,21 +180,16 @@ function AddInterest(props) {
 
 
 
-                {tagStore.partyTags?.map(t => {
+                {tagStore.getTags().map(t => {
                     return (
                         <TagsCollapsible
                             MyInterest={true}
                             Data={t}
-                            isOnSelect={({ tagObj, item }) => {
-                                let isPartySelected = partyModel.party.isSubTagExist(
-                                    tagObj,
-                                    item,
-                                );
-                                return (
-                                    isPartySelected.tagExist && isPartySelected.subTagExist
-                                );
+                            onAdd={onSelectTags}
+                            isOnSelect = {({ tagObj, item }) => {
+                                let isExist = isTagsExist(tagObj,item);
+                                return isExist.tagExist && isExist.subTagExist;
                             }}
-                            onAdd={tag => partyModel.party.addTags(tag)}
                         />
                     );
                 })}

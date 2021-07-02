@@ -18,7 +18,7 @@ class TagSubCategory {
         return tagSubCategory;
     }
     clone = () => {
-        return {...this};
+        return TagSubCategory.fromJSON(this);
     }
 }
 

@@ -1,11 +1,6 @@
- import Party from './Party';
- import Ticket from './Ticket';
+import Party from './Party';
+import Ticket from './Ticket';
 import TagCategory from './TagCategory';
 import TagSubCategory from './TagSubCategory';
-
- export {
-     Party,
-     Ticket,
-    TagCategory,
-     TagSubCategory,
- }
+import SelectedTags from './SelectedTags';
+export {Party, Ticket, TagCategory, TagSubCategory, SelectedTags};

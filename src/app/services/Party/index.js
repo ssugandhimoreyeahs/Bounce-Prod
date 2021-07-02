@@ -52,10 +52,11 @@ class PartyService {
         ApiClient.endPoints.tags,
         ApiClient.applicationJSONHeader(false)
       );
-      // let tags = Tags.data.map((tags) => {
-      //   return TagCategory.fromJSON(tags);
-      // }) || [];
-      return Promise.resolve(Tags.data);
+      let tags = Tags.data.map((tags) => {
+        return TagCategory.fromJSON(tags);
+      }) || [];
+      return Promise.resolve(tags);
+      //return Promise.resolve(Tags.data);
     } catch (error) {
       return Promise.reject(error)
     }

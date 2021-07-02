@@ -14,7 +14,7 @@ const TagsCollapsible = props => {
       let tagObj = Object.assign({}, props.Data);
       delete tagObj.subTags;
       let isPartySelected = props.isOnSelect({ tagObj, item });
-      //let isPartySelected = false;
+       
 
     return (
       <TouchableOpacity
@@ -23,7 +23,7 @@ const TagsCollapsible = props => {
           
           props.onAdd({
             tag: tagObj,
-            subTags: {...item},
+            subTags: item.clone() ?? item,
           });
         }}>
         <View

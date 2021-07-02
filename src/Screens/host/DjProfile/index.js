@@ -48,19 +48,6 @@ import UploadInventoryScreen from '../UploadInventory';
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
 
-
-const DATA = [
-  {
-    id: '0',
-    icon: Girl,
-    messageName: 'Lindas',
-  },
-  {
-    id: '1',
-    icon: Girl,
-    messageName: 'Fernandez',
-  },
-];
 var imgTemp = [];
 
 
@@ -277,16 +264,16 @@ function DjProfile(props) {
         <ScrollView style={[styles.container]}
           contentContainerStyle={{ flexGrow: 1 }}>
           <Header
-            AllAccounts = {MobxStore.authStore.AllAccounts}
+            AllAccounts = {MobxStore.authStore.AllAccounts || []}
             leftDropdown={
               username !== null ? `@${username !== null ? username : ''}` : ''
             }
-            DropdownAccounts={DATA}
             share={<BlackMenubar height={25} width={25} />}
             onPress={() => {
               props.navigation.openDrawer();
             }}
             headerBackColor={{ backgroundColor: '#fff' }}
+            {...props}
           />
 
           <View style={styles.subContainer}>

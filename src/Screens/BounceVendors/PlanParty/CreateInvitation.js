@@ -95,7 +95,6 @@ function CreateInvitation(props) {
 
   const handleOnPress = async isDraftMode => {
     try {
-      console.log('DFMD - ', isDraftMode);
       const res = await partyModel.party.isPartyValid(
         isDraftMode,
         partyModel.isEditMode,
@@ -104,6 +103,10 @@ function CreateInvitation(props) {
         let key = Object.keys(res.error)[0];
         let msg = res.error[key] || 'Something went wrong!';
         Toast(msg);
+        return;
+      }
+      if( !partyModel.party.isPrivate && partyModel.party.partyTags.length == 0){
+        Toast("Add atleast 1 tag");
         return;
       }
 
@@ -316,7 +319,7 @@ function CreateInvitation(props) {
               multiline
               value={partyModel.party.description?.toString()}
               onChange={description => {
-                partyModel.party.set({ description: description });
+                partyModel.party.set({ description: description.toString() });
               }}
               errorMessage={partyModel.party?.partyError?.description}
             />

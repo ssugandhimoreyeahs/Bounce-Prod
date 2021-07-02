@@ -1,4 +1,4 @@
-package com.bounce;
+package com.bounce.apps;
 
 import com.facebook.react.ReactActivity;
 

@@ -97,10 +97,6 @@ class CreatePartyDTO extends CreatePartyEntity {
         tag,
         subTags,
       );
-      console.log(
-        'SUB_TAG_EVAL - ',
-        JSON.stringify({tagIndex, tagExist, subTagIndex, subTagExist}),
-      );
       if (tagExist && subTagExist) {
         if (newTag[tagIndex].subTags.length == 1) {
           newTag = newTag.filter(i => i.id != tag.id);

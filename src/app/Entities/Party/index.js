@@ -17,8 +17,9 @@ import {Strings} from '../../constants';
 class Party {
   @IsNotEmpty({message: Strings.requiredFieldError('Title')})
   title;
-  @IsNotEmpty({message: Strings.requiredFieldError('Description')})
-  description;
+
+  // @IsNotEmpty({message: Strings.requiredFieldError('Description')})
+  description = '';
 
   @IsNotEmpty({message: Strings.requiredFieldError('Date')})
   date;
@@ -44,7 +45,7 @@ class Party {
 
   gallery = [];
 
-  @ArrayNotEmpty({message: 'Add atleast 1 tag'})
+  //@ArrayNotEmpty({message: 'Add atleast 1 tag'})
   partyTags = [];
 
   @ArrayNotEmpty({message: 'Add atleast 1 Ticket Type'})
@@ -67,6 +68,9 @@ class Party {
       newParty.tickets = fields?.tickets;
       newParty.isPrivate = fields?.isPrivate;
       newParty.profileImage = fields?.profileImage;
+      newParty.description = fields?.description;
+      newParty.fromAge = Number(fields['fromAge']) || null;
+      newParty.toAge = Number(fields['toAge']) || null;
       return newParty;
     } catch (error) {
       console.log('PARTY_ENTITY_FROM_JSON - ', error);
@@ -81,7 +85,8 @@ class Party {
           newParty[fKey] = fields[fKey];
         }
       });
-
+      newParty.title = fields.title
+      newParty.description = fields.description
       newParty.fromAge = Number(fields['fromAge']) || 0;
       newParty.toAge = Number(fields['toAge']) || 0;
       newParty.fee = Number(fields['fee']) || 0;

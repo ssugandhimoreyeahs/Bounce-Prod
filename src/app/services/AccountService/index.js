@@ -58,7 +58,6 @@ class AccountService {
 
   getAllAccounts = async () => {
     let allAccounts = await AsyncStorage.getItem(LOCAL_STORAGE_TOKEN.USERS);
-    console.log('Set All Accounts ----> ', allAccounts);
     return JSON.parse(allAccounts);
   };
 
@@ -66,7 +65,6 @@ class AccountService {
     try {
       let newData = [];
       let UserLocal = await AsyncStorage.getItem(LOCAL_STORAGE_TOKEN.USERS);
-      Promise.resolve(UserLocal);
       let userLocal = JSON.parse(UserLocal);
       if (userLocal) {
         userLocal.map(singleUser => {

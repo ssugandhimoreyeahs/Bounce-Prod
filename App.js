@@ -21,7 +21,7 @@ import {observer} from 'mobx-react';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Icon from 'react-native-vector-icons/Entypo';
 import Navigation from './src/navigation';
-import {RNErrorHandlerService} from './src/app/services';
+import {RNErrorHandlerService, NotificationService} from './src/app/services';
 import {CustomValidator, ValidationTypes} from './src/app/Validations';
 import {Root as NativebaseRoot} from 'native-base';
 import transform from 'css-to-react-native';
@@ -32,6 +32,9 @@ function App() {
 
   useEffect(() => {
     RNErrorHandlerService.getInstance().init();
+    NotificationService.initialize();
+    NotificationService.checkPermission();
+    console.log('Notification Permission ----> ', NotificationService.hasPermission);
   }, []);
   const {uiStore} = MobxStore;
   return (

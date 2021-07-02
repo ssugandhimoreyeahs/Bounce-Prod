@@ -16,7 +16,7 @@ import { LocalStorage } from '../../app/utils/localStorage';
 import NameScreen from '../../Screens/BounceVendors/Onboarding/NameScreen';
 import LoginScreen from '../../Screens/BounceVendors/Onboarding/LoginScreen';
 
-import AuthStackNavigator from '../../navigation/AuthNavigation';
+import AuthNavigation from '../../navigation/AuthNavigation';
 
 const { height, width } = Dimensions.get('screen');
 
@@ -226,17 +226,12 @@ function Header(props) {
                         </TouchableOpacity>
                       );
                     })}
-
-                    {/* {
-                                DropdownAccounts.length - 1 > index ?
-                                    <View style={styles.partition} /> : null
-                            } */}
                   </>
                 )}
                 <TouchableOpacity
                   style={styles.newAccountButton}
                   onPress={() => {
-                    props.navigation.navigate(AuthStackNavigator.routeName, {
+                    props.navigation.navigate(AuthNavigation.routeName, {
                       screen: LoginScreen.routeName,
                     });
                   }}>

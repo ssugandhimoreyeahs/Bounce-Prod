@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "386665381575",
+    "firebase_url": "https://bounce-258411.firebaseio.com",
+    "project_id": "bounce-258411",
+    "storage_bucket": "bounce-258411.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386665381575:android:e9f1e405b49c76004788e2",
+        "android_client_info": {
+          "package_name": "com.bounce.apps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386665381575-ljobdaoelqcgc043a55ansns8naep0lk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC94iMpGS05cUQVCXQQt5PbSZapY597dPE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386665381575-ljobdaoelqcgc043a55ansns8naep0lk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "386665381575-2u8bqum0eav3q32uaejpmd1u0hvo937q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.eventswithbounce"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386665381575:android:120f42b34dd85e1d4788e2",
+        "android_client_info": {
+          "package_name": "com.eventswithbounce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386665381575-ljobdaoelqcgc043a55ansns8naep0lk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC94iMpGS05cUQVCXQQt5PbSZapY597dPE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386665381575-ljobdaoelqcgc043a55ansns8naep0lk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "386665381575-2u8bqum0eav3q32uaejpmd1u0hvo937q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.eventswithbounce"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

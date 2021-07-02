@@ -179,7 +179,7 @@ export const Tabview = observer((props) => {
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
                     activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading={"Hosting"}>
                     <Tab1 partyStore={MboxStore.partyStore} {...props} />
-                </Tab >
+                </Tab>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
                     textStyle={{ color: '#000', fontFamily: 'AvenirNext-Regular' }}

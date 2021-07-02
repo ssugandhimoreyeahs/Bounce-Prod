@@ -10,6 +10,10 @@ AntDesign.loadFont();
 const TagsCollapsible = props => {
   const [isVisible, setIsVisible] = useState(true);
 
+  const isSelected = () => {
+
+  } 
+
   const RenderItems = (item, index) => {
     let tagObj = Object.assign({}, props.Data);
     delete tagObj.subTags;

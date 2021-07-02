@@ -4,7 +4,7 @@ import CreateFormData from '../FormData';
 
 class PartyService {
   createOrUpdateParty = async (partyFields, partyID = undefined) => {
-    try { 
+    try {
       const formData = CreateFormData.objectToFormData(partyFields);
       let endPoint = ApiClient.endPoints.party;
       if (partyID) {

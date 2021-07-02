@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Root, CustomButton, ProgressCircle } from '@components';
@@ -17,7 +17,7 @@ import { LocalStorage } from '../../../app/utils/localStorage';
 import { UserContext } from '../../../context/profiledataProvider';
 import MobxStore from '../../../mobx';
 import moment from 'moment';
-import { ApiClient } from '../../../app/services';
+import { ApiClient, NotificationService } from '../../../app/services';
 import { Scaffold } from '@components';
 import { Toast } from '@constants';
 
@@ -26,13 +26,16 @@ export default function ProfilePic(props) {
   const { navigation } = props;
   const [picture, setPicture] = useState(null);
   const [footer, openFooter] = useState(false);
+  const [FCM, setFCM] = useState('');
   const dispatch = useDispatch();
   const [loader, setLoader] = useState(false);
 
   const { name, username, password, birthday, age, email } = props.route.params;
-  // console.log('ProfilePic PROPS -->', props.route.params);
 
-  // console.log(name, username, password, birthday,age,email);
+  useEffect(() => {
+    let token = NotificationService.getToken();
+    setFCM(token);
+  }, []);
 
   const handleSubmit = async () => {
     try {
@@ -56,6 +59,7 @@ export default function ProfilePic(props) {
         formData.append('profileImageFile', imgObj);
         formData.append('vendorType', 2);
         formData.append('email', email);
+        formData.append('firebaseTokens', FCM);
 
         const response = await ApiClient.instance.post(
           ApiClient.endPoints.userRegister,

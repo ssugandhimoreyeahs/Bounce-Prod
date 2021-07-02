@@ -26,9 +26,9 @@ import HostView from '../../MyEvents/HostView';
 import { Toast } from '@constants';
 import InstagramLogin from 'react-native-instagram-login';
 import { BlueEye, GreyEye } from '@svg';
-import UserHomeBottomNavigation from '../../../navigation/UserNavigation/bottomNavigation';
-import UserNavigation from '../../../navigation/UserNavigation';
+import { NotificationService } from '../../../app/services';
 import VendorHomeDrawerNavigator from '../../../navigation/VendorNavigation/drawerNavigation';
+import UserHomeDrawerNavigator from '../../../navigation/UserNavigation/drawerNavigation';
 import Modal from 'react-native-modal';
 
 function LoginScreen(props) {
@@ -53,8 +53,8 @@ function LoginScreen(props) {
     try {
       const loginResponse = await authStore.async.login(username, password);
       if(authStore.isAuthenticated && loginResponse.success){
-        if(authStore.userProfile.user.vendorType == 2){
-          navigation.navigate(UserHomeBottomNavigation.routeName)
+        if(authStore?.userProfile?.user?.vendorType == 2){
+          navigation.navigate(UserHomeDrawerNavigator.routeName)
         }else{
           navigation.navigate(VendorHomeDrawerNavigator.routeName)
         }

@@ -48,7 +48,7 @@ class Party {
   //@ArrayNotEmpty({message: 'Add atleast 1 tag'})
   partyTags = [];
 
-  @ArrayNotEmpty({message: 'Add atleast 1 Ticket Type'})
+  //@ArrayNotEmpty({message: 'Add atleast 1 Ticket Type'})
   tickets = [];
   needBouncer = false;
   needDJ = false;

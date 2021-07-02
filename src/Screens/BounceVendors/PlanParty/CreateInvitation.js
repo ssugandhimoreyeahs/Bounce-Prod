@@ -110,6 +110,11 @@ function CreateInvitation(props) {
         return;
       }
 
+      if( !partyModel.party.isPrivate && partyModel.party.tickets.length == 0){
+        Toast("Add atleast 1 Ticket Type");
+        return;
+      }
+
       const savePartyResponse = await PartyService.createOrUpdateParty(
         res.partyFields,
         partyModel.editParty?.id,
@@ -134,8 +139,6 @@ function CreateInvitation(props) {
       // props.navigation.goBack()
     }
   };
-
-
 
   const handleImage = async () => {
     return props.navigation.navigate(UploadMedia.routeName, {
@@ -396,7 +399,6 @@ function CreateInvitation(props) {
           </Text>
           <View style={{ marginBottom: 5, }}>
             {tagStore.partyTags?.map(t => {
-              // console.log()
               return (
                 <TagsCollapsible
                   Data={t}
@@ -407,6 +409,15 @@ function CreateInvitation(props) {
                     );
                     return (
                       isPartySelected.tagExist && isPartySelected.subTagExist
+                    );
+                  }}
+                  isTagSelected={({ tagObj, item }) => {
+                    let isPartySelected = partyModel.party.isSubTagExist(
+                      tagObj,
+                      item,
+                    );
+                    return (
+                      isPartySelected.tagExist
                     );
                   }}
                   onAdd={tag => partyModel.party.addTags(tag)}

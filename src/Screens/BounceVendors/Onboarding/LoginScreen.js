@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, {useState, useEffect, useContext, useRef} from 'react';
 import {
   View,
   Text,
@@ -6,27 +6,27 @@ import {
   TextInput,
   Animated,
   BackHandler,
-  Platform
+  Platform,
 } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Scaffold } from '@components';
-import { Apple, Insta, Google, Bounce } from '@svg';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {Scaffold} from '@components';
+import {Apple, Insta, Google, Bounce} from '@svg';
 import LinearGradient from 'react-native-linear-gradient';
-import { TouchableOpacity } from 'react-native';
-import { FONTSIZE, getHp, getWp, smallHitSlop } from '@utils';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import {TouchableOpacity} from 'react-native';
+import {FONTSIZE, getHp, getWp, smallHitSlop} from '@utils';
+import {connect, useSelector, useDispatch} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 import MobxStore from '../../../mobx';
 import VendorCategory from '../../Signup/Vendor/VendorCategory';
 import NameScreen from './NameScreen';
 import ForgotPassword from './ForgotPassword';
-import { BounceProLogo, BounceSplash } from '@svg';
+import {BounceProLogo, BounceSplash} from '@svg';
 import HostView from '../../MyEvents/HostView';
-import { Toast } from '@constants';
+import {Toast} from '@constants';
 import InstagramLogin from 'react-native-instagram-login';
-import { BlueEye, GreyEye } from '@svg';
-import { NotificationService } from '../../../app/services';
+import {BlueEye, GreyEye} from '@svg';
+import {NotificationService} from '../../../app/services';
 import VendorHomeDrawerNavigator from '../../../navigation/VendorNavigation/drawerNavigation';
 import UserHomeDrawerNavigator from '../../../navigation/UserNavigation/drawerNavigation';
 import Modal from 'react-native-modal';
@@ -35,28 +35,28 @@ function LoginScreen(props) {
   const [animated, setAnimated] = useState({
     ballAnimation: new Animated.Value(-25),
   });
-  const { navigation } = props;
+  const {navigation} = props;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [IGToken, setIGToken] = useState('');
   const [InstaLogin, setInstaLogin] = useState(true);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
-  const { vendorProfileData } = useSelector(state => state.mainExpenseByCategory);
+  const {vendorProfileData} = useSelector(state => state.mainExpenseByCategory);
   const [loader, setLoader] = useState(false);
   const isFocused = useIsFocused();
 
   const dispatch = useDispatch();
-  const { authStore } = MobxStore;
+  const {authStore} = MobxStore;
 
   const handleUserLogin = async () => {
     try {
       const loginResponse = await authStore.async.login(username, password);
-      if(authStore.isAuthenticated && loginResponse.success){
-        if(authStore?.userProfile?.user?.vendorType == 2){
-          navigation.navigate(UserHomeDrawerNavigator.routeName)
-        }else{
-          navigation.navigate(VendorHomeDrawerNavigator.routeName)
+      if (authStore.isAuthenticated && loginResponse.success) {
+        if (authStore?.userProfile?.user?.vendorType == 2) {
+          navigation.navigate(UserHomeDrawerNavigator.routeName);
+        } else {
+          navigation.navigate(VendorHomeDrawerNavigator.routeName);
         }
       }
     } catch (error) {
@@ -69,7 +69,6 @@ function LoginScreen(props) {
   };
 
   const setIgToken = data => {
-    console.log('Instagram Response --> ', data);
     setIGToken(data.access_token);
     setInstaLogin(false);
   };
@@ -94,9 +93,9 @@ function LoginScreen(props) {
       {!loader && (
         <KeyboardAwareScrollView
           showsVerticalScrollIndicator={false}
-          style={{ flex: 1, backgroundColor: '#FBFBFB' }}>
+          style={{flex: 1, backgroundColor: '#FBFBFB'}}>
           <View style={styles.container}>
-            <View style={{ alignItems: 'center', marginVertical: 50 }}>
+            <View style={{alignItems: 'center', marginVertical: 50}}>
               <BounceSplash
                 preserveAspectRatio="none"
                 height={170}
@@ -105,7 +104,7 @@ function LoginScreen(props) {
             </View>
 
             <Text style={styles.signStyle}>{'Sign In'}</Text>
-            <View style={[styles.textInput, { justifyContent: 'space-between' }]}>
+            <View style={[styles.textInput, {justifyContent: 'space-between'}]}>
               <TextInput
                 returnKeyType="done"
                 placeholderTextColor={'#999999'}
@@ -115,7 +114,7 @@ function LoginScreen(props) {
                   fontFamily: 'AvenirNext-Regular',
                   letterSpacing: 0.1,
                   width: '60%',
-                  color: '#000'
+                  color: '#000',
                 }}
                 onChangeText={value => {
                   if (value.length == 0) {
@@ -130,41 +129,48 @@ function LoginScreen(props) {
             {username.length >= 1 ? (
               <Animated.View style={[ballAnimation]}>
                 <View
-                  style={[styles.textInput, { justifyContent: 'space-between' }]}>
+                  style={[styles.textInput, {justifyContent: 'space-between'}]}>
                   <TextInput
                     placeholderTextColor={'#999999'}
                     returnKeyType="done"
                     placeholder="Password"
-
                     style={{
                       fontSize: FONTSIZE.Text16,
                       fontFamily: 'AvenirNext-Regular',
                       letterSpacing: 0.1,
                       width: '60%',
-                      color: '#000'
+                      color: '#000',
                     }}
                     // multiline={true}
                     onChangeText={value => setPassword(value)}
                     secureTextEntry={!passwordVisible}
                   />
-                  {passwordVisible ?
+                  {passwordVisible ? (
                     <TouchableOpacity
                       hitSlop={smallHitSlop}
-                      onPress={() => setPasswordVisible(!passwordVisible)} >
-                      <BlueEye height={getHp(20)} width={getWp(20)} style={{ marginRight: getWp(15) }} />
+                      onPress={() => setPasswordVisible(!passwordVisible)}>
+                      <BlueEye
+                        height={getHp(20)}
+                        width={getWp(20)}
+                        style={{marginRight: getWp(15)}}
+                      />
                     </TouchableOpacity>
-                    :
+                  ) : (
                     <TouchableOpacity
                       hitSlop={smallHitSlop}
-                      onPress={() => setPasswordVisible(!passwordVisible)} >
-                      <GreyEye height={getHp(20)} width={getWp(20)} style={{ marginRight: getWp(15) }} />
+                      onPress={() => setPasswordVisible(!passwordVisible)}>
+                      <GreyEye
+                        height={getHp(20)}
+                        width={getWp(20)}
+                        style={{marginRight: getWp(15)}}
+                      />
                     </TouchableOpacity>
-
-                  }
+                  )}
                 </View>
 
                 {
-                  <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)} >
+                  <TouchableOpacity
+                    onPress={() => setModalVisible(!isModalVisible)}>
                     <Text
                       style={[
                         {
@@ -180,15 +186,18 @@ function LoginScreen(props) {
                 }
 
                 <LinearGradient
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 1 }}
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 1}}
                   colors={['#1FAEF7', '#1FAEF7', '#AEE4FF']}
                   style={[
                     styles.linearGradient,
-                    { marginTop: 30, marginBottom: 15, width: '100%' },
+                    {marginTop: 30, marginBottom: 15, width: '100%'},
                   ]}>
                   <TouchableOpacity onPress={handleUserLogin}>
-                    <Text style={[styles.buttonText, { fontSize: FONTSIZE.Text16 }]}>{'Login'}</Text>
+                    <Text
+                      style={[styles.buttonText, {fontSize: FONTSIZE.Text16}]}>
+                      {'Login'}
+                    </Text>
                   </TouchableOpacity>
                 </LinearGradient>
               </Animated.View>
@@ -205,13 +214,12 @@ function LoginScreen(props) {
                 <Text style={styles.ThirdParty}>{'Instagram'}</Text>
               </TouchableOpacity>
 
-              {
-                Platform.OS == 'ios' &&
+              {Platform.OS == 'ios' && (
                 <TouchableOpacity style={[styles.Card, styles.boxShadow]}>
                   <Apple height={getHp(30)} width={getWp(30)} />
                   <Text style={styles.ThirdParty}>{'Apple'}</Text>
                 </TouchableOpacity>
-              }
+              )}
 
               <TouchableOpacity style={[styles.Card, styles.boxShadow]}>
                 <Google height={getHp(26)} width={getWp(26)} />
@@ -233,9 +241,13 @@ function LoginScreen(props) {
             </View>
 
             <TouchableOpacity
-              style={[styles.linearGradient, styles.boxShadow, { marginTop: 20 }]}
+              style={[styles.linearGradient, styles.boxShadow, {marginTop: 20}]}
               onPress={() => navigation.navigate(NameScreen.routeName)}>
-              <Text style={[styles.buttonText, { letterSpacing: 0.5, color: '#1FAEF7' }]}>
+              <Text
+                style={[
+                  styles.buttonText,
+                  {letterSpacing: 0.5, color: '#1FAEF7'},
+                ]}>
                 {'User Sign Up'}
               </Text>
             </TouchableOpacity>
@@ -245,23 +257,27 @@ function LoginScreen(props) {
               onPress={() =>
                 props.navigation.navigate(VendorCategory.routeName)
               }>
-              <Text style={[styles.buttonText, { letterSpacing: 0.5, color: '#F8A41E' }]}>
+              <Text
+                style={[
+                  styles.buttonText,
+                  {letterSpacing: 0.5, color: '#F8A41E'},
+                ]}>
                 {'Vendor Sign Up'}
               </Text>
             </TouchableOpacity>
           </View>
 
-          <Modal isVisible={isModalVisible}
-            style={{ backgroundColor: '#fff', }}
+          <Modal
+            isVisible={isModalVisible}
+            style={{backgroundColor: '#fff'}}
             presentationStyle={'formSheet'}
-          // animationIn={'bounceInLeft'}
+            // animationIn={'bounceInLeft'}
           >
             <ForgotPassword
               onBackPress={() => setModalVisible(!isModalVisible)}
               {...props}
             />
           </Modal>
-
         </KeyboardAwareScrollView>
       )}
       {/* <InstagramLogin
@@ -282,7 +298,7 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   boxShadow: {
     shadowColor: '#EFEFEF',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 5,
     shadowRadius: 10,
     elevation: 1,

@@ -702,7 +702,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bounce.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bounce.apps;
 				PRODUCT_NAME = bounce;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -734,7 +734,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bounce.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bounce.apps;
 				PRODUCT_NAME = bounce;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

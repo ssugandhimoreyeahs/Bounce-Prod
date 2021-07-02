@@ -91,6 +91,7 @@ function CustomDrawer({navigation}) {
     {
       name: 'Log Out',
       onPress: async () => {
+        navigation.closeDrawer();
         await AccountService.removeAccount(authStore.userProfile.user.id);
       },
     },

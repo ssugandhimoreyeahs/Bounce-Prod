@@ -6,6 +6,12 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 AntDesign.loadFont();
 const TicketComponent = props => {
   const { data = {}, onChangeText = () => { }, onTicketDelete = () => { } } = props;
+
+  const showValue = () => {
+    let showData = !data.price ? '0' : data?.price?.toString();
+    let returnData = `$ ${showData}`;
+    return !data.price ? returnData : showData;
+  }
   return (
     <View
       style={{
@@ -58,7 +64,7 @@ const TicketComponent = props => {
             styles.headerTitle,
             { fontSize: FONTSIZE.Text18, marginRight: 5 },
           ]}>
-          {'Price'}
+          {'Price ($)'}
         </Text>
         <TextInput
           keyboardType={'numeric'}

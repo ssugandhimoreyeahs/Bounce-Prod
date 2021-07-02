@@ -19,8 +19,6 @@ import PurchaseTickets from '../../Screens/BounceUsers/EventPage/Public/Purchase
 import HostView from '../../Screens/MyEvents/HostView';
 import Featuring from '../../Screens/BounceUsers/EventPage/Public/Featuring'
 import PartyRental from '../../Screens/BounceVendors/PartyRentals'
-import EmailScreen from '../../Screens/BounceVendors/Onboarding/EmailScreen'
-import NameScreen from '../../Screens/BounceVendors/Onboarding/NameScreen'
 import AuthNavigation from '../AuthNavigation';
 
 import InviteFriends from '../../Screens/BounceVendors/PlanParty/InviteFriends'
@@ -71,10 +69,6 @@ class UserNavigation {
           name={HostProfile.routeName}
           component={HostProfile}
         />
-        {/* <UserRootStack.Screen
-          name={NameScreen.routeName}
-          component={NameScreen}
-        /> */}
         <UserRootStack.Screen
           name={AccountSetting.routeName}
           component={AccountSetting}

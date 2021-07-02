@@ -1,4 +1,4 @@
-package com.bounce;
+package com.bounce.apps;
 
 import android.app.Application;
 import android.content.Context;

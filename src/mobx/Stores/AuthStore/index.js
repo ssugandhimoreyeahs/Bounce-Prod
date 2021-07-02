@@ -39,7 +39,7 @@ class AuthStore {
     let nextUserProfile = Object.assign({}, this.userProfile);
     nextUserProfile.user = user;
     this.userProfile = nextUserProfile;
-    this.addAccount(nextUserProfile);
+    this.updateAccount(nextUserProfile);
   };
   @action
   onUserRegistration = body => {
@@ -57,6 +57,12 @@ class AuthStore {
   @action
   addAccount = async (user) => {
     await AccountService.addNewAccount(user);
+    this.AllAccounts = await AccountService.getAllAccounts();
+  }
+
+  @action
+  updateAccount = async (user) => {
+    await AccountService.updateAccount(user);
     this.AllAccounts = await AccountService.getAllAccounts();
   }
 

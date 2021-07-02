@@ -46,11 +46,7 @@ import {
   Snapchat,
   BlackPerson,
 } from '@svg';
-import {
-  AccountService,
-  PartyService,
-  NotificationService,
-} from '../../../app/services';
+import {AccountService, PartyService} from '../../../app/services';
 import CreateInvitation from '../../../Screens/BounceVendors/PlanParty/CreateInvitation';
 import {observer} from 'mobx-react';
 import {FONTSIZE, getHp, getWp} from '@utils';
@@ -78,8 +74,6 @@ function UserFriendsProfile(props) {
   const imageArray = [DJ, DJ1, DJ2];
   const [state, setState] = useState(0);
   const [getSpotify, setSpotifyData] = useState([]);
-  console.log('After Login Data of USER -->', JSON.stringify(userinfo));
-  // console.log("PROPS", props);
 
   const {
     friends,
@@ -96,10 +90,9 @@ function UserFriendsProfile(props) {
     profileImage = {},
     age,
   } = userinfo?.user;
-  //console.log("userinfo ----> ", authStore.userProfile)
 
   var gapi = window;
-  console.log('WINDOW ', gapi);
+  // console.log("WINDOW ", gapi)
   /* 
     Update with your own Client Id and Api key 
   */
@@ -115,7 +108,7 @@ function UserFriendsProfile(props) {
 
   const handleClick = () => {
     gapi.load('client:auth2', () => {
-      console.log('loaded client');
+      // console.log('loaded client')
 
       gapi.client.init({
         apiKey: API_KEY,
@@ -222,16 +215,6 @@ function UserFriendsProfile(props) {
     );
   };
 
-  useEffect(() => {
-    //fetchProfile();
-  }, []);
-
-  // const fetchProfile = async () => {
-  //   const SERVER_RESPONSE = await postData()
-  //   console.log("Spotify_all_playlist", SERVER_RESPONSE);
-  //   setSpotifyData(SERVER_RESPONSE)
-  // };
-
   const handleImage = async () => {
     {
       vendorType !== 'Bartender' &&
@@ -303,82 +286,6 @@ function UserFriendsProfile(props) {
     );
   };
 
-  // return (<Scaffold
-  //   statusBarStyle={{ backgroundColor: '#FFFFFF' }}
-  // >
-  //   <ScrollView
-  //     showsVerticalScrollIndicator={false}
-  //     keyboardShouldPersistTaps={"always"}
-  //     contentContainerStyle={{ flexGrow: 1 }}
-  //     style={{
-  //       backgroundColor: '#FBFBFB',
-  //     }}>
-  //     <Spinner visible={loader} color={"#1FAEF7"} />
-  //     {!loader && (
-  //       <View>
-  //         <Header
-  //           AllAccounts = {authStore.AllAccounts || []}
-  //           leftDropdown={
-  //             username !== null ? `@${username !== null ? username : ""}` : ""
-  //           }
-  //           scanner={<Scanner height={25} width={25} />}
-  //           share={<BlackMenubar height={25} width={25} />}
-  //           onPressScanner={() => props.navigation.navigate(QRcode.routeName)}
-  //           onPress={() => {
-  //             props.navigation.openDrawer()
-  //           }}
-  //           headerBackColor={{ backgroundColor: "#FFFFFF" }}
-  //           {...props}
-  //         />
-  //         <View style={styles.subContainer}>
-  //           <View
-  //             style={{
-  //               flexDirection: "row",
-  //               alignItems: "center",
-  //               paddingVertical: 5,
-  //             }}
-  //           >
-  //             <Avatar
-  //               source={{ uri: `${profileImage?.filePath}` }}
-  //               size="large"
-  //               rounded
-  //             />
-
-  //             <View style={{ paddingLeft: 15 }}>
-  //               <Text
-  //                 style={{
-  //                   color: "#000",
-  //                   fontSize: FONTSIZE.Text20,
-  //                   fontFamily: "AvenirNext-Medium",
-  //                   marginBottom: getHp(5)
-  //                 }}
-  //               >
-  //                 {fullName}
-  //               </Text>
-
-  //               <View style={[styles.flex]}>
-  //                 {
-  //                   <>
-  //                     <Text style={styles.cityAll}>
-  //                       {age}
-  //                     </Text>
-  //                     <View style={styles.dot} />
-  //                   </>
-  //                 }
-
-  //                 {
-
-  //                   (!(city == '' || city == 'null' || city == null) &&
-  //                     <>
-  //                       <Text style={styles.cityAll}>
-  //                         {city.split(",", 1)}
-  //                         {/* {city} */}
-  //                       </Text>
-  //                       <View style={styles.dot} />
-  //                     </>)
-
-  //                 }
-
   return (
     <Scaffold statusBarStyle={{backgroundColor: '#FFFFFF'}}>
       <ScrollView
@@ -392,7 +299,7 @@ function UserFriendsProfile(props) {
         {!loader && (
           <View>
             <Header
-              AllAccounts={authStore.AllAccounts || []}
+              AllAccounts={authStore.AllAccounts}
               leftDropdown={
                 username !== null ? `@${username !== null ? username : ''}` : ''
               }
@@ -437,18 +344,15 @@ function UserFriendsProfile(props) {
                       </>
                     }
 
-                    {city !== null
-                      ? city !== '' &&
-                        city !== 'null' && (
-                          <>
-                            <Text style={styles.cityAll}>
-                              {city.split(',', 1)}
-                              {/* {city} */}
-                            </Text>
-                            <View style={styles.dot} />
-                          </>
-                        )
-                      : null}
+                    {!(city == '' || city == 'null' || city == null) && (
+                      <>
+                        <Text style={styles.cityAll}>
+                          {city.split(',', 1)}
+                          {/* {city} */}
+                        </Text>
+                        <View style={styles.dot} />
+                      </>
+                    )}
 
                     {!(
                       profession == null ||
@@ -623,56 +527,6 @@ function UserFriendsProfile(props) {
                 </TouchableOpacity>
               </LinearGradient>
 
-              {about !== null
-                ? about !== '' &&
-                  about !== 'null' && (
-                    <>
-                      <Text
-                        style={[
-                          styles.textStyle,
-                          {
-                            marginTop: getHp(15),
-                            marginBottom: 10,
-                            lineHeight: 22,
-                            fontSize: FONTSIZE.Text16,
-                          },
-                        ]}>
-                        {about}
-                      </Text>
-                    </>
-                  )
-                : null}
-
-              <LinearGradient
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
-                colors={['#16B0FE', '#3FBEFF']}
-                style={[
-                  styles.linearGradient,
-                  {
-                    width: '100%',
-                    height: getHp(38),
-                    borderRadius: 13,
-                    marginTop: 10,
-                    marginBottom: 10,
-                  },
-                ]}>
-                <TouchableOpacity
-                  style={[
-                    styles.fullTouch,
-                    {
-                      flexDirection: 'row',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    },
-                  ]}>
-                  <Text style={[styles.buttonText, {marginRight: 15}]}>
-                    {'Bounce with Friends'}
-                  </Text>
-                  <Right name="angle-right" color="#FFFFFF" size={25} />
-                </TouchableOpacity>
-              </LinearGradient>
-
               {/* <TextInput
                 multiline
                 numberOfLines={5}
@@ -758,143 +612,90 @@ function UserFriendsProfile(props) {
 
               <View
                 style={{
-                  height: 1,
                   backgroundColor: '#EEEEEE',
-                  marginTop: 10,
-                  marginBottom: 15,
+                  height: 1,
+                  marginVertical: 15,
                 }}
               />
 
-              <View style={{paddingHorizontal: 10}}>
-                <LinearGradient
-                  start={{x: 0, y: 0}}
-                  end={{x: 1, y: 1}}
-                  colors={['#16B0FE', '#3FBEFF']}
-                  style={[
-                    styles.linearGradient,
-                    {
-                      height: getHp(38),
-                      borderRadius: 13,
-                    },
-                  ]}>
-                  <TouchableOpacity
-                    style={[styles.fullTouch, {flexDirection: 'row'}]}
-                    onPress={() =>
-                      props.navigation.navigate(FriendsPage.routeName)
-                    }>
-                    <WhitePerson
-                      height={25}
-                      width={19}
-                      style={{marginBottom: -5}}
-                    />
-                    <Text
-                      style={[
-                        styles.buttonText,
-                        {
-                          marginLeft: 20,
-                          fontFamily: 'AvenirNext-Medium',
-                          color: '#FFFFFF',
-                        },
-                      ]}>
-                      {'Find Friends'}
-                    </Text>
-                  </TouchableOpacity>
-                </LinearGradient>
-
-                <View
-                  style={{
-                    backgroundColor: '#EEEEEE',
-                    height: 1,
-                    marginVertical: 15,
-                  }}
+              {/* Social Media Section Start */}
+              {/* 1st */}
+              <View style={styles.flex}>
+                <TouchableOpacity
+                  style={[styles.socialButton, styles.shadowStyle]}>
+                  <View style={styles.flex}>
+                    <Insta height={getHp(30)} width={getHp(30)} />
+                    <Text style={styles.socialText}>{'Instagram'}</Text>
+                  </View>
+                  <Text style={[styles.headerTitle, styles.connectStyle]}>
+                    {'Connect'}
+                  </Text>
+                </TouchableOpacity>
+                <GreyCross
+                  height={getHp(15)}
+                  width={getWp(15)}
+                  style={{marginLeft: 20}}
                 />
+              </View>
 
-                {/* Social Media Section Start */}
-                {/* 1st */}
+              {/* 2nd */}
+              <View style={styles.flex}>
+                <TouchableOpacity
+                  style={[styles.socialButton, styles.shadowStyle]}>
+                  <View style={styles.flex}>
+                    <Spotify height={getHp(30)} width={getHp(30)} />
+                    <Text style={styles.socialText}>{'Spotify'}</Text>
+                  </View>
+                  <Text style={[styles.headerTitle, styles.connectStyle]}>
+                    {'Connect'}
+                  </Text>
+                </TouchableOpacity>
+                <GreyCross
+                  height={getHp(15)}
+                  width={getWp(15)}
+                  style={{marginLeft: 20}}
+                />
+              </View>
+
+              {/* 3rd */}
+              <View style={[styles.flex, {marginBottom: getHp(30)}]}>
+                <TouchableOpacity
+                  style={[styles.socialButton, styles.shadowStyle]}>
+                  <View style={styles.flex}>
+                    <AppleMusic height={getHp(30)} width={getHp(30)} />
+                    <Text style={styles.socialText}>{'Apple Music'}</Text>
+                  </View>
+                  <Text style={[styles.headerTitle, styles.connectStyle]}>
+                    {'Connect'}
+                  </Text>
+                </TouchableOpacity>
+                <GreyCross
+                  height={getHp(15)}
+                  width={getWp(15)}
+                  style={{marginLeft: 20}}
+                />
+              </View>
+
+              {/* 4th */}
+              {(tiktokUsername == null || tiktokUsername == '') && (
                 <View style={styles.flex}>
                   <TouchableOpacity
-                    style={[styles.socialButton, styles.shadowStyle]}>
-                    <View style={styles.flex}>
-                      <Insta height={getHp(30)} width={getHp(30)} />
-                      <Text style={styles.socialText}>{'Instagram'}</Text>
-                    </View>
-                    <Text
-                      style={[
-                        styles.headerTitle,
-                        {
-                          color: '#1FAEF7',
-                          fontFamily: 'AvenirNext-Medium',
-                          marginRight: getWp(10),
-                        },
-                      ]}>
-                      {'Connect'}
-                    </Text>
-                  </TouchableOpacity>
-                  <GreyCross
-                    height={getHp(15)}
-                    width={getWp(15)}
-                    style={{marginLeft: 20}}
-                  />
-                </View>
-
-                {/* 2nd */}
-                <View style={styles.flex}>
-                  <TouchableOpacity
-                    style={[styles.socialButton, styles.shadowStyle]}>
-                    <View style={styles.flex}>
-                      <Spotify height={getHp(30)} width={getHp(30)} />
-                      <Text style={styles.socialText}>{'Spotify'}</Text>
-                    </View>
-                    <Text style={[styles.headerTitle, styles.connectStyle]}>
-                      {'Connect'}
-                    </Text>
-                  </TouchableOpacity>
-                  <GreyCross
-                    height={getHp(15)}
-                    width={getWp(15)}
-                    style={{marginLeft: 20}}
-                  />
-                </View>
-
-                {/* 3rd */}
-                <View style={[styles.flex, {marginBottom: getHp(30)}]}>
-                  <TouchableOpacity
-                    style={[styles.socialButton, styles.shadowStyle]}>
-                    <View style={styles.flex}>
-                      <AppleMusic height={getHp(30)} width={getHp(30)} />
-                      <Text style={styles.socialText}>{'Apple Music'}</Text>
-                    </View>
-                    <Text
-                      style={[
-                        styles.headerTitle,
-                        {
-                          color: '#1FAEF7',
-                          fontFamily: 'AvenirNext-Medium',
-                          marginRight: getWp(10),
-                        },
-                      ]}>
-                      {'Connect'}
-                    </Text>
-                  </TouchableOpacity>
-                  <GreyCross
-                    height={getHp(15)}
-                    width={getWp(15)}
-                    style={{marginLeft: 20}}
-                  />
-                </View>
-
-                {/* 4th */}
-                <View style={styles.flex}>
-                  <TouchableOpacity
-                    style={[styles.headerTitle, styles.connectStyle]}>
+                    style={[
+                      styles.socialButton,
+                      {
+                        borderWidth: 1,
+                        borderColor: '#DDDDDD',
+                        elevation: 0,
+                      },
+                    ]}>
                     <View style={styles.flex}>
                       <Tiktok height={getHp(30)} width={getHp(30)} />
                       <TextInput
                         placeholder={`@tiktok`}
                         placeholderTextColor={'#999999'}
-                        onChangeText={value => setTiktok(value)}
+                        // onChangeText={value => setTiktok(value)}
                         style={[styles.socialText, styles.TiktokStyle]}
-                        value={tiktok}
+                        // value={tiktok}
                       />
                     </View>
                   </TouchableOpacity>
@@ -904,12 +705,30 @@ function UserFriendsProfile(props) {
                     style={{marginLeft: 20}}
                   />
                 </View>
+              )}
 
-                {/* 5th */}
+              {/* 5th */}
+              {(snapchatUsername == null || snapchatUsername == '') && (
                 <View style={styles.flex}>
                   <TouchableOpacity
-                    style={[styles.headerTitle, styles.connectStyle]}>
-                    <Text>{'Connect'}</Text>
+                    style={[
+                      styles.socialButton,
+                      {
+                        borderWidth: 1,
+                        borderColor: '#DDDDDD',
+                        elevation: 0,
+                      },
+                    ]}>
+                    <View style={styles.flex}>
+                      <Snapchat height={getHp(30)} width={getHp(30)} />
+                      <TextInput
+                        placeholder={`@snapchat`}
+                        placeholderTextColor={'#999999'}
+                        // onChangeText={value => setSnapchat(value)}
+                        style={[styles.socialText, styles.TiktokStyle]}
+                        // value={snapchat == '' ? '' : snapchat}
+                      />
+                    </View>
                   </TouchableOpacity>
                   <GreyCross
                     height={getHp(15)}
@@ -917,142 +736,81 @@ function UserFriendsProfile(props) {
                     style={{marginLeft: 20}}
                   />
                 </View>
+              )}
 
-                {/* 4th */}
-                {(tiktokUsername == null || tiktokUsername == '') && (
-                  <View style={styles.flex}>
-                    <TouchableOpacity
-                      style={[
-                        styles.socialButton,
-                        {
-                          borderWidth: 1,
-                          borderColor: '#DDDDDD',
-                          elevation: 0,
-                        },
-                      ]}>
-                      <View style={styles.flex}>
-                        <Tiktok height={getHp(30)} width={getHp(30)} />
-                        <TextInput
-                          placeholder={`@tiktok`}
-                          placeholderTextColor={'#999999'}
-                          // onChangeText={value => setTiktok(value)}
-                          style={[styles.socialText, styles.TiktokStyle]}
-                          // value={tiktok}
-                        />
-                      </View>
-                    </TouchableOpacity>
-                    <GreyCross
-                      height={getHp(15)}
-                      width={getWp(15)}
-                      style={{marginLeft: 20}}
-                    />
-                  </View>
-                )}
+              {/* 6th */}
+              {(twitterUsername == null || twitterUsername == '') && (
+                <View style={styles.flex}>
+                  <TouchableOpacity
+                    style={[
+                      styles.socialButton,
+                      {
+                        borderWidth: 1,
+                        borderColor: '#DDDDDD',
+                        elevation: 0,
+                      },
+                    ]}>
+                    <View style={styles.flex}>
+                      <Twitter height={getHp(30)} width={getHp(30)} />
+                      <TextInput
+                        placeholder={`@twitter`}
+                        placeholderTextColor={'#999999'}
+                        // onChangeText={value => setTwitter(value)}
+                        style={[styles.socialText, styles.TiktokStyle]}
+                        // value={twitter}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                  <GreyCross
+                    height={getHp(15)}
+                    width={getWp(15)}
+                    style={{marginLeft: 20}}
+                  />
+                </View>
+              )}
 
-                {/* 5th */}
-                {(snapchatUsername == null || snapchatUsername == '') && (
-                  <View style={styles.flex}>
-                    <TouchableOpacity
-                      style={[
-                        styles.socialButton,
-                        {
-                          borderWidth: 1,
-                          borderColor: '#DDDDDD',
-                          elevation: 0,
-                        },
-                      ]}>
-                      <View style={styles.flex}>
-                        <Snapchat height={getHp(30)} width={getHp(30)} />
-                        <TextInput
-                          placeholder={`@snapchat`}
-                          placeholderTextColor={'#999999'}
-                          // onChangeText={value => setSnapchat(value)}
-                          style={[styles.socialText, styles.TiktokStyle]}
-                          // value={snapchat == '' ? '' : snapchat}
-                        />
-                      </View>
-                    </TouchableOpacity>
-                    <GreyCross
-                      height={getHp(15)}
-                      width={getWp(15)}
-                      style={{marginLeft: 20}}
-                    />
-                  </View>
-                )}
+              {/* 7th */}
+              {(linkedInUsername == null || linkedInUsername == '') && (
+                <View style={styles.flex}>
+                  <TouchableOpacity
+                    style={[
+                      styles.socialButton,
+                      {
+                        borderWidth: 1,
+                        borderColor: '#DDDDDD',
+                        elevation: 0,
+                      },
+                    ]}>
+                    <View style={styles.flex}>
+                      <Linkedin height={getHp(30)} width={getHp(30)} />
+                      <TextInput
+                        placeholder={`@linkedin `}
+                        placeholderTextColor={'#999999'}
+                        // onChangeText={value => setTwitter(value)}
+                        style={[styles.socialText, styles.TiktokStyle]}
+                        // value={twitter}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                  <GreyCross
+                    height={getHp(15)}
+                    width={getWp(15)}
+                    style={{marginLeft: 20}}
+                  />
+                </View>
+              )}
 
-                {/* 6th */}
-                {(twitterUsername == null || twitterUsername == '') && (
-                  <View style={styles.flex}>
-                    <TouchableOpacity
-                      style={[
-                        styles.socialButton,
-                        {
-                          borderWidth: 1,
-                          borderColor: '#DDDDDD',
-                          elevation: 0,
-                        },
-                      ]}>
-                      <View style={styles.flex}>
-                        <Twitter height={getHp(30)} width={getHp(30)} />
-                        <TextInput
-                          placeholder={`@twitter`}
-                          placeholderTextColor={'#999999'}
-                          // onChangeText={value => setTwitter(value)}
-                          style={[styles.socialText, styles.TiktokStyle]}
-                          // value={twitter}
-                        />
-                      </View>
-                    </TouchableOpacity>
-                    <GreyCross
-                      height={getHp(15)}
-                      width={getWp(15)}
-                      style={{marginLeft: 20}}
-                    />
-                  </View>
-                )}
+              {/* Social Media Section */}
 
-                {/* 7th */}
-                {(linkedInUsername == null || linkedInUsername == '') && (
-                  <View style={styles.flex}>
-                    <TouchableOpacity
-                      style={[
-                        styles.socialButton,
-                        {
-                          borderWidth: 1,
-                          borderColor: '#DDDDDD',
-                          elevation: 0,
-                        },
-                      ]}>
-                      <View style={styles.flex}>
-                        <Linkedin height={getHp(30)} width={getHp(30)} />
-                        <TextInput
-                          placeholder={`@linkedin `}
-                          placeholderTextColor={'#999999'}
-                          // onChangeText={value => setTwitter(value)}
-                          style={[styles.socialText, styles.TiktokStyle]}
-                          // value={twitter}
-                        />
-                      </View>
-                    </TouchableOpacity>
-                    <GreyCross
-                      height={getHp(15)}
-                      width={getWp(15)}
-                      style={{marginLeft: 20}}
-                    />
-                  </View>
-                )}
-
-                {/* Social Media Section */}
-
-                {/* <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} /> */}
-              </View>
-              {/* <View style={{
+              {/* <View style={{ height: 1, backgroundColor: '#EEEEEE', marginVertical: 10 }} /> */}
+            </View>
+            {/* <View style={{
             height: 1, backgroundColor: '#EEEEEE', marginTop: 10,
             marginBottom: 25
           }} /> */}
 
-              {/*Start*** Second Gallery Block of Instagram */}
-              {/* <View style={[styles.flex, {
+            {/*Start*** Second Gallery Block of Instagram */}
+            {/* <View style={[styles.flex, {
             margin: 10,
           }]}>
             <InstaNew height={20} width={14} />
@@ -1061,45 +819,45 @@ function UserFriendsProfile(props) {
             </Text>
           </View>
           {handleCarousel("Instagram")} */}
-              {/*END*** Second Gallery Block of Instagram */}
+            {/*END*** Second Gallery Block of Instagram */}
 
-              {/* <View style={{
+            {/* <View style={{
             height: 1, backgroundColor: '#EEEEEE', marginTop: 10,
             marginBottom: 25
           }} /> */}
 
-              <View
-                style={[
-                  styles.flex,
-                  {
-                    paddingHorizontal: 10,
-                    marginBottom: getHp(60),
-                  },
-                ]}>
-                {/* <FavouriteMusic height={17} width={10} />
+            <View
+              style={[
+                styles.flex,
+                {
+                  paddingHorizontal: 10,
+                  marginBottom: getHp(60),
+                },
+              ]}>
+              {/* <FavouriteMusic height={17} width={10} />
             <Text style={styles.InstaText} >
               {"Favourite Music"}
             </Text> */}
-              </View>
-
-              <View style={{paddingVertical: 10}} />
-
-              {/* <View> */}
-
-              {/* <ScrollView horizontal >
-                    {getSpotify.length == 0 ?
-                      null :
-                      getSpotify.items.map((items) => {
-                        // console.log("THIS IS SINGLE ITEM:", items)
-                        return <RenderSpotify items={items} />
-                      })
-                    }
-                  </ScrollView> */}
-              {/* </View> */}
             </View>
+
+            <View style={{paddingVertical: 10}} />
+
+            {/* <View> */}
+
+            {/* <ScrollView horizontal >
+                  {getSpotify.length == 0 ?
+                    null :
+                    getSpotify.items.map((items) => {
+                      // console.log("THIS IS SINGLE ITEM:", items)
+                      return <RenderSpotify items={items} />
+                    })
+                  }
+                </ScrollView> */}
+            {/* </View> */}
           </View>
         )}
       </ScrollView>
+      {/* </View> */}
     </Scaffold>
   );
 }

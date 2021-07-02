@@ -138,6 +138,7 @@ export default function UserCustomDrawer(props) {
     {
       name: 'Log Out',
       onPress: async () => {
+        props.navigation.closeDrawer();
         await AccountService.removeAccount(authStore.userProfile.user.id)
       },
     },

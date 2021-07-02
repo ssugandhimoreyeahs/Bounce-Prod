@@ -9,6 +9,7 @@ class PartyService {
       const formData = CreateFormData.objectToFormData(partyFields);
       let endPoint = ApiClient.endPoints.party;
       if (partyID) {
+        formData.append('isTagsUpdated', true);
         endPoint = endPoint.concat('/' + partyID);
       }
       console.log(

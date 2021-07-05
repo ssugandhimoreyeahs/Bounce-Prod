@@ -73,6 +73,10 @@ function LoginScreen(props) {
     setInstaLogin(false);
   };
 
+  useEffect(() => {
+    console.log("FCM Token ---->",NotificationService.getFcmToken())
+  }, []);
+
   const animateBall = () => {
     Animated.timing(animated.ballAnimation, {
       toValue: 0,

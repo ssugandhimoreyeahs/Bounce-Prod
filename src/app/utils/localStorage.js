@@ -7,6 +7,7 @@ const LOCAL_STORAGE_TOKEN = {
   USERDATA: "USERDATA",
   THEME: "THEME"
 };
+
 class LocalStorage {
   //AUTH TOKEN
   static storeToken = async (token) => {
@@ -18,6 +19,7 @@ class LocalStorage {
   static clearToken = async () => {
     await AsyncStorage.clear();
   };
+
   static onSignUp = async (token, userDetails) => {
     const items = [
       [LOCAL_STORAGE_TOKEN.ISAUTHENTICATED, 'true'], 
@@ -59,6 +61,16 @@ class LocalStorage {
       }catch(error) {
         return Promise.reject(error);
       }
+  }
+
+  static onSelectUser = async (User_Data) => {
+    const items = [
+      [LOCAL_STORAGE_TOKEN.ISAUTHENTICATED, 'true'], 
+      [LOCAL_STORAGE_TOKEN.TOKEN, User_Data.token],
+      [LOCAL_STORAGE_TOKEN.USERDATA, JSON.stringify(User_Data.user)]
+    ]
+    return await AsyncStorage.multiSet(items, () => { 
+    });
   }
 }
 

@@ -1,27 +1,39 @@
 import React, { useState } from "react";
 import { View, Switch, StyleSheet, Platform } from "react-native";
 import ToggleSwitch from 'toggle-switch-react-native'
+import SwitchToggle from "react-native-switch-toggle";
 
-export default function Toggle() {
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+export default function Toggle({ switchOn, onChange }) {
+    console.log("switchOn", switchOn);
 
     return (
-        // <View style={styles.container}>
-
-        <ToggleSwitch
-
-            isOn={0}
-            // trackColor={{ true: '#7ab8e1', false: Platform.OS=='android'?'#d3d3d3':'#fbfbfb'  }}
-            onColor="#20AEF7"
-            // trackColor={{true: 'red', false: 'grey'}}
-            offColor="#EFF2F3"
-            // label="Example label"
-            // labelStyle={{ color: "black", fontWeight: "900" }}
-            size='medium'
-            onToggle={isOn => console.log("changed to : ", isOn)}
+        // <ToggleSwitch
+        //     isOn={switchOn}
+        //     onColor="#20AEF7"
+        //     offColor="#EFF2F3"
+        //     size='large'
+        //     onToggle={onChange}
+        // />
+        <SwitchToggle
+            switchOn={!switchOn}
+            onPress={onChange}
+            circleColorOff='#fff'
+            circleColorOn='#fff'
+            backgroundColorOn="#20AEF7"
+            backgroundColorOff="#EFF2F3"
+            containerStyle={{
+                width: 59,
+                height: 36,
+                borderRadius: 25,
+                padding: 3,
+            }}
+            circleStyle={{
+                width: 30,
+                height: 30,
+                borderRadius: 20,
+            }}
         />
-        // </View>
     );
 }
 

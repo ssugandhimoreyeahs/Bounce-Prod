@@ -36,6 +36,7 @@ export default function BirthDayScreen(props) {
     // console.log("Birthday Page : USERNAME FROM REDUX -->", reducerData)
 
     const handleSubmit = async () => {
+        console.log("BIRTHDAY on Birthday screen",birthday);
         if (birthday != '') {
             navigation.navigate(ProfilePic.routeName, {
                 birthday: birthday,

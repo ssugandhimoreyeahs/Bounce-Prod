@@ -48,19 +48,6 @@ import UploadInventoryScreen from '../UploadInventory';
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
 
-
-const DATA = [
-  {
-    id: '0',
-    icon: Girl,
-    messageName: 'Lindas',
-  },
-  {
-    id: '1',
-    icon: Girl,
-    messageName: 'Fernandez',
-  },
-];
 var imgTemp = [];
 
 
@@ -79,7 +66,13 @@ function DjProfile(props) {
   const dispatch = useDispatch();
   const token = userProfile?.token;
 
-  useEffect(() => { }, []);
+  useEffect(() => {
+    setAccounts();
+  }, [MobxStore.authStore.AllAccounts]);
+
+  const setAccounts = async () =>{
+    await MobxStore.authStore.setAllAccounts();
+  }
 
   if (userProfile?.user == undefined) {
     return null;
@@ -108,8 +101,6 @@ function DjProfile(props) {
     hourlyRate,
     inventory,
   } = vendor;
-  console.log("hourlyRate", hourlyRate)
-  console.log("vendorCategoryName", vendorCategoryName)
 
   const handleCarousel = () => {
     return (
@@ -215,8 +206,8 @@ function DjProfile(props) {
   const handleImage = async () => {
     // console.log("called handle images");
     {
-      vendorCategoryName !== 'Bartenders' &&
-        vendorCategoryName !== 'Catering' &&
+      vendorCategoryName !== 'Drinks' &&
+        vendorCategoryName !== 'Food' &&
         vendorCategoryName !== 'Event Rentals'
         ? ImagePicker.openPicker({
           width: 300,
@@ -273,15 +264,16 @@ function DjProfile(props) {
         <ScrollView style={[styles.container]}
           contentContainerStyle={{ flexGrow: 1 }}>
           <Header
+            AllAccounts = {MobxStore.authStore.AllAccounts || []}
             leftDropdown={
               username !== null ? `@${username !== null ? username : ''}` : ''
             }
-            DropdownAccounts={DATA}
             share={<BlackMenubar height={25} width={25} />}
             onPress={() => {
               props.navigation.openDrawer();
             }}
             headerBackColor={{ backgroundColor: '#fff' }}
+            {...props}
           />
 
           <View style={styles.subContainer}>
@@ -349,8 +341,8 @@ function DjProfile(props) {
                         }}>
                         <DollarOnlyWhite height={18} width={18} />
                       </View>
-                      {vendorCategoryName == 'DJ' ||
-                        vendorCategoryName == 'Videographer' ? (
+                      {vendorCategoryName == 'Music' ||
+                        vendorCategoryName == 'Photo & Video' ? (
                           <>
                             <Text style={styles.hourStyle}>
                               {hourlyRate} / hour
@@ -365,7 +357,7 @@ function DjProfile(props) {
                             (Base Package)
                           </Text>
                           </>
-                        ) : vendorCategoryName == 'Catering' ? (
+                        ) : vendorCategoryName == 'Food' ? (
                           <>
                             <Text style={styles.hourStyle}>
                               {hourlyRate} / guest
@@ -544,8 +536,8 @@ function DjProfile(props) {
             {/* pdf section */}
             {
               <>
-                {(vendorCategoryName == 'Bartenders' ||
-                  vendorCategoryName == 'Catering' ||
+                {(vendorCategoryName == 'Drinks' ||
+                  vendorCategoryName == 'Food' ||
                   vendorCategoryName == 'Event Rentals') &&
                   // (getPdf != null || getPdf.length != 0) ||
                   menu != null ? (
@@ -569,8 +561,8 @@ function DjProfile(props) {
                         </Text>
                       </TouchableOpacity>
                     </>
-                  ) : (vendorCategoryName == 'Bartenders' ||
-                    vendorCategoryName == 'Catering' ||
+                  ) : (vendorCategoryName == 'Drinks' ||
+                    vendorCategoryName == 'Food' ||
                     vendorCategoryName == 'Event Rentals') &&
                     // (getPdf != null || getPdf.length != 0) ||
                     menu == null ? (
@@ -609,22 +601,22 @@ function DjProfile(props) {
                       return item.label + comma;
                     })}
                   </>
-                ) : vendorCategoryName == 'DJ' ? (
+                ) : vendorCategoryName == 'Music' ? (
                   <>
                     {genres.map(item => {
                       return `${item.label}, `;
                     })}
                   </>
-                ) : vendorCategoryName == 'Catering' ? (
+                ) : vendorCategoryName == 'Food' ? (
                   cuisines
                 ) : null
               }
               icon={
                 vendorCategoryName == 'Security' ? (
                   <Certified height={getHp(60)} width={getWp(60)} />
-                ) : vendorCategoryName == 'DJ' ? (
+                ) : vendorCategoryName == 'Music' ? (
                   <Certified height={getHp(60)} width={getWp(60)} />
-                ) : vendorCategoryName == 'Catering' ? (
+                ) : vendorCategoryName == 'Food' ? (
                   <Cuisines height={getHp(60)} width={getWp(60)} />
                 ) : (
                         <Services height={getHp(60)} width={getWp(60)} />
@@ -633,9 +625,9 @@ function DjProfile(props) {
               iconBelowText={
                 vendorCategoryName == 'Security'
                   ? 'Certified'
-                  : vendorCategoryName == 'DJ'
+                  : vendorCategoryName == 'Music'
                     ? 'Genres'
-                    : vendorCategoryName == 'Catering'
+                    : vendorCategoryName == 'Food'
                       ? 'Cuisines'
                       : 'Services'
               }
@@ -646,18 +638,18 @@ function DjProfile(props) {
               text={
                 vendorCategoryName == 'Security'
                   ? armed
-                  : vendorCategoryName == 'DJ'
+                  : vendorCategoryName == 'Music'
                     ? equipment
-                    : vendorCategoryName == 'Catering'
+                    : vendorCategoryName == 'Food'
                       ? services
                       : services
               }
               icon={
                 vendorCategoryName == 'Security' ? (
                   <Armed height={getHp(50)} width={getWp(50)} />
-                ) : vendorCategoryName == 'DJ' ? (
+                ) : vendorCategoryName == 'Music' ? (
                   <Equipments height={getHp(60)} width={getWp(60)} />
-                ) : vendorCategoryName == 'Catering' ? (
+                ) : vendorCategoryName == 'Food' ? (
                   <Services height={getHp(48)} width={getWp(48)} />
                 ) : (
                         <Services height={getHp(48)} width={getWp(48)} />
@@ -666,9 +658,9 @@ function DjProfile(props) {
               iconBelowText={
                 vendorCategoryName == 'Security'
                   ? 'Armed'
-                  : vendorCategoryName == 'DJ'
+                  : vendorCategoryName == 'Music'
                     ? 'Equipment'
-                    : vendorCategoryName == 'Catering'
+                    : vendorCategoryName == 'Food'
                       ? 'Services'
                       : 'Services'
               }

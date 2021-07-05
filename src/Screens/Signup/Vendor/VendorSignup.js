@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Alert, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Alert, ScrollView, TouchableOpacity, } from 'react-native'
 import { Header, FloatingInput, CustomButton, Root } from '@components'
 import { Avatar } from 'react-native-elements'
 import { UploadBlue, BlackClose } from '@svg';
 import ImagePicker from 'react-native-image-crop-picker';
+import Spinner from 'react-native-loading-spinner-overlay';
 import { FONTSIZE, validateEmail, validatePass } from '@utils'
 import { useSelector, useDispatch } from "react-redux";
 import { fetchVendorData } from "../../../reducer/mainexpensecategory";
@@ -12,9 +13,9 @@ import { ApiClient } from '../../../app/services';
 import VendorMarketProfile from './VendorMarketProfile';
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default function VendorSignup(props) {
-    console.log("REACHED AT VENDOR SIGNUP SCREEN 2 -->")
     const { login, vendorType
     } = useSelector((state) => state.mainExpenseByCategory);
     const [username, setUsername] = useState('')
@@ -31,6 +32,7 @@ export default function VendorSignup(props) {
         ImagePicker.openPicker({
             width: 300,
             height: 300,
+            cropping: true
         }).then(image => {
             setPicture(image)
         });
@@ -64,24 +66,29 @@ export default function VendorSignup(props) {
                 console.log("values res of email", validateE);
                 Toast("Please enter valid email !");
 
-            } 
+            }
+            else if (password.length < 7) {
+                return Toast('Password should be 8 characters long !');
+            }
             // else if (!validateP) {
             //     console.log("values res of pass", validateP);
             //     Toast("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !");
 
             // }
             else if (picture == null) {
-                console.log("pciture null");
+                // console.log("pciture null");
                 Toast("Please select the profile picture!");
             }
-            else if (!(phone.length > 9)) {
-                console.log("Phone number");
+            else if ((phone.length >
+                10)) {
+                // console.log("Phone number");
                 Toast("Please Enter valid number!");
             }
             else
                 if (username.length > 0 &&
                     password.length > 0 &&
-                    email.length > 0
+                    email.length > 0 &&
+                    phone.length > 0
                 ) {
                     console.log("1 st blockk");
                     setLoader(true)
@@ -109,21 +116,31 @@ export default function VendorSignup(props) {
         }
     }
 
-    const handleSpace = (value) => {
+    const handleSpace = (value, type = 'Username') => {
         let regSpace = new RegExp(/\s/);
         if (regSpace.test(value)) {
-            setUsername(value.trim())
-            Toast("Username cannot contain space !");
+            if (type == 'Password') {
+                setPassword(value.trim())
+            } else {
+                setUsername(value.trim())
+            }
+            Toast(`${type} ` + "cannot contain space !");
         } else {
-            setUsername(value)
+            if (type == 'Password') {
+                setPassword(value)
+            } else {
+                setUsername(value)
+            }
         }
     }
     return (<Scaffold
         statusBarStyle={{ backgroundColor: '#F4F4F4' }}>
-        <ScrollView
+            <Spinner visible={loader} color={'#1FAEF7'} />
+        <KeyboardAwareScrollView >
+            {/* <ScrollView
             keyboardShouldPersistTaps='always'
             contentContainerStyle={{ flexGrow: 1 }}
-            style={{ backgroundColor: '#FBFBFB', flex: 1 }}>
+            style={{ backgroundColor: '#FBFBFB', flex: 1 }}> */}
             <Header
                 headerBackColor={{ paddingBottom: 20, backgroundColor: '#F4F4F4' }}
                 back
@@ -131,7 +148,7 @@ export default function VendorSignup(props) {
                 headerTitle={`Create ${vendorType} Profile`}
                 onPress={() => props.navigation.goBack()}
             />
-            <View style={{ paddingBottom: getHp(80), paddingHorizontal: getWp(10), backgroundColor: '#FBFBFB' }}>
+            <View style={{ paddingBottom: getHp(0), paddingHorizontal: getWp(10), backgroundColor: '#FBFBFB' }}>
 
                 {picture == null ?
                     <View style={{ padding: 0, marginVertical: getHp(60), justifyContent: 'center', alignItems: 'center' }}>
@@ -179,7 +196,7 @@ export default function VendorSignup(props) {
                 }
                 <FloatingInput
                     floatingLabel={"Username"}
-                    onChange={handleSpace}
+                    onChange={value => handleSpace(value, 'Username')}
                     value={username}
                 />
                 <FloatingInput
@@ -196,23 +213,20 @@ export default function VendorSignup(props) {
 
                 <FloatingInput
                     floatingLabel={"Password"}
-                    onChange={(value) => setPassword(value)}
+                    onChange={value => handleSpace(value, 'Password')}
                     Password
                     value={password}
                 />
                 <View style={{ marginVertical: getHp(10) }} />
-
-
-
             </View>
-            <View style={{ position: 'absolute', bottom: 0, alignSelf: 'center', width: '95%', paddingBottom: getHp(10) }}>
+            <View style={{ alignSelf: 'center', width: '95%' }}>
                 <CustomButton
-                 
                     complete
                     onPress={handleData}
                 />
             </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
+
     </Scaffold>
     )
 }

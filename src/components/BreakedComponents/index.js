@@ -31,6 +31,48 @@ import Events from '../../Screens/Views/Search/EventsTab'
 import People from '../../Screens/Views/Search/PeopleTab'
 import AttendingTab from '../../Screens/BounceUsers/EventPage/Public/featuringTabs/AttendingTab'
 
+export const GuestTabview = observer((props) => {
+    const {
+        id,
+        interested,
+        attending,
+        hosting
+    } = props.route.params.UserData;
+    console.log('GuestTabview PROPS-->', interested,
+        attending,
+        hosting)
+
+    return (
+        <View style={{ borderBottomWidth: 1, borderColor: '#EEEEEE', }}>
+
+            {(!interested && !attending) == false ?
+                < Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
+
+            {attending &&
+                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
+                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Regular' }}
+                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading={"Attending"}>
+                    <Tab1 partyStore={MboxStore.partyStore} {...props} />
+                </Tab>
+            }
+
+            {interested &&
+                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
+                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Regular' }}
+                    activeTabStyle={{ backgroundColor: '#FBFBFB' }}
+                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="Interested">
+                    <Tab2 partyStore={MboxStore.partyStore} {...props} />
+                </Tab>
+            }
+                </Tabs>
+                : null}
+             
+        </View >
+    );
+});
+
+
 export const FeaturingPageTab = observer((props) => {
     return (
         <View style={{ flex: 1 }}>
@@ -76,20 +118,36 @@ export const FeaturingPageTab = observer((props) => {
 });
 export const SearchPageTab = observer((props) => {
     return (
-        <View style={{ flex: 1 }}>
-            <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
+        <View style={{ flex: 1, }}>
+            <Tabs locked
+                tabContainerStyle={{}}
+                tabBarUnderlineStyle={{ backgroundColor: '#000' }} >
 
                 <Tab tabStyle={{ backgroundColor: '#fff' }}
-                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
+                    textStyle={{
+                        color: '#000',
+                        fontFamily: 'AvenirNext-Medium'
+                    }}
                     activeTabStyle={{ backgroundColor: '#fff' }}
-                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading={"Events"}>
+                    activeTextStyle={{
+                        color: '#000',
+                        fontFamily: 'AvenirNext-Medium'
+                    }}
+                    heading={"Events"}>
                     <Events />
                 </Tab >
 
                 <Tab tabStyle={{ backgroundColor: '#fff' }}
-                    textStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }}
+                    textStyle={{
+                        color: '#000',
+                        fontFamily: 'AvenirNext-Medium'
+                    }}
                     activeTabStyle={{ backgroundColor: '#fff' }}
-                    activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="People">
+                    activeTextStyle={{
+                        color: '#000',
+                        fontFamily: 'AvenirNext-Medium'
+                    }}
+                    heading="People">
                     <People />
                 </Tab>
 
@@ -146,20 +204,20 @@ export const Tabview = observer((props) => {
             {
                 marginVertical: 10,
             }]}>
-            <Tabs tabBarUnderlineStyle={{ backgroundColor: '#000000' }}>
+            <Tabs tabBarUnderlineStyle={[styles.shadowStyle, { backgroundColor: '#000000' }]}>
 
-                <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
+                <Tab tabStyle={{ backgroundColor: '#FBFBFB', }}
                     textStyle={{ color: '#000', fontFamily: 'AvenirNext-Regular' }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
                     activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading={"Hosting"}>
                     <Tab1 partyStore={MboxStore.partyStore} {...props} />
-                </Tab >
+                </Tab>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}
                     textStyle={{ color: '#000', fontFamily: 'AvenirNext-Regular' }}
                     activeTabStyle={{ backgroundColor: '#FBFBFB' }}
                     activeTextStyle={{ color: '#000', fontFamily: 'AvenirNext-Medium' }} heading="Attending">
-                    <Tab2 />
+                    <Tab2 partyStore={MboxStore.partyStore} {...props} />
                 </Tab>
 
                 <Tab tabStyle={{ backgroundColor: '#FBFBFB' }}

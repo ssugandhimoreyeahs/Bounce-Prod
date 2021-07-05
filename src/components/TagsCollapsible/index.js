@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Collapsible from 'react-native-collapsible';
-import { FONTSIZE, getHp, getWp } from '../../app/utils';
+import {FONTSIZE, getHp, getWp} from '../../app/utils';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { BackBlack } from '@svg'
+import {BackBlack} from '@svg';
 
 AntDesign.loadFont();
 
@@ -13,20 +13,20 @@ const TagsCollapsible = props => {
   const RenderItems = (item, index) => {
     let tagObj = Object.assign({}, props.Data);
     delete tagObj.subTags;
-    let isPartySelected = props.isOnSelect({ tagObj, item });
+    let isPartySelected = props.isOnSelect({tagObj, item});
     return (
       <TouchableOpacity
         key={index}
         onPress={() => {
           props.onAdd({
             tag: tagObj,
-            subTags: item,
+            subTags: {...item},
           });
         }}>
         <View
           style={[
             styles.itemView,
-            isPartySelected && { backgroundColor: 'rgba(0, 224, 143, 0.24)' },
+            isPartySelected && {backgroundColor: 'rgba(0, 224, 143, 0.24)'},
           ]}>
           <Text style={styles.itemTextStyle}>
             {item.emoji + ' ' + item.name}
@@ -36,18 +36,42 @@ const TagsCollapsible = props => {
     );
   };
   return (
-    <View key={props.Data.id} style={styles.container}>
-      <TouchableOpacity
-        style={styles.heading}
-        onPress={() => setIsVisible(s => !s)}>
-        <BackBlack height={13} width={6} />
-        <Text style={styles.headingTextStyle}>{props.Data.name}</Text>
-      </TouchableOpacity>
-      <Collapsible collapsed={isVisible}>
-        <View style={styles.collapsedContainer}>
-          {props.Data.subTags?.map(RenderItems)}
+    <View>
+      {!props?.MyInterest ? (
+        <View key={props.Data.id} style={styles.container}>
+          <TouchableOpacity
+            style={styles.heading}
+            onPress={() => setIsVisible(s => !s)}>
+            <BackBlack height={13} width={6} />
+            <Text style={styles.headingTextStyle}>{props.Data.name}</Text>
+          </TouchableOpacity>
+          <Collapsible collapsed={isVisible}>
+            <View style={styles.collapsedContainer}>
+              {props.Data.subTags?.map(RenderItems)}
+            </View>
+          </Collapsible>
         </View>
-      </Collapsible>
+      ) : (
+        <View
+          key={props.Data.id}
+          style={[
+            styles.container,
+            {backgroundColor: '#FBFBFB', marginVertical: getHp(15)},
+          ]}>
+          <Text style={[styles.headerTitle, {marginLeft: getWp(10)}]}>
+            {props.Data.name}
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              padding: 5,
+              marginTop: 5,
+              flexWrap: 'wrap',
+            }}>
+            {props.Data.subTags?.map(RenderItems)}
+          </View>
+        </View>
+      )}
     </View>
   );
 };
@@ -64,7 +88,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: '#DDDDDD',
     flexDirection: 'row',
-    paddingLeft: 20
+    paddingLeft: 20,
   },
   headingTextStyle: {
     fontSize: FONTSIZE.Text15,
@@ -76,6 +100,11 @@ const styles = StyleSheet.create({
     marginTop: 12,
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+  headerTitle: {
+    color: '#000',
+    fontSize: FONTSIZE.Text16,
+    fontFamily: 'AvenirNext-DemiBold',
   },
   itemView: {
     height: 35,

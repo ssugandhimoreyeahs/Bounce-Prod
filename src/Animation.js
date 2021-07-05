@@ -18,7 +18,7 @@ const { height, width } = Dimensions.get('screen')
 
 
 
-export default function LoginScreen(props) {
+function LoginScreen(props) {
     const {
         navigation
     } = props
@@ -99,6 +99,10 @@ export default function LoginScreen(props) {
         </Root>
     )
 }
+
+LoginScreen.routeName = "/LoginScreen";
+
+export default LoginScreen;
 const styles = StyleSheet.create({
     temp: {
         backgroundColor: 'red'

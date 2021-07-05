@@ -12,8 +12,10 @@ import {
   CustomTextinput,
   FloatingInput,
   CustomButton,
-  Root,
+  ConnectSocialMedia,
+  InputSocialMedia,
   GooglePlacesInput,
+  HostToggleButton,
   Header
 } from '@components';
 import { Avatar } from 'react-native-elements';
@@ -38,8 +40,8 @@ import { PrivacyBlock, Toggle } from '@components';
 import MobxStore from '../../../mobx';
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
-
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { styles } from './indexCss.js'
 
 export default function HostProfile(props) {
   console.log("PROPS -> ", props);
@@ -50,21 +52,37 @@ export default function HostProfile(props) {
   const [city, setCity] = useState('');
   const [profession, setProfession] = useState('');
   const [bio, setBio] = useState('');
-  const [snapchat, setSnapchat] = useState('');
+
   const [instagram, setInstagram] = useState('');
+  const [snapchat, setSnapchat] = useState('');
+  const [tiktok, setTiktok] = useState('');
+  const [twitter, setTwitter] = useState('');
+  const [linkedIn, setLinkedIn] = useState('');
+
   const [picture, setPicture] = useState(null);
   const [footer, openFooter] = useState(false);
-  const [twitter, setTwitter] = useState('');
-  const [tiktok, setTiktok] = useState('');
+  const [friendCount, setFriendCount] = useState(false);
+  const [hosting, setHosting] = useState(false);
+  const [attending, setAttending] = useState(false);
+  const [interested, setInterested] = useState(false);
+
   const dispatch = useDispatch();
 
 
   const token = userinfo?.token;
   const user = userinfo?.user;
 
+  console.log('snapchatUsername--', user.snapchatUsername)
+  console.log('instagramUsername--', user.instagramUsername)
+
+
+
+
   if (!user) {
     return null;
   }
+
+
   const handleImage = () => {
     ImagePicker.openPicker({
       width: 300,
@@ -86,8 +104,13 @@ export default function HostProfile(props) {
     );
   };
 
+
+
   useEffect(() => {
     MobxStore.authStore.async.reloadUser();
+  }, [MobxStore.authStore.userProfile]);
+
+  useEffect(() => {
     setData();
   }, []);
 
@@ -99,8 +122,16 @@ export default function HostProfile(props) {
     setProfession(user?.profession);
     setCity(user?.city);
     setBirthday(user.birthday);
-    setInstagram(user.instagramUsername);
-    setSnapchat(user.snapchatUsername);
+
+    setSnapchat(user?.snapchatUsername);
+    setTiktok(user?.tiktokUsername);
+    setTwitter(user?.twitterUsername);
+    setLinkedIn(user?.linkedInUsername);
+
+    setFriendCount(user?.friendCount);
+    setHosting(user?.hosting);
+    setAttending(user?.attending);
+    setInterested(user?.interested);
     setLoader(false);
   };
 
@@ -114,7 +145,6 @@ export default function HostProfile(props) {
       name: `image-${milliseconds}.jpg`,
     };
 
-
     let formData = new FormData();
     formData.append('fullName', fullName);
     formData.append('city', city);
@@ -122,6 +152,16 @@ export default function HostProfile(props) {
     formData.append('about', bio);
     formData.append('profession', profession);
     formData.append('profileImageFile', imgObj);
+    formData.append('friendCount', friendCount);
+    formData.append('hosting', hosting);
+    formData.append('attending', attending);
+    formData.append('interested', interested);
+
+    formData.append('snapchatUsername', snapchat);
+    formData.append('tiktokUsername', tiktok);
+    formData.append('twitterUsername', twitter);
+    formData.append('linkedInUsername', linkedIn);
+
 
     console.log('TOKEN', token);
 
@@ -148,18 +188,16 @@ export default function HostProfile(props) {
     setLoader(false);
   };
 
-  console.log('profession', profession)
-  console.log('bio', bio)
   return (
     <Scaffold
       statusBarStyle={{ backgroundColor: '#fff' }}>
       <Spinner visible={loader} color={'#1FAEF7'} />
       {!loader && (
-        <ScrollView
+
+        <KeyboardAwareScrollView
+          enableResetScrollToCoords={false}
           showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps='always'
-          style={{ backgroundColor: '#FBFBFB', flex: 1 }}
-          contentContainerStyle={{ flexGrow: 1 }}>
+          keyboardShouldPersistTaps={"handled"}>
           <Header
             back
             headerTitle={"Host Profile"}
@@ -242,7 +280,7 @@ export default function HostProfile(props) {
                 onPress={data => {
                   setCity(data.description);
                 }}
-                value={city === null ? '' : city}
+                value={city === 'null' ? '' : city}
               />
 
               <FloatingInput
@@ -279,138 +317,50 @@ export default function HostProfile(props) {
               </Text>
 
               {/* First Insta */}
-              <TouchableOpacity style={[styles.socialButton, styles.shadowStyle]}>
-                <View style={styles.flex}>
-                  <Insta height={getHp(30)} width={getHp(30)} />
-                  <TextInput
-                    placeholder={`Instagram `}
-                    placeholderTextColor={'#000'}
-                    // value={instagram == '' ? '' : instagram}
-                    // onChangeText={value => setInstagram(value)}
-                    style={[
-                      styles.headerTitle,
-                      { marginLeft: 10, fontFamily: 'AvenirNext-Medium' },
-                    ]}
-                  />
-                </View>
-                <Text
-                  style={[
-                    styles.headerTitle,
-                    { color: '#1FAEF7', fontFamily: 'AvenirNext-Medium', marginRight: getWp(10) },
-                  ]}>
-                  {'Connect'}
-                </Text>
-              </TouchableOpacity>
-
+              <ConnectSocialMedia
+                icon={<Insta height={getHp(30)} width={getHp(30)} />}
+                placeholder={`Instagram `}
+              />
 
               {/* Second Spotify */}
-              <TouchableOpacity style={[styles.socialButton, styles.shadowStyle]}>
-                <View style={styles.flex}>
-                  <Spotify height={getHp(30)} width={getHp(30)} />
-                  <Text
-                    style={[
-                      styles.headerTitle,
-                      { fontFamily: 'AvenirNext-Medium', marginLeft: 13 },
-                    ]}>
-                    {'Spotify'}
-                  </Text>
-                </View>
-                <Text
-                  style={[
-                    styles.headerTitle,
-                    {
-                      color: '#1FAEF7',
-                      fontFamily: 'AvenirNext-Medium',
-                      marginRight: getWp(10)
-                    },
-                  ]}>
-                  {'Connect'}
-                </Text>
-              </TouchableOpacity>
+              <ConnectSocialMedia
+                icon={<Spotify height={getHp(30)} width={getHp(30)} />}
+                placeholder={`Spotify `}
+              />
+
 
               {/* Third Apple Music */}
-              <TouchableOpacity style={[styles.socialButton, styles.shadowStyle, { marginTop: getHp(5), marginBottom: getHp(30) }]}>
-                <View style={styles.flex}>
-                  <AppleMusic height={getHp(30)} width={getHp(30)} />
-                  <Text
-                    style={[
-                      styles.headerTitle,
-                      { fontFamily: 'AvenirNext-Medium', marginLeft: 13 },
-                    ]}>
-                    {'Apple Music'}
-                  </Text>
-                </View>
-                <Text
-                  style={[
-                    styles.headerTitle,
-                    {
-                      color: '#1FAEF7',
-                      fontFamily: 'AvenirNext-Medium',
-                      marginRight: getWp(10)
-                    },
-                  ]}>
-                  {'Connect'}
-                </Text>
-              </TouchableOpacity>
-              {/* <Text
-              style={[
-                styles.headerTitle,
-                { color: '#999999', fontFamily:'AvenirNext-Medium', marginBottom: 8 },
-              ]}>
-              {'Tap to Refresh'}
-            </Text> */}
+              <ConnectSocialMedia
+                icon={<AppleMusic height={getHp(30)} width={getHp(30)} />}
+                placeholder={`Apple Music `}
+                containerStyle={{ marginTop: getHp(5), marginBottom: getHp(30) }}
+              />
 
-              <TouchableOpacity style={styles.socialButton2}>
-                <View style={styles.flex}>
-                  <Tiktok height={getHp(30)} width={getHp(30)} />
-                  <TextInput
-                    placeholder={`@tiktok`}
-                    placeholderTextColor={'#999999'}
-                    onChangeText={value => setTiktok(value)}
-                    style={[styles.headerTitle, styles.Tiktok]}
-                    value={tiktok}
-                  />
-                </View>
-              </TouchableOpacity>
 
-              <TouchableOpacity style={styles.socialButton2}>
-                <View style={styles.flex}>
-                  <Snapchat height={getHp(30)} width={getHp(30)} />
-                  <TextInput
-                    placeholder={`@snapchat`}
-                    placeholderTextColor={'#999999'}
-                    // onChangeText={value => setSnapchat(value)}
-                    style={[styles.headerTitle, styles.Tiktok]}
-                  // value={snapchat == '' ? '' : snapchat}
-                  />
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.socialButton2}>
-                <View style={styles.flex}>
-                  <Twitter height={getHp(30)} width={getHp(30)} />
-                  <TextInput
-                    placeholder={`@twitter`}
-                    placeholderTextColor={'#999999'}
-                    onChangeText={value => setTwitter(value)}
-                    style={[styles.headerTitle, styles.Tiktok]}
-                    value={twitter}
-                  />
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.socialButton2}>
-                <View style={styles.flex}>
-                  <Linkedin height={getHp(30)} width={getHp(30)} />
-                  <TextInput
-                    placeholder={`@linkedin`}
-                    placeholderTextColor={'#999999'}
-                    onChangeText={value => setTwitter(value)}
-                    style={[styles.headerTitle, styles.Tiktok]}
-                    value={twitter}
-                  />
-                </View>
-              </TouchableOpacity>
+              <InputSocialMedia
+                icon={<Tiktok height={getHp(28)} width={getWp(28)} />}
+                placeholder={`@tiktok`}
+                onChangeText={value => setTiktok(value)}
+                value={tiktok == 'null' ? '' : tiktok}
+              />
+              <InputSocialMedia
+                icon={<Snapchat height={getHp(31)} width={getHp(31)} />}
+                placeholder={`@snapchat`}
+                onChangeText={value => setSnapchat(value)}
+                value={snapchat == 'null' ? '' : snapchat}
+              />
+              <InputSocialMedia
+                icon={<Twitter height={getHp(29)} width={getWp(29)} />}
+                placeholder={`@twitter`}
+                onChangeText={value => setTwitter(value)}
+                value={twitter == 'null' ? '' : twitter}
+              />
+              <InputSocialMedia
+                icon={<Linkedin height={getHp(31)} width={getHp(30)} />}
+                placeholder={`@linkedin`}
+                onChangeText={value => setLinkedIn(value)}
+                value={linkedIn == 'null' ? '' : linkedIn}
+              />
 
             </View>
 
@@ -432,21 +382,17 @@ export default function HostProfile(props) {
               </Text>
             </View>
 
-
-            <View style={[styles.flex, {
-              paddingHorizontal: getWp(10),
-              marginVertical: getHp(30),
-              height: getHp(60),
-              backgroundColor: '#FFFFFF',
-              borderBottomWidth: 0.5,
-              borderTopWidth: 0.5,
-              borderColor: '#EEEEEE'
-            }]}>
-              <Text style={[styles.privacyTitle, { fontSize: FONTSIZE.Text16 }]}>
-                {"Friend Count"}
-              </Text>
-              <Toggle />
-            </View>
+            <HostToggleButton
+              placeholder={"Friend Count"}
+              switchOn={friendCount}
+              onChange={() => setFriendCount(!friendCount)}
+              containerStyle={{
+                paddingHorizontal: getWp(10),
+                marginVertical: getHp(20),
+                borderBottomWidth: 0.5,
+                borderTopWidth: 0.5,
+              }}
+            />
 
             <Text style={{
               fontFamily: 'AvenirNext-Regular',
@@ -455,57 +401,29 @@ export default function HostProfile(props) {
               marginBottom: getHp(10),
               paddingHorizontal: getWp(10),
             }}>
-              {"Private events will not be shared."}
+              {"Only public events from the news feed are shared."}
             </Text>
 
-            <View style={[styles.flex, {
-              height: getHp(60),
-              backgroundColor: '#FFFFFF',
-              paddingHorizontal: getWp(10),
-              borderBottomWidth: 0.5,
-              borderTopWidth: 0.5,
-              borderColor: '#EEEEEE'
-            }]}>
-              <Text style={[styles.privacyTitle, { fontSize: FONTSIZE.Text16 }]}>
-                {"Hosting"}
-              </Text>
-              <Toggle />
-            </View>
-
-            <View style={[styles.flex, {
-              height: getHp(60),
-              backgroundColor: '#FFFFFF',
-              paddingHorizontal: getWp(10),
-              borderBottomWidth: 0.5,
-              borderColor: '#EEEEEE'
-            }]}>
-              <Text style={[styles.privacyTitle, { fontSize: FONTSIZE.Text16 }]}>
-                {"Attending"}
-              </Text>
-              <Toggle />
-            </View>
-
-            <View style={[styles.flex, {
-              height: getHp(60),
-              backgroundColor: '#FFFFFF',
-              paddingHorizontal: getWp(10),
-              borderBottomWidth: 0.5,
-              borderColor: '#EEEEEE'
-            }]}>
-              <Text style={[styles.privacyTitle, { fontSize: FONTSIZE.Text16 }]}>
-                {"Interested"}
-              </Text>
-              <Toggle />
-            </View>
-
-
+            <HostToggleButton
+              placeholder={"Hosting"}
+              switchOn={hosting}
+              onChange={() => setHosting(!hosting)}
+            />
+            <HostToggleButton
+              placeholder={"Attending"}
+              switchOn={attending}
+              onChange={() => setAttending(!attending)}
+            />
+            <HostToggleButton
+              placeholder={"Interested"}
+              switchOn={interested}
+              onChange={() => setInterested(!interested)}
+            />
 
           </View>
           {/*Endd Privacy Block */}
 
-
-
-          <View style={{ paddingHorizontal: getWp(10), paddingBottom: 80 }}>
+          <View style={{ paddingHorizontal: getWp(10), paddingBottom: 10 }}>
             <CustomButton
               complete
               bar
@@ -513,99 +431,10 @@ export default function HostProfile(props) {
               ButtonTitle={'Save Changes'}
             />
           </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
       )}
     </Scaffold>
   );
 }
 HostProfile.routeName = '/HostProfile';
-const styles = StyleSheet.create({
-  privacyTitle: {
-    fontFamily: 'AvenirNext-Medium',
-    color: '#000',
-    fontSize: FONTSIZE.Text18,
-  },
-  Tiktok: {
-    marginLeft: 10,
-    fontFamily: 'AvenirNext-Medium',
-    color: '#000',
-    width: '100%'
-  },
-  headerTitle: {
-    color: '#000',
-    fontSize: FONTSIZE.Text16,
-    fontFamily: 'AvenirNext-Regular',
-  },
-  addInterest: {
-    elevation: 2,
-    backgroundColor: '#fff',
-    height: getHp(130),
-    width: getHp(150),
-    borderRadius: 24,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  flex: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  shadowStyle: {
-    shadowColor: '#000',
-    shadowOffset: { width: 1, height: 1 },
-    shadowRadius: 5,
-    shadowOpacity: 0.1,
-    elevation: 1,
-  },
-  socialButton: {
-    height: getHp(50),
-    elevation: 0,
-    borderRadius: 13,
-    paddingHorizontal: getWp(10),
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginVertical: 4,
-  },
-  socialButton2: {
-    height: getHp(50),
-    borderWidth: 0.5,
-    borderColor: '#DDDDDD',
-    borderRadius: 13,
-    paddingHorizontal: getWp(10),
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginVertical: 4,
-  },
-  container: {
-    backgroundColor: '#fff',
-    flex: 1
-  },
-  linearGradient: {
-    flex: 1,
-    borderRadius: 20,
-  },
-  ContainerStyle: {
-    width: '100%',
-    marginVertical: 4,
-  },
-  ButtonStyle: {
-    backgroundColor: '#212121',
-    borderRadius: 10,
-    justifyContent: 'flex-start',
-    paddingLeft: 20
-  },
-  crossButton: {
-    elevation: 2,
-    backgroundColor: '#fff',
-    borderRadius: 50,
-    padding: 10,
-    position: 'absolute',
-    right: -10,
-    top: -10
-  },
 
-})

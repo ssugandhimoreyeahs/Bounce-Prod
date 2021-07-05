@@ -67,7 +67,7 @@ import PartyRental from "../Screens/BounceVendors/PartyRentals";
 import VendorLogin from "../Screens/BounceVendors/Onboarding/VendorLogin";
 import ChangePassword from "../Screens/BounceVendors/Onboarding/ChangePassword";
 import VendorEditProfile from "../Screens/BounceVendors/EditProfile";
-import NewsFeed from "../Screens/BounceUsers/NewsFeed";
+import CommonInterestNewsFeed from "../Screens/BounceUsers/NewsFeed/CommonInterestNewsFeed";
 import AddInterest from "../Screens/BounceUsers/NewsFeed/AddInterest";
 import HostProfile from "../Screens/BounceUsers/HostProfile/HostProfile";
 import UserFriendsProfile from "../Screens/BounceUsers/UserFriendsProfile";
@@ -161,9 +161,9 @@ const DrawerNavigator = () => {
         options={{ drawerLabel: "HostProfile" }}
       />
       <Drawer.Screen
-        name="NewsFeed"
-        component={NewsFeed}
-        options={{ drawerLabel: "NewsFeed" }}
+        name="CommonInterestNewsFeed"
+        component={CommonInterestNewsFeed}
+        options={{ drawerLabel: "CommonInterestNewsFeed" }}
       />
       <Drawer.Screen
         name="AddInterest"
@@ -418,9 +418,9 @@ const DrawerNavigator1 = () => {
         options={{ drawerLabel: "HostProfile" }}
       />
       <Drawer.Screen
-        name="NewsFeed"
-        component={NewsFeed}
-        options={{ drawerLabel: "NewsFeed" }}
+        name="CommonInterestNewsFeed"
+        component={CommonInterestNewsFeed}
+        options={{ drawerLabel: "CommonInterestNewsFeed" }}
       />
       <Drawer.Screen
         name="AddInterest"

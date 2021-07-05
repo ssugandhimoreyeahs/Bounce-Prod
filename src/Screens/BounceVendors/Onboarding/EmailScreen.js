@@ -52,8 +52,8 @@ export default function EmailScreen(props) {
                 );
 
                 if (res.statusCode !== 404) {
-                    console.log("res",res)
-                    console.log("res.sattuss",res.status)
+                    // console.log("res",res)
+                    // console.log("res.sattuss",res.status)
                     setLoader(false);
                     navigation.navigate(BirthDayScreen.routeName, {
                         email: email,

@@ -16,6 +16,8 @@ import UploadInventory from '../../host/UploadInventory';
 // import { na } from '@react-navigation/native';
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 function DJSignup(props) {
     const { authStore } = MobxStore;
@@ -57,6 +59,8 @@ function DJSignup(props) {
 
         return unsubscribe;
     }, [props.navigation, authStore.userProfile]);
+
+
     useEffect(() => {
         if (handleFiller) {
             handleFiller();
@@ -65,6 +69,8 @@ function DJSignup(props) {
             fetchData()
         }
     }, [authStore.userProfile])
+
+
     if (!user) {
         return null;
     }
@@ -141,6 +147,11 @@ function DJSignup(props) {
             }
             setLoader(true);
 
+            if (!(phone.length < 11)) {
+                setLoader(false);
+                return Toast('Please enter valid phone number !');
+            }
+
             let milliseconds = new Date().getTime();
             let imgObj = {
                 uri: `${picture}`,
@@ -198,12 +209,15 @@ function DJSignup(props) {
             statusBarStyle={{ backgroundColor: '#F4F4F4' }}>
             <Spinner visible={loader} color={'#1FAEF7'} />
             <View style={styles.container}>
-                <ScrollView
+                {/* <ScrollView
                     keyboardShouldPersistTaps='always'
                     ref={scrollRef}
                     contentContainerStyle={{ flexGrow: 1 }}
                     style={{ flex: 1 }}
-                >
+                > */}
+                <KeyboardAwareScrollView 
+                keyboardShouldPersistTaps={'handled'} 
+                ref={scrollRef} >
                     <Header
                         back
                         headerTitle={"Edit Profile"}
@@ -439,7 +453,7 @@ function DJSignup(props) {
                         />
                         <View style={{ marginBottom: 10 }} />
                     </View>
-                </ScrollView>
+             </KeyboardAwareScrollView>
             </View>
         </Scaffold >
     )

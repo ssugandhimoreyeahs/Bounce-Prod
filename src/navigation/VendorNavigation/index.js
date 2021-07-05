@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import VendorHomeDrawerNavigator from './drawerNavigation';
 import UploadInventoryScreen from '../../Screens/host/UploadInventory';
+import AuthNavigation from '../AuthNavigation';
 
 const VendorRootStack = createStackNavigator();
 
@@ -21,6 +22,10 @@ class VendorNavigation {
          <VendorRootStack.Screen
           name={UploadInventoryScreen.routeName}
           component={UploadInventoryScreen}
+        />
+        <VendorRootStack.Screen
+          component={AuthNavigation.Stack}
+          name={AuthNavigation.routeName}
         />
       </VendorRootStack.Navigator>
     );

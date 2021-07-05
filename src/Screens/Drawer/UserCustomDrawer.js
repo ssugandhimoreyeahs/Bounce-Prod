@@ -1,26 +1,35 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { BlackClose, More, BlackOutlineShare, LockBlack, Settings,
-  Account_Outline } from '@svg';
-import { FONTSIZE, bigHitSlop, smallHitSlop,getHp ,getWp} from '@utils';
-import { useTheme, Switch } from 'react-native-paper';
-import { AuthContext } from '../../context';
-import { LocalStorage } from '../../app/utils/localStorage';
+import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
+import {
+  BlackClose,
+  More,
+  BlackOutlineShare,
+  LockBlack,
+  Settings,
+  Account_Outline,
+} from '@svg';
+import {FONTSIZE, bigHitSlop, smallHitSlop, getHp, getWp} from '@utils';
+import {useTheme, Switch} from 'react-native-paper';
+import {AuthContext} from '../../context';
+import {LocalStorage} from '../../app/utils/localStorage';
 import MobxStore from '../../mobx';
 import AboutUs from '../Views/About/AboutUs';
-import { shareFunction } from '@components';
-import ScrollCarousel from '../BounceVendors/VendorProfile/ScrollCarousel'
+import {shareFunction} from '@components';
+import ScrollCarousel from '../BounceVendors/VendorProfile/ScrollCarousel';
 import AccountSetting from './AccountSetting';
 import Back from 'react-native-vector-icons/AntDesign';
 import PurchaseTickets from '../BounceUsers/EventPage/Public/PurchaseTickets';
 import HostView from '../MyEvents/HostView';
 import FeaturingPage from '../BounceUsers/EventPage/Public/Featuring';
+import { AccountService } from '../../app/services';
 import PartyRental from '../BounceVendors/PartyRentals'
+import InviteFriends from '../BounceVendors/PlanParty/InviteFriends';
+import FriendsPage from '../BounceUsers/Profile/FriendsPage';
 
 
 
 export default function UserCustomDrawer(props) {
-  const { authStore } = MobxStore;
+  const {authStore} = MobxStore;
   const userinfo = authStore.userProfile;
   const {
     username,
@@ -32,7 +41,7 @@ export default function UserCustomDrawer(props) {
     profileImage = {},
   } = userinfo?.user;
 
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const paperTheme = useTheme();
   const SERVICES = [
     {
@@ -42,7 +51,7 @@ export default function UserCustomDrawer(props) {
         props.navigation.navigate(AccountSetting.routeName);
       },
     },
-   
+
     // {
     //   icon: <LockBlack height={30} width={30} />,
     //   name: 'Privacy Settings',
@@ -54,14 +63,28 @@ export default function UserCustomDrawer(props) {
       icon: <BlackOutlineShare height={getHp(31)} width={getWp(28)} />,
       name: 'Share Profile',
       onPress: () => {
-        shareFunction(userinfo?.user)
+        shareFunction(userinfo?.user);
       },
     },
     {
       icon: <More height={getHp(30)} width={getWp(30)} />,
       name: 'More',
-      onPress: () => { },
+      onPress: () => {},
     },
+    // {
+    //   icon: <Settings height={30} width={30} />,
+    //   name: 'Invite friends',
+    //   onPress: () => {
+    //     props.navigation.navigate(InviteFriends.routeName)
+    //   },
+    // },
+    // {
+    //   icon: <Settings height={30} width={30} />,
+    //   name: 'FriendsPage',
+    //   onPress: () => {
+    //     props.navigation.navigate(FriendsPage.routeName)
+    //   },
+    // },
     // {
     //   icon: <Settings height={30} width={30} />,
     //   name: 'Vendor Profiles',
@@ -115,13 +138,13 @@ export default function UserCustomDrawer(props) {
     {
       name: 'Log Out',
       onPress: async () => {
-        await LocalStorage.clearToken();
-        authStore.logout();
+        props.navigation.closeDrawer();
+        await AccountService.removeAccount(authStore.userProfile.user.id)
       },
     },
   ];
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({item, index}) => {
     return (
       <View
         style={styles.renderContainer}
@@ -129,7 +152,7 @@ export default function UserCustomDrawer(props) {
         key={index.toString()}>
         <TouchableOpacity
           onPress={item.onPress}
-          style={{ flexDirection: 'row', alignItems: 'center' }}>
+          style={{flexDirection: 'row', alignItems: 'center'}}>
           {item.icon}
           <Text
             style={[
@@ -143,55 +166,59 @@ export default function UserCustomDrawer(props) {
             ]}>
             {item.name}
           </Text>
-          {item.name === 'More' &&
-            <TouchableOpacity >
-              <Back name="right" color={'#000'} size={18} style={{ marginLeft: getWp(140) }} />
+          {item.name === 'More' && (
+            <TouchableOpacity>
+              <Back
+                name="right"
+                color={'#000'}
+                size={18}
+                style={{marginLeft: getWp(140)}}
+              />
             </TouchableOpacity>
-          }
+          )}
         </TouchableOpacity>
         {item.name === 'More'
           ? MORE.map(item => {
-            return (
-              <TouchableOpacity
-                style={{
-                  paddingLeft: 30,
-                  paddingTop: 30,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}
-                onPress={item.onPress}
-                key={index.toString()}>
-                {/* {item.name == 'Dark / Light Mode' ? (
+              return (
+                <TouchableOpacity
+                  style={{
+                    paddingLeft: 30,
+                    paddingTop: 30,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}
+                  onPress={item.onPress}
+                  key={index.toString()}>
+                  {/* {item.name == 'Dark / Light Mode' ? (
                     <View pointerEvents="none">
                       {console.log('paperTheme.dark', paperTheme.dark)}
                       <Switch value={paperTheme.dark} />
                     </View>
                   ) : null} */}
 
-                <Text
-                  style={[
-                    styles.heading,
-                    {
-                      marginLeft: 15,
-                      fontSize: FONTSIZE.Text18,
-                      fontWeight: 'normal',
-                      color: '#696969',
-                    },
-                  ]}>
-                  {item.name}
-                </Text>
-
-              </TouchableOpacity>
-            );
-          })
+                  <Text
+                    style={[
+                      styles.heading,
+                      {
+                        marginLeft: 15,
+                        fontSize: FONTSIZE.Text18,
+                        fontWeight: 'normal',
+                        color: '#696969',
+                      },
+                    ]}>
+                    {item.name}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })
           : null}
       </View>
     );
   };
   return (
-    <View style={styles.container} >
-      <View style={[styles.flex, { padding: 15, marginTop: 20 }]}>
-        <Text style={styles.heading}>{"Settings"}</Text>
+    <View style={styles.container}>
+      <View style={[styles.flex, {padding: 15, marginTop: 20}]}>
+        <Text style={styles.heading}>{'Settings'}</Text>
 
         <TouchableOpacity
           onPress={() => {
@@ -200,7 +227,6 @@ export default function UserCustomDrawer(props) {
           hitSlop={bigHitSlop}>
           <BlackClose height={20} width={20} />
         </TouchableOpacity>
-
       </View>
       <FlatList
         data={SERVICES}
@@ -230,6 +256,6 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: FONTSIZE.Text27,
     color: '#000',
-    fontFamily:'AvenirNext-DemiBold'
+    fontFamily: 'AvenirNext-DemiBold'
   },
 });

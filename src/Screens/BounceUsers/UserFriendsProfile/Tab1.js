@@ -18,7 +18,7 @@ import { getHp, toCurrentTimeZone } from '../../../app/utils';
 import { RegexCollection } from '../../../app/constants';
 import { Button } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import LinearGradient from 'react-native-linear-gradient';
 
 AntDesign.loadFont();
 const STATIC_DATA = [
@@ -67,7 +67,7 @@ function Tab1(props) {
                 {
                   position: 'absolute',
                   bottom: 0,
-                  backgroundColor: '#F8A41E',
+                  backgroundColor: 'rgba(255, 255, 255, 0.85)',
                   borderBottomLeftRadius: 10,
                   borderTopRightRadius: 3,
                   paddingHorizontal: 5,
@@ -76,7 +76,7 @@ function Tab1(props) {
               ]}>
                 {item.isDraft && (
                   <Text style={{
-                    color: '#fff',
+                    color: '#1FAEF7',
                     fontFamily: 'AvenirNext-Medium',
                     fontSize: FONTSIZE.Text13
                   }}>{'Draft'}</Text>
@@ -89,7 +89,7 @@ function Tab1(props) {
                 {
                   position: 'absolute',
                   bottom: 0,
-                  backgroundColor: '#1FAEF7',
+                  backgroundColor: 'rgba(255, 255, 255, 0.85)',
                   borderBottomLeftRadius: 10,
                   borderTopRightRadius: 3,
                   paddingHorizontal: 5,
@@ -99,7 +99,7 @@ function Tab1(props) {
                 {item.isPrivate &&
                   (
                     <Text style={{
-                      color: '#fff',
+                      color: '#CF69FF',
                       fontFamily: 'AvenirNext-Medium',
                       fontSize: FONTSIZE.Text13
                     }}>{'Private'}</Text>
@@ -163,8 +163,8 @@ function Tab1(props) {
           style={[
             styles.numberTextStyle,
             {
-              fontSize: FONTSIZE.Text16,
-              fontFamily: 'AvenirNext-Medium',
+              fontSize: FONTSIZE.Text14,
+              fontFamily: 'AvenirNext-Regular',
               marginLeft: 10,
             },
           ]}>
@@ -218,30 +218,89 @@ function Tab1(props) {
           )}
         </Fragment>
       ) : (
-          <View style={{ padding: 10, backgroundColor: '#FBFBFB' }}>
+          <View style={[styles.shadowStyle,{ padding: 10, backgroundColor: '#fff' }]}>
             <FlatList
               data={STATIC_DATA}
               showsHorizontalScrollIndicator={false}
               renderItem={renderStatic}
               keyExtractor={index => index}
             />
-            <Text
+            {/* <TouchableOpacity  onPress={() =>
+          props.navigation.navigate(CreateInvitation.routeName, {
+            // party: item,
+            isEditParty: false,
+          })
+        }> */}
+            {/* <Text
               style={[
                 styles.numberTextStyle,
                 {
                   fontSize: FONTSIZE.Text16,
-                  fontWeight: '600',
+                  // fontWeight: '600',
                   marginVertical: 15,
+                  color:'#1FAEF7'
                 },
               ]}>
               {'Click “+” to get started!'}
-            </Text>
+            </Text> */}
+              <View style={{ backgroundColor: '#EEEEEE', height: 1, marginVertical: 5 }} />
+             <LinearGradient
+              start={{ x: 1, y: 1 }}
+              end={{ x: 0, y: 0 }}
+              colors={['#D67DFF', '#CB5EFF']}
+              style={[
+                styles.linearGradient,
+                {
+                  width: '100%',
+                  height: getHp(38),
+                  borderRadius: 13,
+                  marginTop: 10,
+                  marginBottom: 10
+                },
+              ]}>
+              <TouchableOpacity style={[styles.fullTouch,{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }]} 
+              onPress={() =>
+                props.navigation.navigate(CreateInvitation.routeName, {
+                  // party: item,
+                  isEditParty: false,
+                })
+              }
+              >
+                <Text style={[styles.buttonText, { marginRight: 15 }]}>{'Plan an Event'}</Text>
+              
+              </TouchableOpacity>
+            </LinearGradient>
+            {/* </TouchableOpacity> */}
           </View>
         )}
     </View>
   );
 }
 const styles = StyleSheet.create({
+  buttonText: {
+    fontSize: FONTSIZE.Text18,
+    fontFamily: 'AvenirNext-DemiBold',
+    color: '#fff',
+ },
+  fullTouch: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%'
+},
+linearGradient: {
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: 56,
+  elevation: 2,
+  backgroundColor: '#fff',
+  // marginVertical:15 ,
+  borderRadius: 20,
+},
   showMoreButtonContainer: {
     // alignItems:'center',
     marginHorizontal: 10,
@@ -274,7 +333,7 @@ const styles = StyleSheet.create({
   numberTextStyle: {
     color: '#000000',
     fontSize: FONTSIZE.Text14,
-    fontFamily: 'AvenirNext-Bold',
+    fontFamily: 'AvenirNext-DemiBold',
   },
   numberingStyle: {
     height: 24,

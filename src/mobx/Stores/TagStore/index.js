@@ -14,9 +14,13 @@ class TagStore {
   }
 
   @action
-  setTags = (Tags = []) => {
-    this.partyTags = Tags;
+  setTags = (tags = []) => {
+    this.partyTags = tags;
   };
+
+  getTags = () => {
+    return this.partyTags.slice();
+  }
 
 }
 

@@ -129,10 +129,15 @@ import BlueTick from './BlueTick.svg'
 import CohostPurple from './CohostPurple.svg'
 import Account_Outline from './Account_Outline.svg'
 import BackBlack from './BackBlack.svg'
-
+import BluePerson from './BluePerson.svg'
+import OrangeSaved from './OrangeSaved.svg'
+import BounceText from './BounceText.svg'
 
 
 export {
+    BounceText,
+    BluePerson,
+    OrangeSaved,
     BackBlack,
     Account_Outline,
     CohostPurple,

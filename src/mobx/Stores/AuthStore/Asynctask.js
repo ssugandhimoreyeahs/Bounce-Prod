@@ -2,7 +2,7 @@ import {LocalStorage} from '../../../app/utils/localStorage';
 import {postData, BaseURL} from '../../../FetchServices';
 import {runInAction} from 'mobx';
 import axios from 'axios';
-import {ApiClient} from '../../../app/services';
+import {ApiClient, AccountService} from '../../../app/services';
 class Asynctask {
   authStore;
   rootStore;
@@ -32,7 +32,6 @@ class Asynctask {
 
 
   login = async (username, password, showLoader = true) => {
-  
     try {
       showLoader && this.rootStore.appStore.toogleLoader(true);
       let body = {
@@ -51,6 +50,7 @@ class Asynctask {
           userLoginResponse.token,
           JSON.stringify(userLoginResponse.user),
         );
+        await AccountService.addNewAccount(userLoginResponse)
         runInAction(() => {
           this.authStore.userProfile = userLoginResponse;
           this.authStore.isAuthenticated = true;
@@ -65,8 +65,6 @@ class Asynctask {
     }
   };
 
-
-  
   fetchVendor = async (token = undefined) => {
     try {
       let tok = token;

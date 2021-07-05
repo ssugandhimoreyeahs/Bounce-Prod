@@ -1,19 +1,21 @@
 import ApiClient from '../ApiClient';
 import MobxStore from '../../../mobx';
 import CreateFormData from '../FormData';
+import { TagCategory } from '../../Entities';
 
 class PartyService {
   createOrUpdateParty = async (partyFields, partyID = undefined) => {
-    try { 
+    try {
       const formData = CreateFormData.objectToFormData(partyFields);
       let endPoint = ApiClient.endPoints.party;
       if (partyID) {
+        formData.append('isTagsUpdated', true);
         endPoint = endPoint.concat('/' + partyID);
       }
       console.log(
         'JSON_PARTY_FORM_DATA_edit_check_22 - ',
         JSON.stringify(formData),
-      ); 
+      );
       //return false;
       MobxStore.appStore.toogleLoader(true);
       const createPartyRes = await ApiClient.authInstance.post(
@@ -46,13 +48,16 @@ class PartyService {
   };
 
   getTags = async () => {
-    try{
+    try {
       const Tags = await ApiClient.authInstance.get(
         ApiClient.endPoints.tags,
         ApiClient.applicationJSONHeader(false)
       );
-      return Promise.resolve(Tags.data)
-    }catch(error){
+      // let tags = Tags.data.map((tags) => {
+      //   return TagCategory.fromJSON(tags);
+      // }) || [];
+      return Promise.resolve(Tags.data);
+    } catch (error) {
       return Promise.reject(error)
     }
   }

@@ -23,8 +23,8 @@ import MobxStore from '../../mobx';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FONTSIZE, getHp } from '../../app/utils';
 import BENotification from '../../Screens/BounceUsers/Notifications/Before/Notifications';
-// import HostProfile from '../../Screens/BounceUsers/HostProfile/HostProfile';
-
+import NewsFeed from '../../Screens/BounceUsers/NewsFeed/NewsFeed';
+import AddInterest from '../../Screens/BounceUsers/NewsFeed/AddInterest';
 const UserHomeBottomTab = createBottomTabNavigator();
 
 
@@ -58,6 +58,7 @@ class UserHomeBottomNavigation {
           fontSize: FONTSIZE.Text16,
         }}
       >
+
         <UserHomeBottomTab.Screen
           options={{
             unmountOnBlur: true,
@@ -69,8 +70,10 @@ class UserHomeBottomNavigation {
                 );
             },
           }}
-          name={UserHomeScreen.routeName}
-          component={UserHomeScreen}
+          // name={NewsFeed.routeName}
+          // component={NewsFeed}
+          name={AddInterest.routeName}
+          component={AddInterest}
         />
 
         <UserHomeBottomTab.Screen
@@ -127,7 +130,7 @@ class UserHomeBottomNavigation {
             tabBarIcon: ({ tintColor, focused }) => {
               return focused ? (
                 <View style={{
-                  borderWidth: 1,
+                  borderWidth: 2,
                   borderRadius: 50,
                   padding: 2,
                   borderColor: 'black'
@@ -141,10 +144,10 @@ class UserHomeBottomNavigation {
                 </View>
               ) : (
                   <View style={{
-                    borderWidth: 1,
-                    borderRadius: 50,
-                    padding: 2,
-                    borderColor: 'black'
+                    // borderWidth: 1,
+                    // borderRadius: 50,
+                    // padding: 2,
+                    // borderColor: 'black'
                   }}>
                     <Avatar
                       rounded
@@ -156,10 +159,12 @@ class UserHomeBottomNavigation {
                 );
             },
           }}
-          name={"Temp"}
-          component={() => {
-            return null;
-          }}
+          // name={"Temp"}
+          // component={() => {
+          //   return null;
+          // }}
+          name={UserHomeScreen.routeName}
+          component={UserHomeScreen}
         />
       </UserHomeBottomTab.Navigator>
     );

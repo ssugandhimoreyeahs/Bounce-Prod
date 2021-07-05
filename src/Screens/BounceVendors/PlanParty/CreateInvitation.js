@@ -55,14 +55,6 @@ import { useBackHandler } from '@react-native-community/hooks';
 import UserHomeScreen from '../../BounceUsers/UserFriendsProfile';
 
 
-const TAGS = [
-  {
-    name: 'Entertainment',
-    visible: false,
-    item: ['Comedy', 'Gaming', 'Gaming'],
-  },
-];
-
 function CreateInvitation(props) {
   let party = {};
   let isEditParty = false;
@@ -74,6 +66,7 @@ function CreateInvitation(props) {
   const partyModel = PlanPartyModel.getInstance();
   const [state, setState] = useState({});
   const [getImageState, setImageState] = useState(0);
+  const [footerOpen, setFooterOpen] = useState(false);
 
   useEffect(async () => {
     const Tags = await PartyService.getTags();
@@ -102,7 +95,6 @@ function CreateInvitation(props) {
 
   const handleOnPress = async isDraftMode => {
     try {
-      console.log('DFMD - ', isDraftMode);
       const res = await partyModel.party.isPartyValid(
         isDraftMode,
         partyModel.isEditMode,
@@ -111,6 +103,15 @@ function CreateInvitation(props) {
         let key = Object.keys(res.error)[0];
         let msg = res.error[key] || 'Something went wrong!';
         Toast(msg);
+        return;
+      }
+      if( !partyModel.party.isPrivate && partyModel.party.partyTags.length == 0){
+        Toast("Add atleast 1 tag");
+        return;
+      }
+
+      if( !partyModel.party.isPrivate && partyModel.party.tickets.length == 0){
+        Toast("Add atleast 1 Ticket Type");
         return;
       }
 
@@ -133,13 +134,11 @@ function CreateInvitation(props) {
       console.log('CREATE_PARTY_RES - ', savePartyResponse);
     } catch (error) {
       console.log('ERROR - ', error);
-      // Toast('Something went wrong!');
-      Toast('Party Created Successfully');
-      props.navigation.goBack()
+      Toast('Something went wrong!');
+      // Toast('Party Created Successfully');
+      // props.navigation.goBack()
     }
   };
-
-
 
   const handleImage = async () => {
     return props.navigation.navigate(UploadMedia.routeName, {
@@ -154,29 +153,6 @@ function CreateInvitation(props) {
       partyModel.party.addGallery(images.map(i => i.path));
     });
   };
-
-
-
-  // const ImageFooter = () => {
-  //   return (
-  //     <TouchableOpacity
-  //       onPress={() => setPicture(null)}
-  //       style={styles.crossButton}>
-  //       <BlackClose height={15} width={15} />
-  //     </TouchableOpacity>
-  //   );
-  // };
-  // const SmallButton = ({ item }) => {
-  //   console.log('ase', item);
-  //   return (
-  //     <TouchableOpacity style={styles.smallButtonStyle}>
-  //       <Text style={[styles.headerTitle]}>{item}</Text>
-  //     </TouchableOpacity>
-  //   );
-  // };
-
-  // console.log("partyModel.party",partyModel?.party?.galleryFiles);
-
 
 
   const handleCarousel = () => {
@@ -203,22 +179,21 @@ function CreateInvitation(props) {
           onPress={() => {
             handleImage();
           }}
-          style={{ position: 'absolute', bottom: 50, right: 25 }}>
-          <AddBlue height={33} width={33} />
+          style={styles.imageButton}
+        >
+          <AddBlue height={20} width={20} />
         </TouchableOpacity>
       </View>
     );
   };
 
+  // console.log(
+  //   'TAGS_SELECTED_DATA - ',
+  //   JSON.stringify(partyModel.party.partyTags),
+  // );
 
+  // console.log("props.route?.params?.isEditParty", props.route?.params?.isEditParty);
 
-  console.log(
-    'TAGS_SELECTED_DATA - ',
-    JSON.stringify(partyModel.party.partyTags),
-  );
-
-
-  
   return (
     <Scaffold>
       {/* <Root> */}
@@ -239,10 +214,10 @@ function CreateInvitation(props) {
                 partyModel?.party?.title === ''
               ) {
                 props.navigation.goBack();
-              } else {
+              } else if (!isEditParty) {
                 Alert.alert(
                   'Alert !',
-                  'Are you sure you want to go back? All your changes will be lost!',
+                  'Are you sure you want to go back? All changes will be lost!',
                   [
                     {
                       text: 'OK',
@@ -255,8 +230,10 @@ function CreateInvitation(props) {
                   { cancelable: true },
                 );
               }
+              else {
+                props.navigation.goBack();
+              }
 
-              // Alert.alert("All changes will be lost! Are you sure ? ")
             }}
           />
 
@@ -281,7 +258,7 @@ function CreateInvitation(props) {
           {!partyModel.isEditMode ? (
             partyModel?.party?.galleryFiles?.length == 0 ? (
               <TouchableOpacity
-                onPress={handleImage}
+                onPress={() => setFooterOpen(!footerOpen)}
                 style={{
                   marginVertical: getHp(40),
                   justifyContent: 'center',
@@ -325,7 +302,7 @@ function CreateInvitation(props) {
               value={partyModel.party.date}
               pickerMode={'datetime'}
               minimumDate={moment().toDate()}
-              maximumDate={moment().add(30, 'day').toDate()}
+              // maximumDate={moment().add(30, 'day').toDate()}
               errorMessage={partyModel.party?.partyError?.date}
             />
 
@@ -345,34 +322,14 @@ function CreateInvitation(props) {
               multiline
               value={partyModel.party.description?.toString()}
               onChange={description => {
-                partyModel.party.set({ description: description });
+                partyModel.party.set({ description: description.toString() });
               }}
               errorMessage={partyModel.party?.partyError?.description}
             />
-
-            {/* {INTEREST.map((item) => {
-                            return (
-                                <View style={{ marginVertical: 10 }}>
-                                    <Text style={[styles.headerTitle, { fontSize: FONTSIZE.Text20, marginVertical: 0 }]}>
-                                        {item.categoryHeading}
-                                    </Text>
-
-                                    <View style={{ flexDirection: 'row', marginVertical: 5, flexWrap: 'wrap' }}>
-                                        {
-                                            item.categoryList.map((item) => <SmallButton item={item} />
-                                            )
-                                        }
-                                    </View>
-
-                                </View>
-                            )
-                        })} */}
           </View>
 
 
-
-
-          <View style={[styles.flex, { paddingHorizontal: 15 }]}>
+          {/* <View style={[styles.flex, { paddingHorizontal: 15 }]}>
             <View style={{ flexDirection: 'row', alignItems: 'center', }}>
               <Text style={[{
                 fontFamily: 'AvenirNext-Regular',
@@ -384,14 +341,17 @@ function CreateInvitation(props) {
               <Info height={20} width={20} />
             </View>
             <Toggle />
-          </View>
+          </View> */}
 
 
           <View style={{ marginVertical: 5, paddingHorizontal: 10, }}>
             <SwitchButton
               value={partyModel.party.isPrivate}
               onPrivatePress={() => partyModel.party.setIsPrivate(true)}
-              onPublicPress={() => partyModel.party.setIsPrivate(false)}
+              onPublicPress={() => {
+                partyModel.party.setIsPrivate(false)
+                Toast("Your event is now public!", { duration: 3000 })
+              }}
             />
           </View>
 
@@ -451,12 +411,34 @@ function CreateInvitation(props) {
                       isPartySelected.tagExist && isPartySelected.subTagExist
                     );
                   }}
+                  isTagSelected={({ tagObj, item }) => {
+                    let isPartySelected = partyModel.party.isSubTagExist(
+                      tagObj,
+                      item,
+                    );
+                    return (
+                      isPartySelected.tagExist
+                    );
+                  }}
                   onAdd={tag => partyModel.party.addTags(tag)}
                 />
-
               );
             })}
           </View>
+
+          {partyModel.party.tickets?.map((t, index) => {
+            return (
+              <TicketComponent
+                data={t}
+                onChangeText={data => {
+                  partyModel.party.onTicketChangeText(data, index);
+                }}
+                onTicketDelete={() => {
+                  partyModel.party.onTicketDelete(index);
+                }}
+              />
+            );
+          })}
 
           <TouchableOpacity
             onPress={() => {
@@ -474,12 +456,12 @@ function CreateInvitation(props) {
               style={[
                 styles.headerTitle,
                 {
-                  fontFamily:'AvenirNext-DemiBold',
+                  fontFamily: 'AvenirNext-DemiBold',
                   fontSize: FONTSIZE.Text18,
                   color: '#1FAEF7',
                   paddingVertical: 10,
                   textAlign: 'center',
-                  letterSpacing:0.5
+                  letterSpacing: 0.5
                 },
               ]}>
               {'Add Ticket Type'}
@@ -487,19 +469,6 @@ function CreateInvitation(props) {
           </TouchableOpacity>
 
 
-          {partyModel.party.tickets?.map((t, index) => {
-            return (
-              <TicketComponent
-                data={t}
-                onChangeText={data => {
-                  partyModel.party.onTicketChangeText(data, index);
-                }}
-                onTicketDelete={() => {
-                  partyModel.party.onTicketDelete(index);
-                }}
-              />
-            );
-          })}
 
 
           <CustomButton
@@ -511,26 +480,116 @@ function CreateInvitation(props) {
             onContinuePress={() => handleOnPress(false)}
           />
 
-          {/* <View style={styles.bottomContainer}>
-                            <TouchableButton
-                                icon={<Peoples height={30} width={30} />}
-                                ButtonTitle={"Invite Friends"}
-                                ButtonStyle={styles.bottomButton}
-                            />
-                            <TouchableButton
-                                icon={<HirePeople height={20} width={20} />}
-                                ButtonTitle={"Hire Vendors"}
-                                ButtonStyle={styles.bottomButton}
-                            />
-                        </View> */}
         </ScrollView>
       </View>
-      {/* </Root> */}
+
+      {/* Footer Picture selector */}
+
+      {footerOpen &&
+        <View style={[styles.footerPicture]}>
+
+          <TouchableOpacity onPress={() => {
+            setFooterOpen(!footerOpen)
+            handleImage()
+          }} style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', marginVertical: getHp(20), paddingHorizontal: getWp(10) }}>
+            <Text
+              style={styles.footerText}>
+              {'Take Photo or Video'}
+            </Text>
+            <BlueCamera height={getHp(20)} width={getHp(20)} />
+          </TouchableOpacity>
+
+          <View style={{
+            height: 1, backgroundColor: '#EEEEEE',
+          }} />
+
+          <TouchableOpacity onPress={() => {
+            setFooterOpen(!footerOpen)
+            handleImage()
+          }} style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', marginVertical: getHp(20), paddingHorizontal: getWp(10) }}>
+            <Text
+              style={styles.footerText}>
+              {'Photo Library'}
+            </Text>
+            <BlueCamera height={getHp(20)} width={getHp(20)} />
+          </TouchableOpacity>
+
+          <View style={{
+            height: 1, backgroundColor: '#EEEEEE',
+          }} />
+
+
+          <TouchableOpacity onPress={() => {
+            setFooterOpen(!footerOpen)
+            handleImage()
+          }} style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', marginVertical: getHp(20), paddingHorizontal: getWp(10) }}>
+            <Text
+              style={styles.footerText}>
+              {'Browse'}
+            </Text>
+            <BlueCamera height={getHp(20)} width={getHp(20)} />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => setFooterOpen(!footerOpen)}
+            style={[styles.shadowStyle, {
+              alignSelf: 'center',
+              backgroundColor: '#FFFFFF',
+              borderRadius: 13,
+              width: '95%',
+              elevation: 1,
+
+            }]}>
+            <Text
+              style={[
+                styles.headerTitle,
+                {
+                  fontFamily: 'AvenirNext-DemiBold',
+                  fontSize: FONTSIZE.Text18,
+                  color: '#1FAEF7',
+                  paddingVertical: 10,
+                  textAlign: 'center',
+                  letterSpacing: 0.5
+                },
+              ]}>
+              {'Cancel'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      }
+      {/*END Footer Picture selector */}
+
     </Scaffold>
   );
 }
 
 const styles = StyleSheet.create({
+  footerText: {
+    fontFamily: 'AvenirNext-Medium',
+    fontSize: FONTSIZE.Text15,
+    color: '#000',
+  },
+  footerPicture: {
+    backgroundColor: '#fff',
+    width: '100%',
+    height: '30%',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderWidth: 2,
+    borderColor: '#F2F5F6',
+    borderBottomWidth: 0
+  },
+  imageButton: {
+    position: 'absolute',
+    bottom: 50,
+    right: 25,
+    borderRadius: 100,
+    elevation: 10,
+    backgroundColor: '#fff',
+    padding: 10,
+    zIndex: 100,
+
+  },
   flex: {
     flexDirection: 'row',
     alignItems: 'center',

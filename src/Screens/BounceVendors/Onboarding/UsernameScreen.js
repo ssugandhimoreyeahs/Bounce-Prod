@@ -33,6 +33,10 @@ export default function UserNameScreen(props) {
       if (password.length == 0) {
         return Toast('Password is required!');
       }
+      if (password.length < 7) {
+        return Toast('Password should be 8 characters long !');
+      }
+
       let body = {
         vendorType: '2',
         name,
@@ -47,7 +51,7 @@ export default function UserNameScreen(props) {
       //     'Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !',
       //   );
       // } else
-      if (username.length > 0 && password.length > 0) {
+      if (username.length > 0 && password.length > 7) {
         setLoader(true);
         const res = await ApiClient.instance.post(
           ApiClient.endPoints.validateVendor,
@@ -76,31 +80,25 @@ export default function UserNameScreen(props) {
     }
   };
 
-  // const handleSpace = (value) => {
-  //     let regSpace = new RegExp(/\s/);
-  //     if (regSpace.test(value)) {
-  //         setUsername(value.trim())
-  //         ToastAndroid.show("Username cannot contain space !", ToastAndroid.SHORT);
-  //     } else {
-  //         setUsername(value)
-  //     }
-  // }
+  const handleSpace = (value, type = 'Username') => {
+    let regSpace = new RegExp(/\s/);
+    if (regSpace.test(value)) {
+      if (type == 'Password') {
+        setPassword(value.trim())
+      } else {
+        setUsername(value.trim())
+      }
+      Toast(`${type} ` + "cannot contain space !");
+    } else {
+      if (type == 'Password') {
+        setPassword(value)
+      } else {
+        setUsername(value)
+      }
+    }
+  }
 
-  // const handleSubmit = async () => {
-  //     let validateP = await validatePass(password)
-  //     if (!validateP) {
-  //         console.log("values res of pass", validateP);
-  //         ToastAndroid.show("Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter !", ToastAndroid.SHORT);
 
-  //     } else if (username.length > 0 &&
-  //         password.length > 0) {
-  //         navigation.navigate("Birthday", {
-  //             username: username,
-  //             password: password,
-  //             name
-  //         })
-  //     }
-  // }
 
   return (
     <Scaffold>
@@ -115,7 +113,8 @@ export default function UserNameScreen(props) {
               placeholder="@Username"
               placeholderTextColor="#999"
               style={styles.textInput}
-              onChangeText={value => setUsername(value)}
+              value={username}
+              onChangeText={value => handleSpace(value, 'Username')}
             />
             <Text style={styles.infoText}>
               {'You won’t be able to change it!'}
@@ -132,8 +131,9 @@ export default function UserNameScreen(props) {
                 marginTop: 10,
                 color: '#000', width: '90%'
               }]}
+              value={password}
               secureTextEntry={!passwordVisible}
-              onChangeText={value => setPassword(value)}
+              onChangeText={value => handleSpace(value, 'Password')}
             />
             {passwordVisible ?
               <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)} hitSlop={smallHitSlop} >

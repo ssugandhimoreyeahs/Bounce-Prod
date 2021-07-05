@@ -19,9 +19,14 @@ import PurchaseTickets from '../../Screens/BounceUsers/EventPage/Public/Purchase
 import HostView from '../../Screens/MyEvents/HostView';
 import Featuring from '../../Screens/BounceUsers/EventPage/Public/Featuring'
 import PartyRental from '../../Screens/BounceVendors/PartyRentals'
-import EmailScreen from '../../Screens/BounceVendors/Onboarding/EmailScreen'
-import NameScreen from '../../Screens/BounceVendors/Onboarding/NameScreen'
+import AuthNavigation from '../AuthNavigation';
 
+import InviteFriends from '../../Screens/BounceVendors/PlanParty/InviteFriends'
+import FriendsPage from '../../Screens/BounceUsers/Profile/FriendsPage'
+import GuestProfile from '../../Screens/BounceUsers/Profile/GuestProfile';
+import AddInterest from '../../Screens/BounceUsers/NewsFeed/AddInterest';
+import NewsFeed from '../../Screens/BounceUsers/NewsFeed/NewsFeed';
+import CommonInterestNewsFeed from '../../Screens/BounceUsers/NewsFeed/CommonInterestNewsFeed'
 
 const UserRootStack = createStackNavigator();
 
@@ -33,13 +38,20 @@ class UserNavigation {
       <UserRootStack.Navigator
         headerMode={'none'}
         initialRouteName={UserHomeDrawerNavigator.routeName}>
+        
         <UserRootStack.Screen
           name={UserHomeDrawerNavigator.routeName}
           component={UserHomeDrawerNavigator.drawerHome}
         />
+       
         <UserRootStack.Screen
           name={CallVendorProfile.routeName}
           component={CallVendorProfile}
+        />
+      
+        <UserRootStack.Screen
+          name={NewsFeed.routeName}
+          component={NewsFeed}
         />
         <UserRootStack.Screen
           name={VendorProfile.routeName}
@@ -56,10 +68,6 @@ class UserNavigation {
         <UserRootStack.Screen
           name={HostProfile.routeName}
           component={HostProfile}
-        />
-        <UserRootStack.Screen
-          name={NameScreen.routeName}
-          component={NameScreen}
         />
         <UserRootStack.Screen
           name={AccountSetting.routeName}
@@ -86,7 +94,26 @@ class UserNavigation {
           name={CreateInvitation.routeName}
           component={CreateInvitation}
         />
-
+        <UserRootStack.Screen
+          name={InviteFriends.routeName}
+          component={InviteFriends}
+        />
+        <UserRootStack.Screen
+          name={FriendsPage.routeName}
+          component={FriendsPage}
+        />
+        <UserRootStack.Screen
+          name={GuestProfile.routeName}
+          component={GuestProfile}
+        />
+        <UserRootStack.Screen
+          name={AddInterest.routeName}
+          component={AddInterest}
+        />
+        <UserRootStack.Screen
+          name={CommonInterestNewsFeed.routeName}
+          component={CommonInterestNewsFeed}
+        />
 
         <UserRootStack.Screen
           name={CreateInvitationTemplate.routeName}
@@ -99,6 +126,10 @@ class UserNavigation {
         <UserRootStack.Screen
           name={AboutUs.routeName}
           component={AboutUs}
+        />
+        <UserRootStack.Screen 
+          component={AuthNavigation.Stack}
+          name={AuthNavigation.routeName}
         />
       </UserRootStack.Navigator>
     );

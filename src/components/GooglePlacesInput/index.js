@@ -54,7 +54,7 @@ function GooglePlacesInput(props) {
           (
             <View style={[styles.ButtonStyle, styles.shadowStyle]}>
               <Text style={[styles.Title2Style, {
-                color: '#000',
+                color: '#999999',
                 fontFamily: 'AvenirNext-Regular',
                 backgroundColor: '#fff',
 

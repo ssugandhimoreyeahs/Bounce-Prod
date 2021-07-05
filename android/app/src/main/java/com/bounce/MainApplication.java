@@ -1,9 +1,10 @@
-package com.bounce;
+package com.bounce.apps;
 
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import org.reactnative.camera.RNCameraPackage;
 // import com.github.wumke.RNExitApp.RNExitAppPackage;
 // import com.github.wumke.RNExitApp.RNExitAppPackage;
 import com.facebook.react.ReactInstanceManager;

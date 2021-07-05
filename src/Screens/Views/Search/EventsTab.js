@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
-import { View, ScrollView,StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native';
+import { View, ScrollView, StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native';
 import { QRCodes, Scaffold, SearchPageTab } from '@components';
 import { FONTSIZE, getHp, getWp } from '@utils';
 import { ChangeBlue } from '@svg'
@@ -40,74 +40,78 @@ export default function EventsTab(props) {
             </TouchableOpacity>
         )
     }
-    return (<ScrollView style={{flex:1}} contentContainerStyle={{}}>
-        <View style={{ paddingHorizontal: 10,backgroundColor:'#FBFBFB',flex:1 }}>
-            <Text style={[styles.textStyle, { color: '#999999', paddingTop: 10, paddingBottom: 5 }]}> {"Find events in"}</Text>
+    return (
+        <ScrollView style={{ flex: 1 }}
+            contentContainerStyle={{}}>
+            <View style={{ paddingHorizontal: 10, backgroundColor: '#FBFBFB', flex: 1 }}>
+                <Text style={[styles.textStyle, { color: '#999999', paddingTop: 10, paddingBottom: 5 }]}> {"Find events in"}</Text>
 
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text17, fontFamily: 'AvenirNext-Medium' }]}> {"Westwood, Los Angeles"}</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text17, fontFamily: 'AvenirNext-Medium' }]}> {"Westwood, Los Angeles"}</Text>
 
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <ChangeBlue height={18} width={18} />
-                    <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text17, color: '#1FAEF7', marginLeft: 5 }]}> {"Change"}</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <ChangeBlue height={18} width={18} />
+                        <Text style={[styles.textStyle, { fontSize: FONTSIZE.Text17, color: '#1FAEF7', marginLeft: 5 }]}> {"Change"}</Text>
+                    </View>
                 </View>
+
+
+                <FlatList
+                    data={['Today', 'Tomorrow', 'Today', 'Tomorrow', 'Today', 'Tomorrow']}
+                    renderItem={renderItem}
+                    keyExtractor={(index) => index}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    style={{ marginVertical: 20 }}
+                />
+
+
+                <Text style={[styles.textStyle, {
+                    fontFamily: 'AvenirNext-Medium',
+                    fontSize: FONTSIZE.Text18,
+                    marginVertical: 5
+                }]}> {"Price range"}</Text>
+
+                <Text style={[styles.textStyle, {
+                    fontFamily: 'AvenirNext-Medium',
+                    fontSize: FONTSIZE.Text14,
+                    color: '#999999'
+                }]}> {"$0 - $500+"}</Text>
+
+
+                <RangeSlider
+                    style={styles.sliderStyle}
+                    min={0}
+                    max={100}
+                    step={1}
+                    floatingLabel
+                    renderThumb={renderThumb}
+                    renderRail={renderRail}
+                    renderRailSelected={renderRailSelected}
+                    renderLabel={renderLabel}
+                    renderNotch={renderNotch}
+                    onValueChanged={handleValueChange}
+
+                />
+
+                <LinearGradient
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    colors={['#4EC3FF', '#55C6FF', '#83D9FF']}
+                    style={[
+                        styles.linearGradient,
+                        { width: '100%', height: getHp(38), borderRadius: 13 },
+                    ]}>
+                    <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} >
+                        <Text style={[{
+                            color: '#fff',
+                            fontSize: FONTSIZE.Text16,
+                            fontFamily: 'AvenirNext-Medium'
+                        }]}>{'Apply'}</Text>
+                    </TouchableOpacity>
+                </LinearGradient>
+
             </View>
-
-
-            <FlatList
-                data={['Today', 'Tomorrow', 'Today', 'Tomorrow', 'Today', 'Tomorrow']}
-                renderItem={renderItem}
-                keyExtractor={(index) => index}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                style={{ marginVertical: 20 }}
-            />
-
-
-            <Text style={[styles.textStyle, {
-                fontFamily: 'AvenirNext-Medium',
-                fontSize: FONTSIZE.Text18,
-                marginVertical: 5
-            }]}> {"Price range"}</Text>
-
-            <Text style={[styles.textStyle, {
-                fontFamily: 'AvenirNext-Medium',
-                fontSize: FONTSIZE.Text14,
-                color: '#999999'
-            }]}> {"$0 - $500+"}</Text>
-
-            <RangeSlider
-                style={styles.sliderStyle}
-                min={0}
-                max={100}
-                step={1}
-                floatingLabel
-                renderThumb={renderThumb}
-                renderRail={renderRail}
-                renderRailSelected={renderRailSelected}
-                renderLabel={renderLabel}
-                renderNotch={renderNotch}
-                onValueChanged={handleValueChange}
-
-            />
-
-            <LinearGradient
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                colors={['#4EC3FF', '#55C6FF', '#83D9FF']}
-                style={[
-                    styles.linearGradient,
-                    { width: '100%', height: getHp(38), borderRadius: 13 },
-                ]}>
-                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} >
-                    <Text style={[{
-                        color: '#fff',
-                        fontSize: FONTSIZE.Text16,
-                        fontFamily: 'AvenirNext-Medium'
-                    }]}>{'Apply'}</Text>
-                </TouchableOpacity>
-            </LinearGradient>
-        </View>
         </ScrollView>
     )
 }
@@ -122,7 +126,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     sliderStyle: {
-        marginVertical: 20
+        marginVertical: 20,
     },
     tagsStyle: {
         backgroundColor: '#F2F5F6',

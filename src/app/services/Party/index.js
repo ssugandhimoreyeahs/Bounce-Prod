@@ -55,8 +55,8 @@ class PartyService {
       let tags = Tags.data.map((tags) => {
         return TagCategory.fromJSON(tags);
       }) || [];
-      return Promise.resolve(tags);
-      //return Promise.resolve(Tags.data);
+      // return Promise.resolve(Tags.data);
+      return Promise.resolve(tags)
     } catch (error) {
       return Promise.reject(error)
     }

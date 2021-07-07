@@ -11,10 +11,18 @@ import { CreateFormData, PartyService } from '../../../app/services';
 import MobxStore from '../../../mobx';
 import PlanPartyModel from '../../BounceVendors/PlanParty/PlanPartyModel';
 import NewsFeed from './NewsFeed';
+import { ApiClient } from '../../../app/services';
+import Spinner from 'react-native-loading-spinner-overlay';
+import { SelectedTags } from '../../../app/Entities'
+import { Toast } from '@constants';
 
 function AddInterest(props) {
     const [selectedTags, setSelectedTags] = useState([]);
     const { tagStore } = MobxStore;
+    const { userProfile: userinfo } = MobxStore.authStore;
+    const [loader, setLoader] = useState(false);
+    const token = userinfo?.token
+    console.log("TOKEN ON MY INTEREST:", token)
 
 
     useEffect(async () => {
@@ -22,194 +30,183 @@ function AddInterest(props) {
         tagStore.setTags(Tags);
     }, []);
 
-    const handleSubmit = () => {
-        props.navigation.navigate(NewsFeed.routeName)
+    const handleSubmit = async () => {
+        // props.navigation.navigate(NewsFeed.routeName)
+        setLoader(true);
+        // let formData = new FormData();
+        // formData.append('interest', selectedTags);
+        await ApiClient.authInstance
+            .post(ApiClient.endPoints.addInterest, {
+                "interest":JSON.parse(JSON.stringify(selectedTags))
+            })
+            .then(async i => {
+                //MobxStore.authStore.async.reloadUser();
+                console.log("RESPONSE - TAGS ADD - ");
+                console.log(i.data);
+                if (i.status == 201 || i.status == 200) {
+                    setLoader(false);
+                    setTimeout(() => {
+                        Toast('Profile Updated Successfully!');
+                        //props.navigation.goBack();
+                    }, 100);
+                }
+
+            })
+            .catch(e => {
+                console.log(e.response);
+                setLoader(false);
+            });
+
+        setLoader(false);
     }
 
-    const isTagsExist = (tag, subTags) => {
-        let result = {
-            tagIndex: -1,
-            tagExist: false,
-            subTagIndex: -1,
-            subTagExist: false,
-        };
-        let tagIndex = selectedTags.findIndex(t => tag.id == t.id);
-        if (tagIndex == -1) {
-            return result;
-        }
-        result.tagIndex = tagIndex;
-        result.tagExist = true;
-        let subTagIndex = selectedTags[tagIndex].subTags.findIndex(
-            sT => sT.id == subTags.id,
-        );
-        if (subTagIndex == -1) {
-            return result;
-        }
-        result.subTagIndex = subTagIndex;
-        result.subTagExist = true;
-        return result;
-    }
+
+
     const onSelectTags = ({ tag, subTags }) => {
-
-        let categoryIndex = selectedTags.findIndex(t => t.id == tag.id);
-        if (categoryIndex == -1) {
-            tag = { ...tag, subTags: [] };
-            tag.subTags.push(subTags);
-
-            setSelectedTags(i => ([
-                ...i, tag
-            ]));
-        } else {
-            let isTagExist = isTagsExist(tag, subTags);
-            if (isTagExist.subTagExist) {
-                setSelectedTags(i => {
-                    let newData = [...i];
-                    newData[isTagExist.tagIndex].subTags = newData[isTagExist.tagIndex].subTags.filter((_, i) => {
-                        return i != isTagExist.subTagIndex;
-                    });
-
-                    if (newData[isTagExist.tagIndex].subTags.length == 0) {
-                        newData = newData.filter((_, i) => i != isTagExist.tagIndex);
-                    }
-                    return newData;
-                });
-            } else {
-                setSelectedTags(i => {
-                    let newData = [...i];
-                    newData[isTagExist.tagIndex].subTags.push(subTags);
-                    return newData;
-                });
-            }
+        try {
+            const selectedTagData = SelectedTags.setTags(selectedTags).onSelectTag(
+                tag,
+                subTags,
+            );
+            setSelectedTags(i => [...selectedTagData]);
+        } catch (error) {
+            console.log('ERROR_ONSELECT - ', error);
         }
-
     };
+
+
     console.log("TAG_CAT_STATTE - ", JSON.stringify(selectedTags));
     return (
         <Scaffold statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
-            <Header
-                headerStyleProp={{ fontFamily: 'AvenirNext-DemiBold' }}
-                back
-                headerTitle={"My Interests"}
-                onPress={() => {
-                    props.navigation.goBack()
-                }}
-                headerBackColor={{ backgroundColor: '#fff', elevation: 0 }}
-            />
+            
+            <Spinner visible={loader} color={'#1FAEF7'} />
+            {!loader && (
+                <View style={{ flex: 1 }}>
+                    <Header
+                        headerStyleProp={{ fontFamily: 'AvenirNext-DemiBold' }}
+                        back
+                        headerTitle={"My Interests"}
+                        onPress={() => {
+                            props.navigation.goBack()
+                        }}
+                        headerBackColor={{ backgroundColor: '#fff', elevation: 0 }}
+                    />
 
 
-            <ScrollView style={styles.container}
-                contentContainerStyle={{ flexGrow: 1 }}>
+                    <ScrollView style={styles.container}
+                        contentContainerStyle={{ flexGrow: 1 }}>
 
 
-                {true && (
-                    <View>
-                        <Text style={[styles.headerTitle, {
-                            fontSize: FONTSIZE.Text22,
-                            marginTop: getHp(15)
-                        }]}>
-                            {"Add Interests"}
+                        {true && (
+                            <View>
+                                <Text style={[styles.headerTitle, {
+                                    fontSize: FONTSIZE.Text22,
+                                    marginTop: getHp(15)
+                                }]}>
+                                    {"Add Interests"}
+                                </Text>
+                                <Text style={[styles.headerTitle, {
+                                    fontSize: FONTSIZE.Text14,
+                                    fontFamily: 'AvenirNext-Regular',
+                                    letterSpacing: 0.2,
+                                    marginBottom: getHp(15)
+                                }]}>
+                                    {"Personalize your feed of events!"}
+                                </Text>
+                            </View>
+                        )
+                        }
+
+
+
+                        <Text style={[styles.headerTitle, { marginVertical: getHp(15) }]}>
+                            {"Music"}
                         </Text>
-                        <Text style={[styles.headerTitle, {
-                            fontSize: FONTSIZE.Text14,
-                            fontFamily: 'AvenirNext-Regular',
-                            letterSpacing: 0.2,
-                            marginBottom: getHp(15)
-                        }]}>
-                            {"Personalize your feed of events!"}
-                        </Text>
-                    </View>
-                )
-                }
+                        {/* First Spotify */}
+                        <TouchableOpacity style={[styles.socialButton, styles.shadowStyle]}>
+                            <View style={styles.flex}>
+                                <Spotify height={getHp(30)} width={getHp(30)} />
+                                <Text
+                                    style={[
+                                        styles.headerTitle,
+                                        {
+                                            fontFamily: 'AvenirNext-Medium', marginLeft: 13
+                                        },
+                                    ]}>
+                                    {'Spotify'}
+                                </Text>
+                            </View>
+                            <Text
+                                style={[
+                                    styles.headerTitle,
+                                    {
+                                        color: '#1FAEF7',
+                                        fontFamily: 'AvenirNext-Medium',
+                                        marginRight: getWp(10)
+                                    },
+                                ]}>
+                                {'Connect'}
+                            </Text>
+                        </TouchableOpacity>
+
+                        {/* Second Apple Music */}
+                        <TouchableOpacity style={[styles.socialButton, styles.shadowStyle, { marginTop: getHp(5), marginBottom: getHp(30) }]}>
+                            <View style={styles.flex}>
+                                <AppleMusic height={getHp(30)} width={getHp(30)} />
+                                <Text
+                                    style={[
+                                        styles.headerTitle,
+                                        { fontFamily: 'AvenirNext-Medium', marginLeft: 13 },
+                                    ]}>
+                                    {'Apple Music'}
+                                </Text>
+                            </View>
+                            <Text
+                                style={[
+                                    styles.headerTitle,
+                                    {
+                                        color: '#1FAEF7',
+                                        fontFamily: 'AvenirNext-Medium',
+                                        marginRight: getWp(10)
+                                    },
+                                ]}>
+                                {'Connect'}
+                            </Text>
+                        </TouchableOpacity>
 
 
-
-                <Text style={[styles.headerTitle, { marginVertical: getHp(15) }]}>
-                    {"Music"}
-                </Text>
-                {/* First Spotify */}
-                <TouchableOpacity style={[styles.socialButton, styles.shadowStyle]}>
-                    <View style={styles.flex}>
-                        <Spotify height={getHp(30)} width={getHp(30)} />
-                        <Text
-                            style={[
-                                styles.headerTitle,
-                                {
-                                    fontFamily: 'AvenirNext-Medium', marginLeft: 13
-                                },
-                            ]}>
-                            {'Spotify'}
-                        </Text>
-                    </View>
-                    <Text
-                        style={[
-                            styles.headerTitle,
-                            {
-                                color: '#1FAEF7',
-                                fontFamily: 'AvenirNext-Medium',
-                                marginRight: getWp(10)
-                            },
-                        ]}>
-                        {'Connect'}
-                    </Text>
-                </TouchableOpacity>
-
-                {/* Second Apple Music */}
-                <TouchableOpacity style={[styles.socialButton, styles.shadowStyle, { marginTop: getHp(5), marginBottom: getHp(30) }]}>
-                    <View style={styles.flex}>
-                        <AppleMusic height={getHp(30)} width={getHp(30)} />
-                        <Text
-                            style={[
-                                styles.headerTitle,
-                                { fontFamily: 'AvenirNext-Medium', marginLeft: 13 },
-                            ]}>
-                            {'Apple Music'}
-                        </Text>
-                    </View>
-                    <Text
-                        style={[
-                            styles.headerTitle,
-                            {
-                                color: '#1FAEF7',
-                                fontFamily: 'AvenirNext-Medium',
-                                marginRight: getWp(10)
-                            },
-                        ]}>
-                        {'Connect'}
-                    </Text>
-                </TouchableOpacity>
+                        {tagStore.getTags().map(t => {
+                            return (
+                                <TagsCollapsible
+                                    MyInterest={true}
+                                    Data={t.clone()}
+                                    onAdd={onSelectTags}
+                                    isOnSelect={({ tagObj, item }) => {
+                                        let isExist = SelectedTags.setTags(selectedTags).isTagSelected(
+                                            tagObj,
+                                            item,
+                                        );
+                                        return isExist.tagExist && isExist.subTagExist;
+                                    }}
+                                />
+                            );
+                        })}
 
 
-
-                {tagStore.getTags().map(t => {
-                    return (
-                        <TagsCollapsible
-                            MyInterest={true}
-                            Data={t}
-                            onAdd={onSelectTags}
-                            isOnSelect = {({ tagObj, item }) => {
-                                let isExist = isTagsExist(tagObj,item);
-                                return isExist.tagExist && isExist.subTagExist;
-                            }}
-                        />
-                    );
-                })}
-
-
-
-                <TouchableOpacity
-                    onPress={handleSubmit}
-                    style={[styles.shadowStyle, styles.SaveButton]}>
-                    <Text style={{
-                        color: '#000',
-                        fontFamily: 'AvenirNext-DemiBold', fontSize: FONTSIZE.Text21
-                    }}>
-                        {'Save'}
-                    </Text>
-                </TouchableOpacity>
-
-
-
-            </ScrollView>
+                        <TouchableOpacity
+                            onPress={handleSubmit}
+                            style={[styles.shadowStyle, styles.SaveButton]}>
+                            <Text style={{
+                                color: '#000',
+                                fontFamily: 'AvenirNext-DemiBold', fontSize: FONTSIZE.Text21
+                            }}>
+                                {'Save'}
+                            </Text>
+                        </TouchableOpacity>
+                    </ScrollView>
+                </View>
+            )
+            }
         </Scaffold>
     )
 }

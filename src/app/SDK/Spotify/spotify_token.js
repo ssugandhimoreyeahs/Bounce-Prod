@@ -21,5 +21,5 @@ export default spotifyToken = async () => {
     const newToken = json.access_token;
     console.log("NEW TOKEN", newToken);
 
-    return newToken;
+    return json;
 }

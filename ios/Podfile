@@ -8,6 +8,10 @@ target 'bounce' do
   permissions_path = '../node_modules/react-native-permissions/ios'
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
   pod 'react-native-restart', :path => '../node_modules/react-native-restart'
+
+  pod 'RNEventEmitter', :path => "../node_modules/react-native-events"
+	pod 'RNSpotifyRemote', :path => '../node_modules/react-native-spotify-remote'
+  
   use_react_native!(
     :path => config[:reactNativePath],
     # to enable hermes on iOS, change `false` to `true` and then install pods

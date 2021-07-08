@@ -4507,6 +4507,11 @@ event-target-shim@^5.0.0, event-target-shim@^5.0.1:
   resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
 
+events@^3.0.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
+  integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
+
 exec-sh@^0.3.2:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/exec-sh/-/exec-sh-0.3.6.tgz#ff264f9e325519a60cb5e273692943483cca63bc"
@@ -8602,6 +8607,13 @@ react-native-elements@^3.2.0:
     react-native-ratings "8.0.4"
     react-native-size-matters "^0.3.1"
 
+react-native-events@^1.0.15, react-native-events@^1.0.17:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/react-native-events/-/react-native-events-1.0.17.tgz#3c1ce1a5b5dccc8020a68674054f7afb2d72fc6e"
+  integrity sha512-9RWZJ/yW1Qb7fX6i/msdtRBq00x50OXZEaAjQmiecJyTD44fzx7PWJgviOwTpSMuUZxl8/RQavpYxTLM1TjpkA==
+  dependencies:
+    events "^3.0.0"
+
 react-native-exception-handler@^2.10.10:
   version "2.10.10"
   resolved "https://registry.yarnpkg.com/react-native-exception-handler/-/react-native-exception-handler-2.10.10.tgz#b6bfe2b7e6ea4a4deb1f518f48ce2ee1d4843497"
@@ -8829,6 +8841,13 @@ react-native-snap-carousel@^3.9.1:
   dependencies:
     prop-types "^15.6.1"
     react-addons-shallow-compare "15.6.2"
+
+react-native-spotify-remote@^0.3.9:
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/react-native-spotify-remote/-/react-native-spotify-remote-0.3.9.tgz#fd5c2300717442f3de8df6fbf42bc0d3001da9a2"
+  integrity sha512-h5sswb3KbK1vJAy9qwbmTd8RZpNW7jpzSqWsmemsM4Xtqti3in7RVg7oCap9Whs+RWlHTICzElA6zvZOzgtZJA==
+  dependencies:
+    react-native-events "^1.0.15"
 
 react-native-svg-transformer@^0.14.3:
   version "0.14.3"

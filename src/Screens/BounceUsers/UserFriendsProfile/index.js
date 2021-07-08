@@ -23,7 +23,7 @@ import {BlackMenubar, Scanner, AppleMusic, BluePerson} from '@svg';
 import {Avatar} from 'react-native-elements';
 import ImagePicker from 'react-native-image-crop-picker';
 import {connect, useSelector, useDispatch} from 'react-redux';
-import {fetchVendorData} from '../../../reducer/mainexpensecategory';
+import Modal from 'react-native-modal';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {pickDocument} from '@hooks';
 import {fetchGet, postData} from '../../../FetchServices';
@@ -58,6 +58,21 @@ import Icon from 'react-native-vector-icons/Entypo';
 import spotifyToken from '../../../app/SDK/Spotify/spotify_token';
 import FriendsPage from '../Profile/FriendsPage';
 import CommonInterestNewsFeed from '../NewsFeed/CommonInterestNewsFeed';
+import {
+  auth as SpotifyAuth,
+  remote as SpotifyRemote,
+  ApiScope,
+  ApiConfig,
+} from 'react-native-spotify-remote';
+
+const spotifyConfig = {
+  clientID: '8d16f72b2b524c36965c7fb88a36e9a6',
+  redirectURL: 'https://5f247ddc799b.ngrok.io/spotify/spotifyCallback',
+  tokenRefreshURL: 'https://accounts.spotify.com/api/token',
+  tokenSwapURL: 'https://accounts.spotify.com/api/token',
+  authType: 'TOKEN',
+  scopes: [ApiScope.AppRemoteControlScope, ApiScope.UserFollowReadScope],
+};
 
 Text.defaultProps = {
   allowFontScaling: false,
@@ -67,6 +82,7 @@ Text.defaultProps = {
 function UserFriendsProfile(props) {
   const {authStore} = MobxStore;
   const {navigation} = props;
+  const [spotifyModal, setSpotifyModal] = useState(false);
   const userinfo = authStore.userProfile;
   const [getMedia, setMedia] = useState(null);
   const [loader, setLoader] = useState(false);
@@ -90,6 +106,15 @@ function UserFriendsProfile(props) {
     profileImage = {},
     age,
   } = userinfo?.user;
+
+  const connectSpotify = async () => {
+    try {
+      const session = await SpotifyAuth.authorize(spotifyConfig);
+      console.log('Spotify Response ----> ', JSON.stringify(session));
+    } catch (e) {
+      console.log('Spotify Error ----> ', e);
+    }
+  };
 
   var gapi = window;
   // console.log("WINDOW ", gapi)
@@ -641,6 +666,9 @@ function UserFriendsProfile(props) {
               {/* 2nd */}
               <View style={styles.flex}>
                 <TouchableOpacity
+                  onPress={() => {
+                    connectSpotify();
+                  }}
                   style={[styles.socialButton, styles.shadowStyle]}>
                   <View style={styles.flex}>
                     <Spotify height={getHp(30)} width={getHp(30)} />

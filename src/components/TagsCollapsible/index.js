@@ -10,19 +10,22 @@ AntDesign.loadFont();
 const TagsCollapsible = props => {
   const [isVisible, setIsVisible] = useState(true);
 
-  const RenderItems = (item, index) => {
+  const RenderItems = (item, index) => { 
     let tagObj = Object.assign({}, props.Data);
     delete tagObj.subTags;
-    let isPartySelected = props.isOnSelect({tagObj, item});
-    return (
-      <TouchableOpacity
-        key={index}
-        onPress={() => {
-          props.onAdd({
-            tag: tagObj,
-            subTags: {...item},
-          });
-        }}>
+    let isPartySelected = props.isOnSelect({ tagObj, item });
+     
+
+  return (
+    <TouchableOpacity
+      key={index}
+      onPress={() => {
+        
+        props.onAdd({
+          tag: tagObj,
+          subTags: item.clone() ?? item,
+        });
+      }}>
         <View
           style={[
             styles.itemView,

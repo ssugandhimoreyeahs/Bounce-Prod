@@ -68,6 +68,7 @@ function UserFriendsProfile(props) {
   const {authStore} = MobxStore;
   const {navigation} = props;
   const userinfo = authStore.userProfile;
+  console.log("USER INFO STRINGIFY:", JSON.stringify(userinfo))
   const [getMedia, setMedia] = useState(null);
   const [loader, setLoader] = useState(false);
   const dispatch = useDispatch();

@@ -25,7 +25,7 @@ import { AccountService } from '../../app/services';
 import PartyRental from '../BounceVendors/PartyRentals'
 import InviteFriends from '../BounceVendors/PlanParty/InviteFriends';
 import FriendsPage from '../BounceUsers/Profile/FriendsPage';
-
+import RatingPage from '../../components/ReviewCard/RatingPage'
 
 
 export default function UserCustomDrawer(props) {
@@ -127,10 +127,10 @@ export default function UserCustomDrawer(props) {
       name: 'Dark / Light Mode',
       // onPress: () => toggleTheme()
     },
-    // {
-    //   name: 'Subscription',
-    //   // onPress: () => navigation.navigate("SubscriptionScreen")
-    // },
+    {
+      name: 'RatingPage',
+      onPress: () => props.navigation.navigate(RatingPage.routeName)
+    },
     {
       name: 'About',
       onPress: () => props.navigation.navigate(AboutUs.routeName),

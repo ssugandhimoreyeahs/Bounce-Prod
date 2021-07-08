@@ -5,16 +5,18 @@ class Server {
 }
 
 class Endpoints extends Server {
+  tagWiseNewsFeed = '/party/newsFeed';
   cancelFriendRequest = '/user/cancelFriendRequest';
   sendRequest = '/user/addFriendRequest';
   acceptRequest = '/user/approveFriendRequest';
-  unFriend ='/user/unfriend';
+  unFriend = '/user/unfriend';
   denyFriendRequest = '/user/denyFriendRequest';
   relationWithUser = '/user';
+  addInterest = '/user/addInterest';
   getQR = '/user/getqr';
   getAllUser = '/user/all'
   postUser = '/user';
-   getCategory = '/Vendor/Category';
+  getCategory = '/Vendor/Category';
   postUserLogin = '/user/userlogin';
   getVendor = '/vendor/getvendor';
   getUser = '/user';

@@ -31,5 +31,27 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+
+      <activity
+            android:exported="true"
+            android:name="com.spotify.sdk.android.authentication.AuthCallbackActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:scheme="https://5f247ddc799b.ngrok.io"
+                    android:host="https://5f247ddc799b.ngrok.io/spotify/spotifyCallback"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.spotify.sdk.android.authentication.LoginActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
     </application>
 </manifest>

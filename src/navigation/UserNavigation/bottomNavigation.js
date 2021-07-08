@@ -25,9 +25,9 @@ import { FONTSIZE, getHp } from '../../app/utils';
 import BENotification from '../../Screens/BounceUsers/Notifications/Before/Notifications';
 import NewsFeed from '../../Screens/BounceUsers/NewsFeed/NewsFeed';
 import AddInterest from '../../Screens/BounceUsers/NewsFeed/AddInterest';
+import ConditionalRenderNewsFeed from '../../Screens/BounceUsers/NewsFeed/ConditionalRenderNewsFeed'
+
 const UserHomeBottomTab = createBottomTabNavigator();
-
-
 class UserHomeBottomNavigation {
   static routeName = '/UserHomeBottomNavigation';
   static homeBottomNav = props => {
@@ -70,10 +70,10 @@ class UserHomeBottomNavigation {
                 );
             },
           }}
-          // name={NewsFeed.routeName}
-          // component={NewsFeed}
-          name={AddInterest.routeName}
-          component={AddInterest}
+          name={ConditionalRenderNewsFeed.routeName}
+          component={ConditionalRenderNewsFeed}
+          // name={AddInterest.routeName}
+          // component={AddInterest}
         />
 
         <UserHomeBottomTab.Screen

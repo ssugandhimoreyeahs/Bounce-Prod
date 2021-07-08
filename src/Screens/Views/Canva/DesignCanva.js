@@ -18,7 +18,7 @@ import RangeSlider from 'rn-range-slider';
 // import RailSelected from './basic/RailSelected'
 // import Label from './basic/Label'
 // import Notch from './basic/Notch'
-
+import UserHomeScreen from '../../BounceUsers/UserFriendsProfile'
 
 
 export default function DesignCanva(props) {
@@ -56,7 +56,9 @@ export default function DesignCanva(props) {
             flexDirection: 'row',
             alignItems: 'center'
         }}>
-            <TouchableOpacity style={{}}>
+            <TouchableOpacity
+                onPress={() => props.navigation.navigate(UserHomeScreen.routeName)}
+            >
                 <Back name="chevron-back" color={'#000'}
                     style={{ marginRight: 20, marginLeft: 10 }}
                     size={30} />

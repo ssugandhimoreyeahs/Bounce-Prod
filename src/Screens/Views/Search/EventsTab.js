@@ -62,9 +62,17 @@ export default function EventsTab(props) {
                     keyExtractor={(index) => index}
                     horizontal
                     showsHorizontalScrollIndicator={false}
-                    style={{ marginVertical: 20 }}
+                    style={{ marginTop:getHp(30),marginBottom:getHp(10) }}
                 />
 
+                <FlatList
+                    data={['18+', '21+']}
+                    renderItem={renderItem}
+                    keyExtractor={(index) => index}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    style={{ marginTop:getHp(5),marginBottom:getHp(20) }}
+                />
 
                 <Text style={[styles.textStyle, {
                     fontFamily: 'AvenirNext-Medium',
@@ -134,7 +142,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         paddingVertical: 5,
         paddingHorizontal: 10,
-        marginRight: 5,
+        marginRight: getWp(10),
     },
     linearGradient: {
         justifyContent: 'center',

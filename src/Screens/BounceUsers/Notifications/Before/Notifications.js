@@ -1,6 +1,12 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
-import { Header, Root, BlueCard, BlackCard, Footer } from '@components'
+import {
+    Header,
+    Scaffold,
+    MessageCard,
+    FriendRequest,
+    InviteRequest,
+} from '@components'
 import {
     StarPerson,
     Girl,
@@ -9,65 +15,75 @@ import {
     WhiteParty,
 } from '@assets'
 import { FONTSIZE } from '@utils'
+import { Payment } from '../../../../components'
+import { getHp } from '../../../../app/utils'
 
 const MESSAGESTACK = [{
     icon: Girl,
     name: "David Poura",
     partyType: "Homecoming Party",
-    time: "Sat. October 3, 9:00pm",
+    price: '$750.00',
+    desc:'Hiring this vendor wil place him inside the ‘Featuring’ section in your event page.'
 },
 {
     icon: Girl,
     name: "David Poura",
     partyType: "Homecoming Party",
-    time: "Sat. October 3, 9:00pm",
+    price: '$750.00',
+    desc:'Hiring this vendor wil place him inside the ‘Featuring’ section in your event page.'
 },
 ]
 
-const REVIEWSTACK = [{
+
+const ReviewStack = [{
     icon: Girl,
     name: "David Poura",
-    stars: null,
-    reviewText: "Sat. October 3, 9:00pm",
+    time: "Sat. October 3, 9:00pm",
+    partyType: "Grad Night 2021",
+    price: '$750.00',
+    desc:'Hiring this vendor wil place him inside the ‘Featuring’ section in your event page.'
 },
 {
     icon: Girl,
     name: "David Poura",
-    partyType: "Homecoming Party",
     time: "Sat. October 3, 9:00pm",
+    partyType: "Grad Night 2021",
+    price: '$750.00',
+    desc:'Hiring this vendor wil place him inside the ‘Featuring’ section in your event page.'
 },
 ]
+
 export default function Notifications() {
     return (
-        <View style={styles.container}>
-            <Text style={[styles.headingStyle, { color: '#000' }]}>
-                {"No notification's available."}
-            </Text>
-        </View>
-        // <Root>
-        //     <View style={styles.container}>
-        //         <ScrollView>
-        //             <Header
-        //                 headerTitle={"Notifications"}
-        //             />
-        //             <Text style={styles.headingStyle}>Messages</Text>
-        //             <BlueCard
-        //                 MESSAGESTACK={MESSAGESTACK}
+        // <View style={styles.container}>
+        //     <Text style={[styles.headingStyle, { color: '#000' }]}>
+        //         {"No notification's available."}
+        //     </Text>
+        // </View>
+        <Scaffold>
+            <View style={styles.container}>
+                <ScrollView>
 
-        //             />
-        //             <Text style={styles.headingStyle}>Reviews</Text>
-        //             <BlackCard
-        //                 REVIEWSTACK={REVIEWSTACK}
+                    <Payment
+                        MESSAGESTACK={MESSAGESTACK}
+                        heading={'Payments'}
+                    />
+                    <MessageCard
+                        MESSAGESTACK={MESSAGESTACK}
+                        heading={'Messaging'}
+                    />
+                    <FriendRequest
+                        MESSAGESTACK={MESSAGESTACK}
+                        heading={'Friend Requests'}
+                    />
+                    <InviteRequest
+                        MESSAGESTACK={ReviewStack}
+                        heading={'Invites'}
+                    />
 
-        //             />
-
-
-        //         </ScrollView>
-        //         {/* <Footer
-        //             notification
-        //         /> */}
-        //     </View>
-        // </Root>
+                </ScrollView>
+            </View>
+        </Scaffold>
     )
 }
 
@@ -77,25 +93,8 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: FONTSIZE.Text20,
         fontFamily: 'AvenirNext-Regular'
-        // fontWeight: 'bold',
-        // paddingLeft: 20,
-        // paddingTop: 8
     },
 
-    blueNotificationCard: {
-        backgroundColor: 'radial - gradient(76.22 % 76.22 % at 50 % 23.78 %, rgba(31, 174, 247, 0.69) 0 %, rgba(31, 174, 247, 0.5) 100 %, rgba(31, 174, 247, 0.42) 100 %)',
-        borderRadius: 15,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 15
-    },
-    eventDate: {
-        backgroundColor: '#313131',
-        borderRadius: 15,
-        padding: 20,
-        marginVertical: 10,
-    },
     flexDirectionStyle: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -105,16 +104,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     container: {
-        justifyContent: 'center',
-        alignItems: 'center',
         flex: 1,
-        backgroundColor: '#FBFBFB'
-    },
-    name: {
-        color: "#FFFFFF",
-        fontSize: 20,
-        fontWeight: 'bold',
-        paddingBottom: 10
+        backgroundColor: '#FBFBFB',
+        marginBottom: getHp(50)
     },
     commentLineTextStyle: {
         color: "#FFFFFF",

@@ -53,13 +53,16 @@ class PartyService {
         ApiClient.endPoints.tags,
         ApiClient.applicationJSONHeader(false)
       );
-      // let tags = Tags.data.map((tags) => {
-      //   return TagCategory.fromJSON(tags);
-      // }) || [];
-      return Promise.resolve(Tags.data);
+      return Promise.resolve(this.tagsAssign(Tags.data));
     } catch (error) {
       return Promise.reject(error)
     }
+  }
+
+  tagsAssign = (Tags) => {
+    return Tags.map((tags) => {
+      return TagCategory.fromJSON(tags);
+    }) || [];
   }
 }
 

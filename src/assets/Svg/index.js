@@ -132,9 +132,12 @@ import BackBlack from './BackBlack.svg'
 import BluePerson from './BluePerson.svg'
 import OrangeSaved from './OrangeSaved.svg'
 import BounceText from './BounceText.svg'
-
+import BlueSendRequest from './BlueSendRequest.svg'
+import Party from './Party.svg'
 
 export {
+    Party,
+    BlueSendRequest,
     BounceText,
     BluePerson,
     OrangeSaved,

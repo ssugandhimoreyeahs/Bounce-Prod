@@ -27,6 +27,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {SelectedTags} from '../../../app/Entities';
 import {Toast} from '@constants';
 
+
 function AddInterest(props) {
   const [selectedTags, setSelectedTags] = useState([]);
   const {tagStore} = MobxStore;

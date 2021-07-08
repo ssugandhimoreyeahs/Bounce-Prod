@@ -61,7 +61,7 @@ function NewsFeed(props) {
         await ApiClient.authInstance
             .get(ApiClient.endPoints.tagWiseNewsFeed)
             .then(async i => {
-                console.log("@@@@RESPONSE of Tag wise News Feed- ", JSON.stringify(i.data));
+                console.log("@@@@RESPONSE of Tag wise News Feed- ", JSON.stringify(i.data[0]));
 
                 if (i.status == 201 || i.status == 200) {
                     setNewsFeedData(i.data)
@@ -80,34 +80,37 @@ function NewsFeed(props) {
         initialRender()
     }, [])
 
-    const handleCarousel = () => {
+    const handleCarousel = (gallery) => {
         return <ImageCarousel
-            imageArray={imageArray}
+            imageArray={gallery}
             onSnapToItem={(index) => setState(index)}
             state={state}
             noAddButton={false}
-            value={'Normal'}
+            value={'NewsFeed'}
             pagination={true}
         />
     }
 
 
-    const flatlist = ({ item }) => {
+    const renderItem = ({ item }) => {
         const {
             description,
-            date
+            date,
+            gallery
         } = item
-        console.log(' description date', description, date)
+        // console.log(' description date', description, date)
+
+
         return (
             <View style={{ marginBottom: getHp(40), }}>
-                {handleCarousel()}
+                {handleCarousel(gallery)}
                 <View style={{
                     paddingHorizontal: 10,
                     marginTop: getHp(0)
                 }}>
                     <View style={[styles.timeViewStyle, { paddingVertical: getHp(5) }]}>
                         <Text style={styles.eventTitleStyle}>
-                            {item.eventTitle}
+                            {item.description}
                         </Text>
                         <View style={styles.downloadView}>
                             <Saved height={24} width={22} />
@@ -115,7 +118,7 @@ function NewsFeed(props) {
                         </View>
                     </View>
                     <Text style={styles.timeStyle}>
-                        {date}
+                        {item.date}
                     </Text>
                 </View>
             </View>
@@ -158,7 +161,7 @@ function NewsFeed(props) {
                     <ScrollView style={{ flex: 1 }}>
                         <FlatList
                             data={newsFeedData}
-                            renderItem={flatlist}
+                            renderItem={renderItem}
                         />
                         <View style={{ marginBottom: 30 }} />
                     </ScrollView>
@@ -173,6 +176,9 @@ export default observer(NewsFeed)
 
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
     timeViewStyle: {
         flexDirection: 'row',
         alignItems: 'center',

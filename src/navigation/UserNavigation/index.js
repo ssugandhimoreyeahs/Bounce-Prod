@@ -29,6 +29,7 @@ import GuestProfile from '../../Screens/BounceUsers/Profile/GuestProfile';
 import AddInterest from '../../Screens/BounceUsers/NewsFeed/AddInterest';
 import NewsFeed from '../../Screens/BounceUsers/NewsFeed/NewsFeed';
 import CommonInterestNewsFeed from '../../Screens/BounceUsers/NewsFeed/CommonInterestNewsFeed'
+import RatingPage from '../../components/ReviewCard/RatingPage'
 
 const UserRootStack = createStackNavigator();
 
@@ -89,6 +90,10 @@ class UserNavigation {
         <UserRootStack.Screen
           name={HostView.routeName}
           component={HostView}
+        />
+        <UserRootStack.Screen
+          name={RatingPage.routeName}
+          component={RatingPage}
         />
         <UserRootStack.Screen
           name={Featuring.routeName}

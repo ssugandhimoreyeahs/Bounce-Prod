@@ -5,7 +5,7 @@ import Share from 'react-native-share';
 
 
 export const shareFunction = async (props) => {
-    console.log("Share options props", props)
+    // console.log("Share options props", props)
     const {
         fullName
     } = props

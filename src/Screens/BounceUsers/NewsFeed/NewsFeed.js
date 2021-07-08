@@ -13,6 +13,10 @@ import { BlackOutlineShare, Saved, BounceText } from '@svg'
 import { observer } from 'mobx-react';
 import { getWp } from '../../../app/utils';
 import AddInterest from './AddInterest';
+import { ApiClient } from '../../../app/services';
+import Spinner from 'react-native-loading-spinner-overlay';
+// import { styles } from '../../BounceVendors/VendorProfile/indexCss';
+import MobxStore from '../../../mobx'
 
 const { height, width } = Dimensions.get("screen")
 
@@ -41,8 +45,40 @@ const NEWSFEED = [{
 
 function NewsFeed(props) {
     const [state, setState] = useState(0)
+    const [newsFeedData, setNewsFeedData] = useState(0)
     const imageArray = [DJ, DJ1, DJ2]
+    const [loader, setLoader] = useState(false);
+    const {
+        authStore
+    } = MobxStore;
+    const { navigation } = props;
+    const userinfo = authStore.userProfile;
 
+
+
+    const initialRender = async () => {
+        setLoader(true);
+        await ApiClient.authInstance
+            .get(ApiClient.endPoints.tagWiseNewsFeed)
+            .then(async i => {
+                console.log("@@@@RESPONSE of Tag wise News Feed- ", JSON.stringify(i.data));
+
+                if (i.status == 201 || i.status == 200) {
+                    setNewsFeedData(i.data)
+                    setLoader(false);
+                    MobxStore.authStore.async.reloadUser()
+                }
+            })
+            .catch(e => {
+                console.log(e.response);
+                setLoader(false);
+            });
+        setLoader(false);
+    }
+
+    useEffect(() => {
+        initialRender()
+    }, [])
 
     const handleCarousel = () => {
         return <ImageCarousel
@@ -57,6 +93,11 @@ function NewsFeed(props) {
 
 
     const flatlist = ({ item }) => {
+        const {
+            description,
+            date
+        } = item
+        console.log(' description date', description, date)
         return (
             <View style={{ marginBottom: getHp(40), }}>
                 {handleCarousel()}
@@ -74,68 +115,56 @@ function NewsFeed(props) {
                         </View>
                     </View>
                     <Text style={styles.timeStyle}>
-                        {item.time}
+                        {date}
                     </Text>
                 </View>
             </View>
         )
     }
 
-    const SmallButton = ({ item }) => {
-        return (
-            <TouchableOpacity style={[
-                styles.itemView,
-                { backgroundColor: 'rgba(0, 224, 143, 0.24)' },
-            ]}>
-                <Text style={[styles.headerTitle, {
-                    fontSize: FONTSIZE.Text12,
-                    letterSpacing: 0.4,
-                    color: '#000',
-                    fontFamily: 'AvenirNext-Medium'
-                }]}>
-                    {item}
-                </Text>
-            </TouchableOpacity>
-        )
-    }
 
     return (
         <Scaffold
             statusBarStyle={{ backgroundColor: '#fff' }}>
+            <Spinner visible={loader} color={'#1FAEF7'} />
+            {!loader && (
+                <View style={styles.container}>
+                    <View style={styles.header}>
+                        <TouchableOpacity
+                            onPress={() => props.navigation.goBack()}
+                            hitSlop={smallHitSlop}
+                        >
+                            <BounceText height={24} width={107} />
+                        </TouchableOpacity>
 
-            <View style={styles.header}>
-                <TouchableOpacity
-                    onPress={() => props.navigation.goBack()}
-                    hitSlop={smallHitSlop}
-                >
-                    <BounceText height={24} width={107} />
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    onPress={() => props.navigation.navigate(AddInterest.routeName)}
-                    style={[
-                        styles.itemView,
-                        { backgroundColor: 'rgba(0, 224, 143, 0.12)', borderRadius: 7 },
-                    ]}>
-                    <Text style={[styles.headerTitle, {
-                        fontSize: FONTSIZE.Text15,
-                        letterSpacing: 0.4,
-                        color: '#00E08F',
-                        fontFamily: 'AvenirNext-DemiBold'
-                    }]}>
-                        {'My Interest'}
-                    </Text>
-                </TouchableOpacity>
-            </View>
+                        <TouchableOpacity
+                            onPress={() => props.navigation.navigate(AddInterest.routeName)}
+                            style={[
+                                styles.itemView,
+                                { backgroundColor: 'rgba(0, 224, 143, 0.12)', borderRadius: 7 },
+                            ]}>
+                            <Text style={[styles.headerTitle, {
+                                fontSize: FONTSIZE.Text15,
+                                letterSpacing: 0.4,
+                                color: '#00E08F',
+                                fontFamily: 'AvenirNext-DemiBold'
+                            }]}>
+                                {'My Interest'}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
 
 
-            <ScrollView style={{ flex: 1 }}>
-                <FlatList
-                    data={NEWSFEED}
-                    renderItem={flatlist}
-                />
-                <View style={{ marginBottom: 30 }} />
-            </ScrollView>
+                    <ScrollView style={{ flex: 1 }}>
+                        <FlatList
+                            data={newsFeedData}
+                            renderItem={flatlist}
+                        />
+                        <View style={{ marginBottom: 30 }} />
+                    </ScrollView>
+                </View>
+            )
+            }
         </Scaffold>
     )
 }

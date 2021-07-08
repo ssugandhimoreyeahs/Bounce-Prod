@@ -5,7 +5,7 @@ import { Header, SearchBar, CustomButton, Calender, Toggle } from '@components'
 import { Girl } from '@assets';
 import {
     Info,
-    BlackCircleCross,
+    BlackClose,
     BounceLogo,
     InfoWhite,
     InfoBlackBorder,
@@ -14,6 +14,23 @@ import {
 } from '@svg'
 import { BlurView, VibrancyView } from "@react-native-community/blur";
 
+import { Avatar } from 'react-native-elements'
+import { FONTSIZE, getHp, getWp } from '../../app/utils';
+
+
+// const modalFunction =()=>{
+//     return (
+//         <Modal isVisible={true} style={{}} >
+//         <BlurView
+//             style={[styles.absolute, {}]}
+//             blurType="light"
+//             blurAmount={10}
+
+//         />
+
+//         </Modal>
+//     )
+// }
 export default function ModalPopup(props) {
     const { width, height } = Dimensions.get('screen')
     const {
@@ -21,7 +38,12 @@ export default function ModalPopup(props) {
         infoModel = false,
         alertModel = false,
         customModel = false,
-        otherModel = false
+        otherModel = false,
+        onPress = () => { },
+        closePopup = false,
+        name,
+        icon,
+        desc,
     } = props
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -30,95 +52,93 @@ export default function ModalPopup(props) {
     };
 
     return (
-        <Modal isVisible={visible} style={{}} >
+        <Modal isVisible={closePopup} style={{}} >
             <BlurView
                 style={[styles.absolute, {}]}
-                // viewRef={this.state.viewRef}
                 blurType="light"
-                blurAmount={15}
-                reducedTransparencyFallbackColor="white"
+                blurAmount={10}
+
             />
+
             {
-                otherModel ?
-                    // <View style={{ height:'100%' }}>
-                    <Calender />
-                    //  </View>
-                    : null
+                otherModel && <Calender />
+
             }
-            { alertModel ? <View style={styles.alertContainer}>
 
-                <Text style={{ color: '#fff', fontSize: 26, position: 'absolute', top: 25 }}>Are you sure?</Text>
-
-                <Text style={styles.bbText}>By adding a cohost, your friend(s) will have all the same editing capabilities</Text>
-            </View> : null}
-            {
-                infoModel ?
-
-                    <View style={{ flex: 1, marginTop: '10%' }}>
-                        <View style={styles.doubleButton}>
-                            <View style={styles.doubleSubcontainer}>
-                                <TouchableOpacity style={styles.private}>
-                                    <Text style={[styles.TitleStyle, { fontSize: 18, color: '#fff' }]}>Private</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={[styles.private, { backgroundColor: '#fff' }]}>
-                                    <Text style={[styles.TitleStyle, { fontSize: 18, color: '#000' }]}>Private</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={{ position: 'absolute', right: -45 }}>
-                                <Info height={25} width={25} />
-                            </View>
-                        </View>
-
-                        <View style={styles.mainCardContainer}>
-                            <View style={[styles.bbHeader, {
-                            }]}>
-                                <BounceLogo height={50} width={50} />
-                                <Text style={styles.bbText}>BB</Text>
-
-                            </View>
-                            <Text style={styles.bodyText}>Private events are only visible to friends you invite. Select ‘Public’ to post your event on the news feed.</Text>
-
-                            <TouchableOpacity style={[styles.private, { elevation: 10, paddingVertical: 20, justifyContent: 'center' }]}>
-                                <Text style={[styles.TitleStyle, { fontSize: 18, color: '#fff' }]}>Confirm</Text>
-                            </TouchableOpacity>
-
-                        </View>
-                        <View style={{ position: 'absolute', bottom: '10%', alignSelf: 'center' }}>
-                            <BlackCircleCross height={60} width={60} />
-
-                        </View>
-                        <View style={{ position: 'absolute', bottom: 0, backgroundColor: '#000000', height: 5, width: '30%', borderRadius: 40, marginTop: 15, alignSelf: 'center' }} />
-                    </View>
-                    : null
+            { alertModel &&
+                <View style={styles.alertContainer}>
+                    <Text style={{ color: '#fff', fontSize: 26, position: 'absolute', top: 25 }}>Are you sure?</Text>
+                    <Text style={styles.bbText}>{"By adding a cohost, your friend(s) will have all the same editing capabilities"}</Text>
+                </View>
             }
+
+
             {
-                customModel ?
+                infoModel &&
 
-                    <View style={{ flex: 1, justifyContent: 'center' }}>
-                        <View style={{ padding: 15, justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row', backgroundColor: '#1A1A1A', borderRadius: 15, marginBottom: 2 }}>
+                <View style={{ flex: 1, marginTop: '50%' }}>
+                                       <View style={styles.mainCardContainer}>
+                        <View style={[styles.bbHeader, {
+                        }]}>
+                            <Avatar source={icon} size={50} rounded />
 
-                            <Text style={{ color: '#FFFFFF', fontSize: 22, paddingVertical: 5 }}>Custom Invitation</Text>
-
-
-                            <Info height={30} width={30} />
-
-                        </View>
-
-                        <View style={styles.mainCardContainer}>
-                            <View style={styles.bbHeader}>
-                                <BounceLogo height={50} width={50} />
-                                <Text style={styles.bbText}>BB</Text>
-
-                            </View>
-                            <Text style={styles.bodyText}>A great addition to your event page! Send a custom invitation to your guests to recieve RSVPs before your event. Enjoy our many templates and easy to use customizations!</Text>
-
+                            <Text style={styles.bbText}>
+                                {name}
+                            </Text>
 
                         </View>
-                        <View style={{ alignItems: 'center', marginTop: 30 }}>
-                            <BlackCircleCross height={60} width={60} />
-                        </View>
+                        <Text style={styles.bodyText}>
+                            {desc}
+                        </Text>
+
+                        <TouchableOpacity style={[styles.private]}>
+                            <Text style={styles.confirmButton}>
+                                {"Confirm"}
+                            </Text>
+                        </TouchableOpacity>
+
                     </View>
-                    : null
+
+                    <TouchableOpacity
+                        onPress={onPress}
+                        style={styles.whiteClose}
+                    >
+                        <BlackClose height={getHp(34)} width={getWp(34)} />
+
+                    </TouchableOpacity>
+                </View>
+
+            }
+
+
+            {
+                customModel &&
+
+                <View style={{ flex: 1, justifyContent: 'center' }}>
+                    <View style={{ padding: 15, justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row', backgroundColor: '#1A1A1A', borderRadius: 15, marginBottom: 2 }}>
+
+                        <Text style={{ color: '#FFFFFF', fontSize: 22, paddingVertical: 5 }}>Custom Invitation</Text>
+
+
+                        <Info height={30} width={30} />
+
+                    </View>
+
+                    <View style={styles.mainCardContainer}>
+                        <View style={styles.bbHeader}>
+                            <BounceLogo height={50} width={50} />
+                            <Text style={styles.bbText}>BB</Text>
+
+                        </View>
+                        <Text style={styles.bodyText}>A great addition to your event page! Send a custom invitation to your guests to recieve RSVPs before your event. Enjoy our many templates and easy to use customizations!</Text>
+
+
+                    </View>
+                    <TouchableOpacity onPress={onPress} style={{ alignItems: 'center', marginTop: 30 }}>
+                        <BlackClose height={60} width={60} />
+                    </TouchableOpacity>
+                </View>
+
             }
         </Modal>
 
@@ -127,11 +147,29 @@ export default function ModalPopup(props) {
 }
 const styles = StyleSheet.create({
     private: {
+        width: '100%',
+        height: getHp(50),
+        justifyContent: 'center',
         backgroundColor: '#1FAEF7',
-        borderRadius: 10,
+        borderRadius: 17,
         alignItems: 'center',
-        paddingVertical: 15,
-        flex: 1
+    },
+    whiteClose: {
+        position: 'absolute',
+        bottom: '10%',
+        alignSelf: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 100,
+        height: getHp(74),
+        width: getWp(74),
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    confirmButton: {
+        fontSize: FONTSIZE.Text21,
+        color: '#fff',
+        letterSpacing: 0.6,
+        fontFamily: 'AvenirNext-Medium',
     },
     doubleSubcontainer: {
         flexDirection: 'row',
@@ -162,13 +200,12 @@ const styles = StyleSheet.create({
 
 
     bodyText: {
+        lineHeight: 30,
         fontFamily: 'AvenirNext-Regular',
-        letterSpacing: 0.8,
-        lineHeight: 32,
+        letterSpacing: 0.2,
         color: '#000',
-        fontWeight: 'bold',
-        fontSize: 16,
-        marginVertical: 20
+        fontSize: FONTSIZE.Text16,
+        marginVertical: getHp(16)
     },
     alertContainer: {
         backgroundColor: '#212121',
@@ -186,11 +223,10 @@ const styles = StyleSheet.create({
         marginVertical: 15
     },
     bbText: {
-        fontFamily: 'AvenirNext-Regular',
-        letterSpacing: 1.6,
+        fontFamily: 'AvenirNext-Bold',
         color: '#000',
-        fontSize: 22,
-        marginLeft: 15
+        fontSize: FONTSIZE.Text22,
+        marginLeft: getWp(15)
     },
     bbHeader: {
         // paddingHorizontal: 20,

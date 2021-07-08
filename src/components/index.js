@@ -9,8 +9,9 @@ import { shareFunction } from './ShareOptions'
 
 import CustomText from './CustomText'
 import CustomButton from './CustomButton'
-import BlueCard from './BlueCard'
-import BlackCard from './BlackCard'
+import MessageCard from './MessageCard/Messaging'
+import Payment from './MessageCard/Payment'
+import FriendRequest from './MessageCard/FriendRequest'
 import SearchBar from './SearchBar'
 import TouchableButton from './TouchableButton'
 import VendorRequest from './VendorRequest'
@@ -42,6 +43,7 @@ import DatePicker from './DatePicker'
 import ModalDropDownComponent from './ModalDropDown';
 import TicketComponent from './TicketComponent';
 import ContactList from './ContactList'
+import RatingPage from './ReviewCard/RatingPage'
 
 import {
     PhoneNumber
@@ -77,11 +79,14 @@ import ProgressCircle from './ProgressCircle';
 import AppStatusBar from './AppStatusBar';
 import Scaffold from './Scaffold';
 import PublicPrivateButton from './PublicPrivateButton';
+import InviteRequest from './MessageCard/InviteRequest'
 
 
 
 
 export {
+    RatingPage,
+    InviteRequest,
     FriendsListRender,
     HostToggleButton,
     InputSocialMedia,
@@ -136,8 +141,9 @@ export {
     VendorRequest,
     TouchableButton,
     SearchBar,
-    BlackCard,
-    BlueCard,
+    Payment,
+    FriendRequest,
+    MessageCard,
     CustomButton,
     CustomText,
     // ShareOptions,

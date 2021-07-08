@@ -16,10 +16,14 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { SelectedTags } from '../../../app/Entities'
 import { Toast } from '@constants';
 
+
 function AddInterest(props) {
     const [selectedTags, setSelectedTags] = useState([]);
     const { tagStore } = MobxStore;
     const { userProfile: userinfo } = MobxStore.authStore;
+    const {
+        userInterest
+    } = userinfo.user
     const [loader, setLoader] = useState(false);
     const token = userinfo?.token
     console.log("TOKEN ON MY INTEREST:", token)
@@ -31,32 +35,26 @@ function AddInterest(props) {
     }, []);
 
     const handleSubmit = async () => {
-        // props.navigation.navigate(NewsFeed.routeName)
         setLoader(true);
-        // let formData = new FormData();
-        // formData.append('interest', selectedTags);
         await ApiClient.authInstance
             .post(ApiClient.endPoints.addInterest, {
-                "interest":JSON.parse(JSON.stringify(selectedTags))
+                "interest": JSON.parse(JSON.stringify(selectedTags))
             })
             .then(async i => {
-                //MobxStore.authStore.async.reloadUser();
                 console.log("RESPONSE - TAGS ADD - ");
                 console.log(i.data);
                 if (i.status == 201 || i.status == 200) {
                     setLoader(false);
                     setTimeout(() => {
-                        Toast('Profile Updated Successfully!');
-                        //props.navigation.goBack();
+                        MobxStore.authStore.async.reloadUser();
+                        Toast('Tags Added Successfully!');
                     }, 100);
                 }
-
             })
             .catch(e => {
                 console.log(e.response);
                 setLoader(false);
             });
-
         setLoader(false);
     }
 
@@ -78,7 +76,7 @@ function AddInterest(props) {
     console.log("TAG_CAT_STATTE - ", JSON.stringify(selectedTags));
     return (
         <Scaffold statusBarStyle={{ backgroundColor: '#FFFFFF' }}>
-            
+
             <Spinner visible={loader} color={'#1FAEF7'} />
             {!loader && (
                 <View style={{ flex: 1 }}>

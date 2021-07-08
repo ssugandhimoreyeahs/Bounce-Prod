@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { View, ScrollView, StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native';
-import { QRCodes, Scaffold, SearchPageTab } from '@components';
+import { QRCodes, Scaffold, SearchPageTab, Toast } from '@components';
 import { FONTSIZE, getHp, getWp } from '@utils';
 import { ChangeBlue } from '@svg'
 import Back from 'react-native-vector-icons/Ionicons';
@@ -12,12 +12,21 @@ import Rail from './basic/Rail'
 import RailSelected from './basic/RailSelected'
 import Label from './basic/Label'
 import Notch from './basic/Notch'
-
+import { ApiClient } from '../../../app/services';
+import MobxStore from '../../../mobx';
+import { Avatar } from 'react-native-elements';
+import moment from 'moment';
+import { RegexCollection } from '@constants';
 
 export default function EventsTab(props) {
     const [searchQuery, setSearchQuery] = React.useState('');
     const onChangeSearch = query => setSearchQuery(query);
 
+    const [loader, setLoader] = useState(false);
+    const [thisWeek, setThisWeek] = useState(false)
+    const [filteredEvents, setFilteredEvents] = useState(false)
+
+    //Slider states
     const renderThumb = useCallback(() => <Thumb />, []);
     const renderRail = useCallback(() => <Rail />, []);
     const renderRailSelected = useCallback(() => <RailSelected />, []);
@@ -27,12 +36,34 @@ export default function EventsTab(props) {
         // setLow(low);
         // setHigh(high);
     }, []);
+    //Slider states END
 
+    const setTheStates = (SWITCH) => {
+        switch (SWITCH) {
+            case 'Today':
+                console.log("Today case");
+                return;
+            case 'Tomorrow':
+                console.log("Tomorrow case");
+                return;
+            case 'This week':
+                console.log("This week case");
+                setThisWeek(!thisWeek)
+                return;
+            case '18+':
+                console.log("18+ case");
+                return;
+            case '21+':
+                console.log("21+ case");
+                return;
 
+        }
+    }
     const renderItem = ({ item }) => {
         console.log(item);
         return (
-            <TouchableOpacity style={styles.tagsStyle}>
+            <TouchableOpacity onPress={() => setTheStates(item)}
+                style={styles.tagsStyle}>
                 <Text style={[styles.textStyle, {
                     fontFamily: 'AvenirNext-Medium',
                     fontSize: FONTSIZE.Text16
@@ -40,6 +71,100 @@ export default function EventsTab(props) {
             </TouchableOpacity>
         )
     }
+    const renderEvents = ({ item, index }) => {
+        // setLoader(true)
+        console.log("RENDER ITEM-->",JSON.stringify(item))
+        return (
+            <TouchableOpacity
+                style={styles.shadowStyle}
+                // onPress={() =>
+                //   props.navigation.navigate(CreateInvitation.routeName, {
+                //     party: item,
+                //     isEditParty: true,
+                //   })
+                // }
+                key={index}
+                style={{ backgroundColor: '#F5F5F5', padding: 10 }}>
+                {/* This can be used as component */}
+                <View
+                    style={{
+                        backgroundColor: '#fff',
+                        borderRadius: 10,
+                        flex: 1,
+                        flexDirection: 'row',
+                    }}>
+                    <Avatar
+                        source={{ uri: item?.gallery[0]?.filePath }}
+                        size={125}
+                        avatarStyle={{ borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }}
+                    />
+
+                    <View style={{ marginLeft: 10, flex: 1, paddingVertical: 5 }}>
+                        <Text
+                            style={[
+                                styles.EventsTextStyle,
+                                { color: '#000', marginVertical: 5, fontSize: FONTSIZE.Text16 },
+                            ]}>
+                            {item?.title}
+                        </Text>
+                        <Text
+                            style={[
+                                styles.EventsTextStyle,
+                                {
+                                    color: '#000',
+                                    marginVertical: 3,
+                                    fontSize: FONTSIZE.Text13,
+                                    fontFamily: 'AvenirNext-Medium',
+                                },
+                            ]}>
+                            {item?.location?.addressStr}
+                        </Text>
+                        <Text
+                            style={[
+                                styles.EventsTextStyle,
+                                {
+                                    color: '#000',
+                                    marginVertical: 3,
+                                    fontSize: FONTSIZE.Text13,
+                                    fontFamily: 'AvenirNext-Medium',
+                                },
+                            ]}>
+                            {/* {'Dec. 31, 7:00 PM'} */}
+                            {moment.utc(item?.date).format(RegexCollection.PartyTimeFormat)}
+                        </Text>
+                    </View>
+                </View>
+                {/* This can be used as component */}
+            </TouchableOpacity>
+        );
+    };
+
+    const handleSubmit = async () => {
+        setLoader(true);
+
+
+
+        await ApiClient.authInstance
+            .get(ApiClient.endPoints.filtersEvents, {
+                params: {
+                    'thisWeek': thisWeek
+                }
+            })
+            .then(async i => {
+                MobxStore.authStore.async.reloadUser();
+                console.log("Response after filter Hit-->", i.data[0]);
+                if (i.status == 201 || i.status == 200) {
+                    setFilteredEvents(i.data)
+                    setLoader(false);
+                }
+            })
+            .catch(e => {
+                console.log(e);
+                setLoader(false);
+            });
+        setLoader(false);
+    }
+
     return (
         <ScrollView style={{ flex: 1 }}
             contentContainerStyle={{}}>
@@ -57,12 +182,12 @@ export default function EventsTab(props) {
 
 
                 <FlatList
-                    data={['Today', 'Tomorrow', 'Today', 'Tomorrow', 'Today', 'Tomorrow']}
+                    data={['Today', 'Tomorrow', 'This week',]}
                     renderItem={renderItem}
                     keyExtractor={(index) => index}
                     horizontal
                     showsHorizontalScrollIndicator={false}
-                    style={{ marginTop:getHp(30),marginBottom:getHp(10) }}
+                    style={{ marginTop: getHp(30), marginBottom: getHp(10) }}
                 />
 
                 <FlatList
@@ -71,7 +196,7 @@ export default function EventsTab(props) {
                     keyExtractor={(index) => index}
                     horizontal
                     showsHorizontalScrollIndicator={false}
-                    style={{ marginTop:getHp(5),marginBottom:getHp(20) }}
+                    style={{ marginTop: getHp(5), marginBottom: getHp(20) }}
                 />
 
                 <Text style={[styles.textStyle, {
@@ -110,7 +235,9 @@ export default function EventsTab(props) {
                         styles.linearGradient,
                         { width: '100%', height: getHp(38), borderRadius: 13 },
                     ]}>
-                    <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} >
+                    <TouchableOpacity
+                        onPress={handleSubmit}
+                        style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} >
                         <Text style={[{
                             color: '#fff',
                             fontSize: FONTSIZE.Text16,
@@ -119,11 +246,33 @@ export default function EventsTab(props) {
                     </TouchableOpacity>
                 </LinearGradient>
 
+                {
+                    filteredEvents.length > 0 &&
+                    <FlatList
+                        data={filteredEvents}
+                        renderItem={renderEvents}
+                        keyExtractor={(index) => index}
+                        style={{ marginTop: getHp(5), marginBottom: getHp(20) }}
+                    />
+                }
+
             </View>
         </ScrollView>
     )
 }
 const styles = StyleSheet.create({
+    EventsTextStyle: {
+        color: '#FFFFFF',
+        fontSize: FONTSIZE.Text13,
+        fontFamily: 'AvenirNext-Bold',
+    },
+    shadowStyle: {
+        shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowRadius: 4,
+        shadowOpacity: 0.1,
+        elevation: 2,
+    },
     searchBarStyle: {
         elevation: 0,
         borderRadius: 9,

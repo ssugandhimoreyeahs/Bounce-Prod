@@ -5,6 +5,7 @@ class Server {
 }
 
 class Endpoints extends Server {
+  filtersEvents = '/party/filter';
   tagWiseNewsFeed = '/party/newsFeed';
   cancelFriendRequest = '/user/cancelFriendRequest';
   sendRequest = '/user/addFriendRequest';

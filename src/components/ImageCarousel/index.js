@@ -4,6 +4,7 @@ import { View, Text, Image, Dimensions, StyleSheet, TouchableOpacity } from 'rea
 import { Food, Security, Video, Drinks } from '@assets';
 import { FONTSIZE, getHp, getWp } from '@utils'
 import { BlackDollar, AddBlue } from '@svg'
+import { Placeholder } from '../../assets';
 
 const { width } = Dimensions.get("window");
 const height = width * 100 / 60;
@@ -20,7 +21,7 @@ export default function ImageCarousel(props) {
         onPress = () => { }
     } = props;
     const renderItem = ({ item, index }) => {
-        // console.log("ITEM IN CAROUSEL->", item?.profileImage);
+        // console.log("ITEM IN CAROUSEL->", item);
         return (
             <View style={{}}>
                 {
@@ -83,6 +84,15 @@ export default function ImageCarousel(props) {
                                             alignItems: 'center',
                                         }}>
                                             <Image source={item}
+                                                style={{ width: '100%', height: 400, }} />
+                                        </View>
+                                        :
+                                        value == 'NewsFeed' ?
+                                        <View style={{
+                                            alignItems: 'center',
+                                        }}>
+                                            <Image source={item.length != 0 ? 
+                                            {uri:item?.filePath} : Placeholder}
                                                 style={{ width: '100%', height: 400, }} />
                                         </View>
                                         :

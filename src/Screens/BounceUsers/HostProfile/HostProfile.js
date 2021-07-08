@@ -35,8 +35,8 @@ import { FONTSIZE } from '@utils';
 import { useSelector, useDispatch } from 'react-redux';
 import { getHp, getWp } from '@utils';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { ApiClient } from '../../../app/services';
 import { PrivacyBlock, Toggle } from '@components';
+import { ApiClient } from '../../../app/services';
 import MobxStore from '../../../mobx';
 import { Scaffold } from '@components'
 import { Toast } from '@constants';
